@@ -1,0 +1,4 @@
+# Chạy được trên Python 3.11–3.14 (Groq + LangGraph demo)
+langgraph>=0.2.0
+langchain-core>=0.3.0
+langchain-groq>=0.2.0

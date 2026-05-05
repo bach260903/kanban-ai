@@ -1,0 +1,2 @@
+# Shared with backend for local dev; agents package uses same stack
+-r ../backend/requirements.txt

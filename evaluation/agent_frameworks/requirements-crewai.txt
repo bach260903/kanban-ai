@@ -1,0 +1,5 @@
+# CrewAI bản hiện đại: pip chỉ cài được khi Python <= 3.13
+# Windows: py -3.12 -m venv .venv-crewai && .venv-crewai\Scripts\activate && pip install -r requirements-crewai.txt
+crewai>=0.76.0
+langchain-core>=0.3.0
+langchain-groq>=0.2.0

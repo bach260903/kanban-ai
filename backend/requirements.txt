@@ -1,0 +1,26 @@
+# Python 3.11+ recommended (3.12+ supported)
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+websockets>=13.0
+pydantic>=2.9.0
+email-validator>=2.0.0
+pydantic-settings>=2.6.0
+sqlalchemy[asyncio]>=2.0.36
+aiosqlite>=0.20.0
+alembic>=1.14.0
+python-jose[cryptography]>=3.3.0
+bcrypt>=4.2.0
+python-multipart>=0.0.12
+httpx>=0.27.0
+
+# LLM + agent stack
+openai>=1.55.0
+groq>=0.12.0
+langgraph>=0.2.55
+langchain-core>=0.3.0
+langchain>=0.3.0
+langchain-openai>=0.2.0
+langchain-groq>=0.2.0
+
+# Vector store
+chromadb>=0.5.0

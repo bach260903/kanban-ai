@@ -1,0 +1,19 @@
+{
+  "id": "planner-001",
+  "intent": "plan",
+  "input": {
+    "goal_text": "Implement an email + password login flow with JWT issued from the backend"
+  },
+  "gold": {
+    "subtasks": [
+      { "title": "Design users table + Alembic migration", "skills": ["sql", "alembic"], "est_hours": 2 },
+      { "title": "POST /auth/register endpoint", "skills": ["fastapi", "pydantic"], "est_hours": 3 },
+      { "title": "POST /auth/login endpoint with JWT", "skills": ["fastapi", "jwt"], "est_hours": 3 },
+      { "title": "Bcrypt password hashing helper", "skills": ["python"], "est_hours": 1 },
+      { "title": "Frontend login form + token storage", "skills": ["nextjs", "react"], "est_hours": 4 },
+      { "title": "End-to-end login tests", "skills": ["pytest"], "est_hours": 2 }
+    ],
+    "min_overlap_f1": 0.6,
+    "max_subtasks": 8
+  }
+}
