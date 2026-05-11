@@ -22,7 +22,7 @@
 
 **Purpose**: Create the monorepo skeleton, dev tooling, and Docker environment before any feature work.
 
-- [ ] T001 Create repository root structure: `backend/`, `frontend/`, `docker-compose.yml`, `.env.example` per plan.md layout
+- [X] T001 Create repository root structure: `backend/`, `frontend/`, `docker-compose.yml`, `.env.example` per plan.md layout
 - [ ] T002 Initialise FastAPI backend skeleton: `backend/app/main.py` (empty router), `backend/app/config.py` (Pydantic Settings reading `.env`), `backend/requirements.txt` with pinned Phase 1 deps including `whatthepatch==1.0.6  # D-04: parse unified diff → Monaco original/modified strings`
 - [ ] T003 [P] Initialise React/Vite frontend: run `npm create vite@latest frontend -- --template react-ts`, add deps from plan.md `package.json`, configure `tsconfig.json` strict mode
 - [ ] T004 [P] Configure frontend code quality: `frontend/.eslintrc.json` (TypeScript + React Hooks rules), `frontend/.prettierrc`, add `lint` and `format` scripts to `package.json`
