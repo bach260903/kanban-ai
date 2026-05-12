@@ -25,7 +25,7 @@
 - [X] T001 Create repository root structure: `backend/`, `frontend/`, `docker-compose.yml`, `.env.example` per plan.md layout
 - [X] T002 Initialise FastAPI backend skeleton: `backend/app/main.py` (empty router), `backend/app/config.py` (Pydantic Settings reading `.env`), `backend/requirements.txt` with pinned Phase 1 deps including `whatthepatch==1.0.6  # D-04: parse unified diff → Monaco original/modified strings`
 - [X] T003 [P] Initialise React/Vite frontend: run `npm create vite@latest frontend -- --template react-ts`, add deps from plan.md `package.json`, configure `tsconfig.json` strict mode
-- [ ] T004 [P] Configure frontend code quality: `frontend/.eslintrc.json` (TypeScript + React Hooks rules), `frontend/.prettierrc`, add `lint` and `format` scripts to `package.json`
+- [X] T004 [P] Configure frontend code quality: `frontend/.eslintrc.json` (TypeScript + React Hooks rules), `frontend/.prettierrc`, add `lint` and `format` scripts to `package.json`
 - [ ] T005 Write `docker-compose.yml`: PostgreSQL 16 service (port 5432), Redis 7 service (port 6379), env vars from `.env`. Before writing docker-compose.yml, create `backend/Dockerfile` with content: `FROM python:3.11-slim`, `WORKDIR /app`, `COPY requirements.txt .`, `RUN pip install --no-cache-dir -r requirements.txt`, `COPY . .`, `EXPOSE 8000`, `CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]`. The docker-compose.yml references this image via `build: ./backend`.
 - [ ] T006 [P] Create `backend/.env.example` listing all required vars: `DATABASE_URL`, `REDIS_URL`, `JWT_SECRET`, `OPENAI_API_KEY`, `SANDBOX_ROOT`
 

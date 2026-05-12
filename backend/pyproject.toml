@@ -1,0 +1,5 @@
+[project]
+name = "neo-kanban-backend"
+version = "0.1.0"
+requires-python = ">=3.11,<3.12"
+description = "Neo-Kanban FastAPI backend (see specs/001-neo-kanban/plan.md)"
