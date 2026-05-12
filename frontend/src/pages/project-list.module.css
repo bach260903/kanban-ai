@@ -1,0 +1,144 @@
+.page {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  text-align: left;
+}
+
+.title {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+}
+
+.sub {
+  margin: 0 0 1.5rem;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--code-bg);
+}
+
+.formRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.fieldGrow {
+  flex: 1 1 200px;
+}
+
+.selectLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.select {
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  min-width: 10rem;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.inlineError {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #b91c1c;
+}
+
+@media (prefers-color-scheme: dark) {
+  .inlineError {
+    color: #fca5a5;
+  }
+}
+
+.banner {
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--social-bg);
+  font-size: 0.9rem;
+  color: var(--text-h);
+}
+
+.grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.card {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.lang {
+  font-family: var(--mono);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: var(--code-bg);
+  color: var(--text-h);
+}
+
+.desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.empty {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+}

@@ -19,6 +19,16 @@ export interface Project {
   updated_at: ISODateTime
 }
 
+/** Row shape from ``GET /api/v1/projects`` (subset of `Project`). */
+export interface ProjectListItem {
+  id: UUID
+  name: string
+  description: string | null
+  primary_language: PrimaryLanguage
+  status: ProjectStatus
+  updated_at: ISODateTime
+}
+
 export type DocumentType = 'SPEC' | 'PLAN'
 
 export type DocumentStatus = 'draft' | 'approved' | 'revision_requested'
