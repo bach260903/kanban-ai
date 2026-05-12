@@ -62,3 +62,22 @@ class Project(Base):
         cascade="all, delete-orphan",
         lazy="selectin",
     )
+    tasks: Mapped[list["Task"]] = relationship(
+        back_populates="project",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    agent_runs: Mapped[list["AgentRun"]] = relationship(
+        back_populates="project",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    feedbacks: Mapped[list["Feedback"]] = relationship(
+        back_populates="project",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    audit_logs: Mapped[list["AuditLog"]] = relationship(
+        back_populates="project",
+        lazy="selectin",
+    )
