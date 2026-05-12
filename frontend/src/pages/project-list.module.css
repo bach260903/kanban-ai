@@ -104,6 +104,15 @@
   font-size: 1.1rem;
 }
 
+.cardTitle {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardTitle:hover {
+  text-decoration: underline;
+}
+
 .meta {
   display: flex;
   flex-wrap: wrap;

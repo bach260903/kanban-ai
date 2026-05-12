@@ -69,7 +69,7 @@
 - [X] T021 [US1] Implement `projectStore` Zustand store in `frontend/src/store/project-store.ts`: `projects`, `currentProject`, `setProjects()`, `setCurrentProject()`
 - [X] T022 [US1] Implement project API calls in `frontend/src/services/project-api.ts`: `listProjects()`, `createProject()`, `getProject()`, `updateProject()`
 - [X] T023 [US1] Implement `ProjectList` page in `frontend/src/pages/project-list.tsx`: fetch + display project cards, inline create-project form (name required, description optional, language select), show 409 error inline
-- [ ] T024 [US1] Implement `App.tsx` with `BrowserRouter` routes: `/projects` → `ProjectList`, `/projects/:id` → `ProjectWorkspace` (stub), `/projects/:id/constitution` → stub; add `frontend/src/main.tsx`
+- [X] T024 [US1] Implement `App.tsx` with `BrowserRouter` routes: `/projects` → `ProjectList`, `/projects/:id` → `ProjectWorkspace` (stub), `/projects/:id/constitution` → stub; add `frontend/src/main.tsx`
 
 **Checkpoint**: Open browser at `/projects`; create a project; see it in the list; creating duplicate shows error message.
 

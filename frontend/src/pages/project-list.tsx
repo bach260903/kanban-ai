@@ -1,5 +1,6 @@
 import { isAxiosError } from 'axios'
 import { type FormEvent, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Button } from '../components/atoms/button'
 import { Spinner } from '../components/atoms/spinner'
@@ -166,7 +167,11 @@ export default function ProjectList() {
         <div className={styles.grid}>
           {projects.map((p) => (
             <article key={p.id} className={styles.card}>
-              <h3>{p.name}</h3>
+              <h3>
+                <Link to={`/projects/${p.id}`} className={styles.cardTitle}>
+                  {p.name}
+                </Link>
+              </h3>
               <div className={styles.meta}>
                 <span className={styles.lang}>{p.primary_language}</span>
                 <span>{p.status}</span>
