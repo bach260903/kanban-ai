@@ -81,3 +81,8 @@ class Project(Base):
         back_populates="project",
         lazy="selectin",
     )
+    intents: Mapped[list["Intent"]] = relationship(
+        back_populates="project",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )

@@ -690,7 +690,7 @@ builder reads the full file and includes it verbatim in the system prompt.
 | File | Purpose |
 |------|---------|
 | `backend/app/main.py` | FastAPI app factory, router includes, lifespan for DB pool |
-| `backend/app/config.py` | Pydantic `Settings` reading `.env` (DB URL, Redis URL, JWT secret, OpenAI key) |
+| `backend/app/config.py` | Pydantic `Settings` reading `.env` (DB URL, Redis URL, JWT secret, Groq API key + model) |
 | `backend/app/database.py` | Async SQLAlchemy engine, `get_db` dependency |
 | `backend/app/models/project.py` | `Project` ORM model |
 | `backend/app/models/document.py` | `Document` ORM model |
@@ -846,9 +846,8 @@ redis==5.1.1
 
 # AI
 langchain==0.3.0
-langchain-openai==0.2.0
+langchain-groq==0.2.0
 langgraph==0.2.20
-openai==1.51.0
 
 # Git
 gitpython==3.1.43

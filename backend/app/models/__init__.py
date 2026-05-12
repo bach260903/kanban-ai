@@ -3,6 +3,7 @@
 from app.models.base import Base
 from app.models.project import Project, ProjectStatus
 from app.models.document import Document, DocumentStatus, DocumentType
+from app.models.intent import Intent
 from app.models.task import Task, TaskStatus
 from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
 from app.models.diff import Diff, DiffReviewStatus
@@ -23,6 +24,7 @@ __all__ = [
     "DocumentType",
     "Feedback",
     "FeedbackReferenceType",
+    "Intent",
     "Project",
     "ProjectStatus",
     "Task",
