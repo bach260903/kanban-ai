@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # `uvicorn` is typically run with cwd = `backend/`; `.env` lives at monorepo root.
@@ -22,7 +23,14 @@ class Settings(BaseSettings):
     database_url: str
     redis_url: str
     jwt_secret: str
-    openai_api_key: str = ""
+    groq_api_key: str = Field(
+        default="",
+        description="Groq API key (https://console.groq.com) for LangChain ChatGroq.",
+    )
+    groq_model: str = Field(
+        default="llama-3.3-70b-versatile",
+        description="Groq chat model id; override with GROQ_MODEL in .env.",
+    )
     sandbox_root: str
 
 

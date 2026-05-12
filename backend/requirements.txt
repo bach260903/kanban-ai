@@ -20,11 +20,10 @@ passlib[bcrypt]==1.7.4
 # Cache / Pub-Sub
 redis==5.1.1
 
-# AI
+# AI (LLM via Groq — OpenAI-compatible stack removed; use langchain_groq.ChatGroq)
 langchain==0.3.0
-langchain-openai==0.2.0
+langchain-groq==0.2.0
 langgraph==0.2.20
-openai==1.51.0
 
 # Git
 gitpython==3.1.43
