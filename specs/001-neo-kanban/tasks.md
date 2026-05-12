@@ -64,8 +64,8 @@
 - [X] T016 [US1] Implement `ProjectService` in `backend/app/services/project_service.py`: `create()` with uniqueness check (raises `DuplicateNameError` on conflict), `get()`, `list()`, `update()`, `archive()`
 - [X] T017 [US1] Implement Projects API router in `backend/app/api/v1/projects.py`: `GET /`, `POST /`, `GET /{id}`, `PUT /{id}`, `DELETE /{id}` — all `async def`, all guarded by JWT dependency, register in `main.py`
 - [X] T018 [P] [US1] Create Axios API service in `frontend/src/services/api.ts`: base URL from `VITE_API_URL` env, request interceptor to attach `Authorization: Bearer <jwt>`, response interceptor to handle 401 redirect
-- [ ] T019 [P] [US1] Define all Phase 1 TypeScript interfaces in `frontend/src/types/index.ts`: `Project`, `Document`, `Task`, `AgentRun`, `Diff`, `Feedback`, `AuditLog`
-- [ ] T020 [P] [US1] Create Atom components in `frontend/src/components/atoms/`: `button.tsx` (primary/secondary/danger variants), `badge.tsx` (status colour map), `spinner.tsx` (loading), `text-input.tsx` (controlled)
+- [X] T019 [P] [US1] Define all Phase 1 TypeScript interfaces in `frontend/src/types/index.ts`: `Project`, `Document`, `Task`, `AgentRun`, `Diff`, `Feedback`, `AuditLog`
+- [X] T020 [P] [US1] Create Atom components in `frontend/src/components/atoms/`: `button.tsx` (primary/secondary/danger variants), `badge.tsx` (status colour map), `spinner.tsx` (loading), `text-input.tsx` (controlled)
 - [ ] T021 [US1] Implement `projectStore` Zustand store in `frontend/src/store/project-store.ts`: `projects`, `currentProject`, `setProjects()`, `setCurrentProject()`
 - [ ] T022 [US1] Implement project API calls in `frontend/src/services/project-api.ts`: `listProjects()`, `createProject()`, `getProject()`, `updateProject()`
 - [ ] T023 [US1] Implement `ProjectList` page in `frontend/src/pages/project-list.tsx`: fetch + display project cards, inline create-project form (name required, description optional, language select), show 409 error inline
