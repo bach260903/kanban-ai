@@ -4,6 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from app.exceptions import (
+    DuplicateNameError,
     InvalidTransitionError,
     NotFoundError,
     SandboxEscapeError,
@@ -18,6 +19,10 @@ def register_exception_handlers(app: FastAPI) -> None:
 
     @app.exception_handler(WIPLimitError)
     async def _wip(_request: Request, exc: WIPLimitError) -> JSONResponse:
+        return JSONResponse(status_code=409, content={"detail": str(exc) or "Conflict."})
+
+    @app.exception_handler(DuplicateNameError)
+    async def _duplicate_name(_request: Request, exc: DuplicateNameError) -> JSONResponse:
         return JSONResponse(status_code=409, content={"detail": str(exc) or "Conflict."})
 
     @app.exception_handler(InvalidTransitionError)

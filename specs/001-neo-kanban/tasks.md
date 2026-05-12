@@ -61,7 +61,7 @@
 
 **Independent Test**: `POST /api/v1/projects` with valid body → 201 with project data; same name again → 409.
 
-- [ ] T016 [US1] Implement `ProjectService` in `backend/app/services/project_service.py`: `create()` with uniqueness check (raises `DuplicateNameError` on conflict), `get()`, `list()`, `update()`, `archive()`
+- [X] T016 [US1] Implement `ProjectService` in `backend/app/services/project_service.py`: `create()` with uniqueness check (raises `DuplicateNameError` on conflict), `get()`, `list()`, `update()`, `archive()`
 - [ ] T017 [US1] Implement Projects API router in `backend/app/api/v1/projects.py`: `GET /`, `POST /`, `GET /{id}`, `PUT /{id}`, `DELETE /{id}` — all `async def`, all guarded by JWT dependency, register in `main.py`
 - [ ] T018 [P] [US1] Create Axios API service in `frontend/src/services/api.ts`: base URL from `VITE_API_URL` env, request interceptor to attach `Authorization: Bearer <jwt>`, response interceptor to handle 401 redirect
 - [ ] T019 [P] [US1] Define all Phase 1 TypeScript interfaces in `frontend/src/types/index.ts`: `Project`, `Document`, `Task`, `AgentRun`, `Diff`, `Feedback`, `AuditLog`
