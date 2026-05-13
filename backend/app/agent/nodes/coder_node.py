@@ -122,29 +122,6 @@ def _run_git_command(sandbox: Path, command: str) -> str:
     return out or "(no output)"
 
 
-def _monaco_from_unified(unified: str) -> tuple[str, str]:
-    if not unified.strip():
-        return "", ""
-    try:
-        from whatthepatch import parse_patch
-
-        patches = list(parse_patch(unified))
-    except Exception:
-        return unified, unified
-    orig: list[str] = []
-    mod: list[str] = []
-    for patch in patches:
-        for change in patch.changes:
-            if change.old is not None and change.new is not None:
-                orig.append(change.line)
-                mod.append(change.line)
-            elif change.old is not None:
-                orig.append(change.line)
-            elif change.new is not None:
-                mod.append(change.line)
-    return "\n".join(orig), "\n".join(mod)
-
-
 @tool
 def read_file(relative_path: str) -> str:
     """Read a UTF-8 text file from the project sandbox (relative path, forward slashes)."""
@@ -318,15 +295,14 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 "agent_notes.md",
                 f"# Coder stub\n\nNo LLM key configured. Task: {task.title}\n",
             )
-            unified, files = await asyncio.to_thread(GitService.diff_staged, sandbox)
-            orig, mod = _monaco_from_unified(unified)
+            snap = await asyncio.to_thread(GitService.diff_staged, sandbox)
             diff_row = Diff(
                 task_id=task_id,
                 agent_run_id=agent_run_id,
-                content=unified or "(no staged diff)",
-                original_content=orig,
-                modified_content=mod,
-                files_affected=files or [],
+                content=snap.unified or "(no staged diff)",
+                original_content=snap.original_content,
+                modified_content=snap.modified_content,
+                files_affected=snap.files or [],
                 review_status=DiffReviewStatus.PENDING,
             )
             session.add(diff_row)
@@ -390,15 +366,14 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 )
                 messages.append(ToolMessage(content=out, tool_call_id=str(tid)))
 
-        unified, files = await asyncio.to_thread(GitService.diff_staged, sandbox)
-        orig, mod = _monaco_from_unified(unified)
+        snap = await asyncio.to_thread(GitService.diff_staged, sandbox)
         diff_row = Diff(
             task_id=task_id,
             agent_run_id=agent_run_id,
-            content=unified or "(no staged diff)",
-            original_content=orig,
-            modified_content=mod,
-            files_affected=files or [],
+            content=snap.unified or "(no staged diff)",
+            original_content=snap.original_content,
+            modified_content=snap.modified_content,
+            files_affected=snap.files or [],
             review_status=DiffReviewStatus.PENDING,
         )
         session.add(diff_row)
