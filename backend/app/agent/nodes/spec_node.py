@@ -18,6 +18,16 @@ except Exception:  # pragma: no cover - fallback for local/unit environments
         return None
 
 
+def _request_po_review_interrupt() -> None:
+    """Pause for HIL after SPEC is written (initial generation or revision retry — T042)."""
+    try:
+        interrupt(None)
+    except TypeError:
+        interrupt()
+    except RuntimeError:
+        pass
+
+
 StateDict = dict[str, Any]
 AsyncCallable = Callable[..., Awaitable[Any]]
 
@@ -76,10 +86,17 @@ async def _generate_spec(state: StateDict) -> StateDict:
     if intent:
         human_parts.append(f"Intent:\n{intent}")
     if feedback:
+        human_parts.append(
+            "The PO requested a revision of the current SPEC. Regenerate the full SPEC markdown, "
+            "addressing the feedback while keeping coherent structure and headings."
+        )
         human_parts.append(f"Revision feedback:\n{feedback}")
     human_content = "\n\n".join(human_parts)
 
-    await _audit(state, "llm_call", "Generate SPEC from intent + constitution")
+    if feedback:
+        await _audit(state, "llm_call", "Regenerate SPEC from PO revision feedback + constitution")
+    else:
+        await _audit(state, "llm_call", "Generate SPEC from intent + constitution")
     llm = ChatGroq(
         api_key=settings.groq_api_key,
         model=settings.groq_model,
@@ -100,12 +117,7 @@ async def _generate_spec(state: StateDict) -> StateDict:
 
     await _set_status(state, "awaiting_hil")
     await _audit(state, "spec_node", "success", final=True)
-    try:
-        interrupt(None)
-    except TypeError:
-        interrupt()
-    except RuntimeError:
-        pass
+    _request_po_review_interrupt()
     return state
 
 

@@ -74,12 +74,16 @@ async def _run_with_session(
             run.completed_at = datetime.now(timezone.utc)
         await session.flush()
 
+    feedback_text = (feedback or "").strip()
+
     async def persist_spec(content: str) -> str:
         doc = await session.get(Document, document_id)
         if doc is None:
             raise ValueError("SPEC document missing.")
         doc.content = content
         doc.updated_at = datetime.now(timezone.utc)
+        if feedback_text:
+            doc.version = int(doc.version) + 1
         await session.flush()
         return content
 
