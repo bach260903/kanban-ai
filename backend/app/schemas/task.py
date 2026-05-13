@@ -1,38 +1,27 @@
-"""Pydantic schemas for Kanban tasks."""
+"""Pydantic schemas for Kanban tasks (US7 / T050)."""
 
 from __future__ import annotations
 
-from datetime import datetime
-from typing import Literal
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.models.task import TaskStatus
 
-TaskMoveTo = Literal["in_progress", "review", "done"]
+class TaskKanbanItem(BaseModel):
+    """Task fields returned inside grouped columns (contract GET /tasks)."""
 
-
-class TaskResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: UUID
-    project_id: UUID
     title: str
-    description: str | None
-    status: TaskStatus
-    priority: int
-    created_at: datetime
-    updated_at: datetime
+    description: str | None = None
+    priority: int = 0
 
 
-class TaskMoveRequest(BaseModel):
-    """Body for ``POST .../tasks/{id}/move`` (contracts/rest-api.md)."""
-
-    to: TaskMoveTo
-
-
-class RejectRequest(BaseModel):
-    """Body for ``POST .../tasks/{id}/reject``."""
-
-    feedback: str = Field(..., min_length=1)
+class TasksGroupedResponse(BaseModel):
+    todo: list[TaskKanbanItem] = Field(default_factory=list)
+    in_progress: list[TaskKanbanItem] = Field(default_factory=list)
+    review: list[TaskKanbanItem] = Field(default_factory=list)
+    done: list[TaskKanbanItem] = Field(default_factory=list)
+    rejected: list[TaskKanbanItem] = Field(default_factory=list)
+    conflict: list[TaskKanbanItem] = Field(default_factory=list)
