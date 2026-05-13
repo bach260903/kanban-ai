@@ -65,7 +65,7 @@ export interface Task {
 
 export type AgentType = 'architect' | 'coder' | 'reviewer'
 
-export type AgentRunStatus = 'running' | 'success' | 'failure' | 'awaiting_hil' | 'paused'
+export type AgentRunStatus = 'running' | 'success' | 'failure' | 'awaiting_hil' | 'paused' | 'timeout'
 
 export interface AgentRun {
   id: UUID
