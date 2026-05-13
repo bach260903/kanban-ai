@@ -64,6 +64,12 @@ class GenerateSpecResponse(BaseModel):
     message: str = "SPEC generation started."
 
 
+class GeneratePlanResponse(BaseModel):
+    agent_run_id: UUID
+    status: str = "running"
+    message: str = "PLAN generation started."
+
+
 class DocumentApproveResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 

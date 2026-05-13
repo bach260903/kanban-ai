@@ -23,6 +23,7 @@ from app.schemas.document import (
     DocumentResponse,
     DocumentReviseResponse,
     DocumentTypeFilter,
+    GeneratePlanResponse,
     GenerateSpecRequest,
     GenerateSpecResponse,
     RevisionRequest,
@@ -30,6 +31,7 @@ from app.schemas.document import (
 from app.services.audit_service import write_audit
 from app.services.document_service import DocumentService
 from app.services.intent_service import IntentService
+from app.services.plan_generation_runner import run_generate_plan_task
 from app.services.project_service import ProjectService
 from app.services.spec_generation_runner import run_generate_spec_task
 
@@ -139,6 +141,46 @@ async def generate_spec(
         intent_id=intent_row.id,
         document_id=spec_doc.id,
     )
+
+
+@router.post(
+    "/{project_id}/generate-plan",
+    response_model=GeneratePlanResponse,
+    status_code=status.HTTP_202_ACCEPTED,
+)
+async def generate_plan(
+    project_id: UUID,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> GeneratePlanResponse:
+    await ProjectService.get(session, project_id)
+    try:
+        spec_doc = await DocumentService.get_by_type(session, project_id, DocumentType.SPEC)
+    except NotFoundError:
+        raise InvalidTransitionError("SPEC must be approved before generating PLAN.") from None
+    if spec_doc.status != DocumentStatus.APPROVED:
+        raise InvalidTransitionError("SPEC must be approved before generating PLAN.")
+
+    agent_run = AgentRun(
+        project_id=project_id,
+        task_id=None,
+        agent_type=AgentType.ARCHITECT,
+        status=AgentRunStatus.RUNNING,
+    )
+    session.add(agent_run)
+    await session.flush()
+
+    await session.commit()
+
+    asyncio.create_task(
+        run_generate_plan_task(
+            project_id,
+            agent_run.id,
+            feedback=None,
+        )
+    )
+
+    return GeneratePlanResponse(agent_run_id=agent_run.id)
 
 
 @router.post(
