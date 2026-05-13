@@ -11,7 +11,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.middleware.auth import require_jwt
 from app.models.task import Task, TaskStatus
-from app.schemas.task import TaskKanbanItem, TasksGroupedResponse
+from app.schemas.task import TaskKanbanItem, TaskMoveRequest, TaskMoveResult, TasksGroupedResponse
+from app.services.kanban_service import KanbanService
 from app.services.project_service import ProjectService
 from app.services.task_service import TaskService
 
@@ -51,3 +52,28 @@ async def list_tasks_grouped(
     await ProjectService.get(session, project_id)
     rows = await TaskService.list_by_project(session, project_id)
     return _group_tasks_by_status(rows)
+
+
+@router.post(
+    "/{project_id}/tasks/{task_id}/move",
+    response_model=TaskMoveResult,
+)
+async def move_task(
+    project_id: UUID,
+    task_id: UUID,
+    body: TaskMoveRequest,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> TaskMoveResult:
+    await ProjectService.get(session, project_id)
+    task = await TaskService.get(session, task_id, project_id=project_id)
+    from_status = task.status
+    await KanbanService.move_task(task_id, body.to, session)
+    await session.commit()
+    await session.refresh(task)
+    return TaskMoveResult(
+        task_id=task.id,
+        from_status=from_status,
+        to_status=task.status,
+        agent_run_id=None,
+    )
