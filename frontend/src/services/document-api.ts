@@ -70,6 +70,17 @@ export async function generateSpec(
   return data
 }
 
+export type GeneratePlanResponse = {
+  agent_run_id: UUID
+  status: string
+  message: string
+}
+
+export async function generatePlan(projectId: string): Promise<GeneratePlanResponse> {
+  const { data } = await api.post<GeneratePlanResponse>(`${PROJECTS_PREFIX}/${projectId}/generate-plan`, {})
+  return data
+}
+
 export type DocumentApproveResponse = {
   id: UUID
   status: Document['status']

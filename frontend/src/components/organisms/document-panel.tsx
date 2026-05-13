@@ -6,13 +6,20 @@ import { Spinner } from '../atoms/spinner'
 import { DocumentEditor } from '../molecules/document-editor'
 import { useDocument } from '../../hooks/use-document'
 import type { DocumentListItem } from '../../services/document-api'
-import { approveDocument, generateSpec, getDocuments, reviseDocument } from '../../services/document-api'
-import type { DocumentStatus } from '../../types'
+import {
+  approveDocument,
+  generatePlan,
+  generateSpec,
+  getDocuments,
+  reviseDocument,
+} from '../../services/document-api'
+import type { DocumentStatus, DocumentType } from '../../types'
 
 import styles from './document-panel.module.css'
 
 export type DocumentPanelProps = {
   projectId: string
+  documentType: DocumentType
 }
 
 function errorMessage(err: unknown): string {
@@ -31,8 +38,9 @@ function statusBadgeClass(status: DocumentStatus): string {
   return styles.badge
 }
 
-export function DocumentPanel({ projectId }: DocumentPanelProps) {
-  const [specRows, setSpecRows] = useState<DocumentListItem[]>([])
+export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
+  const [docRows, setDocRows] = useState<DocumentListItem[]>([])
+  const [specRowsForPlan, setSpecRowsForPlan] = useState<DocumentListItem[]>([])
   const [listLoading, setListLoading] = useState(true)
   const [listError, setListError] = useState<string | null>(null)
   const [intent, setIntent] = useState('')
@@ -43,35 +51,51 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
   const [revisionFeedback, setRevisionFeedback] = useState('')
   const [hilBusy, setHilBusy] = useState(false)
 
-  const refreshSpecs = useCallback(async () => {
+  const refreshDocuments = useCallback(async () => {
     setListError(null)
     try {
-      const rows = await getDocuments(projectId, 'SPEC')
-      setSpecRows(rows)
+      if (documentType === 'SPEC') {
+        const rows = await getDocuments(projectId, 'SPEC')
+        setDocRows(rows)
+        setSpecRowsForPlan([])
+      } else {
+        const [planRows, specRows] = await Promise.all([
+          getDocuments(projectId, 'PLAN'),
+          getDocuments(projectId, 'SPEC'),
+        ])
+        setDocRows(planRows)
+        setSpecRowsForPlan(specRows)
+      }
     } catch (e) {
       setListError(errorMessage(e))
-      setSpecRows([])
+      setDocRows([])
+      if (documentType === 'PLAN') {
+        setSpecRowsForPlan([])
+      }
     }
-  }, [projectId])
+  }, [projectId, documentType])
 
   useEffect(() => {
     let cancelled = false
     ;(async () => {
       setListLoading(true)
-      await refreshSpecs()
+      await refreshDocuments()
       if (!cancelled) setListLoading(false)
     })()
     return () => {
       cancelled = true
     }
-  }, [refreshSpecs])
+  }, [refreshDocuments])
 
-  const latestSpec = specRows?.[0]
-  const specDocumentId = latestSpec?.id
+  const latestSpecForGate = specRowsForPlan[0]
+  const specApproved = latestSpecForGate?.status === 'approved'
+  const activeDocumentId = docRows[0]?.id
 
-  const { document, agentRun, isGenerating, isLoading, error, refetch } = useDocument(projectId, specDocumentId, {
-    agentRunId: pendingRunId,
-  })
+  const { document, agentRun, isGenerating, isLoading, error, refetch } = useDocument(
+    projectId,
+    activeDocumentId,
+    { agentRunId: pendingRunId },
+  )
 
   useEffect(() => {
     if (agentRun && agentRun.status !== 'running') {
@@ -79,12 +103,17 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
     }
   }, [agentRun])
 
-  const displayStatus = document?.status ?? latestSpec?.status
-  const showGenerate = !listLoading && specRows.length === 0
-  const showHilActions =
-    Boolean(specDocumentId) &&
-    (displayStatus === 'draft' || displayStatus === 'revision_requested') &&
-    !isGenerating
+  const displayStatus = document?.status ?? docRows[0]?.status
+  const showGenerateSpec = documentType === 'SPEC' && !listLoading && docRows.length === 0
+  const showGeneratePlan =
+    documentType === 'PLAN' && !listLoading && docRows.length === 0 && specApproved
+  const showPlanBlocked =
+    documentType === 'PLAN' && !listLoading && docRows.length === 0 && !specApproved
+
+  const docLabel = documentType === 'SPEC' ? 'SPEC' : 'PLAN'
+  const headingId =
+    documentType === 'SPEC' ? 'document-panel-spec-heading' : 'document-panel-plan-heading'
+  const revisionFieldId = `${documentType.toLowerCase()}-revision-feedback`
 
   async function onGenerateSpec() {
     setActionError(null)
@@ -97,7 +126,7 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
     try {
       setSubmitting(true)
       const res = await generateSpec(projectId, { intent: trimmed })
-      await refreshSpecs()
+      await refreshDocuments()
       setPendingRunId(res.agent_run_id)
       setIntent('')
       setStatusMessage('SPEC generation started. This may take up to a minute.')
@@ -109,16 +138,33 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
     }
   }
 
-  async function onApproveSpec() {
-    if (!specDocumentId) return
+  async function onGeneratePlan() {
+    setActionError(null)
+    setStatusMessage(null)
+    try {
+      setSubmitting(true)
+      const res = await generatePlan(projectId)
+      await refreshDocuments()
+      setPendingRunId(res.agent_run_id)
+      setStatusMessage('PLAN generation started. This may take up to a minute.')
+      setTimeout(() => setStatusMessage(null), 5000)
+    } catch (e) {
+      setActionError(errorMessage(e))
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  async function onApprove() {
+    if (!activeDocumentId) return
     setActionError(null)
     setStatusMessage(null)
     try {
       setHilBusy(true)
-      await approveDocument(projectId, specDocumentId)
-      await refreshSpecs()
+      await approveDocument(projectId, activeDocumentId)
+      await refreshDocuments()
       await refetch()
-      setStatusMessage('SPEC approved.')
+      setStatusMessage(documentType === 'SPEC' ? 'SPEC approved.' : 'PLAN approved.')
       setTimeout(() => setStatusMessage(null), 4000)
     } catch (e) {
       setActionError(errorMessage(e))
@@ -128,7 +174,7 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
   }
 
   async function onRequestRevision() {
-    if (!specDocumentId) return
+    if (!activeDocumentId) return
     setActionError(null)
     setStatusMessage(null)
     const fb = revisionFeedback.trim()
@@ -138,12 +184,16 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
     }
     try {
       setHilBusy(true)
-      const res = await reviseDocument(projectId, specDocumentId, fb)
-      await refreshSpecs()
+      const res = await reviseDocument(projectId, activeDocumentId, fb)
+      await refreshDocuments()
       setPendingRunId(res.agent_run_id)
       setRevisionFeedback('')
       await refetch()
-      setStatusMessage('Revision requested. Regenerating SPEC…')
+      setStatusMessage(
+        documentType === 'SPEC'
+          ? 'Revision requested. Regenerating SPEC…'
+          : 'Revision requested. Regenerating PLAN…',
+      )
       setTimeout(() => setStatusMessage(null), 5000)
     } catch (e) {
       setActionError(errorMessage(e))
@@ -157,11 +207,18 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
 
   const combinedError = listError ?? actionError ?? (error ? errorMessage(error) : null)
 
+  const showHilActions =
+    Boolean(activeDocumentId) &&
+    (displayStatus === 'draft' || displayStatus === 'revision_requested') &&
+    !isGenerating
+
+  const panelTitle = documentType === 'SPEC' ? 'SPEC.md' : 'PLAN.md'
+
   return (
-    <section className={styles.root} aria-labelledby="document-panel-heading">
+    <section className={styles.root} aria-labelledby={headingId}>
       <div className={styles.toolbar}>
-        <h2 id="document-panel-heading" className={styles.title}>
-          SPEC.md
+        <h2 id={headingId} className={styles.title}>
+          {panelTitle}
         </h2>
         {displayStatus ? (
           <span className={statusBadgeClass(displayStatus)} role="status">
@@ -172,7 +229,7 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
 
       {listLoading ? (
         <p className={styles.spinnerRow}>
-          <Spinner aria-label="Loading documents" />
+          <Spinner aria-label={`Loading ${docLabel} documents`} />
           Loading documents…
         </p>
       ) : null}
@@ -180,7 +237,7 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
       {combinedError ? <p className={styles.error}>{combinedError}</p> : null}
       {statusMessage ? <p className={styles.success}>{statusMessage}</p> : null}
 
-      {showGenerate ? (
+      {showGenerateSpec ? (
         <div className={styles.empty}>
           <label className={styles.intentLabel} htmlFor="spec-intent">
             Intent
@@ -209,12 +266,34 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
         </div>
       ) : null}
 
-      {!listLoading && specDocumentId ? (
+      {showGeneratePlan ? (
+        <div className={styles.empty}>
+          <div className={styles.actions}>
+            <Button type="button" onClick={() => void onGeneratePlan()} disabled={submitting || isGenerating}>
+              Generate PLAN
+            </Button>
+            {submitting || isGenerating ? <Spinner aria-label="Starting PLAN generation" /> : null}
+          </div>
+          <p className={styles.muted}>SPEC is approved. Generate PLAN.md from the approved SPEC.</p>
+        </div>
+      ) : null}
+
+      {showPlanBlocked ? (
+        <div className={styles.empty}>
+          <p className={styles.muted}>
+            {specRowsForPlan.length === 0
+              ? 'Create a SPEC and approve it before generating a PLAN.'
+              : 'Approve the SPEC to enable Generate PLAN.'}
+          </p>
+        </div>
+      ) : null}
+
+      {!listLoading && activeDocumentId ? (
         <>
           {isLoading && !document && !isGenerating ? (
             <p className={styles.spinnerRow}>
-              <Spinner aria-label="Loading SPEC" />
-              Loading SPEC…
+              <Spinner aria-label={`Loading ${docLabel}`} />
+              Loading {docLabel}…
             </p>
           ) : null}
           <div className={styles.editorWrap}>
@@ -227,23 +306,23 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
             <DocumentEditor value={editorValue} onChange={noopChange} readOnly height="min(55vh, 520px)" />
           </div>
           {showHilActions ? (
-            <div className={styles.actionBar} role="region" aria-label="Document review actions">
+            <div className={styles.actionBar} role="region" aria-label={`${docLabel} review actions`}>
               <span className={styles.actionBarLabel}>Product owner review</span>
               <div className={styles.actionBarRow}>
-                <Button type="button" onClick={() => void onApproveSpec()} disabled={hilBusy || isLoading}>
+                <Button type="button" onClick={() => void onApprove()} disabled={hilBusy || isLoading}>
                   Approve
                 </Button>
                 {hilBusy ? <Spinner aria-label="Saving review" /> : null}
               </div>
-              <label className={styles.intentLabel} htmlFor="spec-revision-feedback">
+              <label className={styles.intentLabel} htmlFor={revisionFieldId}>
                 Request revision
               </label>
               <textarea
-                id="spec-revision-feedback"
+                id={revisionFieldId}
                 className={styles.revisionField}
                 value={revisionFeedback}
                 onChange={(e) => setRevisionFeedback(e.target.value)}
-                placeholder="Describe what should change in the SPEC…"
+                placeholder={`Describe what should change in the ${docLabel}…`}
                 disabled={hilBusy}
                 minLength={1}
               />

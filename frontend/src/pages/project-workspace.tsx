@@ -66,7 +66,15 @@ export default function ProjectWorkspace() {
         <>
           <ProjectHeader project={currentProject} />
           <section className={styles.body}>
-            <DocumentPanel projectId={currentProject.id} />
+            <section className={styles.documents} aria-labelledby="workspace-documents-heading">
+              <h2 id="workspace-documents-heading" className={styles.documentsTitle}>
+                Documents
+              </h2>
+              <div className={styles.documentPanels}>
+                <DocumentPanel projectId={currentProject.id} documentType="SPEC" />
+                <DocumentPanel projectId={currentProject.id} documentType="PLAN" />
+              </div>
+            </section>
             <p>
               <Link to="/projects">Back to project list</Link>
             </p>

@@ -228,8 +228,8 @@ async def revise_document(
     doc = await session.get(Document, document_id)
     if doc is None or doc.project_id != project_id:
         raise NotFoundError("Document not found.")
-    if doc.document_type != DocumentType.SPEC:
-        raise InvalidTransitionError("Revision regeneration is only supported for SPEC documents.")
+    if doc.document_type not in (DocumentType.SPEC, DocumentType.PLAN):
+        raise InvalidTransitionError("Revision regeneration is only supported for SPEC and PLAN documents.")
 
     document, fb = await DocumentService.request_revision(session, document_id, body.feedback)
 
@@ -254,15 +254,24 @@ async def revise_document(
     )
     await session.commit()
 
-    asyncio.create_task(
-        run_generate_spec_task(
-            project_id,
-            agent_run.id,
-            document.id,
-            "",
-            feedback=fb.content,
+    if document.document_type == DocumentType.SPEC:
+        asyncio.create_task(
+            run_generate_spec_task(
+                project_id,
+                agent_run.id,
+                document.id,
+                "",
+                feedback=fb.content,
+            )
         )
-    )
+    else:
+        asyncio.create_task(
+            run_generate_plan_task(
+                project_id,
+                agent_run.id,
+                feedback=fb.content,
+            )
+        )
 
     await session.refresh(document)
     return DocumentReviseResponse(

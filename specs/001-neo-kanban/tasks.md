@@ -146,7 +146,7 @@
 
 - [X] T044 [US6] Implement `plan_node` async function in `backend/app/agent/nodes/plan_node.py`: reads approved SPEC content from DB + constitution → generates PLAN.md markdown → saves to `documents` table → calls `interrupt()`; handle feedback revision same as spec_node. This file overwrites the stub created at T035; remove stub comment after implementing. BẮTBUỘC (Constitution Principle V): Call `audit_service.write_pending_log()` BEFORE each LLM call and BEFORE each file write; call `audit_service.finalise_log()` after completion or in except block. TIMEOUT (TC-03): Wrap core logic in `asyncio.wait_for(_generate_plan(state), timeout=60.0)`; on `asyncio.TimeoutError` set `agent_run.status = "timeout"` and publish ERROR event via WebSocket.
 - [X] T045 [US6] Implement `POST /generate-plan` endpoint in `backend/app/api/v1/documents.py`: validates SPEC has `status = approved` (returns 400 if not), launches `plan_node` background task, returns 202 with `agent_run_id`
-- [ ] T046 [US6] Add PLAN display to `ProjectWorkspace` in `frontend/src/pages/project-workspace.tsx`: Documents tab shows both SPEC and PLAN sections; "Generate PLAN" button appears only when SPEC is approved and no PLAN exists; PLAN DocumentPanel includes approve/revise action bar
+- [X] T046 [US6] Add PLAN display to `ProjectWorkspace` in `frontend/src/pages/project-workspace.tsx`: Documents tab shows both SPEC and PLAN sections; "Generate PLAN" button appears only when SPEC is approved and no PLAN exists; PLAN DocumentPanel includes approve/revise action bar
 
 **Checkpoint**: After approving SPEC, click Generate PLAN → PLAN appears → approve it → system proceeds to task breakdown.
 
