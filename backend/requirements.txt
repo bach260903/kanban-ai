@@ -24,6 +24,8 @@ redis==5.1.1
 langchain==0.3.0
 langchain-groq==0.2.0
 langgraph==0.2.20
+langgraph-checkpoint-postgres>=2.0.25,<3
+psycopg[binary]>=3.2.0
 
 # Git
 gitpython==3.1.43
