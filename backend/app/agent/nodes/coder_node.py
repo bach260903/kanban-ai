@@ -1,10 +1,468 @@
-"""Coder agent node — stub until T058 (US8)."""
+"""Coder agent: sandbox tools + Groq tool-calling + git diff + Diff row + HIL (US8 / T058)."""
 
 from __future__ import annotations
 
-from typing import Any
+import asyncio
+import logging
+import shlex
+import subprocess
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, cast
+from uuid import UUID
+
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain_core.tools import tool
+from langchain_groq import ChatGroq
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.config import settings
+from app.database import async_session_maker
+from app.exceptions import SandboxEscapeError
+from app.git.git_service import GitService
+from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
+from app.models.audit_log import AuditLogResult
+from app.models.diff import Diff, DiffReviewStatus
+from app.models.project import Project
+from app.models.task import Task, TaskStatus
+from app.services.audit_service import finalise_log, write_audit, write_pending_log
+from app.services.task_service import TaskService
+
+try:
+    from langgraph.types import interrupt
+except Exception:  # pragma: no cover
+    def interrupt(_value: Any = None) -> None:  # type: ignore[override]
+        return None
 
 
-async def run(state: dict[str, Any]) -> dict[str, Any]:
-    """Stub: full ReAct + diff + HIL in T058."""
+logger = logging.getLogger(__name__)
+
+StateDict = dict[str, Any]
+
+_MAX_READ = 400_000
+_MAX_WRITE = 500_000
+_MAX_TOOL_ROUNDS = 8
+
+
+def _request_hil_interrupt() -> None:
+    try:
+        interrupt(None)
+    except TypeError:
+        interrupt()
+    except RuntimeError:
+        pass
+
+
+def _as_uuid(value: Any, field: str) -> UUID:
+    if isinstance(value, UUID):
+        return value
+    if isinstance(value, str):
+        return UUID(value)
+    raise ValueError(f"coder_node requires UUID-compatible `{field}` in state.")
+
+
+def _sandbox_root(project_id: UUID) -> Path:
+    root = Path(settings.sandbox_root).expanduser().resolve()
+    proj = (root / str(project_id)).resolve()
+    try:
+        proj.relative_to(root)
+    except ValueError as exc:
+        raise SandboxEscapeError("Resolved sandbox path escapes SANDBOX_ROOT.") from exc
+    return proj
+
+
+def _safe_path(sandbox: Path, relative_path: str) -> Path:
+    rel = relative_path.replace("\\", "/").lstrip("/")
+    target = (sandbox / rel).resolve()
+    try:
+        target.relative_to(sandbox)
+    except ValueError as exc:
+        raise SandboxEscapeError("Path escapes sandbox.") from exc
+    return target
+
+
+def _fs_read(sandbox: Path, relative_path: str) -> str:
+    path = _safe_path(sandbox, relative_path)
+    if not path.is_file():
+        raise FileNotFoundError(f"Not a file: {relative_path}")
+    data = path.read_text(encoding="utf-8", errors="replace")
+    if len(data) > _MAX_READ:
+        return data[:_MAX_READ] + "\n…(truncated)"
+    return data
+
+
+def _fs_write(sandbox: Path, relative_path: str, content: str) -> str:
+    if len(content) > _MAX_WRITE:
+        raise ValueError("Content exceeds maximum size.")
+    path = _safe_path(sandbox, relative_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+    return f"Wrote {len(content)} bytes to {relative_path}"
+
+
+def _run_git_command(sandbox: Path, command: str) -> str:
+    raw = command.strip()
+    if not raw:
+        raise ValueError("Empty command.")
+    parts = shlex.split(raw)
+    if not parts or parts[0] != "git":
+        raise ValueError("Only `git ...` commands are allowed.")
+    if len(raw) > 300:
+        raise ValueError("Command too long.")
+    proc = subprocess.run(
+        parts,
+        cwd=sandbox,
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+    out = (proc.stdout or "") + (proc.stderr or "")
+    if proc.returncode != 0:
+        return f"(exit {proc.returncode})\n{out}"
+    return out or "(no output)"
+
+
+def _monaco_from_unified(unified: str) -> tuple[str, str]:
+    if not unified.strip():
+        return "", ""
+    try:
+        from whatthepatch import parse_patch
+
+        patches = list(parse_patch(unified))
+    except Exception:
+        return unified, unified
+    orig: list[str] = []
+    mod: list[str] = []
+    for patch in patches:
+        for change in patch.changes:
+            if change.old is not None and change.new is not None:
+                orig.append(change.line)
+                mod.append(change.line)
+            elif change.old is not None:
+                orig.append(change.line)
+            elif change.new is not None:
+                mod.append(change.line)
+    return "\n".join(orig), "\n".join(mod)
+
+
+@tool
+def read_file(relative_path: str) -> str:
+    """Read a UTF-8 text file from the project sandbox (relative path, forward slashes)."""
+    return relative_path
+
+
+@tool
+def write_file(relative_path: str, content: str) -> str:
+    """Create or overwrite a UTF-8 text file under the sandbox."""
+    return relative_path
+
+
+@tool
+def run_terminal(command: str) -> str:
+    """Run a `git ...` command with cwd set to the sandbox (no shell metacharacters)."""
+    return command
+
+
+_CODER_TOOLS = [read_file, write_file, run_terminal]
+
+
+async def _finalize_agent_run(
+    session: AsyncSession,
+    agent_run_id: UUID,
+    status: AgentRunStatus,
+) -> None:
+    run = await session.get(AgentRun, agent_run_id)
+    if run is None:
+        return
+    run.status = status
+    if status in (
+        AgentRunStatus.SUCCESS,
+        AgentRunStatus.FAILURE,
+        AgentRunStatus.TIMEOUT,
+        AgentRunStatus.AWAITING_HIL,
+    ):
+        run.completed_at = datetime.now(timezone.utc)
+    await session.flush()
+
+
+async def _execute_tool(
+    *,
+    session: AsyncSession,
+    sandbox: Path,
+    project_id: UUID,
+    task_id: UUID,
+    name: str,
+    args: dict[str, Any],
+) -> str:
+    if name == "read_file":
+        rel = str(args.get("relative_path", "")).strip()
+        log = await write_pending_log(
+            session,
+            project_id=project_id,
+            task_id=task_id,
+            action_type="coder_read_file",
+            action_description=f"read_file `{rel}`",
+            input_refs=[rel],
+        )
+        try:
+            body = await asyncio.to_thread(_fs_read, sandbox, rel)
+            await finalise_log(session, log.id, AuditLogResult.SUCCESS, output_refs=[rel])
+            return body
+        except Exception as exc:
+            await finalise_log(
+                session,
+                log.id,
+                AuditLogResult.FAILURE,
+                output_refs=[str(exc)],
+            )
+            return f"ERROR: {exc}"
+
+    if name == "write_file":
+        rel = str(args.get("relative_path", "")).strip()
+        content = str(args.get("content", ""))
+        log = await write_pending_log(
+            session,
+            project_id=project_id,
+            task_id=task_id,
+            action_type="coder_write_file",
+            action_description=f"write_file `{rel}` ({len(content)} chars)",
+            input_refs=[rel],
+        )
+        try:
+            msg = await asyncio.to_thread(_fs_write, sandbox, rel, content)
+            await finalise_log(session, log.id, AuditLogResult.SUCCESS, output_refs=[rel])
+            return msg
+        except Exception as exc:
+            await finalise_log(
+                session,
+                log.id,
+                AuditLogResult.FAILURE,
+                output_refs=[str(exc)],
+            )
+            return f"ERROR: {exc}"
+
+    if name == "run_terminal":
+        cmd = str(args.get("command", "")).strip()
+        log = await write_pending_log(
+            session,
+            project_id=project_id,
+            task_id=task_id,
+            action_type="coder_run_terminal",
+            action_description=f"run_terminal `{cmd}`",
+            input_refs=[cmd],
+        )
+        try:
+            out = await asyncio.to_thread(_run_git_command, sandbox, cmd)
+            await finalise_log(session, log.id, AuditLogResult.SUCCESS, output_refs=[cmd])
+            return out
+        except Exception as exc:
+            await finalise_log(
+                session,
+                log.id,
+                AuditLogResult.FAILURE,
+                output_refs=[str(exc)],
+            )
+            return f"ERROR: {exc}"
+
+    return f"ERROR: unknown tool {name}"
+
+
+async def _run_with_session(state: StateDict) -> StateDict:
+    project_id = _as_uuid(state["project_id"], "project_id")
+    task_id = _as_uuid(state["task_id"], "task_id")
+
+    async with async_session_maker() as session:
+        task = await TaskService.get(session, task_id, project_id=project_id)
+        project = await session.get(Project, project_id)
+        if project is None:
+            raise ValueError("Project not found.")
+
+        agent_run = AgentRun(
+            project_id=project_id,
+            task_id=task_id,
+            agent_type=AgentType.CODER,
+            agent_version="1.0.0",
+            status=AgentRunStatus.RUNNING,
+            input_artifacts=[str(task.id)],
+            output_artifacts=[],
+        )
+        session.add(agent_run)
+        await session.flush()
+        agent_run_id = agent_run.id
+
+        sandbox = _sandbox_root(project_id)
+        await asyncio.to_thread(GitService.init_repo, sandbox)
+        await asyncio.to_thread(GitService.configure_identity, sandbox)
+        await asyncio.to_thread(GitService.ensure_baseline_commit, sandbox)
+
+        system = (
+            "You are the Coder agent. Work only via tools: read_file, write_file, run_terminal.\n"
+            "Implement the task in the sandbox using relative POSIX paths. Prefer small files.\n"
+            "Use run_terminal only for read-only git commands (e.g. `git status`).\n"
+            "When finished, stop calling tools and briefly summarize what you changed."
+        )
+        human = (
+            f"Task title: {task.title}\n"
+            f"Task description:\n{task.description or '(none)'}\n\n"
+            f"Project constitution (excerpt, first 8000 chars):\n{project.constitution[:8000]}"
+        )
+        messages: list[Any] = [
+            SystemMessage(content=system),
+            HumanMessage(content=human),
+        ]
+
+        if not settings.groq_api_key.strip():
+            await asyncio.to_thread(
+                _fs_write,
+                sandbox,
+                "agent_notes.md",
+                f"# Coder stub\n\nNo LLM key configured. Task: {task.title}\n",
+            )
+            unified, files = await asyncio.to_thread(GitService.diff_staged, sandbox)
+            orig, mod = _monaco_from_unified(unified)
+            diff_row = Diff(
+                task_id=task_id,
+                agent_run_id=agent_run_id,
+                content=unified or "(no staged diff)",
+                original_content=orig,
+                modified_content=mod,
+                files_affected=files or [],
+                review_status=DiffReviewStatus.PENDING,
+            )
+            session.add(diff_row)
+            await session.flush()
+            await write_audit(
+                session,
+                project_id=project_id,
+                task_id=task_id,
+                action_type="coder_node",
+                action_description="GROQ_API_KEY missing — placeholder diff recorded.",
+                result=AuditLogResult.FAILURE,
+                output_refs=[str(diff_row.id)],
+            )
+            task.status = TaskStatus.REVIEW
+            task.updated_at = datetime.now(timezone.utc)
+            await _finalize_agent_run(session, agent_run_id, AgentRunStatus.AWAITING_HIL)
+            await session.commit()
+            _request_hil_interrupt()
+            return state
+
+        llm = ChatGroq(
+            api_key=settings.groq_api_key,
+            model=settings.groq_model,
+            temperature=0.1,
+        ).bind_tools(_CODER_TOOLS)
+
+        rounds = 0
+        while rounds < _MAX_TOOL_ROUNDS:
+            rounds += 1
+            llm_log = await write_pending_log(
+                session,
+                project_id=project_id,
+                task_id=task_id,
+                action_type="coder_llm",
+                action_description=f"ChatGroq invoke (round {rounds})",
+                input_refs=[],
+            )
+            try:
+                ai = cast(AIMessage, await llm.ainvoke(messages))
+                await finalise_log(session, llm_log.id, AuditLogResult.SUCCESS)
+            except Exception as exc:
+                await finalise_log(session, llm_log.id, AuditLogResult.FAILURE, output_refs=[str(exc)])
+                raise
+
+            messages.append(ai)
+            tool_calls = getattr(ai, "tool_calls", None) or []
+            if not tool_calls:
+                break
+
+            for tc in tool_calls:
+                name = tc.get("name", "")
+                args = cast(dict[str, Any], tc.get("args", {}))
+                tid = tc.get("id", "") or f"tool-{name}-{rounds}"
+                out = await _execute_tool(
+                    session=session,
+                    sandbox=sandbox,
+                    project_id=project_id,
+                    task_id=task_id,
+                    name=name,
+                    args=args,
+                )
+                messages.append(ToolMessage(content=out, tool_call_id=str(tid)))
+
+        unified, files = await asyncio.to_thread(GitService.diff_staged, sandbox)
+        orig, mod = _monaco_from_unified(unified)
+        diff_row = Diff(
+            task_id=task_id,
+            agent_run_id=agent_run_id,
+            content=unified or "(no staged diff)",
+            original_content=orig,
+            modified_content=mod,
+            files_affected=files or [],
+            review_status=DiffReviewStatus.PENDING,
+        )
+        session.add(diff_row)
+        await session.flush()
+        task.status = TaskStatus.REVIEW
+        task.updated_at = datetime.now(timezone.utc)
+        await _finalize_agent_run(session, agent_run_id, AgentRunStatus.AWAITING_HIL)
+        await write_audit(
+            session,
+            project_id=project_id,
+            task_id=task_id,
+            action_type="coder_node",
+            action_description="Coder produced diff; awaiting PO review (HIL).",
+            result=AuditLogResult.SUCCESS,
+            output_refs=[str(diff_row.id)],
+        )
+        await session.commit()
+        _request_hil_interrupt()
     return state
+
+
+async def run(state: StateDict) -> StateDict:
+    """Entry point for LangGraph / background task (``KanbanService``)."""
+    try:
+        return await asyncio.wait_for(_run_with_session(state), timeout=600.0)
+    except asyncio.TimeoutError:
+        logger.exception("coder_node timed out")
+        try:
+            async with async_session_maker() as session:
+                task_id = state.get("task_id")
+                project_id = state.get("project_id")
+                if isinstance(task_id, UUID) and isinstance(project_id, UUID):
+                    task = await session.get(Task, task_id)
+                    if task is not None:
+                        task.status = TaskStatus.REJECTED
+                        task.updated_at = datetime.now(timezone.utc)
+                    await write_audit(
+                        session,
+                        project_id=project_id,
+                        task_id=task_id if isinstance(task_id, UUID) else None,
+                        action_type="coder_node",
+                        action_description="Coder exceeded 10-minute budget.",
+                        result=AuditLogResult.FAILURE,
+                    )
+                    await session.commit()
+        except Exception:
+            logger.exception("coder_node timeout cleanup failed")
+        return {**state, "error": "Coder timed out."}
+    except Exception as exc:
+        logger.exception("coder_node failed")
+        try:
+            async with async_session_maker() as session:
+                task_id = state.get("task_id")
+                project_id = state.get("project_id")
+                if isinstance(task_id, UUID) and isinstance(project_id, UUID):
+                    await write_audit(
+                        session,
+                        project_id=project_id,
+                        task_id=task_id,
+                        action_type="coder_node",
+                        action_description=str(exc),
+                        result=AuditLogResult.FAILURE,
+                    )
+                    await session.commit()
+        except Exception:
+            logger.exception("coder_node failure audit failed")
+        return {**state, "error": str(exc)}

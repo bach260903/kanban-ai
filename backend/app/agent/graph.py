@@ -6,7 +6,7 @@ from typing import Any
 
 from langgraph.graph import END, START, StateGraph
 
-# ``coder_node`` remains a stub — see T058. ``task_breakdown`` runs after ``plan`` when the graph
+# ``coder_node`` is implemented for US8 / T058. ``task_breakdown`` runs after ``plan`` when the graph
 # continues past PLAN HIL (or via ``run_task_breakdown_task`` on PLAN approve — US7 / T048).
 from app.agent.nodes import coder_node, plan_node, spec_node, task_breakdown_node
 
