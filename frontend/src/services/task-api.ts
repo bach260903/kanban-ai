@@ -1,3 +1,4 @@
+import type { TaskColumnItem, TaskColumns } from '../store/task-store'
 import type { DiffReviewStatus, TaskStatus, UUID } from '../types'
 
 import api from './api'
@@ -24,6 +25,22 @@ export type TasksGroupedResponse = {
   done: TaskKanbanListItem[]
   rejected: TaskKanbanListItem[]
   conflict: TaskKanbanListItem[]
+}
+
+function withStatus(items: TaskKanbanListItem[], status: TaskStatus): TaskColumnItem[] {
+  return items.map((row) => ({ ...row, status }))
+}
+
+/** Maps API grouped payload into ``taskStore`` column shape (every card carries ``status``). */
+export function groupedResponseToTaskColumns(data: TasksGroupedResponse): TaskColumns {
+  return {
+    todo: withStatus(data.todo, 'todo'),
+    in_progress: withStatus(data.in_progress, 'in_progress'),
+    review: withStatus(data.review, 'review'),
+    done: withStatus(data.done, 'done'),
+    rejected: withStatus(data.rejected, 'rejected'),
+    conflict: withStatus(data.conflict, 'conflict'),
+  }
 }
 
 /** Expected body for ``POST .../tasks/{task_id}/move`` (``plan.md``). */

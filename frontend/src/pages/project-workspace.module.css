@@ -14,6 +14,35 @@
   color: var(--text);
 }
 
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+
+.tab,
+.tabActive {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--social-bg);
+  color: var(--text);
+}
+
+.tab:hover {
+  border-color: var(--accent-border);
+}
+
+.tabActive {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .documents {
   margin: 0;
 }
@@ -29,6 +58,17 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+}
+
+.kanban {
+  margin: 0;
+}
+
+.kanbanTitle {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
 }
 
 .loading,

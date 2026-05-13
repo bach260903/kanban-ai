@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 
 import { Spinner } from '../components/atoms/spinner'
 import { DocumentPanel } from '../components/organisms/document-panel'
+import { KanbanBoard } from '../components/organisms/kanban-board'
 import { ProjectHeader } from '../components/organisms/project-header'
 import { getProject } from '../services/project-api'
 import { useProjectStore } from '../store/project-store'
@@ -25,6 +26,7 @@ export default function ProjectWorkspace() {
   const { currentProject, setCurrentProject } = useProjectStore()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<'documents' | 'kanban'>('documents')
 
   useEffect(() => {
     let cancelled = false
@@ -65,16 +67,47 @@ export default function ProjectWorkspace() {
       {!loading && !error && currentProject ? (
         <>
           <ProjectHeader project={currentProject} />
+          <div className={styles.tabs} role="tablist" aria-label="Workspace sections">
+            <button
+              type="button"
+              role="tab"
+              className={activeTab === 'documents' ? styles.tabActive : styles.tab}
+              aria-selected={activeTab === 'documents'}
+              id="workspace-tab-documents"
+              onClick={() => setActiveTab('documents')}
+            >
+              Documents
+            </button>
+            <button
+              type="button"
+              role="tab"
+              className={activeTab === 'kanban' ? styles.tabActive : styles.tab}
+              aria-selected={activeTab === 'kanban'}
+              id="workspace-tab-kanban"
+              onClick={() => setActiveTab('kanban')}
+            >
+              Kanban
+            </button>
+          </div>
           <section className={styles.body}>
-            <section className={styles.documents} aria-labelledby="workspace-documents-heading">
-              <h2 id="workspace-documents-heading" className={styles.documentsTitle}>
-                Documents
-              </h2>
-              <div className={styles.documentPanels}>
-                <DocumentPanel projectId={currentProject.id} documentType="SPEC" />
-                <DocumentPanel projectId={currentProject.id} documentType="PLAN" />
-              </div>
-            </section>
+            {activeTab === 'documents' ? (
+              <section className={styles.documents} aria-labelledby="workspace-documents-heading">
+                <h2 id="workspace-documents-heading" className={styles.documentsTitle}>
+                  Documents
+                </h2>
+                <div className={styles.documentPanels}>
+                  <DocumentPanel projectId={currentProject.id} documentType="SPEC" />
+                  <DocumentPanel projectId={currentProject.id} documentType="PLAN" />
+                </div>
+              </section>
+            ) : (
+              <section className={styles.kanban} aria-labelledby="workspace-kanban-heading">
+                <h2 id="workspace-kanban-heading" className={styles.kanbanTitle}>
+                  Kanban
+                </h2>
+                <KanbanBoard projectId={currentProject.id} />
+              </section>
+            )}
             <p>
               <Link to="/projects">Back to project list</Link>
             </p>
