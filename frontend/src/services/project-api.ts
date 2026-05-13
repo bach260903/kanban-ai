@@ -15,6 +15,12 @@ export type ProjectUpdatePayload = {
   description?: string | null
 }
 
+export type ConstitutionResponse = {
+  project_id: string
+  content: string
+  updated_at: string | null
+}
+
 export async function listProjects(): Promise<ProjectListItem[]> {
   const { data } = await api.get<ProjectListItem[]>(PREFIX)
   return data
@@ -32,5 +38,18 @@ export async function getProject(projectId: string): Promise<Project> {
 
 export async function updateProject(projectId: string, body: ProjectUpdatePayload): Promise<Project> {
   const { data } = await api.put<Project>(`${PREFIX}/${projectId}`, body)
+  return data
+}
+
+export async function getConstitution(projectId: string): Promise<ConstitutionResponse> {
+  const { data } = await api.get<ConstitutionResponse>(`${PREFIX}/${projectId}/constitution`)
+  return data
+}
+
+export async function updateConstitution(
+  projectId: string,
+  content: string,
+): Promise<ConstitutionResponse> {
+  const { data } = await api.put<ConstitutionResponse>(`${PREFIX}/${projectId}/constitution`, { content })
   return data
 }
