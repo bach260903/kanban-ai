@@ -68,8 +68,16 @@ async def _generate_spec(state: StateDict) -> StateDict:
 
     context = await ContextBuilder.build_architect_context(project_id, session)
     intent = str(state.get("intent", "")).strip()
-    if not intent:
-        raise ValueError("spec_node requires non-empty `intent`.")
+    feedback = str(state.get("feedback", "")).strip()
+    if not intent and not feedback:
+        raise ValueError("spec_node requires non-empty `intent` and/or `feedback`.")
+
+    human_parts = [context["human"]]
+    if intent:
+        human_parts.append(f"Intent:\n{intent}")
+    if feedback:
+        human_parts.append(f"Revision feedback:\n{feedback}")
+    human_content = "\n\n".join(human_parts)
 
     await _audit(state, "llm_call", "Generate SPEC from intent + constitution")
     llm = ChatGroq(
@@ -80,7 +88,7 @@ async def _generate_spec(state: StateDict) -> StateDict:
     llm_response = await llm.ainvoke(
         [
             SystemMessage(content=context["system"]),
-            HumanMessage(content=f"{context['human']}\n\nIntent:\n{intent}"),
+            HumanMessage(content=human_content),
         ]
     )
     spec_markdown = str(llm_response.content).strip()

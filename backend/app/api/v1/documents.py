@@ -14,15 +14,20 @@ from app.database import get_db
 from app.exceptions import InvalidTransitionError, NotFoundError
 from app.middleware.auth import require_jwt
 from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
+from app.models.audit_log import AuditLogResult
 from app.models.document import Document, DocumentStatus, DocumentType
 from app.schemas.document import (
+    DocumentApproveResponse,
     DocumentContentUpdate,
     DocumentListItem,
     DocumentResponse,
+    DocumentReviseResponse,
     DocumentTypeFilter,
     GenerateSpecRequest,
     GenerateSpecResponse,
+    RevisionRequest,
 )
+from app.services.audit_service import write_audit
 from app.services.document_service import DocumentService
 from app.services.intent_service import IntentService
 from app.services.project_service import ProjectService
@@ -125,6 +130,7 @@ async def generate_spec(
             agent_run.id,
             spec_doc.id,
             body.intent.strip(),
+            feedback=None,
         )
     )
 
@@ -132,4 +138,95 @@ async def generate_spec(
         agent_run_id=agent_run.id,
         intent_id=intent_row.id,
         document_id=spec_doc.id,
+    )
+
+
+@router.post(
+    "/{project_id}/documents/{document_id}/approve",
+    response_model=DocumentApproveResponse,
+)
+async def approve_document(
+    project_id: UUID,
+    document_id: UUID,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> DocumentApproveResponse:
+    await ProjectService.get(session, project_id)
+    doc = await session.get(Document, document_id)
+    if doc is None or doc.project_id != project_id:
+        raise NotFoundError("Document not found.")
+    approved = await DocumentService.approve(session, document_id)
+    await write_audit(
+        session,
+        project_id=project_id,
+        task_id=None,
+        action_type="document_approve",
+        action_description=f"Approved document {document_id}",
+        result=AuditLogResult.SUCCESS,
+        input_refs=[str(document_id)],
+        output_refs=[str(approved.id), str(approved.status)],
+    )
+    await session.commit()
+    await session.refresh(approved)
+    return DocumentApproveResponse.model_validate(approved)
+
+
+@router.post(
+    "/{project_id}/documents/{document_id}/revise",
+    response_model=DocumentReviseResponse,
+)
+async def revise_document(
+    project_id: UUID,
+    document_id: UUID,
+    body: RevisionRequest,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> DocumentReviseResponse:
+    await ProjectService.get(session, project_id)
+    doc = await session.get(Document, document_id)
+    if doc is None or doc.project_id != project_id:
+        raise NotFoundError("Document not found.")
+    if doc.document_type != DocumentType.SPEC:
+        raise InvalidTransitionError("Revision regeneration is only supported for SPEC documents.")
+
+    document, fb = await DocumentService.request_revision(session, document_id, body.feedback)
+
+    agent_run = AgentRun(
+        project_id=project_id,
+        task_id=None,
+        agent_type=AgentType.ARCHITECT,
+        status=AgentRunStatus.RUNNING,
+    )
+    session.add(agent_run)
+    await session.flush()
+
+    await write_audit(
+        session,
+        project_id=project_id,
+        task_id=None,
+        action_type="document_revise",
+        action_description=f"Requested revision for document {document_id}",
+        result=AuditLogResult.SUCCESS,
+        input_refs=[str(document_id), str(fb.id)],
+        output_refs=[str(agent_run.id)],
+    )
+    await session.commit()
+
+    asyncio.create_task(
+        run_generate_spec_task(
+            project_id,
+            agent_run.id,
+            document.id,
+            "",
+            feedback=fb.content,
+        )
+    )
+
+    await session.refresh(document)
+    return DocumentReviseResponse(
+        id=document.id,
+        status=document.status,
+        feedback_id=fb.id,
+        agent_run_id=agent_run.id,
+        updated_at=document.updated_at,
     )

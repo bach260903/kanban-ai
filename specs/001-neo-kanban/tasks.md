@@ -130,7 +130,7 @@
 
 **Independent Test**: With SPEC in Draft state — `POST /documents/{id}/approve` → status = `approved`; `POST /documents/{id}/revise` with feedback → status = `revision_requested` and new agent run starts.
 
-- [ ] T041 [US5] Implement document approve + revise endpoints in `backend/app/api/v1/documents.py`: `POST /{id}/approve` (calls `document_service.approve()`, writes audit log), `POST /{id}/revise` (calls `document_service.request_revision()`, launches spec_node with feedback in context)
+- [X] T041 [US5] Implement document approve + revise endpoints in `backend/app/api/v1/documents.py`: `POST /{id}/approve` (calls `document_service.approve()`, writes audit log), `POST /{id}/revise` (calls `document_service.request_revision()`, launches spec_node with feedback in context)
 - [ ] T042 [US5] Handle revision retry in `spec_node`: if `state.feedback` is present, include it in the LangChain prompt; after regeneration, call `interrupt()` again; increment `document.version`
 - [ ] T043 [US5] Add Approve / Request Revision action bar to `DocumentPanel` in `frontend/src/components/organisms/document-panel.tsx`: show action bar when `document.status = "draft"` or `"revision_requested"`, Approve button → `POST /approve`, Revision button → textarea for feedback + `POST /revise`
 

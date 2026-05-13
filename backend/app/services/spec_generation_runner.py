@@ -26,8 +26,10 @@ async def run_generate_spec_task(
     agent_run_id: UUID,
     document_id: UUID,
     intent_text: str,
+    *,
+    feedback: str | None = None,
 ) -> None:
-    """Run ``spec_node`` in a fresh DB session (started from ``POST /generate-spec``)."""
+    """Run ``spec_node`` in a fresh DB session (``generate-spec`` or revision)."""
     async with async_session_maker() as session:
         try:
             await _run_with_session(
@@ -36,6 +38,7 @@ async def run_generate_spec_task(
                 agent_run_id=agent_run_id,
                 document_id=document_id,
                 intent_text=intent_text,
+                feedback=feedback,
             )
             await session.commit()
         except Exception:
@@ -56,6 +59,7 @@ async def _run_with_session(
     agent_run_id: UUID,
     document_id: UUID,
     intent_text: str,
+    feedback: str | None = None,
 ) -> None:
     async def set_agent_run_status(new_status: str) -> None:
         run = await session.get(AgentRun, agent_run_id)
@@ -84,6 +88,7 @@ async def _run_with_session(
         "project_id": project_id,
         "agent_run_id": agent_run_id,
         "intent": intent_text,
+        "feedback": feedback or "",
         "set_agent_run_status": set_agent_run_status,
         "persist_spec": persist_spec,
         "write_pending_log": _noop,
