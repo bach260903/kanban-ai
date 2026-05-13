@@ -63,3 +63,14 @@ class ProjectService:
         project.status = ProjectStatus.ARCHIVED
         await session.flush()
         return project
+
+    @staticmethod
+    async def get_constitution(session: AsyncSession, project_id: UUID) -> Project:
+        return await ProjectService.get(session, project_id)
+
+    @staticmethod
+    async def update_constitution(session: AsyncSession, project_id: UUID, content: str) -> Project:
+        project = await ProjectService.get(session, project_id)
+        project.constitution = content
+        await session.flush()
+        return project

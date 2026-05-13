@@ -10,7 +10,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
 from app.middleware.auth import require_jwt
-from app.schemas.project import ProjectCreate, ProjectListItem, ProjectResponse, ProjectUpdate
+from app.schemas.project import (
+    ConstitutionResponse,
+    ConstitutionUpdate,
+    ProjectCreate,
+    ProjectListItem,
+    ProjectResponse,
+    ProjectUpdate,
+)
 from app.services.project_service import ProjectService
 
 router = APIRouter(prefix="/projects", tags=["projects"])
@@ -69,3 +76,34 @@ async def archive_project(
     await ProjectService.archive(session, project_id)
     await session.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.get("/{project_id}/constitution", response_model=ConstitutionResponse)
+async def get_constitution(
+    project_id: UUID,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> ConstitutionResponse:
+    project = await ProjectService.get_constitution(session, project_id)
+    return ConstitutionResponse(
+        project_id=project.id,
+        content=project.constitution,
+        updated_at=project.updated_at,
+    )
+
+
+@router.put("/{project_id}/constitution", response_model=ConstitutionResponse)
+async def update_constitution(
+    project_id: UUID,
+    data: ConstitutionUpdate,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> ConstitutionResponse:
+    project = await ProjectService.update_constitution(session, project_id, data.content)
+    await session.commit()
+    await session.refresh(project)
+    return ConstitutionResponse(
+        project_id=project.id,
+        content=project.constitution,
+        updated_at=project.updated_at,
+    )

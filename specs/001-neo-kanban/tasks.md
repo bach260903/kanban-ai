@@ -94,7 +94,7 @@
 
 **Independent Test**: Write constitution → save → reload → constitution appears; verify `GET /constitution` returns saved content.
 
-- [ ] T027 [US3] Implement Constitution API endpoints in `backend/app/api/v1/projects.py`: `GET /{id}/constitution` and `PUT /{id}/constitution` (body: `{"content": "..."}`)
+- [X] T027 [US3] Implement Constitution API endpoints in `backend/app/api/v1/projects.py`: `GET /{id}/constitution` and `PUT /{id}/constitution` (body: `{"content": "..."}`)
 - [ ] T028 [US3] Implement `DocumentEditor` molecule in `frontend/src/components/molecules/document-editor.tsx`: `@monaco-editor/react` in Markdown language mode, controlled value/onChange props
 - [ ] T029 [US3] Implement `ConstitutionEditor` page in `frontend/src/pages/constitution-editor.tsx`: load constitution via `GET /constitution`, render `DocumentEditor`, Save button calls `PUT /constitution`, show success toast; add route `/projects/:id/constitution` in `App.tsx`
 

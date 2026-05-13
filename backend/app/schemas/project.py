@@ -24,6 +24,16 @@ class ProjectUpdate(BaseModel):
     description: str | None = None
 
 
+class ConstitutionUpdate(BaseModel):
+    content: str = ""
+
+
+class ConstitutionResponse(BaseModel):
+    project_id: UUID
+    content: str
+    updated_at: datetime | None = None
+
+
 class ProjectListItem(BaseModel):
     """Subset returned by ``GET /api/v1/projects`` (contract)."""
 
