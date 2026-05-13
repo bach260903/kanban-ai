@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { Spinner } from '../components/atoms/spinner'
+import { DocumentPanel } from '../components/organisms/document-panel'
 import { ProjectHeader } from '../components/organisms/project-header'
 import { getProject } from '../services/project-api'
 import { useProjectStore } from '../store/project-store'
@@ -65,7 +66,7 @@ export default function ProjectWorkspace() {
         <>
           <ProjectHeader project={currentProject} />
           <section className={styles.body}>
-            <p>Workspace shell ready. Kanban board and document panel will be added in later tasks.</p>
+            <DocumentPanel projectId={currentProject.id} />
             <p>
               <Link to="/projects">Back to project list</Link>
             </p>
