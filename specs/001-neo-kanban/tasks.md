@@ -164,7 +164,7 @@
 - [X] T050 [US7] Implement Tasks router `GET /projects/{id}/tasks` in `backend/app/api/v1/tasks.py`: return tasks grouped by status `{todo: [...], in_progress: [...], review: [...], done: [...], rejected: [], conflict: []}` ; register in `main.py`
 - [X] T051 [US7] Implement `taskStore` Zustand in `frontend/src/store/task-store.ts`: `columns` (keyed by status), `setColumns()`, `moveTask(taskId, fromStatus, toStatus)` (optimistic update)
 - [X] T052 [US7] Implement `task-api.ts` in `frontend/src/services/task-api.ts`: `getTasks()`, `moveTask()`, `approveTask()`, `rejectTask()`, `getDiff()`
-- [ ] T053 [US7] Implement `TaskCard` molecule in `frontend/src/components/molecules/task-card.tsx`: display task title, description truncated, priority number, status badge; wrap with `useSortable` from `@dnd-kit/sortable` (drag handle inactive for now)
+- [X] T053 [US7] Implement `TaskCard` molecule in `frontend/src/components/molecules/task-card.tsx`: display task title, description truncated, priority number, status badge; wrap with `useSortable` from `@dnd-kit/sortable` (drag handle inactive for now)
 - [ ] T054 [US7] Implement `KanbanColumn` organism in `frontend/src/components/organisms/kanban-column.tsx`: receives `column` prop (status + tasks list), renders column header + list of `TaskCard`; use `SortableContext` from dnd-kit (not yet connected to drop)
 - [ ] T055 [US7] Implement `KanbanBoard` organism in `frontend/src/components/organisms/kanban-board.tsx`: fetch tasks on mount via `getTasks()`, populate `taskStore.columns`, render 4 `KanbanColumn` (To Do, In Progress, Review, Done); add to `ProjectWorkspace` Kanban tab
 
