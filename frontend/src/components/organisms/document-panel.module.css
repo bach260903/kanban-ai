@@ -110,6 +110,46 @@
   flex-wrap: wrap;
 }
 
+.actionBar {
+  margin-top: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--accent-bg, rgba(148, 163, 184, 0.06));
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.actionBarLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.actionBarRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.revisionField {
+  width: 100%;
+  min-height: 4.5rem;
+  resize: vertical;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--input-bg, transparent);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
 .error {
   margin: 0.5rem 0 0;
   color: #b91c1c;

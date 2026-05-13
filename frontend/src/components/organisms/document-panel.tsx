@@ -6,7 +6,7 @@ import { Spinner } from '../atoms/spinner'
 import { DocumentEditor } from '../molecules/document-editor'
 import { useDocument } from '../../hooks/use-document'
 import type { DocumentListItem } from '../../services/document-api'
-import { generateSpec, getDocuments } from '../../services/document-api'
+import { approveDocument, generateSpec, getDocuments, reviseDocument } from '../../services/document-api'
 import type { DocumentStatus } from '../../types'
 
 import styles from './document-panel.module.css'
@@ -40,6 +40,8 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
   const [actionError, setActionError] = useState<string | null>(null)
   const [statusMessage, setStatusMessage] = useState<string | null>(null)
   const [pendingRunId, setPendingRunId] = useState<string | null>(null)
+  const [revisionFeedback, setRevisionFeedback] = useState('')
+  const [hilBusy, setHilBusy] = useState(false)
 
   const refreshSpecs = useCallback(async () => {
     setListError(null)
@@ -79,6 +81,10 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
 
   const displayStatus = document?.status ?? latestSpec?.status
   const showGenerate = !listLoading && specRows.length === 0
+  const showHilActions =
+    Boolean(specDocumentId) &&
+    (displayStatus === 'draft' || displayStatus === 'revision_requested') &&
+    !isGenerating
 
   async function onGenerateSpec() {
     setActionError(null)
@@ -100,6 +106,49 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
       setActionError(errorMessage(e))
     } finally {
       setSubmitting(false)
+    }
+  }
+
+  async function onApproveSpec() {
+    if (!specDocumentId) return
+    setActionError(null)
+    setStatusMessage(null)
+    try {
+      setHilBusy(true)
+      await approveDocument(projectId, specDocumentId)
+      await refreshSpecs()
+      await refetch()
+      setStatusMessage('SPEC approved.')
+      setTimeout(() => setStatusMessage(null), 4000)
+    } catch (e) {
+      setActionError(errorMessage(e))
+    } finally {
+      setHilBusy(false)
+    }
+  }
+
+  async function onRequestRevision() {
+    if (!specDocumentId) return
+    setActionError(null)
+    setStatusMessage(null)
+    const fb = revisionFeedback.trim()
+    if (!fb) {
+      setActionError('Enter revision feedback before submitting.')
+      return
+    }
+    try {
+      setHilBusy(true)
+      const res = await reviseDocument(projectId, specDocumentId, fb)
+      await refreshSpecs()
+      setPendingRunId(res.agent_run_id)
+      setRevisionFeedback('')
+      await refetch()
+      setStatusMessage('Revision requested. Regenerating SPEC…')
+      setTimeout(() => setStatusMessage(null), 5000)
+    } catch (e) {
+      setActionError(errorMessage(e))
+    } finally {
+      setHilBusy(false)
     }
   }
 
@@ -177,6 +226,39 @@ export function DocumentPanel({ projectId }: DocumentPanelProps) {
             ) : null}
             <DocumentEditor value={editorValue} onChange={noopChange} readOnly height="min(55vh, 520px)" />
           </div>
+          {showHilActions ? (
+            <div className={styles.actionBar} role="region" aria-label="Document review actions">
+              <span className={styles.actionBarLabel}>Product owner review</span>
+              <div className={styles.actionBarRow}>
+                <Button type="button" onClick={() => void onApproveSpec()} disabled={hilBusy || isLoading}>
+                  Approve
+                </Button>
+                {hilBusy ? <Spinner aria-label="Saving review" /> : null}
+              </div>
+              <label className={styles.intentLabel} htmlFor="spec-revision-feedback">
+                Request revision
+              </label>
+              <textarea
+                id="spec-revision-feedback"
+                className={styles.revisionField}
+                value={revisionFeedback}
+                onChange={(e) => setRevisionFeedback(e.target.value)}
+                placeholder="Describe what should change in the SPEC…"
+                disabled={hilBusy}
+                minLength={1}
+              />
+              <div className={styles.actions}>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => void onRequestRevision()}
+                  disabled={hilBusy || revisionFeedback.trim().length === 0}
+                >
+                  Submit revision
+                </Button>
+              </div>
+            </div>
+          ) : null}
           <div className={styles.actions}>
             <Button type="button" variant="secondary" onClick={() => void refetch()} disabled={isGenerating}>
               Refresh

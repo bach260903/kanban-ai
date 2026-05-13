@@ -70,6 +70,43 @@ export async function generateSpec(
   return data
 }
 
+export type DocumentApproveResponse = {
+  id: UUID
+  status: Document['status']
+  updated_at: ISODateTime
+}
+
+export type DocumentReviseResponse = {
+  id: UUID
+  status: Document['status']
+  feedback_id: UUID
+  agent_run_id: UUID
+  updated_at: ISODateTime
+}
+
+export async function approveDocument(
+  projectId: string,
+  documentId: string,
+): Promise<DocumentApproveResponse> {
+  const { data } = await api.post<DocumentApproveResponse>(
+    `${PROJECTS_PREFIX}/${projectId}/documents/${documentId}/approve`,
+    {},
+  )
+  return data
+}
+
+export async function reviseDocument(
+  projectId: string,
+  documentId: string,
+  feedback: string,
+): Promise<DocumentReviseResponse> {
+  const { data } = await api.post<DocumentReviseResponse>(
+    `${PROJECTS_PREFIX}/${projectId}/documents/${documentId}/revise`,
+    { feedback },
+  )
+  return data
+}
+
 export async function getAgentRun(runId: string): Promise<AgentRun> {
   const { data } = await api.get<AgentRun>(`${AGENT_RUNS_PREFIX}/${runId}`)
   return data
