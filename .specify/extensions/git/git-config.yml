@@ -4,8 +4,8 @@
 # Branch numbering strategy: "sequential" (001, 002, ...) or "timestamp" (YYYYMMDD-HHMMSS)
 branch_numbering: sequential
 
-# Commit message used by `git commit` during repository initialization
-init_commit_message: "[Spec Kit] Initial commit"
+# Commit message used by `git commit` during repository initialization (Conventional Commits)
+init_commit_message: "chore(spec-kit): initial commit"
 
 # Auto-commit before/after core commands.
 # Set "default" to enable for all commands, then override per-command.
@@ -14,49 +14,49 @@ auto_commit:
   default: false
   before_clarify:
     enabled: false
-    message: "[Spec Kit] Save progress before clarification"
+    message: "chore(spec-kit): save progress before clarification"
   before_plan:
     enabled: false
-    message: "[Spec Kit] Save progress before planning"
+    message: "chore(spec-kit): save progress before planning"
   before_tasks:
     enabled: false
-    message: "[Spec Kit] Save progress before task generation"
+    message: "chore(spec-kit): save progress before task generation"
   before_implement:
     enabled: false
-    message: "[Spec Kit] Save progress before implementation"
+    message: "chore(spec-kit): save progress before implementation"
   before_checklist:
     enabled: false
-    message: "[Spec Kit] Save progress before checklist"
+    message: "chore(spec-kit): save progress before checklist"
   before_analyze:
     enabled: false
-    message: "[Spec Kit] Save progress before analysis"
+    message: "chore(spec-kit): save progress before analysis"
   before_taskstoissues:
     enabled: false
-    message: "[Spec Kit] Save progress before issue sync"
+    message: "chore(spec-kit): save progress before issue sync"
   after_constitution:
     enabled: false
-    message: "[Spec Kit] Add project constitution"
+    message: "docs(constitution): add project constitution"
   after_specify:
     enabled: false
-    message: "[Spec Kit] Add specification"
+    message: "docs(spec): add specification"
   after_clarify:
     enabled: false
-    message: "[Spec Kit] Clarify specification"
+    message: "docs(spec): clarify specification"
   after_plan:
     enabled: false
-    message: "[Spec Kit] Add implementation plan"
+    message: "docs(plan): add implementation plan"
   after_tasks:
     enabled: false
-    message: "[Spec Kit] Add tasks"
+    message: "docs(spec): add tasks"
   after_implement:
     enabled: false
-    message: "[Spec Kit] Implementation progress"
+    message: "chore(spec-kit): implementation progress"
   after_checklist:
     enabled: false
-    message: "[Spec Kit] Add checklist"
+    message: "docs(spec): add checklist"
   after_analyze:
     enabled: false
-    message: "[Spec Kit] Add analysis report"
+    message: "docs(spec): add analysis report"
   after_taskstoissues:
     enabled: false
-    message: "[Spec Kit] Sync tasks to issues"
+    message: "chore(spec-kit): sync tasks to issues"

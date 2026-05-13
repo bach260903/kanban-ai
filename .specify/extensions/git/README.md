@@ -53,8 +53,8 @@ Configuration is stored in `.specify/extensions/git/git-config.yml`:
 # Branch numbering strategy: "sequential" or "timestamp"
 branch_numbering: sequential
 
-# Custom commit message for git init
-init_commit_message: "[Spec Kit] Initial commit"
+# Custom commit message for git init (Conventional Commits)
+init_commit_message: "chore(spec-kit): initial commit"
 
 # Auto-commit per command (all disabled by default)
 # Example: enable auto-commit after specify
@@ -62,7 +62,7 @@ auto_commit:
   default: false
   after_specify:
     enabled: true
-    message: "[Spec Kit] Add specification"
+    message: "docs(spec): add specification"
 ```
 
 ## Installation
