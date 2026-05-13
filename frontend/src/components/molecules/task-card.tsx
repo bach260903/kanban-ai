@@ -67,7 +67,7 @@ export function TaskCard({ task, sortableDisabled = true }: TaskCardProps) {
         className={styles.handle}
         tabIndex={-1}
         aria-hidden
-        title="Drag (coming soon)"
+        title={sortableDisabled ? 'Drag inactive for this column' : 'Drag into In Progress'}
         {...(sortableDisabled ? {} : listeners)}
       />
       <div className={styles.body}>

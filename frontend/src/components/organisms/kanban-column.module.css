@@ -39,6 +39,12 @@
   min-height: 4rem;
 }
 
+.listWrapOver {
+  outline: 2px dashed var(--accent-border);
+  outline-offset: -4px;
+  border-radius: 8px;
+}
+
 .list {
   margin: 0;
   padding: 0;

@@ -1,3 +1,4 @@
+import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 
 import { TaskCard } from '../molecules/task-card'
@@ -14,7 +15,7 @@ export type KanbanColumnModel = {
 
 export type KanbanColumnProps = {
   column: KanbanColumnModel
-  /** Passed through to each ``TaskCard`` (default keeps drag off until T060). */
+  /** When true, cards are not draggable (e.g. all columns except To do for US8 MVP). */
   taskCardSortableDisabled?: boolean
 }
 
@@ -34,6 +35,11 @@ export function KanbanColumn({ column, taskCardSortableDisabled = true }: Kanban
   const { status, tasks } = column
   const ids = tasks.map((t) => t.id)
 
+  const { setNodeRef, isOver } = useDroppable({
+    id: `droppable-${status}`,
+    data: { type: 'column', status },
+  })
+
   return (
     <section className={styles.root} aria-labelledby={`kanban-col-${status}`}>
       <header className={styles.header}>
@@ -44,11 +50,14 @@ export function KanbanColumn({ column, taskCardSortableDisabled = true }: Kanban
           {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
         </span>
       </header>
-      <div className={styles.listWrap}>
+      <div
+        ref={setNodeRef}
+        className={`${styles.listWrap} ${isOver ? styles.listWrapOver : ''}`}
+      >
         {tasks.length === 0 ? (
           <p className={styles.empty}>No tasks</p>
         ) : (
-          <SortableContext id={`kanban-column-${status}`} items={ids} strategy={verticalListSortingStrategy}>
+          <SortableContext id={`sortable-${status}`} items={ids} strategy={verticalListSortingStrategy}>
             <ul className={styles.list}>
               {tasks.map((task) => (
                 <li key={task.id} className={styles.listItem}>
