@@ -82,7 +82,7 @@
 **Independent Test**: Create 2 projects; reload page; both appear in list; clicking one navigates to its workspace.
 
 - [X] T025 [US2] Implement `ProjectWorkspace` page shell in `frontend/src/pages/project-workspace.tsx`: fetch project by `:id` on mount, store in `projectStore`, render `ProjectHeader` + tab placeholders (Kanban, Documents, Constitution)
-- [ ] T026 [US2] Implement `ProjectHeader` organism in `frontend/src/components/organisms/project-header.tsx`: display project name + language badge + tab navigation links
+- [X] T026 [US2] Implement `ProjectHeader` organism in `frontend/src/components/organisms/project-header.tsx`: display project name + language badge + tab navigation links
 
 **Checkpoint**: Clicking a project card navigates to `/projects/:id` and shows the project name in the header.
 

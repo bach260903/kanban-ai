@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { Spinner } from '../components/atoms/spinner'
+import { ProjectHeader } from '../components/organisms/project-header'
 import { getProject } from '../services/project-api'
 import { useProjectStore } from '../store/project-store'
-import type { Project } from '../types'
 
 import styles from './project-workspace.module.css'
 
@@ -17,25 +17,6 @@ function errorMessage(err: unknown): string {
   }
   if (err instanceof Error) return err.message
   return 'Unable to load project.'
-}
-
-function ProjectHeader({ project }: { project: Project }) {
-  return (
-    <header className={styles.header}>
-      <div className={styles.titleRow}>
-        <h1 className={styles.title}>{project.name}</h1>
-        <span className={styles.lang}>{project.primary_language}</span>
-      </div>
-      {project.description ? <p className={styles.description}>{project.description}</p> : null}
-      <nav className={styles.tabs} aria-label="Workspace tabs">
-        <span className={styles.tabActive}>Kanban</span>
-        <span className={styles.tabPlaceholder}>Documents</span>
-        <Link className={styles.tabLink} to={`/projects/${project.id}/constitution`}>
-          Constitution
-        </Link>
-      </nav>
-    </header>
-  )
 }
 
 export default function ProjectWorkspace() {
