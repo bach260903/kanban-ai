@@ -6,7 +6,8 @@ from typing import Any
 
 from langgraph.graph import END, START, StateGraph
 
-# ``coder_node`` remains a stub — see T058 (task_breakdown + plan are implemented).
+# ``coder_node`` remains a stub — see T058. ``task_breakdown`` runs after ``plan`` when the graph
+# continues past PLAN HIL (or via ``run_task_breakdown_task`` on PLAN approve — US7 / T048).
 from app.agent.nodes import coder_node, plan_node, spec_node, task_breakdown_node
 
 
@@ -17,6 +18,15 @@ def _route_after_spec(state: dict[str, Any]) -> str:
     if str(state.get("feedback", "")).strip():
         return "spec"
     return "plan"
+
+
+def _route_after_plan(state: dict[str, Any]) -> str:
+    """After PLAN node: stop at HIL / errors (US7). Task breakdown runs on PLAN approve via REST."""
+    if state.get("error"):
+        return END
+    if state.get("run_task_breakdown_after_plan"):
+        return "task_breakdown"
+    return END
 
 
 def build_state_graph() -> StateGraph:
@@ -34,8 +44,13 @@ def build_state_graph() -> StateGraph:
         _route_after_spec,
         {"plan": "plan", "spec": "spec", END: END},
     )
-    workflow.add_edge("plan", "task_breakdown")
-    workflow.add_edge("task_breakdown", "coder")
+    workflow.add_conditional_edges(
+        "plan",
+        _route_after_plan,
+        {"task_breakdown": "task_breakdown", END: END},
+    )
+    # TASK_BREAKDOWN → IDLE (no automatic coder hand-off until US8 / T058).
+    workflow.add_edge("task_breakdown", END)
     workflow.add_edge("coder", END)
 
     return workflow

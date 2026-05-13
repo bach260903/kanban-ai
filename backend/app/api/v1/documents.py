@@ -34,6 +34,7 @@ from app.services.intent_service import IntentService
 from app.services.plan_generation_runner import run_generate_plan_task
 from app.services.project_service import ProjectService
 from app.services.spec_generation_runner import run_generate_spec_task
+from app.services.task_breakdown_runner import run_task_breakdown_task
 
 router = APIRouter(prefix="/projects", tags=["documents"])
 
@@ -198,6 +199,19 @@ async def approve_document(
     if doc is None or doc.project_id != project_id:
         raise NotFoundError("Document not found.")
     approved = await DocumentService.approve(session, document_id)
+
+    breakdown_run_id: UUID | None = None
+    if approved.document_type == DocumentType.PLAN:
+        breakdown_agent = AgentRun(
+            project_id=project_id,
+            task_id=None,
+            agent_type=AgentType.ARCHITECT,
+            status=AgentRunStatus.RUNNING,
+        )
+        session.add(breakdown_agent)
+        await session.flush()
+        breakdown_run_id = breakdown_agent.id
+
     await write_audit(
         session,
         project_id=project_id,
@@ -210,6 +224,10 @@ async def approve_document(
     )
     await session.commit()
     await session.refresh(approved)
+
+    if breakdown_run_id is not None:
+        asyncio.create_task(run_task_breakdown_task(project_id, breakdown_run_id))
+
     return DocumentApproveResponse.model_validate(approved)
 
 
