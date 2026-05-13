@@ -32,3 +32,25 @@ class ContextBuilder:
             "while strictly following the constitution above."
         )
         return {"system": system_prompt, "human": human_prompt}
+
+    @staticmethod
+    async def build_plan_context(
+        project_id: UUID,
+        session: AsyncSession,
+        spec_markdown: str,
+    ) -> dict[str, str]:
+        """Architect constitution + approved SPEC body for PLAN.md generation (T044)."""
+        base = await ContextBuilder.build_architect_context(project_id, session)
+        system_prompt = (
+            base["system"]
+            + "\n## PLAN output\n"
+            "You now produce **PLAN.md**: a concise implementation plan derived from the approved SPEC below. "
+            "Use Markdown with clear sections (for example phases, workstreams, milestones, risks, and testing). "
+            "Do not paste the entire SPEC; reference its sections when helpful.\n"
+        )
+        human_prompt = (
+            base["human"]
+            + "\n\n## Approved SPEC (read-only)\n\n"
+            f"{spec_markdown.strip()}\n"
+        )
+        return {"system": system_prompt, "human": human_prompt}

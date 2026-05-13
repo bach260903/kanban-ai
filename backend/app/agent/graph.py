@@ -6,7 +6,7 @@ from typing import Any
 
 from langgraph.graph import END, START, StateGraph
 
-# Nodes imported as stubs — see T044, T048, T058
+# Nodes imported as stubs — see T048, T058
 from app.agent.nodes import coder_node, plan_node, spec_node, task_breakdown_node
 
 
