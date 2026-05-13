@@ -160,7 +160,7 @@
 
 - [X] T047 [US7] Implement `task_breakdown_node` async function in `backend/app/agent/nodes/task_breakdown_node.py`: receives approved PLAN content → calls LLM to extract structured task list `[{title, description, priority}]` → batch-INSERT into `tasks` table with `status = todo` → no `interrupt()` needed (no HIL here; auto-completes)
 - [X] T048 [US7] Wire `task_breakdown_node` into LangGraph graph: triggered automatically when `plan_node` state is approved (graph edge from PLAN_GENERATION → TASK_BREAKDOWN → IDLE). The `task_breakdown_node.py` file was created as a stub at T035 and implemented at T047; remove stub comment in that file after T047 completes.
-- [ ] T049 [US7] Implement `TaskService` in `backend/app/services/task_service.py`: `create_bulk()` (for breakdown), `list_by_project()`, `get()`, `count_in_progress()` (for WIP check)
+- [X] T049 [US7] Implement `TaskService` in `backend/app/services/task_service.py`: `create_bulk()` (for breakdown), `list_by_project()`, `get()`, `count_in_progress()` (for WIP check)
 - [ ] T050 [US7] Implement Tasks router `GET /projects/{id}/tasks` in `backend/app/api/v1/tasks.py`: return tasks grouped by status `{todo: [...], in_progress: [...], review: [...], done: [...], rejected: [], conflict: []}` ; register in `main.py`
 - [ ] T051 [US7] Implement `taskStore` Zustand in `frontend/src/store/task-store.ts`: `columns` (keyed by status), `setColumns()`, `moveTask(taskId, fromStatus, toStatus)` (optimistic update)
 - [ ] T052 [US7] Implement `task-api.ts` in `frontend/src/services/task-api.ts`: `getTasks()`, `moveTask()`, `approveTask()`, `rejectTask()`, `getDiff()`

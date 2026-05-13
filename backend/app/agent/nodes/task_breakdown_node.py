@@ -18,8 +18,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.config import settings
 from app.models.agent_run import AgentRun, AgentRunStatus
 from app.models.document import DocumentStatus, DocumentType
-from app.models.task import Task, TaskStatus
 from app.services.document_service import DocumentService
+from app.services.task_service import TaskBulkItem, TaskService
 
 logger = logging.getLogger(__name__)
 
@@ -141,29 +141,18 @@ async def _run_task_breakdown(state: StateDict) -> StateDict:
         items = items[:_MAX_TASKS]
         logger.warning("Task breakdown truncated to %s tasks", _MAX_TASKS)
 
-    to_add: list[Task] = []
+    bulk_inputs: list[TaskBulkItem] = []
     for it in items:
         title = it.title.strip()[:500]
         if not title:
             continue
         desc = (it.description or "").strip() or None
-        pr = int(it.priority)
-        to_add.append(
-            Task(
-                project_id=project_id,
-                title=title,
-                description=desc,
-                status=TaskStatus.TODO,
-                priority=pr,
-            )
-        )
-    if not to_add:
+        bulk_inputs.append(TaskBulkItem(title=title, description=desc, priority=int(it.priority)))
+    if not bulk_inputs:
         raise ValueError("No valid tasks after parsing LLM output.")
-    for row in to_add:
-        session.add(row)
-    await session.flush()
+    created = await TaskService.create_bulk(session, project_id, bulk_inputs)
 
-    state["tasks_created"] = len(to_add)
+    state["tasks_created"] = len(created)
     await _apply_agent_run_status(state, AgentRunStatus.SUCCESS.value)
     return state
 
