@@ -92,7 +92,12 @@ async def _generate_spec(state: StateDict) -> StateDict:
 
     await _set_status(state, "awaiting_hil")
     await _audit(state, "spec_node", "success", final=True)
-    interrupt()
+    try:
+        interrupt(None)
+    except TypeError:
+        interrupt()
+    except RuntimeError:
+        pass
     return state
 
 
