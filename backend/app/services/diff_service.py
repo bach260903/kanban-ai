@@ -32,6 +32,26 @@ class DiffService:
         return result.scalar_one_or_none()
 
     @staticmethod
+    async def get_latest_approved_for_task(
+        session: AsyncSession,
+        *,
+        task_id: UUID,
+        project_id: UUID,
+    ) -> Diff | None:
+        """Latest diff in ``approved`` state for the task (e.g. after PO approve, T093)."""
+        await TaskService.get(session, task_id, project_id=project_id)
+        result = await session.execute(
+            select(Diff)
+            .where(
+                Diff.task_id == task_id,
+                Diff.review_status == DiffReviewStatus.APPROVED,
+            )
+            .order_by(Diff.created_at.desc())
+            .limit(1)
+        )
+        return result.scalar_one_or_none()
+
+    @staticmethod
     async def approve_latest_pending(
         session: AsyncSession,
         *,

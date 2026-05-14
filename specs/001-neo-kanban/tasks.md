@@ -278,7 +278,7 @@
 
 - [X] T091 [US12] Implement `MemoryService.create_entry()` in `backend/app/services/memory_service.py`: takes `project_id`, `task_id`, `diff` record → calls LLM to extract `summary` and `lessons_learned` from diff content → INSERTs `memory_entries` row with all 5 required fields
 - [X] T092 [US12] Implement `MemoryService.export_memory_file()` in `backend/app/services/memory_service.py`: queries all `memory_entries` for project ordered by `entry_timestamp ASC` → renders to MEMORY.md format defined in `plan.md` → writes to `{SANDBOX_ROOT}/{project_id}/MEMORY.md`
-- [ ] T093 [US12] Wire `memory_service.create_entry()` + `export_memory_file()` into `kanban_service.move_task()` in `backend/app/services/kanban_service.py`: call both after task status is set to `done` and diff is approved
+- [X] T093 [US12] Wire `memory_service.create_entry()` + `export_memory_file()` into `kanban_service.move_task()` in `backend/app/services/kanban_service.py`: call both after task status is set to `done` and diff is approved
 
 **Checkpoint**: Approve a task → `GET /memory` shows entry; check `{SANDBOX_ROOT}/{project_id}/MEMORY.md` file exists with correct content.
 

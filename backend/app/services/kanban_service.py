@@ -13,6 +13,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.agent.nodes import coder_node
 from app.exceptions import InvalidTransitionError, WIPLimitError
 from app.models.task import Task, TaskStatus
+from app.services.diff_service import DiffService
+from app.services.memory_service import MemoryService
 from app.services.task_service import TaskService
 
 logger = logging.getLogger(__name__)
@@ -90,6 +92,24 @@ class KanbanService:
         task.status = to_status
         task.updated_at = datetime.now(timezone.utc)
         await session.flush()
+        if to_status == TaskStatus.DONE and from_status == TaskStatus.REVIEW:
+            diff = await DiffService.get_latest_approved_for_task(
+                session, task_id=task.id, project_id=task.project_id
+            )
+            if diff is not None:
+                try:
+                    await MemoryService.create_entry(session, task.project_id, task.id, diff)
+                except Exception:
+                    logger.exception("MemoryService.create_entry failed task_id=%s", task.id)
+                try:
+                    await MemoryService.export_memory_file(session, task.project_id)
+                except Exception:
+                    logger.exception("MemoryService.export_memory_file failed project_id=%s", task.project_id)
+            else:
+                logger.info(
+                    "Skipping memory write: no approved diff for task_id=%s when moving to done",
+                    task.id,
+                )
         if to_status == TaskStatus.IN_PROGRESS and not defer_coder_start:
             _schedule_coder_agent(
                 task.id,
