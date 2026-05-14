@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 from datetime import datetime, timezone
 from typing import Any
 from uuid import UUID
@@ -17,8 +18,10 @@ from app.exceptions import NotFoundError
 from app.models.agent_run import AgentRun, AgentRunStatus
 from app.models.audit_log import AuditLogResult
 from app.models.document import DocumentStatus, DocumentType
+from app.models.stream_event import StreamEventType
 from app.services.audit_service import finalise_log, write_audit, write_pending_log
 from app.services.document_service import DocumentService
+from app.websocket.event_publisher import EventPublisher
 
 try:
     from langgraph.types import interrupt
@@ -37,6 +40,37 @@ def _request_po_review_interrupt() -> None:
 
 
 StateDict = dict[str, Any]
+
+
+async def _resolve_stream_task_id(state: StateDict, session: AsyncSession) -> UUID | None:
+    tid = state.get("task_id")
+    if isinstance(tid, UUID):
+        return tid
+    aid = state.get("agent_run_id")
+    if isinstance(aid, UUID):
+        run = await session.get(AgentRun, aid)
+        if run is not None and run.task_id is not None:
+            return run.task_id
+    return None
+
+
+async def _publish_plan_status(state: StateDict, body: dict[str, Any]) -> None:
+    """Thought-stream STATUS_CHANGE when a task scope exists (``stream_events.task_id`` FK)."""
+    raw = state.get("session")
+    if not isinstance(raw, AsyncSession):
+        return
+    task_id = await _resolve_stream_task_id(state, raw)
+    if task_id is None:
+        return
+    aid = state.get("agent_run_id")
+    ar = aid if isinstance(aid, UUID) else None
+    await EventPublisher.publish(
+        task_id,
+        StreamEventType.STATUS_CHANGE,
+        json.dumps(body, separators=(",", ":")),
+        raw,
+        ar,
+    )
 
 
 async def _call_async(fn: Any, *args: Any, **kwargs: Any) -> Any:
@@ -119,6 +153,20 @@ async def _generate_plan(state: StateDict) -> StateDict:
         human_parts.append(f"Revision feedback:\n{feedback}")
     human_content = "\n\n".join(human_parts)
 
+    await _publish_plan_status(
+        state,
+        {
+            "from": "IDLE",
+            "to": "PLAN_GENERATION",
+            "reason": (
+                "Regenerating PLAN from PO revision feedback."
+                if feedback
+                else "Generating PLAN from approved SPEC and constitution."
+            ),
+        },
+    )
+    state["plan_generation_stream"] = True
+
     if feedback:
         llm_desc = "Regenerate PLAN from PO revision feedback + approved SPEC + constitution"
     else:
@@ -190,6 +238,14 @@ async def _generate_plan(state: StateDict) -> StateDict:
         input_refs=[str(plan_doc.id)],
         output_refs=[str(plan_doc.id)],
     )
+    await _publish_plan_status(
+        state,
+        {
+            "from": "PLAN_GENERATION",
+            "to": "AWAITING_HIL",
+            "reason": "PLAN draft ready for PO review.",
+        },
+    )
     _request_po_review_interrupt()
 
     return state
@@ -202,6 +258,11 @@ async def run(state: StateDict) -> StateDict:
     except asyncio.TimeoutError:
         message = "Plan generation exceeded 60-second limit. Please retry."
         state["error"] = message
+        frm = "PLAN_GENERATION" if state.get("plan_generation_stream") else "IDLE"
+        await _publish_plan_status(
+            state,
+            {"from": frm, "to": "TIMEOUT", "reason": message},
+        )
         await _apply_agent_run_status(state, AgentRunStatus.TIMEOUT.value)
         await _publish_error(state, message)
         session = state.get("session")
@@ -222,6 +283,11 @@ async def run(state: StateDict) -> StateDict:
         return state
     except Exception as exc:
         state["error"] = str(exc)
+        frm = "PLAN_GENERATION" if state.get("plan_generation_stream") else "IDLE"
+        await _publish_plan_status(
+            state,
+            {"from": frm, "to": "FAILED", "reason": str(exc)},
+        )
         await _apply_agent_run_status(state, AgentRunStatus.FAILURE.value)
         await _publish_error(state, str(exc))
         session = state.get("session")
