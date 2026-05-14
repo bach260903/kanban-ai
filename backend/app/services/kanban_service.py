@@ -53,6 +53,7 @@ async def _run_coder_agent_background(
     *,
     po_feedback: str | None = None,
     agent_run_id: UUID | None = None,
+    inline_comments: list[dict[str, str | int]] | None = None,
 ) -> None:
     """Fire-and-forget entry: T058 replaces ``coder_node.run`` body."""
     try:
@@ -64,6 +65,8 @@ async def _run_coder_agent_background(
             payload["po_feedback"] = po_feedback
         if agent_run_id is not None:
             payload["agent_run_id"] = agent_run_id
+        if inline_comments:
+            payload["inline_comments"] = inline_comments
         await coder_node.run(payload)
     except Exception:
         logger.exception("Coder agent background task failed task_id=%s", task_id)
@@ -75,9 +78,16 @@ def _schedule_coder_agent(
     *,
     po_feedback: str | None = None,
     agent_run_id: UUID | None = None,
+    inline_comments: list[dict[str, str | int]] | None = None,
 ) -> None:
     asyncio.create_task(
-        _run_coder_agent_background(task_id, project_id, po_feedback=po_feedback, agent_run_id=agent_run_id)
+        _run_coder_agent_background(
+            task_id,
+            project_id,
+            po_feedback=po_feedback,
+            agent_run_id=agent_run_id,
+            inline_comments=inline_comments,
+        )
     )
 
 
@@ -160,6 +170,7 @@ class KanbanService:
         *,
         po_feedback: str | None = None,
         agent_run_id: UUID | None = None,
+        inline_comments: list[dict[str, str | int]] | None = None,
     ) -> None:
         """Schedule coder after DB commit (e.g. diff reject / T064)."""
         _schedule_coder_agent(
@@ -167,4 +178,5 @@ class KanbanService:
             project_id,
             po_feedback=po_feedback,
             agent_run_id=agent_run_id,
+            inline_comments=inline_comments,
         )

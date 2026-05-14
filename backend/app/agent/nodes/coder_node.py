@@ -394,6 +394,30 @@ async def _run_with_session(state: StateDict) -> StateDict:
 
         po = state.get("po_feedback")
         po_kw = po.strip()[:20_000] if isinstance(po, str) and po.strip() else None
+        ic_raw = state.get("inline_comments")
+        ic_kw: list[dict[str, str | int]] | None = None
+        if isinstance(ic_raw, list) and ic_raw:
+            parsed: list[dict[str, str | int]] = []
+            for item in ic_raw:
+                if not isinstance(item, dict):
+                    continue
+                fp = item.get("file_path")
+                ln = item.get("line_number")
+                ct = item.get("comment_text")
+                if not isinstance(fp, str) or not isinstance(ct, str):
+                    continue
+                if isinstance(ln, bool):
+                    continue
+                if isinstance(ln, int):
+                    ln_int = ln
+                else:
+                    try:
+                        ln_int = int(ln)  # type: ignore[arg-type]
+                    except (TypeError, ValueError):
+                        continue
+                parsed.append({"file_path": fp, "line_number": ln_int, "comment_text": ct})
+            if parsed:
+                ic_kw = parsed
         prompts = await ContextBuilder.build_coder_context(
             project_id,
             task_id,
@@ -401,6 +425,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
             task=task,
             project=project,
             po_feedback=po_kw,
+            inline_comments=ic_kw,
         )
         system = prompts["system"]
         human = prompts["human"]

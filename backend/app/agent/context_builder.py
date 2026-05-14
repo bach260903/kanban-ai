@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 
 _MAX_MEMORY_MD_CHARS = 24_000
 _MAX_CODEBASE_MAP_JSON_CHARS = 120_000
+_MAX_INLINE_COMMENTS_JSON_CHARS = 12_000
 
 
 def _sandbox_project_dir(project_id: UUID) -> Path:
@@ -67,6 +68,7 @@ class ContextBuilder:
         task: Task,
         project: Project,
         po_feedback: str | None = None,
+        inline_comments: list[dict[str, str | int]] | None = None,
     ) -> dict[str, str]:
         """Coder system/human prompts; MEMORY.md (T094), codebase map (T100), PO steering (T087)."""
         if task.id != task_id or task.project_id != project_id or project.id != project_id:
@@ -124,6 +126,14 @@ class ContextBuilder:
         if po_feedback is not None and po_feedback.strip():
             human_prompt += (
                 "\n\nPO review feedback (address this in your changes):\n" + po_feedback.strip()[:20_000]
+            )
+        if inline_comments:
+            blob = json.dumps(inline_comments, indent=2, ensure_ascii=False)
+            if len(blob) > _MAX_INLINE_COMMENTS_JSON_CHARS:
+                blob = blob[:_MAX_INLINE_COMMENTS_JSON_CHARS] + "\n…(inline comments JSON truncated)"
+            human_prompt += (
+                "\n\nPO inline comments (structured; align edits with file_path and line_number):\n"
+                f"```json\n{blob}\n```"
             )
         return {"system": system_prompt, "human": human_prompt}
 

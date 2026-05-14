@@ -27,6 +27,7 @@ from app.schemas.task import (
 )
 from app.services.audit_service import write_audit
 from app.services.diff_service import DiffService
+from app.services.inline_comment_service import InlineCommentService
 from app.services.kanban_service import KanbanService
 from app.services.project_service import ProjectService
 from app.services.task_service import TaskService
@@ -153,6 +154,14 @@ async def reject_task(
     fb_text = body.feedback.strip()
     if not fb_text:
         raise InvalidTransitionError("Feedback must not be empty.")
+    diff_pending = await DiffService.get_latest_for_task(session, task_id=task_id, project_id=project_id)
+    inline_for_coder: list[dict[str, str | int]] | None = None
+    if diff_pending is not None:
+        ic_list = await InlineCommentService.list_payload_for_task_diff(
+            session, task_id=task_id, diff_id=diff_pending.id
+        )
+        if ic_list:
+            inline_for_coder = ic_list
     await DiffService.reject_latest_pending(session, task_id=task_id, project_id=project_id)
     feedback = Feedback(
         project_id=project_id,
@@ -189,6 +198,7 @@ async def reject_task(
         project_id,
         po_feedback=fb_text,
         agent_run_id=agent_run.id,
+        inline_comments=inline_for_coder,
     )
     await session.refresh(task)
     await session.refresh(feedback)

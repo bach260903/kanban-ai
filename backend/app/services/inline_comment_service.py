@@ -48,6 +48,27 @@ class InlineCommentService:
         return list(result.scalars().all())
 
     @staticmethod
+    async def list_payload_for_task_diff(
+        session: AsyncSession,
+        *,
+        task_id: UUID,
+        diff_id: UUID,
+    ) -> list[dict[str, str | int]]:
+        """Structured inline comments for a specific diff (e.g. PO reject → coder context / T107)."""
+        await TaskService.get(session, task_id)
+        result = await session.execute(
+            select(InlineComment)
+            .where(InlineComment.task_id == task_id, InlineComment.diff_id == diff_id)
+            .order_by(
+                InlineComment.file_path.asc(),
+                InlineComment.line_number.asc(),
+                InlineComment.created_at.asc(),
+            )
+        )
+        rows = list(result.scalars().all())
+        return [{"file_path": r.file_path, "line_number": r.line_number, "comment_text": r.comment_text} for r in rows]
+
+    @staticmethod
     async def create_for_task(
         session: AsyncSession,
         *,

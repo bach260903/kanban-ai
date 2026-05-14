@@ -162,6 +162,41 @@ async def test_list_and_delete_scoped_to_task(
 
 
 @pytest.mark.asyncio
+async def test_list_payload_for_task_diff_returns_ordered_dicts(
+    async_db_session: AsyncSession,
+    project_id: UUID,
+) -> None:
+    t = await _insert_task(async_db_session, project_id, status=TaskStatus.REVIEW, title="payload")
+    diff = Diff(
+        task_id=t.id,
+        agent_run_id=None,
+        content="---",
+        original_content="a",
+        modified_content="b",
+        files_affected=["z.py", "a.py"],
+        review_status=DiffReviewStatus.PENDING,
+    )
+    async_db_session.add(diff)
+    await async_db_session.flush()
+
+    await InlineCommentService.create_for_task(
+        async_db_session,
+        task_id=t.id,
+        body=InlineCommentCreate(file_path="a.py", line_number=2, comment_text="second"),
+    )
+    await InlineCommentService.create_for_task(
+        async_db_session,
+        task_id=t.id,
+        body=InlineCommentCreate(file_path="a.py", line_number=1, comment_text="first"),
+    )
+    out = await InlineCommentService.list_payload_for_task_diff(
+        async_db_session, task_id=t.id, diff_id=diff.id
+    )
+    assert [x["line_number"] for x in out] == [1, 2]
+    assert out[0] == {"file_path": "a.py", "line_number": 1, "comment_text": "first"}
+
+
+@pytest.mark.asyncio
 async def test_delete_wrong_comment_id_raises_not_found(
     async_db_session: AsyncSession,
     project_id: UUID,
