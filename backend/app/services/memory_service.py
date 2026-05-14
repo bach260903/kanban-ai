@@ -14,7 +14,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
-from app.exceptions import SandboxEscapeError
+from app.exceptions import NotFoundError, SandboxEscapeError
 from app.models.diff import Diff
 from app.models.memory_entry import MemoryEntry
 
@@ -215,3 +215,42 @@ class MemoryService:
         out = sandbox / "MEMORY.md"
         out.write_text(body, encoding="utf-8", newline="\n")
         return out
+
+    @staticmethod
+    async def list_for_project(session: AsyncSession, project_id: UUID) -> list[MemoryEntry]:
+        result = await session.execute(
+            select(MemoryEntry)
+            .where(MemoryEntry.project_id == project_id)
+            .order_by(MemoryEntry.entry_timestamp.desc())
+        )
+        return list(result.scalars().all())
+
+    @staticmethod
+    async def get_entry(session: AsyncSession, project_id: UUID, entry_id: UUID) -> MemoryEntry:
+        row = await session.get(MemoryEntry, entry_id)
+        if row is None or row.project_id != project_id:
+            raise NotFoundError("Memory entry not found.")
+        return row
+
+    @staticmethod
+    async def update_entry(
+        session: AsyncSession,
+        project_id: UUID,
+        entry_id: UUID,
+        *,
+        summary: str | None,
+        lessons_learned: str | None,
+    ) -> MemoryEntry:
+        row = await MemoryService.get_entry(session, project_id, entry_id)
+        if summary is not None:
+            row.summary = summary.strip()
+        if lessons_learned is not None:
+            row.lessons_learned = lessons_learned.strip()
+        await session.flush()
+        return row
+
+    @staticmethod
+    async def delete_entry(session: AsyncSession, project_id: UUID, entry_id: UUID) -> None:
+        row = await MemoryService.get_entry(session, project_id, entry_id)
+        await session.delete(row)
+        await session.flush()
