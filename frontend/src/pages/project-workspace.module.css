@@ -71,6 +71,23 @@
   color: var(--text);
 }
 
+.memory {
+  margin: 0;
+}
+
+.memoryTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.memoryHint {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-muted, #64748b);
+}
+
 .loading,
 .error {
   display: flex;

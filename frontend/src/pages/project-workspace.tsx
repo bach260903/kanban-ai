@@ -6,6 +6,7 @@ import { Spinner } from '../components/atoms/spinner'
 import { DocumentPanel } from '../components/organisms/document-panel'
 import { KanbanBoard } from '../components/organisms/kanban-board'
 import { ProjectHeader } from '../components/organisms/project-header'
+import { MemoryEditor } from '../components/organisms/memory-editor'
 import { ReviewPanel } from '../components/organisms/review-panel'
 import { ThoughtStreamPanel } from '../components/organisms/thought-stream-panel'
 import { getAuditLogs, type AuditLogsPage } from '../services/audit-api'
@@ -39,7 +40,7 @@ export default function ProjectWorkspace() {
   const [thoughtStreamOpen, setThoughtStreamOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'audit'>('documents')
+  const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'memory' | 'audit'>('documents')
   const AUDIT_PAGE_SIZE = 25
   const [auditPage, setAuditPage] = useState<AuditLogsPage | null>(null)
   const [auditLoading, setAuditLoading] = useState(false)
@@ -215,6 +216,16 @@ export default function ProjectWorkspace() {
             <button
               type="button"
               role="tab"
+              className={activeTab === 'memory' ? styles.tabActive : styles.tab}
+              aria-selected={activeTab === 'memory'}
+              id="workspace-tab-memory"
+              onClick={() => setActiveTab('memory')}
+            >
+              Memory
+            </button>
+            <button
+              type="button"
+              role="tab"
               className={activeTab === 'audit' ? styles.tabActive : styles.tab}
               aria-selected={activeTab === 'audit'}
               id="workspace-tab-audit"
@@ -243,6 +254,14 @@ export default function ProjectWorkspace() {
                   Kanban
                 </h2>
                 <KanbanBoard projectId={currentProject.id} />
+              </section>
+            ) : activeTab === 'memory' ? (
+              <section className={styles.memory} aria-labelledby="workspace-memory-heading">
+                <h2 id="workspace-memory-heading" className={styles.memoryTitle}>
+                  Memory
+                </h2>
+                <p className={styles.memoryHint}>Lessons learned from completed work on this project.</p>
+                <MemoryEditor projectId={currentProject.id} />
               </section>
             ) : (
               <section className={styles.audit} aria-labelledby="workspace-audit-heading">

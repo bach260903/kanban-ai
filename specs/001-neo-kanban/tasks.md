@@ -292,7 +292,7 @@
 
 - [X] T094 [US13] Inject MEMORY.md into agent context in `backend/app/agent/context_builder.py`: `build_coder_context()` reads `{SANDBOX_ROOT}/{project_id}/MEMORY.md` if file exists → appends to system prompt under section "## Past Lessons"
 - [X] T095 [US13] Implement Memory CRUD API in `backend/app/api/v1/memory.py`: `GET /projects/{id}/memory`, `GET /projects/{id}/memory/{entry_id}`, `PUT /projects/{id}/memory/{entry_id}` (body: `{summary?, lessons_learned?}`), `DELETE /projects/{id}/memory/{entry_id}` → after each write/delete, call `export_memory_file()` to regenerate `MEMORY.md`; register router in `main.py`
-- [ ] T096 [US13] Implement `MemoryEditor` organism in `frontend/src/components/organisms/memory-editor.tsx`: fetch memory entries list, display as expandable cards (title = summary, body = lessons_learned + files_affected), Edit button opens inline form, Delete button with confirmation dialog, optimistic UI removal on delete
+- [X] T096 [US13] Implement `MemoryEditor` organism in `frontend/src/components/organisms/memory-editor.tsx`: fetch memory entries list, display as expandable cards (title = summary, body = lessons_learned + files_affected), Edit button opens inline form, Delete button with confirmation dialog, optimistic UI removal on delete
 - [ ] T097 [US13] Add Memory tab to `ProjectWorkspace` in `frontend/src/pages/project-workspace.tsx`: render `MemoryEditor` under Memory tab
 
 **Checkpoint**: Open Memory tab → see entries → delete one → entry disappears immediately → run another task → deleted lesson not in `MEMORY.md`.
