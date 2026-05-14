@@ -51,6 +51,7 @@ class EventPublisher:
         event_type: StreamEventType | str,
         content: str,
         session: AsyncSession,
+        agent_run_id: UUID | None = None,
     ) -> StreamEvent:
         """Lock task row, allocate next sequence, insert ``stream_events``, ``PUBLISH`` JSON."""
         locked = await session.execute(select(Task.id).where(Task.id == task_id).with_for_update())
@@ -65,7 +66,7 @@ class EventPublisher:
 
         row = StreamEvent(
             task_id=task_id,
-            agent_run_id=None,
+            agent_run_id=agent_run_id,
             event_type=et,
             content=content,
             sequence_number=next_seq,
@@ -77,7 +78,7 @@ class EventPublisher:
         payload = {
             "id": str(row.id),
             "task_id": str(task_id),
-            "agent_run_id": str(row.agent_run_id) if row.agent_run_id else None,
+            "agent_run_id": str(agent_run_id) if agent_run_id else None,
             "event_type": et.value,
             "content": content,
             "sequence_number": next_seq,

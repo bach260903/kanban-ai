@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
 import shlex
 import subprocess
@@ -25,9 +26,11 @@ from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
 from app.models.audit_log import AuditLogResult
 from app.models.diff import Diff, DiffReviewStatus
 from app.models.project import Project
+from app.models.stream_event import StreamEventType
 from app.models.task import Task, TaskStatus
 from app.services.audit_service import finalise_log, write_audit, write_pending_log
 from app.services.task_service import TaskService
+from app.websocket.event_publisher import EventPublisher
 
 try:
     from langgraph.types import interrupt
@@ -39,6 +42,45 @@ except Exception:  # pragma: no cover
 logger = logging.getLogger(__name__)
 
 StateDict = dict[str, Any]
+
+
+async def _publish_event(
+    session: AsyncSession,
+    task_id: UUID,
+    agent_run_id: UUID | None,
+    event_type: StreamEventType,
+    body: dict[str, Any],
+) -> None:
+    await EventPublisher.publish(
+        task_id,
+        event_type,
+        json.dumps(body, separators=(",", ":")),
+        session,
+        agent_run_id,
+    )
+
+
+def _tool_result_body(tool_name: str, call_id: str, result: str) -> dict[str, Any]:
+    success = not result.startswith("ERROR:")
+    lim = 2000
+    truncated = len(result) > lim
+    preview = result[:lim] if truncated else result
+    return {
+        "tool_name": tool_name,
+        "call_id": call_id,
+        "success": success,
+        "result": preview,
+        "result_truncated": truncated,
+    }
+
+
+def _error_body(exc: BaseException, *, recoverable: bool = False) -> dict[str, Any]:
+    return {
+        "error_type": type(exc).__name__,
+        "message": str(exc),
+        "recoverable": recoverable,
+        "step": "CODING",
+    }
 
 _MAX_READ = 400_000
 _MAX_WRITE = 500_000
@@ -170,6 +212,7 @@ async def _execute_tool(
     sandbox: Path,
     project_id: UUID,
     task_id: UUID,
+    agent_run_id: UUID,
     name: str,
     args: dict[str, Any],
 ) -> str:
@@ -208,6 +251,18 @@ async def _execute_tool(
             input_refs=[rel],
         )
         try:
+            await _publish_event(
+                session,
+                task_id,
+                agent_run_id,
+                StreamEventType.ACTION,
+                {
+                    "action_type": "write_file",
+                    "description": f"Writing `{rel}` ({len(content)} chars)",
+                    "target": rel,
+                    "audit_log_id": str(log.id),
+                },
+            )
             msg = await asyncio.to_thread(_fs_write, sandbox, rel, content)
             await finalise_log(session, log.id, AuditLogResult.SUCCESS, output_refs=[rel])
             return msg
@@ -231,6 +286,18 @@ async def _execute_tool(
             input_refs=[cmd],
         )
         try:
+            await _publish_event(
+                session,
+                task_id,
+                agent_run_id,
+                StreamEventType.ACTION,
+                {
+                    "action_type": "run_command",
+                    "description": f"Running sandbox git command ({len(cmd)} chars)",
+                    "target": cmd[:500],
+                    "audit_log_id": str(log.id),
+                },
+            )
             out = await asyncio.to_thread(_run_git_command, sandbox, cmd)
             await finalise_log(session, log.id, AuditLogResult.SUCCESS, output_refs=[cmd])
             return out
@@ -301,6 +368,13 @@ async def _run_with_session(state: StateDict) -> StateDict:
         ]
 
         if not settings.groq_api_key.strip():
+            await _publish_event(
+                session,
+                task_id,
+                agent_run_id,
+                StreamEventType.THOUGHT,
+                {"reasoning": "Groq API key is not configured; writing stub notes and exiting without LLM."},
+            )
             await asyncio.to_thread(
                 _fs_write,
                 sandbox,
@@ -330,6 +404,17 @@ async def _run_with_session(state: StateDict) -> StateDict:
             )
             task.status = TaskStatus.REVIEW
             task.updated_at = datetime.now(timezone.utc)
+            await _publish_event(
+                session,
+                task_id,
+                agent_run_id,
+                StreamEventType.STATUS_CHANGE,
+                {
+                    "from": "CODING",
+                    "to": "REVIEWING",
+                    "reason": "GROQ_API_KEY missing — placeholder diff recorded.",
+                },
+            )
             await _finalize_agent_run(session, agent_run_id, AgentRunStatus.AWAITING_HIL)
             await session.commit()
             _request_hil_interrupt()
@@ -353,10 +438,20 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 input_refs=[],
             )
             try:
+                await _publish_event(
+                    session,
+                    task_id,
+                    agent_run_id,
+                    StreamEventType.THOUGHT,
+                    {
+                        "reasoning": f"Coder LLM round {rounds}: invoking model to decide the next sandbox actions.",
+                    },
+                )
                 ai = cast(AIMessage, await llm.ainvoke(messages))
                 await finalise_log(session, llm_log.id, AuditLogResult.SUCCESS)
             except Exception as exc:
                 await finalise_log(session, llm_log.id, AuditLogResult.FAILURE, output_refs=[str(exc)])
+                await _publish_event(session, task_id, agent_run_id, StreamEventType.ERROR, _error_body(exc))
                 raise
 
             messages.append(ai)
@@ -368,13 +463,40 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 name = tc.get("name", "")
                 args = cast(dict[str, Any], tc.get("args", {}))
                 tid = tc.get("id", "") or f"tool-{name}-{rounds}"
+                call_id = str(tid)
+                tc_args: dict[str, Any] = {}
+                if name == "read_file":
+                    tc_args = {"path": str(args.get("relative_path", "")).strip()}
+                elif name == "write_file":
+                    tc_args = {"path": str(args.get("relative_path", "")).strip()}
+                elif name == "run_terminal":
+                    tc_args = {"path": str(args.get("command", "")).strip()[:500]}
+                await _publish_event(
+                    session,
+                    task_id,
+                    agent_run_id,
+                    StreamEventType.TOOL_CALL,
+                    {
+                        "tool_name": name,
+                        "call_id": call_id,
+                        "arguments": tc_args,
+                    },
+                )
                 out = await _execute_tool(
                     session=session,
                     sandbox=sandbox,
                     project_id=project_id,
                     task_id=task_id,
+                    agent_run_id=agent_run_id,
                     name=name,
                     args=args,
+                )
+                await _publish_event(
+                    session,
+                    task_id,
+                    agent_run_id,
+                    StreamEventType.TOOL_RESULT,
+                    _tool_result_body(name, call_id, out),
                 )
                 messages.append(ToolMessage(content=out, tool_call_id=str(tid)))
 
@@ -392,6 +514,17 @@ async def _run_with_session(state: StateDict) -> StateDict:
         await session.flush()
         task.status = TaskStatus.REVIEW
         task.updated_at = datetime.now(timezone.utc)
+        await _publish_event(
+            session,
+            task_id,
+            agent_run_id,
+            StreamEventType.STATUS_CHANGE,
+            {
+                "from": "CODING",
+                "to": "REVIEWING",
+                "reason": "Agent completed implementation; diff stored.",
+            },
+        )
         await _finalize_agent_run(session, agent_run_id, AgentRunStatus.AWAITING_HIL)
         await write_audit(
             session,
@@ -440,6 +573,37 @@ async def run(state: StateDict) -> StateDict:
                             "error": err_msg,
                             "detail": "Task moved to rejected.",
                         }
+                    rid = open_run.id if open_run else None
+                    await EventPublisher.publish(
+                        task_id,
+                        StreamEventType.ERROR,
+                        json.dumps(
+                            {
+                                "error_type": "TimeoutError",
+                                "message": err_msg,
+                                "recoverable": False,
+                                "step": "CODING",
+                            },
+                            separators=(",", ":"),
+                        ),
+                        session,
+                        rid,
+                    )
+                    if task is not None:
+                        await EventPublisher.publish(
+                            task_id,
+                            StreamEventType.STATUS_CHANGE,
+                            json.dumps(
+                                {
+                                    "from": "CODING",
+                                    "to": "REJECTED",
+                                    "reason": err_msg,
+                                },
+                                separators=(",", ":"),
+                            ),
+                            session,
+                            rid,
+                        )
                     await write_audit(
                         session,
                         project_id=project_id,
@@ -460,6 +624,24 @@ async def run(state: StateDict) -> StateDict:
                 task_id = state.get("task_id")
                 project_id = state.get("project_id")
                 if isinstance(task_id, UUID) and isinstance(project_id, UUID):
+                    run_q = await session.execute(
+                        select(AgentRun)
+                        .where(
+                            AgentRun.task_id == task_id,
+                            AgentRun.agent_type == AgentType.CODER,
+                        )
+                        .order_by(AgentRun.started_at.desc())
+                        .limit(1)
+                    )
+                    last_run = run_q.scalar_one_or_none()
+                    rid = last_run.id if last_run else None
+                    await EventPublisher.publish(
+                        task_id,
+                        StreamEventType.ERROR,
+                        json.dumps(_error_body(exc), separators=(",", ":")),
+                        session,
+                        rid,
+                    )
                     await write_audit(
                         session,
                         project_id=project_id,
