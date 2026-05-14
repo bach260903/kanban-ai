@@ -1,67 +1,26 @@
-# Environment
-.env
-.env.local
-.env.*.local
-!.env.example
+.tools/
 
-# Python
+# Dependencies & build
+node_modules/
+dist/
+build/
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
 .venv/
 venv/
-ENV/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
 
-# Node / Next.js
-node_modules/
-.next/
-out/
-.turbo
-*.tsbuildinfo
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# Environment & secrets
+.env
+!.env.example
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# OS
+# Logs & OS
+*.log
 .DS_Store
 Thumbs.db
 
-# Testing / coverage
-.coverage
-htmlcov/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-
-# Chroma / local DB
-chroma_data/
-*.db
-*.sqlite3
-
-# Misc
-*.log
-evaluation/results/
+# IDE
+.idea/

@@ -1,53 +1,52 @@
-from __future__ import annotations
+"""FastAPI application entry: lifespan, health, API v1 shell, exception mapping."""
 
-import asyncio
-import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter, FastAPI
 
-from app.config import settings
-from app.database import Base, engine
-from app.routers import activity, agent, auth, boards, comments, skills, users, ws
-from app.services import agent_runner
+from app.api.v1.agent_runs import router as agent_runs_router
+from app.api.v1.audit_logs import router as audit_logs_router
+from app.api.v1.branches import router as branches_router
+from app.api.v1.codebase import router as codebase_router
+from app.api.v1.documents import router as documents_router
+from app.api.v1.memory import router as memory_router
+from app.api.v1.pause import pause_router
+from app.api.v1.projects import router as projects_router
+from app.api.v1.tasks import router as tasks_router
+from app.database import dispose_engine, get_db  # noqa: F401 — dependency + lifespan
+from app.middleware.error_handlers import register_exception_handlers
+from app.websocket import ws_handler
 
-# Import models so Base.metadata includes all tables
-from app import models  # noqa: F401
-
-logging.basicConfig(level=getattr(logging, settings.log_level.upper(), logging.INFO))
+api_v1_router = APIRouter(prefix="/api/v1")
+api_v1_router.include_router(projects_router)
+api_v1_router.include_router(audit_logs_router)
+api_v1_router.include_router(documents_router)
+api_v1_router.include_router(memory_router)
+api_v1_router.include_router(codebase_router)
+api_v1_router.include_router(branches_router)
+api_v1_router.include_router(tasks_router)
+api_v1_router.include_router(pause_router)
+api_v1_router.include_router(agent_runs_router)
 
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    agent_runner.install_loop(asyncio.get_running_loop())
+    """Shutdown: dispose async engine pool (startup is lazy-connect on first query)."""
     yield
+    await dispose_engine()
 
 
-app = FastAPI(title="Kanban AI Multi-Agent Backend", version="0.3.0", lifespan=lifespan)
+def create_app() -> FastAPI:
+    application = FastAPI(title="Neo-Kanban API", lifespan=lifespan)
+    register_exception_handlers(application)
 
-_origins = [o.strip() for o in settings.cors_origins.split(",") if o.strip()]
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=_origins or ["http://localhost:3000"],
-    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    @application.get("/health")
+    async def health() -> dict[str, str]:
+        return {"status": "ok"}
 
-app.include_router(auth.router, prefix="/api")
-app.include_router(boards.router, prefix="/api")
-app.include_router(comments.router, prefix="/api")
-app.include_router(skills.router, prefix="/api")
-app.include_router(users.router, prefix="/api")
-app.include_router(activity.router, prefix="/api")
-app.include_router(agent.router, prefix="/api")
-app.include_router(ws.router)
+    application.include_router(api_v1_router)
+    application.add_api_websocket_route("/ws/tasks/{task_id}/stream", ws_handler.handle)
+    return application
 
 
-@app.get("/health")
-async def health() -> dict[str, str]:
-    return {"status": "ok"}
+app = create_app()
