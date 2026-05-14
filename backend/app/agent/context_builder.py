@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 from pathlib import Path
 from uuid import UUID
@@ -14,11 +15,13 @@ from app.exceptions import SandboxEscapeError
 from app.models.agent_pause_state import AgentPauseState
 from app.models.project import Project
 from app.models.task import Task
+from app.services.codebase_mapper import run as run_codebase_map
 from app.services.project_service import ProjectService
 
 logger = logging.getLogger(__name__)
 
 _MAX_MEMORY_MD_CHARS = 24_000
+_MAX_CODEBASE_MAP_JSON_CHARS = 120_000
 
 
 def _sandbox_project_dir(project_id: UUID) -> Path:
@@ -65,7 +68,7 @@ class ContextBuilder:
         project: Project,
         po_feedback: str | None = None,
     ) -> dict[str, str]:
-        """Coder system/human prompts; MEMORY.md (T094), PO steering from DB (T087)."""
+        """Coder system/human prompts; MEMORY.md (T094), codebase map (T100), PO steering (T087)."""
         if task.id != task_id or task.project_id != project_id or project.id != project_id:
             raise ValueError("build_coder_context: task/project must match project_id and task_id.")
 
@@ -94,6 +97,22 @@ class ContextBuilder:
             raise
         except OSError as exc:
             logger.warning("Could not read MEMORY.md for project_id=%s: %s", project_id, exc)
+        try:
+            map_payload = await run_codebase_map(
+                session,
+                project_id=project_id,
+                task_id=task_id,
+                project_root=_sandbox_project_dir(project_id),
+                primary_language=project.primary_language,
+            )
+            blob = json.dumps(map_payload, indent=2, ensure_ascii=False)
+            if len(blob) > _MAX_CODEBASE_MAP_JSON_CHARS:
+                blob = blob[:_MAX_CODEBASE_MAP_JSON_CHARS] + "\n…(codebase map JSON truncated)"
+            system_prompt += f"\n\n## Codebase Structure\n\n```json\n{blob}\n```\n"
+        except SandboxEscapeError:
+            raise
+        except Exception as exc:
+            logger.warning("codebase map run failed for project_id=%s task_id=%s: %s", project_id, task_id, exc)
         if steering is not None:
             system_prompt += f"\n\nUpdated instructions from Project Owner: {steering}"
 

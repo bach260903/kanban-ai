@@ -490,3 +490,30 @@ class CodebaseMapperService:
         await session.flush()
         await session.refresh(row)
         return map_json
+
+
+async def run(
+    session: AsyncSession,
+    *,
+    project_id: UUID,
+    task_id: UUID,
+    project_root: Path,
+    primary_language: str,
+) -> dict[str, Any]:
+    """Scan sandbox at task start, persist ``codebase_maps`` row, return map (US14 / T100).
+
+    Task-spec alias ``codebase_mapper.run``; caller should ``commit`` the session.
+    """
+    lang = (primary_language or "python").lower()
+    if lang not in ("python", "javascript", "typescript"):
+        lang = "python"
+    root = project_root.expanduser().resolve()
+    if not root.is_dir():
+        root.mkdir(parents=True, exist_ok=True)
+    return await CodebaseMapperService.scan_and_store(
+        session,
+        project_id=project_id,
+        project_root=root,
+        language=lang,
+        task_id=task_id,
+    )
