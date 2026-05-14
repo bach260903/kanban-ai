@@ -11,7 +11,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.exceptions import InvalidTransitionError, NotFoundError
 from app.middleware.auth import require_jwt
+from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
 from app.models.audit_log import AuditLogResult
+from app.models.feedback import Feedback, FeedbackReferenceType
 from app.models.task import Task, TaskStatus
 from app.schemas.task import (
     TaskApproveResponse,
@@ -19,6 +21,8 @@ from app.schemas.task import (
     TaskKanbanItem,
     TaskMoveRequest,
     TaskMoveResult,
+    TaskRejectRequest,
+    TaskRejectResponse,
     TasksGroupedResponse,
 )
 from app.services.audit_service import write_audit
@@ -114,6 +118,72 @@ async def approve_task(
         task_id=task.id,
         status=task.status,
         diff_id=diff.id,
+        updated_at=task.updated_at,
+    )
+
+
+@router.post(
+    "/{project_id}/tasks/{task_id}/reject",
+    response_model=TaskRejectResponse,
+)
+async def reject_task(
+    project_id: UUID,
+    task_id: UUID,
+    body: TaskRejectRequest,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> TaskRejectResponse:
+    await ProjectService.get(session, project_id)
+    task = await TaskService.get(session, task_id, project_id=project_id)
+    if task.status != TaskStatus.REVIEW:
+        raise InvalidTransitionError("Task must be in review status to reject the diff.")
+    fb_text = body.feedback.strip()
+    if not fb_text:
+        raise InvalidTransitionError("Feedback must not be empty.")
+    await DiffService.reject_latest_pending(session, task_id=task_id, project_id=project_id)
+    feedback = Feedback(
+        project_id=project_id,
+        reference_type=FeedbackReferenceType.TASK,
+        reference_id=task_id,
+        content=fb_text,
+    )
+    session.add(feedback)
+    agent_run = AgentRun(
+        project_id=project_id,
+        task_id=task_id,
+        agent_type=AgentType.CODER,
+        agent_version="1.0.0",
+        status=AgentRunStatus.RUNNING,
+        input_artifacts=[str(task_id)],
+        output_artifacts=[],
+    )
+    session.add(agent_run)
+    await session.flush()
+    await KanbanService.move_task(task_id, TaskStatus.IN_PROGRESS, session, defer_coder_start=True)
+    await write_audit(
+        session,
+        project_id=project_id,
+        task_id=task_id,
+        action_type="task_diff_reject",
+        action_description=f"PO rejected code diff with feedback {feedback.id}; task moved to in_progress.",
+        result=AuditLogResult.SUCCESS,
+        input_refs=[str(feedback.id)],
+        output_refs=[str(agent_run.id)],
+    )
+    await session.commit()
+    KanbanService.start_coder_agent(
+        task_id,
+        project_id,
+        po_feedback=fb_text,
+        agent_run_id=agent_run.id,
+    )
+    await session.refresh(task)
+    await session.refresh(feedback)
+    return TaskRejectResponse(
+        task_id=task.id,
+        status=task.status,
+        feedback_id=feedback.id,
+        agent_run_id=agent_run.id,
         updated_at=task.updated_at,
     )
 

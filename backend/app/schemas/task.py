@@ -70,3 +70,21 @@ class TaskApproveResponse(BaseModel):
     status: TaskStatus
     diff_id: UUID
     updated_at: datetime
+
+
+class TaskRejectRequest(BaseModel):
+    """Body for ``POST .../tasks/{task_id}/reject`` (US9 / T064)."""
+
+    feedback: str = Field(..., min_length=1, max_length=10_000)
+
+
+class TaskRejectResponse(BaseModel):
+    """JSON from ``POST .../tasks/{task_id}/reject`` (REST contract)."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    task_id: UUID
+    status: TaskStatus
+    feedback_id: UUID
+    agent_run_id: UUID
+    updated_at: datetime

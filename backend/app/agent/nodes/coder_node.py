@@ -254,17 +254,24 @@ async def _run_with_session(state: StateDict) -> StateDict:
         if project is None:
             raise ValueError("Project not found.")
 
-        agent_run = AgentRun(
-            project_id=project_id,
-            task_id=task_id,
-            agent_type=AgentType.CODER,
-            agent_version="1.0.0",
-            status=AgentRunStatus.RUNNING,
-            input_artifacts=[str(task.id)],
-            output_artifacts=[],
-        )
-        session.add(agent_run)
-        await session.flush()
+        existing_raw = state.get("agent_run_id")
+        if existing_raw is not None:
+            pre_id = _as_uuid(existing_raw, "agent_run_id")
+            agent_run = await session.get(AgentRun, pre_id)
+            if agent_run is None or agent_run.task_id != task_id or agent_run.project_id != project_id:
+                raise ValueError("agent_run_id does not match this task/project.")
+        else:
+            agent_run = AgentRun(
+                project_id=project_id,
+                task_id=task_id,
+                agent_type=AgentType.CODER,
+                agent_version="1.0.0",
+                status=AgentRunStatus.RUNNING,
+                input_artifacts=[str(task.id)],
+                output_artifacts=[],
+            )
+            session.add(agent_run)
+            await session.flush()
         agent_run_id = agent_run.id
 
         sandbox = _sandbox_root(project_id)
@@ -283,6 +290,9 @@ async def _run_with_session(state: StateDict) -> StateDict:
             f"Task description:\n{task.description or '(none)'}\n\n"
             f"Project constitution (excerpt, first 8000 chars):\n{project.constitution[:8000]}"
         )
+        po = state.get("po_feedback")
+        if isinstance(po, str) and po.strip():
+            human += "\n\nPO review feedback (address this in your changes):\n" + po.strip()[:20_000]
         messages: list[Any] = [
             SystemMessage(content=system),
             HumanMessage(content=human),

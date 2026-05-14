@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from datetime import datetime, timezone
+from typing import Any
 from uuid import UUID
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -28,28 +29,53 @@ _ALLOWED_MOVES: frozenset[tuple[TaskStatus, TaskStatus]] = frozenset(
 )
 
 
-async def _run_coder_agent_background(task_id: UUID, project_id: UUID) -> None:
+async def _run_coder_agent_background(
+    task_id: UUID,
+    project_id: UUID,
+    *,
+    po_feedback: str | None = None,
+    agent_run_id: UUID | None = None,
+) -> None:
     """Fire-and-forget entry: T058 replaces ``coder_node.run`` body."""
     try:
-        await coder_node.run(
-            {
-                "task_id": task_id,
-                "project_id": project_id,
-            }
-        )
+        payload: dict[str, Any] = {
+            "task_id": task_id,
+            "project_id": project_id,
+        }
+        if po_feedback:
+            payload["po_feedback"] = po_feedback
+        if agent_run_id is not None:
+            payload["agent_run_id"] = agent_run_id
+        await coder_node.run(payload)
     except Exception:
         logger.exception("Coder agent background task failed task_id=%s", task_id)
 
 
-def _schedule_coder_agent(task_id: UUID, project_id: UUID) -> None:
-    asyncio.create_task(_run_coder_agent_background(task_id, project_id))
+def _schedule_coder_agent(
+    task_id: UUID,
+    project_id: UUID,
+    *,
+    po_feedback: str | None = None,
+    agent_run_id: UUID | None = None,
+) -> None:
+    asyncio.create_task(
+        _run_coder_agent_background(task_id, project_id, po_feedback=po_feedback, agent_run_id=agent_run_id)
+    )
 
 
 class KanbanService:
     """Validates task status transitions, enforces WIP = 1, starts coder on ``in_progress``."""
 
     @staticmethod
-    async def move_task(task_id: UUID, to_status: TaskStatus, session: AsyncSession) -> Task:
+    async def move_task(
+        task_id: UUID,
+        to_status: TaskStatus,
+        session: AsyncSession,
+        *,
+        po_feedback: str | None = None,
+        agent_run_id: UUID | None = None,
+        defer_coder_start: bool = False,
+    ) -> Task:
         task = await TaskService.get(session, task_id)
         from_status = task.status
         if from_status == to_status:
@@ -64,6 +90,27 @@ class KanbanService:
         task.status = to_status
         task.updated_at = datetime.now(timezone.utc)
         await session.flush()
-        if to_status == TaskStatus.IN_PROGRESS:
-            _schedule_coder_agent(task.id, task.project_id)
+        if to_status == TaskStatus.IN_PROGRESS and not defer_coder_start:
+            _schedule_coder_agent(
+                task.id,
+                task.project_id,
+                po_feedback=po_feedback,
+                agent_run_id=agent_run_id,
+            )
         return task
+
+    @staticmethod
+    def start_coder_agent(
+        task_id: UUID,
+        project_id: UUID,
+        *,
+        po_feedback: str | None = None,
+        agent_run_id: UUID | None = None,
+    ) -> None:
+        """Schedule coder after DB commit (e.g. diff reject / T064)."""
+        _schedule_coder_agent(
+            task_id,
+            project_id,
+            po_feedback=po_feedback,
+            agent_run_id=agent_run_id,
+        )

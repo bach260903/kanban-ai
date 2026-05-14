@@ -1,4 +1,4 @@
-"""Latest diff for a Kanban task (US9 / T062, T063)."""
+"""Latest diff for a Kanban task (US9 / T062–T064)."""
 
 from __future__ import annotations
 
@@ -45,5 +45,22 @@ class DiffService:
         if diff.review_status != DiffReviewStatus.PENDING:
             raise InvalidTransitionError("Latest diff is not pending approval.")
         diff.review_status = DiffReviewStatus.APPROVED
+        await session.flush()
+        return diff
+
+    @staticmethod
+    async def reject_latest_pending(
+        session: AsyncSession,
+        *,
+        task_id: UUID,
+        project_id: UUID,
+    ) -> Diff:
+        """Mark the latest diff as rejected (must be ``pending``). Task project scope enforced."""
+        diff = await DiffService.get_latest_for_task(session, task_id=task_id, project_id=project_id)
+        if diff is None:
+            raise InvalidTransitionError("No diff available to reject.")
+        if diff.review_status != DiffReviewStatus.PENDING:
+            raise InvalidTransitionError("Latest diff is not pending review.")
+        diff.review_status = DiffReviewStatus.REJECTED
         await session.flush()
         return diff
