@@ -353,7 +353,7 @@
 - [X] T112 [P] Validate TC-08: stream event latency ≤ 2 s — measure time from coder_node publish call to frontend event receipt using browser devtools WebSocket inspector; document result
 - [X] T113 [P] Validate TC-09: Pause stops within 1 step — write automated test that sends PAUSE and counts how many events arrive after the signal; assert ≤ 1 additional event
 - [X] T114 [P] Validate TC-10: 100% of Done tasks produce MEMORY.md entry with all 5 fields — run 5 approve cycles; inspect DB and file
-- [ ] T115 Validate TC-11: codebase map ≤ 10 s for 500 files — benchmark `CodebaseMapper` with a synthetic 500-file Python project; document result; optimise if needed
+- [X] T115 Validate TC-11: codebase map ≤ 10 s for 500 files — benchmark `CodebaseMapper` with a synthetic 500-file Python project; document result; optimise if needed
 - [ ] T116 [P] Validate TC-12 + TC-13: squash commit count = 1 per approve; inline comment `{file, line}` round-trip — end-to-end manual scenario
 - [ ] T117 Add Phase 2 Pydantic schemas for new types in `frontend/src/types/index.ts`: `StreamEvent`, `MemoryEntry`, `CodebaseMap`, `InlineComment`, `PauseState`, `TaskBranch`
 

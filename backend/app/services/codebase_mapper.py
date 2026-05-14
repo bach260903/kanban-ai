@@ -414,6 +414,7 @@ def build_codebase_map_dict(
 
     files_payload: list[dict[str, Any]] = []
     rel_paths: list[str] = []
+    _logged_parse_exc: bool = False
 
     for path in sorted(_iter_source_files(root, scan_lang), key=lambda p: str(p).lower()):
         rel = _rel_posix(root, path)
@@ -441,7 +442,11 @@ def build_codebase_map_dict(
         try:
             symbols = _extract_symbols(path, raw, scan_lang)
         except Exception:
-            logger.warning("tree-sitter parse failed for %s", rel, exc_info=True)
+            if not _logged_parse_exc:
+                logger.warning("tree-sitter parse failed for %s", rel, exc_info=True)
+                _logged_parse_exc = True
+            else:
+                logger.debug("tree-sitter parse failed for %s", rel)
             symbols = []
         files_payload.append(
             {
