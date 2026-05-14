@@ -1,4 +1,6 @@
 import { DiffEditor } from '@monaco-editor/react'
+import type { editor } from 'monaco-editor'
+import { useCallback, useEffect, useRef } from 'react'
 
 import styles from './diff-viewer.module.css'
 
@@ -12,6 +14,20 @@ export type DiffViewerProps = {
   height?: number | string
   /** Optional label shown above the diff (e.g. primary file path). */
   title?: string
+  /** Modified-side line click (US16 / T108): ``file`` from ``title`` or model URI, ``line`` from editor target. */
+  onLineClick?: (file: string, line: number) => void
+}
+
+function fileNameFromModifiedModel(title: string | undefined, model: editor.ITextModel | null): string {
+  const fromTitle = title?.trim()
+  if (fromTitle) return fromTitle
+  if (!model) return ''
+  const { uri } = model
+  const segments = uri.path.split('/').filter(Boolean)
+  const tail = segments.length ? segments[segments.length - 1] : ''
+  if (tail) return tail
+  const p = uri.path.replace(/^\//, '')
+  return p || ''
 }
 
 /**
@@ -24,7 +40,38 @@ export function DiffViewer({
   language = 'plaintext',
   height = '50vh',
   title,
+  onLineClick,
 }: DiffViewerProps) {
+  const mouseDisposableRef = useRef<{ dispose: () => void } | null>(null)
+  const onLineClickRef = useRef(onLineClick)
+  const titleRef = useRef(title)
+
+  onLineClickRef.current = onLineClick
+  titleRef.current = title
+
+  useEffect(() => {
+    return () => {
+      mouseDisposableRef.current?.dispose()
+      mouseDisposableRef.current = null
+    }
+  }, [])
+
+  const onDiffMount = useCallback((diffEditor: editor.IStandaloneDiffEditor) => {
+    mouseDisposableRef.current?.dispose()
+    mouseDisposableRef.current = null
+
+    const modifiedEditor = diffEditor.getModifiedEditor()
+    mouseDisposableRef.current = modifiedEditor.onMouseDown((e) => {
+      if (!onLineClickRef.current) return
+      if (e.event.browserEvent.button !== 0) return
+      const pos = e.target.position
+      if (!pos || pos.lineNumber < 1) return
+      const model = modifiedEditor.getModel()
+      const file = fileNameFromModifiedModel(titleRef.current, model) || '(modified)'
+      onLineClickRef.current(file, pos.lineNumber)
+    })
+  }, [])
+
   return (
     <section className={styles.root} aria-label={title ?? 'Code diff'}>
       {title ? (
@@ -41,6 +88,9 @@ export function DiffViewer({
           language={language}
           original={original}
           modified={modified}
+          onMount={(editor) => {
+            onDiffMount(editor)
+          }}
           options={{
             readOnly: true,
             originalEditable: false,
