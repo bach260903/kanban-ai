@@ -43,6 +43,27 @@
   opacity: 0.85;
 }
 
+.rootEmbedded {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  border-radius: 0;
+  border: none;
+}
+
+.embeddedStatus {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0.65rem 0.35rem;
+  flex-shrink: 0;
+}
+
+.scrollerEmbedded {
+  max-height: none;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
 .scroller {
   flex: 1 1 auto;
   min-height: 180px;

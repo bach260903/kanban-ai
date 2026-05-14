@@ -1,5 +1,5 @@
 import { isAxiosError } from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { Spinner } from '../components/atoms/spinner'
@@ -7,6 +7,7 @@ import { DocumentPanel } from '../components/organisms/document-panel'
 import { KanbanBoard } from '../components/organisms/kanban-board'
 import { ProjectHeader } from '../components/organisms/project-header'
 import { ReviewPanel } from '../components/organisms/review-panel'
+import { ThoughtStreamPanel } from '../components/organisms/thought-stream-panel'
 import { getAuditLogs, type AuditLogsPage } from '../services/audit-api'
 import { getProject } from '../services/project-api'
 import { getTasks, groupedResponseToTaskColumns } from '../services/task-api'
@@ -29,6 +30,13 @@ export default function ProjectWorkspace() {
   const { id } = useParams()
   const { currentProject, setCurrentProject } = useProjectStore()
   const columns = useTaskStore((s) => s.columns)
+  const inProgressTask = useMemo(() => {
+    const list = [...columns.in_progress].sort(
+      (a, b) => a.priority - b.priority || a.title.localeCompare(b.title),
+    )
+    return list[0] ?? null
+  }, [columns.in_progress])
+  const [thoughtStreamOpen, setThoughtStreamOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'audit'>('documents')
@@ -110,6 +118,12 @@ export default function ProjectWorkspace() {
     }
   }, [activeTab, currentProject?.id, auditOffset])
 
+  useEffect(() => {
+    if (inProgressTask == null) {
+      setThoughtStreamOpen(false)
+    }
+  }, [inProgressTask])
+
   return (
     <div className={styles.shell}>
       {loading ? (
@@ -125,6 +139,58 @@ export default function ProjectWorkspace() {
         <>
           <ProjectHeader project={currentProject} />
           {columns.review.length > 0 ? <ReviewPanel projectId={currentProject.id} /> : null}
+          {inProgressTask ? (
+            <>
+              {!thoughtStreamOpen ? (
+                <button
+                  type="button"
+                  className={styles.thoughtStreamFab}
+                  onClick={() => setThoughtStreamOpen(true)}
+                  aria-expanded={false}
+                  aria-controls="thought-stream-panel"
+                >
+                  Thought stream
+                </button>
+              ) : null}
+              {thoughtStreamOpen ? (
+                <>
+                  <button
+                    type="button"
+                    className={styles.thoughtStreamBackdrop}
+                    aria-label="Close thought stream"
+                    onClick={() => setThoughtStreamOpen(false)}
+                  />
+                  <aside
+                    id="thought-stream-panel"
+                    className={styles.thoughtStreamPanel}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="thought-stream-panel-heading"
+                  >
+                    <div className={styles.thoughtStreamPanelToolbar}>
+                      <div>
+                        <h2 id="thought-stream-panel-heading" className={styles.thoughtStreamPanelTitle}>
+                          Thought stream
+                        </h2>
+                        <p className={styles.thoughtStreamPanelSubtitle}>{inProgressTask.title}</p>
+                      </div>
+                      <button
+                        type="button"
+                        className={styles.thoughtStreamClose}
+                        onClick={() => setThoughtStreamOpen(false)}
+                        aria-label="Close thought stream panel"
+                      >
+                        Close
+                      </button>
+                    </div>
+                    <div className={styles.thoughtStreamPanelBody}>
+                      <ThoughtStreamPanel taskId={inProgressTask.id} embedded />
+                    </div>
+                  </aside>
+                </>
+              ) : null}
+            </>
+          ) : null}
           <div className={styles.tabs} role="tablist" aria-label="Workspace sections">
             <button
               type="button"

@@ -6,6 +6,8 @@ import styles from './thought-stream-panel.module.css'
 
 export type ThoughtStreamPanelProps = {
   taskId: string | null
+  /** Fills parent flex column (slide-in drawer); compact chrome. */
+  embedded?: boolean
 }
 
 function eventKind(msg: Record<string, unknown>): string {
@@ -125,7 +127,7 @@ function rowKey(msg: Record<string, unknown>, index: number): string {
 /**
  * Live task thought stream (US10 / T082): scrollable events, colour-coded labels, STREAM_END summary.
  */
-export function ThoughtStreamPanel({ taskId }: ThoughtStreamPanelProps) {
+export function ThoughtStreamPanel({ taskId, embedded = false }: ThoughtStreamPanelProps) {
   const { events, isConnected, streamEnded } = useThoughtStream(taskId)
   const scrollRef = useRef<HTMLDivElement>(null)
 
@@ -146,16 +148,28 @@ export function ThoughtStreamPanel({ taskId }: ThoughtStreamPanelProps) {
   const showEmpty = taskId == null || taskId === ''
 
   return (
-    <section className={styles.root} aria-label="Agent thought stream">
-      <header className={styles.header}>
-        <span>Thought stream</span>
-        <span className={isConnected ? styles.pillOn : styles.pillOff} title="WebSocket transport">
-          {isConnected ? 'Live' : 'Offline'}
-        </span>
-      </header>
-      <div ref={scrollRef} className={styles.scroller}>
+    <section
+      className={embedded ? `${styles.root} ${styles.rootEmbedded}` : styles.root}
+      aria-label="Agent thought stream"
+    >
+      {embedded ? null : (
+        <header className={styles.header}>
+          <span>Thought stream</span>
+          <span className={isConnected ? styles.pillOn : styles.pillOff} title="WebSocket transport">
+            {isConnected ? 'Live' : 'Offline'}
+          </span>
+        </header>
+      )}
+      {embedded ? (
+        <div className={styles.embeddedStatus} aria-live="polite">
+          <span className={isConnected ? styles.pillOn : styles.pillOff}>{isConnected ? 'Live' : 'Offline'}</span>
+        </div>
+      ) : null}
+      <div ref={scrollRef} className={embedded ? `${styles.scroller} ${styles.scrollerEmbedded}` : styles.scroller}>
         {showEmpty ? (
-          <p className={styles.empty}>Open a task in progress to stream agent events.</p>
+          <p className={styles.empty}>
+            {embedded ? 'No task selected for this stream.' : 'Open a task in progress to stream agent events.'}
+          </p>
         ) : events.length === 0 ? (
           <p className={styles.empty}>Waiting for events…</p>
         ) : (

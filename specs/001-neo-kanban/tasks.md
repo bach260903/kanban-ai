@@ -246,7 +246,7 @@
 - [X] T080 [US10] Implement WebSocket client in `frontend/src/services/websocket-client.ts`: connect with JWT token, track `lastSequence`, send `CATCH_UP` on reconnect, auto-reconnect with 1 s backoff, expose `onEvent(callback)` and `send(message)` methods
 - [X] T081 [US10] Implement `use-thought-stream.ts` hook in `frontend/src/hooks/use-thought-stream.ts`: subscribes to `websocket-client`, maintains ordered `events[]` array (sorted by `sequence_number`), exposes `events`, `isConnected`, `streamEnded`
 - [X] T082 [US10] Implement `ThoughtStreamPanel` organism in `frontend/src/components/organisms/thought-stream-panel.tsx`: renders scrolling event list; each event shows type label (colour-coded), timestamp, content; auto-scrolls to bottom; shows `STREAM_END` summary badge
-- [ ] T083 [US10] Add Thought Stream toggle to `ProjectWorkspace` in `frontend/src/pages/project-workspace.tsx`: slide-in panel that appears when a task is `in_progress`; uses `use-thought-stream.ts`; closeable
+- [X] T083 [US10] Add Thought Stream toggle to `ProjectWorkspace` in `frontend/src/pages/project-workspace.tsx`: slide-in panel that appears when a task is `in_progress`; uses `use-thought-stream.ts`; closeable
 
 **Checkpoint**: Agent runs → Thought Stream panel opens → events appear with type labels in real-time; close browser + reopen → events replay from DB.
 
