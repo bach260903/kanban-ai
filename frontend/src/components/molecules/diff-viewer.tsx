@@ -16,6 +16,8 @@ export type DiffViewerProps = {
   title?: string
   /** Modified-side line click (US16 / T108): ``file`` from ``title`` or model URI, ``line`` from editor target. */
   onLineClick?: (file: string, line: number) => void
+  /** Exposes modified editor for inline comment overlay (US16 / T109). */
+  onModifiedEditor?: (editor: editor.IStandaloneCodeEditor | null) => void
 }
 
 function fileNameFromModifiedModel(title: string | undefined, model: editor.ITextModel | null): string {
@@ -41,18 +43,22 @@ export function DiffViewer({
   height = '50vh',
   title,
   onLineClick,
+  onModifiedEditor,
 }: DiffViewerProps) {
   const mouseDisposableRef = useRef<{ dispose: () => void } | null>(null)
   const onLineClickRef = useRef(onLineClick)
   const titleRef = useRef(title)
+  const onModifiedEditorRef = useRef(onModifiedEditor)
 
   onLineClickRef.current = onLineClick
   titleRef.current = title
+  onModifiedEditorRef.current = onModifiedEditor
 
   useEffect(() => {
     return () => {
       mouseDisposableRef.current?.dispose()
       mouseDisposableRef.current = null
+      onModifiedEditorRef.current?.(null)
     }
   }, [])
 
@@ -61,6 +67,8 @@ export function DiffViewer({
     mouseDisposableRef.current = null
 
     const modifiedEditor = diffEditor.getModifiedEditor()
+    onModifiedEditorRef.current?.(modifiedEditor)
+
     mouseDisposableRef.current = modifiedEditor.onMouseDown((e) => {
       if (!onLineClickRef.current) return
       if (e.event.browserEvent.button !== 0) return
@@ -101,6 +109,7 @@ export function DiffViewer({
             automaticLayout: true,
             wordWrap: 'on',
             lineNumbers: 'on',
+            glyphMargin: true,
             renderOverviewRuler: true,
             ignoreTrimWhitespace: false,
           }}

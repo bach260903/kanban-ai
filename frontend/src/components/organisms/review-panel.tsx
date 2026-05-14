@@ -1,17 +1,20 @@
 import { isAxiosError } from 'axios'
+import type { editor } from 'monaco-editor'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Button } from '../atoms/button'
 import { Spinner } from '../atoms/spinner'
 import { DiffViewer } from '../molecules/diff-viewer'
+import { InlineCommentOverlay } from '../molecules/inline-comment-overlay'
 import {
   approveTask,
   getDiff,
+  getTaskComments,
   getTasks,
   groupedResponseToTaskColumns,
   rejectTask,
 } from '../../services/task-api'
-import type { TaskDiffResponse } from '../../services/task-api'
+import type { InlineCommentItem, TaskDiffResponse } from '../../services/task-api'
 import { useTaskStore } from '../../store/task-store'
 
 function diffErrorMessage(err: unknown): string {
@@ -50,11 +53,25 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
   const [diffError, setDiffError] = useState<string | null>(null)
   const [actionBusy, setActionBusy] = useState(false)
   const [rejectFeedback, setRejectFeedback] = useState('')
+  const [modifiedEditor, setModifiedEditor] = useState<editor.IStandaloneCodeEditor | null>(null)
+  const [inlineComments, setInlineComments] = useState<InlineCommentItem[]>([])
+  const [activeCommentLine, setActiveCommentLine] = useState<number | null>(null)
 
   const refreshBoard = useCallback(async () => {
     const data = await getTasks(projectId)
     setColumns(groupedResponseToTaskColumns(data))
   }, [projectId, setColumns])
+
+  const refreshInlineComments = useCallback(async () => {
+    const tid = reviewTask?.id
+    if (!tid) return
+    try {
+      const rows = await getTaskComments(tid)
+      setInlineComments(rows)
+    } catch {
+      setInlineComments([])
+    }
+  }, [reviewTask?.id])
 
   useEffect(() => {
     if (!reviewTask) {
@@ -81,6 +98,25 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
       cancelled = true
     }
   }, [projectId, reviewTask])
+
+  useEffect(() => {
+    if (!reviewTask || !diff) {
+      setInlineComments([])
+      return
+    }
+    void refreshInlineComments()
+  }, [reviewTask?.id, diff?.id, refreshInlineComments])
+
+  useEffect(() => {
+    setActiveCommentLine(null)
+  }, [diff?.id])
+
+  useEffect(() => {
+    if (!diff) {
+      setModifiedEditor(null)
+      setActiveCommentLine(null)
+    }
+  }, [diff])
 
   const onApprove = useCallback(async () => {
     if (!reviewTask) return
@@ -122,6 +158,7 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
     diff?.files_affected?.length && diff.files_affected[0]
       ? diff.files_affected[0]!
       : `Task: ${reviewTask.title}`
+  const apiFilePath = (diff?.files_affected?.[0] ?? '').trim()
 
   return (
     <>
@@ -153,12 +190,27 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
         ) : null}
 
         {!diffLoading && diff ? (
-          <DiffViewer
-            original={diff.original_content}
-            modified={diff.modified_content}
-            title={diffTitle}
-            height="42vh"
-          />
+          <>
+            <DiffViewer
+              original={diff.original_content}
+              modified={diff.modified_content}
+              title={diffTitle}
+              height="42vh"
+              onLineClick={apiFilePath ? (_file, line) => setActiveCommentLine(line) : undefined}
+              onModifiedEditor={setModifiedEditor}
+            />
+            {apiFilePath && modifiedEditor ? (
+              <InlineCommentOverlay
+                modifiedEditor={modifiedEditor}
+                taskId={reviewTask.id}
+                apiFilePath={apiFilePath}
+                comments={inlineComments}
+                activeLine={activeCommentLine}
+                onCloseComposer={() => setActiveCommentLine(null)}
+                onSaved={refreshInlineComments}
+              />
+            ) : null}
+          </>
         ) : null}
 
         <div className={styles.actions}>

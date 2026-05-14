@@ -108,3 +108,27 @@ export async function getTaskBranch(taskId: string, signal?: AbortSignal): Promi
   const { data } = await api.get<TaskBranchInfo>(`/api/v1/tasks/${taskId}/branch`, { signal })
   return data
 }
+
+/** ``GET/POST /api/v1/tasks/{task_id}/comments`` (US16 / T106–T109). */
+export type InlineCommentItem = {
+  id: string
+  task_id: string
+  diff_id: string | null
+  file_path: string
+  line_number: number
+  comment_text: string
+  created_at: string
+}
+
+export async function getTaskComments(taskId: string, signal?: AbortSignal): Promise<InlineCommentItem[]> {
+  const { data } = await api.get<InlineCommentItem[]>(`/api/v1/tasks/${taskId}/comments`, { signal })
+  return data
+}
+
+export async function createTaskComment(
+  taskId: string,
+  body: { file_path: string; line_number: number; comment_text: string },
+): Promise<InlineCommentItem> {
+  const { data } = await api.post<InlineCommentItem>(`/api/v1/tasks/${taskId}/comments`, body)
+  return data
+}
