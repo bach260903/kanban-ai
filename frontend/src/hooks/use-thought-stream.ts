@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { TaskThoughtStreamClient } from '../services/websocket-client'
 
@@ -31,6 +31,8 @@ export type UseThoughtStreamResult = {
   events: Record<string, unknown>[]
   isConnected: boolean
   streamEnded: boolean
+  /** Send control frames (e.g. ``PAUSE`` / ``RESUME``) on the same socket (US11 / T089). */
+  send: (message: Record<string, unknown> | string) => void
 }
 
 /**
@@ -46,6 +48,11 @@ export function useThoughtStream(taskId: string | null): UseThoughtStreamResult 
   const seenSeqRef = useRef(new Set<number>())
   const seenIdRef = useRef(new Set<string>())
   const entriesRef = useRef<StreamEntry[]>([])
+  const clientRef = useRef<TaskThoughtStreamClient | null>(null)
+
+  const send = useCallback((message: Record<string, unknown> | string) => {
+    clientRef.current?.send(message)
+  }, [])
 
   useEffect(() => {
     seenSeqRef.current.clear()
@@ -55,12 +62,14 @@ export function useThoughtStream(taskId: string | null): UseThoughtStreamResult 
     setEvents([])
     setStreamEnded(false)
     setIsConnected(false)
+    clientRef.current = null
 
     if (taskId == null || taskId === '') {
       return undefined
     }
 
     const client = new TaskThoughtStreamClient(taskId)
+    clientRef.current = client
 
     const offConn = client.onConnectionChange(setIsConnected)
 
@@ -105,8 +114,9 @@ export function useThoughtStream(taskId: string | null): UseThoughtStreamResult 
       offConn()
       offEv()
       client.disconnect()
+      clientRef.current = null
     }
   }, [taskId])
 
-  return { events, isConnected, streamEnded }
+  return { events, isConnected, streamEnded, send }
 }

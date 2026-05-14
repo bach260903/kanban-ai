@@ -1,6 +1,7 @@
 import { useLayoutEffect, useMemo, useRef } from 'react'
 
 import { useThoughtStream } from '../../hooks/use-thought-stream'
+import { PauseResumeControls } from '../molecules/pause-resume-controls'
 
 import styles from './thought-stream-panel.module.css'
 
@@ -128,7 +129,7 @@ function rowKey(msg: Record<string, unknown>, index: number): string {
  * Live task thought stream (US10 / T082): scrollable events, colour-coded labels, STREAM_END summary.
  */
 export function ThoughtStreamPanel({ taskId, embedded = false }: ThoughtStreamPanelProps) {
-  const { events, isConnected, streamEnded } = useThoughtStream(taskId)
+  const { events, isConnected, streamEnded, send } = useThoughtStream(taskId)
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const streamEndPayload = useMemo(() => {
@@ -164,6 +165,15 @@ export function ThoughtStreamPanel({ taskId, embedded = false }: ThoughtStreamPa
         <div className={styles.embeddedStatus} aria-live="polite">
           <span className={isConnected ? styles.pillOn : styles.pillOff}>{isConnected ? 'Live' : 'Offline'}</span>
         </div>
+      ) : null}
+      {!showEmpty ? (
+        <PauseResumeControls
+          taskId={taskId}
+          send={send}
+          isConnected={isConnected}
+          streamEnded={streamEnded}
+          events={events}
+        />
       ) : null}
       <div ref={scrollRef} className={embedded ? `${styles.scroller} ${styles.scrollerEmbedded}` : styles.scroller}>
         {showEmpty ? (
