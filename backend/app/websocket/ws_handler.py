@@ -5,7 +5,6 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
-from datetime import datetime, timezone
 from typing import Any
 from uuid import UUID
 
@@ -16,12 +15,11 @@ from starlette.websockets import WebSocket, WebSocketDisconnect, WebSocketState
 
 from app.config import settings
 from app.database import async_session_maker
-from app.models.agent_pause_state import AgentPauseState, PauseRunState
 from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
 from app.models.stream_event import StreamEvent, StreamEventType
 from app.models.task import Task, TaskStatus
+from app.services.pause_service import PauseService
 from app.websocket.event_consumer import EventConsumer
-from app.websocket.event_publisher import _get_redis
 
 logger = logging.getLogger(__name__)
 
@@ -122,56 +120,6 @@ def _should_end_stream(task: Task, run: AgentRun | None) -> bool:
     if run is not None and run.status == AgentRunStatus.FAILURE:
         return True
     return task.status != TaskStatus.IN_PROGRESS
-
-
-async def _apply_pause(session: AsyncSession, task_id: UUID) -> None:
-    r = await _get_redis()
-    await r.set(f"pause:{task_id}", "1")
-    run_id = await _latest_coder_run_id(session, task_id)
-    if run_id is None:
-        await session.flush()
-        return
-    row = await session.scalar(select(AgentPauseState).where(AgentPauseState.task_id == task_id))
-    now = datetime.now(timezone.utc)
-    if row is None:
-        session.add(
-            AgentPauseState(
-                task_id=task_id,
-                agent_run_id=run_id,
-                state=PauseRunState.PAUSED,
-                paused_at=now,
-            )
-        )
-    else:
-        row.state = PauseRunState.PAUSED
-        row.paused_at = now
-    await session.flush()
-
-
-async def _apply_resume(session: AsyncSession, task_id: UUID, steering: str | None) -> None:
-    r = await _get_redis()
-    await r.delete(f"pause:{task_id}")
-    run_id = await _latest_coder_run_id(session, task_id)
-    if run_id is None:
-        await session.flush()
-        return
-    now = datetime.now(timezone.utc)
-    row = await session.scalar(select(AgentPauseState).where(AgentPauseState.task_id == task_id))
-    if row is None:
-        session.add(
-            AgentPauseState(
-                task_id=task_id,
-                agent_run_id=run_id,
-                state=PauseRunState.RUNNING,
-                steering_instructions=steering,
-                resumed_at=now,
-            )
-        )
-    else:
-        row.state = PauseRunState.RUNNING
-        row.steering_instructions = steering
-        row.resumed_at = now
-    await session.flush()
 
 
 async def _pump_redis(task_id: UUID, send: Any, stop: asyncio.Event) -> None:
@@ -322,7 +270,7 @@ async def handle(websocket: WebSocket, task_id: UUID) -> None:
                     await _replay_catch_up(sc, send_text, task_id, last_seq)
             elif mtype == "PAUSE":
                 async with async_session_maker() as sp:
-                    await _apply_pause(sp, task_id)
+                    await PauseService.pause(sp, task_id)
                     await sp.commit()
                 await send_text(
                     json.dumps(
@@ -340,7 +288,7 @@ async def handle(websocket: WebSocket, task_id: UUID) -> None:
                 if steer_s == "":
                     steer_s = None
                 async with async_session_maker() as sr:
-                    await _apply_resume(sr, task_id, steer_s)
+                    await PauseService.resume(sr, task_id, steer_s)
                     await sr.commit()
     finally:
         stop.set()
