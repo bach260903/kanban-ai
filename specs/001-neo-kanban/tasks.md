@@ -305,7 +305,7 @@
 
 **Independent Test**: Task starts → `GET /codebase-map` returns JSON matching schema in `plan.md` with correct file count; Agent THOUGHT events reference correct file paths from the map.
 
-- [ ] T098 [US14] Implement `CodebaseMapper` in `backend/app/services/codebase_mapper.py`: accepts `project_root` + `language` (`python`|`javascript`|`typescript`) → walks directory tree → uses tree-sitter to extract classes + functions + signatures per file → assembles `CodebaseMap` JSON per schema in `plan.md` → stores in `codebase_maps` table → returns JSON
+- [X] T098 [US14] Implement `CodebaseMapper` in `backend/app/services/codebase_mapper.py`: accepts `project_root` + `language` (`python`|`javascript`|`typescript`) → walks directory tree → uses tree-sitter to extract classes + functions + signatures per file → assembles `CodebaseMap` JSON per schema in `plan.md` → stores in `codebase_maps` table → returns JSON
 - [ ] T099 [US14] Implement codebase map API in `backend/app/api/v1/codebase.py`: `GET /projects/{id}/codebase-map` — returns latest map from DB if exists; if no map or `?refresh=true`, triggers synchronous scan via `codebase_mapper.py` (≤10 s for 500 files); register router in `main.py`
 - [ ] T100 [US14] Inject codebase map into `context_builder` in `backend/app/agent/context_builder.py`: `build_coder_context()` calls `codebase_mapper.run(project_id)` at task start → appends serialised map JSON to system prompt under "## Codebase Structure" (replace raw file reads)
 - [ ] T101 [US14] Add `tree-sitter==0.23.0`, `tree-sitter-python==0.23.2`, `tree-sitter-javascript==0.23.0`, `tree-sitter-typescript==0.23.0` to `backend/requirements.txt`; test grammar loading in isolation before wiring
