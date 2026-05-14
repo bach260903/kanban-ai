@@ -19,3 +19,7 @@ class InvalidTransitionError(Exception):
 
 class SandboxEscapeError(Exception):
     """Path or command outside sandbox root (→ 400)."""
+
+
+class PauseSignal(Exception):
+    """Coder detected a task-level pause (Redis); run stops after status/event persist (US11 / T086)."""

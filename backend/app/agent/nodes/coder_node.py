@@ -20,7 +20,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
 from app.database import async_session_maker
-from app.exceptions import SandboxEscapeError
+from app.exceptions import PauseSignal, SandboxEscapeError
 from app.git.git_service import GitService
 from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
 from app.models.audit_log import AuditLogResult
@@ -29,8 +29,11 @@ from app.models.project import Project
 from app.models.stream_event import StreamEventType
 from app.models.task import Task, TaskStatus
 from app.services.audit_service import finalise_log, write_audit, write_pending_log
+from app.services.pause_service import PauseService
 from app.services.task_service import TaskService
 from app.websocket.event_publisher import EventPublisher
+
+pause_service = PauseService
 
 try:
     from langgraph.types import interrupt
@@ -206,6 +209,42 @@ async def _finalize_agent_run(
     await session.flush()
 
 
+async def _pause_checkpoint(
+    session: AsyncSession,
+    *,
+    project_id: UUID,
+    task_id: UUID,
+    agent_run_id: UUID,
+) -> None:
+    """If task is paused (Redis), finalize run as ``paused``, publish ``STATUS_CHANGE``, commit, stop (T086)."""
+    if not await pause_service.is_paused(task_id):
+        return
+    await _finalize_agent_run(session, agent_run_id, AgentRunStatus.PAUSED)
+    await _publish_event(
+        session,
+        task_id,
+        agent_run_id,
+        StreamEventType.STATUS_CHANGE,
+        {
+            "from": "CODING",
+            "to": "PAUSED",
+            "reason": "pause_requested",
+        },
+    )
+    await write_audit(
+        session,
+        project_id=project_id,
+        task_id=task_id,
+        action_type="coder_paused",
+        action_description="Coder stopped: Redis pause flag set for task.",
+        result=AuditLogResult.SUCCESS,
+        input_refs=[],
+        output_refs=[str(agent_run_id)],
+    )
+    await session.commit()
+    raise PauseSignal()
+
+
 async def _execute_tool(
     *,
     session: AsyncSession,
@@ -343,10 +382,14 @@ async def _run_with_session(state: StateDict) -> StateDict:
             await session.flush()
         agent_run_id = agent_run.id
 
+        await _pause_checkpoint(session, project_id=project_id, task_id=task_id, agent_run_id=agent_run_id)
+
         sandbox = _sandbox_root(project_id)
         await asyncio.to_thread(GitService.init_repo, sandbox)
         await asyncio.to_thread(GitService.configure_identity, sandbox)
         await asyncio.to_thread(GitService.ensure_baseline_commit, sandbox)
+
+        await _pause_checkpoint(session, project_id=project_id, task_id=task_id, agent_run_id=agent_run_id)
 
         system = (
             "You are the Coder agent. Work only via tools: read_file, write_file, run_terminal.\n"
@@ -428,6 +471,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
 
         rounds = 0
         while rounds < _MAX_TOOL_ROUNDS:
+            await _pause_checkpoint(session, project_id=project_id, task_id=task_id, agent_run_id=agent_run_id)
             rounds += 1
             llm_log = await write_pending_log(
                 session,
@@ -460,6 +504,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 break
 
             for tc in tool_calls:
+                await _pause_checkpoint(session, project_id=project_id, task_id=task_id, agent_run_id=agent_run_id)
                 name = tc.get("name", "")
                 args = cast(dict[str, Any], tc.get("args", {}))
                 tid = tc.get("id", "") or f"tool-{name}-{rounds}"
@@ -499,6 +544,8 @@ async def _run_with_session(state: StateDict) -> StateDict:
                     _tool_result_body(name, call_id, out),
                 )
                 messages.append(ToolMessage(content=out, tool_call_id=str(tid)))
+
+        await _pause_checkpoint(session, project_id=project_id, task_id=task_id, agent_run_id=agent_run_id)
 
         snap = await asyncio.to_thread(GitService.diff_staged, sandbox)
         diff_row = Diff(
@@ -544,6 +591,8 @@ async def run(state: StateDict) -> StateDict:
     """Entry point for LangGraph / background task (``KanbanService``)."""
     try:
         return await asyncio.wait_for(_run_with_session(state), timeout=float(_CODER_TASK_TIMEOUT_SEC))
+    except PauseSignal:
+        return state
     except asyncio.TimeoutError:
         logger.exception("coder_node timed out")
         err_msg = f"Coder exceeded the {_CODER_TASK_TIMEOUT_SEC}s task budget (timeout)."
