@@ -32,6 +32,17 @@ class DiffService:
         return result.scalar_one_or_none()
 
     @staticmethod
+    async def get_latest_row_for_task(session: AsyncSession, *, task_id: UUID) -> Diff | None:
+        """Latest diff for ``task_id`` (no project check). Caller must enforce access (e.g. JWT + task exists)."""
+        result = await session.execute(
+            select(Diff)
+            .where(Diff.task_id == task_id)
+            .order_by(Diff.created_at.desc())
+            .limit(1)
+        )
+        return result.scalar_one_or_none()
+
+    @staticmethod
     async def get_latest_approved_for_task(
         session: AsyncSession,
         *,
