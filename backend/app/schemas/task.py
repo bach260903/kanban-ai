@@ -59,3 +59,14 @@ class TaskDiffResponse(BaseModel):
     files_affected: list[str]
     review_status: DiffReviewStatus
     created_at: datetime
+
+
+class TaskApproveResponse(BaseModel):
+    """JSON from ``POST .../tasks/{task_id}/approve`` (US9 / T063, REST contract)."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    task_id: UUID
+    status: TaskStatus
+    diff_id: UUID
+    updated_at: datetime

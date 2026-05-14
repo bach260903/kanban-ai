@@ -9,16 +9,19 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
-from app.exceptions import NotFoundError
+from app.exceptions import InvalidTransitionError, NotFoundError
 from app.middleware.auth import require_jwt
+from app.models.audit_log import AuditLogResult
 from app.models.task import Task, TaskStatus
 from app.schemas.task import (
+    TaskApproveResponse,
     TaskDiffResponse,
     TaskKanbanItem,
     TaskMoveRequest,
     TaskMoveResult,
     TasksGroupedResponse,
 )
+from app.services.audit_service import write_audit
 from app.services.diff_service import DiffService
 from app.services.kanban_service import KanbanService
 from app.services.project_service import ProjectService
@@ -77,6 +80,42 @@ async def get_task_diff(
     if diff is None:
         raise NotFoundError(_NO_DIFF_DETAIL)
     return TaskDiffResponse.model_validate(diff)
+
+
+@router.post(
+    "/{project_id}/tasks/{task_id}/approve",
+    response_model=TaskApproveResponse,
+)
+async def approve_task(
+    project_id: UUID,
+    task_id: UUID,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> TaskApproveResponse:
+    await ProjectService.get(session, project_id)
+    task = await TaskService.get(session, task_id, project_id=project_id)
+    if task.status != TaskStatus.REVIEW:
+        raise InvalidTransitionError("Task must be in review status to approve the diff.")
+    diff = await DiffService.approve_latest_pending(session, task_id=task_id, project_id=project_id)
+    await KanbanService.move_task(task_id, TaskStatus.DONE, session)
+    await write_audit(
+        session,
+        project_id=project_id,
+        task_id=task_id,
+        action_type="task_diff_approve",
+        action_description=f"PO approved code diff {diff.id}; task moved to done.",
+        result=AuditLogResult.SUCCESS,
+        input_refs=[str(diff.id)],
+        output_refs=[str(task.id)],
+    )
+    await session.commit()
+    await session.refresh(task)
+    return TaskApproveResponse(
+        task_id=task.id,
+        status=task.status,
+        diff_id=diff.id,
+        updated_at=task.updated_at,
+    )
 
 
 @router.post(
