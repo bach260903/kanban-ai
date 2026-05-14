@@ -129,6 +129,30 @@
   background: rgba(234, 88, 12, 0.12);
 }
 
+.mergeConflictBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 1px solid rgba(185, 28, 28, 0.45);
+  background: #b91c1c;
+  color: #fff;
+}
+
+.branchHint {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text);
+  opacity: 0.75;
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .agentBadge {
   display: inline-flex;
   align-items: center;

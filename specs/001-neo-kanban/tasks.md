@@ -323,7 +323,7 @@
 - [X] T102 [US15] Implement `BranchService` in `backend/app/git/branch_service.py`: `create_task_branch(task_id, sandbox_path)` — creates branch `task/{task_id[:8]}`, INSERTs `task_branches` row; `squash_and_merge(task_id, sandbox_path)` — squashes all commits on branch to 1 commit, merges into main; `detect_conflict(task_id)` — catches `GitCommandError` during merge, updates `task_branches.status = conflict`, moves task to `conflict` status
 - [X] T103 [US15] Wire `branch_service` into `kanban_service` in `backend/app/services/kanban_service.py`: on `todo → in_progress` → call `branch_service.create_task_branch()`; on `review → done` (after approve) → call `branch_service.squash_and_merge()` (catches conflict → sets conflict status)
 - [X] T104 [US15] Implement Branch endpoint in `backend/app/api/v1/branches.py`: `GET /tasks/{id}/branch` returns `{task_id, branch_name, status, created_at, merged_at}`; register router in `main.py`
-- [ ] T105 [US15] Show branch info + conflict badge in `TaskCard` molecule in `frontend/src/components/molecules/task-card.tsx`: if `task.status = conflict`, show red "Conflict" badge and tooltip "Merge conflict detected — resolve manually"; fetch branch info from `task-api.ts`
+- [X] T105 [US15] Show branch info + conflict badge in `TaskCard` molecule in `frontend/src/components/molecules/task-card.tsx`: if `task.status = conflict`, show red "Conflict" badge and tooltip "Merge conflict detected — resolve manually"; fetch branch info from `task-api.ts`
 
 **Checkpoint**: Task moves to In Progress → git branch exists; Approve → 1 squash commit on main; conflict scenario → Conflict badge on task card.
 

@@ -94,3 +94,17 @@ export async function getDiff(projectId: string, taskId: string): Promise<TaskDi
   const { data } = await api.get<TaskDiffResponse>(`${tasksBase(projectId)}/${taskId}/diff`)
   return data
 }
+
+/** ``GET /api/v1/tasks/{task_id}/branch`` (US15 / T104). */
+export type TaskBranchInfo = {
+  task_id: UUID
+  branch_name: string
+  status: 'active' | 'merged' | 'conflict'
+  created_at: string
+  merged_at: string | null
+}
+
+export async function getTaskBranch(taskId: string, signal?: AbortSignal): Promise<TaskBranchInfo> {
+  const { data } = await api.get<TaskBranchInfo>(`/api/v1/tasks/${taskId}/branch`, { signal })
+  return data
+}

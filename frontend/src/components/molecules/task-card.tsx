@@ -1,7 +1,10 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { isAxiosError } from 'axios'
+import { useEffect, useState } from 'react'
 
 import { useTaskStore } from '../../store/task-store'
+import { getTaskBranch, type TaskBranchInfo } from '../../services/task-api'
 
 import type { TaskColumnItem } from '../../store/task-store'
 import type { AgentRunStatus, TaskStatus } from '../../types'
@@ -77,6 +80,39 @@ function agentRunLabel(status: AgentRunStatus): string {
 
 export function TaskCard({ task, sortableDisabled = true }: TaskCardProps) {
   const agentRun = useTaskStore((s) => s.taskAgentByTaskId[task.id])
+  const [branch, setBranch] = useState<TaskBranchInfo | null | undefined>(undefined)
+
+  useEffect(() => {
+    if (task.status === 'todo') {
+      setBranch(undefined)
+      return
+    }
+    let cancelled = false
+    const ac = new AbortController()
+    ;(async () => {
+      try {
+        const info = await getTaskBranch(task.id, ac.signal)
+        if (!cancelled) setBranch(info)
+      } catch (e) {
+        if (ac.signal.aborted) return
+        if (isAxiosError(e) && e.response?.status === 404) {
+          if (!cancelled) setBranch(null)
+          return
+        }
+        if (!cancelled) setBranch(null)
+      }
+    })()
+    return () => {
+      cancelled = true
+      ac.abort()
+    }
+  }, [task.id, task.status])
+
+  const branchTitle =
+    branch && branch.branch_name
+      ? `Branch: ${branch.branch_name} (${branch.status})` +
+        (branch.merged_at ? ` · merged ${branch.merged_at}` : '')
+      : undefined
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: task.id,
@@ -116,7 +152,22 @@ export function TaskCard({ task, sortableDisabled = true }: TaskCardProps) {
           <span className={styles.priority} title="Priority (lower = higher)">
             {task.priority}
           </span>
-          <span className={badgeClassForStatus(task.status)}>{statusLabel(task.status)}</span>
+          {task.status === 'conflict' ? (
+            <span
+              className={styles.mergeConflictBadge}
+              title="Merge conflict detected — resolve manually"
+              aria-label="Merge conflict detected — resolve manually"
+            >
+              Conflict
+            </span>
+          ) : (
+            <span className={badgeClassForStatus(task.status)}>{statusLabel(task.status)}</span>
+          )}
+          {branch && branch.branch_name ? (
+            <span className={styles.branchHint} title={branchTitle}>
+              {branch.branch_name}
+            </span>
+          ) : null}
           {agentRun ? (
             <span className={agentRunBadgeClass(agentRun.status)} title={`Run ${agentRun.runId}`}>
               {agentRunLabel(agentRun.status)}
