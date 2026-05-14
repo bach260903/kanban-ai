@@ -199,7 +199,7 @@
 - [X] T063 [US9] Implement `POST /tasks/{id}/approve` endpoint in `backend/app/api/v1/tasks.py`: validates task in `review` status, sets `diff.review_status = approved`, calls `kanban_service.move_task(task_id, "done")`, writes audit log
 - [X] T064 [US9] Implement `POST /tasks/{id}/reject` endpoint in `backend/app/api/v1/tasks.py`: validates task in `review`, sets `diff.review_status = rejected`, writes Feedback record, moves task back to `in_progress`, relaunches `coder_node` with feedback in context
 - [X] T065 [US9] Implement `DiffViewer` molecule in `frontend/src/components/molecules/diff-viewer.tsx`: `@monaco-editor/react` `DiffEditor` component in read-only mode, `original` and `modified` props from API response, green/red line highlighting via Monaco options `renderSideBySide: true`. Note: Backend has already handled diff parsing via `whatthepatch` (T009). Frontend only consumes `original_content` and `modified_content` from `GET /tasks/{id}/diff` — no additional parsing needed on the frontend.
-- [ ] T066 [US9] Add Review panel to `ProjectWorkspace`: when `taskStore` has a task in `review` status, show modal/side panel with `DiffViewer` + Approve button + Reject section (textarea for feedback + Reject button); wire to `task-api.ts` approve/reject calls
+- [X] T066 [US9] Add Review panel to `ProjectWorkspace`: when `taskStore` has a task in `review` status, show modal/side panel with `DiffViewer` + Approve button + Reject section (textarea for feedback + Reject button); wire to `task-api.ts` approve/reject calls
 
 **Checkpoint**: Agent completes → task card moves to Review column → DiffViewer shows coloured diff → Approve → card moves to Done; Reject with feedback → card returns to In Progress → Agent retries.
 

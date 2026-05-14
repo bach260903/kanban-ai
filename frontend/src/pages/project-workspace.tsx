@@ -6,7 +6,10 @@ import { Spinner } from '../components/atoms/spinner'
 import { DocumentPanel } from '../components/organisms/document-panel'
 import { KanbanBoard } from '../components/organisms/kanban-board'
 import { ProjectHeader } from '../components/organisms/project-header'
+import { ReviewPanel } from '../components/organisms/review-panel'
 import { getProject } from '../services/project-api'
+import { getTasks, groupedResponseToTaskColumns } from '../services/task-api'
+import { emptyTaskColumns, useTaskStore } from '../store/task-store'
 import { useProjectStore } from '../store/project-store'
 
 import styles from './project-workspace.module.css'
@@ -24,6 +27,7 @@ function errorMessage(err: unknown): string {
 export default function ProjectWorkspace() {
   const { id } = useParams()
   const { currentProject, setCurrentProject } = useProjectStore()
+  const columns = useTaskStore((s) => s.columns)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<'documents' | 'kanban'>('documents')
@@ -50,8 +54,29 @@ export default function ProjectWorkspace() {
     return () => {
       cancelled = true
       setCurrentProject(null)
+      useTaskStore.getState().clearTaskAgentRuns()
+      useTaskStore.getState().setColumns(emptyTaskColumns())
     }
   }, [id, setCurrentProject])
+
+  useEffect(() => {
+    if (!currentProject?.id) return
+    let cancelled = false
+    void (async () => {
+      try {
+        const data = await getTasks(currentProject.id)
+        if (!cancelled) {
+          useTaskStore.getState().clearTaskAgentRuns()
+          useTaskStore.getState().setColumns(groupedResponseToTaskColumns(data))
+        }
+      } catch {
+        /* Kanban tab will surface load errors if user opens it */
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [currentProject?.id])
 
   return (
     <div className={styles.shell}>
@@ -67,6 +92,7 @@ export default function ProjectWorkspace() {
       {!loading && !error && currentProject ? (
         <>
           <ProjectHeader project={currentProject} />
+          {columns.review.length > 0 ? <ReviewPanel projectId={currentProject.id} /> : null}
           <div className={styles.tabs} role="tablist" aria-label="Workspace sections">
             <button
               type="button"

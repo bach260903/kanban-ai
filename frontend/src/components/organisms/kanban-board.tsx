@@ -60,8 +60,6 @@ export function KanbanBoard({ projectId }: KanbanBoardProps) {
     })()
     return () => {
       cancelled = true
-      clearTaskAgentRuns()
-      setColumns(emptyTaskColumns())
     }
   }, [projectId, setColumns, clearTaskAgentRuns])
 

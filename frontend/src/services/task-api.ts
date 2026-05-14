@@ -83,7 +83,7 @@ export async function moveTask(
 }
 
 export async function approveTask(projectId: string, taskId: string): Promise<void> {
-  await api.post(`${tasksBase(projectId)}/${taskId}/approve`)
+  await api.post(`${tasksBase(projectId)}/${taskId}/approve`, {})
 }
 
 export async function rejectTask(projectId: string, taskId: string, feedback: string): Promise<void> {
