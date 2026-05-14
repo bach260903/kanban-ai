@@ -31,7 +31,7 @@ export type UseThoughtStreamResult = {
   events: Record<string, unknown>[]
   isConnected: boolean
   streamEnded: boolean
-  /** Send control frames (e.g. ``PAUSE`` / ``RESUME``) on the same socket (US11 / T089). */
+  /** Send control frames (e.g. ``PAUSE`` / ``RESUME``) on the same socket (US11 / T089–T090 → {@link TaskThoughtStreamClient.send}). */
   send: (message: Record<string, unknown> | string) => void
 }
 

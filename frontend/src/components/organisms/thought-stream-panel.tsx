@@ -127,6 +127,7 @@ function rowKey(msg: Record<string, unknown>, index: number): string {
 
 /**
  * Live task thought stream (US10 / T082): scrollable events, colour-coded labels, STREAM_END summary.
+ * Pause / resume (US11 / T090): PauseResumeControls when `isConnected && !streamEnded`; `send` uses TaskThoughtStreamClient.send.
  */
 export function ThoughtStreamPanel({ taskId, embedded = false }: ThoughtStreamPanelProps) {
   const { events, isConnected, streamEnded, send } = useThoughtStream(taskId)
@@ -166,7 +167,7 @@ export function ThoughtStreamPanel({ taskId, embedded = false }: ThoughtStreamPa
           <span className={isConnected ? styles.pillOn : styles.pillOff}>{isConnected ? 'Live' : 'Offline'}</span>
         </div>
       ) : null}
-      {!showEmpty ? (
+      {!showEmpty && isConnected && !streamEnded ? (
         <PauseResumeControls
           taskId={taskId}
           send={send}
