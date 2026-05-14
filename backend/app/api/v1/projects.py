@@ -10,6 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
 from app.middleware.auth import require_jwt
+from app.schemas.intent import IntentResponse
 from app.schemas.project import (
     ConstitutionResponse,
     ConstitutionUpdate,
@@ -18,6 +19,7 @@ from app.schemas.project import (
     ProjectResponse,
     ProjectUpdate,
 )
+from app.services.intent_service import IntentService
 from app.services.project_service import ProjectService
 
 router = APIRouter(prefix="/projects", tags=["projects"])
@@ -90,6 +92,17 @@ async def get_constitution(
         content=project.constitution,
         updated_at=project.updated_at,
     )
+
+
+@router.get("/{project_id}/intents", response_model=list[IntentResponse])
+async def list_intents(
+    project_id: UUID,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> list[IntentResponse]:
+    await ProjectService.get(session, project_id)
+    intents = await IntentService.list_by_project(session, project_id)
+    return [IntentResponse.model_validate(i) for i in intents]
 
 
 @router.put("/{project_id}/constitution", response_model=ConstitutionResponse)

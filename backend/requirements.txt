@@ -24,6 +24,8 @@ redis==5.1.1
 langchain==0.3.0
 langchain-groq==0.2.0
 langgraph==0.2.20
+langgraph-checkpoint-postgres>=2.0.25,<3
+psycopg[binary]>=3.2.0
 
 # Git
 gitpython==3.1.43
@@ -32,3 +34,9 @@ gitpython==3.1.43
 httpx==0.27.2
 
 whatthepatch==1.0.6  # D-04: parse unified diff → Monaco original/modified strings
+
+# Codebase map (US14) — pins per plan.md; grammar smoke tests: tests/unit/test_tree_sitter_grammars.py (T101)
+tree-sitter==0.23.0
+tree-sitter-python==0.23.2
+tree-sitter-javascript==0.23.0
+tree-sitter-typescript==0.23.0

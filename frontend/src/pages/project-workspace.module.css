@@ -1,6 +1,6 @@
 .shell {
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 1.5rem 1rem 3rem;
   text-align: left;
@@ -14,6 +14,80 @@
   color: var(--text);
 }
 
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+
+.tab,
+.tabActive {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--social-bg);
+  color: var(--text);
+}
+
+.tab:hover {
+  border-color: var(--accent-border);
+}
+
+.tabActive {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.documents {
+  margin: 0;
+}
+
+.documentsTitle {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.documentPanels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.kanban {
+  margin: 0;
+}
+
+.kanbanTitle {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.memory {
+  margin: 0;
+}
+
+.memoryTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.memoryHint {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-muted, #64748b);
+}
+
 .loading,
 .error {
   display: flex;
@@ -24,4 +98,207 @@
 
 .error {
   color: #b91c1c;
+}
+
+.audit {
+  margin: 0;
+}
+
+.auditTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.auditHint {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-muted, #64748b);
+}
+
+.auditTableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.auditTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.auditTable th,
+.auditTable td {
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.auditTable th {
+  font-weight: 600;
+  background: var(--social-bg);
+  color: var(--text);
+}
+
+.auditTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.auditEmpty {
+  text-align: center;
+  color: var(--text-muted, #64748b);
+  padding: 1rem !important;
+}
+
+.auditAgentId {
+  font-weight: 500;
+}
+
+.auditAgentVer {
+  color: var(--text-muted, #64748b);
+  font-size: 0.85em;
+}
+
+.auditPager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+.auditPagerBtn {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--social-bg);
+  color: var(--text);
+}
+
+.auditPagerBtn:hover:not(:disabled) {
+  border-color: var(--accent-border);
+}
+
+.auditPagerBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.auditPagerMeta {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.thoughtStreamFab {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 90;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--accent-bg);
+  color: var(--accent);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.thoughtStreamFab:hover {
+  border-color: var(--accent-border);
+}
+
+.thoughtStreamBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: rgba(15, 23, 42, 0.3);
+  cursor: pointer;
+}
+
+.thoughtStreamPanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 96;
+  display: flex;
+  flex-direction: column;
+  width: min(440px, 100vw);
+  height: 100vh;
+  max-height: 100dvh;
+  background: var(--bg, #fff);
+  border-left: 1px solid var(--border);
+  box-shadow: -6px 0 28px rgba(0, 0, 0, 0.12);
+  color: var(--text);
+  animation: thoughtStreamSlideIn 0.22s ease-out;
+}
+
+@keyframes thoughtStreamSlideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.thoughtStreamPanelToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.thoughtStreamPanelTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-h, #0f172a);
+}
+
+.thoughtStreamPanelSubtitle {
+  margin: 0.2rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--text-muted, #64748b);
+  line-height: 1.35;
+  max-width: 260px;
+}
+
+.thoughtStreamClose {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--social-bg);
+  color: var(--text);
+}
+
+.thoughtStreamClose:hover {
+  border-color: var(--accent-border);
+}
+
+.thoughtStreamPanelBody {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0.5rem 0.75rem 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }

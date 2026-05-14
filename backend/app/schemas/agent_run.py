@@ -1,4 +1,4 @@
-"""Pydantic schemas for agent runs."""
+"""Pydantic schemas for agent runs (US4)."""
 
 from __future__ import annotations
 
@@ -15,12 +15,13 @@ class AgentRunResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: UUID
-    project_id: UUID
     task_id: UUID | None
+    project_id: UUID
     agent_type: AgentType
+    agent_version: str
     status: AgentRunStatus
     input_artifacts: list[str]
     output_artifacts: list[str]
     started_at: datetime
     completed_at: datetime | None
-    result: Any | None = None
+    result: dict[str, Any] | None = None

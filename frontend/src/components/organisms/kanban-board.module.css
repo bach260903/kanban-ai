@@ -1,0 +1,19 @@
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.error {
+  color: #b91c1c;
+}

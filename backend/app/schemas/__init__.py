@@ -3,7 +3,7 @@
 from app.schemas.agent_run import AgentRunResponse
 from app.schemas.document import DocumentResponse, DocumentUpdate, RevisionRequest
 from app.schemas.project import ProjectCreate, ProjectListItem, ProjectResponse, ProjectUpdate
-from app.schemas.task import RejectRequest, TaskMoveRequest, TaskResponse
+from app.schemas.task import TaskKanbanItem, TasksGroupedResponse
 
 __all__ = [
     "AgentRunResponse",
@@ -13,8 +13,7 @@ __all__ = [
     "ProjectListItem",
     "ProjectResponse",
     "ProjectUpdate",
-    "RejectRequest",
     "RevisionRequest",
-    "TaskMoveRequest",
-    "TaskResponse",
+    "TaskKanbanItem",
+    "TasksGroupedResponse",
 ]
