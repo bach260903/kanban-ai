@@ -1,17 +1,20 @@
-"""Memory entries from approved diffs (US12 / T091)."""
+"""Memory entries from approved diffs and MEMORY.md export (US12 / T091–T092)."""
 
 from __future__ import annotations
 
 import json
 import logging
 from datetime import datetime, timezone
+from pathlib import Path
 from uuid import UUID
 
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_groq import ChatGroq
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
+from app.exceptions import SandboxEscapeError
 from app.models.diff import Diff
 from app.models.memory_entry import MemoryEntry
 
@@ -20,6 +23,50 @@ logger = logging.getLogger(__name__)
 _MAX_DIFF_CHARS = 24_000
 _MAX_SUMMARY = 20_000
 _MAX_LESSONS = 50_000
+
+
+def _sandbox_project_dir(project_id: UUID) -> Path:
+    root = Path(settings.sandbox_root).expanduser().resolve()
+    proj = (root / str(project_id)).resolve()
+    try:
+        proj.relative_to(root)
+    except ValueError as exc:
+        raise SandboxEscapeError("Resolved sandbox path escapes SANDBOX_ROOT.") from exc
+    return proj
+
+
+def _task_id_short(task_id: UUID | None) -> str:
+    if task_id is None:
+        return "unknown"
+    return str(task_id).replace("-", "")[:8]
+
+
+def _format_timestamp_z(dt: datetime) -> str:
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    s = dt.astimezone(timezone.utc).isoformat()
+    return s.replace("+00:00", "Z")
+
+
+def _render_memory_md_entry(row: MemoryEntry) -> str:
+    """One block per ``plan.md`` § MEMORY.md Entry Format."""
+    short = _task_id_short(row.task_id)
+    first_line = (row.summary or "").strip().split("\n", 1)[0].strip() or "(no summary)"
+    heading = first_line[:500]
+    files = row.files_affected or []
+    files_line = ", ".join(f"`{p}`" for p in files) if files else "_(none)_"
+    tid = str(row.task_id) if row.task_id is not None else "—"
+    lines = [
+        f"## [MEMORY-{short}] {heading}",
+        "",
+        f"- **Timestamp**: {_format_timestamp_z(row.entry_timestamp)}",
+        f"- **Task ID**: {tid}",
+        f"- **Summary**: {row.summary}",
+        f"- **Files Affected**: {files_line}",
+        "- **Lessons Learned**:",
+        row.lessons_learned,
+    ]
+    return "\n".join(lines)
 
 
 def _stub_extraction(diff: Diff) -> tuple[str, str]:
@@ -116,7 +163,7 @@ async def _extract_summary_and_lessons(diff: Diff) -> tuple[str, str]:
 
 
 class MemoryService:
-    """Create ``memory_entries`` rows from diff content (optional Groq extraction)."""
+    """``memory_entries`` persistence and sandbox ``MEMORY.md`` export."""
 
     @staticmethod
     async def create_entry(
@@ -141,3 +188,30 @@ class MemoryService:
         session.add(row)
         await session.flush()
         return row
+
+    @staticmethod
+    async def export_memory_file(session: AsyncSession, project_id: UUID) -> Path:
+        """Load all project memory rows (oldest first), render ``MEMORY.md``, write under sandbox (T092)."""
+        stmt = (
+            select(MemoryEntry)
+            .where(MemoryEntry.project_id == project_id)
+            .order_by(MemoryEntry.entry_timestamp.asc())
+        )
+        result = await session.execute(stmt)
+        rows = list(result.scalars().all())
+
+        header = (
+            "# MEMORY\n\n"
+            "Entries below are generated from `memory_entries` in chronological order "
+            "(see implementation plan MEMORY.md format).\n"
+        )
+        blocks = [_render_memory_md_entry(r) for r in rows]
+        body = header + ("\n\n".join(blocks) if blocks else "_No memory entries yet._\n")
+        if not body.endswith("\n"):
+            body += "\n"
+
+        sandbox = _sandbox_project_dir(project_id)
+        sandbox.mkdir(parents=True, exist_ok=True)
+        out = sandbox / "MEMORY.md"
+        out.write_text(body, encoding="utf-8", newline="\n")
+        return out
