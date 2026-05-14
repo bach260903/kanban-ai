@@ -23,7 +23,7 @@ const SORTABLE_PREFIX = 'sortable-'
 const POLL_MS = 3000
 
 function isTerminalAgentStatus(status: AgentRunStatus): boolean {
-  return status === 'success' || status === 'failure'
+  return status === 'success' || status === 'failure' || status === 'timeout'
 }
 
 function findColumnForTask(columns: TaskColumns, taskId: string): TaskStatus | undefined {

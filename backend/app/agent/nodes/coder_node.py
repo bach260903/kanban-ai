@@ -14,6 +14,7 @@ from uuid import UUID
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_core.tools import tool
 from langchain_groq import ChatGroq
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
@@ -42,6 +43,7 @@ StateDict = dict[str, Any]
 _MAX_READ = 400_000
 _MAX_WRITE = 500_000
 _MAX_TOOL_ROUNDS = 8
+_CODER_TASK_TIMEOUT_SEC = 600
 
 
 def _request_hil_interrupt() -> None:
@@ -408,9 +410,10 @@ async def _run_with_session(state: StateDict) -> StateDict:
 async def run(state: StateDict) -> StateDict:
     """Entry point for LangGraph / background task (``KanbanService``)."""
     try:
-        return await asyncio.wait_for(_run_with_session(state), timeout=600.0)
+        return await asyncio.wait_for(_run_with_session(state), timeout=float(_CODER_TASK_TIMEOUT_SEC))
     except asyncio.TimeoutError:
         logger.exception("coder_node timed out")
+        err_msg = f"Coder exceeded the {_CODER_TASK_TIMEOUT_SEC}s task budget (timeout)."
         try:
             async with async_session_maker() as session:
                 task_id = state.get("task_id")
@@ -420,18 +423,36 @@ async def run(state: StateDict) -> StateDict:
                     if task is not None:
                         task.status = TaskStatus.REJECTED
                         task.updated_at = datetime.now(timezone.utc)
+                    run_result = await session.execute(
+                        select(AgentRun)
+                        .where(
+                            AgentRun.task_id == task_id,
+                            AgentRun.status == AgentRunStatus.RUNNING,
+                        )
+                        .order_by(AgentRun.started_at.desc())
+                        .limit(1)
+                    )
+                    open_run = run_result.scalar_one_or_none()
+                    if open_run is not None:
+                        open_run.status = AgentRunStatus.TIMEOUT
+                        open_run.completed_at = datetime.now(timezone.utc)
+                        open_run.result = {
+                            "error": err_msg,
+                            "detail": "Task moved to rejected.",
+                        }
                     await write_audit(
                         session,
                         project_id=project_id,
                         task_id=task_id if isinstance(task_id, UUID) else None,
                         action_type="coder_node",
-                        action_description="Coder exceeded 10-minute budget.",
+                        action_description=f"ERROR: {err_msg}",
                         result=AuditLogResult.FAILURE,
+                        output_refs=[str(open_run.id)] if open_run else [],
                     )
                     await session.commit()
         except Exception:
             logger.exception("coder_node timeout cleanup failed")
-        return {**state, "error": "Coder timed out."}
+        return {**state, "error": err_msg}
     except Exception as exc:
         logger.exception("coder_node failed")
         try:

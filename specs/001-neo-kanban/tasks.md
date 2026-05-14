@@ -209,7 +209,7 @@
 
 **Purpose**: Timeout enforcement, error handling, audit log UI, integration tests. Validates TC-01 → TC-07.
 
-- [ ] T067 Enforce task timeout in `coder_node`: wrap full agent loop in `asyncio.wait_for(timeout=600)` (10 min); on timeout, move task to `rejected`, write `ERROR` audit log, return error message to frontend via agent_run status
+- [X] T067 Enforce task timeout in `coder_node`: wrap full agent loop in `asyncio.wait_for(timeout=600)` (10 min); on timeout, move task to `rejected`, write `ERROR` audit log, return error message to frontend via agent_run status
 - [ ] T068 [P] Write unit tests for WIP limit in `backend/tests/unit/test_task_service.py`: test `count_in_progress()` correctly counts, test `move_task()` raises `WIPLimitError` when limit reached, test idempotent approve
 - [ ] T069 [P] Write unit tests for Kanban transitions in `backend/tests/unit/test_kanban_transitions.py`: test all valid transitions pass, test all invalid backward transitions raise `InvalidTransitionError`, test `todo → in_progress` triggers agent dispatch
 - [ ] T070 Write integration tests in `backend/tests/integration/`: `test_projects_api.py` (CRUD + duplicate name), `test_documents_api.py` (approve gate blocks generate-plan without approved SPEC), `test_tasks_api.py` (WIP limit end-to-end via real DB)
