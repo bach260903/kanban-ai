@@ -11,6 +11,7 @@ from app.api.v1.projects import router as projects_router
 from app.api.v1.tasks import router as tasks_router
 from app.database import dispose_engine, get_db  # noqa: F401 — dependency + lifespan
 from app.middleware.error_handlers import register_exception_handlers
+from app.websocket import ws_handler
 
 api_v1_router = APIRouter(prefix="/api/v1")
 api_v1_router.include_router(projects_router)
@@ -36,6 +37,7 @@ def create_app() -> FastAPI:
         return {"status": "ok"}
 
     application.include_router(api_v1_router)
+    application.add_api_websocket_route("/ws/tasks/{task_id}/stream", ws_handler.handle)
     return application
 
 
