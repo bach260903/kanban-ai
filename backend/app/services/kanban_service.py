@@ -5,19 +5,35 @@ from __future__ import annotations
 import asyncio
 import logging
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 from uuid import UUID
 
+from git.exc import GitCommandError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.agent.nodes import coder_node
-from app.exceptions import InvalidTransitionError, WIPLimitError
+from app.config import settings
+from app.exceptions import InvalidTransitionError, NotFoundError, SandboxEscapeError, WIPLimitError
 from app.models.task import Task, TaskStatus
+from app.git.branch_service import BranchService
+from app.git.git_service import GitService
 from app.services.diff_service import DiffService
 from app.services.memory_service import MemoryService
 from app.services.task_service import TaskService
 
 logger = logging.getLogger(__name__)
+
+
+def _sandbox_project_root(project_id: UUID) -> Path:
+    root = Path(settings.sandbox_root).expanduser().resolve()
+    proj = (root / str(project_id)).resolve()
+    try:
+        proj.relative_to(root)
+    except ValueError as exc:
+        raise SandboxEscapeError("Resolved sandbox path escapes SANDBOX_ROOT.") from exc
+    return proj
+
 
 _ALLOWED_MOVES: frozenset[tuple[TaskStatus, TaskStatus]] = frozenset(
     {
@@ -89,9 +105,27 @@ class KanbanService:
         if to_status == TaskStatus.IN_PROGRESS:
             if await TaskService.count_in_progress(session, task.project_id) >= 1:
                 raise WIPLimitError("WIP limit: only one task may be in progress per project.")
+
+        if from_status == TaskStatus.REVIEW and to_status == TaskStatus.DONE:
+            sandbox = _sandbox_project_root(task.project_id)
+            try:
+                await BranchService.squash_and_merge(session, task.id, sandbox)
+            except GitCommandError:
+                await session.refresh(task)
+                return task
+            except NotFoundError:
+                logger.info("squash merge skipped: no task branch for task_id=%s", task.id)
+
         task.status = to_status
         task.updated_at = datetime.now(timezone.utc)
         await session.flush()
+
+        if to_status == TaskStatus.IN_PROGRESS and from_status == TaskStatus.TODO:
+            sandbox = _sandbox_project_root(task.project_id)
+            await asyncio.to_thread(GitService.init_repo, sandbox)
+            await asyncio.to_thread(GitService.configure_identity, sandbox)
+            await asyncio.to_thread(GitService.ensure_baseline_commit, sandbox)
+            await BranchService.create_task_branch(session, task.id, sandbox)
         if to_status == TaskStatus.DONE and from_status == TaskStatus.REVIEW:
             diff = await DiffService.get_latest_approved_for_task(
                 session, task_id=task.id, project_id=task.project_id

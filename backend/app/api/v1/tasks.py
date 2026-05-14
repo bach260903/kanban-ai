@@ -102,16 +102,29 @@ async def approve_task(
         raise InvalidTransitionError("Task must be in review status to approve the diff.")
     diff = await DiffService.approve_latest_pending(session, task_id=task_id, project_id=project_id)
     await KanbanService.move_task(task_id, TaskStatus.DONE, session)
-    await write_audit(
-        session,
-        project_id=project_id,
-        task_id=task_id,
-        action_type="task_diff_approve",
-        action_description=f"PO approved code diff {diff.id}; task moved to done.",
-        result=AuditLogResult.SUCCESS,
-        input_refs=[str(diff.id)],
-        output_refs=[str(task.id)],
-    )
+    await session.refresh(task)
+    if task.status == TaskStatus.CONFLICT:
+        await write_audit(
+            session,
+            project_id=project_id,
+            task_id=task_id,
+            action_type="task_diff_approve",
+            action_description=f"PO approved diff {diff.id}; merge conflict — task left in conflict.",
+            result=AuditLogResult.FAILURE,
+            input_refs=[str(diff.id)],
+            output_refs=[str(task.id)],
+        )
+    else:
+        await write_audit(
+            session,
+            project_id=project_id,
+            task_id=task_id,
+            action_type="task_diff_approve",
+            action_description=f"PO approved code diff {diff.id}; task moved to done.",
+            result=AuditLogResult.SUCCESS,
+            input_refs=[str(diff.id)],
+            output_refs=[str(task.id)],
+        )
     await session.commit()
     await session.refresh(task)
     return TaskApproveResponse(
