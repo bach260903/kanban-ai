@@ -9,9 +9,17 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
+from app.exceptions import NotFoundError
 from app.middleware.auth import require_jwt
 from app.models.task import Task, TaskStatus
-from app.schemas.task import TaskKanbanItem, TaskMoveRequest, TaskMoveResult, TasksGroupedResponse
+from app.schemas.task import (
+    TaskDiffResponse,
+    TaskKanbanItem,
+    TaskMoveRequest,
+    TaskMoveResult,
+    TasksGroupedResponse,
+)
+from app.services.diff_service import DiffService
 from app.services.kanban_service import KanbanService
 from app.services.project_service import ProjectService
 from app.services.task_service import TaskService
@@ -52,6 +60,23 @@ async def list_tasks_grouped(
     await ProjectService.get(session, project_id)
     rows = await TaskService.list_by_project(session, project_id)
     return _group_tasks_by_status(rows)
+
+
+_NO_DIFF_DETAIL = "No diff available. Agent may still be running."
+
+
+@router.get("/{project_id}/tasks/{task_id}/diff", response_model=TaskDiffResponse)
+async def get_task_diff(
+    project_id: UUID,
+    task_id: UUID,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> TaskDiffResponse:
+    await ProjectService.get(session, project_id)
+    diff = await DiffService.get_latest_for_task(session, task_id=task_id, project_id=project_id)
+    if diff is None:
+        raise NotFoundError(_NO_DIFF_DETAIL)
+    return TaskDiffResponse.model_validate(diff)
 
 
 @router.post(
