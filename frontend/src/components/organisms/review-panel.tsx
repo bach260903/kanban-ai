@@ -15,7 +15,7 @@ import {
   rejectTask,
 } from '../../services/task-api'
 import type { TaskDiffResponse } from '../../services/task-api'
-import { useInlineComments } from '../../hooks/use-inline-comments'
+import type { UseInlineCommentsReturn } from '../../hooks/use-inline-comments'
 import { useTaskStore } from '../../store/task-store'
 
 import styles from './review-panel.module.css'
@@ -37,12 +37,13 @@ function diffErrorMessage(err: unknown): string {
 
 export type ReviewPanelProps = {
   projectId: string
+  inlineComments: UseInlineCommentsReturn
 }
 
 /**
  * Code review HIL when a task is in ``review`` (US9 / T066): diff + approve / reject.
  */
-export function ReviewPanel({ projectId }: ReviewPanelProps) {
+export function ReviewPanel({ projectId, inlineComments }: ReviewPanelProps) {
   const columns = useTaskStore((s) => s.columns)
   const setColumns = useTaskStore((s) => s.setColumns)
 
@@ -58,10 +59,10 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
   const [rejectFeedback, setRejectFeedback] = useState('')
   const [modifiedEditor, setModifiedEditor] = useState<editor.IStandaloneCodeEditor | null>(null)
   const {
-    comments: inlineComments,
+    comments: inlineCommentRows,
     replaceFromApi,
     getCommentPayload,
-  } = useInlineComments()
+  } = inlineComments
   const [activeCommentLine, setActiveCommentLine] = useState<number | null>(null)
 
   const refreshBoard = useCallback(async () => {
@@ -147,12 +148,10 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
     setActionBusy(true)
     setDiffError(null)
     try {
-      const payload = getCommentPayload()
-      const feedbackBody =
-        payload.length > 0
-          ? `${fb}\n\n--- inline_comments (JSON) ---\n${JSON.stringify(payload)}`
-          : fb
-      await rejectTask(projectId, reviewTask.id, feedbackBody)
+      await rejectTask(projectId, reviewTask.id, {
+        feedback: fb,
+        inline_comments: getCommentPayload(),
+      })
       setRejectFeedback('')
       await refreshBoard()
     } catch (err) {
@@ -216,7 +215,7 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
                 modifiedEditor={modifiedEditor}
                 taskId={reviewTask.id}
                 apiFilePath={apiFilePath}
-                comments={inlineComments}
+                comments={inlineCommentRows}
                 activeLine={activeCommentLine}
                 onCloseComposer={() => setActiveCommentLine(null)}
                 onSaved={refreshInlineComments}

@@ -9,6 +9,7 @@ import { ProjectHeader } from '../components/organisms/project-header'
 import { MemoryEditor } from '../components/organisms/memory-editor'
 import { ReviewPanel } from '../components/organisms/review-panel'
 import { ThoughtStreamPanel } from '../components/organisms/thought-stream-panel'
+import { useInlineComments } from '../hooks/use-inline-comments'
 import { getAuditLogs, type AuditLogsPage } from '../services/audit-api'
 import { getProject } from '../services/project-api'
 import { getTasks, groupedResponseToTaskColumns } from '../services/task-api'
@@ -46,6 +47,7 @@ export default function ProjectWorkspace() {
   const [auditLoading, setAuditLoading] = useState(false)
   const [auditError, setAuditError] = useState<string | null>(null)
   const [auditOffset, setAuditOffset] = useState(0)
+  const inlineComments = useInlineComments()
 
   useEffect(() => {
     let cancelled = false
@@ -139,7 +141,9 @@ export default function ProjectWorkspace() {
       {!loading && !error && currentProject ? (
         <>
           <ProjectHeader project={currentProject} />
-          {columns.review.length > 0 ? <ReviewPanel projectId={currentProject.id} /> : null}
+          {columns.review.length > 0 ? (
+            <ReviewPanel projectId={currentProject.id} inlineComments={inlineComments} />
+          ) : null}
           {inProgressTask ? (
             <>
               {!thoughtStreamOpen ? (

@@ -340,7 +340,7 @@
 - [X] T108 [US16] Add Monaco line-click to `DiffViewer` in `frontend/src/components/molecules/diff-viewer.tsx`: add `editor.onMouseDown` listener on the modified-side editor instance; on click, extract `lineNumber` + `fileName` from Monaco model → call `onLineClick(file, line)` prop callback
 - [X] T109 [US16] Implement `InlineCommentOverlay` molecule in `frontend/src/components/molecules/inline-comment-overlay.tsx`: rendered as a Monaco decoration overlay — `GlyphMarginWidget` positioned at clicked line; contains textarea + Save + Cancel; on Save calls `POST /comments`; shows saved comments as read-only decorations on diff
 - [X] T110 [US16] Implement `use-inline-comments.ts` hook in `frontend/src/hooks/use-inline-comments.ts`: manages `comments[]` state, exposes `addComment()`, `removeComment()`, `getCommentsForLine()`, `getCommentPayload()` (returns array for reject body)
-- [ ] T111 [US16] Wire inline comments into Reject flow in `ProjectWorkspace` in `frontend/src/pages/project-workspace.tsx`: pass `use-inline-comments.getCommentPayload()` alongside text feedback in `POST /reject` body
+- [X] T111 [US16] Wire inline comments into Reject flow in `ProjectWorkspace` in `frontend/src/pages/project-workspace.tsx`: pass `use-inline-comments.getCommentPayload()` alongside text feedback in `POST /reject` body
 
 **Checkpoint**: DiffViewer → click line → comment box appears → save comment → Reject → check Agent's next THOUGHT references the specific file + line + comment text.
 

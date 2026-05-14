@@ -86,10 +86,6 @@ export async function approveTask(projectId: string, taskId: string): Promise<vo
   await api.post(`${tasksBase(projectId)}/${taskId}/approve`, {})
 }
 
-export async function rejectTask(projectId: string, taskId: string, feedback: string): Promise<void> {
-  await api.post(`${tasksBase(projectId)}/${taskId}/reject`, { feedback })
-}
-
 export async function getDiff(projectId: string, taskId: string): Promise<TaskDiffResponse> {
   const { data } = await api.get<TaskDiffResponse>(`${tasksBase(projectId)}/${taskId}/diff`)
   return data
@@ -122,6 +118,17 @@ export type InlineCommentItem = {
 
 /** Fields needed for diff glyphs, ``useInlineComments``, and reject payload (US16 / T110). */
 export type InlineCommentListRow = Pick<InlineCommentItem, 'id' | 'file_path' | 'line_number' | 'comment_text'>
+
+/** Body for ``POST .../tasks/{task_id}/reject`` (T064, T111). */
+export type TaskRejectBody = {
+  feedback: string
+  /** When set (including ``[]``), server uses this list instead of loading comments from the DB. */
+  inline_comments?: Array<Pick<InlineCommentItem, 'file_path' | 'line_number' | 'comment_text'>>
+}
+
+export async function rejectTask(projectId: string, taskId: string, body: TaskRejectBody): Promise<void> {
+  await api.post(`${tasksBase(projectId)}/${taskId}/reject`, body)
+}
 
 export async function getTaskComments(taskId: string, signal?: AbortSignal): Promise<InlineCommentItem[]> {
   const { data } = await api.get<InlineCommentItem[]>(`/api/v1/tasks/${taskId}/comments`, { signal })

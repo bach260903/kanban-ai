@@ -9,6 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from app.models.diff import DiffReviewStatus
 from app.models.task import TaskStatus
+from app.schemas.inline_comment import InlineCommentCreate
 
 
 class TaskKanbanItem(BaseModel):
@@ -73,9 +74,14 @@ class TaskApproveResponse(BaseModel):
 
 
 class TaskRejectRequest(BaseModel):
-    """Body for ``POST .../tasks/{task_id}/reject`` (US9 / T064)."""
+    """Body for ``POST .../tasks/{task_id}/reject`` (US9 / T064, US16 / T111)."""
 
     feedback: str = Field(..., min_length=1, max_length=10_000)
+    inline_comments: list[InlineCommentCreate] | None = Field(
+        default=None,
+        max_length=500,
+        description="Optional inline comments for coder context; omit to load from DB (legacy clients).",
+    )
 
 
 class TaskRejectResponse(BaseModel):

@@ -77,3 +77,5 @@ export function useInlineComments() {
     getCommentPayload,
   }
 }
+
+export type UseInlineCommentsReturn = ReturnType<typeof useInlineComments>

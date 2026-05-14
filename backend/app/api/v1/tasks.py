@@ -156,7 +156,24 @@ async def reject_task(
         raise InvalidTransitionError("Feedback must not be empty.")
     diff_pending = await DiffService.get_latest_for_task(session, task_id=task_id, project_id=project_id)
     inline_for_coder: list[dict[str, str | int]] | None = None
-    if diff_pending is not None:
+    if body.inline_comments is not None:
+        if diff_pending is not None and body.inline_comments:
+            files = list(diff_pending.files_affected or [])
+            for c in body.inline_comments:
+                if not InlineCommentService._file_path_allowed(c.file_path, files):
+                    raise InvalidTransitionError(
+                        "Each inline_comments file_path must be in the current diff's files_affected list.",
+                    )
+        if body.inline_comments:
+            inline_for_coder = [
+                {
+                    "file_path": c.file_path.strip(),
+                    "line_number": c.line_number,
+                    "comment_text": c.comment_text.strip(),
+                }
+                for c in body.inline_comments
+            ]
+    elif diff_pending is not None:
         ic_list = await InlineCommentService.list_payload_for_task_diff(
             session, task_id=task_id, diff_id=diff_pending.id
         )
