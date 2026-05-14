@@ -2,15 +2,33 @@
 
 from __future__ import annotations
 
+import logging
+from pathlib import Path
 from uuid import UUID
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import settings
+from app.exceptions import SandboxEscapeError
 from app.models.agent_pause_state import AgentPauseState
 from app.models.project import Project
 from app.models.task import Task
 from app.services.project_service import ProjectService
+
+logger = logging.getLogger(__name__)
+
+_MAX_MEMORY_MD_CHARS = 24_000
+
+
+def _sandbox_project_dir(project_id: UUID) -> Path:
+    root = Path(settings.sandbox_root).expanduser().resolve()
+    proj = (root / str(project_id)).resolve()
+    try:
+        proj.relative_to(root)
+    except ValueError as exc:
+        raise SandboxEscapeError("Resolved sandbox path escapes SANDBOX_ROOT.") from exc
+    return proj
 
 
 class ContextBuilder:
@@ -47,7 +65,7 @@ class ContextBuilder:
         project: Project,
         po_feedback: str | None = None,
     ) -> dict[str, str]:
-        """Coder system/human prompts; appends PO steering from ``agent_pause_states`` when set (T087)."""
+        """Coder system/human prompts; MEMORY.md (T094), PO steering from DB (T087)."""
         if task.id != task_id or task.project_id != project_id or project.id != project_id:
             raise ValueError("build_coder_context: task/project must match project_id and task_id.")
 
@@ -64,6 +82,18 @@ class ContextBuilder:
             "Use run_terminal only for read-only git commands (e.g. `git status`).\n"
             "When finished, stop calling tools and briefly summarize what you changed."
         )
+        memory_path = _sandbox_project_dir(project_id) / "MEMORY.md"
+        try:
+            if memory_path.is_file():
+                mem_txt = memory_path.read_text(encoding="utf-8", errors="replace").strip()
+                if mem_txt:
+                    if len(mem_txt) > _MAX_MEMORY_MD_CHARS:
+                        mem_txt = mem_txt[:_MAX_MEMORY_MD_CHARS] + "\n…(MEMORY.md truncated)"
+                    system_prompt += "\n\n## Past Lessons\n\n" + mem_txt
+        except SandboxEscapeError:
+            raise
+        except OSError as exc:
+            logger.warning("Could not read MEMORY.md for project_id=%s: %s", project_id, exc)
         if steering is not None:
             system_prompt += f"\n\nUpdated instructions from Project Owner: {steering}"
 
