@@ -129,6 +129,47 @@
   background: rgba(234, 88, 12, 0.12);
 }
 
+.agentBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--text-h);
+}
+
+.agentRunning {
+  color: #1d4ed8;
+  border-color: rgba(29, 78, 216, 0.35);
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.agentSuccess {
+  color: #15803d;
+  border-color: rgba(21, 128, 61, 0.35);
+  background: rgba(21, 128, 61, 0.12);
+}
+
+.agentFailure {
+  color: #b91c1c;
+  border-color: rgba(185, 28, 28, 0.35);
+  background: rgba(185, 28, 28, 0.1);
+}
+
+.agentHil {
+  color: #a16207;
+  border-color: rgba(161, 98, 7, 0.35);
+  background: rgba(234, 179, 8, 0.12);
+}
+
+.agentPaused {
+  color: var(--text);
+  opacity: 0.85;
+}
+
 @media (prefers-color-scheme: dark) {
   .badgeInProgress {
     color: #93c5fd;
@@ -140,5 +181,11 @@
     color: #fde047;
     border-color: rgba(253, 224, 71, 0.35);
     background: rgba(234, 179, 8, 0.12);
+  }
+
+  .agentRunning {
+    color: #93c5fd;
+    border-color: rgba(147, 197, 253, 0.35);
+    background: rgba(59, 130, 246, 0.15);
   }
 }

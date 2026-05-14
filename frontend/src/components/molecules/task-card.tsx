@@ -1,8 +1,10 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
+import { useTaskStore } from '../../store/task-store'
+
 import type { TaskColumnItem } from '../../store/task-store'
-import type { TaskStatus } from '../../types'
+import type { AgentRunStatus, TaskStatus } from '../../types'
 
 import styles from './task-card.module.css'
 
@@ -42,7 +44,40 @@ function badgeClassForStatus(status: TaskStatus): string {
   }
 }
 
+function agentRunBadgeClass(status: AgentRunStatus): string {
+  const base = styles.agentBadge
+  switch (status) {
+    case 'running':
+      return `${base} ${styles.agentRunning}`
+    case 'success':
+      return `${base} ${styles.agentSuccess}`
+    case 'failure':
+    case 'timeout':
+      return `${base} ${styles.agentFailure}`
+    case 'awaiting_hil':
+      return `${base} ${styles.agentHil}`
+    case 'paused':
+      return `${base} ${styles.agentPaused}`
+    default:
+      return base
+  }
+}
+
+function agentRunLabel(status: AgentRunStatus): string {
+  const labels: Record<AgentRunStatus, string> = {
+    running: 'Agent: running',
+    success: 'Agent: done',
+    failure: 'Agent: failed',
+    awaiting_hil: 'Agent: awaiting review',
+    paused: 'Agent: paused',
+    timeout: 'Agent: timed out',
+  }
+  return labels[status]
+}
+
 export function TaskCard({ task, sortableDisabled = true }: TaskCardProps) {
+  const agentRun = useTaskStore((s) => s.taskAgentByTaskId[task.id])
+
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: task.id,
     disabled: sortableDisabled,
@@ -82,6 +117,11 @@ export function TaskCard({ task, sortableDisabled = true }: TaskCardProps) {
             {task.priority}
           </span>
           <span className={badgeClassForStatus(task.status)}>{statusLabel(task.status)}</span>
+          {agentRun ? (
+            <span className={agentRunBadgeClass(agentRun.status)} title={`Run ${agentRun.runId}`}>
+              {agentRunLabel(agentRun.status)}
+            </span>
+          ) : null}
         </div>
       </div>
     </article>

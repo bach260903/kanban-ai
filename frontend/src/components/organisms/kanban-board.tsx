@@ -1,27 +1,18 @@
-import {
-  closestCorners,
-  DndContext,
-  type DragEndEvent,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core'
+import { DndContext } from '@dnd-kit/core'
 import { isAxiosError } from 'axios'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Spinner } from '../atoms/spinner'
 import { KanbanColumn } from './kanban-column'
-import { getTasks, groupedResponseToTaskColumns, moveTask as moveTaskOnServer } from '../../services/task-api'
+import { useKanban } from '../../hooks/use-kanban'
+import { getTasks, groupedResponseToTaskColumns } from '../../services/task-api'
 import { emptyTaskColumns, useTaskStore } from '../../store/task-store'
-import type { TaskColumns } from '../../store/task-store'
 import type { TaskStatus } from '../../types'
 
 import styles from './kanban-board.module.css'
 
 /** Primary board columns (US7 checkpoint); rejected/conflict stay in store but off MVP board. */
 const BOARD_STATUSES = ['todo', 'in_progress', 'review', 'done'] as const satisfies readonly TaskStatus[]
-
-const SORTABLE_PREFIX = 'sortable-'
 
 export type KanbanBoardProps = {
   projectId: string
@@ -37,58 +28,14 @@ function loadErrorMessage(err: unknown): string {
   return 'Unable to load tasks.'
 }
 
-function findColumnForTask(columns: TaskColumns, taskId: string): TaskStatus | undefined {
-  for (const st of BOARD_STATUSES) {
-    if (columns[st].some((t) => t.id === taskId)) return st
-  }
-  return undefined
-}
-
-function resolveDropTarget(
-  over: NonNullable<DragEndEvent['over']>,
-  columns: TaskColumns,
-): TaskStatus | undefined {
-  const data = over.data.current as { type?: string; status?: TaskStatus } | undefined
-  if (data?.type === 'column' && data.status) return data.status
-  return findColumnForTask(columns, String(over.id))
-}
-
 export function KanbanBoard({ projectId }: KanbanBoardProps) {
   const columns = useTaskStore((s) => s.columns)
   const setColumns = useTaskStore((s) => s.setColumns)
+  const clearTaskAgentRuns = useTaskStore((s) => s.clearTaskAgentRuns)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }))
-
-  const handleDragEnd = useCallback(
-    (event: DragEndEvent) => {
-      const { active, over } = event
-      if (!over) return
-
-      const containerId = active.data.current?.sortable?.containerId as string | undefined
-      const fromStatus = containerId?.startsWith(SORTABLE_PREFIX)
-        ? (containerId.slice(SORTABLE_PREFIX.length) as TaskStatus)
-        : undefined
-      if (!fromStatus) return
-
-      const toStatus = resolveDropTarget(over, columns)
-      if (!toStatus) return
-
-      if (fromStatus !== 'todo' || toStatus !== 'in_progress') {
-        return
-      }
-
-      const taskId = String(active.id)
-      const snapshot = useTaskStore.getState().columns
-      useTaskStore.getState().moveTask(taskId, 'todo', 'in_progress')
-
-      void moveTaskOnServer(projectId, taskId, 'in_progress').catch(() => {
-        useTaskStore.getState().setColumns(snapshot)
-      })
-    },
-    [columns, projectId],
-  )
+  const { sensors, collisionDetection, onDragEnd } = useKanban(projectId)
 
   useEffect(() => {
     let cancelled = false
@@ -97,10 +44,14 @@ export function KanbanBoard({ projectId }: KanbanBoardProps) {
       setError(null)
       try {
         const data = await getTasks(projectId)
-        if (!cancelled) setColumns(groupedResponseToTaskColumns(data))
+        if (!cancelled) {
+          clearTaskAgentRuns()
+          setColumns(groupedResponseToTaskColumns(data))
+        }
       } catch (err) {
         if (!cancelled) {
           setError(loadErrorMessage(err))
+          clearTaskAgentRuns()
           setColumns(emptyTaskColumns())
         }
       } finally {
@@ -109,9 +60,10 @@ export function KanbanBoard({ projectId }: KanbanBoardProps) {
     })()
     return () => {
       cancelled = true
+      clearTaskAgentRuns()
       setColumns(emptyTaskColumns())
     }
-  }, [projectId, setColumns])
+  }, [projectId, setColumns, clearTaskAgentRuns])
 
   if (loading) {
     return (
@@ -127,7 +79,7 @@ export function KanbanBoard({ projectId }: KanbanBoardProps) {
   }
 
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+    <DndContext sensors={sensors} collisionDetection={collisionDetection} onDragEnd={onDragEnd}>
       <div className={styles.board}>
         {BOARD_STATUSES.map((status) => (
           <KanbanColumn
