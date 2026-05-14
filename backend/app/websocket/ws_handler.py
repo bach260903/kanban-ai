@@ -21,6 +21,8 @@ from app.models.task import Task, TaskStatus
 from app.services.pause_service import PauseService
 from app.websocket.event_consumer import EventConsumer
 
+pause_service = PauseService
+
 logger = logging.getLogger(__name__)
 
 _WS_ERROR = "ERROR"
@@ -269,9 +271,14 @@ async def handle(websocket: WebSocket, task_id: UUID) -> None:
                 async with async_session_maker() as sc:
                     await _replay_catch_up(sc, send_text, task_id, last_seq)
             elif mtype == "PAUSE":
-                async with async_session_maker() as sp:
-                    await PauseService.pause(sp, task_id)
-                    await sp.commit()
+                try:
+                    async with async_session_maker() as sp:
+                        await pause_service.pause(sp, task_id)
+                        await sp.commit()
+                except Exception:
+                    logger.exception("WS PAUSE failed task_id=%s", task_id)
+                    await send_text(_ws_error("PAUSE_FAILED", "Could not pause task."))
+                    continue
                 await send_text(
                     json.dumps(
                         {
@@ -287,9 +294,24 @@ async def handle(websocket: WebSocket, task_id: UUID) -> None:
                 steer_s = str(steer).strip() if steer is not None else None
                 if steer_s == "":
                     steer_s = None
-                async with async_session_maker() as sr:
-                    await PauseService.resume(sr, task_id, steer_s)
-                    await sr.commit()
+                try:
+                    async with async_session_maker() as sr:
+                        await pause_service.resume(sr, task_id, steer_s)
+                        await sr.commit()
+                except Exception:
+                    logger.exception("WS RESUME failed task_id=%s", task_id)
+                    await send_text(_ws_error("RESUME_FAILED", "Could not resume task."))
+                    continue
+                await send_text(
+                    json.dumps(
+                        {
+                            "event_type": "STATUS_CHANGE",
+                            "content": {"from": "PAUSED", "to": "CODING", "reason": "resume_requested"},
+                            "sequence_number": None,
+                        },
+                        separators=(",", ":"),
+                    )
+                )
     finally:
         stop.set()
         poll_task.cancel()
