@@ -6,6 +6,7 @@ from fastapi import APIRouter, FastAPI
 
 from app.api.v1.agent_runs import router as agent_runs_router
 from app.api.v1.audit_logs import router as audit_logs_router
+from app.api.v1.codebase import router as codebase_router
 from app.api.v1.documents import router as documents_router
 from app.api.v1.memory import router as memory_router
 from app.api.v1.pause import pause_router
@@ -20,6 +21,7 @@ api_v1_router.include_router(projects_router)
 api_v1_router.include_router(audit_logs_router)
 api_v1_router.include_router(documents_router)
 api_v1_router.include_router(memory_router)
+api_v1_router.include_router(codebase_router)
 api_v1_router.include_router(tasks_router)
 api_v1_router.include_router(pause_router)
 api_v1_router.include_router(agent_runs_router)
