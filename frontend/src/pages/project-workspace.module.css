@@ -82,3 +82,97 @@
 .error {
   color: #b91c1c;
 }
+
+.audit {
+  margin: 0;
+}
+
+.auditTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.auditHint {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-muted, #64748b);
+}
+
+.auditTableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.auditTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.auditTable th,
+.auditTable td {
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.auditTable th {
+  font-weight: 600;
+  background: var(--social-bg);
+  color: var(--text);
+}
+
+.auditTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.auditEmpty {
+  text-align: center;
+  color: var(--text-muted, #64748b);
+  padding: 1rem !important;
+}
+
+.auditAgentId {
+  font-weight: 500;
+}
+
+.auditAgentVer {
+  color: var(--text-muted, #64748b);
+  font-size: 0.85em;
+}
+
+.auditPager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+.auditPagerBtn {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--social-bg);
+  color: var(--text);
+}
+
+.auditPagerBtn:hover:not(:disabled) {
+  border-color: var(--accent-border);
+}
+
+.auditPagerBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.auditPagerMeta {
+  font-size: 0.9rem;
+  color: var(--text);
+}

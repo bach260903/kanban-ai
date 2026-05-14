@@ -213,7 +213,7 @@
 - [X] T068 [P] Write unit tests for WIP limit in `backend/tests/unit/test_task_service.py`: test `count_in_progress()` correctly counts, test `move_task()` raises `WIPLimitError` when limit reached, test idempotent approve
 - [X] T069 [P] Write unit tests for Kanban transitions in `backend/tests/unit/test_kanban_transitions.py`: test all valid transitions pass, test all invalid backward transitions raise `InvalidTransitionError`, test `todo → in_progress` triggers agent dispatch
 - [X] T070 Write integration tests in `backend/tests/integration/`: `test_projects_api.py` (CRUD + duplicate name), `test_documents_api.py` (approve gate blocks generate-plan without approved SPEC), `test_tasks_api.py` (WIP limit end-to-end via real DB)
-- [ ] T071 Add read-only Audit Log tab to `ProjectWorkspace`: fetch `GET /audit-logs` paginated, display in table with columns: agent, action_type, timestamp, result — no delete/edit controls
+- [X] T071 Add read-only Audit Log tab to `ProjectWorkspace`: fetch `GET /audit-logs` paginated, display in table with columns: agent, action_type, timestamp, result — no delete/edit controls
 
 **Checkpoint**: All YC-01 → YC-22 manually verified; TC-01 → TC-07 criteria met; unit + integration tests pass.
 

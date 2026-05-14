@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from uuid import UUID
 
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.audit_log import AuditLog, AuditLogResult
@@ -75,6 +76,28 @@ async def write_pending_log(
     session.add(row)
     await session.flush()
     return row
+
+
+async def list_audit_logs_for_project(
+    session: AsyncSession,
+    project_id: UUID,
+    *,
+    offset: int,
+    limit: int,
+) -> tuple[list[AuditLog], int]:
+    """Return newest-first audit rows for a project and total count (pagination)."""
+    count_stmt = select(func.count()).select_from(AuditLog).where(AuditLog.project_id == project_id)
+    total = int(await session.scalar(count_stmt) or 0)
+    stmt = (
+        select(AuditLog)
+        .where(AuditLog.project_id == project_id)
+        .order_by(AuditLog.timestamp.desc())
+        .offset(offset)
+        .limit(limit)
+    )
+    result = await session.execute(stmt)
+    rows = list(result.scalars().all())
+    return rows, total
 
 
 async def finalise_log(
