@@ -20,6 +20,8 @@ function httpBaseToWsBase(httpBase: string): string {
 
 export type StreamEventCallback = (message: Record<string, unknown>) => void
 
+export type ConnectionStateCallback = (open: boolean) => void
+
 /**
  * Browser WebSocket client for the task thought stream (`/ws/tasks/{task_id}/stream`).
  * See `specs/001-neo-kanban/contracts/websocket-protocol.md`.
@@ -28,6 +30,7 @@ export class TaskThoughtStreamClient {
   private ws: WebSocket | null = null
   private _lastSequence = 0
   private readonly listeners = new Set<StreamEventCallback>()
+  private readonly connectionListeners = new Set<ConnectionStateCallback>()
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null
   private manualClose = false
   private streamEnded = false
@@ -47,6 +50,23 @@ export class TaskThoughtStreamClient {
     this.listeners.add(callback)
     return () => {
       this.listeners.delete(callback)
+    }
+  }
+
+  onConnectionChange(callback: ConnectionStateCallback): () => void {
+    this.connectionListeners.add(callback)
+    return () => {
+      this.connectionListeners.delete(callback)
+    }
+  }
+
+  private notifyConnection(open: boolean): void {
+    for (const cb of this.connectionListeners) {
+      try {
+        cb(open)
+      } catch {
+        /* ignore */
+      }
     }
   }
 
@@ -81,6 +101,7 @@ export class TaskThoughtStreamClient {
     this.clearReconnectTimer()
     if (this.ws != null) {
       this.ws.onclose = null
+      this.notifyConnection(false)
       this.ws.close()
       this.ws = null
     }
@@ -117,6 +138,10 @@ export class TaskThoughtStreamClient {
     const socket = new WebSocket(url)
     this.ws = socket
 
+    socket.onopen = () => {
+      this.notifyConnection(true)
+    }
+
     socket.onmessage = (ev: MessageEvent<string>) => {
       try {
         const msg = JSON.parse(ev.data) as Record<string, unknown>
@@ -131,6 +156,7 @@ export class TaskThoughtStreamClient {
     }
 
     socket.onclose = () => {
+      this.notifyConnection(false)
       this.ws = null
       if (this.manualClose || this.streamEnded) {
         return
