@@ -18,6 +18,7 @@ from langchain_groq import ChatGroq
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.agent.context_builder import ContextBuilder
 from app.config import settings
 from app.database import async_session_maker
 from app.exceptions import PauseSignal, SandboxEscapeError
@@ -391,20 +392,18 @@ async def _run_with_session(state: StateDict) -> StateDict:
 
         await _pause_checkpoint(session, project_id=project_id, task_id=task_id, agent_run_id=agent_run_id)
 
-        system = (
-            "You are the Coder agent. Work only via tools: read_file, write_file, run_terminal.\n"
-            "Implement the task in the sandbox using relative POSIX paths. Prefer small files.\n"
-            "Use run_terminal only for read-only git commands (e.g. `git status`).\n"
-            "When finished, stop calling tools and briefly summarize what you changed."
-        )
-        human = (
-            f"Task title: {task.title}\n"
-            f"Task description:\n{task.description or '(none)'}\n\n"
-            f"Project constitution (excerpt, first 8000 chars):\n{project.constitution[:8000]}"
-        )
         po = state.get("po_feedback")
-        if isinstance(po, str) and po.strip():
-            human += "\n\nPO review feedback (address this in your changes):\n" + po.strip()[:20_000]
+        po_kw = po.strip()[:20_000] if isinstance(po, str) and po.strip() else None
+        prompts = await ContextBuilder.build_coder_context(
+            project_id,
+            task_id,
+            session,
+            task=task,
+            project=project,
+            po_feedback=po_kw,
+        )
+        system = prompts["system"]
+        human = prompts["human"]
         messages: list[Any] = [
             SystemMessage(content=system),
             HumanMessage(content=human),
