@@ -14,8 +14,11 @@ import {
   groupedResponseToTaskColumns,
   rejectTask,
 } from '../../services/task-api'
-import type { InlineCommentItem, TaskDiffResponse } from '../../services/task-api'
+import type { TaskDiffResponse } from '../../services/task-api'
+import { useInlineComments } from '../../hooks/use-inline-comments'
 import { useTaskStore } from '../../store/task-store'
+
+import styles from './review-panel.module.css'
 
 function diffErrorMessage(err: unknown): string {
   if (isAxiosError(err) && err.response?.status === 404) {
@@ -54,7 +57,11 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
   const [actionBusy, setActionBusy] = useState(false)
   const [rejectFeedback, setRejectFeedback] = useState('')
   const [modifiedEditor, setModifiedEditor] = useState<editor.IStandaloneCodeEditor | null>(null)
-  const [inlineComments, setInlineComments] = useState<InlineCommentItem[]>([])
+  const {
+    comments: inlineComments,
+    replaceFromApi,
+    getCommentPayload,
+  } = useInlineComments()
   const [activeCommentLine, setActiveCommentLine] = useState<number | null>(null)
 
   const refreshBoard = useCallback(async () => {
@@ -67,11 +74,11 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
     if (!tid) return
     try {
       const rows = await getTaskComments(tid)
-      setInlineComments(rows)
+      replaceFromApi(rows)
     } catch {
-      setInlineComments([])
+      replaceFromApi([])
     }
-  }, [reviewTask?.id])
+  }, [reviewTask?.id, replaceFromApi])
 
   useEffect(() => {
     if (!reviewTask) {
@@ -101,11 +108,11 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
 
   useEffect(() => {
     if (!reviewTask || !diff) {
-      setInlineComments([])
+      replaceFromApi([])
       return
     }
     void refreshInlineComments()
-  }, [reviewTask?.id, diff?.id, refreshInlineComments])
+  }, [reviewTask?.id, diff?.id, refreshInlineComments, replaceFromApi])
 
   useEffect(() => {
     setActiveCommentLine(null)
@@ -140,7 +147,12 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
     setActionBusy(true)
     setDiffError(null)
     try {
-      await rejectTask(projectId, reviewTask.id, fb)
+      const payload = getCommentPayload()
+      const feedbackBody =
+        payload.length > 0
+          ? `${fb}\n\n--- inline_comments (JSON) ---\n${JSON.stringify(payload)}`
+          : fb
+      await rejectTask(projectId, reviewTask.id, feedbackBody)
       setRejectFeedback('')
       await refreshBoard()
     } catch (err) {
@@ -148,7 +160,7 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
     } finally {
       setActionBusy(false)
     }
-  }, [projectId, reviewTask, rejectFeedback, refreshBoard])
+  }, [projectId, reviewTask, rejectFeedback, refreshBoard, getCommentPayload])
 
   if (!reviewTask) {
     return null

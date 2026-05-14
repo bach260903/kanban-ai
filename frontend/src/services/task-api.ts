@@ -120,6 +120,9 @@ export type InlineCommentItem = {
   created_at: string
 }
 
+/** Fields needed for diff glyphs, ``useInlineComments``, and reject payload (US16 / T110). */
+export type InlineCommentListRow = Pick<InlineCommentItem, 'id' | 'file_path' | 'line_number' | 'comment_text'>
+
 export async function getTaskComments(taskId: string, signal?: AbortSignal): Promise<InlineCommentItem[]> {
   const { data } = await api.get<InlineCommentItem[]>(`/api/v1/tasks/${taskId}/comments`, { signal })
   return data

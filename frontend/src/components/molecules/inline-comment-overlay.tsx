@@ -4,7 +4,7 @@ import type { editor } from 'monaco-editor'
 import { useEffect, useRef } from 'react'
 
 import { createTaskComment } from '../../services/task-api'
-import type { InlineCommentItem } from '../../services/task-api'
+import type { InlineCommentListRow } from '../../services/task-api'
 
 import './inline-comment-overlay.css'
 
@@ -18,7 +18,7 @@ export type InlineCommentOverlayProps = {
   taskId: string
   /** Path used for ``POST`` body ``file_path`` (must match diff ``files_affected``). */
   apiFilePath: string
-  comments: InlineCommentItem[]
+  comments: InlineCommentListRow[]
   /** Open composer after modified-side line click (glyph / line target). */
   activeLine: number | null
   onCloseComposer: () => void
