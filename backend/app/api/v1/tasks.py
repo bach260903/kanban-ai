@@ -242,12 +242,39 @@ async def move_task(
     await ProjectService.get(session, project_id)
     task = await TaskService.get(session, task_id, project_id=project_id)
     from_status = task.status
-    await KanbanService.move_task(task_id, body.to, session)
+
+    # Pre-create AgentRun so agent_run_id is available in the response immediately.
+    # Coder is deferred until after commit to avoid running against an uncommitted task state.
+    pre_created_run: AgentRun | None = None
+    if body.to == TaskStatus.IN_PROGRESS:
+        pre_created_run = AgentRun(
+            project_id=project_id,
+            task_id=task_id,
+            agent_type=AgentType.CODER,
+            agent_version="1.0.0",
+            status=AgentRunStatus.RUNNING,
+            input_artifacts=[str(task_id)],
+            output_artifacts=[],
+        )
+        session.add(pre_created_run)
+        await session.flush()
+
+    await KanbanService.move_task(
+        task_id,
+        body.to,
+        session,
+        agent_run_id=pre_created_run.id if pre_created_run else None,
+        defer_coder_start=pre_created_run is not None,
+    )
     await session.commit()
     await session.refresh(task)
+
+    if pre_created_run is not None:
+        KanbanService.start_coder_agent(task_id, project_id, agent_run_id=pre_created_run.id)
+
     return TaskMoveResult(
         task_id=task.id,
         from_status=from_status,
         to_status=task.status,
-        agent_run_id=None,
+        agent_run_id=pre_created_run.id if pre_created_run else None,
     )

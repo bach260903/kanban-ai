@@ -15,10 +15,12 @@ class TaskResumeBody(BaseModel):
 
 
 class PauseResumeResponse(BaseModel):
-    """JSON after pause or resume; ``paused`` reflects Redis after the operation."""
+    """JSON after pause or resume — matches REST contract (state + timestamp)."""
 
     task_id: UUID
-    paused: bool
+    state: str
+    paused_at: datetime | None = None
+    resumed_at: datetime | None = None
 
 
 class PauseStateResponse(BaseModel):

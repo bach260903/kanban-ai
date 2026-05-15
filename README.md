@@ -1,149 +1,149 @@
-# Kanban AI Multi-Agent
+# Kanban AI
 
-Nền tảng quản lý công việc Kanban tích hợp AI đa tác tử (multi-agent), hỗ trợ lập kế hoạch, giám sát tiến độ, gợi ý phân công và báo cáo.
+Nền tảng quản lý công việc Kanban tích hợp AI đa tác tử — lập kế hoạch, phân rã task, giám sát tiến độ và sinh code tự động.
 
-## Tổng quan
+## Stack
 
-Đây là monorepo gồm các thành phần:
+| Lớp | Công nghệ |
+|---|---|
+| Frontend | React 18 + TypeScript + Vite, Zustand, dnd-kit, Monaco Editor |
+| Backend | FastAPI (Python 3.11), SQLAlchemy async, Alembic |
+| Database | PostgreSQL 16 |
+| Cache / Pub-Sub | Redis 7 |
+| AI | LangChain + LangGraph + Groq (llama-3.3-70b-versatile) |
+| Realtime | WebSocket |
 
-- `frontend`: Next.js 14, Tailwind, dnd-kit, giao diện Kanban + AI assistant
-- `backend`: FastAPI, SQLAlchemy, WebSocket, API auth/boards/tasks/agent
-- `agents`: logic tác tử (orchestrator, planner, assigner, monitor, reporter, executor)
-- `evaluation`: bộ dữ liệu và script benchmark/eval
-- `docs`: tài liệu kiến trúc, quyết định công nghệ, checklist kiểm thử
+## Yêu cầu
 
-## Tính năng nổi bật
-
-- Quản lý board Kanban: cột, task, kéo thả, comment, phân công
-- Quản lý thành viên theo UID cho từng dự án
-- Hồ sơ người dùng + kỹ năng để AI gợi ý phân công
-- Trợ lý AI đa tác tử:
-  - `Planner`: phân rã mục tiêu thành subtask
-  - `Assigner`: gợi ý người phù hợp
-  - `Monitor`: phát hiện tắc nghẽn, quá hạn, task chất lượng thấp
-  - `Reporter`: tạo báo cáo tổng hợp
-  - `Executor`: thao tác task theo lệnh
-- Lưu lịch sử chạy AI (`agent_runs`, `agent_run_steps`) + realtime qua WebSocket
-
-## Yêu cầu môi trường
-
-- Windows + PowerShell
+- Docker & Docker Compose
 - Node.js 18+
-- Python 3.14 (backend)
-- (Tuỳ chọn benchmark) Python 3.12 cho CrewAI
-- API key LLM: `GROQ_API_KEY`
+- Python 3.11
+- [Groq API key](https://console.groq.com/keys)
 
-## Cài đặt nhanh
+## Cài đặt
+
+### 1. Clone và tạo file môi trường
 
 ```powershell
-cd d:\kanban
+git clone <repo-url>
+cd kanban-ai
 copy .env.example .env
 ```
 
-Điền key trong `.env`:
+Mở `.env` và điền các giá trị bắt buộc:
 
 ```env
-GROQ_API_KEY=your_key_here
+POSTGRES_PASSWORD=your_secure_password
+JWT_SECRET=replace_with_a_long_random_string
+GROQ_API_KEY=gsk_...
 ```
 
-## Chạy dự án local
-
-### Backend
+### 2. Khởi động PostgreSQL và Redis qua Docker
 
 ```powershell
-cd d:\kanban\backend
+docker compose up -d postgres redis
+```
+
+Đợi healthy (khoảng 10–15 giây), kiểm tra:
+
+```powershell
+docker compose ps
+```
+
+### 3. Chạy Backend
+
+```powershell
+cd backend
 python -m venv .venv
 .\.venv\Scripts\activate
-python -m pip install -r requirements.txt
-python -m uvicorn app.main:app --reload --port 8000
+pip install -r requirements.txt
 ```
 
-- API docs: <http://localhost:8000/docs>
-- Health: <http://localhost:8000/health>
-
-### Frontend
+Chạy migration database:
 
 ```powershell
-cd d:\kanban\frontend
-copy .env.example .env.local
+alembic upgrade head
+```
+
+Khởi động API server:
+
+```powershell
+uvicorn app.main:app --reload --port 8000
+```
+
+- API docs: http://localhost:8000/docs
+- Health check: http://localhost:8000/health
+
+### 4. Chạy Frontend
+
+Mở terminal mới:
+
+```powershell
+cd frontend
 npm install
 npm run dev
 ```
 
-Mở: <http://localhost:3000>
+Mở trình duyệt: http://localhost:5173
 
-## Luồng sử dụng đề xuất
-
-1. Đăng ký/đăng nhập
-2. Tạo board và thêm thành viên bằng UID
-3. Tạo task, set hạn chót, phân công
-4. Dùng AI để:
-   - phân rã mục tiêu
-   - gợi ý người phụ trách
-   - quét tắc nghẽn
-   - tạo báo cáo
-
-## Kiểm thử nhanh
-
-### Kiểm tra Groq key
+## Chạy toàn bộ bằng Docker (tùy chọn)
 
 ```powershell
-cd d:\kanban
-python evaluation\scripts\verify_groq.py
+docker compose up --build
 ```
 
-### Build frontend
-
-```powershell
-cd d:\kanban
-npm run build --workspace=frontend
-```
-
-### Eval planner end-to-end
-
-```powershell
-cd d:\kanban\evaluation\scripts
-python seed_fixtures.py --api http://127.0.0.1:8000
-python run_eval.py planner --api http://127.0.0.1:8000
-python aggregate_eval.py
-```
-
-Kết quả ở `evaluation/results/<timestamp>/report.md`.
+Backend sẽ chạy trên cổng 8000. Frontend vẫn cần chạy riêng bằng `npm run dev`.
 
 ## Cấu trúc thư mục
 
-```text
-backend/
-  app/
-    routers/
-    services/
-    models.py
-    schemas.py
-
-agents/
-  src/agents/
-  src/tools/
-  src/graph.py
-
-frontend/
-  src/app/
-  src/components/
-  src/lib/
-
-evaluation/
-  datasets/
-  judge/
-  scripts/
-
-docs/
+```
+kanban-ai/
+├── backend/
+│   ├── app/
+│   │   ├── agent/          # LangGraph multi-agent nodes
+│   │   ├── api/v1/         # REST endpoints
+│   │   ├── models/         # SQLAlchemy models
+│   │   ├── schemas/        # Pydantic schemas
+│   │   ├── services/       # Business logic
+│   │   ├── websocket/      # WebSocket handler
+│   │   └── main.py
+│   ├── alembic/            # Database migrations
+│   └── tests/
+├── frontend/
+│   └── src/
+│       ├── components/     # atoms / molecules / organisms
+│       ├── hooks/
+│       ├── pages/
+│       ├── services/       # API clients
+│       └── store/          # Zustand stores
+├── specs/                  # Feature specs & design docs
+├── docker-compose.yml
+└── .env.example
 ```
 
-## Lưu ý bảo mật & đóng góp
+## Biến môi trường quan trọng
 
-- Không commit file chứa secret (`.env`, `.env.local`)
-- Không commit artifacts local (venv, build cache, database local)
-- Trước khi push, chạy lint/build để đảm bảo ổn định
+| Biến | Mô tả | Mặc định |
+|---|---|---|
+| `POSTGRES_USER` | PostgreSQL user | `neo_kanban` |
+| `POSTGRES_PASSWORD` | PostgreSQL password | *(bắt buộc đặt)* |
+| `POSTGRES_DB` | Tên database | `neo_kanban` |
+| `DATABASE_URL` | SQLAlchemy connection string | xem `.env.example` |
+| `REDIS_URL` | Redis connection string | `redis://localhost:6379/0` |
+| `JWT_SECRET` | Secret ký JWT | *(bắt buộc đặt)* |
+| `GROQ_API_KEY` | Groq API key | *(bắt buộc đặt)* |
+| `GROQ_MODEL` | Model Groq sử dụng | `llama-3.3-70b-versatile` |
 
----
+## Chạy test
 
-Nếu bạn cần checklist release/public repo chuẩn (README badges, changelog, license, contribution guide), có thể bổ sung thêm ở bước tiếp theo.
+```powershell
+cd backend
+.\.venv\Scripts\activate
+pytest
+```
+
+## Lưu ý
+
+- Không commit `.env` hoặc bất kỳ file chứa secret
+- Không commit thư mục `.venv/`, `__pycache__/`, `node_modules/`
+- Trước khi push, chạy `npm run build` và `pytest` để đảm bảo không bị lỗi

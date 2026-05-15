@@ -303,10 +303,14 @@ Trigger Architect Agent to generate SPEC.md from Intent.
 ```json
 {
   "agent_run_id": "uuid",
+  "intent_id": "uuid",
+  "document_id": "uuid",
   "status": "running",
   "message": "SPEC generation started."
 }
 ```
+
+Note: `intent_id` is the persisted Intent record; `document_id` is the created/updated Document record. Both may be used by the frontend to poll progress.
 
 **Response 400** — if a SPEC already exists and is approved
 ```json
@@ -542,7 +546,9 @@ Paginated immutable audit log.
 
 ### Pause & Steer
 
-#### `POST /api/v1/tasks/{task_id}/pause`
+> **Note**: Primary pause/resume path is via WebSocket messages `{"type": "PAUSE"}` / `{"type": "RESUME", "steering_instructions": "..."}`. These REST endpoints are provided for test automation and non-WebSocket clients.
+
+#### `POST /api/v1/projects/{project_id}/tasks/{task_id}/pause`
 
 Signal agent to pause after its current step.
 
@@ -564,7 +570,7 @@ Signal agent to pause after its current step.
 
 ---
 
-#### `POST /api/v1/tasks/{task_id}/resume`
+#### `POST /api/v1/projects/{project_id}/tasks/{task_id}/resume`
 
 Resume paused agent with optional steering instructions.
 
@@ -586,7 +592,7 @@ Resume paused agent with optional steering instructions.
 
 ---
 
-#### `GET /api/v1/tasks/{task_id}/pause-state`
+#### `GET /api/v1/projects/{project_id}/tasks/{task_id}/pause-state`
 
 Get current pause state.
 

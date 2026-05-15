@@ -43,8 +43,12 @@ async def pause_task(
         output_refs=[],
     )
     await session.commit()
-    paused = await PauseService.is_paused(task_id)
-    return PauseResumeResponse(task_id=task_id, paused=paused)
+    row = await session.scalar(select(AgentPauseState).where(AgentPauseState.task_id == task_id))
+    return PauseResumeResponse(
+        task_id=task_id,
+        state="paused",
+        paused_at=row.paused_at if row else None,
+    )
 
 
 @pause_router.post("/{project_id}/tasks/{task_id}/resume", response_model=PauseResumeResponse)
@@ -72,8 +76,12 @@ async def resume_task(
         output_refs=[],
     )
     await session.commit()
-    paused = await PauseService.is_paused(task_id)
-    return PauseResumeResponse(task_id=task_id, paused=paused)
+    row = await session.scalar(select(AgentPauseState).where(AgentPauseState.task_id == task_id))
+    return PauseResumeResponse(
+        task_id=task_id,
+        state="running",
+        resumed_at=row.resumed_at if row else None,
+    )
 
 
 @pause_router.get("/{project_id}/tasks/{task_id}/pause-state", response_model=PauseStateResponse)
