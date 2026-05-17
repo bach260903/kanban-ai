@@ -23,6 +23,8 @@ class Settings(BaseSettings):
     database_url: str
     redis_url: str
     jwt_secret: str
+    jwt_expire_minutes: int = Field(default=60 * 24 * 7, description="JWT expiry in minutes (default 7 days).")
+    jwt_algorithm: str = Field(default="HS256")
     groq_api_key: str = Field(
         default="",
         description="Groq API key (https://console.groq.com) for LangChain ChatGroq.",
