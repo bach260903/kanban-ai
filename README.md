@@ -54,8 +54,19 @@ docker compose ps
 
 ```powershell
 cd backend
+```
+
+Tạo virtual environment (dùng `uv` để nhanh hơn, hoặc `python -m venv`):
+
+```powershell
+# Dùng uv (khuyến nghị)
+uv venv
+.\.venv\Scripts\Activate.ps1
+uv pip install -r requirements.txt
+
+# Hoặc dùng pip thông thường
 python -m venv .venv
-.\.venv\Scripts\activate
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
@@ -71,7 +82,7 @@ Khởi động API server:
 uvicorn app.main:app --reload --port 8000
 ```
 
-- API docs: http://localhost:8000/docs
+- API docs (Swagger): http://localhost:8000/docs
 - Health check: http://localhost:8000/health
 
 ### 4. Chạy Frontend
@@ -80,11 +91,40 @@ Mở terminal mới:
 
 ```powershell
 cd frontend
+```
+
+Tạo file biến môi trường:
+
+```powershell
+copy .env.example .env.local
+```
+
+Cài dependencies (bao gồm Tailwind CSS v3):
+
+```powershell
 npm install
+npm install -D tailwindcss@^3 autoprefixer tw-animate-css
+```
+
+Khởi động dev server:
+
+```powershell
 npm run dev
 ```
 
 Mở trình duyệt: http://localhost:5173
+
+## Tài liệu API
+
+Xem đầy đủ tại [docs/api.md](docs/api.md), bao gồm:
+- REST endpoints (Projects, Documents, Tasks, Audit Logs)
+- Agent triggers (generate-spec, generate-plan)
+- WebSocket Thought Stream protocol (Phase 2)
+- Pause & Steer, Memory, Codebase Map (Phase 2)
+
+Swagger UI tương tác: http://localhost:8000/docs (khi backend đang chạy)
+
+---
 
 ## Chạy toàn bộ bằng Docker (tùy chọn)
 

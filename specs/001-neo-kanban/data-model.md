@@ -1,13 +1,17 @@
 # Data Model: Neo-Kanban
 
-**Phase**: 1 (core) + Phase 2 (additions marked)
-**Date**: 2026-05-11
+**Phase**: 1 (core) + Phase 2 (additions marked) + Auth (migration 003)
+**Date**: 2026-05-17
 
 ---
 
 ## Entity Relationship Overview
 
 ```
+users  (migration 003 — authentication only, no FK to projects yet)
+   │  id, email, hashed_password, display_name, created_at
+   │  JWT sub = users.id
+   │
 projects ──────────────────────────────────────────────────────────
    │                                                               │
    ├──< documents (type: SPEC | PLAN)                             │
@@ -28,6 +32,24 @@ projects ───────────────────────�
                                                                │  │
    ← project_id on all child tables ─────────────────────────────┘
 ```
+
+---
+
+## Auth Entities (Migration 003)
+
+### `users`
+
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| `id` | UUID | PK, default gen_random_uuid() | User identifier |
+| `email` | VARCHAR(320) | UNIQUE NOT NULL | Email dùng để đăng nhập |
+| `hashed_password` | VARCHAR(255) | NOT NULL | Bcrypt hash của password |
+| `display_name` | VARCHAR(200) | NOT NULL | Tên hiển thị |
+| `created_at` | TIMESTAMPTZ | NOT NULL, default NOW() | Thời điểm tạo tài khoản |
+
+**Indexes**: `UNIQUE INDEX ix_users_email (email)`
+
+> Token JWT sử dụng `id` của user làm `sub` claim, thuật toán HS256, hết hạn sau `JWT_EXPIRE_MINUTES` phút (mặc định 10080 = 7 ngày).
 
 ---
 
