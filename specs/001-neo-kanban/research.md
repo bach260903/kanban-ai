@@ -1,212 +1,137 @@
-# Research: Neo-Kanban Implementation Plan
+# Research: Neo-Kanban — RTK Token Optimizer + Constitution Tab
 
-**Phase**: 0 — Research & Decisions
-**Date**: 2026-05-11
-**Branch**: `003-core-kanban-flow`
-
-All "NEEDS CLARIFICATION" items from Technical Context are resolved below.
-Each decision includes rationale and the alternatives considered.
+**Phase 0 Output** | Date: 2026-05-17 | Plan: [plan.md](plan.md)
+**Implementation status**: ✅ Implemented 2026-05-18 — `token_optimizer.py` (9 public functions), patched `file_tools.py`, `sandbox_tools.py`, `context_builder.py`; Constitution tab added to workspace (5th tab in `project-workspace.tsx`)
 
 ---
 
-## D-01: LangGraph HIL Pattern — How to suspend a running agent and wait for PO action
+## 1. RTK-AI/RTK — Core Technology Analysis
 
-**Decision**: Use LangGraph's built-in `interrupt()` primitive inside graph nodes combined with
-a PostgreSQL-backed `SqliteSaver` / `AsyncPostgresSaver` checkpointer. The graph is resumed by
-calling `graph.ainvoke(None, config={"configurable": {"thread_id": agent_run_id}})` from the
-FastAPI approval endpoint after writing the PO decision to DB.
+**Source**: github.com/rtk-ai/rtk — CLI proxy, 60-90% LLM token reduction on dev commands.
 
-**Rationale**: LangGraph 0.2+ has first-class support for human-in-the-loop via `interrupt()`.
-The checkpointer serialises full graph state to DB, so the process can be restarted without
-losing context. This is the recommended pattern in the LangGraph documentation and aligns with
-Constitution Principle II (HIL checkpoints).
+### 1.1 Architecture
+
+| Aspect | Detail |
+|---|---|
+| Implementation | Single Rust binary, zero runtime dependencies |
+| Integration point | CLI proxy layer between agent tools and shell output |
+| Storage | `~/.local/share/rtk/tee/` — full output saved on failure for fallback |
+| Config | `~/.config/rtk/config.toml` with `[hooks]` and `[tee]` sections |
+
+RTK intercepts shell output **before** it reaches the LLM context window and applies four transformations. For this project we implement the same transformations in Python inside the agent tool pipeline.
+
+### 1.2 The Four Core Techniques
+
+#### A. Smart Filtering
+Removes content that LLMs don't need: comments, excessive whitespace, boilerplate headers, binary content markers, progress bars, ANSI codes.
+
+**Applied to**: `read_file` output, `run_command` stdout/stderr, MEMORY.md injection.
+
+#### B. Grouping
+Aggregates related items into structured summaries instead of flat lists:
+- File listings → directory tree with file counts per folder
+- Test failures → grouped by test suite / file
+- Lint errors → grouped by rule name or file
+
+**Applied to**: `list_files` output (flat list → tree), `run_command` for test/lint output.
+
+#### C. Truncation
+Keeps contextually important lines (head + tail pattern), discards middle redundancy. Preserves first N lines (imports, setup) and last M lines (errors, results).
+
+**Applied to**: `read_file` for large files (>500 lines), `run_command` stdout when verbose.
+
+#### D. Deduplication
+Collapses repeated identical lines into `× N` counters. Example:
+```
+[INFO] Processing file...   (×47)
+```
+**Applied to**: `run_command` log-heavy output (servers, migrations, docker).
+
+### 1.3 Command-Specific Transformations
+
+| Command Category | RTK Technique | Token Saving |
+|---|---|---|
+| `ls` / `list_files` | Flat list → hierarchical tree | ~80% |
+| `pytest` / `jest` / `go test` | Failures-only + summary line | ~90% |
+| `git status` | Staged/unstaged counts, branch info | ~75% |
+| `git log` | One-line format with author+date | ~85% |
+| `git diff` | Keep only `+`/`-` lines + file headers | ~70% |
+| `tsc` / `eslint` / `ruff` | Group errors by file, dedupe rule | ~80% |
+| `docker logs` | Deduplicate + last 50 lines | ~85% |
+| `cat` large file | head+tail with skip notice | ~60% |
+
+### 1.4 Implementation Decision for Neo-Kanban
+
+**Decision**: Implement RTK techniques as a pure-Python module `backend/app/tools/token_optimizer.py` — no external binary dependency.
+
+**Rationale**:
+- The project uses `sandbox_tools.py` (Python asyncio subprocess) and `file_tools.py` — injection points are clear.
+- Avoids binary dependency on a Rust binary in the Docker/CI pipeline.
+- The four RTK techniques are straightforward to implement in Python with `re` and `pathlib`.
 
 **Alternatives considered**:
-- `asyncio.Event` — process-local only, lost on restart. Rejected.
-- Separate "poll for approval" loop in the agent — creates busy-wait and complicates audit trail.
-  Rejected.
-- Celery task suspension — adds Celery as a dependency; overkill for single-worker MVP. Rejected.
-
-**Action required**: Use `langgraph-checkpoint-postgres` package and run LangGraph `ainvoke` in a
-background asyncio task (not blocking the FastAPI event loop). On `interrupt()`, the task saves
-state and exits. The approval endpoint restarts it.
+- Shell to RTK binary: rejected — adds Rust toolchain as a hard dependency; fragile on Windows dev env.
+- LangChain output parser: rejected — would require changing tool signatures; token_optimizer.py is a thin utility layer that can be inserted without altering the tool API.
 
 ---
 
-## D-02: WIP = 1 Enforcement — Race condition between concurrent drag events
+## 2. Constitution Tab — Gap Analysis
 
-**Decision**: Enforce WIP = 1 at two layers:
-1. **PostgreSQL** — `EXCLUDE USING btree (project_id WITH =) WHERE (status = 'in_progress')` on
-   the `tasks` table. This makes the constraint atomic at the database level.
-2. **Service layer** — `task_service.move()` does an explicit SELECT count check before the
-   UPDATE, returning a 409 Conflict HTTP response before the DB constraint fires (better UX).
+### 2.1 Implementation Status
 
-**Rationale**: Database-level constraint is the safety net; service-level check provides the
-correct error message. Neither alone is sufficient — the constraint alone gives a cryptic DB
-error; the service check alone has a TOCTOU race window.
+| Item | Status |
+|---|---|
+| Constitution data model | ✅ `projects.constitution TEXT` column |
+| API endpoints | ✅ `GET/PUT /api/v1/projects/{id}/constitution` |
+| Editor page | ✅ `frontend/src/pages/constitution-editor.tsx` (Monaco + save) |
+| Navigation to editor | ✅ Standalone route `/projects/:id/constitution` still exists |
+| Workspace tab | ✅ **Implemented 2026-05-18** — 5th tab "Constitution" in `project-workspace.tsx` |
+| Constitution organism | ✅ `frontend/src/components/organisms/constitution-panel.tsx` — Monaco + dirty indicator + save/load |
+| CSS module | ✅ `frontend/src/components/organisms/constitution-panel.module.css` |
 
-**Alternatives considered**:
-- Application-level mutex — not viable in multi-process deployment. Rejected.
-- Redis distributed lock — adds complexity for a constraint that PostgreSQL handles natively.
-  Rejected.
+### 2.2 Implementation Decision (Resolved)
 
----
+Added a 5th **"Constitution"** tab to `project-workspace.tsx`. Logic extracted into `constitution-panel.tsx` organism so it can be embedded without full-page navigation.
 
-## D-03: Sandbox Security — Preventing file-system escape
+**Decision**: Created `frontend/src/components/organisms/constitution-panel.tsx` — self-contained, reuses `getConstitution` / `updateConstitution` from `project-api.ts`. Standalone editor page untouched.
 
-**Decision**: The Coder Agent's `write_file` and `read_file` tools validate that the resolved
-absolute path starts with the project's sandbox root (`/tmp/neo-kanban/{project_id}/`). Any path
-traversal attempt (e.g., `../../etc/passwd`) raises a `SandboxEscapeError` which is caught by
-`error_handlers.py` and returned as HTTP 400. The sandbox directory has no execute permission
-for network binaries.
-
-**Rationale**: Constitution Principle VI mandates sandbox isolation. Local tmp directory is the
-MVP sandbox; Docker is deferred. Path validation is the minimum viable isolation.
-
-**Alternatives considered**:
-- `chroot` jail — requires root privileges on the host; not suitable for dev laptops. Rejected.
-- Docker SDK — explicitly deferred to post-MVP by Constitution Principle VII. Rejected.
-- `seccomp` profile — too complex for MVP; noted for future hardening. Deferred.
+**Rationale**: Zero new API calls, zero new state management. Dirty detection via `content !== savedContent` guards accidental navigation away.
 
 ---
 
-## D-04: Monaco Diff Format — Converting git unified diff to Monaco's diff model
+## 3. RTK Optimizer — Implementation Details (2026-05-18)
 
-**Decision**: Use Monaco's `createDiffEditor` with two `ITextModel` objects (original and
-modified). Convert the git unified diff to two full-text strings (original file content and
-modified file content) by applying the diff patch using Python's `whatthepatch` library server-side.
-The API returns `{ original: string, modified: string }` and the frontend passes them to Monaco.
+### 3.1 Public API (`backend/app/tools/token_optimizer.py`)
 
-**Rationale**: Monaco `DiffEditor` requires full text models, not patch strings. The conversion
-is straightforward and deterministic. Doing it server-side keeps the frontend simple.
+All 9 functions are pure (no I/O, no async):
 
-**Alternatives considered**:
-- Parse unified diff in the browser — more complex JS, harder to test. Rejected.
-- Use `diff2html` library — outputs HTML, not Monaco models. Rejected.
-- Store both original and modified file content in the `diffs` table — adds storage overhead but
-  makes the API simpler. **Adopted as a pragmatic trade-off**.
+| Function | Technique | Output |
+|---|---|---|
+| `optimize_list_output(paths)` | Grouping | Directory tree with per-dir file counts |
+| `optimize_file_content(content, max_lines=500)` | Truncation + Filtering | ANSI stripped, blank lines collapsed, head+tail |
+| `optimize_command_output(cmd, stdout, stderr, exit_code)` | Routing | Dispatches to specialised handler, always prepends `exit_code: N` |
+| `filter_test_output(output)` | Filtering | FAILED/ERROR/Traceback lines + last summary line |
+| `compress_git_diff(diff)` | Filtering | Strips space-prefix context lines; keeps `+/-/@@/---/+++` |
+| `compress_git_log(log)` | Truncation | One line per commit: hash(7) · author · date · subject |
+| `compress_git_status(status)` | Grouping | Branch line + staged/unstaged/untracked counts |
+| `group_build_errors(output)` | Grouping | Errors grouped by file path (TypeScript + ruff/flake8 patterns) |
+| `deduplicate_lines(text, threshold=3)` | Deduplication | Consecutive identical lines → `line × N` |
 
-**Action required**: Add `whatthepatch==1.0.6` to `requirements.txt`. Store `original_content`
-and `modified_content` columns alongside `content` (unified diff) in the `diffs` table for fast
-retrieval.
+### 3.2 Integration Points
 
----
+| File patched | What changed |
+|---|---|
+| `file_tools.py` | `read_file` → `optimize_file_content(raw)`; `list_files` return type `list[str]` → `str` via `optimize_list_output` |
+| `sandbox_tools.py` | Final `return f"exit_code: ..."` → `optimize_command_output(...)`; `RTK_OPTIMIZER_DISABLED` env-var escape hatch added |
+| `context_builder.py` | MEMORY.md injected via `optimize_file_content(mem_txt, max_lines=300)` before char-limit truncation; constitution block via `deduplicate_lines(constitution)` |
 
-## D-05: LangGraph Running Without Blocking FastAPI Event Loop
+### 3.3 Resolved Technical Context
 
-**Decision**: Use `asyncio.create_task()` to run the LangGraph graph as a background async task.
-FastAPI returns the `agent_run_id` immediately (HTTP 202 Accepted). The PO polls
-`GET /agent-runs/{run_id}` or observes the WebSocket stream (Phase 2) to see progress.
-
-**Rationale**: LangGraph `ainvoke` can run for minutes. Blocking the request would hold an HTTP
-connection and a Uvicorn worker. Background task is the idiomatic FastAPI pattern for long-running
-operations.
-
-**Alternatives considered**:
-- Celery worker queue — operational overhead not justified for single-user MVP. Deferred.
-- `BackgroundTasks` (FastAPI built-in) — does not support `interrupt()`/resume across requests.
-  Rejected.
-- Separate agent process via subprocess — inter-process state sharing is complex. Rejected.
-
----
-
-## D-06: Pause Signal — Async-safe across multiple Uvicorn workers
-
-**Decision**: Store the pause flag as a Redis key: `SET pause:{task_id} 1` (with no expiry; TTL
-managed manually on resume). Each LangGraph node checks `await redis.exists(f"pause:{task_id}")`
-at its entry point. If the key exists, the node raises `PauseSignal` which is caught by the graph
-runner and transitions to `awaiting_hil` state.
-
-**Rationale**: Redis SET/GET is atomic and process-independent. Even if Uvicorn is restarted or
-runs multiple workers, the pause state is correctly shared. This satisfies the spec note
-"Pause signal phải là async-safe (không block event loop FastAPI)".
-
-**Alternatives considered**:
-- `asyncio.Event` — process-local, lost on restart. Rejected.
-- DB row flag — polling DB on every node step adds latency and DB load. Rejected.
-- LangGraph's own interrupt mechanism — designed for HIL, not for mid-flight pause from a
-  separate HTTP endpoint. The two mechanisms work differently; Redis flag is cleaner here.
-
----
-
-## D-07: tree-sitter Integration — Language binding installation
-
-**Decision**: Use `tree-sitter==0.23.0` with pre-built wheel packages:
-- `tree-sitter-python==0.23.2`
-- `tree-sitter-javascript==0.23.0`
-- `tree-sitter-typescript==0.23.0`
-
-These wheels include precompiled grammar `.so` files and do not require a C compiler at install
-time. A simple version pin matrix is tested in CI.
-
-**Rationale**: tree-sitter is the only mature parser library that supports incremental parsing
-and symbol extraction for both Python and JS/TS in a single dependency. Pre-built wheels avoid
-the C-compilation step that has historically caused CI failures.
-
-**Alternatives considered**:
-- `ast` module (Python only) — does not cover JavaScript/TypeScript. Rejected.
-- `jedi` + `eslint-plugin-jsdoc` — separate tools per language, harder to unify output schema.
-  Rejected.
-- LSP-based symbol extraction — requires running a full language server; too heavy for a
-  background scan. Rejected.
-
-**Risk**: tree-sitter grammar API changed significantly between 0.21 and 0.23. Pinning exact
-versions is mandatory.
-
----
-
-## D-08: WebSocket Reconnection Strategy
-
-**Decision**: Assign each event a monotonically increasing `sequence_number` scoped to
-`(task_id)`. Events are persisted to the `stream_events` table before being published to Redis.
-When a client reconnects, it sends `{"type": "CATCH_UP", "last_sequence": N}`. The server queries
-`stream_events WHERE task_id = X AND sequence_number > N` and replays missed events before
-resuming the live Redis subscription.
-
-**Rationale**: Persisting events to DB before publishing ensures no event is ever lost even if
-the Redis connection drops. The `CATCH_UP` mechanism is simpler than maintaining an in-memory
-ring buffer and works across process restarts.
-
-**Alternatives considered**:
-- Redis Streams (`XADD` / `XREAD`) — provides persistence within Redis but adds operational
-  complexity (stream trimming, consumer groups). PostgreSQL already handles persistence. Rejected.
-- SSE (Server-Sent Events) instead of WebSocket — SSE is unidirectional (no PAUSE/RESUME from
-  client); rejected because the spec requires bidirectional control.
-
----
-
-## D-09: Inline Comment Line Mapping — Stability after squash/rebase
-
-**Decision**: Inline comments store positions as unified diff hunk positions
-(`file_path`, `diff_line_number` within the diff object). They are NOT stored as absolute file
-line numbers. When the Agent receives the reject feedback, it receives the diff content alongside
-the comments, so it can locate the correct region without needing to know the absolute line number
-in the current file.
-
-**Rationale**: Absolute line numbers drift after any rebase or squash. Diff-relative positions
-are stable within the scope of a single review cycle (one diff object, one review decision).
-
-**Alternatives considered**:
-- Store absolute file line numbers — drift after squash; PO feedback becomes inaccurate. Rejected.
-- Use Git blame to correlate — complex, fragile for new files. Rejected.
-
-**Trade-off**: If the PO rejects and the Agent modifies the file, the next diff is a new diff
-object. Comments from the previous diff are historical only. This is acceptable per the spec
-(inline comments apply to the current diff under review).
-
----
-
-## D-10: MEMORY.md Concurrency — Preventing write conflicts
-
-**Decision**: Agent writes to `memory_entries` table (INSERT only, never UPDATE). PO edits use
-`SELECT FOR UPDATE` on the specific row then UPDATE. The `MEMORY.md` file is regenerated from
-the DB as a read artifact each time the Agent context is assembled — it is not a write target
-during Agent execution. This means there is no concurrent file-write contention.
-
-**Rationale**: Separating the DB (source of truth) from the file (read artifact) eliminates the
-race condition described in the spec's edge case ("PO editing MEMORY.md while Agent writes").
-
-**Alternatives considered**:
-- File lock (`fcntl.flock`) — process-local; fails with multiple workers. Rejected.
-- Optimistic locking with `updated_at` version check — workable but adds round-trips. The DB row
-  SELECT FOR UPDATE pattern is simpler and equally correct.
+| Question | Resolution |
+|---|---|
+| RTK binary dependency? | Not needed — all 9 techniques implemented in Python stdlib only (`re`, `collections`) |
+| New DB tables for optimizer? | No — pure processing layer, no persistence |
+| New API endpoints? | No — constitution uses existing `GET/PUT /api/v1/projects/{id}/constitution` |
+| Monaco available in workspace? | Yes — `@monaco-editor/react` already in `document-editor.tsx` |
+| CSS module convention? | kebab-case `.module.css` per Constitution Principle VIII |
+| `list_files` return type change breaks callers? | Verified — only agent nodes consume this; tool description updated |

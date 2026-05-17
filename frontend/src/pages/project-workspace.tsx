@@ -6,6 +6,7 @@ import { Spinner } from '../components/atoms/spinner'
 import { DocumentPanel } from '../components/organisms/document-panel'
 import { KanbanBoard } from '../components/organisms/kanban-board'
 import { ProjectHeader } from '../components/organisms/project-header'
+import { ConstitutionPanel } from '../components/organisms/constitution-panel'
 import { MemoryEditor } from '../components/organisms/memory-editor'
 import { ReviewPanel } from '../components/organisms/review-panel'
 import { ThoughtStreamPanel } from '../components/organisms/thought-stream-panel'
@@ -41,7 +42,7 @@ export default function ProjectWorkspace() {
   const [thoughtStreamOpen, setThoughtStreamOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'memory' | 'audit'>('documents')
+  const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'memory' | 'audit' | 'constitution'>('documents')
   const AUDIT_PAGE_SIZE = 25
   const [auditPage, setAuditPage] = useState<AuditLogsPage | null>(null)
   const [auditLoading, setAuditLoading] = useState(false)
@@ -240,6 +241,16 @@ export default function ProjectWorkspace() {
             >
               Audit log
             </button>
+            <button
+              type="button"
+              role="tab"
+              className={activeTab === 'constitution' ? styles.tabActive : styles.tab}
+              aria-selected={activeTab === 'constitution'}
+              id="workspace-tab-constitution"
+              onClick={() => setActiveTab('constitution')}
+            >
+              Constitution
+            </button>
           </div>
           <section className={styles.body}>
             {activeTab === 'documents' ? (
@@ -266,6 +277,16 @@ export default function ProjectWorkspace() {
                 </h2>
                 <p className={styles.memoryHint}>Lessons learned from completed work on this project.</p>
                 <MemoryEditor projectId={currentProject.id} />
+              </section>
+            ) : activeTab === 'constitution' ? (
+              <section className={styles.constitution} aria-labelledby="workspace-constitution-heading">
+                <h2 id="workspace-constitution-heading" className={styles.constitutionTitle}>
+                  Constitution
+                </h2>
+                <p className={styles.constitutionHint}>
+                  Rules and conventions that guide every Agent in this project.
+                </p>
+                <ConstitutionPanel projectId={currentProject.id} />
               </section>
             ) : (
               <section className={styles.audit} aria-labelledby="workspace-audit-heading">

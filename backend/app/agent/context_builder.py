@@ -17,6 +17,7 @@ from app.models.project import Project
 from app.models.task import Task
 from app.services.codebase_mapper import run as run_codebase_map
 from app.services.project_service import ProjectService
+from app.tools.token_optimizer import deduplicate_lines, optimize_file_content
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +45,7 @@ class ContextBuilder:
         project = await ProjectService.get(session, project_id)
         constitution = project.constitution.strip()
         constitution_block = (
-            constitution if constitution else "No constitution provided yet. Follow safe defaults."
+            deduplicate_lines(constitution) if constitution else "No constitution provided yet. Follow safe defaults."
         )
 
         system_prompt = (
@@ -92,6 +93,7 @@ class ContextBuilder:
             if memory_path.is_file():
                 mem_txt = memory_path.read_text(encoding="utf-8", errors="replace").strip()
                 if mem_txt:
+                    mem_txt = optimize_file_content(mem_txt, max_lines=300)
                     if len(mem_txt) > _MAX_MEMORY_MD_CHARS:
                         mem_txt = mem_txt[:_MAX_MEMORY_MD_CHARS] + "\n…(MEMORY.md truncated)"
                     system_prompt += "\n\n## Past Lessons\n\n" + mem_txt

@@ -3,8 +3,9 @@
 **Input**: Design documents from `/specs/001-neo-kanban/`
 **Prerequisites**: plan.md ✅ · spec.md ✅ · research.md ✅ · data-model.md ✅ · contracts/ ✅
 
-**Scope**: Phase 1 (core agentic loop) + Phase 2 (AI enhancements)
-**Total tasks**: 118 tasks across 20 phases (T007a added G7, T008a added G4, T073a added G9)
+**Scope**: Phase 1 (core agentic loop) + Phase 2 (AI enhancements) + Phase 3 (RTK Token Optimizer + Constitution Tab)
+**Total tasks**: 127 tasks across 22 phases (T007a/T008a/T073a added; Phase 21-22 added 2026-05-17 for RTK Token Optimizer + Constitution Tab)
+**Status**: Phase 1 ✅ · Phase 2 ✅ · Phase 3 ✅ — All 127 tasks complete as of 2026-05-18
 
 ## Format: `[ID] [P?] [Story?] Description`
 
@@ -359,6 +360,45 @@
 
 ---
 
+# ══════════════════════════════════════════════
+# PHASE 3 — RTK Token Optimizer + Constitution Tab
+# ══════════════════════════════════════════════
+#
+# Prerequisites: Phase 1 fully complete.
+# These phases are independent of Phase 2 — can be worked in parallel with Phase 2 tasks.
+
+---
+
+## Phase 21: RTK Token Optimizer (Priority: P1) [Phase 3]
+
+**Goal**: Implement the four RTK-AI/RTK compression techniques (Smart Filtering, Grouping, Truncation, Deduplication) as a pure-Python module integrated into the agent tool pipeline. Target: 60-90% token reduction on common tool calls.
+
+**Independent Test**: Run the unit test suite: `pytest backend/tests/unit/test_token_optimizer.py -v` — all 8 functions pass. Then trigger a Coder Agent run and verify `list_files` output is a tree, pytest output shows failures-only, and `git diff` shows only `+`/`-` lines.
+
+- [X] T118 [US17] Create `backend/app/tools/token_optimizer.py` with 8 pure functions: `optimize_list_output(paths: list[str]) -> str` (flat list → directory tree with file counts), `optimize_file_content(content: str, max_lines: int = 500) -> str` (ANSI strip + collapse blank lines + head/tail truncation), `optimize_command_output(cmd: str, stdout: str, stderr: str, exit_code: int) -> str` (routes to specialised handlers based on cmd pattern, always prepends `exit_code: N`), `filter_test_output(output: str) -> str` (keep FAILED/ERROR/Traceback lines + last summary line; if no failures return last line only), `compress_git_diff(diff: str) -> str` (keep `---`/`+++`/`@@`/`+`/`-` lines; strip space-prefix context lines), `compress_git_log(log: str) -> str` (one line per commit: 7-char hash · author · date · subject), `compress_git_status(status: str) -> str` (branch line + staged/unstaged/untracked counts), `group_build_errors(output: str) -> str` (group `tsc`/`eslint`/`ruff`/`flake8` errors by file path). All functions are pure (no I/O, no async). Add module-level docstring referencing research.md RTK analysis.
+- [X] T119 [P] [US17] Write `backend/tests/unit/test_token_optimizer.py`: one test class per function, fixtures with representative real output samples (e.g., 50-test pytest run with 3 failures, a 200-line git diff, a 100-file listing). Assert: (1) `optimize_list_output` produces a tree with `/` directory separators and `(N files)` counts; (2) `optimize_file_content` with 600-line input returns ≤ 300 lines with skip notice; (3) `filter_test_output` on passing run returns only last line; (4) `compress_git_diff` output contains no lines starting with ` ` (space); (5) empty-input edge cases return non-empty strings without raising. Dependency: T118.
+- [X] T120 [US17] Patch `backend/app/tools/file_tools.py`: (1) add `from app.tools.token_optimizer import optimize_file_content, optimize_list_output`; (2) in `read_file()` replace `return file_path.read_text(encoding="utf-8")` with `return optimize_file_content(file_path.read_text(encoding="utf-8"))`; (3) change `list_files()` return type from `list[str]` to `str` and replace the final `return sorted(...)` with `return optimize_list_output(sorted(...))`; (4) update the `list_files` LangChain tool `description` to reflect string return: "Returns a compact directory tree of files under the given directory inside the project sandbox.". Dependency: T118.
+- [X] T121 [US17] Patch `backend/app/tools/sandbox_tools.py`: (1) add `from app.tools.token_optimizer import optimize_command_output`; (2) replace the final `return f"exit_code: {code}\n\nstdout:\n{stdout}\n\nstderr:\n{stderr}"` with `return optimize_command_output(stripped, stdout, stderr, code)`. Add env-var escape hatch: if `os.environ.get("RTK_OPTIMIZER_DISABLED")` is truthy, skip optimizer and return raw output. Dependency: T118.
+- [X] T122 [US17] Patch `backend/app/agent/context_builder.py`: (1) add `from app.tools.token_optimizer import optimize_file_content, deduplicate_lines`; (2) in `build_coder_context()`, wrap the MEMORY.md read with `mem_txt = optimize_file_content(mem_txt, max_lines=300)` before the existing char-limit truncation (so optimizer runs first, then hard cap applies); (3) in `build_architect_context()`, wrap constitution with `constitution_block = deduplicate_lines(constitution.strip())` before it is injected into the system prompt. Dependency: T118.
+
+**Checkpoint**: `pytest backend/tests/unit/test_token_optimizer.py` — all tests green. Trigger coder_node via drag-to-In-Progress — inspect agent_run logs to confirm `list_files` returns tree format and `run_command: pytest` returns failures-only.
+
+---
+
+## Phase 22: Constitution Tab (Priority: P1) [Phase 3]
+
+**Goal**: Add a 5th "Constitution" tab to the workspace, fulfilling spec YC-05 ("PO mở tab Constitution trong dự án"). No new API endpoints or DB changes.
+
+**Independent Test**: Open any project workspace → click "Constitution" tab → Monaco editor loads with current constitution content → edit and save → reload → content persists. All 4 existing tabs still function correctly.
+
+- [X] T123 [US3] Create `frontend/src/components/organisms/constitution-panel.tsx`: self-contained organism accepting `{ projectId: string }` prop. Internal state: `content` (editor value), `savedContent` (last persisted value for dirty detection), `loading`, `saving`, `lastSavedAt: string | null`, `statusMessage: string | null`, `error: string | null`. On mount: call `getConstitution(projectId)` → populate `content` and `savedContent`. Save button: call `updateConstitution(projectId, { content })` → on success update `savedContent` and `lastSavedAt`. Show "Unsaved changes" indicator when `content !== savedContent`. Monaco config: `language="markdown"`, `theme="vs"`, `options={{ lineNumbers: "off", wordWrap: "on", minimap: { enabled: false } }}`. Import `getConstitution` and `updateConstitution` from `../../services/project-api`. Import `DocumentEditor` from `../molecules/document-editor` as the Monaco wrapper. Follow Atomic Design: this is an organism (composes molecules + atoms).
+- [X] T124 [P] [US3] Create `frontend/src/components/organisms/constitution-panel.module.css`: styles for the constitution panel layout. Must include: `.panel` (flex-column, full height), `.toolbar` (flex-row, space-between, padding 8px), `.title` (font-weight 600), `.saveBtn` (reuse project button design), `.status` (font-size 0.85rem, muted colour for save timestamp), `.dirtyIndicator` (amber colour, font-size 0.8rem), `.editorWrap` (flex: 1, min-height 400px), `.error` (red text, margin), `.loading` (spinner row). Dependency: T123.
+- [X] T125 [US3] Patch `frontend/src/pages/project-workspace.tsx`: (1) add `import { ConstitutionPanel } from '../components/organisms/constitution-panel'`; (2) extend `activeTab` union type to include `| 'constitution'`; (3) add tab button after the Audit Log button: `<button type="button" role="tab" className={activeTab === 'constitution' ? styles.tabActive : styles.tab} aria-selected={activeTab === 'constitution'} id="workspace-tab-constitution" onClick={() => setActiveTab('constitution')}>Constitution</button>`; (4) add tab body section after the audit section: render `<section className={styles.constitution} aria-labelledby="workspace-constitution-heading"><h2 id="workspace-constitution-heading" className={styles.constitutionTitle}>Constitution</h2><p className={styles.constitutionHint}>Rules and conventions that guide every Agent in this project.</p><ConstitutionPanel projectId={currentProject.id} /></section>`; (5) add `.constitution`, `.constitutionTitle`, `.constitutionHint` class definitions to `project-workspace.module.css` (same visual pattern as `.memory` / `.memoryTitle` / `.memoryHint`). Dependency: T123.
+
+**Checkpoint**: Click "Constitution" tab in workspace → editor loads → type rules → Save → "Saved" message appears → reload page → rules persist → verify via `GET /api/v1/projects/{id}/constitution` returning updated content.
+
+---
+
 ## Dependencies & Execution Order
 
 ### Cross-Phase Dependencies
@@ -377,6 +417,12 @@ Phase 11 (US9) + Phase 12 ──────────────────
 Phase 13 (US10 - WebSocket) ───────────────────► BLOCKS Phase 14 (US11 - Pause/Steer)
 Phase 15 (US12 - Memory write) ────────────────► BLOCKS Phase 16 (US13 - Memory read/edit)
 Phase 18 (US15 - Git branch) ──────────────────► BLOCKS Phase 19 (US16 - Inline comments)
+
+Phase 21 (RTK Optimizer) ──────────────────────► Independent of Phase 2; can run in parallel
+                                                   T118 (core) → T119 (tests) in parallel
+                                                   T118 → T120 → T121 → T122 (sequential integration)
+Phase 22 (Constitution Tab) ───────────────────► Independent of Phase 2; depends only on Phase 5
+                                                   T123 + T124 in parallel → T125
 ```
 
 ### Phase 2 Inter-Dependencies
@@ -451,6 +497,25 @@ Task T079: Instrument spec_node + plan_node
 19. Complete **Phase 18** (US15 — Git branching) → validate TC-12
 20. Complete **Phase 19** (US16 — Inline comments) → validate TC-13
 21. Complete **Phase 20** (Full Phase 2 validation)
+
+### Phase 3 Strategy (RTK + Constitution Tab)
+
+These can be started any time after **Phase 1 Setup is complete**:
+
+```
+Phase 21 (RTK):
+  T118 → T119 [P]    (write module + tests in parallel)
+  T118 → T120        (patch file_tools, depends on module)
+  T120 → T121        (patch sandbox_tools)
+  T121 → T122        (patch context_builder, last integration point)
+
+Phase 22 (Constitution Tab):
+  T123 + T124 [P]    (component + CSS in parallel)
+  T123 → T125        (workspace patch after component exists)
+```
+
+Both phases are **safe to work in parallel with each other** and with Phase 2 tasks —
+they touch different files and have no cross-phase runtime dependencies.
 
 ---
 

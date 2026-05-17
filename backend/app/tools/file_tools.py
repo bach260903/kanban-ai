@@ -9,6 +9,7 @@ from langchain_core.tools import StructuredTool
 
 from app.config import settings
 from app.exceptions import SandboxEscapeError
+from app.tools.token_optimizer import optimize_file_content, optimize_list_output
 
 
 def _project_root(project_id: UUID | str) -> Path:
@@ -27,7 +28,7 @@ def read_file(project_id: UUID | str, path: str) -> str:
     file_path = _resolve_in_project(project_id, path)
     if not file_path.exists() or not file_path.is_file():
         raise FileNotFoundError(f"File not found: {path}")
-    return file_path.read_text(encoding="utf-8")
+    return optimize_file_content(file_path.read_text(encoding="utf-8"))
 
 
 def write_file(project_id: UUID | str, path: str, content: str) -> str:
@@ -37,16 +38,17 @@ def write_file(project_id: UUID | str, path: str, content: str) -> str:
     return str(file_path)
 
 
-def list_files(project_id: UUID | str, directory: str = ".") -> list[str]:
+def list_files(project_id: UUID | str, directory: str = ".") -> str:
     base_dir = _resolve_in_project(project_id, directory)
     if not base_dir.exists() or not base_dir.is_dir():
         raise FileNotFoundError(f"Directory not found: {directory}")
     root = _project_root(project_id)
-    return sorted(
+    paths = sorted(
         str(path.relative_to(root))
         for path in base_dir.rglob("*")
         if path.is_file()
     )
+    return optimize_list_output(paths)
 
 
 def build_file_tools(project_id: UUID | str) -> list[StructuredTool]:
@@ -58,7 +60,7 @@ def build_file_tools(project_id: UUID | str) -> list[StructuredTool]:
     def _write(path: str, content: str) -> str:
         return write_file(pid, path, content)
 
-    def _list(directory: str = ".") -> list[str]:
+    def _list(directory: str = ".") -> str:
         return list_files(pid, directory)
 
     return [
@@ -75,6 +77,6 @@ def build_file_tools(project_id: UUID | str) -> list[StructuredTool]:
         StructuredTool.from_function(
             func=_list,
             name="list_files",
-            description="List all files under a directory inside project sandbox.",
+            description="Returns a compact directory tree of files under the given directory inside the project sandbox.",
         ),
     ]
