@@ -8,6 +8,8 @@ export type PrimaryLanguage = 'python' | 'javascript' | 'typescript'
 
 export type ProjectStatus = 'active' | 'archived'
 
+export type CodingBackend = 'groq' | 'claude_code' | 'openai' | 'gemini'
+
 export interface Project {
   id: UUID
   name: string
@@ -15,6 +17,7 @@ export interface Project {
   primary_language: PrimaryLanguage
   constitution: string
   status: ProjectStatus
+  coding_backend: CodingBackend
   created_at: ISODateTime
   updated_at: ISODateTime
 }
@@ -26,6 +29,7 @@ export interface ProjectListItem {
   description: string | null
   primary_language: PrimaryLanguage
   status: ProjectStatus
+  coding_backend: CodingBackend
   updated_at: ISODateTime
 }
 
