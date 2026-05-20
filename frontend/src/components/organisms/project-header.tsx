@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
+import { BackendBadge } from '../atoms/backend-badge'
 import type { Project } from '../../types'
 
 import styles from './project-header.module.css'
@@ -18,6 +19,7 @@ export function ProjectHeader({ project }: ProjectHeaderProps) {
       <div className={styles.titleRow}>
         <h1 className={styles.title}>{project.name}</h1>
         <span className={styles.lang}>{project.primary_language}</span>
+        <BackendBadge backend={project.coding_backend} />
       </div>
       {project.description ? <p className={styles.description}>{project.description}</p> : null}
       <nav className={styles.tabs} aria-label="Workspace tabs">

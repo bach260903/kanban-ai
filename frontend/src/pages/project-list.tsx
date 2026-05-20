@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom'
 import { Button } from '../components/atoms/button'
 import { Spinner } from '../components/atoms/spinner'
 import { TextInput } from '../components/atoms/text-input'
+import { BackendSelector } from '../components/molecules/backend-selector'
 import { createProject, listProjects } from '../services/project-api'
 import { useProjectStore } from '../store/project-store'
-import type { PrimaryLanguage } from '../types'
+import type { CodingBackend, PrimaryLanguage } from '../types'
 
 import styles from './project-list.module.css'
 
@@ -45,6 +46,7 @@ export default function ProjectList() {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [language, setLanguage] = useState<PrimaryLanguage>('typescript')
+  const [backend, setBackend] = useState<CodingBackend>('groq')
   const [createError, setCreateError] = useState<string | null>(null)
   const [creating, setCreating] = useState(false)
 
@@ -81,6 +83,7 @@ export default function ProjectList() {
         name: trimmed,
         description: description.trim() === '' ? null : description.trim(),
         primary_language: language,
+        coding_backend: backend,
       })
       setName('')
       setDescription('')
@@ -134,6 +137,15 @@ export default function ProjectList() {
                 </option>
               ))}
             </select>
+          </label>
+          <label className={styles.selectLabel}>
+            AI Coding Backend
+            <BackendSelector
+              id="project-backend"
+              value={backend}
+              onChange={setBackend}
+              disabled={creating}
+            />
           </label>
         </div>
         <TextInput
