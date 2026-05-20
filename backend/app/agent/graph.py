@@ -8,7 +8,15 @@ from langgraph.graph import END, START, StateGraph
 
 # ``coder_node`` is implemented for US8 / T058. ``task_breakdown`` runs after ``plan`` when the graph
 # continues past PLAN HIL (or via ``run_task_breakdown_task`` on PLAN approve — US7 / T048).
-from app.agent.nodes import coder_node, plan_node, spec_node, task_breakdown_node
+from app.agent.nodes import cli_coder_node, coder_node, plan_node, spec_node, task_breakdown_node
+
+
+def route_coder(state: dict[str, Any]) -> str:
+    """Return the coder node name based on the project's coding backend."""
+    backend = str(state.get("coding_backend", "groq"))
+    if backend in ("claude_code", "gemini"):
+        return "cli_coder_node"
+    return "coder_node"
 
 
 def _route_after_spec(state: dict[str, Any]) -> str:
@@ -36,7 +44,8 @@ def build_state_graph() -> StateGraph:
     workflow.add_node("spec", spec_node.run)
     workflow.add_node("plan", plan_node.run)
     workflow.add_node("task_breakdown", task_breakdown_node.run)
-    workflow.add_node("coder", coder_node.run)
+    workflow.add_node("coder_node", coder_node.run)
+    workflow.add_node("cli_coder_node", cli_coder_node.run)
 
     workflow.add_edge(START, "spec")
     workflow.add_conditional_edges(
@@ -51,7 +60,8 @@ def build_state_graph() -> StateGraph:
     )
     # TASK_BREAKDOWN → IDLE (no automatic coder hand-off until US8 / T058).
     workflow.add_edge("task_breakdown", END)
-    workflow.add_edge("coder", END)
+    workflow.add_edge("coder_node", END)
+    workflow.add_edge("cli_coder_node", END)
 
     return workflow
 
