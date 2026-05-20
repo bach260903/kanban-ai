@@ -18,12 +18,23 @@ class ProjectStatus(StrEnum):
     ARCHIVED = "archived"
 
 
+class CodingBackend(StrEnum):
+    groq = "groq"
+    claude_code = "claude_code"
+    openai = "openai"
+    gemini = "gemini"
+
+
 class Project(Base):
     __tablename__ = "projects"
     __table_args__ = (
         CheckConstraint(
             "status IN ('active','archived')",
             name="ck_projects_status",
+        ),
+        CheckConstraint(
+            "coding_backend IN ('groq','claude_code','openai','gemini')",
+            name="ck_projects_coding_backend",
         ),
         UniqueConstraint("name", name="uq_projects_name"),
     )
@@ -45,6 +56,11 @@ class Project(Base):
         String(20),
         nullable=False,
         server_default=text("'active'"),
+    )
+    coding_backend: Mapped[CodingBackend] = mapped_column(
+        String(20),
+        nullable=False,
+        server_default=text("'groq'"),
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
