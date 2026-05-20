@@ -8,7 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.exceptions import DuplicateNameError, NotFoundError
-from app.models.project import Project, ProjectStatus
+from app.models.project import CodingBackend, Project, ProjectStatus
 from app.schemas.project import ProjectCreate, ProjectUpdate
 
 
@@ -23,6 +23,7 @@ class ProjectService:
             name=name,
             description=data.description,
             primary_language=data.primary_language,
+            coding_backend=data.coding_backend,
         )
         session.add(project)
         await session.flush()
@@ -54,6 +55,8 @@ class ProjectService:
             project.name = new_name
         if data.description is not None:
             project.description = data.description
+        if data.coding_backend is not None:
+            project.coding_backend = data.coding_backend
         await session.flush()
         return project
 
