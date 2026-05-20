@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.agent_runs import router as agent_runs_router
 from app.api.v1.audit_logs import router as audit_logs_router
+from app.api.v1.backends import router as backends_router
 from app.api.v1.branches import router as branches_router
 from app.api.v1.codebase import router as codebase_router
 from app.api.v1.documents import router as documents_router
@@ -22,6 +23,7 @@ from app.websocket import ws_handler
 api_v1_router = APIRouter(prefix="/api/v1")
 api_v1_router.include_router(auth_router)
 api_v1_router.include_router(projects_router)
+api_v1_router.include_router(backends_router)
 api_v1_router.include_router(audit_logs_router)
 api_v1_router.include_router(documents_router)
 api_v1_router.include_router(memory_router)
