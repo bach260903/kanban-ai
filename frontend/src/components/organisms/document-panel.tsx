@@ -235,6 +235,13 @@ export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
       ) : null}
 
       {combinedError ? <p className={styles.error}>{combinedError}</p> : null}
+      {agentFailed ? (
+        <p className={styles.error} role="alert">
+          {docLabel} generation failed
+          {agentFailureDetail ? `: ${agentFailureDetail}` : ''}. Check backend logs and{' '}
+          <code>GROQ_API_KEY</code> / <code>GROQ_MODEL</code> in <code>.env</code>.
+        </p>
+      ) : null}
       {statusMessage ? <p className={styles.success}>{statusMessage}</p> : null}
 
       {showGenerateSpec ? (

@@ -9,11 +9,12 @@ from typing import Any
 from uuid import UUID
 
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_groq import ChatGroq
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.agent.context_builder import ContextBuilder
 from app.config import settings
+from app.llm.factory import create_architect_llm, require_llm_configured
+from app.llm.invoke_helpers import ainvoke_llm
 from app.exceptions import NotFoundError
 from app.models.agent_run import AgentRun, AgentRunStatus
 from app.models.audit_log import AuditLogResult
@@ -181,16 +182,14 @@ async def _generate_plan(state: StateDict) -> StateDict:
         input_refs=[str(spec_doc.id), str(plan_doc.id)],
     )
     try:
-        llm = ChatGroq(
-            api_key=settings.groq_api_key,
-            model=settings.groq_model,
-            temperature=0.2,
-        )
-        llm_response = await llm.ainvoke(
+        require_llm_configured(settings.architect_llm_provider)
+        llm = create_architect_llm(temperature=0.2)
+        llm_response = await ainvoke_llm(
+            llm,
             [
                 SystemMessage(content=context["system"]),
                 HumanMessage(content=human_content),
-            ]
+            ],
         )
         plan_markdown = str(llm_response.content).strip()
         if not plan_markdown:

@@ -14,12 +14,13 @@ from uuid import UUID
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_core.tools import tool
-from langchain_groq import ChatGroq
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.agent.context_builder import ContextBuilder
 from app.config import settings
+from app.llm.factory import coder_llm_configured, create_coder_llm
+from app.llm.invoke_helpers import ainvoke_llm
 from app.database import async_session_maker
 from app.exceptions import PauseSignal, SandboxEscapeError
 from app.git.git_service import GitService
@@ -434,13 +435,18 @@ async def _run_with_session(state: StateDict) -> StateDict:
             HumanMessage(content=human),
         ]
 
-        if not settings.groq_api_key.strip():
+        if not coder_llm_configured():
             await _publish_event(
                 session,
                 task_id,
                 agent_run_id,
                 StreamEventType.THOUGHT,
-                {"reasoning": "Groq API key is not configured; writing stub notes and exiting without LLM."},
+                {
+                    "reasoning": (
+                        f"Coder LLM not configured (CODER_LLM_PROVIDER={settings.coder_llm_provider}); "
+                        "writing stub notes and exiting without LLM."
+                    ),
+                },
             )
             await asyncio.to_thread(
                 _fs_write,
@@ -465,7 +471,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 project_id=project_id,
                 task_id=task_id,
                 action_type="coder_node",
-                action_description="GROQ_API_KEY missing — placeholder diff recorded.",
+                action_description="LLM API key missing — placeholder diff recorded.",
                 result=AuditLogResult.FAILURE,
                 output_refs=[str(diff_row.id)],
             )
@@ -479,7 +485,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 {
                     "from": "CODING",
                     "to": "REVIEWING",
-                    "reason": "GROQ_API_KEY missing — placeholder diff recorded.",
+                    "reason": "LLM API key missing — placeholder diff recorded.",
                 },
             )
             await _finalize_agent_run(session, agent_run_id, AgentRunStatus.AWAITING_HIL)
@@ -487,11 +493,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
             _request_hil_interrupt()
             return state
 
-        llm = ChatGroq(
-            api_key=settings.groq_api_key,
-            model=settings.groq_model,
-            temperature=0.1,
-        ).bind_tools(_CODER_TOOLS)
+        llm = create_coder_llm(temperature=0.1).bind_tools(_CODER_TOOLS)
 
         rounds = 0
         while rounds < _MAX_TOOL_ROUNDS:
@@ -502,7 +504,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 project_id=project_id,
                 task_id=task_id,
                 action_type="coder_llm",
-                action_description=f"ChatGroq invoke (round {rounds})",
+                action_description=f"Coder LLM invoke (round {rounds})",
                 input_refs=[],
             )
             try:
@@ -515,7 +517,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                         "reasoning": f"Coder LLM round {rounds}: invoking model to decide the next sandbox actions.",
                     },
                 )
-                ai = cast(AIMessage, await llm.ainvoke(messages))
+                ai = cast(AIMessage, await ainvoke_llm(llm, messages))
                 await finalise_log(session, llm_log.id, AuditLogResult.SUCCESS)
             except Exception as exc:
                 await finalise_log(session, llm_log.id, AuditLogResult.FAILURE, output_refs=[str(exc)])

@@ -20,9 +20,10 @@ passlib[bcrypt]==1.7.4
 # Cache / Pub-Sub
 redis==5.1.1
 
-# AI (LLM via Groq — OpenAI-compatible stack removed; use langchain_groq.ChatGroq)
+# AI (LLM: LLM_PROVIDER=google | groq — app.llm.factory.create_chat_llm)
 langchain==0.3.0
 langchain-groq==0.2.0
+langchain-google-genai==2.0.0
 langgraph==0.2.20
 langgraph-checkpoint-postgres>=2.0.25,<3
 psycopg[binary]>=3.2.0

@@ -9,11 +9,11 @@ from pathlib import Path
 from uuid import UUID
 
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_groq import ChatGroq
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.config import settings
+from app.llm.factory import architect_llm_configured, create_architect_llm
+from app.llm.invoke_helpers import ainvoke_llm
 from app.exceptions import NotFoundError, SandboxEscapeError
 from app.models.diff import Diff
 from app.models.memory_entry import MemoryEntry
@@ -80,7 +80,7 @@ def _stub_extraction(diff: Diff) -> tuple[str, str]:
     )[:_MAX_SUMMARY]
     excerpt = (diff.content or "").strip()[:1200]
     lessons = (
-        "No LLM extraction (GROQ_API_KEY missing or parse failed). "
+        "No LLM extraction (LLM API key missing or parse failed). "
         "Review the unified diff manually for pitfalls and patterns.\n\n"
         f"Excerpt:\n{excerpt}"
     )[:_MAX_LESSONS]
@@ -118,7 +118,7 @@ def _parse_llm_json(text: str) -> tuple[str | None, str | None]:
 
 
 async def _extract_summary_and_lessons(diff: Diff) -> tuple[str, str]:
-    if not settings.groq_api_key.strip():
+    if not architect_llm_configured():
         return _stub_extraction(diff)
 
     body = (diff.content or "").strip()
@@ -138,13 +138,10 @@ async def _extract_summary_and_lessons(diff: Diff) -> tuple[str, str]:
         + body
     )
 
-    llm = ChatGroq(
-        api_key=settings.groq_api_key,
-        model=settings.groq_model,
-        temperature=0.2,
-    )
+    llm = create_architect_llm(temperature=0.2)
     try:
-        resp = await llm.ainvoke(
+        resp = await ainvoke_llm(
+            llm,
             [
                 SystemMessage(content=system),
                 HumanMessage(content=human),

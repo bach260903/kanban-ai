@@ -20,6 +20,12 @@ import styles from './project-workspace.module.css'
 
 function errorMessage(err: unknown): string {
   if (isAxiosError(err)) {
+    if (err.code === 'ECONNABORTED' || err.message.includes('timeout')) {
+      return (
+        'Backend did not respond in time. Restart uvicorn on port 8000 ' +
+        '(kanban-ai/backend) and ensure Postgres/Redis are running.'
+      )
+    }
     const detail = (err.response?.data as { detail?: unknown } | undefined)?.detail
     if (typeof detail === 'string') return detail
     return err.message
