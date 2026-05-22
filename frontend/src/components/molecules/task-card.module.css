@@ -1,215 +1,317 @@
+/* Molecule/TaskCard — ui-spec §5.5 / Pencil */
+
 .root {
+
   position: relative;
+
   display: flex;
-  gap: 0.65rem;
+
+  gap: var(--space-2);
+
   align-items: flex-start;
-  padding: 0.75rem 0.85rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--bg);
+
+  width: 100%;
+
+  max-width: var(--card-w);
+
+  padding: var(--space-4);
+
+  border: 1px solid var(--border-default);
+
+  border-radius: var(--radius-card);
+
+  background: var(--surface-primary);
+
   box-shadow: var(--shadow);
+
   text-align: left;
+
   touch-action: none;
+
 }
+
+
 
 .rootDragging {
+
   opacity: 0.85;
-  box-shadow: var(--shadow), 0 0 0 2px var(--accent-border);
+
+  box-shadow: var(--shadow), 0 0 0 2px var(--c-info-500);
+
 }
+
+
+
+.rootAgentRunning {
+
+  border-color: var(--c-info-500);
+
+  border-width: 2px;
+
+}
+
+
+
+.rootConflict {
+
+  border-color: var(--c-danger-500);
+
+  border-width: 2px;
+
+}
+
+
 
 .handle {
+
   flex-shrink: 0;
-  width: 1.25rem;
-  margin-top: 0.15rem;
-  padding: 0.2rem 0;
+
+  width: 1rem;
+
+  margin-top: 2px;
+
+  padding: 0;
+
   border: none;
-  border-radius: 6px;
+
   background: transparent;
-  color: var(--text);
-  font-size: 0.85rem;
-  line-height: 1;
+
+  color: var(--font-secondary-color);
+
+  font-size: 12px;
+
   cursor: grab;
-  opacity: 0.55;
+
+  opacity: 0.4;
+
 }
+
+
 
 .body {
+
   min-width: 0;
+
   flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: var(--space-2);
+
 }
+
+
+
+.topRow {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: var(--space-2);
+
+}
+
+
+
+.priorityBadge {
+
+  background: var(--c-neutral-100) !important;
+
+  color: var(--font-primary-color) !important;
+
+  border-color: var(--border-default) !important;
+
+}
+
+
 
 .title {
-  margin: 0 0 0.35rem;
-  font-size: 0.95rem;
+
+  margin: 0;
+
+  font-family: var(--font-ui);
+
+  font-size: var(--t-base);
+
   font-weight: 600;
-  color: var(--text-h);
-  line-height: 1.25;
+
+  color: var(--font-primary-color);
+
+  line-height: 1.3;
+
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+
 }
+
+
 
 .description {
+
   margin: 0;
-  font-size: 0.82rem;
-  line-height: 1.35;
-  color: var(--text);
+
+  font-family: var(--font-ui);
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  color: var(--font-secondary-color);
+
   display: -webkit-box;
+
   -webkit-box-orient: vertical;
+
   -webkit-line-clamp: 2;
+
   overflow: hidden;
+
 }
+
+
 
 .descriptionEmpty {
-  color: var(--text);
+
   opacity: 0.55;
+
   font-style: italic;
+
 }
 
-.meta {
+
+
+.divider {
+
+  margin: 0;
+
+  border: none;
+
+  border-top: 1px solid var(--border-default);
+
+  width: 100%;
+
+}
+
+
+
+.footer {
+
   display: flex;
+
   flex-wrap: wrap;
+
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.55rem;
+
+  gap: var(--space-2);
+
 }
 
-.priority {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-h);
-  padding: 0.12rem 0.4rem;
-  border-radius: 6px;
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-}
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 600;
+
+.branchBadge {
+
+  font-family: var(--font-mono);
+
   text-transform: none;
-  border: 1px solid var(--border);
-  background: var(--accent-bg);
-  color: var(--accent);
+
+  letter-spacing: 0;
+
 }
 
-.badgeTodo {
-  color: var(--text-h);
-  background: var(--social-bg);
+
+
+.agentPlaceholder {
+
+  font-family: var(--font-ui);
+
+  font-size: var(--t-sm);
+
+  color: var(--font-secondary-color);
+
 }
 
-.badgeInProgress {
-  color: #1d4ed8;
-  border-color: rgba(29, 78, 216, 0.35);
-  background: rgba(59, 130, 246, 0.12);
-}
 
-.badgeReview {
-  color: #a16207;
-  border-color: rgba(161, 98, 7, 0.35);
-  background: rgba(234, 179, 8, 0.12);
-}
 
-.badgeDone {
-  color: #15803d;
-  border-color: rgba(21, 128, 61, 0.35);
-  background: rgba(21, 128, 61, 0.12);
-}
+.updated {
 
-.badgeRejected {
-  color: #b91c1c;
-  border-color: rgba(185, 28, 28, 0.35);
-  background: rgba(185, 28, 28, 0.1);
-}
+  margin-left: auto;
 
-.badgeConflict {
-  color: #c2410c;
-  border-color: rgba(194, 65, 12, 0.35);
-  background: rgba(234, 88, 12, 0.12);
-}
+  font-family: var(--font-ui);
 
-.mergeConflictBadge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.15rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  border: 1px solid rgba(185, 28, 28, 0.45);
-  background: #b91c1c;
-  color: #fff;
-}
+  font-size: var(--t-sm);
 
-.branchHint {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: var(--text);
-  opacity: 0.75;
-  max-width: 12rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--font-secondary-color);
+
   white-space: nowrap;
+
 }
 
-.agentBadge {
-  display: inline-flex;
+
+
+.agentRunningBand {
+
+  display: flex;
+
   align-items: center;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.68rem;
+
+  gap: var(--space-2);
+
+  padding: 4px 8px;
+
+  background: var(--c-info-50);
+
+  border: 1px solid rgba(37, 99, 235, 0.35);
+
+  border-radius: var(--radius-badge);
+
+  font-size: var(--t-sm);
+
   font-weight: 600;
-  border: 1px solid var(--border);
-  background: var(--code-bg);
-  color: var(--text-h);
+
+  color: var(--c-info-700);
+
 }
 
-.agentRunning {
-  color: #1d4ed8;
-  border-color: rgba(29, 78, 216, 0.35);
-  background: rgba(59, 130, 246, 0.12);
+
+
+.agentRunningSpinner {
+
+  display: inline-block;
+
+  width: 10px;
+
+  height: 10px;
+
+  border: 2px solid currentColor;
+
+  border-right-color: transparent;
+
+  border-radius: 50%;
+
+  animation: spinAgent 0.7s linear infinite;
+
 }
 
-.agentSuccess {
-  color: #15803d;
-  border-color: rgba(21, 128, 61, 0.35);
-  background: rgba(21, 128, 61, 0.12);
-}
 
-.agentFailure {
-  color: #b91c1c;
-  border-color: rgba(185, 28, 28, 0.35);
-  background: rgba(185, 28, 28, 0.1);
-}
 
-.agentHil {
-  color: #a16207;
-  border-color: rgba(161, 98, 7, 0.35);
-  background: rgba(234, 179, 8, 0.12);
-}
+@keyframes spinAgent {
 
-.agentPaused {
-  color: var(--text);
-  opacity: 0.85;
-}
+  to {
 
-@media (prefers-color-scheme: dark) {
-  .badgeInProgress {
-    color: #93c5fd;
-    border-color: rgba(147, 197, 253, 0.35);
-    background: rgba(59, 130, 246, 0.15);
+    transform: rotate(360deg);
+
   }
 
-  .badgeReview {
-    color: #fde047;
-    border-color: rgba(253, 224, 71, 0.35);
-    background: rgba(234, 179, 8, 0.12);
-  }
-
-  .agentRunning {
-    color: #93c5fd;
-    border-color: rgba(147, 197, 253, 0.35);
-    background: rgba(59, 130, 246, 0.15);
-  }
 }
+
+

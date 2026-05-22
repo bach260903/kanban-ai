@@ -11,11 +11,13 @@ import type { TaskStatus } from '../../types'
 
 import styles from './kanban-board.module.css'
 
-/** Primary board columns (US7 checkpoint); rejected/conflict stay in store but off MVP board. */
-const BOARD_STATUSES = ['todo', 'in_progress', 'review', 'done'] as const satisfies readonly TaskStatus[]
+/** All 5 logical columns per ui-spec §5.5. */
+const BOARD_STATUSES = ['todo', 'in_progress', 'review', 'done', 'rejected', 'conflict'] as const satisfies readonly TaskStatus[]
 
 export type KanbanBoardProps = {
   projectId: string
+  /** True when the latest PLAN document has status === 'approved'. */
+  planApproved?: boolean
 }
 
 function loadErrorMessage(err: unknown): string {
@@ -28,7 +30,7 @@ function loadErrorMessage(err: unknown): string {
   return 'Unable to load tasks.'
 }
 
-export function KanbanBoard({ projectId }: KanbanBoardProps) {
+export function KanbanBoard({ projectId, planApproved = false }: KanbanBoardProps) {
   const columns = useTaskStore((s) => s.columns)
   const setColumns = useTaskStore((s) => s.setColumns)
   const clearTaskAgentRuns = useTaskStore((s) => s.clearTaskAgentRuns)
@@ -84,6 +86,8 @@ export function KanbanBoard({ projectId }: KanbanBoardProps) {
             key={status}
             column={{ status, tasks: columns[status] }}
             taskCardSortableDisabled={status !== 'todo'}
+            isWip={status === 'in_progress'}
+            planApproved={planApproved}
           />
         ))}
       </div>

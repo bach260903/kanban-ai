@@ -64,6 +64,10 @@ class Settings(BaseSettings):
         description="Retries on Gemini 429 ResourceExhausted.",
     )
     sandbox_root: str
+    dev_auth_enabled: bool = Field(
+        default=False,
+        description="When true, exposes POST /api/v1/dev/token for local JWT (DEV_AUTH_ENABLED).",
+    )
 
 
 settings = Settings()

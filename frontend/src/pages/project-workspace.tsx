@@ -11,6 +11,7 @@ import { ReviewPanel } from '../components/organisms/review-panel'
 import { ThoughtStreamPanel } from '../components/organisms/thought-stream-panel'
 import { useInlineComments } from '../hooks/use-inline-comments'
 import { getAuditLogs, type AuditLogsPage } from '../services/audit-api'
+import { getDocuments } from '../services/document-api'
 import { getProject } from '../services/project-api'
 import { getTasks, groupedResponseToTaskColumns } from '../services/task-api'
 import { emptyTaskColumns, useTaskStore } from '../store/task-store'
@@ -47,6 +48,7 @@ export default function ProjectWorkspace() {
   const [thoughtStreamOpen, setThoughtStreamOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [planApproved, setPlanApproved] = useState(false)
   const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'memory' | 'audit'>('documents')
   const AUDIT_PAGE_SIZE = 25
   const [auditPage, setAuditPage] = useState<AuditLogsPage | null>(null)
@@ -87,10 +89,14 @@ export default function ProjectWorkspace() {
     let cancelled = false
     void (async () => {
       try {
-        const data = await getTasks(currentProject.id)
+        const [data, planDocs] = await Promise.all([
+          getTasks(currentProject.id),
+          getDocuments(currentProject.id, 'PLAN'),
+        ])
         if (!cancelled) {
           useTaskStore.getState().clearTaskAgentRuns()
           useTaskStore.getState().setColumns(groupedResponseToTaskColumns(data))
+          setPlanApproved(planDocs.some((d) => d.status === 'approved'))
         }
       } catch {
         /* Kanban tab will surface load errors if user opens it */
@@ -146,7 +152,14 @@ export default function ProjectWorkspace() {
 
       {!loading && !error && currentProject ? (
         <>
-          <ProjectHeader project={currentProject} />
+          <ProjectHeader
+            project={currentProject}
+            activeTab={activeTab}
+            onTabChange={(tab) => {
+              if (tab === 'audit') setAuditOffset(0)
+              setActiveTab(tab)
+            }}
+          />
           {columns.review.length > 0 ? (
             <ReviewPanel projectId={currentProject.id} inlineComments={inlineComments} />
           ) : null}
@@ -202,51 +215,6 @@ export default function ProjectWorkspace() {
               ) : null}
             </>
           ) : null}
-          <div className={styles.tabs} role="tablist" aria-label="Workspace sections">
-            <button
-              type="button"
-              role="tab"
-              className={activeTab === 'documents' ? styles.tabActive : styles.tab}
-              aria-selected={activeTab === 'documents'}
-              id="workspace-tab-documents"
-              onClick={() => setActiveTab('documents')}
-            >
-              Documents
-            </button>
-            <button
-              type="button"
-              role="tab"
-              className={activeTab === 'kanban' ? styles.tabActive : styles.tab}
-              aria-selected={activeTab === 'kanban'}
-              id="workspace-tab-kanban"
-              onClick={() => setActiveTab('kanban')}
-            >
-              Kanban
-            </button>
-            <button
-              type="button"
-              role="tab"
-              className={activeTab === 'memory' ? styles.tabActive : styles.tab}
-              aria-selected={activeTab === 'memory'}
-              id="workspace-tab-memory"
-              onClick={() => setActiveTab('memory')}
-            >
-              Memory
-            </button>
-            <button
-              type="button"
-              role="tab"
-              className={activeTab === 'audit' ? styles.tabActive : styles.tab}
-              aria-selected={activeTab === 'audit'}
-              id="workspace-tab-audit"
-              onClick={() => {
-                setAuditOffset(0)
-                setActiveTab('audit')
-              }}
-            >
-              Audit log
-            </button>
-          </div>
           <section className={styles.body}>
             {activeTab === 'documents' ? (
               <section className={styles.documents} aria-labelledby="workspace-documents-heading">
@@ -263,7 +231,7 @@ export default function ProjectWorkspace() {
                 <h2 id="workspace-kanban-heading" className={styles.kanbanTitle}>
                   Kanban
                 </h2>
-                <KanbanBoard projectId={currentProject.id} />
+                <KanbanBoard projectId={currentProject.id} planApproved={planApproved} />
               </section>
             ) : activeTab === 'memory' ? (
               <section className={styles.memory} aria-labelledby="workspace-memory-heading">

@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgba(15, 23, 42, 0.35);
+  background: var(--c-overlay);
 }
 
 .panel {
@@ -12,12 +12,12 @@
   z-index: 100;
   display: flex;
   flex-direction: column;
-  width: min(560px, 100vw);
+  width: min(var(--aside-w), 100vw);
   max-height: 100vh;
   padding: 1rem 1rem 1.25rem;
   overflow-y: auto;
   border-left: 1px solid var(--border);
-  background: var(--bg);
+  background: var(--surface-primary);
   box-shadow: -6px 0 28px rgba(0, 0, 0, 0.12);
   color: var(--text);
   text-align: left;

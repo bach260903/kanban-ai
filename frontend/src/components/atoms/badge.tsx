@@ -10,6 +10,7 @@ export type BadgeProps = {
   /** Overrides default label derived from `status` */
   label?: string
   className?: string
+  role?: string
 }
 
 const TASK_TONE: Record<TaskStatus, keyof typeof styles> = {
@@ -32,7 +33,7 @@ const AGENT_TONE: Record<AgentRunStatus, keyof typeof styles> = {
   success: 'success',
   failure: 'danger',
   awaiting_hil: 'review',
-  paused: 'neutral',
+  paused: 'purple',
 }
 
 function toneFor(kind: BadgeKind, status: BadgeProps['status']): keyof typeof styles {
@@ -49,9 +50,13 @@ function defaultLabel(status: string): string {
   return status.replace(/_/g, ' ')
 }
 
-export function Badge({ kind, status, label, className }: BadgeProps) {
+export function Badge({ kind, status, label, className, role }: BadgeProps) {
   const tone = toneFor(kind, status)
   const text = label ?? defaultLabel(status)
   const merged = [styles.badge, styles[tone], className].filter(Boolean).join(' ')
-  return <span className={merged}>{text}</span>
+  return (
+    <span className={merged} role={role}>
+      {text}
+    </span>
+  )
 }

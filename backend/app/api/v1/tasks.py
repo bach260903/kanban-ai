@@ -35,27 +35,26 @@ from app.services.task_service import TaskService
 router = APIRouter(prefix="/projects", tags=["tasks"])
 
 
+def _status_key(status: TaskStatus | str) -> str:
+    """Normalize status for grouping (ORM may return ``str`` even when typed as ``TaskStatus``)."""
+    return str(status)
+
+
 def _group_tasks_by_status(tasks: list[Task]) -> TasksGroupedResponse:
-    buckets: dict[str, list[TaskKanbanItem]] = {
-        TaskStatus.TODO.value: [],
-        TaskStatus.IN_PROGRESS.value: [],
-        TaskStatus.REVIEW.value: [],
-        TaskStatus.DONE.value: [],
-        TaskStatus.REJECTED.value: [],
-        TaskStatus.CONFLICT.value: [],
-    }
+    # ``TaskStatus`` is a ``StrEnum``: members are strings (no ``.value`` attribute).
+    buckets: dict[str, list[TaskKanbanItem]] = {s: [] for s in TaskStatus}
     for t in tasks:
-        key = t.status.value
+        key = _status_key(t.status)
         if key not in buckets:
             continue
         buckets[key].append(TaskKanbanItem.model_validate(t))
     return TasksGroupedResponse(
-        todo=buckets[TaskStatus.TODO.value],
-        in_progress=buckets[TaskStatus.IN_PROGRESS.value],
-        review=buckets[TaskStatus.REVIEW.value],
-        done=buckets[TaskStatus.DONE.value],
-        rejected=buckets[TaskStatus.REJECTED.value],
-        conflict=buckets[TaskStatus.CONFLICT.value],
+        todo=buckets[TaskStatus.TODO],
+        in_progress=buckets[TaskStatus.IN_PROGRESS],
+        review=buckets[TaskStatus.REVIEW],
+        done=buckets[TaskStatus.DONE],
+        rejected=buckets[TaskStatus.REJECTED],
+        conflict=buckets[TaskStatus.CONFLICT],
     )
 
 

@@ -17,6 +17,10 @@ export type KanbanColumnProps = {
   column: KanbanColumnModel
   /** When true, cards are not draggable (e.g. all columns except To do for US8 MVP). */
   taskCardSortableDisabled?: boolean
+  /** When true, render WIP = 1 chip in header (only for In Progress). */
+  isWip?: boolean
+  /** When false and column is 'todo', show PLAN-pending warning banner. */
+  planApproved?: boolean
 }
 
 function columnHeading(status: TaskStatus): string {
@@ -31,7 +35,21 @@ function columnHeading(status: TaskStatus): string {
   return titles[status]
 }
 
-export function KanbanColumn({ column, taskCardSortableDisabled = true }: KanbanColumnProps) {
+const EMPTY_HINTS: Record<TaskStatus, string> = {
+  todo: 'No tasks yet.',
+  in_progress: 'Drag a task here to start the Coder.',
+  review: 'No tasks in review.',
+  done: 'No tasks done yet.',
+  rejected: 'No rejected tasks.',
+  conflict: 'No conflicts.',
+}
+
+export function KanbanColumn({
+  column,
+  taskCardSortableDisabled = true,
+  isWip = false,
+  planApproved = false,
+}: KanbanColumnProps) {
   const { status, tasks } = column
   const ids = tasks.map((t) => t.id)
 
@@ -40,22 +58,38 @@ export function KanbanColumn({ column, taskCardSortableDisabled = true }: Kanban
     data: { type: 'column', status },
   })
 
+  const showPlanPending = tasks.length === 0 && status === 'todo' && !planApproved
+
   return (
     <section className={styles.root} aria-labelledby={`kanban-col-${status}`}>
       <header className={styles.header}>
-        <h2 className={styles.title} id={`kanban-col-${status}`}>
-          {columnHeading(status)}
-        </h2>
-        <span className={styles.count}>
-          {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
-        </span>
+        <div className={styles.headerLeft}>
+          <h2 className={styles.title} id={`kanban-col-${status}`}>
+            {columnHeading(status)}
+          </h2>
+          <span className={styles.count}>
+            {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
+          </span>
+        </div>
+        {isWip && (
+          <span className={styles.wip} aria-label="WIP limit: 1">
+            WIP = 1
+          </span>
+        )}
       </header>
       <div
         ref={setNodeRef}
         className={`${styles.listWrap} ${isOver ? styles.listWrapOver : ''}`}
       >
         {tasks.length === 0 ? (
-          <p className={styles.empty}>No tasks</p>
+          showPlanPending ? (
+            <div className={styles.emptyBanner} role="status">
+              <span aria-hidden>⏳</span>
+              <span>Approve PLAN.md to generate tasks.</span>
+            </div>
+          ) : (
+            <p className={styles.empty}>{EMPTY_HINTS[status]}</p>
+          )
         ) : (
           <SortableContext id={`sortable-${status}`} items={ids} strategy={verticalListSortingStrategy}>
             <ul className={styles.list}>
