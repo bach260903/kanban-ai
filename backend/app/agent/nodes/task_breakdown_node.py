@@ -11,11 +11,12 @@ from typing import Any
 from uuid import UUID
 
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_groq import ChatGroq
 from pydantic import BaseModel, Field, TypeAdapter
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
+from app.llm.factory import create_architect_llm, require_llm_configured
+from app.llm.invoke_helpers import ainvoke_llm
 from app.models.agent_run import AgentRun, AgentRunStatus
 from app.models.document import DocumentStatus, DocumentType
 from app.services.document_service import DocumentService
@@ -124,12 +125,12 @@ async def _run_task_breakdown(state: StateDict) -> StateDict:
     )
     human = f"## Approved PLAN\n\n{plan_markdown}\n"
 
-    llm = ChatGroq(
-        api_key=settings.groq_api_key,
-        model=settings.groq_model,
-        temperature=0.1,
+    require_llm_configured(settings.architect_llm_provider)
+    llm = create_architect_llm(temperature=0.1)
+    llm_response = await ainvoke_llm(
+        llm,
+        [SystemMessage(content=system), HumanMessage(content=human)],
     )
-    llm_response = await llm.ainvoke([SystemMessage(content=system), HumanMessage(content=human)])
     raw = str(llm_response.content).strip()
     if not raw:
         raise ValueError("LLM returned empty response.")

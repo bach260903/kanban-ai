@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.v1.dev_auth import router as dev_auth_router
 from app.api.v1.agent_runs import router as agent_runs_router
 from app.api.v1.audit_logs import router as audit_logs_router
 from app.api.v1.backends import router as backends_router
@@ -32,6 +33,7 @@ api_v1_router.include_router(branches_router)
 api_v1_router.include_router(tasks_router)
 api_v1_router.include_router(pause_router)
 api_v1_router.include_router(agent_runs_router)
+api_v1_router.include_router(dev_auth_router)
 
 
 @asynccontextmanager

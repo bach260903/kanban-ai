@@ -1,48 +1,83 @@
+/* Molecule/KanbanColumn */
 .root {
   display: flex;
   flex-direction: column;
-  min-width: 0;
-  flex: 1 1 220px;
+  min-width: var(--card-w);
+  flex: 1 1 var(--card-w);
   max-width: 320px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--bg);
+  padding: var(--space-3);
+  gap: var(--space-3);
+  border-radius: var(--radius-card);
+  background: var(--surface-bg);
   text-align: left;
 }
 
 .header {
-  padding: 0.65rem 0.85rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--social-bg);
-  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .title {
   margin: 0;
-  font-size: 0.95rem;
+  font-family: var(--font-ui);
+  font-size: var(--t-base);
   font-weight: 600;
-  color: var(--text-h);
+  color: var(--font-primary-color);
+  white-space: nowrap;
 }
 
 .count {
-  display: block;
-  margin-top: 0.2rem;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text);
-  opacity: 0.85;
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 4px 8px;
+  border-radius: var(--radius-badge);
+  font-family: var(--font-ui);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  background: var(--c-neutral-100);
+  color: var(--font-primary-color);
+}
+
+.wip {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--c-info-700);
+  background: var(--c-info-50);
+  border: 1px solid rgba(37, 99, 235, 0.4);
+  border-radius: var(--radius-badge);
+  padding: 4px 8px;
+  white-space: nowrap;
 }
 
 .listWrap {
-  padding: 0.65rem;
   flex: 1;
-  min-height: 4rem;
+  min-height: 64px;
 }
 
 .listWrapOver {
-  outline: 2px dashed var(--accent-border);
-  outline-offset: -4px;
-  border-radius: 8px;
+  outline: 2px dashed var(--c-info-500);
+  outline-offset: -3px;
+  border-radius: var(--radius-badge);
+  background: rgba(37, 99, 235, 0.04);
+}
+
+.listWrapBlocked {
+  outline: 2px dashed var(--c-danger-500);
+  outline-offset: -3px;
+  border-radius: var(--radius-badge);
+  background: rgba(220, 38, 38, 0.04);
 }
 
 .list {
@@ -51,7 +86,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: var(--space-3);
 }
 
 .listItem {
@@ -60,9 +95,23 @@
 
 .empty {
   margin: 0;
-  padding: 0.5rem 0.25rem;
-  font-size: 0.82rem;
-  color: var(--text);
-  opacity: 0.7;
+  padding: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: var(--t-sm);
+  color: var(--font-secondary-color);
   text-align: center;
+}
+
+.emptyBanner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--c-warn-50);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  border-radius: var(--radius-card);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--c-warn-700);
+  line-height: 1.4;
 }

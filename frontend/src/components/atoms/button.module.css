@@ -1,11 +1,18 @@
+/* Atom/Button — Pencil variants */
 .button {
-  font: inherit;
-  font-size: 0.95rem;
+  font-family: var(--font-ui);
+  font-size: var(--t-base);
+  font-weight: 500;
   line-height: 1.2;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  height: 36px;
+  padding: 8px 16px;
+  border-radius: var(--radius-card);
   border: 1px solid transparent;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
   transition:
     background 0.15s ease,
     border-color 0.15s ease,
@@ -13,7 +20,7 @@
 }
 
 .button:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--c-info-500);
   outline-offset: 2px;
 }
 
@@ -23,37 +30,32 @@
 }
 
 .primary {
-  background: var(--accent);
+  background: var(--c-info-500);
   color: #fff;
-  border-color: transparent;
+  border-color: var(--c-info-500);
 }
 
 .primary:hover:not(:disabled) {
-  filter: brightness(1.06);
+  background: var(--c-info-700);
+  border-color: var(--c-info-700);
 }
 
 .secondary {
-  background: var(--code-bg);
-  color: var(--text-h);
-  border-color: var(--border);
+  background: var(--surface-primary);
+  color: var(--font-primary-color);
+  border-color: var(--border-default);
 }
 
 .secondary:hover:not(:disabled) {
-  border-color: var(--accent-border);
+  border-color: var(--c-info-500);
 }
 
 .danger {
-  background: #dc2626;
+  background: var(--c-danger-500);
   color: #fff;
-  border-color: transparent;
+  border-color: var(--c-danger-500);
 }
 
 .danger:hover:not(:disabled) {
-  filter: brightness(1.08);
-}
-
-@media (prefers-color-scheme: dark) {
-  .primary {
-    color: #0f0f12;
-  }
+  filter: brightness(1.06);
 }

@@ -1,6 +1,7 @@
 import { isAxiosError } from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 
+import { Badge } from '../atoms/badge'
 import { Button } from '../atoms/button'
 import { Spinner } from '../atoms/spinner'
 import { DocumentEditor } from '../molecules/document-editor'
@@ -30,12 +31,6 @@ function errorMessage(err: unknown): string {
   }
   if (err instanceof Error) return err.message
   return 'Something went wrong.'
-}
-
-function statusBadgeClass(status: DocumentStatus): string {
-  if (status === 'approved') return `${styles.badge} ${styles.badgeApproved}`
-  if (status === 'revision_requested') return `${styles.badge} ${styles.badgeRevision}`
-  return styles.badge
 }
 
 export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
@@ -102,6 +97,17 @@ export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
       setPendingRunId(null)
     }
   }, [agentRun])
+
+  const agentFailed =
+    agentRun != null && (agentRun.status === 'failure' || agentRun.status === 'timeout')
+  const agentFailureDetail = (() => {
+    if (!agentFailed || agentRun?.result == null || typeof agentRun.result !== 'object') {
+      return null
+    }
+    const r = agentRun.result as Record<string, unknown>
+    const msg = r.error ?? r.message ?? r.detail
+    return typeof msg === 'string' && msg.trim() !== '' ? msg.trim() : null
+  })()
 
   const displayStatus = document?.status ?? docRows[0]?.status
   const showGenerateSpec = documentType === 'SPEC' && !listLoading && docRows.length === 0
@@ -221,9 +227,7 @@ export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
           {panelTitle}
         </h2>
         {displayStatus ? (
-          <span className={statusBadgeClass(displayStatus)} role="status">
-            {displayStatus.replaceAll('_', ' ')}
-          </span>
+          <Badge kind="document" status={displayStatus} role="status" />
         ) : null}
       </div>
 
@@ -235,6 +239,13 @@ export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
       ) : null}
 
       {combinedError ? <p className={styles.error}>{combinedError}</p> : null}
+      {agentFailed ? (
+        <p className={styles.error} role="alert">
+          {docLabel} generation failed
+          {agentFailureDetail ? `: ${agentFailureDetail}` : ''}. Check backend logs and{' '}
+          <code>GROQ_API_KEY</code> / <code>GROQ_MODEL</code> in <code>.env</code>.
+        </p>
+      ) : null}
       {statusMessage ? <p className={styles.success}>{statusMessage}</p> : null}
 
       {showGenerateSpec ? (

@@ -24,6 +24,15 @@ function formatUpdated(iso: string): string {
 
 function messageFromUnknown(err: unknown): string {
   if (isAxiosError(err)) {
+    if (err.code === 'ECONNABORTED' || err.message.includes('timeout')) {
+      return (
+        'Backend không phản hồi (timeout 30s). Kiểm tra uvicorn port 8000, Postgres/Redis, ' +
+        'rồi mở /dev/auth để lấy JWT nếu chưa đăng nhập.'
+      )
+    }
+    if (err.response?.status === 401) {
+      return 'Chưa có JWT. Mở /dev/auth để lấy dev token (cần DEV_AUTH_ENABLED=true trên backend).'
+    }
     const data = err.response?.data as { detail?: unknown } | undefined
     const d = data?.detail
     if (typeof d === 'string') return d

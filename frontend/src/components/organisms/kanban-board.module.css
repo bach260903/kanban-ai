@@ -1,8 +1,13 @@
+/* ui-spec §5.5 — KanbanBoard organism */
+
 .board {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.85rem;
+  flex-wrap: nowrap;        /* desktop-first horizontal layout */
+  gap: var(--s-3, 12px);   /* spec §8.2: gap cột Kanban = 12 px */
   align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: var(--s-2, 8px);
+  min-height: 480px;
 }
 
 .loading,
@@ -15,5 +20,5 @@
 }
 
 .error {
-  color: #b91c1c;
+  color: var(--c-danger-500, #dc2626);
 }

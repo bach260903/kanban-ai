@@ -12,6 +12,7 @@ import { ReviewPanel } from '../components/organisms/review-panel'
 import { ThoughtStreamPanel } from '../components/organisms/thought-stream-panel'
 import { useInlineComments } from '../hooks/use-inline-comments'
 import { getAuditLogs, type AuditLogsPage } from '../services/audit-api'
+import { getDocuments } from '../services/document-api'
 import { getProject } from '../services/project-api'
 import { getTasks, groupedResponseToTaskColumns } from '../services/task-api'
 import { emptyTaskColumns, useTaskStore } from '../store/task-store'
@@ -21,6 +22,12 @@ import styles from './project-workspace.module.css'
 
 function errorMessage(err: unknown): string {
   if (isAxiosError(err)) {
+    if (err.code === 'ECONNABORTED' || err.message.includes('timeout')) {
+      return (
+        'Backend did not respond in time. Restart uvicorn on port 8000 ' +
+        '(kanban-ai/backend) and ensure Postgres/Redis are running.'
+      )
+    }
     const detail = (err.response?.data as { detail?: unknown } | undefined)?.detail
     if (typeof detail === 'string') return detail
     return err.message
@@ -42,7 +49,12 @@ export default function ProjectWorkspace() {
   const [thoughtStreamOpen, setThoughtStreamOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+<<<<<<< HEAD
   const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'memory' | 'audit' | 'constitution'>('documents')
+=======
+  const [planApproved, setPlanApproved] = useState(false)
+  const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'memory' | 'audit'>('documents')
+>>>>>>> feature
   const AUDIT_PAGE_SIZE = 25
   const [auditPage, setAuditPage] = useState<AuditLogsPage | null>(null)
   const [auditLoading, setAuditLoading] = useState(false)
@@ -82,10 +94,14 @@ export default function ProjectWorkspace() {
     let cancelled = false
     void (async () => {
       try {
-        const data = await getTasks(currentProject.id)
+        const [data, planDocs] = await Promise.all([
+          getTasks(currentProject.id),
+          getDocuments(currentProject.id, 'PLAN'),
+        ])
         if (!cancelled) {
           useTaskStore.getState().clearTaskAgentRuns()
           useTaskStore.getState().setColumns(groupedResponseToTaskColumns(data))
+          setPlanApproved(planDocs.some((d) => d.status === 'approved'))
         }
       } catch {
         /* Kanban tab will surface load errors if user opens it */
@@ -141,7 +157,14 @@ export default function ProjectWorkspace() {
 
       {!loading && !error && currentProject ? (
         <>
-          <ProjectHeader project={currentProject} />
+          <ProjectHeader
+            project={currentProject}
+            activeTab={activeTab}
+            onTabChange={(tab) => {
+              if (tab === 'audit') setAuditOffset(0)
+              setActiveTab(tab)
+            }}
+          />
           {columns.review.length > 0 ? (
             <ReviewPanel projectId={currentProject.id} inlineComments={inlineComments} />
           ) : null}
@@ -197,6 +220,7 @@ export default function ProjectWorkspace() {
               ) : null}
             </>
           ) : null}
+<<<<<<< HEAD
           <div className={styles.tabs} role="tablist" aria-label="Workspace sections">
             <button
               type="button"
@@ -252,6 +276,8 @@ export default function ProjectWorkspace() {
               Constitution
             </button>
           </div>
+=======
+>>>>>>> feature
           <section className={styles.body}>
             {activeTab === 'documents' ? (
               <section className={styles.documents} aria-labelledby="workspace-documents-heading">
@@ -268,7 +294,7 @@ export default function ProjectWorkspace() {
                 <h2 id="workspace-kanban-heading" className={styles.kanbanTitle}>
                   Kanban
                 </h2>
-                <KanbanBoard projectId={currentProject.id} />
+                <KanbanBoard projectId={currentProject.id} planApproved={planApproved} />
               </section>
             ) : activeTab === 'memory' ? (
               <section className={styles.memory} aria-labelledby="workspace-memory-heading">

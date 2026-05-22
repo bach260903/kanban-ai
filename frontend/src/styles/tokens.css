@@ -1,0 +1,130 @@
+/**
+ * Neo-Kanban design tokens — synced with design/neo-kanban.pen & ui-spec §8
+ */
+:root {
+  /* Semantic colors */
+  --c-neutral-50: #f9fafb;
+  --c-neutral-100: #f3f4f6;
+  --c-neutral-200: #e5e7eb;
+  --c-neutral-300: #d1d5db;
+  --c-neutral-500: #6b7280;
+  --c-neutral-700: #374151;
+  --c-neutral-900: #0f172a;
+
+  --c-info-50: #eff6ff;
+  --c-info-500: #2563eb;
+  --c-info-700: #1d4ed8;
+
+  --c-warn-50: #fef3c7;
+  --c-warn-500: #f59e0b;
+  --c-warn-700: #a16207;
+
+  --c-success-50: #ecfdf5;
+  --c-success-500: #10b981;
+  --c-success-700: #047857;
+
+  --c-danger-50: #fef2f2;
+  --c-danger-500: #dc2626;
+  --c-danger-700: #991b1b;
+
+  --c-purple-50: #f3e8ff;
+  --c-purple-500: #8b5cf6;
+  --c-purple-700: #6d28d9;
+
+  --c-orange-50: #fff7ed;
+  --c-orange-500: #f97316;
+  --c-orange-700: #c2410c;
+
+  --surface-bg: #f8fafc;
+  --surface-primary: #ffffff;
+  --border-default: #e2e8f0;
+  --c-overlay: #0f172a80;
+
+  --font-primary-color: #0f172a;
+  --font-secondary-color: #475569;
+  --font-muted-color: #94a3b8;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  /* Aliases used across modules */
+  --s-1: var(--space-1);
+  --s-2: var(--space-2);
+  --s-3: var(--space-3);
+  --s-4: var(--space-4);
+  --s-5: var(--space-6);
+  --s-6: var(--space-8);
+  --s-8: var(--space-12);
+
+  /* Radius */
+  --radius-badge: 4px;
+  --radius-card: 6px;
+  --radius-aside: 12px;
+  --r-badge: var(--radius-badge);
+  --r-card: var(--radius-card);
+  --r-panel: var(--radius-aside);
+
+  /* Typography */
+  --font-ui: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  --t-sm: 12px;
+  --t-base: 14px;
+  --t-h2: 18px;
+  --t-h1: 24px;
+
+  /* Layout */
+  --header-h: 56px;
+  --tab-h: 44px;
+  --card-w: 280px;
+  --aside-w: 520px;
+  --content-max: 1440px;
+
+  /* App semantic aliases (migrate legacy vars) */
+  --text: var(--font-secondary-color);
+  --text-h: var(--font-primary-color);
+  --text-muted: var(--font-muted-color);
+  --bg: var(--surface-primary);
+  --border: var(--border-default);
+  --code-bg: var(--c-neutral-100);
+  --social-bg: var(--c-neutral-50);
+  --accent: var(--c-info-500);
+  --accent-bg: var(--c-info-50);
+  --accent-border: rgba(37, 99, 235, 0.45);
+  --panel-bg: var(--surface-primary);
+  --input-bg: var(--surface-primary);
+
+  --sans: var(--font-ui);
+  --heading: var(--font-ui);
+  --mono: var(--font-mono);
+
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-bg: #0f172a;
+    --surface-primary: #1e293b;
+    --border-default: #334155;
+    --font-primary-color: #f1f5f9;
+    --font-secondary-color: #94a3b8;
+    --font-muted-color: #64748b;
+    --c-neutral-100: #334155;
+    --c-neutral-50: #1e293b;
+    --code-bg: #334155;
+    --social-bg: #1e293b;
+    --c-info-50: rgba(37, 99, 235, 0.15);
+    --c-info-700: #93c5fd;
+    --c-warn-700: #fde047;
+    --c-success-700: #6ee7b7;
+    --c-danger-700: #fca5a5;
+    --c-purple-700: #d8b4fe;
+    --c-orange-700: #fdba74;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  }
+}

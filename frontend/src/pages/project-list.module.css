@@ -1,37 +1,40 @@
 .page {
   width: 100%;
-  max-width: 720px;
+  max-width: var(--content-max);
   margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
+  padding: var(--space-6);
   text-align: left;
+  box-sizing: border-box;
 }
 
 .title {
-  margin: 0 0 0.25rem;
-  font-size: 1.75rem;
+  margin: 0 0 var(--space-1);
+  font-size: var(--t-h1);
+  font-weight: 600;
+  color: var(--font-primary-color);
 }
 
 .sub {
-  margin: 0 0 1.5rem;
-  color: var(--text);
-  font-size: 0.95rem;
+  margin: 0 0 var(--space-6);
+  color: var(--font-secondary-color);
+  font-size: var(--t-base);
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--code-bg);
+  gap: var(--space-3);
+  padding: var(--space-4);
+  margin-bottom: var(--space-6);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
+  background: var(--surface-primary);
 }
 
 .formRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: var(--space-3);
   align-items: flex-end;
 }
 
@@ -42,66 +45,63 @@
 .selectLabel {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  font-size: 0.85rem;
+  gap: var(--space-1);
+  font-size: var(--t-sm);
   font-weight: 500;
-  color: var(--text-h);
+  color: var(--font-primary-color);
 }
 
 .select {
-  font: inherit;
-  font-size: 0.95rem;
-  padding: 0.5rem 0.65rem;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text-h);
+  font-family: var(--font-ui);
+  font-size: var(--t-base);
+  height: 36px;
+  padding: 8px 12px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-default);
+  background: var(--surface-primary);
+  color: var(--font-primary-color);
   min-width: 10rem;
 }
 
 .select:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--c-info-500);
 }
 
 .inlineError {
   margin: 0;
-  font-size: 0.85rem;
-  color: #b91c1c;
-}
-
-@media (prefers-color-scheme: dark) {
-  .inlineError {
-    color: #fca5a5;
-  }
+  font-size: var(--t-sm);
+  color: var(--c-danger-500);
 }
 
 .banner {
-  padding: 0.65rem 0.85rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--social-bg);
-  font-size: 0.9rem;
-  color: var(--text-h);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--c-danger-500);
+  background: var(--c-danger-50);
+  font-size: var(--t-base);
+  color: var(--c-danger-700);
 }
 
 .grid {
   display: grid;
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-4);
 }
 
 .card {
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg);
+  padding: 20px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
+  background: var(--surface-primary);
   box-shadow: var(--shadow);
 }
 
 .card h3 {
-  margin: 0 0 0.35rem;
-  font-size: 1.1rem;
+  margin: 0 0 var(--space-1);
+  font-size: var(--t-base);
+  font-weight: 600;
 }
 
 .cardTitle {
@@ -110,44 +110,41 @@
 }
 
 .cardTitle:hover {
-  text-decoration: underline;
+  color: var(--c-info-500);
+  text-decoration: none;
 }
 
 .meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--space-2);
   align-items: center;
-  margin-bottom: 0.35rem;
-  font-size: 0.8rem;
-  color: var(--text);
-}
-
-.lang {
-  font-family: var(--mono);
-  padding: 0.1rem 0.35rem;
-  border-radius: 4px;
-  background: var(--code-bg);
-  color: var(--text-h);
+  margin-bottom: var(--space-1);
+  font-size: var(--t-sm);
+  color: var(--font-secondary-color);
 }
 
 .desc {
   margin: 0;
-  font-size: 0.9rem;
-  color: var(--text);
+  font-size: 13px;
+  color: var(--font-secondary-color);
   line-height: 1.35;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .loading {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: var(--text);
-  font-size: 0.95rem;
+  gap: var(--space-2);
+  color: var(--font-secondary-color);
+  font-size: var(--t-base);
 }
 
 .empty {
   margin: 0;
-  color: var(--text);
-  font-size: 0.95rem;
+  color: var(--font-secondary-color);
+  font-size: var(--t-base);
 }
