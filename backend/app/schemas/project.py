@@ -8,7 +8,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.models.project import ProjectStatus
+from app.models.project import CodingBackend, ProjectStatus
 
 PrimaryLanguage = Literal["python", "javascript", "typescript"]
 
@@ -17,11 +17,13 @@ class ProjectCreate(BaseModel):
     name: str = Field(..., min_length=1, max_length=255)
     description: str | None = None
     primary_language: PrimaryLanguage
+    coding_backend: CodingBackend = CodingBackend.groq
 
 
 class ProjectUpdate(BaseModel):
     name: str | None = Field(None, min_length=1, max_length=255)
     description: str | None = None
+    coding_backend: CodingBackend | None = None
 
 
 class ConstitutionUpdate(BaseModel):
@@ -44,6 +46,7 @@ class ProjectListItem(BaseModel):
     description: str | None
     primary_language: str
     status: ProjectStatus
+    coding_backend: CodingBackend
     updated_at: datetime
 
 
@@ -56,5 +59,6 @@ class ProjectResponse(BaseModel):
     primary_language: str
     constitution: str
     status: ProjectStatus
+    coding_backend: CodingBackend
     created_at: datetime
     updated_at: datetime

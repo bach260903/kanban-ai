@@ -1,0 +1,18 @@
+{
+  "id": "planner-002",
+  "intent": "plan",
+  "input": {
+    "goal_text": "Add a Kanban drag-and-drop UI to the frontend with optimistic updates"
+  },
+  "gold": {
+    "subtasks": [
+      { "title": "Install dnd-kit + sensors", "skills": ["react"], "est_hours": 1 },
+      { "title": "Sortable column + task primitives", "skills": ["react", "typescript"], "est_hours": 4 },
+      { "title": "Optimistic update via React Query", "skills": ["tanstack-query"], "est_hours": 2 },
+      { "title": "Server-side position persistence", "skills": ["fastapi"], "est_hours": 2 },
+      { "title": "Visual drag overlay polish", "skills": ["css", "tailwind"], "est_hours": 1 }
+    ],
+    "min_overlap_f1": 0.55,
+    "max_subtasks": 8
+  }
+}

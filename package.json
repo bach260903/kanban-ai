@@ -1,0 +1,16 @@
+{
+  "name": "kanban-monorepo",
+  "private": true,
+  "description": "Multi-agent intelligent work management — monorepo root",
+  "scripts": {
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:backend": "cd backend && python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "install:all": "npm install && cd backend && pip install -r requirements.txt"
+  },
+  "workspaces": [
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

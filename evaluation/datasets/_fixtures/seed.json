@@ -1,0 +1,21 @@
+{
+  "users": [
+    { "email": "alice@example.com", "password": "evalpass123", "display_name": "Alice", "skills": [["fastapi", "expert"], ["sql", "expert"], ["python", "expert"]] },
+    { "email": "bob@example.com", "password": "evalpass123", "display_name": "Bob", "skills": [["react", "expert"], ["typescript", "expert"], ["nextjs", "intermediate"]] },
+    { "email": "carol@example.com", "password": "evalpass123", "display_name": "Carol", "skills": [["pytest", "expert"], ["python", "intermediate"]] },
+    { "email": "dan@example.com", "password": "evalpass123", "display_name": "Dan", "skills": [["docker", "expert"], ["kubernetes", "intermediate"], ["sql", "intermediate"]] }
+  ],
+  "boards": [
+    {
+      "title": "Eval Board (auth + login feature)",
+      "description": "Seed board for evaluation runs.",
+      "tasks": [
+        { "title": "Spec login endpoint", "priority": "high", "tags": ["fastapi", "auth"], "est_hours": 2 },
+        { "title": "Implement /auth/register", "priority": "high", "tags": ["fastapi", "sql"], "est_hours": 3 },
+        { "title": "Add bcrypt password hashing", "priority": "medium", "tags": ["python"], "est_hours": 1 },
+        { "title": "Frontend login form", "priority": "medium", "tags": ["react", "nextjs"], "est_hours": 4 },
+        { "title": "Write pytest cases for auth", "priority": "medium", "tags": ["pytest"], "est_hours": 2 }
+      ]
+    }
+  ]
+}

@@ -12,9 +12,11 @@ from uuid import UUID
 from git.exc import GitCommandError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.agent.nodes import coder_node
+from app.agent.graph import route_coder
+from app.agent.nodes import cli_coder_node, coder_node
 from app.config import settings
 from app.exceptions import InvalidTransitionError, NotFoundError, SandboxEscapeError, WIPLimitError
+from app.models.project import Project
 from app.models.task import Task, TaskStatus
 from app.git.branch_service import BranchService
 from app.git.git_service import GitService
@@ -54,12 +56,14 @@ async def _run_coder_agent_background(
     po_feedback: str | None = None,
     agent_run_id: UUID | None = None,
     inline_comments: list[dict[str, str | int]] | None = None,
+    coding_backend: str = "groq",
 ) -> None:
-    """Fire-and-forget entry: T058 replaces ``coder_node.run`` body."""
+    """Fire-and-forget entry for coder agent dispatch."""
     try:
         payload: dict[str, Any] = {
             "task_id": task_id,
             "project_id": project_id,
+            "coding_backend": coding_backend,
         }
         if po_feedback:
             payload["po_feedback"] = po_feedback
@@ -67,7 +71,11 @@ async def _run_coder_agent_background(
             payload["agent_run_id"] = agent_run_id
         if inline_comments:
             payload["inline_comments"] = inline_comments
-        await coder_node.run(payload)
+        node_name = route_coder(payload)
+        if node_name == "cli_coder_node":
+            await cli_coder_node.run(payload)
+        else:
+            await coder_node.run(payload)
     except Exception:
         logger.exception("Coder agent background task failed task_id=%s", task_id)
 
@@ -79,6 +87,7 @@ def _schedule_coder_agent(
     po_feedback: str | None = None,
     agent_run_id: UUID | None = None,
     inline_comments: list[dict[str, str | int]] | None = None,
+    coding_backend: str = "groq",
 ) -> None:
     asyncio.create_task(
         _run_coder_agent_background(
@@ -87,6 +96,7 @@ def _schedule_coder_agent(
             po_feedback=po_feedback,
             agent_run_id=agent_run_id,
             inline_comments=inline_comments,
+            coding_backend=coding_backend,
         )
     )
 
@@ -155,11 +165,14 @@ class KanbanService:
                     task.id,
                 )
         if to_status == TaskStatus.IN_PROGRESS and not defer_coder_start:
+            project = await session.get(Project, task.project_id)
+            backend = str(project.coding_backend) if project else "groq"
             _schedule_coder_agent(
                 task.id,
                 task.project_id,
                 po_feedback=po_feedback,
                 agent_run_id=agent_run_id,
+                coding_backend=backend,
             )
         return task
 

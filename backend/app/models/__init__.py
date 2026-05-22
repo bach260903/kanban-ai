@@ -15,6 +15,7 @@ from app.models.project import Project, ProjectStatus
 from app.models.stream_event import StreamEvent, StreamEventType
 from app.models.task import Task, TaskStatus
 from app.models.task_branch import TaskBranch, TaskBranchStatus
+from app.models.user import User
 
 __all__ = [
     "AgentPauseState",
@@ -44,4 +45,5 @@ __all__ = [
     "TaskBranch",
     "TaskBranchStatus",
     "TaskStatus",
+    "User",
 ]

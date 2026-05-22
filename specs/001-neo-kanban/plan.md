@@ -2,6 +2,8 @@
 
 **Branch**: `003-core-kanban-flow` | **Date**: 2026-05-11 | **Spec**: [spec.md](spec.md)
 **Input**: Feature specification from `/specs/001-neo-kanban/spec.md`
+**Implementation status**: Phase 1 ✅ · Phase 2 ✅ · Phase 3 ✅ — All 127 tasks complete (2026-05-18)
+**Amendments**: RTK Token Optimizer (Phase 3) · Constitution Tab (Phase 3) — implemented 2026-05-18
 
 ---
 

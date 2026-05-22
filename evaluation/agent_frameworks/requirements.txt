@@ -1,0 +1,6 @@
+# Mặc định: chỉ cài gói tương thích Python 3.14+ (và mọi bản 3.11+).
+# Chạy: pip install -r requirements.txt
+-r requirements-langgraph.txt
+-r requirements-autogen.txt
+
+# CrewAI (demo_crewai.py): KHÔNG nằm trong file này — xem requirements-crewai.txt + Python 3.12.

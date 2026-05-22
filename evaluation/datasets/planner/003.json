@@ -1,0 +1,19 @@
+{
+  "id": "planner-003",
+  "intent": "plan",
+  "input": {
+    "goal_text": "Stand up CI/CD: lint, test, type-check, deploy preview to Vercel + Render"
+  },
+  "gold": {
+    "subtasks": [
+      { "title": "GitHub Actions workflow skeleton", "skills": ["github-actions"], "est_hours": 1 },
+      { "title": "Backend: ruff + mypy + pytest steps", "skills": ["python", "pytest"], "est_hours": 2 },
+      { "title": "Frontend: eslint + tsc + next build", "skills": ["typescript"], "est_hours": 2 },
+      { "title": "Vercel preview integration", "skills": ["vercel"], "est_hours": 1 },
+      { "title": "Render deploy hook for backend", "skills": ["render", "docker"], "est_hours": 2 },
+      { "title": "Status badges + PR checks doc", "skills": ["github"], "est_hours": 1 }
+    ],
+    "min_overlap_f1": 0.5,
+    "max_subtasks": 8
+  }
+}

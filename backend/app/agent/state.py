@@ -19,3 +19,4 @@ class AgentState(TypedDict):
     diff_content: str
     feedback: str
     error: str
+    coding_backend: str

@@ -12,13 +12,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.agent.nodes import spec_node
 from app.database import async_session_maker
 from app.models.agent_run import AgentRun, AgentRunStatus
+from app.models.audit_log import AuditLogResult
 from app.models.document import Document
+import app.services.audit_service as audit_service
 
 logger = logging.getLogger(__name__)
-
-
-async def _noop(*_a: object, **_kw: object) -> None:
-    return None
 
 
 async def run_generate_spec_task(
@@ -87,6 +85,37 @@ async def _run_with_session(
         await session.flush()
         return content
 
+    _pending_log_id: list[Any] = [None]
+
+    async def write_pending_log_cb(*, action_type: str, action_description: str) -> None:
+        log = await audit_service.write_pending_log(
+            session,
+            project_id=project_id,
+            task_id=None,
+            action_type=action_type,
+            action_description=action_description,
+        )
+        _pending_log_id[0] = log.id
+
+    async def finalise_log_cb(*, action_type: str, result: str) -> None:
+        log_id = _pending_log_id[0]
+        if log_id is not None:
+            await audit_service.finalise_log(session, log_id, result)
+            _pending_log_id[0] = None
+        else:
+            coerced = AuditLogResult.SUCCESS if "success" in result.lower() else AuditLogResult.FAILURE
+            await audit_service.write_audit(
+                session,
+                project_id=project_id,
+                task_id=None,
+                action_type=action_type,
+                action_description=result,
+                result=coerced,
+            )
+
+    async def _noop(*_a: object, **_kw: object) -> None:
+        return None
+
     state: dict[str, Any] = {
         "session": session,
         "project_id": project_id,
@@ -95,8 +124,8 @@ async def _run_with_session(
         "feedback": feedback or "",
         "set_agent_run_status": set_agent_run_status,
         "persist_spec": persist_spec,
-        "write_pending_log": _noop,
-        "finalise_log": _noop,
+        "write_pending_log": write_pending_log_cb,
+        "finalise_log": finalise_log_cb,
         "publish_error": _noop,
     }
     await spec_node.run(state)

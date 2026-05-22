@@ -23,7 +23,8 @@ redis==5.1.1
 # AI (LLM via Groq — OpenAI-compatible stack removed; use langchain_groq.ChatGroq)
 langchain==0.3.0
 langchain-groq==0.2.0
-langgraph==0.2.20
+langchain-openai>=0.3.0,<0.4
+langgraph>=0.3.0,<0.4.0
 langgraph-checkpoint-postgres>=2.0.25,<3
 psycopg[binary]>=3.2.0
 

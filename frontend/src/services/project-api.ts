@@ -1,18 +1,25 @@
-import type { PrimaryLanguage, Project, ProjectListItem } from '../types'
+import type { CodingBackend, PrimaryLanguage, Project, ProjectListItem } from '../types'
 
 import api from './api'
 
 const PREFIX = '/api/v1/projects'
 
+export type BackendAvailability = {
+  available: CodingBackend[]
+  unavailable: { backend: string; reason: string }[]
+}
+
 export type ProjectCreatePayload = {
   name: string
   description?: string | null
   primary_language: PrimaryLanguage
+  coding_backend?: CodingBackend
 }
 
 export type ProjectUpdatePayload = {
   name?: string
   description?: string | null
+  coding_backend?: CodingBackend
 }
 
 export type ConstitutionResponse = {
@@ -51,5 +58,10 @@ export async function updateConstitution(
   content: string,
 ): Promise<ConstitutionResponse> {
   const { data } = await api.put<ConstitutionResponse>(`${PREFIX}/${projectId}/constitution`, { content })
+  return data
+}
+
+export async function getAvailableBackends(): Promise<BackendAvailability> {
+  const { data } = await api.get<BackendAvailability>('/api/v1/backends/available')
   return data
 }

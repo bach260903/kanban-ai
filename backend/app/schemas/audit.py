@@ -19,8 +19,13 @@ class AuditLogListItem(BaseModel):
     agent_id: str
     agent_version: str
     action_type: str
+    action_description: str
     timestamp: datetime
+    input_refs: list[str]
+    output_refs: list[str]
     result: AuditLogResult
+    project_id: UUID | None = None
+    task_id: UUID | None = None
 
 
 class AuditLogsPageResponse(BaseModel):

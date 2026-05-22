@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import asyncio
+import os
 from uuid import UUID
 
 from langchain_core.tools import StructuredTool
 
 from app.tools.file_tools import _project_root
+from app.tools.token_optimizer import optimize_command_output
 
 
 async def run_command(project_id: UUID | str, cmd: str) -> str:
@@ -37,7 +39,9 @@ async def run_command(project_id: UUID | str, cmd: str) -> str:
     stdout = (stdout_b or b"").decode("utf-8", errors="replace")
     stderr = (stderr_b or b"").decode("utf-8", errors="replace")
     code = proc.returncode if proc.returncode is not None else -1
-    return f"exit_code: {code}\n\nstdout:\n{stdout}\n\nstderr:\n{stderr}"
+    if os.environ.get("RTK_OPTIMIZER_DISABLED"):
+        return f"exit_code: {code}\n\nstdout:\n{stdout}\n\nstderr:\n{stderr}"
+    return optimize_command_output(stripped, stdout, stderr, code)
 
 
 def build_sandbox_tools(project_id: UUID | str) -> list[StructuredTool]:

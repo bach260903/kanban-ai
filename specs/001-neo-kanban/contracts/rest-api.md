@@ -2,9 +2,9 @@
 
 **Base URL**: `http://localhost:8000`
 **API version prefix**: `/api/v1`
-**Auth**: All endpoints (except `/health`) require `Authorization: Bearer <jwt_token>` header.
+**Auth**: All endpoints (except `/health`, `/api/v1/auth/register`, `/api/v1/auth/login`) require `Authorization: Bearer <jwt_token>` header.
 **Content-Type**: `application/json` for all request/response bodies.
-**Date**: 2026-05-11
+**Date**: 2026-05-17 (updated: added auth endpoints, CORS, frontend auth flow)
 
 ---
 
@@ -22,6 +22,67 @@
 | 409 | Conflict — e.g., WIP limit exceeded, duplicate project name |
 | 422 | Unprocessable entity — schema validation failure |
 | 500 | Server error |
+
+---
+
+## Authentication
+
+### `POST /api/v1/auth/register`
+
+Create a new user account. No JWT required.
+
+**Request body**
+```json
+{
+  "email": "user@example.com",
+  "password": "securepassword",
+  "display_name": "Display Name"
+}
+```
+
+**Response 201**
+```json
+{
+  "id": "uuid",
+  "email": "user@example.com",
+  "display_name": "Display Name",
+  "created_at": "2026-05-17T10:00:00Z"
+}
+```
+
+**Response 400** — email already registered
+```json
+{ "detail": "Email already registered" }
+```
+
+---
+
+### `POST /api/v1/auth/login`
+
+Authenticate and receive a JWT. No JWT required.
+
+**Request body**
+```json
+{
+  "email": "user@example.com",
+  "password": "securepassword"
+}
+```
+
+**Response 200**
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token_type": "bearer"
+}
+```
+
+**Response 401** — wrong credentials
+```json
+{ "detail": "Invalid email or password" }
+```
+
+Token algorithm: HS256. Default expiry: 7 days (configurable via `JWT_EXPIRE_MINUTES` env var).
 
 ---
 
@@ -303,10 +364,14 @@ Trigger Architect Agent to generate SPEC.md from Intent.
 ```json
 {
   "agent_run_id": "uuid",
+  "intent_id": "uuid",
+  "document_id": "uuid",
   "status": "running",
   "message": "SPEC generation started."
 }
 ```
+
+Note: `intent_id` is the persisted Intent record; `document_id` is the created/updated Document record. Both may be used by the frontend to poll progress.
 
 **Response 400** — if a SPEC already exists and is approved
 ```json
@@ -542,7 +607,9 @@ Paginated immutable audit log.
 
 ### Pause & Steer
 
-#### `POST /api/v1/tasks/{task_id}/pause`
+> **Note**: Primary pause/resume path is via WebSocket messages `{"type": "PAUSE"}` / `{"type": "RESUME", "steering_instructions": "..."}`. These REST endpoints are provided for test automation and non-WebSocket clients.
+
+#### `POST /api/v1/projects/{project_id}/tasks/{task_id}/pause`
 
 Signal agent to pause after its current step.
 
@@ -564,7 +631,7 @@ Signal agent to pause after its current step.
 
 ---
 
-#### `POST /api/v1/tasks/{task_id}/resume`
+#### `POST /api/v1/projects/{project_id}/tasks/{task_id}/resume`
 
 Resume paused agent with optional steering instructions.
 
@@ -586,7 +653,7 @@ Resume paused agent with optional steering instructions.
 
 ---
 
-#### `GET /api/v1/tasks/{task_id}/pause-state`
+#### `GET /api/v1/projects/{project_id}/tasks/{task_id}/pause-state`
 
 Get current pause state.
 

@@ -1,0 +1,13 @@
+INFO:     Started server process [15572]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+WARNING:app.services.vectorstore:OpenAI embedding requested but OPENAI_API_KEY missing; vector disabled
+WARNING:app.services.vectorstore:OpenAI embedding requested but OPENAI_API_KEY missing; vector disabled
+WARNING:app.services.vectorstore:OpenAI embedding requested but OPENAI_API_KEY missing; vector disabled
+WARNING:app.services.vectorstore:OpenAI embedding requested but OPENAI_API_KEY missing; vector disabled
+WARNING:app.services.vectorstore:OpenAI embedding requested but OPENAI_API_KEY missing; vector disabled
+WARNING:app.services.vectorstore:OpenAI embedding requested but OPENAI_API_KEY missing; vector disabled
+INFO:httpx:HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:app.services.vectorstore:OpenAI embedding requested but OPENAI_API_KEY missing; vector disabled
+INFO:httpx:HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
