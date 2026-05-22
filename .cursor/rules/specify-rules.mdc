@@ -5,4 +5,21 @@ alwaysApply: true
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan
+at `specs/002-ai-cli-integration/plan.md` (or the active feature's `plan.md` under `specs/`).
+
+## Spec Kit workflow (PO gates)
+
+| Phase | Command | Output |
+|-------|---------|--------|
+| Specify | `/speckit-specify` | `spec.md` + `checklists/requirements.md` (Status: **Pending PO Review**) |
+| PO approves spec | `/speckit-approve-spec` | Status → **Approved**; **auto-runs** `/speckit-plan` in the same turn → `plan.md` for PO review |
+| PO approves plan | `/speckit-tasks` | `tasks.md` |
+| Implement | `/speckit-implement` | code changes |
+
+**When the user says the spec is approved** (e.g. "chấp thuận spec", "spec OK", "approve spec"):
+1. Run the **`speckit-approve-spec`** skill immediately (read `.cursor/skills/speckit-approve-spec/SKILL.md`).
+2. Do **not** stop after updating status — continue with the full **`speckit-plan`** workflow in the same session so PO receives `plan.md` to evaluate.
+3. Do **not** ask the user to run `/speckit-plan` separately unless they explicitly want to regenerate an existing plan.
+
+Optional: `/speckit-clarify` before approval if requirements are still ambiguous.
 <!-- SPECKIT END -->

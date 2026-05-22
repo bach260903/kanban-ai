@@ -183,6 +183,11 @@ export class TaskThoughtStreamClient {
     }
     if (t === 'ERROR') {
       this.emit(msg)
+      const code = typeof msg.code === 'string' ? msg.code : ''
+      if (code === 'TASK_NOT_ACTIVE' || code === 'TASK_NOT_FOUND') {
+        this.streamEnded = true
+        this.disconnect()
+      }
       return
     }
     const seq = msg.sequence_number

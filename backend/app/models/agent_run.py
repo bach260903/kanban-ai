@@ -11,8 +11,13 @@ from sqlalchemy import CheckConstraint, DateTime, ForeignKey, Index, String, Tex
 from sqlalchemy.dialects.postgresql import ARRAY, JSONB, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from typing import TYPE_CHECKING
+
 from app.models.base import Base
 from app.models.project import Project
+
+if TYPE_CHECKING:
+    from app.models.review_report import ReviewReport
 
 
 class AgentType(StrEnum):
@@ -92,6 +97,10 @@ class AgentRun(Base):
     project: Mapped[Project] = relationship(back_populates="agent_runs")
     diffs: Mapped[list["Diff"]] = relationship(
         "Diff",
+        back_populates="agent_run",
+        lazy="selectin",
+    )
+    review_reports: Mapped[list["ReviewReport"]] = relationship(
         back_populates="agent_run",
         lazy="selectin",
     )

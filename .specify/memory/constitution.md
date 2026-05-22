@@ -198,4 +198,30 @@ quyết định kiến trúc và phạm vi MVP.
   integration test trước khi bất kỳ bản build nào được đẩy lên môi trường release.
 - Áp dụng giới hạn WIP và chặn chuyển đổi ngược PHẢI được bao phủ bởi automated API test.
 
+### Amendment A — WIP Limit trong Multi-User Mode (APPROVED)
+
+Trong chế độ đa người dùng (`ProjectMember` count > 0), giới hạn WIP chuyển từ cấp **project** sang cấp **developer**:
+
+- Mỗi Developer PHẢI bị giới hạn tối đa **1 task ở trạng thái In Progress** tại một thời điểm.
+- Owner và Leader được **miễn** giới hạn này và có thể kéo task thứ hai.
+- Khi project ở chế độ single-user (không có `ProjectMember`), giới hạn WIP gốc theo project vẫn áp dụng (backward compat).
+
+**Lý do**: Trong team, giới hạn WIP per-developer tốt hơn per-project vì cho phép nhiều thành viên làm việc song song trong khi vẫn giữ focus của từng người.
+
+### Amendment B — Multi-User/Team là Post-MVP Phase 1 (APPROVED)
+
+Tính năng đa người dùng, phân quyền nhóm và team management (spec 003) được phân loại là **Post-MVP Phase 1** và đã được PO phê duyệt để triển khai.
+
+Phạm vi bao gồm:
+- JWT Authentication & 4-role permission system (owner/leader/developer/viewer)
+- Invitation system với link 7 ngày
+- AI Reviewer Agent (US1 — không cần auth, MVP-safe)
+- Task assignment & WIP per-developer (US3)
+- Task dependencies với cycle detection (US4)
+- Task templates global + project scope (US5)
+- Team dashboard & analytics (US6)
+- In-app notifications & webhook delivery (US7)
+
+**Ràng buộc**: Mọi endpoint mới PHẢI bảo vệ bằng `get_current_user` dependency. Viewer token KHÔNG ĐƯỢC thực hiện write operations.
+
 **Phiên bản**: 1.0.1 | **Phê duyệt**: 2026-05-11 | **Sửa đổi lần cuối**: 2026-05-11

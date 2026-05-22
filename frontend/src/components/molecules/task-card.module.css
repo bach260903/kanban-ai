@@ -32,6 +32,26 @@
 
 
 
+.rootClickable {
+  cursor: pointer;
+}
+
+.rootClickable:hover {
+  border-color: var(--c-info-500);
+}
+
+.rootReviewSelected {
+  border-color: var(--c-info-500);
+  box-shadow: var(--shadow), 0 0 0 2px var(--c-info-500);
+}
+
+.reviewHint {
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--text-muted, var(--text));
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
 .rootDragging {
 
   opacity: 0.85;
@@ -62,28 +82,29 @@
 
 
 
-.handle {
-
-  flex-shrink: 0;
-
-  width: 1rem;
-
-  margin-top: 2px;
-
-  padding: 0;
-
-  border: none;
-
-  background: transparent;
-
-  color: var(--font-secondary-color);
-
-  font-size: 12px;
-
+.rootDraggable {
   cursor: grab;
+}
 
-  opacity: 0.4;
+.rootDraggable:active {
+  cursor: grabbing;
+}
 
+.handle {
+  flex-shrink: 0;
+  width: 1rem;
+  margin-top: 2px;
+  color: var(--font-secondary-color);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: -2px;
+  opacity: 0.55;
+  user-select: none;
+}
+
+.rootDraggable:hover .handle {
+  opacity: 1;
+  color: var(--c-info-500);
 }
 
 

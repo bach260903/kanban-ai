@@ -1,7 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 
 import { Badge } from '../atoms/badge'
-
 import { BackendBadge } from '../atoms/backend-badge'
 import type { Project } from '../../types'
 
@@ -27,12 +26,6 @@ export function ProjectHeader({ project, activeTab, onTabChange }: ProjectHeader
 
   return (
     <header className={styles.header}>
-<<<<<<< HEAD
-      <div className={styles.titleRow}>
-        <h1 className={styles.title}>{project.name}</h1>
-        <span className={styles.lang}>{project.primary_language}</span>
-        <BackendBadge backend={project.coding_backend} />
-=======
       <div className={styles.bar}>
         <div className={styles.left}>
           <Link to="/projects" className={styles.projectLink}>
@@ -44,6 +37,7 @@ export function ProjectHeader({ project, activeTab, onTabChange }: ProjectHeader
             label={project.primary_language.toUpperCase()}
             className={styles.langBadge}
           />
+          <BackendBadge backend={project.coding_backend} />
         </div>
         <div className={styles.right}>
           {showWorkspaceTabs ? (
@@ -71,7 +65,6 @@ export function ProjectHeader({ project, activeTab, onTabChange }: ProjectHeader
             Constitution
           </NavLink>
         </div>
->>>>>>> feature
       </div>
       {project.description ? <p className={styles.description}>{project.description}</p> : null}
     </header>

@@ -75,6 +75,7 @@ export default function ProjectList() {
     })()
     return () => {
       cancelled = true
+      setLoading(false)
     }
   }, [setProjects])
 

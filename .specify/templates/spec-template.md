@@ -2,7 +2,9 @@
 
 **Feature Branch**: `[###-feature-name]`  
 **Created**: [DATE]  
-**Status**: Draft  
+**Status**: Draft | Pending PO Review | Approved  
+**Approved**: _(set when PO runs `/speckit-approve-spec`)_  
+**Plan generated**: _(set when plan.md is created)_  
 **Input**: User description: "$ARGUMENTS"
 
 ## User Scenarios & Testing *(mandatory)*

@@ -197,12 +197,18 @@ def review_llm_configured() -> bool:
 
 
 def create_coder_llm(*, model: str | None = None, temperature: float = 0.1) -> BaseChatModel:
+    # Prefer CODER_GROQ_MODEL when provider is groq and env var is set.
+    resolved = model
+    if resolved is None and _normalize_provider(settings.coder_llm_provider) == "groq":
+        override = settings.coder_groq_model.strip()
+        if override:
+            resolved = override
 
     return create_chat_llm(
 
         provider=settings.coder_llm_provider,
 
-        model=model,
+        model=resolved,
 
         temperature=temperature,
 

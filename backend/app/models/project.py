@@ -5,6 +5,14 @@ from __future__ import annotations
 import uuid
 from datetime import datetime
 from enum import StrEnum
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.models.github_config import GitHubConfig
+    from app.models.invitation import Invitation
+    from app.models.project_member import ProjectMember
+    from app.models.task_template import TaskTemplate
+    from app.models.webhook import WebhookConfig
 
 from sqlalchemy import CheckConstraint, DateTime, String, Text, UniqueConstraint, func, text
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
@@ -101,4 +109,29 @@ class Project(Base):
         back_populates="project",
         cascade="all, delete-orphan",
         lazy="selectin",
+    )
+    members: Mapped[list["ProjectMember"]] = relationship(
+        back_populates="project",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    invitations: Mapped[list["Invitation"]] = relationship(
+        back_populates="project",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    task_templates: Mapped[list["TaskTemplate"]] = relationship(
+        back_populates="project",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    webhook_configs: Mapped[list["WebhookConfig"]] = relationship(
+        back_populates="project",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    github_config: Mapped["GitHubConfig | None"] = relationship(
+        back_populates="project",
+        uselist=False,
+        cascade="all, delete-orphan",
     )

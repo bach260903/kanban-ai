@@ -47,6 +47,14 @@ class TaskMoveResult(BaseModel):
     agent_run_id: UUID | None = None
 
 
+class TaskCancelResponse(BaseModel):
+    """JSON returned after cancelling an in-progress task."""
+
+    task_id: UUID
+    from_status: TaskStatus
+    to_status: TaskStatus
+
+
 class TaskDiffResponse(BaseModel):
     """Latest diff for ``GET .../tasks/{task_id}/diff`` (US9 / T062, REST contract)."""
 

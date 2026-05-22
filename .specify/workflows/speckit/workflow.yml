@@ -34,7 +34,10 @@ steps:
 
   - id: review-spec
     type: gate
-    message: "Review the generated spec before planning."
+    message: |
+      PO reviews spec.md and checklists/requirements.md.
+      On APPROVE: implementation plan (plan.md, research.md, data-model.md, contracts/) is generated
+      automatically in the next step for PO to evaluate — no separate plan command needed.
     options: [approve, reject]
     on_reject: abort
 

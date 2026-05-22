@@ -8,7 +8,31 @@ from langgraph.graph import END, START, StateGraph
 
 # ``coder_node`` is implemented for US8 / T058. ``task_breakdown`` runs after ``plan`` when the graph
 # continues past PLAN HIL (or via ``run_task_breakdown_task`` on PLAN approve — US7 / T048).
-from app.agent.nodes import cli_coder_node, coder_node, plan_node, spec_node, task_breakdown_node
+from app.agent.nodes import (
+    cli_coder_node,
+    coder_node,
+    plan_node,
+    reviewer_node,
+    spec_node,
+    task_breakdown_node,
+)
+
+try:
+    from langgraph.types import interrupt as _lg_interrupt
+except Exception:  # pragma: no cover
+    def _lg_interrupt(_value: Any = None) -> None:  # type: ignore[override]
+        return None
+
+
+async def _interrupt_node(state: dict[str, Any]) -> dict[str, Any]:
+    """HIL checkpoint — suspend graph until PO approves or rejects the diff + AI review."""
+    try:
+        _lg_interrupt(None)
+    except RuntimeError:
+        # Raised when interrupt() is called outside a LangGraph execution context
+        # (e.g., unit tests or direct kanban_service calls). Safe to ignore.
+        pass
+    return state
 
 
 def route_coder(state: dict[str, Any]) -> str:
@@ -46,6 +70,8 @@ def build_state_graph() -> StateGraph:
     workflow.add_node("task_breakdown", task_breakdown_node.run)
     workflow.add_node("coder_node", coder_node.run)
     workflow.add_node("cli_coder_node", cli_coder_node.run)
+    workflow.add_node("reviewer_node", reviewer_node.run)
+    workflow.add_node("interrupt_node", _interrupt_node)
 
     workflow.add_edge(START, "spec")
     workflow.add_conditional_edges(
@@ -60,8 +86,11 @@ def build_state_graph() -> StateGraph:
     )
     # TASK_BREAKDOWN → IDLE (no automatic coder hand-off until US8 / T058).
     workflow.add_edge("task_breakdown", END)
-    workflow.add_edge("coder_node", END)
-    workflow.add_edge("cli_coder_node", END)
+    # CODER / CLI_CODER → REVIEWER → HIL interrupt
+    workflow.add_edge("coder_node", "reviewer_node")
+    workflow.add_edge("cli_coder_node", "reviewer_node")
+    workflow.add_edge("reviewer_node", "interrupt_node")
+    workflow.add_edge("interrupt_node", END)
 
     return workflow
 

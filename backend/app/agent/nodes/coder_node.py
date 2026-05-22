@@ -14,11 +14,6 @@ from uuid import UUID
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_core.tools import tool
-<<<<<<< HEAD
-from langchain_groq import ChatGroq
-from langchain_openai import ChatOpenAI
-=======
->>>>>>> feature
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -440,13 +435,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
             HumanMessage(content=human),
         ]
 
-<<<<<<< HEAD
-        coding_backend = str(state.get("coding_backend", "groq"))
-
-        if not settings.groq_api_key.strip() and coding_backend not in ("openai",):
-=======
         if not coder_llm_configured():
->>>>>>> feature
             await _publish_event(
                 session,
                 task_id,
@@ -504,23 +493,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
             _request_hil_interrupt()
             return state
 
-<<<<<<< HEAD
-        if coding_backend == "openai" and settings.openai_api_key:
-            llm = ChatOpenAI(
-                api_key=settings.openai_api_key,
-                model=settings.openai_model,
-                base_url=settings.openai_base_url,
-                temperature=0.1,
-            ).bind_tools(_CODER_TOOLS)
-        else:
-            llm = ChatGroq(
-                api_key=settings.groq_api_key,
-                model=settings.groq_model,
-                temperature=0.1,
-            ).bind_tools(_CODER_TOOLS)
-=======
         llm = create_coder_llm(temperature=0.1).bind_tools(_CODER_TOOLS)
->>>>>>> feature
 
         rounds = 0
         while rounds < _MAX_TOOL_ROUNDS:

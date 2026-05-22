@@ -11,7 +11,11 @@ import { useCallback, useEffect, useRef } from 'react'
 
 import { showErrorToast } from '../lib/toast'
 import { getAgentRun } from '../services/document-api'
-import { moveTask as moveTaskOnServer } from '../services/task-api'
+import {
+  getTasks,
+  groupedResponseToTaskColumns,
+  moveTask as moveTaskOnServer,
+} from '../services/task-api'
 import { useTaskStore } from '../store/task-store'
 import type { TaskColumns } from '../store/task-store'
 import type { AgentRunStatus, TaskStatus } from '../types'
@@ -20,10 +24,16 @@ const BOARD_STATUSES = ['todo', 'in_progress', 'review', 'done'] as const satisf
 
 const SORTABLE_PREFIX = 'sortable-'
 
-const POLL_MS = 3000
+const POLL_MS = 2000
 
+/** Coder finished (or failed) — stop polling and refresh Kanban columns from API. */
 function isTerminalAgentStatus(status: AgentRunStatus): boolean {
-  return status === 'success' || status === 'failure' || status === 'timeout'
+  return (
+    status === 'success' ||
+    status === 'failure' ||
+    status === 'timeout' ||
+    status === 'awaiting_hil'
+  )
 }
 
 function findColumnForTask(columns: TaskColumns, taskId: string): TaskStatus | undefined {
@@ -42,19 +52,28 @@ function resolveDropTarget(
   return findColumnForTask(columns, String(over.id))
 }
 
-function moveConflictMessage(err: unknown): string {
-  if (isAxiosError(err) && err.response?.status === 409) {
+function moveErrorMessage(err: unknown): string {
+  if (isAxiosError(err)) {
     const detail = (err.response?.data as { detail?: unknown } | undefined)?.detail
     if (typeof detail === 'string' && detail.trim()) return detail
-    return 'Cannot move task: another task may already be in progress (WIP limit).'
+    if (err.response?.status === 409) {
+      return 'Cannot move task: another task may already be in progress (WIP limit).'
+    }
+    if (err.response?.status === 400) {
+      return 'Invalid move. Drag from To do to In progress only.'
+    }
+    return err.message || 'Failed to move task.'
   }
-  return ''
+  if (err instanceof Error) return err.message
+  return 'Failed to move task.'
 }
 
 export type UseKanbanResult = {
   sensors: ReturnType<typeof useSensors>
   collisionDetection: CollisionDetection
   onDragEnd: (event: DragEndEvent) => void
+  /** Move a To do task to In progress (same as drag-drop). */
+  startTask: (taskId: string) => void
 }
 
 /**
@@ -81,6 +100,15 @@ export function useKanban(projectId: string): UseKanbanResult {
     pollIntervalsRef.current.clear()
   }, [])
 
+  const refreshBoard = useCallback(async () => {
+    try {
+      const data = await getTasks(projectId)
+      useTaskStore.getState().setColumns(groupedResponseToTaskColumns(data))
+    } catch {
+      /* keep optimistic columns on transient failure */
+    }
+  }, [projectId])
+
   useEffect(() => {
     const reconcilePollers = () => {
       const map = useTaskStore.getState().taskAgentByTaskId
@@ -105,7 +133,10 @@ export function useKanban(projectId: string): UseKanbanResult {
             try {
               const run = await getAgentRun(runId)
               useTaskStore.getState().updateTaskAgentRunStatus(taskId, run.status)
-              if (isTerminalAgentStatus(run.status)) clearPoller(taskId)
+              if (isTerminalAgentStatus(run.status)) {
+                clearPoller(taskId)
+                void refreshBoard()
+              }
             } catch {
               /* transient network errors — next tick retries */
             }
@@ -117,7 +148,10 @@ export function useKanban(projectId: string): UseKanbanResult {
           try {
             const run = await getAgentRun(meta.runId)
             useTaskStore.getState().updateTaskAgentRunStatus(taskId, run.status)
-            if (isTerminalAgentStatus(run.status)) clearPoller(taskId)
+            if (isTerminalAgentStatus(run.status)) {
+              clearPoller(taskId)
+              void refreshBoard()
+            }
           } catch {
             /* ignore */
           }
@@ -131,28 +165,24 @@ export function useKanban(projectId: string): UseKanbanResult {
       unsub()
       clearAllPollers()
     }
-  }, [clearAllPollers, clearPoller])
+  }, [clearAllPollers, clearPoller, refreshBoard])
 
-  const onDragEnd = useCallback(
-    (event: DragEndEvent) => {
-      const { active, over } = event
-      if (!over) return
-
-      const containerId = active.data.current?.sortable?.containerId as string | undefined
-      const fromStatus = containerId?.startsWith(SORTABLE_PREFIX)
-        ? (containerId.slice(SORTABLE_PREFIX.length) as TaskStatus)
-        : undefined
-      if (!fromStatus) return
-
-      const toStatus = resolveDropTarget(over, columns)
-      if (!toStatus) return
-
-      if (fromStatus !== 'todo' || toStatus !== 'in_progress') {
+  const startTask = useCallback(
+    (taskId: string) => {
+      const cols = useTaskStore.getState().columns
+      const inTodo = cols.todo.some((t) => t.id === taskId)
+      if (!inTodo) {
+        showErrorToast('Task is no longer in To do.')
+        return
+      }
+      if (cols.in_progress.length >= 1) {
+        showErrorToast(
+          'WIP limit: finish or move the current In progress task before starting another.',
+        )
         return
       }
 
-      const taskId = String(active.id)
-      const snapshot = useTaskStore.getState().columns
+      const snapshot = cols
       useTaskStore.getState().moveTask(taskId, 'todo', 'in_progress')
 
       void moveTaskOnServer(projectId, taskId, 'in_progress')
@@ -163,16 +193,43 @@ export function useKanban(projectId: string): UseKanbanResult {
         })
         .catch((err: unknown) => {
           useTaskStore.getState().setColumns(snapshot)
-          const msg409 = moveConflictMessage(err)
-          if (msg409) showErrorToast(msg409)
+          showErrorToast(moveErrorMessage(err))
         })
     },
-    [columns, projectId, setTaskAgentRun],
+    [projectId, setTaskAgentRun],
+  )
+
+  const onDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      const { active, over } = event
+      if (!over) return
+
+      const taskId = String(active.id)
+      const containerId = active.data.current?.sortable?.containerId as string | undefined
+      const fromStatus = containerId?.startsWith(SORTABLE_PREFIX)
+        ? (containerId.slice(SORTABLE_PREFIX.length) as TaskStatus)
+        : findColumnForTask(columns, taskId)
+      if (!fromStatus) return
+
+      const toStatus = resolveDropTarget(over, columns)
+      if (!toStatus) return
+
+      if (fromStatus !== 'todo' || toStatus !== 'in_progress') {
+        if (fromStatus === 'todo') {
+          showErrorToast('Drop the task on the In progress column to start the Coder Agent.')
+        }
+        return
+      }
+
+      startTask(taskId)
+    },
+    [columns, startTask],
   )
 
   return {
     sensors,
     collisionDetection: closestCorners,
     onDragEnd,
+    startTask,
   }
 }

@@ -11,6 +11,7 @@ import {
   approveDocument,
   generatePlan,
   generateSpec,
+  getAgentRun,
   getDocuments,
   reviseDocument,
 } from '../../services/document-api'
@@ -21,6 +22,12 @@ import styles from './document-panel.module.css'
 export type DocumentPanelProps = {
   projectId: string
   documentType: DocumentType
+  /** When SPEC approve auto-starts PLAN, parent passes the architect run id to the PLAN panel. */
+  linkedAgentRunId?: string | null
+  /** Bump to force document list refresh (e.g. after SPEC approve). */
+  refreshKey?: number
+  /** Called when SPEC approval starts PLAN generation in the background. */
+  onPlanAutoStart?: (agentRunId: string) => void
 }
 
 function errorMessage(err: unknown): string {
@@ -33,7 +40,13 @@ function errorMessage(err: unknown): string {
   return 'Something went wrong.'
 }
 
-export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
+export function DocumentPanel({
+  projectId,
+  documentType,
+  linkedAgentRunId = null,
+  refreshKey = 0,
+  onPlanAutoStart,
+}: DocumentPanelProps) {
   const [docRows, setDocRows] = useState<DocumentListItem[]>([])
   const [specRowsForPlan, setSpecRowsForPlan] = useState<DocumentListItem[]>([])
   const [listLoading, setListLoading] = useState(true)
@@ -80,17 +93,48 @@ export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
     return () => {
       cancelled = true
     }
-  }, [refreshDocuments])
+  }, [refreshDocuments, refreshKey])
+
+  useEffect(() => {
+    if (refreshKey > 0) {
+      void refreshDocuments()
+    }
+  }, [refreshKey, refreshDocuments])
 
   const latestSpecForGate = specRowsForPlan[0]
   const specApproved = latestSpecForGate?.status === 'approved'
   const activeDocumentId = docRows[0]?.id
 
+  const trackedRunId = pendingRunId ?? (documentType === 'PLAN' ? linkedAgentRunId : null)
+
   const { document, agentRun, isGenerating, isLoading, error, refetch } = useDocument(
     projectId,
     activeDocumentId,
-    { agentRunId: pendingRunId },
+    { agentRunId: trackedRunId },
   )
+
+  /** Poll linked PLAN run when PLAN row does not exist yet (auto-start after SPEC approve). */
+  useEffect(() => {
+    if (documentType !== 'PLAN' || !linkedAgentRunId || activeDocumentId) return undefined
+    let cancelled = false
+    const poll = async () => {
+      try {
+        const run = await getAgentRun(linkedAgentRunId)
+        if (cancelled) return
+        if (run.status !== 'running') {
+          await refreshDocuments()
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+    void poll()
+    const id = window.setInterval(() => void poll(), 3000)
+    return () => {
+      cancelled = true
+      window.clearInterval(id)
+    }
+  }, [documentType, linkedAgentRunId, activeDocumentId, refreshDocuments])
 
   useEffect(() => {
     if (agentRun && agentRun.status !== 'running') {
@@ -111,8 +155,14 @@ export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
 
   const displayStatus = document?.status ?? docRows[0]?.status
   const showGenerateSpec = documentType === 'SPEC' && !listLoading && docRows.length === 0
+  const planAutoStarting =
+    documentType === 'PLAN' && specApproved && Boolean(linkedAgentRunId) && isGenerating
   const showGeneratePlan =
-    documentType === 'PLAN' && !listLoading && docRows.length === 0 && specApproved
+    documentType === 'PLAN' &&
+    !listLoading &&
+    docRows.length === 0 &&
+    specApproved &&
+    !planAutoStarting
   const showPlanBlocked =
     documentType === 'PLAN' && !listLoading && docRows.length === 0 && !specApproved
 
@@ -167,11 +217,18 @@ export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
     setStatusMessage(null)
     try {
       setHilBusy(true)
-      await approveDocument(projectId, activeDocumentId)
+      const res = await approveDocument(projectId, activeDocumentId)
       await refreshDocuments()
       await refetch()
-      setStatusMessage(documentType === 'SPEC' ? 'SPEC approved.' : 'PLAN approved.')
-      setTimeout(() => setStatusMessage(null), 4000)
+      if (documentType === 'SPEC' && res.plan_generation_started && res.plan_agent_run_id) {
+        onPlanAutoStart?.(res.plan_agent_run_id)
+        setStatusMessage(
+          'SPEC approved. PLAN is being generated automatically for your review (see PLAN panel).',
+        )
+      } else {
+        setStatusMessage(documentType === 'SPEC' ? 'SPEC approved.' : 'PLAN approved.')
+      }
+      setTimeout(() => setStatusMessage(null), 6000)
     } catch (e) {
       setActionError(errorMessage(e))
     } finally {
@@ -285,7 +342,19 @@ export function DocumentPanel({ projectId, documentType }: DocumentPanelProps) {
             </Button>
             {submitting || isGenerating ? <Spinner aria-label="Starting PLAN generation" /> : null}
           </div>
-          <p className={styles.muted}>SPEC is approved. Generate PLAN.md from the approved SPEC.</p>
+          <p className={styles.muted}>
+            SPEC is approved. Use Generate PLAN only if automatic generation did not start.
+          </p>
+        </div>
+      ) : null}
+
+      {planAutoStarting ? (
+        <div className={styles.empty}>
+          <p className={styles.spinnerRow}>
+            <Spinner aria-label="Generating PLAN after SPEC approval" />
+            Generating PLAN from approved SPEC…
+          </p>
+          <p className={styles.muted}>Review the draft here when generation finishes, then Approve PLAN.</p>
         </div>
       ) : null}
 

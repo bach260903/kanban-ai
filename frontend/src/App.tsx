@@ -1,11 +1,8 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import ConstitutionEditor from './pages/constitution-editor'
-<<<<<<< HEAD
-import LoginPage from './pages/login'
-=======
 import DevAuth from './pages/dev-auth'
->>>>>>> feature
+import LoginPage from './pages/login'
 import ProjectList from './pages/project-list'
 import ProjectWorkspace from './pages/project-workspace'
 import RegisterPage from './pages/register'
@@ -22,17 +19,14 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/dev/auth" element={<DevAuth />} />
         <Route path="/" element={<Navigate to="/projects" replace />} />
-<<<<<<< HEAD
         <Route path="/projects" element={<RequireAuth><ProjectList /></RequireAuth>} />
         <Route path="/projects/:id" element={<RequireAuth><ProjectWorkspace /></RequireAuth>} />
-        <Route path="/projects/:id/constitution" element={<RequireAuth><ConstitutionEditor /></RequireAuth>} />
-=======
-        <Route path="/dev/auth" element={<DevAuth />} />
-        <Route path="/projects" element={<ProjectList />} />
-        <Route path="/projects/:id" element={<ProjectWorkspace />} />
-        <Route path="/projects/:id/constitution" element={<ConstitutionEditor />} />
->>>>>>> feature
+        <Route
+          path="/projects/:id/constitution"
+          element={<RequireAuth><ConstitutionEditor /></RequireAuth>}
+        />
         <Route path="*" element={<Navigate to="/projects" replace />} />
       </Routes>
     </BrowserRouter>

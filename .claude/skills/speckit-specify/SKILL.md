@@ -174,9 +174,15 @@ Given that feature description, do this:
       - [ ] Feature meets measurable outcomes defined in Success Criteria
       - [ ] No implementation details leak into specification
       
+      ## PO Review Gate
+      
+      - [ ] PO has reviewed the specification and approves scope, priorities, and success criteria
+      - [ ] Ready to generate implementation plan for PO review (via `/speckit-approve-spec`)
+      
       ## Notes
       
-      - Items marked incomplete require spec updates before `/speckit-clarify` or `/speckit-plan`
+      - Items marked incomplete require spec updates before `/speckit-clarify`
+      - **Do not** run `/speckit-plan` manually until PO approves — use `/speckit-approve-spec` to approve spec and auto-generate `plan.md`
       ```
 
    b. **Run Validation Check**: Review the spec against each checklist item:
@@ -230,13 +236,16 @@ Given that feature description, do this:
 
    d. **Update Checklist**: After each validation iteration, update the checklist file with current pass/fail status
 
-8. **Report completion** to the user with:
+8. **Set spec status for PO review**: In `spec.md`, ensure `**Status**: Pending PO Review` (not `Approved` — approval is a separate gate).
+
+9. **Report completion** to the user with:
    - `SPECIFY_FEATURE_DIRECTORY` — the feature directory path
    - `SPEC_FILE` — the spec file path
    - Checklist results summary
-   - Readiness for the next phase (`/speckit-clarify` or `/speckit-plan`)
+   - **Next step for PO**: Review `spec.md` + `checklists/requirements.md`. When satisfied, run **`/speckit-approve-spec`** — this marks the spec approved and **automatically generates `plan.md`** for PO to evaluate (do **not** ask PO to run `/speckit-plan` separately)
+   - Optional before approval: `/speckit-clarify` if open questions remain
 
-9. **Check for extension hooks**: After reporting completion, check if `.specify/extensions.yml` exists in the project root.
+10. **Check for extension hooks**: After reporting completion, check if `.specify/extensions.yml` exists in the project root.
    - If it exists, read it and look for entries under the `hooks.after_specify` key
    - If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
    - Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.

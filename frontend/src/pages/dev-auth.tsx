@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '../components/atoms/button'
 import { Spinner } from '../components/atoms/spinner'
-import { getAuthToken, setAuthToken } from '../services/api'
+import { getAuthToken, probeAuthToken, setAuthToken } from '../services/api'
 import { fetchDevToken } from '../services/auth-api'
 
 import styles from './dev-auth.module.css'
@@ -12,14 +12,25 @@ import styles from './dev-auth.module.css'
 export default function DevAuth() {
   const navigate = useNavigate()
   const [busy, setBusy] = useState(false)
+  const [checking, setChecking] = useState(Boolean(getAuthToken()))
   const [error, setError] = useState<string | null>(null)
-  const existing = getAuthToken()
 
   useEffect(() => {
-    if (existing) {
-      navigate('/projects', { replace: true })
+    if (!getAuthToken()) {
+      setChecking(false)
+      return
     }
-  }, [existing, navigate])
+    let cancelled = false
+    void (async () => {
+      const ok = await probeAuthToken()
+      if (cancelled) return
+      setChecking(false)
+      if (ok) navigate('/projects', { replace: true })
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [navigate])
 
   async function onGetToken() {
     setError(null)
@@ -48,6 +59,15 @@ export default function DevAuth() {
     } finally {
       setBusy(false)
     }
+  }
+
+  if (checking) {
+    return (
+      <div className={styles.page}>
+        <Spinner aria-label="Checking session" />
+        <p className={styles.sub}>Đang kiểm tra token…</p>
+      </div>
+    )
   }
 
   return (

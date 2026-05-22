@@ -25,7 +25,7 @@ async def issue_dev_token() -> dict[str, str]:
     now = datetime.now(timezone.utc)
     token = jwt.encode(
         {"sub": "dev-user", "exp": now + timedelta(days=7)},
-        settings.jwt_secret,
+        settings.jwt_secret_key,
         algorithm="HS256",
     )
     return {"access_token": token, "token_type": "bearer"}

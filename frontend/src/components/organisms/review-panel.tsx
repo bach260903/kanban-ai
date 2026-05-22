@@ -6,6 +6,7 @@ import { Button } from '../atoms/button'
 import { Spinner } from '../atoms/spinner'
 import { DiffViewer } from '../molecules/diff-viewer'
 import { InlineCommentOverlay } from '../molecules/inline-comment-overlay'
+import { AiReviewPanel } from './ai-review-panel'
 import {
   approveTask,
   getDiff,
@@ -16,6 +17,9 @@ import {
 } from '../../services/task-api'
 import type { TaskDiffResponse } from '../../services/task-api'
 import type { UseInlineCommentsReturn } from '../../hooks/use-inline-comments'
+import { useReviewReport } from '../../services/review-api'
+import { handleReviewStreamEvent } from '../../services/ws-handler'
+import { useThoughtStream } from '../../hooks/use-thought-stream'
 import { useTaskStore } from '../../store/task-store'
 
 import styles from './review-panel.module.css'
@@ -37,20 +41,23 @@ function diffErrorMessage(err: unknown): string {
 
 export type ReviewPanelProps = {
   projectId: string
+  taskId: string
   inlineComments: UseInlineCommentsReturn
+  onClose: () => void
 }
 
 /**
- * Code review HIL when a task is in ``review`` (US9 / T066): diff + approve / reject.
+ * Code review HIL for a selected task in ``review`` (US9 / T066): diff + approve / reject.
+ * Opened on demand when PO clicks a task in the Review column — not auto-shown.
  */
-export function ReviewPanel({ projectId, inlineComments }: ReviewPanelProps) {
+export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: ReviewPanelProps) {
   const columns = useTaskStore((s) => s.columns)
   const setColumns = useTaskStore((s) => s.setColumns)
 
-  const reviewTask = useMemo(() => {
-    const list = [...columns.review].sort((a, b) => a.priority - b.priority || a.title.localeCompare(b.title))
-    return list[0]
-  }, [columns.review])
+  const reviewTask = useMemo(
+    () => columns.review.find((t) => t.id === taskId) ?? null,
+    [columns.review, taskId],
+  )
 
   const [diff, setDiff] = useState<TaskDiffResponse | null>(null)
   const [diffLoading, setDiffLoading] = useState(false)
@@ -58,6 +65,17 @@ export function ReviewPanel({ projectId, inlineComments }: ReviewPanelProps) {
   const [actionBusy, setActionBusy] = useState(false)
   const [rejectFeedback, setRejectFeedback] = useState('')
   const [modifiedEditor, setModifiedEditor] = useState<editor.IStandaloneCodeEditor | null>(null)
+  const [highlightedLine, setHighlightedLine] = useState<{ file: string; line: number | null } | null>(null)
+
+  const reviewState = useReviewReport(reviewTask?.id ?? null)
+  const { events: streamEvents } = useThoughtStream(reviewTask?.id ?? null)
+
+  // Forward REVIEW_* WS events to the review state for optimistic updates
+  useEffect(() => {
+    if (streamEvents.length === 0) return
+    const last = streamEvents[streamEvents.length - 1]
+    if (last) handleReviewStreamEvent(last, reviewState.applyStreamEvent)
+  }, [streamEvents, reviewState.applyStreamEvent])
   const {
     comments: inlineCommentRows,
     replaceFromApi,
@@ -117,6 +135,7 @@ export function ReviewPanel({ projectId, inlineComments }: ReviewPanelProps) {
 
   useEffect(() => {
     setActiveCommentLine(null)
+    setHighlightedLine(null)
   }, [diff?.id])
 
   useEffect(() => {
@@ -134,12 +153,13 @@ export function ReviewPanel({ projectId, inlineComments }: ReviewPanelProps) {
       await approveTask(projectId, reviewTask.id)
       setRejectFeedback('')
       await refreshBoard()
+      onClose()
     } catch (err) {
       setDiffError(diffErrorMessage(err))
     } finally {
       setActionBusy(false)
     }
-  }, [projectId, reviewTask, refreshBoard])
+  }, [projectId, reviewTask, refreshBoard, onClose])
 
   const onReject = useCallback(async () => {
     if (!reviewTask) return
@@ -154,12 +174,13 @@ export function ReviewPanel({ projectId, inlineComments }: ReviewPanelProps) {
       })
       setRejectFeedback('')
       await refreshBoard()
+      onClose()
     } catch (err) {
       setDiffError(diffErrorMessage(err))
     } finally {
       setActionBusy(false)
     }
-  }, [projectId, reviewTask, rejectFeedback, refreshBoard, getCommentPayload])
+  }, [projectId, reviewTask, rejectFeedback, refreshBoard, getCommentPayload, onClose])
 
   if (!reviewTask) {
     return null
@@ -180,10 +201,17 @@ export function ReviewPanel({ projectId, inlineComments }: ReviewPanelProps) {
         aria-modal="true"
         aria-labelledby="review-panel-title"
       >
-        <h2 id="review-panel-title" className={styles.title}>
-          Code review
-        </h2>
-        <p className={styles.subtitle}>{reviewTask.title}</p>
+        <div className={styles.panelHeader}>
+          <div>
+            <h2 id="review-panel-title" className={styles.title}>
+              Code review
+            </h2>
+            <p className={styles.subtitle}>{reviewTask.title}</p>
+          </div>
+          <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="Close review panel">
+            Close
+          </button>
+        </div>
 
         <div className={styles.statusRow}>
           {diffLoading ? (
@@ -200,29 +228,51 @@ export function ReviewPanel({ projectId, inlineComments }: ReviewPanelProps) {
           </p>
         ) : null}
 
-        {!diffLoading && diff ? (
-          <>
-            <DiffViewer
-              original={diff.original_content}
-              modified={diff.modified_content}
-              title={diffTitle}
-              height="42vh"
-              onLineClick={apiFilePath ? (_file, line) => setActiveCommentLine(line) : undefined}
-              onModifiedEditor={setModifiedEditor}
-            />
-            {apiFilePath && modifiedEditor ? (
-              <InlineCommentOverlay
-                modifiedEditor={modifiedEditor}
-                taskId={reviewTask.id}
-                apiFilePath={apiFilePath}
-                comments={inlineCommentRows}
-                activeLine={activeCommentLine}
-                onCloseComposer={() => setActiveCommentLine(null)}
-                onSaved={refreshInlineComments}
-              />
+        <div className="flex h-full min-h-0">
+          <div className="flex-1 min-w-0">
+            {!diffLoading && diff ? (
+              <>
+                <DiffViewer
+                  original={diff.original_content}
+                  modified={diff.modified_content}
+                  title={diffTitle}
+                  height="42vh"
+                  highlightedLine={
+                    highlightedLine && highlightedLine.file === apiFilePath ? highlightedLine.line : null
+                  }
+                  onLineClick={
+                    apiFilePath
+                      ? (file, line) => {
+                          setActiveCommentLine(line)
+                          setHighlightedLine({ file, line })
+                        }
+                      : undefined
+                  }
+                  onModifiedEditor={setModifiedEditor}
+                />
+                {apiFilePath && modifiedEditor ? (
+                  <InlineCommentOverlay
+                    modifiedEditor={modifiedEditor}
+                    taskId={reviewTask.id}
+                    apiFilePath={apiFilePath}
+                    comments={inlineCommentRows}
+                    activeLine={activeCommentLine}
+                    onCloseComposer={() => setActiveCommentLine(null)}
+                    onSaved={refreshInlineComments}
+                  />
+                ) : null}
+              </>
             ) : null}
-          </>
-        ) : null}
+          </div>
+
+          <AiReviewPanel
+            reviewState={reviewState}
+            onCommentClick={(file, line) => {
+              setHighlightedLine({ file, line })
+              if (typeof line === 'number') setActiveCommentLine(line)
+            }}
+          />
+        </div>
 
         <div className={styles.actions}>
           <div className={styles.row}>

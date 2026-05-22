@@ -27,6 +27,43 @@ function isRenderableStreamMessage(msg: Record<string, unknown>): boolean {
   )
 }
 
+function parseStreamContent(msg: Record<string, unknown>): Record<string, unknown> | null {
+  const raw = msg.content
+  if (raw == null) return null
+  if (typeof raw === 'object' && !Array.isArray(raw)) {
+    return raw as Record<string, unknown>
+  }
+  if (typeof raw === 'string') {
+    try {
+      const parsed = JSON.parse(raw) as unknown
+      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+        return parsed as Record<string, unknown>
+      }
+    } catch {
+      return null
+    }
+  }
+  return null
+}
+
+/** Kanban columns should reload when coder moves task to review (events arrive before poll). */
+export function shouldSyncKanbanFromStream(msg: Record<string, unknown>): boolean {
+  const frameType = msg.type
+  if (frameType === 'STREAM_END') return true
+
+  const eventType = typeof msg.event_type === 'string' ? msg.event_type : null
+  if (eventType === 'STATUS_CHANGE') {
+    const body = parseStreamContent(msg)
+    return body?.to === 'REVIEWING'
+  }
+  if (eventType === 'ACTION') {
+    const body = parseStreamContent(msg)
+    const inner = body?.type
+    return inner === 'REVIEW_SCORE' || inner === 'REVIEW_COMMENT'
+  }
+  return false
+}
+
 export type UseThoughtStreamResult = {
   events: Record<string, unknown>[]
   isConnected: boolean
@@ -39,7 +76,10 @@ export type UseThoughtStreamResult = {
  * Subscribes to {@link TaskThoughtStreamClient}, keeps `events` ordered by `sequence_number`
  * (non-sequenced frames ordered by arrival). US10 / T081.
  */
-export function useThoughtStream(taskId: string | null): UseThoughtStreamResult {
+export function useThoughtStream(
+  taskId: string | null,
+  onStreamEnded?: () => void,
+): UseThoughtStreamResult {
   const [events, setEvents] = useState<Record<string, unknown>[]>([])
   const [isConnected, setIsConnected] = useState(false)
   const [streamEnded, setStreamEnded] = useState(false)
@@ -76,6 +116,12 @@ export function useThoughtStream(taskId: string | null): UseThoughtStreamResult 
     const offEv = client.onEvent((msg) => {
       if (msg.type === 'STREAM_END') {
         setStreamEnded(true)
+      }
+      if (msg.type === 'ERROR' && msg.code === 'TASK_NOT_ACTIVE') {
+        setStreamEnded(true)
+      }
+      if (shouldSyncKanbanFromStream(msg)) {
+        onStreamEnded?.()
       }
 
       if (!isRenderableStreamMessage(msg)) {
@@ -117,6 +163,10 @@ export function useThoughtStream(taskId: string | null): UseThoughtStreamResult 
       clientRef.current = null
     }
   }, [taskId])
+
+  useEffect(() => {
+    if (streamEnded) onStreamEnded?.()
+  }, [streamEnded, onStreamEnded])
 
   return { events, isConnected, streamEnded, send }
 }

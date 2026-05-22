@@ -63,8 +63,110 @@ export interface Task {
   description: string | null
   status: TaskStatus
   priority: number
+  assigned_to: UUID | null
+  is_blocked: boolean
   created_at: ISODateTime
   updated_at: ISODateTime
+}
+
+// --- Spec 003: multi-user platform types ---
+
+export type ProjectRole = 'owner' | 'leader' | 'developer' | 'viewer'
+
+export interface User {
+  id: UUID
+  email: string
+  display_name: string
+  created_at: ISODateTime
+}
+
+export interface ProjectMember {
+  user_id: UUID
+  display_name: string
+  email: string
+  role: ProjectRole
+  joined_at: ISODateTime
+}
+
+export interface Invitation {
+  invitation_id: UUID
+  invite_url: string
+  expires_at: ISODateTime
+}
+
+export type ReviewStatus = 'pending' | 'running' | 'complete' | 'error'
+
+export type ReviewSuggestion = 'approve' | 'needs_changes'
+
+export type ReviewSeverity = 'info' | 'warning' | 'error'
+
+export interface ReviewComment {
+  id: UUID
+  file_path: string
+  line_number: number | null
+  content: string
+  severity: ReviewSeverity
+}
+
+export interface ReviewReport {
+  id: UUID
+  task_id: UUID
+  status: ReviewStatus
+  score: number | null
+  suggestion: ReviewSuggestion | null
+  test_runner: string | null
+  test_pass: number | null
+  test_fail: number | null
+  comments: ReviewComment[]
+  error_message: string | null
+  created_at: ISODateTime
+  completed_at: ISODateTime | null
+}
+
+export interface TaskDependency {
+  task_id: UUID
+  depends_on_task_id: UUID
+  created_at: ISODateTime
+}
+
+export type TemplateScope = 'project' | 'global'
+
+export interface TaskTemplate {
+  id: UUID
+  name: string
+  title_template: string
+  description_template: string
+  scope: TemplateScope
+  project_id: UUID | null
+  created_by: UUID | null
+  created_at: ISODateTime
+}
+
+export type NotificationType =
+  | 'task_assigned'
+  | 'task_needs_review'
+  | 'task_done'
+  | 'task_unblocked'
+  | 'agent_error'
+  | 'invite_accepted'
+  | 'review_complete'
+
+export interface Notification {
+  id: UUID
+  type: NotificationType
+  content: string
+  reference_type: string | null
+  reference_id: UUID | null
+  is_read: boolean
+  created_at: ISODateTime
+}
+
+export interface WebhookConfig {
+  id: UUID
+  url: string
+  events: string[]
+  enabled: boolean
+  created_at: ISODateTime
 }
 
 export type AgentType = 'architect' | 'coder' | 'reviewer'

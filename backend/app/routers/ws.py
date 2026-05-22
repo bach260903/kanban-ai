@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
 
 async def _authenticate(token: str) -> User | None:
     try:
-        payload = jwt.decode(token, settings.jwt_secret, algorithms=[settings.jwt_algorithm])
+        payload = jwt.decode(token, settings.jwt_secret_key, algorithms=[settings.jwt_algorithm])
         sub = payload.get("sub")
         if not sub:
             return None

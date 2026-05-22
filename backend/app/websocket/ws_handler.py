@@ -34,7 +34,11 @@ def _decode_jwt_sub(token: str | None) -> str:
     if not token or not str(token).strip():
         raise ValueError("missing_token")
     try:
-        payload = jwt.decode(token.strip(), settings.jwt_secret, algorithms=["HS256"])
+        payload = jwt.decode(
+            token.strip(),
+            settings.jwt_secret_key,
+            algorithms=[settings.jwt_algorithm],
+        )
     except JWTError as e:
         raise ValueError("invalid_token") from e
     sub = payload.get("sub")
@@ -125,6 +129,7 @@ def _should_end_stream(task: Task, run: AgentRun | None) -> bool:
 
 
 async def _pump_redis(task_id: UUID, send: Any, stop: asyncio.Event) -> None:
+    """Relay Redis pub/sub; if Redis is down, log and exit without killing the WS handler."""
     try:
         async for evt in EventConsumer.consume(task_id):
             if stop.is_set():
@@ -133,8 +138,10 @@ async def _pump_redis(task_id: UUID, send: Any, stop: asyncio.Event) -> None:
     except asyncio.CancelledError:
         raise
     except Exception:
-        logger.exception("Redis relay failed task_id=%s", task_id)
-        raise
+        logger.exception(
+            "Redis relay unavailable for task_id=%s — live events disabled until Redis is running",
+            task_id,
+        )
 
 
 async def handle(websocket: WebSocket, task_id: UUID) -> None:

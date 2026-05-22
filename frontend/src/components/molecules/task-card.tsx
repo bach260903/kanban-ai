@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 
 
 import { Badge } from '../atoms/badge'
+import { Button } from '../atoms/button'
 
 import { useTaskStore } from '../../store/task-store'
 
@@ -27,11 +28,17 @@ import styles from './task-card.module.css'
 
 
 export type TaskCardProps = {
-
   task: TaskColumnItem
-
   sortableDisabled?: boolean
-
+  /** When set, shows a Start button (To do → In progress). */
+  onStart?: () => void
+  startBusy?: boolean
+  /** Cancel in-progress coder and return task to To do. */
+  onCancel?: () => void
+  cancelBusy?: boolean
+  /** Open code review panel (Review column only). */
+  onOpenReview?: () => void
+  isReviewSelected?: boolean
 }
 
 
@@ -60,7 +67,16 @@ function agentRunLabel(status: AgentRunStatus): string {
 
 
 
-export function TaskCard({ task, sortableDisabled = true }: TaskCardProps) {
+export function TaskCard({
+  task,
+  sortableDisabled = true,
+  onStart,
+  startBusy = false,
+  onCancel,
+  cancelBusy = false,
+  onOpenReview,
+  isReviewSelected = false,
+}: TaskCardProps) {
 
   const agentRun = useTaskStore((s) => s.taskAgentByTaskId[task.id])
 
@@ -142,7 +158,8 @@ export function TaskCard({ task, sortableDisabled = true }: TaskCardProps) {
 
   const desc = task.description?.trim() ?? ''
 
-  const isAgentRunning = agentRun?.status === 'running'
+  const isAgentRunning =
+    agentRun?.status === 'running' || agentRun?.status === 'paused'
 
   const branchLabel =
 
@@ -152,49 +169,59 @@ export function TaskCard({ task, sortableDisabled = true }: TaskCardProps) {
 
 
 
+  const dragProps = sortableDisabled ? {} : { ...attributes, ...listeners }
+
   return (
-
     <article
-
       ref={setNodeRef}
-
       style={style}
-
       className={[
-
         styles.root,
-
         isDragging ? styles.rootDragging : '',
-
         isAgentRunning ? styles.rootAgentRunning : '',
-
         task.status === 'conflict' ? styles.rootConflict : '',
-
+        isReviewSelected ? styles.rootReviewSelected : '',
+        !sortableDisabled ? styles.rootDraggable : '',
+        onOpenReview ? styles.rootClickable : '',
       ]
-
         .filter(Boolean)
-
         .join(' ')}
-
-      {...attributes}
-
+      {...dragProps}
+      onClick={
+        onOpenReview
+          ? (e) => {
+              if ((e.target as HTMLElement).closest('button')) return
+              onOpenReview()
+            }
+          : undefined
+      }
+      onKeyDown={
+        onOpenReview
+          ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onOpenReview()
+              }
+            }
+          : undefined
+      }
+      role={onOpenReview ? 'button' : undefined}
+      tabIndex={onOpenReview ? 0 : undefined}
+      title={
+        onOpenReview
+          ? 'Open code review'
+          : sortableDisabled
+            ? undefined
+            : 'Drag to In progress or use Start'
+      }
     >
-
-      <button
-
-        type="button"
-
+      <span
         className={styles.handle}
-
-        tabIndex={-1}
-
         aria-hidden
-
-        title={sortableDisabled ? 'Drag inactive for this column' : 'Drag into In Progress'}
-
-        {...(sortableDisabled ? {} : listeners)}
-
-      />
+        title={sortableDisabled ? undefined : 'Drag handle'}
+      >
+        ⋮⋮
+      </span>
 
       <div className={styles.body}>
 
@@ -267,13 +294,38 @@ export function TaskCard({ task, sortableDisabled = true }: TaskCardProps) {
           ) : null}
 
           <span className={styles.updated}>Updated —</span>
-
         </div>
-
+        {onCancel ? (
+          <Button
+            type="button"
+            variant="danger"
+            disabled={cancelBusy}
+            onClick={(e) => {
+              e.stopPropagation()
+              onCancel()
+            }}
+          >
+            Cancel
+          </Button>
+        ) : null}
+        {onStart ? (
+          <Button
+            type="button"
+            variant="primary"
+            disabled={startBusy}
+            onClick={(e) => {
+              e.stopPropagation()
+              onStart()
+            }}
+          >
+            Start
+          </Button>
+        ) : null}
+        {onOpenReview ? (
+          <span className={styles.reviewHint}>{isReviewSelected ? 'Reviewing' : 'Click to review'}</span>
+        ) : null}
       </div>
-
     </article>
-
   )
 
 }

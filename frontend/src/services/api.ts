@@ -1,5 +1,8 @@
 import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios'
 
+/** Set on a request to avoid full-page redirect on 401 (e.g. token probe on /dev/auth). */
+export type ApiRequestConfig = InternalAxiosRequestConfig & { skipAuthRedirect?: boolean }
+
 const DEFAULT_BASE_URL = 'http://localhost:8000'
 
 /** localStorage key for JWT (used until dedicated auth store exists). */
@@ -65,14 +68,35 @@ function resolve401RedirectPath(): string {
   return '/auth-required'
 }
 
+export async function probeAuthToken(): Promise<boolean> {
+  const token = getAuthToken()
+  if (!token) return false
+  try {
+    await api.get('/api/v1/projects', {
+      timeout: 8000,
+      skipAuthRedirect: true,
+    } as ApiRequestConfig)
+    return true
+  } catch {
+    setAuthToken(null)
+    return false
+  }
+}
+
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    if (error.response?.status === 401) {
+    const skipRedirect = (error.config as ApiRequestConfig | undefined)?.skipAuthRedirect
+    if (error.response?.status === 401 && !skipRedirect) {
       setAuthToken(null)
       const redirectPath = resolve401RedirectPath()
       const path = window.location.pathname
-      if (path === '/dev/auth' || path === '/auth-required') {
+      if (
+        path === '/dev/auth' ||
+        path === '/auth-required' ||
+        path === '/login' ||
+        path === '/register'
+      ) {
         return Promise.reject(error)
       }
       const target = redirectPath.startsWith('http')

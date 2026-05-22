@@ -17,6 +17,7 @@ from app.models.feedback import Feedback, FeedbackReferenceType
 from app.models.task import Task, TaskStatus
 from app.schemas.task import (
     TaskApproveResponse,
+    TaskCancelResponse,
     TaskDiffResponse,
     TaskKanbanItem,
     TaskMoveRequest,
@@ -224,6 +225,40 @@ async def reject_task(
         feedback_id=feedback.id,
         agent_run_id=agent_run.id,
         updated_at=task.updated_at,
+    )
+
+
+@router.post(
+    "/{project_id}/tasks/{task_id}/cancel",
+    response_model=TaskCancelResponse,
+)
+async def cancel_task(
+    project_id: UUID,
+    task_id: UUID,
+    _sub: Annotated[str, Depends(require_jwt)],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> TaskCancelResponse:
+    """Cancel an in-progress task: stop coder run and move back to To do."""
+    await ProjectService.get(session, project_id)
+    task = await TaskService.get(session, task_id, project_id=project_id)
+    from_status = task.status
+    updated = await KanbanService.cancel_in_progress(session, task_id)
+    await write_audit(
+        session,
+        project_id=project_id,
+        task_id=task_id,
+        action_type="task_cancel",
+        action_description="User cancelled in-progress coder task.",
+        result=AuditLogResult.SUCCESS,
+        input_refs=[str(task_id)],
+        output_refs=[str(updated.id), str(updated.status)],
+    )
+    await session.commit()
+    await session.refresh(updated)
+    return TaskCancelResponse(
+        task_id=updated.id,
+        from_status=from_status,
+        to_status=updated.status,
     )
 
 

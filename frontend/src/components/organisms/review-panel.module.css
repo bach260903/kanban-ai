@@ -1,8 +1,10 @@
+/* Visual dim only — must not block Kanban/header clicks (US1 review is a side sheet). */
 .backdrop {
   position: fixed;
   inset: 0;
   z-index: 90;
   background: var(--c-overlay);
+  pointer-events: none;
 }
 
 .panel {
@@ -10,6 +12,7 @@
   top: 0;
   right: 0;
   z-index: 100;
+  pointer-events: auto;
   display: flex;
   flex-direction: column;
   width: min(var(--aside-w), 100vw);
@@ -21,6 +24,29 @@
   box-shadow: -6px 0 28px rgba(0, 0, 0, 0.12);
   color: var(--text);
   text-align: left;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.closeBtn {
+  flex-shrink: 0;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 4px);
+  background: var(--surface-secondary, transparent);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.05));
 }
 
 .title {

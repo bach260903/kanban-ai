@@ -10,12 +10,15 @@ from typing import Any
 from uuid import UUID
 
 from git.exc import GitCommandError
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.agent.graph import route_coder
-from app.agent.nodes import cli_coder_node, coder_node
+from app.agent.nodes import cli_coder_node, coder_node, reviewer_node
 from app.config import settings
+from app.database import async_session_maker
 from app.exceptions import InvalidTransitionError, NotFoundError, SandboxEscapeError, WIPLimitError
+from app.models.agent_run import AgentRun, AgentRunStatus
 from app.models.project import Project
 from app.models.task import Task, TaskStatus
 from app.git.branch_service import BranchService
@@ -49,6 +52,37 @@ _ALLOWED_MOVES: frozenset[tuple[TaskStatus, TaskStatus]] = frozenset(
 )
 
 
+async def _mark_agent_run_failed(task_id: UUID, agent_run_id: UUID | None) -> None:
+    """Mark a stuck RUNNING agent run as failure so the UI can stop polling."""
+    try:
+        async with async_session_maker() as session:
+            run: AgentRun | None = None
+            if agent_run_id is not None:
+                run = await session.get(AgentRun, agent_run_id)
+            if run is None:
+                result = await session.execute(
+                    select(AgentRun)
+                    .where(
+                        AgentRun.task_id == task_id,
+                        AgentRun.status == AgentRunStatus.RUNNING,
+                    )
+                    .order_by(AgentRun.started_at.desc())
+                    .limit(1)
+                )
+                run = result.scalar_one_or_none()
+            if run is not None and run.status == AgentRunStatus.RUNNING:
+                run.status = AgentRunStatus.FAILURE
+                run.completed_at = datetime.now(timezone.utc)
+                run.result = {"error": "Coder background task failed"}
+            task = await session.get(Task, task_id)
+            if task is not None and task.status == TaskStatus.IN_PROGRESS:
+                task.status = TaskStatus.REJECTED
+                task.updated_at = datetime.now(timezone.utc)
+            await session.commit()
+    except Exception:
+        logger.exception("Failed to mark agent run failure for task_id=%s", task_id)
+
+
 async def _run_coder_agent_background(
     task_id: UUID,
     project_id: UUID,
@@ -73,11 +107,19 @@ async def _run_coder_agent_background(
             payload["inline_comments"] = inline_comments
         node_name = route_coder(payload)
         if node_name == "cli_coder_node":
-            await cli_coder_node.run(payload)
+            state = await cli_coder_node.run(payload)
         else:
-            await coder_node.run(payload)
+            state = await coder_node.run(payload)
+        # Run reviewer automatically after coder (plan.md F-003)
+        await reviewer_node.run(state)
     except Exception:
         logger.exception("Coder agent background task failed task_id=%s", task_id)
+        async with async_session_maker() as session:
+            task = await session.get(Task, task_id)
+            if task is not None and task.status == TaskStatus.IN_PROGRESS:
+                await _mark_agent_run_failed(task_id, agent_run_id)
+            else:
+                await session.commit()
 
 
 def _schedule_coder_agent(
@@ -103,6 +145,33 @@ def _schedule_coder_agent(
 
 class KanbanService:
     """Validates task status transitions, enforces WIP = 1, starts coder on ``in_progress``."""
+
+    @staticmethod
+    async def cancel_in_progress(session: AsyncSession, task_id: UUID) -> Task:
+        """Stop an in-progress coder run and return the task to To do (PO cancel)."""
+        task = await TaskService.get(session, task_id)
+        if task.status != TaskStatus.IN_PROGRESS:
+            raise InvalidTransitionError("Only in-progress tasks can be cancelled.")
+
+        result = await session.execute(
+            select(AgentRun)
+            .where(
+                AgentRun.task_id == task_id,
+                AgentRun.status == AgentRunStatus.RUNNING,
+            )
+            .order_by(AgentRun.started_at.desc())
+            .limit(1)
+        )
+        run = result.scalar_one_or_none()
+        if run is not None:
+            run.status = AgentRunStatus.FAILURE
+            run.completed_at = datetime.now(timezone.utc)
+            run.result = {"error": "Cancelled by user", "code": "USER_CANCELLED"}
+
+        task.status = TaskStatus.TODO
+        task.updated_at = datetime.now(timezone.utc)
+        await session.flush()
+        return task
 
     @staticmethod
     async def move_task(

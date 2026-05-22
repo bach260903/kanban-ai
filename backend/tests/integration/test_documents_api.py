@@ -45,3 +45,22 @@ async def test_generate_plan_accepted_when_spec_approved(
     assert r.status_code == 202
     body = r.json()
     assert "agent_run_id" in body
+
+
+@pytest.mark.asyncio
+async def test_approve_spec_auto_starts_plan_generation(
+    test_client: AsyncClient,
+    auth_headers: dict[str, str],
+) -> None:
+    pid = await create_project(test_client, auth_headers)
+    spec_id = await insert_spec_document(pid, status="draft")
+    with patch("app.api.v1.documents.asyncio.create_task"):
+        r = await test_client.post(
+            f"/api/v1/projects/{pid}/documents/{spec_id}/approve",
+            headers=auth_headers,
+        )
+    assert r.status_code == 200, r.text
+    body = r.json()
+    assert body["status"] == "approved"
+    assert body["plan_generation_started"] is True
+    assert body["plan_agent_run_id"] is not None

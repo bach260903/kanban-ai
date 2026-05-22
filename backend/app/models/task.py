@@ -5,13 +5,19 @@ from __future__ import annotations
 import uuid
 from datetime import datetime
 from enum import StrEnum
+from typing import TYPE_CHECKING
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, Index, Integer, String, Text, func, text
+from sqlalchemy import Boolean, CheckConstraint, DateTime, ForeignKey, Index, Integer, String, Text, func, text
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import Base
 from app.models.project import Project
+from app.models.task_dependency import TaskDependency
+
+if TYPE_CHECKING:
+    from app.models.review_report import ReviewReport
+    from app.models.user import User
 
 
 class TaskStatus(StrEnum):
@@ -37,6 +43,7 @@ class Task(Base):
             unique=True,
             postgresql_where=text("status = 'in_progress'"),
         ),
+        Index("idx_tasks_assigned_to", "assigned_to"),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(
@@ -67,8 +74,22 @@ class Task(Base):
         nullable=False,
         server_default=func.now(),
     )
+    assigned_to: Mapped[uuid.UUID | None] = mapped_column(
+        PG_UUID(as_uuid=True),
+        ForeignKey("users.id", ondelete="SET NULL"),
+        nullable=True,
+    )
+    is_blocked: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        server_default=text("false"),
+    )
 
     project: Mapped[Project] = relationship(back_populates="tasks")
+    assignee: Mapped["User | None"] = relationship(
+        foreign_keys=[assigned_to],
+        back_populates="assigned_tasks",
+    )
     agent_runs: Mapped[list["AgentRun"]] = relationship(
         "AgentRun",
         back_populates="task",
@@ -83,5 +104,21 @@ class Task(Base):
     audit_logs: Mapped[list["AuditLog"]] = relationship(
         "AuditLog",
         back_populates="task",
+        lazy="selectin",
+    )
+    review_reports: Mapped[list["ReviewReport"]] = relationship(
+        back_populates="task",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    dependencies: Mapped[list[TaskDependency]] = relationship(
+        foreign_keys=[TaskDependency.task_id],
+        back_populates="task",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+    dependents: Mapped[list[TaskDependency]] = relationship(
+        foreign_keys=[TaskDependency.depends_on_task_id],
+        back_populates="depends_on",
         lazy="selectin",
     )

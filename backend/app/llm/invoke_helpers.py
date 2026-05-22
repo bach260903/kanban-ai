@@ -94,6 +94,14 @@ async def _wait_google_spacing() -> None:
 
 
 
+def _is_groq_tool_use_failed(exc: BaseException) -> bool:
+    """Detect Groq 400 tool_use_failed — model generated a malformed function call."""
+    return (
+        type(exc).__name__ == "BadRequestError"
+        and "tool_use_failed" in str(exc)
+    )
+
+
 async def ainvoke_llm(
 
     llm: BaseChatModel,
@@ -104,11 +112,31 @@ async def ainvoke_llm(
 
 ) -> Any:
 
-    """Invoke chat model; Gemini calls get spacing + 429 retries."""
+    """Invoke chat model; Gemini calls get spacing + 429 retries.
+
+    Groq ``tool_use_failed`` (400) is retried up to 3 times because
+    ``llama-3.3-70b-versatile`` occasionally emits XML-formatted tool calls
+    that Groq rejects — a simple retry usually succeeds.
+    """
 
     if not _is_google_llm(llm):
-
-        return await llm.ainvoke(messages, **kwargs)
+        _GROQ_TOOL_RETRIES = 3
+        last_exc: BaseException | None = None
+        for attempt in range(1, _GROQ_TOOL_RETRIES + 1):
+            try:
+                return await llm.ainvoke(messages, **kwargs)
+            except Exception as exc:
+                if _is_groq_tool_use_failed(exc):
+                    last_exc = exc
+                    delay = 1.5 * attempt
+                    logger.warning(
+                        "Groq tool_use_failed (attempt %d/%d); retrying in %.1fs — %s",
+                        attempt, _GROQ_TOOL_RETRIES, delay, exc,
+                    )
+                    await asyncio.sleep(delay)
+                else:
+                    raise
+        raise last_exc  # type: ignore[misc]
 
 
 

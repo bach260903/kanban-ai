@@ -21,6 +21,15 @@ export type KanbanColumnProps = {
   isWip?: boolean
   /** When false and column is 'todo', show PLAN-pending warning banner. */
   planApproved?: boolean
+  /** Start handler for To do tasks (todo → in_progress). */
+  onStartTask?: (taskId: string) => void
+  /** Task id currently starting (disables its Start button). */
+  startingTaskId?: string | null
+  /** Task id with review panel open. */
+  selectedReviewTaskId?: string | null
+  onOpenReview?: (taskId: string) => void
+  onCancelTask?: (taskId: string) => void
+  cancellingTaskId?: string | null
 }
 
 function columnHeading(status: TaskStatus): string {
@@ -38,7 +47,7 @@ function columnHeading(status: TaskStatus): string {
 const EMPTY_HINTS: Record<TaskStatus, string> = {
   todo: 'No tasks yet.',
   in_progress: 'Drag a task here to start the Coder.',
-  review: 'No tasks in review.',
+  review: 'Coder finished — click a task to review when ready.',
   done: 'No tasks done yet.',
   rejected: 'No rejected tasks.',
   conflict: 'No conflicts.',
@@ -49,6 +58,12 @@ export function KanbanColumn({
   taskCardSortableDisabled = true,
   isWip = false,
   planApproved = false,
+  onStartTask,
+  startingTaskId = null,
+  selectedReviewTaskId = null,
+  onOpenReview,
+  onCancelTask,
+  cancellingTaskId = null,
 }: KanbanColumnProps) {
   const { status, tasks } = column
   const ids = tasks.map((t) => t.id)
@@ -95,7 +110,24 @@ export function KanbanColumn({
             <ul className={styles.list}>
               {tasks.map((task) => (
                 <li key={task.id} className={styles.listItem}>
-                  <TaskCard task={task} sortableDisabled={taskCardSortableDisabled} />
+                  <TaskCard
+                    task={task}
+                    sortableDisabled={taskCardSortableDisabled}
+                    onStart={
+                      status === 'todo' && onStartTask ? () => onStartTask(task.id) : undefined
+                    }
+                    startBusy={startingTaskId === task.id}
+                    onCancel={
+                      status === 'in_progress' && onCancelTask
+                        ? () => onCancelTask(task.id)
+                        : undefined
+                    }
+                    cancelBusy={cancellingTaskId === task.id}
+                    onOpenReview={
+                      status === 'review' && onOpenReview ? () => onOpenReview(task.id) : undefined
+                    }
+                    isReviewSelected={status === 'review' && selectedReviewTaskId === task.id}
+                  />
                 </li>
               ))}
             </ul>

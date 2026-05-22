@@ -15,6 +15,7 @@ from app.api.v1.documents import router as documents_router
 from app.api.v1.memory import router as memory_router
 from app.api.v1.pause import pause_router
 from app.api.v1.projects import router as projects_router
+from app.api.v1.review import router as review_router
 from app.api.v1.tasks import router as tasks_router
 from app.database import dispose_engine, get_db  # noqa: F401 — dependency + lifespan
 from app.middleware.error_handlers import register_exception_handlers
@@ -31,6 +32,7 @@ api_v1_router.include_router(memory_router)
 api_v1_router.include_router(codebase_router)
 api_v1_router.include_router(branches_router)
 api_v1_router.include_router(tasks_router)
+api_v1_router.include_router(review_router)
 api_v1_router.include_router(pause_router)
 api_v1_router.include_router(agent_runs_router)
 api_v1_router.include_router(dev_auth_router)

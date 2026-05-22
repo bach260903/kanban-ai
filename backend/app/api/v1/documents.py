@@ -39,6 +39,15 @@ from app.services.task_breakdown_runner import run_task_breakdown_task
 router = APIRouter(prefix="/projects", tags=["documents"])
 
 
+async def _should_auto_generate_plan(session: AsyncSession, project_id: UUID) -> bool:
+    """True when PO approved SPEC and PLAN is not already approved (Neo-Kanban SDD flow)."""
+    try:
+        plan_doc = await DocumentService.get_by_type(session, project_id, DocumentType.PLAN)
+    except NotFoundError:
+        return True
+    return plan_doc.status != DocumentStatus.APPROVED
+
+
 @router.get("/{project_id}/documents", response_model=list[DocumentListItem])
 async def list_documents(
     project_id: UUID,
@@ -200,6 +209,20 @@ async def approve_document(
         raise NotFoundError("Document not found.")
     approved = await DocumentService.approve(session, document_id)
 
+    plan_run_id: UUID | None = None
+    if approved.document_type == DocumentType.SPEC and await _should_auto_generate_plan(
+        session, project_id
+    ):
+        plan_agent = AgentRun(
+            project_id=project_id,
+            task_id=None,
+            agent_type=AgentType.ARCHITECT,
+            status=AgentRunStatus.RUNNING,
+        )
+        session.add(plan_agent)
+        await session.flush()
+        plan_run_id = plan_agent.id
+
     breakdown_run_id: UUID | None = None
     if approved.document_type == DocumentType.PLAN:
         breakdown_agent = AgentRun(
@@ -228,7 +251,22 @@ async def approve_document(
     if breakdown_run_id is not None:
         asyncio.create_task(run_task_breakdown_task(project_id, breakdown_run_id))
 
-    return DocumentApproveResponse.model_validate(approved)
+    if plan_run_id is not None:
+        asyncio.create_task(
+            run_generate_plan_task(
+                project_id,
+                plan_run_id,
+                feedback=None,
+            )
+        )
+
+    return DocumentApproveResponse(
+        id=approved.id,
+        status=approved.status,
+        updated_at=approved.updated_at,
+        plan_agent_run_id=plan_run_id,
+        plan_generation_started=plan_run_id is not None,
+    )
 
 
 @router.post(

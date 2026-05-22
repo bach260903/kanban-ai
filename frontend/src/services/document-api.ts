@@ -85,6 +85,9 @@ export type DocumentApproveResponse = {
   id: UUID
   status: Document['status']
   updated_at: ISODateTime
+  /** Present when approving SPEC triggers automatic PLAN generation. */
+  plan_agent_run_id?: UUID | null
+  plan_generation_started?: boolean
 }
 
 export type DocumentReviseResponse = {

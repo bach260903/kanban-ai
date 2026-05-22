@@ -1,12 +1,11 @@
 import { isAxiosError } from 'axios'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { Spinner } from '../components/atoms/spinner'
 import { DocumentPanel } from '../components/organisms/document-panel'
 import { KanbanBoard } from '../components/organisms/kanban-board'
 import { ProjectHeader } from '../components/organisms/project-header'
-import { ConstitutionPanel } from '../components/organisms/constitution-panel'
 import { MemoryEditor } from '../components/organisms/memory-editor'
 import { ReviewPanel } from '../components/organisms/review-panel'
 import { ThoughtStreamPanel } from '../components/organisms/thought-stream-panel'
@@ -49,18 +48,28 @@ export default function ProjectWorkspace() {
   const [thoughtStreamOpen, setThoughtStreamOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-<<<<<<< HEAD
-  const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'memory' | 'audit' | 'constitution'>('documents')
-=======
   const [planApproved, setPlanApproved] = useState(false)
+  const [planPendingRunId, setPlanPendingRunId] = useState<string | null>(null)
+  const [documentsRefreshKey, setDocumentsRefreshKey] = useState(0)
+  const [selectedReviewTaskId, setSelectedReviewTaskId] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'memory' | 'audit'>('documents')
->>>>>>> feature
   const AUDIT_PAGE_SIZE = 25
   const [auditPage, setAuditPage] = useState<AuditLogsPage | null>(null)
   const [auditLoading, setAuditLoading] = useState(false)
   const [auditError, setAuditError] = useState<string | null>(null)
   const [auditOffset, setAuditOffset] = useState(0)
   const inlineComments = useInlineComments()
+
+  const refreshKanbanColumns = useCallback(async () => {
+    if (!currentProject?.id) return
+    try {
+      const data = await getTasks(currentProject.id)
+      useTaskStore.getState().clearTaskAgentRuns()
+      useTaskStore.getState().setColumns(groupedResponseToTaskColumns(data))
+    } catch {
+      /* KanbanBoard load effect will retry */
+    }
+  }, [currentProject?.id])
 
   useEffect(() => {
     let cancelled = false
@@ -83,6 +92,7 @@ export default function ProjectWorkspace() {
     })()
     return () => {
       cancelled = true
+      setLoading(false)
       setCurrentProject(null)
       useTaskStore.getState().clearTaskAgentRuns()
       useTaskStore.getState().setColumns(emptyTaskColumns())
@@ -144,6 +154,21 @@ export default function ProjectWorkspace() {
     }
   }, [inProgressTask])
 
+  useEffect(() => {
+    if (
+      selectedReviewTaskId != null &&
+      !columns.review.some((t) => t.id === selectedReviewTaskId)
+    ) {
+      setSelectedReviewTaskId(null)
+    }
+  }, [columns.review, selectedReviewTaskId])
+
+  /** Re-sync columns when opening Kanban (fixes stale in_progress after coder → review). */
+  useEffect(() => {
+    if (activeTab !== 'kanban') return
+    void refreshKanbanColumns()
+  }, [activeTab, refreshKanbanColumns])
+
   return (
     <div className={styles.shell}>
       {loading ? (
@@ -165,8 +190,13 @@ export default function ProjectWorkspace() {
               setActiveTab(tab)
             }}
           />
-          {columns.review.length > 0 ? (
-            <ReviewPanel projectId={currentProject.id} inlineComments={inlineComments} />
+          {activeTab === 'kanban' && selectedReviewTaskId ? (
+            <ReviewPanel
+              projectId={currentProject.id}
+              taskId={selectedReviewTaskId}
+              inlineComments={inlineComments}
+              onClose={() => setSelectedReviewTaskId(null)}
+            />
           ) : null}
           {inProgressTask ? (
             <>
@@ -213,71 +243,19 @@ export default function ProjectWorkspace() {
                       </button>
                     </div>
                     <div className={styles.thoughtStreamPanelBody}>
-                      <ThoughtStreamPanel taskId={inProgressTask.id} embedded />
+                      <ThoughtStreamPanel
+                        taskId={inProgressTask.id}
+                        embedded
+                        onStreamEnded={() => {
+                          void refreshKanbanColumns()
+                        }}
+                      />
                     </div>
                   </aside>
                 </>
               ) : null}
             </>
           ) : null}
-<<<<<<< HEAD
-          <div className={styles.tabs} role="tablist" aria-label="Workspace sections">
-            <button
-              type="button"
-              role="tab"
-              className={activeTab === 'documents' ? styles.tabActive : styles.tab}
-              aria-selected={activeTab === 'documents'}
-              id="workspace-tab-documents"
-              onClick={() => setActiveTab('documents')}
-            >
-              Documents
-            </button>
-            <button
-              type="button"
-              role="tab"
-              className={activeTab === 'kanban' ? styles.tabActive : styles.tab}
-              aria-selected={activeTab === 'kanban'}
-              id="workspace-tab-kanban"
-              onClick={() => setActiveTab('kanban')}
-            >
-              Kanban
-            </button>
-            <button
-              type="button"
-              role="tab"
-              className={activeTab === 'memory' ? styles.tabActive : styles.tab}
-              aria-selected={activeTab === 'memory'}
-              id="workspace-tab-memory"
-              onClick={() => setActiveTab('memory')}
-            >
-              Memory
-            </button>
-            <button
-              type="button"
-              role="tab"
-              className={activeTab === 'audit' ? styles.tabActive : styles.tab}
-              aria-selected={activeTab === 'audit'}
-              id="workspace-tab-audit"
-              onClick={() => {
-                setAuditOffset(0)
-                setActiveTab('audit')
-              }}
-            >
-              Audit log
-            </button>
-            <button
-              type="button"
-              role="tab"
-              className={activeTab === 'constitution' ? styles.tabActive : styles.tab}
-              aria-selected={activeTab === 'constitution'}
-              id="workspace-tab-constitution"
-              onClick={() => setActiveTab('constitution')}
-            >
-              Constitution
-            </button>
-          </div>
-=======
->>>>>>> feature
           <section className={styles.body}>
             {activeTab === 'documents' ? (
               <section className={styles.documents} aria-labelledby="workspace-documents-heading">
@@ -285,8 +263,21 @@ export default function ProjectWorkspace() {
                   Documents
                 </h2>
                 <div className={styles.documentPanels}>
-                  <DocumentPanel projectId={currentProject.id} documentType="SPEC" />
-                  <DocumentPanel projectId={currentProject.id} documentType="PLAN" />
+                  <DocumentPanel
+                    projectId={currentProject.id}
+                    documentType="SPEC"
+                    refreshKey={documentsRefreshKey}
+                    onPlanAutoStart={(runId) => {
+                      setPlanPendingRunId(runId)
+                      setDocumentsRefreshKey((k) => k + 1)
+                    }}
+                  />
+                  <DocumentPanel
+                    projectId={currentProject.id}
+                    documentType="PLAN"
+                    linkedAgentRunId={planPendingRunId}
+                    refreshKey={documentsRefreshKey}
+                  />
                 </div>
               </section>
             ) : activeTab === 'kanban' ? (
@@ -294,7 +285,12 @@ export default function ProjectWorkspace() {
                 <h2 id="workspace-kanban-heading" className={styles.kanbanTitle}>
                   Kanban
                 </h2>
-                <KanbanBoard projectId={currentProject.id} planApproved={planApproved} />
+                <KanbanBoard
+                  projectId={currentProject.id}
+                  planApproved={planApproved}
+                  selectedReviewTaskId={selectedReviewTaskId}
+                  onSelectReviewTask={setSelectedReviewTaskId}
+                />
               </section>
             ) : activeTab === 'memory' ? (
               <section className={styles.memory} aria-labelledby="workspace-memory-heading">
@@ -303,16 +299,6 @@ export default function ProjectWorkspace() {
                 </h2>
                 <p className={styles.memoryHint}>Lessons learned from completed work on this project.</p>
                 <MemoryEditor projectId={currentProject.id} />
-              </section>
-            ) : activeTab === 'constitution' ? (
-              <section className={styles.constitution} aria-labelledby="workspace-constitution-heading">
-                <h2 id="workspace-constitution-heading" className={styles.constitutionTitle}>
-                  Constitution
-                </h2>
-                <p className={styles.constitutionHint}>
-                  Rules and conventions that guide every Agent in this project.
-                </p>
-                <ConstitutionPanel projectId={currentProject.id} />
               </section>
             ) : (
               <section className={styles.audit} aria-labelledby="workspace-audit-heading">

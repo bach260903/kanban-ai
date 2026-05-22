@@ -60,28 +60,7 @@
 }
 
 .error {
-<<<<<<< HEAD
-  color: #b91c1c;
-}
-
-.constitution {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 520px;
-}
-
-.constitutionTitle {
-  margin: 0 0 0.35rem;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.constitutionHint {
-  margin: 0 0 0.75rem;
-  font-size: 0.9rem;
-  color: var(--text-muted, #64748b);
+  color: var(--c-danger-500);
 }
 
 .audit {
@@ -99,9 +78,6 @@
   margin: 0 0 0.75rem;
   font-size: 0.9rem;
   color: var(--text-muted, #64748b);
-=======
-  color: var(--c-danger-500);
->>>>>>> feature
 }
 
 .auditTableWrap {

@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react'
 import { Spinner } from '../atoms/spinner'
 import { KanbanColumn } from './kanban-column'
 import { useKanban } from '../../hooks/use-kanban'
-import { getTasks, groupedResponseToTaskColumns } from '../../services/task-api'
+import { showErrorToast, showSuccessToast } from '../../lib/toast'
+import { cancelTask, getTasks, groupedResponseToTaskColumns } from '../../services/task-api'
 import { emptyTaskColumns, useTaskStore } from '../../store/task-store'
 import type { TaskStatus } from '../../types'
 
@@ -18,6 +19,8 @@ export type KanbanBoardProps = {
   projectId: string
   /** True when the latest PLAN document has status === 'approved'. */
   planApproved?: boolean
+  selectedReviewTaskId?: string | null
+  onSelectReviewTask?: (taskId: string) => void
 }
 
 function loadErrorMessage(err: unknown): string {
@@ -30,14 +33,42 @@ function loadErrorMessage(err: unknown): string {
   return 'Unable to load tasks.'
 }
 
-export function KanbanBoard({ projectId, planApproved = false }: KanbanBoardProps) {
+export function KanbanBoard({
+  projectId,
+  planApproved = false,
+  selectedReviewTaskId = null,
+  onSelectReviewTask,
+}: KanbanBoardProps) {
   const columns = useTaskStore((s) => s.columns)
   const setColumns = useTaskStore((s) => s.setColumns)
   const clearTaskAgentRuns = useTaskStore((s) => s.clearTaskAgentRuns)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const { sensors, collisionDetection, onDragEnd } = useKanban(projectId)
+  const [startingTaskId, setStartingTaskId] = useState<string | null>(null)
+  const [cancellingTaskId, setCancellingTaskId] = useState<string | null>(null)
+  const { sensors, collisionDetection, onDragEnd, startTask } = useKanban(projectId)
+
+  const handleCancelTask = async (taskId: string) => {
+    setCancellingTaskId(taskId)
+    try {
+      await cancelTask(projectId, taskId)
+      clearTaskAgentRuns()
+      const data = await getTasks(projectId)
+      setColumns(groupedResponseToTaskColumns(data))
+      showSuccessToast('Task cancelled and moved back to To do.')
+    } catch (err) {
+      showErrorToast(loadErrorMessage(err))
+    } finally {
+      setCancellingTaskId(null)
+    }
+  }
+
+  const handleStartTask = (taskId: string) => {
+    setStartingTaskId(taskId)
+    startTask(taskId)
+    window.setTimeout(() => setStartingTaskId(null), 800)
+  }
 
   useEffect(() => {
     let cancelled = false
@@ -88,6 +119,12 @@ export function KanbanBoard({ projectId, planApproved = false }: KanbanBoardProp
             taskCardSortableDisabled={status !== 'todo'}
             isWip={status === 'in_progress'}
             planApproved={planApproved}
+            onStartTask={status === 'todo' ? handleStartTask : undefined}
+            startingTaskId={startingTaskId}
+            selectedReviewTaskId={selectedReviewTaskId}
+            onOpenReview={onSelectReviewTask}
+            onCancelTask={handleCancelTask}
+            cancellingTaskId={cancellingTaskId}
           />
         ))}
       </div>

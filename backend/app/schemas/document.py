@@ -71,11 +71,12 @@ class GeneratePlanResponse(BaseModel):
 
 
 class DocumentApproveResponse(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
-
     id: UUID
     status: DocumentStatus
     updated_at: datetime
+    """Set when SPEC approval auto-starts PLAN generation for PO review."""
+    plan_agent_run_id: UUID | None = None
+    plan_generation_started: bool = False
 
 
 class DocumentReviseResponse(BaseModel):

@@ -82,6 +82,21 @@ export async function moveTask(
   return data
 }
 
+export type TaskCancelResponse = {
+  task_id: UUID
+  from_status: TaskStatus
+  to_status: TaskStatus
+}
+
+/** Cancel in-progress coder and return task to To do. */
+export async function cancelTask(projectId: string, taskId: string): Promise<TaskCancelResponse> {
+  const { data } = await api.post<TaskCancelResponse>(
+    `${tasksBase(projectId)}/${taskId}/cancel`,
+    {},
+  )
+  return data
+}
+
 export async function approveTask(projectId: string, taskId: string): Promise<void> {
   await api.post(`${tasksBase(projectId)}/${taskId}/approve`, {})
 }

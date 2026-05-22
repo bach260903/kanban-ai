@@ -18,6 +18,8 @@ export type DiffViewerProps = {
   onLineClick?: (file: string, line: number) => void
   /** Exposes modified editor for inline comment overlay (US16 / T109). */
   onModifiedEditor?: (editor: editor.IStandaloneCodeEditor | null) => void
+  /** Programmatically focuses/reveals a modified-side line (used by AI review comment click). */
+  highlightedLine?: number | null
 }
 
 function fileNameFromModifiedModel(title: string | undefined, model: editor.ITextModel | null): string {
@@ -44,8 +46,10 @@ export function DiffViewer({
   title,
   onLineClick,
   onModifiedEditor,
+  highlightedLine = null,
 }: DiffViewerProps) {
   const mouseDisposableRef = useRef<{ dispose: () => void } | null>(null)
+  const modifiedEditorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
   const onLineClickRef = useRef(onLineClick)
   const titleRef = useRef(title)
   const onModifiedEditorRef = useRef(onModifiedEditor)
@@ -58,6 +62,7 @@ export function DiffViewer({
     return () => {
       mouseDisposableRef.current?.dispose()
       mouseDisposableRef.current = null
+      modifiedEditorRef.current = null
       onModifiedEditorRef.current?.(null)
     }
   }, [])
@@ -67,6 +72,7 @@ export function DiffViewer({
     mouseDisposableRef.current = null
 
     const modifiedEditor = diffEditor.getModifiedEditor()
+    modifiedEditorRef.current = modifiedEditor
     onModifiedEditorRef.current?.(modifiedEditor)
 
     mouseDisposableRef.current = modifiedEditor.onMouseDown((e) => {
@@ -79,6 +85,20 @@ export function DiffViewer({
       onLineClickRef.current(file, pos.lineNumber)
     })
   }, [])
+
+  useEffect(() => {
+    if (!highlightedLine || highlightedLine < 1) return
+    const modifiedEditor = modifiedEditorRef.current
+    if (!modifiedEditor) return
+    modifiedEditor.revealLineInCenter(highlightedLine)
+    modifiedEditor.setSelection({
+      startLineNumber: highlightedLine,
+      startColumn: 1,
+      endLineNumber: highlightedLine,
+      endColumn: 1,
+    })
+    modifiedEditor.focus()
+  }, [highlightedLine])
 
   return (
     <section className={styles.root} aria-label={title ?? 'Code diff'}>

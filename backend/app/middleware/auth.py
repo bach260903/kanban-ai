@@ -24,8 +24,8 @@ async def require_jwt(
     try:
         payload = jwt.decode(
             credentials.credentials,
-            settings.jwt_secret,
-            algorithms=["HS256"],
+            settings.jwt_secret_key,
+            algorithms=[settings.jwt_algorithm],
         )
     except JWTError:
         raise HTTPException(
