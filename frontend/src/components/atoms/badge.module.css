@@ -36,9 +36,9 @@
 }
 
 .success {
-  background: var(--c-success-500);
+  background: var(--c-success-700);
   color: #fff;
-  border-color: var(--c-success-500);
+  border-color: var(--c-success-700);
 }
 
 .danger {

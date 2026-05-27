@@ -15,6 +15,8 @@ export type TaskKanbanListItem = {
   title: string
   description: string | null
   priority: number
+  assigned_to: UUID | null
+  is_blocked: boolean
 }
 
 /** Response shape of ``GET /api/v1/projects/{project_id}/tasks``. */
@@ -28,7 +30,12 @@ export type TasksGroupedResponse = {
 }
 
 function withStatus(items: TaskKanbanListItem[], status: TaskStatus): TaskColumnItem[] {
-  return items.map((row) => ({ ...row, status }))
+  return items.map((row) => ({
+    ...row,
+    status,
+    assigned_to: row.assigned_to ?? null,
+    is_blocked: row.is_blocked ?? false,
+  }))
 }
 
 /** Maps API grouped payload into ``taskStore`` column shape (every card carries ``status``). */
@@ -68,6 +75,24 @@ export type TaskDiffResponse = {
 
 export async function getTasks(projectId: string): Promise<TasksGroupedResponse> {
   const { data } = await api.get<TasksGroupedResponse>(tasksBase(projectId))
+  return data
+}
+
+export type TaskCreateBody = {
+  title: string
+  description?: string
+  priority?: number
+}
+
+export async function createTask(
+  projectId: string,
+  body: TaskCreateBody,
+): Promise<TaskAssignResponse> {
+  const { data } = await api.post<TaskAssignResponse>(tasksBase(projectId), {
+    title: body.title,
+    description: body.description ?? '',
+    priority: body.priority ?? 0,
+  })
   return data
 }
 
@@ -155,5 +180,28 @@ export async function createTaskComment(
   body: { file_path: string; line_number: number; comment_text: string },
 ): Promise<InlineCommentItem> {
   const { data } = await api.post<InlineCommentItem>(`/api/v1/tasks/${taskId}/comments`, body)
+  return data
+}
+
+/** ``PATCH .../tasks/{task_id}/assign`` (US3 / T058). */
+export type TaskAssignResponse = {
+  id: UUID
+  title: string
+  description: string | null
+  priority: number
+  status: TaskStatus
+  assigned_to: UUID | null
+  is_blocked: boolean
+}
+
+export async function assignTask(
+  projectId: string,
+  taskId: string,
+  userId: string | null,
+): Promise<TaskAssignResponse> {
+  const { data } = await api.patch<TaskAssignResponse>(
+    `${tasksBase(projectId)}/${taskId}/assign`,
+    { user_id: userId },
+  )
   return data
 }

@@ -84,13 +84,22 @@ class DocumentService:
         content: str,
         *,
         project_id: UUID | None = None,
+        force: bool = False,
     ) -> Document:
-        """Manual PO edit: updates ``content`` only (no ``status`` / ``version`` change)."""
+        """Manual PO edit: updates ``content``; optional ``force`` reopens approved SPEC as draft."""
         document = await DocumentService._get_document(session, document_id)
         if project_id is not None and document.project_id != project_id:
             raise NotFoundError("Document not found.")
 
-        if document.status not in (DocumentStatus.DRAFT, DocumentStatus.REVISION_REQUESTED):
+        if document.status == DocumentStatus.APPROVED:
+            if document.document_type != DocumentType.SPEC:
+                raise InvalidTransitionError("Approved PLAN cannot be edited manually.")
+            if not force:
+                raise InvalidTransitionError(
+                    "SPEC đã được duyệt. Xác nhận sửa để chuyển về draft và duyệt lại."
+                )
+            document.status = DocumentStatus.DRAFT
+        elif document.status not in (DocumentStatus.DRAFT, DocumentStatus.REVISION_REQUESTED):
             raise InvalidTransitionError(
                 "Document content can only be edited while in draft or revision_requested state."
             )

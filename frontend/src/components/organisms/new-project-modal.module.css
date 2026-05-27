@@ -1,0 +1,218 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 0.18s ease-out;
+}
+
+.modal {
+  width: min(100%, 32rem);
+  max-height: calc(100vh - 2 * var(--space-4));
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-aside);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+  overflow: hidden;
+  animation: slideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--font-primary-color);
+}
+
+.closeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-card);
+  background: transparent;
+  color: var(--font-secondary-color);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.closeBtn:hover {
+  background: var(--c-neutral-100);
+  color: var(--font-primary-color);
+}
+
+.closeBtn:focus-visible {
+  outline: 2px solid var(--c-info-500);
+  outline-offset: 2px;
+}
+
+.body {
+  padding: var(--space-6);
+  overflow-y: auto;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-family: var(--font-ui);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--font-primary-color);
+}
+
+.required {
+  color: var(--c-danger-500);
+  margin-left: 2px;
+}
+
+.input,
+.textarea,
+.select {
+  font-family: var(--font-ui);
+  font-size: var(--t-base);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-default);
+  background: var(--surface-primary);
+  color: var(--font-primary-color);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input,
+.select {
+  height: 36px;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+.input:hover:not(:disabled),
+.textarea:hover:not(:disabled),
+.select:hover:not(:disabled) {
+  border-color: var(--c-info-500);
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--c-info-500);
+  box-shadow: 0 0 0 1px var(--c-info-500);
+}
+
+.input:disabled,
+.textarea:disabled,
+.select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.inlineError {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--c-danger-500);
+  background: var(--c-danger-50);
+  font-size: var(--t-sm);
+  color: var(--c-danger-700);
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--border-default);
+  background: var(--c-neutral-50);
+}
+
+@media (max-width: 480px) {
+  .backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .modal {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: var(--radius-aside) var(--radius-aside) 0 0;
+  }
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .header {
+    padding: var(--space-3) var(--space-4);
+  }
+  .body {
+    padding: var(--space-4);
+  }
+  .footer {
+    padding: var(--space-3) var(--space-4);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .modal {
+    animation: none;
+  }
+}

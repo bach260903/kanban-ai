@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import uuid
 from datetime import datetime, timedelta, timezone
 
@@ -72,7 +73,7 @@ async def register_user(
         )
     user = User(
         email=email,
-        hashed_password=hash_password(password),
+        hashed_password=await asyncio.to_thread(hash_password, password),
         display_name=display_name,
     )
     session.add(user)
@@ -88,7 +89,12 @@ async def login_user(
 ) -> tuple[User, str]:
     """Authenticate user and return (user, access_token)."""
     user = await session.scalar(select(User).where(User.email == email))
-    if user is None or not verify_password(password, user.hashed_password):
+    password_ok = user is not None and await asyncio.to_thread(
+        verify_password,
+        password,
+        user.hashed_password,
+    )
+    if user is None or not password_ok:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid credentials",

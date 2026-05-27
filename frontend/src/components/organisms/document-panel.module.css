@@ -17,10 +17,30 @@
 
 .title {
   margin: 0;
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px;
   font-family: var(--font-ui);
   font-size: var(--t-base);
   font-weight: 600;
   color: var(--font-primary-color);
+}
+
+.breadcrumb {
+  font-weight: 500;
+  color: var(--font-secondary-color);
+}
+
+.statusGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.statusIcon {
+  color: var(--c-success-700);
+  flex-shrink: 0;
 }
 
 .spinnerRow {

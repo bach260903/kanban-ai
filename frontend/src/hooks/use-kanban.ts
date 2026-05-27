@@ -19,6 +19,7 @@ import {
 import { useTaskStore } from '../store/task-store'
 import type { TaskColumns } from '../store/task-store'
 import type { AgentRunStatus, TaskStatus } from '../types'
+import { isUserWipFull } from '../utils/wip-limit'
 
 const BOARD_STATUSES = ['todo', 'in_progress', 'review', 'done'] as const satisfies readonly TaskStatus[]
 
@@ -57,7 +58,16 @@ function moveErrorMessage(err: unknown): string {
     const detail = (err.response?.data as { detail?: unknown } | undefined)?.detail
     if (typeof detail === 'string' && detail.trim()) return detail
     if (err.response?.status === 409) {
+      const lower = typeof detail === 'string' ? detail.toLowerCase() : ''
+      if (lower.includes('blocked') || lower.includes('dependency')) {
+        return typeof detail === 'string' && detail.trim() ? detail : 'Task đang bị blocked.'
+      }
       return 'Cannot move task: another task may already be in progress (WIP limit).'
+    }
+    if (err.response?.status === 403) {
+      return typeof detail === 'string' && detail.trim()
+        ? detail
+        : 'You cannot move a task assigned to another user.'
     }
     if (err.response?.status === 400) {
       return 'Invalid move. Drag from To do to In progress only.'
@@ -66,6 +76,11 @@ function moveErrorMessage(err: unknown): string {
   }
   if (err instanceof Error) return err.message
   return 'Failed to move task.'
+}
+
+export type UseKanbanOptions = {
+  currentUserId?: string
+  isMultiUser?: boolean
 }
 
 export type UseKanbanResult = {
@@ -79,7 +94,8 @@ export type UseKanbanResult = {
 /**
  * Kanban drag (todo → in_progress only) + optimistic move, 409 toast, agent run tracking + polling (T061).
  */
-export function useKanban(projectId: string): UseKanbanResult {
+export function useKanban(projectId: string, options: UseKanbanOptions = {}): UseKanbanResult {
+  const { currentUserId, isMultiUser = false } = options
   const columns = useTaskStore((s) => s.columns)
   const setTaskAgentRun = useTaskStore((s) => s.setTaskAgentRun)
 
@@ -170,14 +186,23 @@ export function useKanban(projectId: string): UseKanbanResult {
   const startTask = useCallback(
     (taskId: string) => {
       const cols = useTaskStore.getState().columns
+      const task = [...cols.todo, ...cols.in_progress, ...cols.review, ...cols.done, ...cols.rejected, ...cols.conflict].find(
+        (t) => t.id === taskId,
+      )
+      if (task?.is_blocked) {
+        showErrorToast('Task đang bị blocked.')
+        return
+      }
       const inTodo = cols.todo.some((t) => t.id === taskId)
       if (!inTodo) {
         showErrorToast('Task is no longer in To do.')
         return
       }
-      if (cols.in_progress.length >= 1) {
+      if (isUserWipFull(cols, currentUserId, isMultiUser)) {
         showErrorToast(
-          'WIP limit: finish or move the current In progress task before starting another.',
+          isMultiUser
+            ? 'WIP limit: you already have a task in progress.'
+            : 'WIP limit: finish or move the current In progress task before starting another.',
         )
         return
       }
@@ -196,7 +221,7 @@ export function useKanban(projectId: string): UseKanbanResult {
           showErrorToast(moveErrorMessage(err))
         })
     },
-    [projectId, setTaskAgentRun],
+    [projectId, setTaskAgentRun, currentUserId, isMultiUser],
   )
 
   const onDragEnd = useCallback(
@@ -205,6 +230,13 @@ export function useKanban(projectId: string): UseKanbanResult {
       if (!over) return
 
       const taskId = String(active.id)
+      const cols = useTaskStore.getState().columns
+      const task = cols.todo.find((t) => t.id === taskId)
+      if (task?.is_blocked) {
+        showErrorToast('Task đang bị blocked.')
+        return
+      }
+
       const containerId = active.data.current?.sortable?.containerId as string | undefined
       const fromStatus = containerId?.startsWith(SORTABLE_PREFIX)
         ? (containerId.slice(SORTABLE_PREFIX.length) as TaskStatus)

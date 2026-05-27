@@ -1,8 +1,17 @@
 import { isAxiosError } from 'axios'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import {
+  CheckCircle2,
+  Code2,
+  Cpu,
+  Eye,
+  Settings,
+  XCircle,
+} from 'lucide-react'
+import { useCallback, useEffect, useMemo, useState, type ReactElement } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { Spinner } from '../components/atoms/spinner'
+import { DependencyGraph } from '../components/organisms/dependency-graph'
 import { DocumentPanel } from '../components/organisms/document-panel'
 import { KanbanBoard } from '../components/organisms/kanban-board'
 import { ProjectHeader } from '../components/organisms/project-header'
@@ -10,14 +19,103 @@ import { MemoryEditor } from '../components/organisms/memory-editor'
 import { ReviewPanel } from '../components/organisms/review-panel'
 import { ThoughtStreamPanel } from '../components/organisms/thought-stream-panel'
 import { useInlineComments } from '../hooks/use-inline-comments'
-import { getAuditLogs, type AuditLogsPage } from '../services/audit-api'
+import { showErrorToast } from '../lib/toast'
+import { getAuditLogs, type AuditLogRow, type AuditLogsPage } from '../services/audit-api'
 import { getDocuments } from '../services/document-api'
 import { getProject } from '../services/project-api'
 import { getTasks, groupedResponseToTaskColumns } from '../services/task-api'
-import { emptyTaskColumns, useTaskStore } from '../store/task-store'
+import { emptyTaskColumns, useTaskStore, type TaskColumns } from '../store/task-store'
+import type { TaskStatus } from '../types'
 import { useProjectStore } from '../store/project-store'
+import { relativeTime } from '../utils/relative-time'
 
 import styles from './project-workspace.module.css'
+
+type AuditAgentKind = 'architect' | 'coder' | 'reviewer' | 'system'
+
+function classifyAgent(agentId: string): AuditAgentKind {
+  const id = agentId.toLowerCase()
+  if (id.includes('architect') || id.includes('planner') || id.includes('spec')) {
+    return 'architect'
+  }
+  if (id.includes('review')) return 'reviewer'
+  if (id.includes('coder') || id.includes('writer') || id.includes('code')) {
+    return 'coder'
+  }
+  return 'system'
+}
+
+const AGENT_KIND_LABEL: Record<AuditAgentKind, string> = {
+  architect: 'Architect',
+  coder: 'Coder',
+  reviewer: 'Reviewer',
+  system: 'System',
+}
+
+function AgentIcon({ kind }: { kind: AuditAgentKind }) {
+  const props = { size: 14, 'aria-hidden': true as const, className: styles.auditAgentIcon }
+  if (kind === 'architect') return <Cpu {...props} />
+  if (kind === 'coder') return <Code2 {...props} />
+  if (kind === 'reviewer') return <Eye {...props} />
+  return <Settings {...props} />
+}
+
+function humanizeAction(action: string): string {
+  const map: Record<string, string> = {
+    coder_llm: 'Coder: LLM call',
+    coder_write_file: 'Coder: Write file',
+    coder_run_tests: 'Coder: Run tests',
+    coder_commit: 'Coder: Commit',
+    task_diff_approve: 'Task: Approve diff',
+    task_diff_reject: 'Task: Reject diff',
+    architect_generate_spec: 'Architect: Generate SPEC',
+    architect_generate_plan: 'Architect: Generate PLAN',
+    reviewer_check: 'Reviewer: Run checks',
+  }
+  if (map[action]) return map[action]
+  return action
+    .split(/[_:]/)
+    .filter(Boolean)
+    .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+    .join(' ')
+}
+
+function isSuccessResult(result: string): boolean {
+  const r = result.toLowerCase()
+  return r === 'success' || r === 'ok' || r === 'pass' || r === 'passed' || r === 'true'
+}
+
+function isFailureResult(result: string): boolean {
+  const r = result.toLowerCase()
+  return (
+    r === 'failure' ||
+    r === 'failed' ||
+    r === 'fail' ||
+    r === 'error' ||
+    r === 'timeout' ||
+    r === 'rejected'
+  )
+}
+
+function renderResultCell(result: string): ReactElement {
+  if (isSuccessResult(result)) {
+    return (
+      <span className={`${styles.auditResultCell} ${styles.auditResultSuccess}`}>
+        <CheckCircle2 size={14} aria-hidden="true" />
+        Success
+      </span>
+    )
+  }
+  if (isFailureResult(result)) {
+    return (
+      <span className={`${styles.auditResultCell} ${styles.auditResultFail}`}>
+        <XCircle size={14} aria-hidden="true" />
+        Failed
+      </span>
+    )
+  }
+  return <span className={styles.auditResultCell}>{result}</span>
+}
 
 function errorMessage(err: unknown): string {
   if (isAxiosError(err)) {
@@ -33,6 +131,22 @@ function errorMessage(err: unknown): string {
   }
   if (err instanceof Error) return err.message
   return 'Unable to load project.'
+}
+
+const BOARD_STATUSES: TaskStatus[] = [
+  'todo',
+  'in_progress',
+  'review',
+  'done',
+  'rejected',
+  'conflict',
+]
+
+function findTaskStatus(columns: TaskColumns, taskId: string): TaskStatus | null {
+  for (const status of BOARD_STATUSES) {
+    if (columns[status].some((task) => task.id === taskId)) return status
+  }
+  return null
 }
 
 export default function ProjectWorkspace() {
@@ -52,13 +166,29 @@ export default function ProjectWorkspace() {
   const [planPendingRunId, setPlanPendingRunId] = useState<string | null>(null)
   const [documentsRefreshKey, setDocumentsRefreshKey] = useState(0)
   const [selectedReviewTaskId, setSelectedReviewTaskId] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<'documents' | 'kanban' | 'memory' | 'audit'>('documents')
+  const [activeTab, setActiveTab] = useState<
+    'documents' | 'kanban' | 'memory' | 'audit' | 'dependencies'
+  >('documents')
   const AUDIT_PAGE_SIZE = 25
   const [auditPage, setAuditPage] = useState<AuditLogsPage | null>(null)
   const [auditLoading, setAuditLoading] = useState(false)
   const [auditError, setAuditError] = useState<string | null>(null)
   const [auditOffset, setAuditOffset] = useState(0)
+  const [auditAgentFilter, setAuditAgentFilter] = useState<'all' | AuditAgentKind>('all')
+  const [auditResultFilter, setAuditResultFilter] = useState<'all' | 'success' | 'failed'>('all')
   const inlineComments = useInlineComments()
+
+  const filteredAuditRows = useMemo<AuditLogRow[]>(() => {
+    if (!auditPage) return []
+    return auditPage.items.filter((row) => {
+      if (auditAgentFilter !== 'all' && classifyAgent(row.agent_id) !== auditAgentFilter) {
+        return false
+      }
+      if (auditResultFilter === 'success' && !isSuccessResult(row.result)) return false
+      if (auditResultFilter === 'failed' && !isFailureResult(row.result)) return false
+      return true
+    })
+  }, [auditPage, auditAgentFilter, auditResultFilter])
 
   const refreshKanbanColumns = useCallback(async () => {
     if (!currentProject?.id) return
@@ -189,6 +319,17 @@ export default function ProjectWorkspace() {
               if (tab === 'audit') setAuditOffset(0)
               setActiveTab(tab)
             }}
+            onOpenTask={(taskId) => {
+              const status = findTaskStatus(useTaskStore.getState().columns, taskId)
+              if (!status) {
+                showErrorToast('Task không thuộc dự án hiện tại')
+                return
+              }
+              setActiveTab('kanban')
+              if (status === 'review') {
+                setSelectedReviewTaskId(taskId)
+              }
+            }}
           />
           {activeTab === 'kanban' && selectedReviewTaskId ? (
             <ReviewPanel
@@ -292,12 +433,25 @@ export default function ProjectWorkspace() {
                   onSelectReviewTask={setSelectedReviewTaskId}
                 />
               </section>
+            ) : activeTab === 'dependencies' ? (
+              <section className={styles.memory} aria-labelledby="workspace-deps-heading">
+                <h2 id="workspace-deps-heading" className={styles.memoryTitle}>
+                  Dependencies
+                </h2>
+                <p className={styles.memoryHint}>
+                  Task dependency graph — blocked tasks unlock when prerequisites reach Done.
+                </p>
+                <DependencyGraph
+                  projectId={currentProject.id}
+                  onChanged={() => void refreshKanbanColumns()}
+                />
+              </section>
             ) : activeTab === 'memory' ? (
               <section className={styles.memory} aria-labelledby="workspace-memory-heading">
                 <h2 id="workspace-memory-heading" className={styles.memoryTitle}>
                   Memory
                 </h2>
-                <p className={styles.memoryHint}>Lessons learned from completed work on this project.</p>
+                <p className={styles.memoryHint}>Lessons learned from completed tasks.</p>
                 <MemoryEditor projectId={currentProject.id} />
               </section>
             ) : (
@@ -306,6 +460,36 @@ export default function ProjectWorkspace() {
                   Audit log
                 </h2>
                 <p className={styles.auditHint}>Read-only history for this project.</p>
+                <div className={styles.auditFilters} role="group" aria-label="Audit log filters">
+                  <label className={styles.auditFilterField}>
+                    Agent:
+                    <select
+                      value={auditAgentFilter}
+                      onChange={(e) =>
+                        setAuditAgentFilter(e.target.value as 'all' | AuditAgentKind)
+                      }
+                    >
+                      <option value="all">All agents</option>
+                      <option value="architect">Architect</option>
+                      <option value="coder">Coder</option>
+                      <option value="reviewer">Reviewer</option>
+                      <option value="system">System</option>
+                    </select>
+                  </label>
+                  <label className={styles.auditFilterField}>
+                    Result:
+                    <select
+                      value={auditResultFilter}
+                      onChange={(e) =>
+                        setAuditResultFilter(e.target.value as 'all' | 'success' | 'failed')
+                      }
+                    >
+                      <option value="all">All results</option>
+                      <option value="success">Success only</option>
+                      <option value="failed">Failed only</option>
+                    </select>
+                  </label>
+                </div>
                 {auditLoading ? (
                   <p className={styles.loading}>
                     <Spinner aria-label="Loading audit log" />
@@ -326,24 +510,44 @@ export default function ProjectWorkspace() {
                           </tr>
                         </thead>
                         <tbody>
-                          {auditPage.items.length === 0 ? (
+                          {filteredAuditRows.length === 0 ? (
                             <tr>
                               <td colSpan={4} className={styles.auditEmpty}>
-                                No audit entries yet.
+                                {auditPage.items.length === 0
+                                  ? 'No audit entries yet.'
+                                  : 'No entries match the selected filters.'}
                               </td>
                             </tr>
                           ) : (
-                            auditPage.items.map((row) => (
-                              <tr key={row.id}>
-                                <td>
-                                  <span className={styles.auditAgentId}>{row.agent_id}</span>
-                                  <span className={styles.auditAgentVer}> v{row.agent_version}</span>
-                                </td>
-                                <td>{row.action_type}</td>
-                                <td>{new Date(row.timestamp).toLocaleString()}</td>
-                                <td>{row.result}</td>
-                              </tr>
-                            ))
+                            filteredAuditRows.map((row) => {
+                              const kind = classifyAgent(row.agent_id)
+                              const failed = isFailureResult(row.result)
+                              return (
+                                <tr key={row.id} className={failed ? styles.auditRowFail : undefined}>
+                                  <td>
+                                    <span className={styles.auditAgentCell}>
+                                      <AgentIcon kind={kind} />
+                                      <span className={styles.auditAgentId}>
+                                        {AGENT_KIND_LABEL[kind]}
+                                      </span>
+                                      <span className={styles.auditAgentVer}>
+                                        v{row.agent_version}
+                                      </span>
+                                    </span>
+                                  </td>
+                                  <td>{humanizeAction(row.action_type)}</td>
+                                  <td>
+                                    <time
+                                      dateTime={row.timestamp}
+                                      title={new Date(row.timestamp).toLocaleString()}
+                                    >
+                                      {relativeTime(row.timestamp)}
+                                    </time>
+                                  </td>
+                                  <td>{renderResultCell(row.result)}</td>
+                                </tr>
+                              )
+                            })
                           )}
                         </tbody>
                       </table>
@@ -376,9 +580,6 @@ export default function ProjectWorkspace() {
                 ) : null}
               </section>
             )}
-            <p>
-              <Link to="/projects">Back to project list</Link>
-            </p>
           </section>
         </>
       ) : null}

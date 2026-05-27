@@ -31,7 +31,32 @@ _MAX_TASKS = 80
 class TaskBreakdownItem(BaseModel):
     title: str = Field(..., min_length=1, max_length=500)
     description: str = ""
+    acceptance_criteria: list[str] = Field(default_factory=list)
+    plan_reference: str = ""
+    files_hint: list[str] = Field(default_factory=list)
     priority: int = 0
+
+
+def _compose_task_description(item: TaskBreakdownItem) -> str | None:
+    """Merge structured fields into one markdown description for the coder agent."""
+    sections: list[str] = []
+    summary = item.description.strip()
+    if summary:
+        sections.append(f"## Objective\n{summary}")
+    if item.plan_reference.strip():
+        sections.append(f"## Plan reference\n{item.plan_reference.strip()}")
+    if item.files_hint:
+        lines = "\n".join(f"- `{path.strip()}`" for path in item.files_hint if path.strip())
+        if lines:
+            sections.append(f"## Suggested files / modules\n{lines}")
+    if item.acceptance_criteria:
+        lines = "\n".join(
+            f"- {criterion.strip()}" for criterion in item.acceptance_criteria if criterion.strip()
+        )
+        if lines:
+            sections.append(f"## Acceptance criteria\n{lines}")
+    text = "\n\n".join(sections).strip()
+    return text if text else None
 
 
 def _strip_json_fence(text: str) -> str:
@@ -113,15 +138,23 @@ async def _run_task_breakdown(state: StateDict) -> StateDict:
         raise ValueError("Approved PLAN has no content.")
 
     system = (
-        "You are a project planning assistant. Read the PLAN.md markdown and extract concrete "
-        "engineering or product tasks suitable for a Kanban board.\n"
+        "You are a project planning assistant. Read the approved PLAN.md and extract concrete "
+        "engineering tasks for a Kanban board. Each task will be executed by an autonomous coding agent "
+        "that only sees the task title and description — make descriptions self-contained and actionable.\n\n"
         "Reply with **only** valid JSON: either a top-level array, or an object "
         '`{"tasks": [...]}` where each element has:\n'
-        '- "title" (string, required, max 500 chars)\n'
-        '- "description" (string, optional)\n'
-        '- "priority" (integer; lower means higher urgency; default 0)\n'
-        "Produce between 3 and 40 tasks when the PLAN is substantial; fewer if the PLAN is tiny. "
-        "Do not include tasks that are only meta-documentation."
+        '- "title" (string, required, max 120 chars; verb-first, specific, e.g. "Add JWT login endpoint")\n'
+        '- "description" (string, required, 2–6 sentences: scope, approach, constraints, what NOT to change)\n'
+        '- "acceptance_criteria" (array of strings, required, 2–5 testable bullet points)\n'
+        '- "plan_reference" (string, required; quote or paraphrase the PLAN section this task implements)\n'
+        '- "files_hint" (array of strings, optional; likely file paths or modules, e.g. "backend/app/routers/auth.py")\n'
+        '- "priority" (integer; lower = higher urgency; default 0)\n\n'
+        "Rules:\n"
+        "- Produce 3–40 tasks when the PLAN is substantial; fewer if the PLAN is tiny.\n"
+        "- Do NOT create meta tasks (writing docs, creating plans, running reviews only).\n"
+        "- Split large PLAN items into independently implementable units.\n"
+        "- Every task MUST have a non-empty description and at least 2 acceptance criteria.\n"
+        "- Order tasks so dependencies come first (models before API, API before UI).\n"
     )
     human = f"## Approved PLAN\n\n{plan_markdown}\n"
 
@@ -147,7 +180,10 @@ async def _run_task_breakdown(state: StateDict) -> StateDict:
         title = it.title.strip()[:500]
         if not title:
             continue
-        desc = (it.description or "").strip() or None
+        desc = _compose_task_description(it)
+        if not desc:
+            logger.warning("Skipping task with empty composed description: %s", title)
+            continue
         bulk_inputs.append(TaskBulkItem(title=title, description=desc, priority=int(it.priority)))
     if not bulk_inputs:
         raise ValueError("No valid tasks after parsing LLM output.")

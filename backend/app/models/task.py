@@ -38,10 +38,11 @@ class Task(Base):
         ),
         Index("idx_tasks_project_status", "project_id", "status"),
         Index(
-            "one_in_progress_per_project",
+            "one_in_progress_per_assignee",
             "project_id",
+            "assigned_to",
             unique=True,
-            postgresql_where=text("status = 'in_progress'"),
+            postgresql_where=text("status = 'in_progress' AND assigned_to IS NOT NULL"),
         ),
         Index("idx_tasks_assigned_to", "assigned_to"),
     )
@@ -116,9 +117,11 @@ class Task(Base):
         back_populates="task",
         cascade="all, delete-orphan",
         lazy="selectin",
+        passive_deletes=True,
     )
     dependents: Mapped[list[TaskDependency]] = relationship(
         foreign_keys=[TaskDependency.depends_on_task_id],
         back_populates="depends_on",
         lazy="selectin",
+        passive_deletes=True,
     )

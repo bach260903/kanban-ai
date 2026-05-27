@@ -20,27 +20,43 @@ type BackendSelectorProps = {
   onChange: (value: CodingBackend) => void
   disabled?: boolean
   id?: string
+  name?: string
+  className?: string
+  ariaLabel?: string
 }
 
-export function BackendSelector({ value, onChange, disabled, id }: BackendSelectorProps) {
+export function BackendSelector({
+  value,
+  onChange,
+  disabled,
+  id,
+  name,
+  className,
+  ariaLabel,
+}: BackendSelectorProps) {
   const [unavailable, setUnavailable] = useState<Set<string>>(new Set())
 
   useEffect(() => {
-    getAvailableBackends()
+    const ac = new AbortController()
+    getAvailableBackends({ signal: ac.signal })
       .then((data) => {
+        if (ac.signal.aborted) return
         const set = new Set(data.unavailable.map((u: { backend: string }) => u.backend))
         setUnavailable(set)
       })
       .catch(() => {})
+    return () => ac.abort()
   }, [])
 
   return (
     <select
       id={id}
+      name={name ?? id}
       value={value}
       onChange={(e) => onChange(e.target.value as CodingBackend)}
       disabled={disabled}
-      aria-label="AI Coding Backend"
+      className={className}
+      aria-label={ariaLabel}
     >
       {ALL_BACKENDS.map((opt) => (
         <option

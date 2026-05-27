@@ -3,6 +3,7 @@
 from collections.abc import AsyncGenerator
 
 import app.models  # noqa: F401 — register ORM mappers and ``Base.metadata`` tables
+import app.models.task_dependency_hooks  # noqa: F401 — sync is_blocked on task delete
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
     AsyncSession,
@@ -18,6 +19,7 @@ engine: AsyncEngine = create_async_engine(
     pool_pre_ping=True,
     pool_size=5,
     max_overflow=10,
+    connect_args={"timeout": 10},
 )
 
 async_session_maker = async_sessionmaker(

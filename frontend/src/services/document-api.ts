@@ -30,14 +30,85 @@ export type GenerateSpecResponse = {
   message: string
 }
 
+/**
+ * Per-(projectId, type) cache:
+ * - `inflight`: dedupes concurrent fetches inside the React StrictMode double-mount window
+ *   so SPEC/PLAN only hit the API once per navigation.
+ * - `result` + `fetchedAt`: short TTL cache. Callers can pass ``forceRefresh: true`` to bust.
+ */
+type DocumentCacheKey = string
+const documentListInflight = new Map<DocumentCacheKey, Promise<DocumentListItem[]>>()
+const documentListCache = new Map<
+  DocumentCacheKey,
+  { data: DocumentListItem[]; fetchedAt: number }
+>()
+const DOCUMENT_LIST_STALE_MS = 30_000
+
+function documentListKey(projectId: string, type?: DocumentType): DocumentCacheKey {
+  return `${projectId}:${type ?? '*'}`
+}
+
+export function invalidateDocuments(projectId: string, type?: DocumentType): void {
+  if (type) {
+    documentListCache.delete(documentListKey(projectId, type))
+    documentListInflight.delete(documentListKey(projectId, type))
+    return
+  }
+  for (const key of Array.from(documentListCache.keys())) {
+    if (key.startsWith(`${projectId}:`)) documentListCache.delete(key)
+  }
+  for (const key of Array.from(documentListInflight.keys())) {
+    if (key.startsWith(`${projectId}:`)) documentListInflight.delete(key)
+  }
+}
+
 export async function getDocuments(
   projectId: string,
   type?: DocumentType,
+  options?: { signal?: AbortSignal; forceRefresh?: boolean },
 ): Promise<DocumentListItem[]> {
-  const { data } = await api.get<DocumentListItem[]>(`${PROJECTS_PREFIX}/${projectId}/documents`, {
-    params: type != null ? { type } : undefined,
-  })
-  return data
+  const key = documentListKey(projectId, type)
+
+  if (!options?.forceRefresh) {
+    const cached = documentListCache.get(key)
+    if (cached && Date.now() - cached.fetchedAt < DOCUMENT_LIST_STALE_MS) {
+      if (options?.signal?.aborted) throw new DOMException('Aborted', 'AbortError')
+      return cached.data
+    }
+    const inflight = documentListInflight.get(key)
+    if (inflight) {
+      const data = await inflight
+      if (options?.signal?.aborted) throw new DOMException('Aborted', 'AbortError')
+      return data
+    }
+  }
+
+  // NOTE: We deliberately do NOT pass the consumer's `signal` into axios.
+  // The cache + inflight map are shared across components, so a single
+  // aborted caller (e.g. React StrictMode's first-pass cleanup) must not
+  // cancel the network request that every other caller depends on. The
+  // caller can still bail by checking `signal.aborted` after we return.
+  const promise = (async () => {
+    const { data } = await api.get<DocumentListItem[]>(
+      `${PROJECTS_PREFIX}/${projectId}/documents`,
+      {
+        params: type != null ? { type } : undefined,
+      },
+    )
+    documentListCache.set(key, { data, fetchedAt: Date.now() })
+    return data
+  })()
+
+  documentListInflight.set(key, promise)
+  try {
+    const data = await promise
+    if (options?.signal?.aborted) throw new DOMException('Aborted', 'AbortError')
+    return data
+  } finally {
+    if (documentListInflight.get(key) === promise) {
+      documentListInflight.delete(key)
+    }
+  }
 }
 
 export async function getDocument(projectId: string, documentId: string): Promise<Document> {
@@ -49,10 +120,14 @@ export async function updateDocument(
   projectId: string,
   documentId: string,
   content: string,
+  options?: { force?: boolean },
 ): Promise<Document> {
   const { data } = await api.put<Document>(`${PROJECTS_PREFIX}/${projectId}/documents/${documentId}`, {
     content,
+  }, {
+    params: options?.force === true ? { force: true } : undefined,
   })
+  invalidateDocuments(projectId)
   return data
 }
 
@@ -67,6 +142,7 @@ export async function generateSpec(
       params: payload.force === true ? { force: true } : undefined,
     },
   )
+  invalidateDocuments(projectId, 'SPEC')
   return data
 }
 
@@ -78,6 +154,7 @@ export type GeneratePlanResponse = {
 
 export async function generatePlan(projectId: string): Promise<GeneratePlanResponse> {
   const { data } = await api.post<GeneratePlanResponse>(`${PROJECTS_PREFIX}/${projectId}/generate-plan`, {})
+  invalidateDocuments(projectId, 'PLAN')
   return data
 }
 
@@ -106,6 +183,7 @@ export async function approveDocument(
     `${PROJECTS_PREFIX}/${projectId}/documents/${documentId}/approve`,
     {},
   )
+  invalidateDocuments(projectId)
   return data
 }
 
@@ -118,6 +196,7 @@ export async function reviseDocument(
     `${PROJECTS_PREFIX}/${projectId}/documents/${documentId}/revise`,
     { feedback },
   )
+  invalidateDocuments(projectId)
   return data
 }
 

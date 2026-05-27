@@ -1,26 +1,23 @@
-import { isAxiosError } from 'axios'
-import { type FormEvent, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import axios, { isAxiosError } from 'axios'
+import { Plus } from 'lucide-react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { Button } from '../components/atoms/button'
-import { Spinner } from '../components/atoms/spinner'
-import { TextInput } from '../components/atoms/text-input'
-import { BackendSelector } from '../components/molecules/backend-selector'
+import { EmptyState } from '../components/molecules/empty-state'
+import {
+  NewProjectModal,
+  type NewProjectFormValues,
+} from '../components/organisms/new-project-modal'
+import { ProjectCard } from '../components/organisms/project-card'
+import { ProjectCardSkeleton } from '../components/organisms/project-card-skeleton'
 import { createProject, listProjects } from '../services/project-api'
 import { useProjectStore } from '../store/project-store'
-import type { CodingBackend, PrimaryLanguage } from '../types'
 
 import styles from './project-list.module.css'
 
-const LANGUAGES: PrimaryLanguage[] = ['python', 'javascript', 'typescript']
-
-function formatUpdated(iso: string): string {
-  try {
-    return new Date(iso).toLocaleString()
-  } catch {
-    return iso
-  }
-}
+const SKELETON_COUNT = 6
+/** Skip a refetch if the cached list is younger than this (StrictMode-friendly). */
+const STALE_TIME_MS = 60_000
 
 function messageFromUnknown(err: unknown): string {
   if (isAxiosError(err)) {
@@ -37,9 +34,9 @@ function messageFromUnknown(err: unknown): string {
     const d = data?.detail
     if (typeof d === 'string') return d
     if (Array.isArray(d)) {
-      return d.map((x) => (typeof x === 'object' && x && 'msg' in x ? String((x as { msg: string }).msg) : String(x))).join(
-        '; ',
-      )
+      return d
+        .map((x) => (typeof x === 'object' && x && 'msg' in x ? String((x as { msg: string }).msg) : String(x)))
+        .join('; ')
     }
     return err.message || 'Request failed'
   }
@@ -47,163 +44,137 @@ function messageFromUnknown(err: unknown): string {
   return 'Something went wrong'
 }
 
+/**
+ * Module-scoped fetch timestamp — a StrictMode-safe dedupe guard. Two effect
+ * setups within ~60s reuse the cached store payload instead of issuing a second
+ * GET /api/v1/projects. Production (no StrictMode) hits the network exactly once.
+ */
+let lastFetchedAt = 0
+
 export default function ProjectList() {
   const { projects, setProjects } = useProjectStore()
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState<string | null>(null)
-
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
-  const [language, setLanguage] = useState<PrimaryLanguage>('typescript')
-  const [backend, setBackend] = useState<CodingBackend>('groq')
-  const [createError, setCreateError] = useState<string | null>(null)
-  const [creating, setCreating] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
-    let cancelled = false
+    const ac = new AbortController()
+    const fresh = Date.now() - lastFetchedAt < STALE_TIME_MS
+
+    if (fresh && projects.length > 0) {
+      setLoading(false)
+      return () => ac.abort()
+    }
+
+    setLoadError(null)
+    setLoading(true)
     ;(async () => {
       try {
-        setLoadError(null)
-        setLoading(true)
-        const list = await listProjects()
-        if (!cancelled) setProjects(list)
+        const list = await listProjects({ signal: ac.signal })
+        if (ac.signal.aborted) return
+        setProjects(list)
+        lastFetchedAt = Date.now()
       } catch (e) {
-        if (!cancelled) setLoadError(messageFromUnknown(e))
+        if (ac.signal.aborted) return
+        if (axios.isCancel(e)) return
+        setLoadError(messageFromUnknown(e))
       } finally {
-        if (!cancelled) setLoading(false)
+        if (!ac.signal.aborted) setLoading(false)
       }
     })()
-    return () => {
-      cancelled = true
-      setLoading(false)
-    }
-  }, [setProjects])
 
-  async function handleCreate(e: FormEvent) {
-    e.preventDefault()
-    setCreateError(null)
-    const trimmed = name.trim()
-    if (!trimmed) {
-      setCreateError('Name is required.')
-      return
-    }
-    setCreating(true)
-    try {
+    return () => ac.abort()
+  }, [setProjects, projects.length])
+
+  const handleCreate = useCallback(
+    async (values: NewProjectFormValues) => {
       await createProject({
-        name: trimmed,
-        description: description.trim() === '' ? null : description.trim(),
-        primary_language: language,
-        coding_backend: backend,
+        name: values.name,
+        description: values.description === '' ? null : values.description,
+        primary_language: values.language,
+        coding_backend: values.backend,
       })
-      setName('')
-      setDescription('')
       const list = await listProjects()
+      lastFetchedAt = Date.now()
       setProjects(list)
-    } catch (err) {
-      if (isAxiosError(err) && err.response?.status === 409) {
-        const data = err.response.data as { detail?: string }
-        setCreateError(data.detail ?? 'A project with this name already exists.')
-      } else {
-        setCreateError(messageFromUnknown(err))
+      setModalOpen(false)
+    },
+    [setProjects],
+  )
+
+  const handleCreateWithError = useCallback(
+    async (values: NewProjectFormValues) => {
+      try {
+        await handleCreate(values)
+      } catch (err) {
+        if (isAxiosError(err) && err.response?.status === 409) {
+          const data = err.response.data as { detail?: string }
+          throw new Error(data.detail ?? 'A project with this name already exists.')
+        }
+        throw new Error(messageFromUnknown(err))
       }
-    } finally {
-      setCreating(false)
-    }
-  }
+    },
+    [handleCreate],
+  )
+
+  const count = projects.length
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>Projects</h1>
-      <p className={styles.sub}>Create and open Neo-Kanban projects.</p>
-
-      <form className={styles.form} onSubmit={handleCreate} noValidate>
-        <strong>New project</strong>
-        <div className={styles.formRow}>
-          <div className={styles.fieldGrow}>
-            <TextInput
-              id="project-name"
-              label="Name"
-              name="name"
-              value={name}
-              onChange={(ev) => setName(ev.target.value)}
-              required
-              maxLength={255}
-              autoComplete="off"
-              disabled={creating}
-            />
-          </div>
-          <label className={styles.selectLabel}>
-            Language
-            <select
-              className={styles.select}
-              value={language}
-              onChange={(ev) => setLanguage(ev.target.value as PrimaryLanguage)}
-              disabled={creating}
-              aria-label="Primary language"
-            >
-              {LANGUAGES.map((lang) => (
-                <option key={lang} value={lang}>
-                  {lang}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className={styles.selectLabel}>
-            AI Coding Backend
-            <BackendSelector
-              id="project-backend"
-              value={backend}
-              onChange={setBackend}
-              disabled={creating}
-            />
-          </label>
+      <div className={styles.header}>
+        <div className={styles.headerText}>
+          <h1 className={styles.title}>Projects</h1>
+          <p className={styles.sub}>Create and open Neo-Kanban projects.</p>
         </div>
-        <TextInput
-          id="project-description"
-          label="Description (optional)"
-          name="description"
-          value={description}
-          onChange={(ev) => setDescription(ev.target.value)}
-          disabled={creating}
-        />
-        {createError ? <p className={styles.inlineError}>{createError}</p> : null}
-        <Button type="submit" variant="primary" disabled={creating}>
-          {creating ? 'Creating…' : 'Create project'}
+        <Button
+          type="button"
+          variant="primary"
+          className={styles.newBtn}
+          onClick={() => setModalOpen(true)}
+        >
+          <Plus size={16} aria-hidden="true" />
+          New Project
         </Button>
-      </form>
+      </div>
 
       {loadError ? <div className={styles.banner}>{loadError}</div> : null}
 
       {loading ? (
-        <div className={styles.loading} role="status">
-          <Spinner aria-label="Loading projects" />
-          Loading projects…
-        </div>
-      ) : null}
+        <section
+          className={styles.section}
+          aria-busy="true"
+          aria-live="polite"
+          aria-label="Loading projects"
+        >
+          <div className={styles.grid}>
+            {Array.from({ length: SKELETON_COUNT }).map((_, i) => (
+              <ProjectCardSkeleton key={i} />
+            ))}
+          </div>
+        </section>
+      ) : count === 0 && !loadError ? (
+        <EmptyState onCreate={() => setModalOpen(true)} />
+      ) : (
+        <section className={styles.section} aria-labelledby="projects-section-title">
+          <div className={styles.sectionHeader}>
+            <h2 id="projects-section-title" className={styles.sectionTitle}>
+              Your Projects
+              <span className={styles.sectionCount}>({count})</span>
+            </h2>
+          </div>
+          <div className={styles.grid}>
+            {projects.map((p) => (
+              <ProjectCard key={p.id} project={p} />
+            ))}
+          </div>
+        </section>
+      )}
 
-      {!loading && !loadError && projects.length === 0 ? (
-        <p className={styles.empty}>No projects yet. Create one above.</p>
-      ) : null}
-
-      {!loading && projects.length > 0 ? (
-        <div className={styles.grid}>
-          {projects.map((p) => (
-            <article key={p.id} className={styles.card}>
-              <h3>
-                <Link to={`/projects/${p.id}`} className={styles.cardTitle}>
-                  {p.name}
-                </Link>
-              </h3>
-              <div className={styles.meta}>
-                <span className={styles.lang}>{p.primary_language}</span>
-                <span>{p.status}</span>
-                <span>Updated {formatUpdated(p.updated_at)}</span>
-              </div>
-              {p.description ? <p className={styles.desc}>{p.description}</p> : null}
-            </article>
-          ))}
-        </div>
-      ) : null}
+      <NewProjectModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={handleCreateWithError}
+      />
     </div>
   )
 }

@@ -176,7 +176,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: Auth Endpoints
 
-- [ ] T039 [US2] **Update** `backend/app/routers/auth.py` (KHÔNG tạo file mới) — Thay thế toàn bộ nội dung để dùng `auth_service` và schemas mới:
+- [x] T039 [US2] **Update** `backend/app/routers/auth.py` (KHÔNG tạo file mới) — Thay thế toàn bộ nội dung để dùng `auth_service` và schemas mới:
   ```python
   # Imports cần dùng:
   from app.dependencies import get_current_user
@@ -203,7 +203,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: Members & Invitations
 
-- [ ] T040 [P] [US2] Tạo `backend/app/schemas/member.py` — mới hoàn toàn:
+- [x] T040 [P] [US2] Tạo `backend/app/schemas/member.py` — mới hoàn toàn:
   ```python
   # File: backend/app/schemas/member.py
   import uuid
@@ -236,7 +236,7 @@ export async function getMembers(projectId: string) {
       role: ProjectRole
   ```
 
-- [ ] T041 [US2] Tạo `backend/app/api/v1/members.py` — phần 1 (list, invite, get-invitation):
+- [x] T041 [US2] Tạo `backend/app/api/v1/members.py` — phần 1 (list, invite, get-invitation):
   ```python
   # File: backend/app/api/v1/members.py
   # Imports:
@@ -272,7 +272,7 @@ export async function getMembers(projectId: string) {
   api_v1_router.include_router(members_router)
   ```
 
-- [ ] T042 [US2] Thêm phần 2 vào `backend/app/api/v1/members.py` (accept, change-role, remove):
+- [x] T042 [US2] Thêm phần 2 vào `backend/app/api/v1/members.py` (accept, change-role, remove):
   ```python
   # POST /invitations/{token}/accept
   #   guard: get_current_user (auth required)
@@ -300,7 +300,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: Auth Guard Existing Routes
 
-- [ ] T043 [US2] **Update** `backend/app/api/v1/projects.py` — thêm auth + project membership:
+- [x] T043 [US2] **Update** `backend/app/api/v1/projects.py` — thêm auth + project membership:
 
   **Trạng thái hiện tại**: tất cả endpoints dùng `_sub: Annotated[str, Depends(require_jwt)]`
 
@@ -327,7 +327,7 @@ export async function getMembers(projectId: string) {
   #   nhưng đổi require_jwt → require_any_member
   ```
 
-- [ ] T044 [US2] **Update** `backend/app/api/v1/tasks.py` — thêm auth:
+- [x] T044 [US2] **Update** `backend/app/api/v1/tasks.py` — thêm auth:
 
   **Trạng thái hiện tại**: dùng `_sub: Annotated[str, Depends(require_jwt)]` ở mọi endpoint
 
@@ -347,7 +347,7 @@ export async function getMembers(projectId: string) {
   # không phải User. Nếu endpoint cần User object riêng, thêm thêm current_user: Annotated[User, Depends(get_current_user)]
   ```
 
-- [ ] T045 [P] [US2] **Update** `backend/app/main.py` — startup log:
+- [x] T045 [P] [US2] **Update** `backend/app/main.py` — startup log:
   ```python
   # CORS đã đúng (allow_headers=["*"]) — không cần sửa
   # Thêm vào lifespan hoặc startup event:
@@ -368,7 +368,7 @@ export async function getMembers(projectId: string) {
 
 ### Frontend: Auth Context & Pages
 
-- [ ] T046 [US2] Tạo `frontend/src/contexts/auth-context.tsx` — Context cho user session:
+- [x] T046 [US2] Tạo `frontend/src/contexts/auth-context.tsx` — Context cho user session:
   ```typescript
   // File: frontend/src/contexts/auth-context.tsx
   // Imports cần:
@@ -402,7 +402,7 @@ export async function getMembers(projectId: string) {
   // KHÔNG dùng createApiClient — dùng trực tiếp axios hay api instance từ services/api.ts
   ```
 
-- [ ] T047 [P] [US2] Tạo `frontend/src/services/auth-api.ts` — API wrapper cho auth:
+- [x] T047 [P] [US2] Tạo `frontend/src/services/auth-api.ts` — API wrapper cho auth:
   ```typescript
   // File: frontend/src/services/auth-api.ts
   // Dùng api từ services/api.ts (đã có auth header injection + base URL + timeout)
@@ -424,7 +424,7 @@ export async function getMembers(projectId: string) {
   }
   ```
 
-- [ ] T048 [US2] **Update** `frontend/src/pages/login.tsx` — wire với AuthContext:
+- [x] T048 [US2] **Update** `frontend/src/pages/login.tsx` — wire với AuthContext:
   ```typescript
   // File hiện tại: dùng api.ts trực tiếp để POST /auth/login
   // Thay đổi:
@@ -439,7 +439,7 @@ export async function getMembers(projectId: string) {
   // Giữ nguyên: form structure, styling, error display
   ```
 
-- [ ] T049 [US2] **Update** `frontend/src/pages/register.tsx` — wire với AuthContext:
+- [x] T049 [US2] **Update** `frontend/src/pages/register.tsx` — wire với AuthContext:
   ```typescript
   // Tương tự T048:
   import { useAuth } from '../contexts/auth-context'
@@ -449,7 +449,7 @@ export async function getMembers(projectId: string) {
   // Bắt 409 (email đã dùng): hiển thị "Email đã được sử dụng"
   ```
 
-- [ ] T050 [P] [US2] Tạo `frontend/src/components/molecules/auth-guard.tsx` — component wrapper:
+- [x] T050 [P] [US2] Tạo `frontend/src/components/molecules/auth-guard.tsx` — component wrapper:
   ```typescript
   // File: frontend/src/components/molecules/auth-guard.tsx
   // App.tsx hiện tại có RequireAuth component dùng getAuthToken() — component này tương tự
@@ -465,7 +465,7 @@ export async function getMembers(projectId: string) {
   }
   ```
 
-- [ ] T051 [US2] **Update** `frontend/src/App.tsx` — wrap với AuthProvider + dùng AuthGuard:
+- [x] T051 [US2] **Update** `frontend/src/App.tsx` — wrap với AuthProvider + dùng AuthGuard:
   ```typescript
   // File hiện tại:
   // import { getAuthToken } from './services/api'
@@ -497,7 +497,7 @@ export async function getMembers(projectId: string) {
 
 ### Frontend: Member Management UI
 
-- [ ] T052 [P] [US2] Tạo `frontend/src/services/member-api.ts`:
+- [x] T052 [P] [US2] Tạo `frontend/src/services/member-api.ts`:
   ```typescript
   // File: frontend/src/services/member-api.ts
   // Dùng api từ services/api.ts (đã có auth header, base URL, timeout)
@@ -545,7 +545,7 @@ export async function getMembers(projectId: string) {
   }
   ```
 
-- [ ] T053 [P] [US2] Tạo `frontend/src/components/atoms/role-badge.tsx`:
+- [x] T053 [P] [US2] Tạo `frontend/src/components/atoms/role-badge.tsx`:
   ```typescript
   // File: frontend/src/components/atoms/role-badge.tsx
   import type { ProjectRole } from '../../types'
@@ -566,7 +566,7 @@ export async function getMembers(projectId: string) {
   }
   ```
 
-- [ ] T054 [US2] Tạo `frontend/src/components/organisms/project-members.tsx` — Members management:
+- [x] T054 [US2] Tạo `frontend/src/components/organisms/project-members.tsx` — Members management:
   ```typescript
   // File: frontend/src/components/organisms/project-members.tsx
   // Imports:
@@ -591,7 +591,7 @@ export async function getMembers(projectId: string) {
   // 3. Loading / empty state
   ```
 
-- [ ] T055 [US2] **Update** `frontend/src/components/organisms/project-header.tsx` — thêm member avatars + bell:
+- [x] T055 [US2] **Update** `frontend/src/components/organisms/project-header.tsx` — thêm member avatars + bell:
 
   **Trạng thái hiện tại**: project-header hiện thị project name + tab navigation
 
@@ -627,7 +627,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: WIP & Assignment Logic
 
-- [ ] T056 [US3] **Update** `backend/app/services/kanban_service.py` — WIP per-developer mode:
+- [X] T056 [US3] **Update** `backend/app/services/kanban_service.py` — WIP per-developer mode:
   ```python
   # Thêm imports:
   from sqlalchemy import select, func
@@ -654,7 +654,7 @@ export async function getMembers(projectId: string) {
   # (current_user_id cần được truyền vào move_task — xem T057 về signature)
   ```
 
-- [ ] T057 [US3] Thêm assignment conflict check vào `kanban_service.py` — auto-assign + conflict:
+- [X] T057 [US3] Thêm assignment conflict check vào `kanban_service.py` — auto-assign + conflict:
   ```python
   # Cập nhật signature move_task để nhận current_user_id:
   # async def move_task(task_id, to_status, session, *, current_user_id: UUID | None = None, ...) -> Task:
@@ -667,7 +667,7 @@ export async function getMembers(projectId: string) {
   # Cập nhật call site trong api/v1/tasks.py để truyền current_user_id
   ```
 
-- [ ] T058 [P] [US3] Thêm `PATCH /projects/{project_id}/tasks/{task_id}/assign` vào `backend/app/api/v1/tasks.py`:
+- [X] T058 [P] [US3] Thêm `PATCH /projects/{project_id}/tasks/{task_id}/assign` vào `backend/app/api/v1/tasks.py`:
   ```python
   # Schema cần thêm vào backend/app/schemas/task.py:
   class AssignRequest(BaseModel):
@@ -688,7 +688,7 @@ export async function getMembers(projectId: string) {
       # trả TaskResponse.model_validate(task)
   ```
 
-- [ ] T059 [P] [US3] **Update** `backend/app/schemas/task.py` — thêm assigned_to + is_blocked vào response schemas:
+- [X] T059 [P] [US3] **Update** `backend/app/schemas/task.py` — thêm assigned_to + is_blocked vào response schemas:
   ```python
   # Trong TaskKanbanItem và bất kỳ response schema nào:
   assigned_to: UUID | None = None
@@ -700,7 +700,7 @@ export async function getMembers(projectId: string) {
 
 ### Frontend: Assignee Avatar & Assign UI
 
-- [ ] T060 [P] [US3] Tạo `frontend/src/components/atoms/avatar.tsx`:
+- [X] T060 [P] [US3] Tạo `frontend/src/components/atoms/avatar.tsx`:
   ```typescript
   // File: frontend/src/components/atoms/avatar.tsx
   type AvatarSize = 'sm' | 'md' | 'lg'
@@ -727,7 +727,7 @@ export async function getMembers(projectId: string) {
   }
   ```
 
-- [ ] T061 [P] [US3] Tạo `frontend/src/components/molecules/assign-member.tsx`:
+- [X] T061 [P] [US3] Tạo `frontend/src/components/molecules/assign-member.tsx`:
   ```typescript
   // Props: members: ProjectMember[], currentAssigneeId: string | null, onAssign(userId: string | null): void
   // State: open: boolean
@@ -738,7 +738,7 @@ export async function getMembers(projectId: string) {
   //   Sau khi chọn: gọi onAssign(userId | null) + close
   ```
 
-- [ ] T062 [US3] **Update** `frontend/src/components/molecules/task-card.tsx` — thêm assignee:
+- [X] T062 [US3] **Update** `frontend/src/components/molecules/task-card.tsx` — thêm assignee:
   ```typescript
   // Trạng thái hiện tại: task-card render title, description, agent status badge, Start button
   // Thêm vào footer:
@@ -760,7 +760,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: Dependency Service & API
 
-- [ ] T063 [US4] Tạo `backend/app/services/dependency_service.py` — cycle detection:
+- [X] T063 [US4] Tạo `backend/app/services/dependency_service.py` — cycle detection:
   ```python
   # File: backend/app/services/dependency_service.py
   from sqlalchemy import select
@@ -796,7 +796,7 @@ export async function getMembers(projectId: string) {
       return False
   ```
 
-- [ ] T064 [US4] Thêm add/remove/is_blocked vào `dependency_service.py`:
+- [X] T064 [US4] Thêm add/remove/is_blocked vào `dependency_service.py`:
   ```python
   async def add_dependency(session, task_id: uuid.UUID, depends_on_id: uuid.UUID, project_id: uuid.UUID):
       # 1. Kiểm tra cả hai task thuộc project_id → 404 nếu không
@@ -818,7 +818,7 @@ export async function getMembers(projectId: string) {
       # Trả {"nodes": [{id, title, status}], "edges": [{from, to}]}
   ```
 
-- [ ] T065 [US4] Thêm unlock_dependents vào `dependency_service.py`:
+- [X] T065 [US4] Thêm unlock_dependents vào `dependency_service.py`:
   ```python
   async def unlock_dependents(session, completed_task_id: uuid.UUID) -> list[uuid.UUID]:
       """Gọi sau khi task move to DONE. Trả list task IDs vừa được unblock."""
@@ -830,14 +830,14 @@ export async function getMembers(projectId: string) {
       # 4. return unlocked list
   ```
 
-- [ ] T066 [P] [US4] Tạo `backend/app/schemas/dependency.py`:
+- [X] T066 [P] [US4] Tạo `backend/app/schemas/dependency.py`:
   ```python
   # DependencyCreate(depends_on_task_id: UUID)
   # DependencyResponse(task_id, depends_on_task_id, created_at) — from_attributes=True
   # DependencyGraphResponse(nodes: list[dict], edges: list[dict])
   ```
 
-- [ ] T067 [P] [US4] Tạo `backend/app/api/v1/dependencies.py`:
+- [X] T067 [P] [US4] Tạo `backend/app/api/v1/dependencies.py`:
   ```python
   router = APIRouter(prefix="/projects", tags=["dependencies"])
 
@@ -856,7 +856,7 @@ export async function getMembers(projectId: string) {
   ```
   Đăng ký trong `main.py`: `from app.api.v1.dependencies import router as deps_router`
 
-- [ ] T068 [US4] **Update** `backend/app/services/kanban_service.py` — unlock sau approve:
+- [X] T068 [US4] **Update** `backend/app/services/kanban_service.py` — unlock sau approve:
   ```python
   # Trong approve_task() (hoặc tương đương khi task → DONE):
   # Sau khi task.status = TaskStatus.DONE:
@@ -869,7 +869,7 @@ export async function getMembers(projectId: string) {
 
 ### Frontend: Blocked Badge & DAG
 
-- [ ] T069 [P] [US4] Tạo `frontend/src/services/dependency-api.ts`:
+- [X] T069 [P] [US4] Tạo `frontend/src/services/dependency-api.ts`:
   ```typescript
   import { api } from './api'
   // getDeps(projectId, taskId) → GET /api/v1/projects/{pid}/tasks/{tid}/dependencies
@@ -878,7 +878,7 @@ export async function getMembers(projectId: string) {
   // getGraph(projectId) → GET /api/v1/projects/{pid}/dependency-graph
   ```
 
-- [ ] T070 [P] [US4] Tạo `frontend/src/components/molecules/dependency-badge.tsx`:
+- [X] T070 [P] [US4] Tạo `frontend/src/components/molecules/dependency-badge.tsx`:
   ```typescript
   // Props: blockedByTitles: string[]
   // Nếu rỗng: không render
@@ -886,7 +886,7 @@ export async function getMembers(projectId: string) {
   // Tooltip (hover): danh sách tối đa 3 tên + "..." nếu nhiều hơn
   ```
 
-- [ ] T071 [US4] **Update** `frontend/src/components/molecules/task-card.tsx` — blocked state:
+- [X] T071 [US4] **Update** `frontend/src/components/molecules/task-card.tsx` — blocked state:
   ```typescript
   // Nếu task.is_blocked:
   //   - Render <DependencyBadge blockedByTitles={blockedByTitles ?? []} />
@@ -895,14 +895,14 @@ export async function getMembers(projectId: string) {
   //   - Ẩn Start button
   ```
 
-- [ ] T072 [US4] **Update** `frontend/src/components/organisms/kanban-board.tsx` — kiểm tra blocked khi drag:
+- [X] T072 [US4] **Update** `frontend/src/components/organisms/kanban-board.tsx` — kiểm tra blocked khi drag:
   ```typescript
   // Trong onDragEnd handler (từ useKanban):
   // Trước khi gọi startTask(): kiểm tra task.is_blocked → toast "Task đang bị blocked" + return
   // Hoặc trong useKanban.startTask(): thêm check columns.todo.find(t => t.id === taskId)?.is_blocked
   ```
 
-- [ ] T073 [US4] Tạo `frontend/src/components/organisms/dependency-graph.tsx` — SVG DAG:
+- [X] T073 [US4] Tạo `frontend/src/components/organisms/dependency-graph.tsx` — SVG DAG:
   ```typescript
   // Props: projectId: string
   // Fetch graph data khi mount: getGraph(projectId)
@@ -913,7 +913,7 @@ export async function getMembers(projectId: string) {
   //   Loading spinner khi fetch
   ```
 
-- [ ] T074 [US4] **Update** `frontend/src/pages/project-workspace.tsx` — thêm Dependencies tab:
+- [X] T074 [US4] **Update** `frontend/src/pages/project-workspace.tsx` — thêm Dependencies tab:
   ```typescript
   // Thêm "dependencies" vào activeTab state type và tab navigation
   // Thêm trong body section:
@@ -933,7 +933,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: Template Service & API
 
-- [ ] T075 [US5] Tạo `backend/app/services/template_service.py`:
+- [X] T075 [US5] Tạo `backend/app/services/template_service.py`:
   ```python
   from app.models.task_template import TaskTemplate, TemplateScope
   from sqlalchemy import select, or_
@@ -964,7 +964,7 @@ export async function getMembers(projectId: string) {
       await session.delete(template); await session.flush()
   ```
 
-- [ ] T076 [P] [US5] Tạo `backend/app/schemas/template.py`:
+- [X] T076 [P] [US5] Tạo `backend/app/schemas/template.py`:
   ```python
   from typing import Literal
   class TemplateCreate(BaseModel):
@@ -980,7 +980,7 @@ export async function getMembers(projectId: string) {
       scope: str; project_id: UUID | None; created_by: UUID; created_at: datetime
   ```
 
-- [ ] T077 [P] [US5] Tạo `backend/app/api/v1/templates.py`:
+- [X] T077 [P] [US5] Tạo `backend/app/api/v1/templates.py`:
   ```python
   router = APIRouter(prefix="/templates", tags=["templates"])
   # GET /templates?scope=&project_id= → auth required (get_current_user); gọi list_templates
@@ -993,7 +993,7 @@ export async function getMembers(projectId: string) {
 
 ### Frontend: Template Selector
 
-- [ ] T078 [P] [US5] Tạo `frontend/src/services/template-api.ts`:
+- [X] T078 [P] [US5] Tạo `frontend/src/services/template-api.ts`:
   ```typescript
   import { api } from './api'
   export async function listTemplates(scope?: string, projectId?: string) {
@@ -1006,7 +1006,7 @@ export async function getMembers(projectId: string) {
   // createTemplate(data), deleteTemplate(id)
   ```
 
-- [ ] T079 [US5] Tạo `frontend/src/components/molecules/template-selector.tsx`:
+- [X] T079 [US5] Tạo `frontend/src/components/molecules/template-selector.tsx`:
   ```typescript
   // Props: projectId: string, onSelect(title: string, description: string): void
   // Mount: fetch global + project templates với Promise.all()
@@ -1015,14 +1015,14 @@ export async function getMembers(projectId: string) {
   // Không render nếu danh sách rỗng
   ```
 
-- [ ] T080 [US5] **Update** task creation form trong `project-workspace.tsx` hoặc task creation modal — thêm TemplateSelector:
+- [X] T080 [US5] **Update** task creation form trong `project-workspace.tsx` hoặc task creation modal — thêm TemplateSelector:
   ```typescript
   // Tìm nơi nhập title + description khi tạo task mới
   // Thêm <TemplateSelector projectId={projectId} onSelect={(t, d) => { setTitle(t); setDesc(d) }} />
   // trước input title
   ```
 
-- [ ] T081 [US5] Thêm "Lưu làm template" trong task detail view:
+- [X] T081 [US5] Thêm "Lưu làm template" trong task detail view:
   ```typescript
   // Modal nhỏ: name input + scope select (project/global)
   // Gọi: createTemplate({ name, title_template: task.title, description_template: task.description, scope, project_id })
@@ -1041,7 +1041,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: Analytics Service & API
 
-- [ ] T082 [US6] Tạo `backend/app/services/analytics_service.py` — dashboard data:
+- [X] T082 [US6] Tạo `backend/app/services/analytics_service.py` — dashboard data:
   ```python
   # get_dashboard_data(session, user_id: UUID) -> dict:
   #   1. Query projects qua ProjectMember JOIN Project WHERE user_id=user_id
@@ -1052,7 +1052,7 @@ export async function getMembers(projectId: string) {
   #   3. Trả {"projects": [{id, name, task_counts: {todo:N, ...}, stale_count:N, member_count:N}]}
   ```
 
-- [ ] T083 [US6] Thêm get_project_analytics vào `analytics_service.py`:
+- [X] T083 [US6] Thêm get_project_analytics vào `analytics_service.py`:
   ```python
   # get_project_analytics(session, project_id, from_dt, to_dt) -> dict:
   # 4 sub-queries:
@@ -1068,7 +1068,7 @@ export async function getMembers(projectId: string) {
   # 4. error_breakdown: SELECT action_type, count(*) FROM audit_logs WHERE project_id AND result='failure' GROUP BY action_type
   ```
 
-- [ ] T084 [P] [US6] Tạo `backend/app/schemas/analytics.py`:
+- [X] T084 [P] [US6] Tạo `backend/app/schemas/analytics.py`:
   ```python
   class BackendMetric(BaseModel): agent_type: str; avg_seconds: float; first_approve_rate: float; error_count: int
   class MemberMetric(BaseModel): display_name: str; tasks_done: int; tasks_in_progress: int
@@ -1077,7 +1077,7 @@ export async function getMembers(projectId: string) {
   class AnalyticsResponse(BaseModel): period: str; by_backend: list[BackendMetric]; by_member: list[MemberMetric]; reviewer_avg_score: float | None; error_breakdown: list[dict]
   ```
 
-- [ ] T085 [P] [US6] Tạo `backend/app/api/v1/analytics.py`:
+- [X] T085 [P] [US6] Tạo `backend/app/api/v1/analytics.py`:
   ```python
   # GET /dashboard → current_user required; gọi get_dashboard_data(session, current_user.id)
   # GET /projects/{id}/analytics?range=7d|30d|custom&from_date=&to_date=
@@ -1091,7 +1091,7 @@ export async function getMembers(projectId: string) {
 
 ### Frontend: Dashboard & Analytics Pages
 
-- [ ] T086 [P] [US6] Tạo `frontend/src/services/analytics-api.ts`:
+- [X] T086 [P] [US6] Tạo `frontend/src/services/analytics-api.ts`:
   ```typescript
   import { api } from './api'
   export async function getDashboard() {
@@ -1105,7 +1105,7 @@ export async function getMembers(projectId: string) {
   }
   ```
 
-- [ ] T087 [US6] Tạo `frontend/src/pages/dashboard.tsx`:
+- [X] T087 [US6] Tạo `frontend/src/pages/dashboard.tsx`:
   ```typescript
   // Import: getDashboard, AuthGuard (hoặc useAuth check), Link từ react-router-dom
   // Mount: fetch getDashboard()
@@ -1120,7 +1120,7 @@ export async function getMembers(projectId: string) {
   // Empty state: "Chưa có project nào" + Link tới /projects khi projects.length === 0
   ```
 
-- [ ] T088 [US6] Tạo `frontend/src/pages/analytics.tsx`:
+- [X] T088 [US6] Tạo `frontend/src/pages/analytics.tsx`:
   ```typescript
   // Import từ recharts: BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell
   // Props: useParams để lấy projectId
@@ -1135,7 +1135,7 @@ export async function getMembers(projectId: string) {
   //   - Error breakdown: colored badges
   ```
 
-- [ ] T089 [US6] **Update** `frontend/src/App.tsx` — thêm routes mới:
+- [X] T089 [US6] **Update** `frontend/src/App.tsx` — thêm routes mới:
   ```typescript
   // Thêm imports:
   import Dashboard from './pages/dashboard'
@@ -1158,7 +1158,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: Notification Service
 
-- [ ] T090 [US7] Tạo `backend/app/services/notification_service.py` — phần 1:
+- [X] T090 [US7] Tạo `backend/app/services/notification_service.py` — phần 1:
   ```python
   from app.models.notification import Notification, NotificationType
   from app.models.project_member import ProjectMember, ProjectRole
@@ -1188,7 +1188,7 @@ export async function getMembers(projectId: string) {
                                     f"Task cần review: {task.title}", "task", str(task.id))
   ```
 
-- [ ] T091 [US7] Thêm get/mark vào `notification_service.py`:
+- [X] T091 [US7] Thêm get/mark vào `notification_service.py`:
   ```python
   async def notify_agent_error(session, task): ...  # tương tự notify_task_needs_review nhưng type=AGENT_ERROR
   async def notify_task_unblocked(session, task, user_id): ...  # notify assignee
@@ -1198,7 +1198,7 @@ export async function getMembers(projectId: string) {
   async def mark_all_read(session, user_id) -> int: ...  # UPDATE; return rowcount
   ```
 
-- [ ] T092 [P] [US7] Tạo `backend/app/schemas/notification.py`:
+- [X] T092 [P] [US7] Tạo `backend/app/schemas/notification.py`:
   ```python
   class NotificationResponse(BaseModel):
       model_config = ConfigDict(from_attributes=True)
@@ -1210,7 +1210,7 @@ export async function getMembers(projectId: string) {
       total_unread: int; items: list[NotificationResponse]
   ```
 
-- [ ] T093 [P] [US7] Tạo `backend/app/api/v1/notifications.py`:
+- [X] T093 [P] [US7] Tạo `backend/app/api/v1/notifications.py`:
   ```python
   # GET /notifications?unread_only=false&limit=20&offset=0 → NotificationListResponse
   # PATCH /notifications/{id}/read → {"ok": true}
@@ -1223,7 +1223,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: Webhook Service
 
-- [ ] T094 [US7] Tạo `backend/app/services/webhook_service.py` — phần 1 (sign + deliver):
+- [X] T094 [US7] Tạo `backend/app/services/webhook_service.py` — phần 1 (sign + deliver):
   ```python
   import hmac, hashlib, json
   import httpx
@@ -1244,7 +1244,7 @@ export async function getMembers(projectId: string) {
       # except httpx.RequestError: return (False, None)
   ```
 
-- [ ] T095 [US7] Thêm enqueue_delivery vào `webhook_service.py`:
+- [X] T095 [US7] Thêm enqueue_delivery vào `webhook_service.py`:
   ```python
   async def enqueue_delivery(session, project_id, event_type: str, payload: dict):
       # Query WebhookConfig WHERE project_id AND enabled=True AND event_type IN events array
@@ -1254,7 +1254,7 @@ export async function getMembers(projectId: string) {
       # await redis.rpush("webhook_queue", str(delivery.id))
   ```
 
-- [ ] T096 [US7] Thêm process_deliveries worker vào `webhook_service.py`:
+- [X] T096 [US7] Thêm process_deliveries worker vào `webhook_service.py`:
   ```python
   async def process_deliveries():
       RETRY_DELAYS = [0, 5, 30]  # seconds trước mỗi attempt
@@ -1270,7 +1270,7 @@ export async function getMembers(projectId: string) {
           # commit; except all silently; continue
   ```
 
-- [ ] T097 [P] [US7] Thêm test_webhook vào `webhook_service.py`:
+- [X] T097 [P] [US7] Thêm test_webhook vào `webhook_service.py`:
   ```python
   async def test_webhook(session, webhook_id) -> dict:
       # Fetch config; 404 nếu không có
@@ -1283,7 +1283,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: Webhook & GitHub APIs
 
-- [ ] T098 [P] [US7] Tạo `backend/app/schemas/webhook.py`:
+- [X] T098 [P] [US7] Tạo `backend/app/schemas/webhook.py`:
   ```python
   class WebhookCreate(BaseModel): url: str; secret: str | None = None; events: list[str]
   class WebhookResponse(BaseModel):
@@ -1292,7 +1292,7 @@ export async function getMembers(projectId: string) {
   class TestWebhookResponse(BaseModel): delivered: bool; http_status: int | None; response_time_ms: int
   ```
 
-- [ ] T099 [P] [US7] Tạo `backend/app/api/v1/webhooks.py`:
+- [X] T099 [P] [US7] Tạo `backend/app/api/v1/webhooks.py`:
   ```python
   router = APIRouter(prefix="/projects", tags=["webhooks"])
   # GET /projects/{id}/webhooks → require_any_member
@@ -1303,7 +1303,7 @@ export async function getMembers(projectId: string) {
   ```
   Đăng ký trong `main.py`.
 
-- [ ] T100 [P] [US7] Tạo `backend/app/services/github_service.py`:
+- [X] T100 [P] [US7] Tạo `backend/app/services/github_service.py`:
   ```python
   from cryptography.fernet import Fernet
   from github import Github, GithubException
@@ -1323,7 +1323,7 @@ export async function getMembers(projectId: string) {
           return False
   ```
 
-- [ ] T101 [P] [US7] Thêm create_pull_request vào `github_service.py`:
+- [X] T101 [P] [US7] Thêm create_pull_request vào `github_service.py`:
   ```python
   async def create_pull_request(config, task, diff_content: str, branch_name: str) -> str:
       pat = decrypt_pat(config.pat_encrypted)
@@ -1337,7 +1337,7 @@ export async function getMembers(projectId: string) {
       return pr.html_url
   ```
 
-- [ ] T102 [P] [US7] Tạo `backend/app/api/v1/github.py`:
+- [X] T102 [P] [US7] Tạo `backend/app/api/v1/github.py`:
   ```python
   # GET /projects/{id}/github → require_any_member; 404 nếu chưa config
   # PUT /projects/{id}/github → require_owner; validate PAT trước (validate_config()); 422 nếu fail
@@ -1349,7 +1349,7 @@ export async function getMembers(projectId: string) {
 
 ### Backend: Kanban Integration (Notifications + Webhooks)
 
-- [ ] T103 [US7] **Update** `backend/app/services/kanban_service.py` — notification calls:
+- [X] T103 [US7] **Update** `backend/app/services/kanban_service.py` — notification calls:
   ```python
   from app.services import notification_service
   # Sau task.status = TaskStatus.REVIEW:
@@ -1361,7 +1361,7 @@ export async function getMembers(projectId: string) {
   #   except Exception: logger.exception(...)
   ```
 
-- [ ] T104 [US7] Thêm webhook calls vào `kanban_service.py`:
+- [X] T104 [US7] Thêm webhook calls vào `kanban_service.py`:
   ```python
   from app.services import webhook_service
 
@@ -1379,7 +1379,7 @@ export async function getMembers(projectId: string) {
   # Wrap trong try/except để không block task
   ```
 
-- [ ] T105 [US7] Thêm GitHub PR integration vào `kanban_service.py` — trong approve_task sau DONE:
+- [X] T105 [US7] Thêm GitHub PR integration vào `kanban_service.py` — trong approve_task sau DONE:
   ```python
   from app.models.github_config import GitHubConfig
   from app.services import github_service
@@ -1394,7 +1394,7 @@ export async function getMembers(projectId: string) {
   #   except Exception: logger.exception("GitHub PR creation failed task_id=%s", task.id)
   ```
 
-- [ ] T106 [US7] **Update** `backend/app/main.py` — webhook worker startup/shutdown:
+- [X] T106 [US7] **Update** `backend/app/main.py` — webhook worker startup/shutdown:
   ```python
   from app.services import webhook_service
   import asyncio
@@ -1417,7 +1417,7 @@ export async function getMembers(projectId: string) {
 
 ### Frontend: Notification Panel
 
-- [ ] T107 [P] [US7] Tạo `frontend/src/services/notification-api.ts`:
+- [X] T107 [P] [US7] Tạo `frontend/src/services/notification-api.ts`:
   ```typescript
   import { api } from './api'
   export interface NotificationListResponse {
@@ -1431,7 +1431,7 @@ export async function getMembers(projectId: string) {
   export async function markAllRead() { return (await api.post<{ marked: number }>('/api/v1/notifications/read-all')).data }
   ```
 
-- [ ] T108 [P] [US7] Tạo `frontend/src/components/atoms/notification-badge.tsx`:
+- [X] T108 [P] [US7] Tạo `frontend/src/components/atoms/notification-badge.tsx`:
   ```typescript
   export function NotificationBadge({ count }: { count: number }) {
     if (count <= 0) return null
@@ -1443,7 +1443,7 @@ export async function getMembers(projectId: string) {
   }
   ```
 
-- [ ] T109 [US7] Tạo `frontend/src/components/molecules/notification-panel.tsx`:
+- [X] T109 [US7] Tạo `frontend/src/components/molecules/notification-panel.tsx`:
   ```typescript
   // timeAgo(isoDate): "2 phút trước" / "3 giờ trước" / "2 ngày trước"
   // TYPE_ICON map: task_assigned→📋, task_needs_review→👁, task_done→✅, agent_error→⚠, task_unblocked→🔓
@@ -1458,7 +1458,7 @@ export async function getMembers(projectId: string) {
   //   onClose: click outside hoặc close button
   ```
 
-- [ ] T110 [US7] **Update** `frontend/src/components/organisms/project-header.tsx` — wire bell + NotificationPanel:
+- [X] T110 [US7] **Update** `frontend/src/components/organisms/project-header.tsx` — wire bell + NotificationPanel:
   ```typescript
   // State: notifOpen: boolean, unreadCount: number
   // useEffect: fetch getNotifications({unread_only: true}) mỗi 30s → set unreadCount
@@ -1471,7 +1471,7 @@ export async function getMembers(projectId: string) {
 
 ### Frontend: Webhook Settings UI
 
-- [ ] T111 [P] [US7] Tạo `frontend/src/services/webhook-api.ts`:
+- [X] T111 [P] [US7] Tạo `frontend/src/services/webhook-api.ts`:
   ```typescript
   import { api } from './api'
   export async function listWebhooks(projectId: string) { return (await api.get(`/api/v1/projects/${projectId}/webhooks`)).data }
@@ -1485,7 +1485,7 @@ export async function getMembers(projectId: string) {
   export async function testWebhook(projectId: string, id: string) { return (await api.post(`/api/v1/projects/${projectId}/webhooks/${id}/test`)).data }
   ```
 
-- [ ] T112 [US7] Tạo `frontend/src/components/organisms/webhook-settings.tsx`:
+- [X] T112 [US7] Tạo `frontend/src/components/organisms/webhook-settings.tsx`:
   ```typescript
   // Props: projectId: string
   // 2 sections:
@@ -1500,7 +1500,7 @@ export async function getMembers(projectId: string) {
   //    - Hiện current config nếu exists; ẩn PAT sau save (chỉ hiện "••••••••")
   ```
 
-- [ ] T113 [US7] Tạo `frontend/src/pages/project-settings.tsx`:
+- [X] T113 [US7] Tạo `frontend/src/pages/project-settings.tsx`:
   ```typescript
   // Props: useParams() để lấy projectId
   // Tabs: "Members" | "Webhooks & Integrations"
@@ -1517,7 +1517,7 @@ export async function getMembers(projectId: string) {
 
 ## Phase 10: Polish & Cross-Cutting
 
-- [ ] T114 [P] **Update** `frontend/src/services/api-client.ts` — thêm response interceptor:
+- [X] T114 [P] **Update** `frontend/src/services/api-client.ts` — thêm response interceptor:
   ```typescript
   // Thêm vào createApiClient() trả về:
   client.interceptors.response.use(
@@ -1541,7 +1541,7 @@ export async function getMembers(projectId: string) {
   ```
   **Lưu ý**: api.ts cũng đã có 401 handler — đảm bảo không duplicate logic
 
-- [ ] T115 [P] **Update** `frontend/src/pages/dashboard.tsx` — loading skeleton + empty state:
+- [X] T115 [P] **Update** `frontend/src/pages/dashboard.tsx` — loading skeleton + empty state:
   ```typescript
   // Loading: 3 gray card divs với animate-pulse className khi isLoading
   // Empty: khi projects.length === 0 và !isLoading:
@@ -1551,7 +1551,7 @@ export async function getMembers(projectId: string) {
   //   </div>
   ```
 
-- [ ] T116 [US2] Tạo `frontend/src/pages/accept-invite.tsx`:
+- [X] T116 [US2] Tạo `frontend/src/pages/accept-invite.tsx`:
   ```typescript
   // import: useParams, useNavigate; acceptInvite từ member-api; showErrorToast
   // useEffect khi mount: acceptInvite(token)
@@ -1561,19 +1561,19 @@ export async function getMembers(projectId: string) {
   //   Thêm route trong App.tsx: <Route path="/invitations/:token" element={<AcceptInvite />} />
   ```
 
-- [ ] T117 [P] **Update** `frontend/src/components/molecules/notification-panel.tsx` — edge cases:
+- [X] T117 [P] **Update** `frontend/src/components/molecules/notification-panel.tsx` — edge cases:
   ```typescript
   // Empty state: khi items.length === 0: "Không có thông báo nào" với icon 🔔
   // Error state: nếu fetch fail: không hiện error (silent); retry tự động ở poll tiếp theo
   ```
 
-- [ ] T118 [P] **Update** `frontend/src/components/organisms/webhook-settings.tsx` — confirm + URL validation:
+- [X] T118 [P] **Update** `frontend/src/components/organisms/webhook-settings.tsx` — confirm + URL validation:
   ```typescript
   // Delete: window.confirm("Xóa webhook này? Thao tác không thể hoàn tác.") trước api call
   // URL validation trong form: if (!url.startsWith('https://')) setUrlError('URL phải bắt đầu với https://')
   ```
 
-- [ ] T119 Kiểm tra `backend/app/main.py` — verify tất cả routers đã được đăng ký:
+- [X] T119 Kiểm tra `backend/app/main.py` — verify tất cả routers đã được đăng ký:
   ```python
   # Danh sách phải có:
   # auth_router (từ routers/auth.py)
@@ -1587,7 +1587,7 @@ export async function getMembers(projectId: string) {
   # Các routers đã có: projects, tasks, review, documents, branches, audit_logs, backends, codebase, pause, agent_runs, dev_auth
   ```
 
-- [ ] T120 Smoke test toàn bộ flow:
+- [X] T120 Smoke test toàn bộ flow:
   ```
   # Backend:
   POST /auth/register → 201

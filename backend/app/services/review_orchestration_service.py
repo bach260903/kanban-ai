@@ -144,9 +144,12 @@ class ReviewOrchestrationService:
         task_id: UUID,
         reason: str,
     ) -> None:
+        entering_review = task.status != TaskStatus.REVIEW
         task.status = TaskStatus.REVIEW
         task.updated_at = datetime.now(timezone.utc)
         await session.flush()
+        if entering_review:
+            await KanbanService.on_task_needs_review(session, task)
         await EventPublisher.publish(
             task_id,
             StreamEventType.STATUS_CHANGE,

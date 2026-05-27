@@ -14,11 +14,30 @@ from app.schemas.project import ProjectCreate, ProjectUpdate
 
 class ProjectService:
     @staticmethod
+    def _archived_name(original: str, project_id: UUID) -> str:
+        """Rename archived project so the display name can be reused by a new project."""
+        suffix = f"__archived_{project_id.hex[:8]}"
+        max_base = 255 - len(suffix)
+        base = original.strip()[:max_base].rstrip()
+        return f"{base}{suffix}"
+
+    @staticmethod
+    async def _release_project_name(session: AsyncSession, project: Project) -> None:
+        released = ProjectService._archived_name(project.name, project.id)
+        if project.name == released:
+            return
+        project.name = released
+        await session.flush()
+
+    @staticmethod
     async def create(session: AsyncSession, data: ProjectCreate) -> Project:
         name = data.name.strip()
-        conflict = await session.scalar(select(Project.id).where(Project.name == name))
-        if conflict is not None:
-            raise DuplicateNameError(f"Project name '{name}' already exists.")
+        existing = await session.scalar(select(Project).where(Project.name == name))
+        if existing is not None:
+            if existing.status == ProjectStatus.ARCHIVED:
+                await ProjectService._release_project_name(session, existing)
+            else:
+                raise DuplicateNameError(f"Project name '{name}' already exists.")
         project = Project(
             name=name,
             description=data.description,
@@ -48,7 +67,11 @@ class ProjectService:
             new_name = data.name.strip()
             if new_name != project.name:
                 conflict = await session.scalar(
-                    select(Project.id).where(Project.name == new_name, Project.id != project.id)
+                    select(Project.id).where(
+                        Project.name == new_name,
+                        Project.id != project.id,
+                        Project.status == ProjectStatus.ACTIVE,
+                    )
                 )
                 if conflict is not None:
                     raise DuplicateNameError(f"Project name '{new_name}' already exists.")
@@ -64,6 +87,7 @@ class ProjectService:
     async def archive(session: AsyncSession, project_id: UUID) -> Project:
         project = await ProjectService.get(session, project_id)
         project.status = ProjectStatus.ARCHIVED
+        await ProjectService._release_project_name(session, project)
         await session.flush()
         return project
 

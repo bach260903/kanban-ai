@@ -2,28 +2,38 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from typing import Annotated
 from uuid import UUID
 
 from fastapi import APIRouter, Depends
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
+from app.dependencies import (
+    require_any_member,
+    require_developer_or_above,
+    require_leader_or_above,
+)
 from app.exceptions import InvalidTransitionError, NotFoundError
-from app.middleware.auth import require_jwt
 from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
 from app.models.audit_log import AuditLogResult
 from app.models.feedback import Feedback, FeedbackReferenceType
+from app.models.project_member import ProjectMember
 from app.models.task import Task, TaskStatus
 from app.schemas.task import (
+    AssignRequest,
     TaskApproveResponse,
     TaskCancelResponse,
+    TaskCreateRequest,
     TaskDiffResponse,
     TaskKanbanItem,
     TaskMoveRequest,
     TaskMoveResult,
     TaskRejectRequest,
     TaskRejectResponse,
+    TaskResponse,
     TasksGroupedResponse,
 )
 from app.services.audit_service import write_audit
@@ -62,12 +72,35 @@ def _group_tasks_by_status(tasks: list[Task]) -> TasksGroupedResponse:
 @router.get("/{project_id}/tasks", response_model=TasksGroupedResponse)
 async def list_tasks_grouped(
     project_id: UUID,
-    _sub: Annotated[str, Depends(require_jwt)],
+    _member: Annotated[ProjectMember, require_any_member],
     session: Annotated[AsyncSession, Depends(get_db)],
 ) -> TasksGroupedResponse:
     await ProjectService.get(session, project_id)
     rows = await TaskService.list_by_project(session, project_id)
     return _group_tasks_by_status(rows)
+
+
+@router.post(
+    "/{project_id}/tasks",
+    response_model=TaskResponse,
+    status_code=201,
+)
+async def create_task(
+    project_id: UUID,
+    body: TaskCreateRequest,
+    _developer: Annotated[ProjectMember, require_developer_or_above],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> TaskResponse:
+    await ProjectService.get(session, project_id)
+    created = await TaskService.create_bulk(
+        session,
+        project_id,
+        [{"title": body.title, "description": body.description, "priority": body.priority}],
+        status=TaskStatus.TODO,
+    )
+    await session.commit()
+    await session.refresh(created[0])
+    return TaskResponse.model_validate(created[0])
 
 
 _NO_DIFF_DETAIL = "No diff available. Agent may still be running."
@@ -77,7 +110,7 @@ _NO_DIFF_DETAIL = "No diff available. Agent may still be running."
 async def get_task_diff(
     project_id: UUID,
     task_id: UUID,
-    _sub: Annotated[str, Depends(require_jwt)],
+    _member: Annotated[ProjectMember, require_any_member],
     session: Annotated[AsyncSession, Depends(get_db)],
 ) -> TaskDiffResponse:
     await ProjectService.get(session, project_id)
@@ -94,7 +127,7 @@ async def get_task_diff(
 async def approve_task(
     project_id: UUID,
     task_id: UUID,
-    _sub: Annotated[str, Depends(require_jwt)],
+    leader: Annotated[ProjectMember, require_leader_or_above],
     session: Annotated[AsyncSession, Depends(get_db)],
 ) -> TaskApproveResponse:
     await ProjectService.get(session, project_id)
@@ -102,7 +135,12 @@ async def approve_task(
     if task.status != TaskStatus.REVIEW:
         raise InvalidTransitionError("Task must be in review status to approve the diff.")
     diff = await DiffService.approve_latest_pending(session, task_id=task_id, project_id=project_id)
-    await KanbanService.move_task(task_id, TaskStatus.DONE, session)
+    await KanbanService.move_task(
+        task_id,
+        TaskStatus.DONE,
+        session,
+        current_user_id=leader.user_id,
+    )
     await session.refresh(task)
     if task.status == TaskStatus.CONFLICT:
         await write_audit(
@@ -144,7 +182,7 @@ async def reject_task(
     project_id: UUID,
     task_id: UUID,
     body: TaskRejectRequest,
-    _sub: Annotated[str, Depends(require_jwt)],
+    _leader: Annotated[ProjectMember, require_leader_or_above],
     session: Annotated[AsyncSession, Depends(get_db)],
 ) -> TaskRejectResponse:
     await ProjectService.get(session, project_id)
@@ -198,7 +236,13 @@ async def reject_task(
     )
     session.add(agent_run)
     await session.flush()
-    await KanbanService.move_task(task_id, TaskStatus.IN_PROGRESS, session, defer_coder_start=True)
+    await KanbanService.move_task(
+        task_id,
+        TaskStatus.IN_PROGRESS,
+        session,
+        current_user_id=_leader.user_id,
+        defer_coder_start=True,
+    )
     await write_audit(
         session,
         project_id=project_id,
@@ -235,7 +279,7 @@ async def reject_task(
 async def cancel_task(
     project_id: UUID,
     task_id: UUID,
-    _sub: Annotated[str, Depends(require_jwt)],
+    _member: Annotated[ProjectMember, require_any_member],
     session: Annotated[AsyncSession, Depends(get_db)],
 ) -> TaskCancelResponse:
     """Cancel an in-progress task: stop coder run and move back to To do."""
@@ -270,7 +314,7 @@ async def move_task(
     project_id: UUID,
     task_id: UUID,
     body: TaskMoveRequest,
-    _sub: Annotated[str, Depends(require_jwt)],
+    _developer: Annotated[ProjectMember, require_developer_or_above],
     session: Annotated[AsyncSession, Depends(get_db)],
 ) -> TaskMoveResult:
     await ProjectService.get(session, project_id)
@@ -297,6 +341,7 @@ async def move_task(
         task_id,
         body.to,
         session,
+        current_user_id=_developer.user_id,
         agent_run_id=pre_created_run.id if pre_created_run else None,
         defer_coder_start=pre_created_run is not None,
     )
@@ -312,3 +357,35 @@ async def move_task(
         to_status=task.status,
         agent_run_id=pre_created_run.id if pre_created_run else None,
     )
+
+
+@router.patch(
+    "/{project_id}/tasks/{task_id}/assign",
+    response_model=TaskResponse,
+)
+async def assign_task(
+    project_id: UUID,
+    task_id: UUID,
+    body: AssignRequest,
+    _leader: Annotated[ProjectMember, require_leader_or_above],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> TaskResponse:
+    await ProjectService.get(session, project_id)
+    task = await TaskService.get(session, task_id, project_id=project_id)
+    if body.user_id is not None:
+        target_member = await session.scalar(
+            select(ProjectMember).where(
+                ProjectMember.project_id == project_id,
+                ProjectMember.user_id == body.user_id,
+            )
+        )
+        if target_member is None:
+            raise NotFoundError("User is not a member of this project.")
+    previous_assignee = task.assigned_to
+    task.assigned_to = body.user_id
+    task.updated_at = datetime.now(timezone.utc)
+    if body.user_id is not None and body.user_id != previous_assignee:
+        await KanbanService.on_task_assigned(session, task, body.user_id)
+    await session.commit()
+    await session.refresh(task)
+    return TaskResponse.model_validate(task)

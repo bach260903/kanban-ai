@@ -9,17 +9,17 @@ import { useEffect, useState } from 'react'
 
 
 import { Badge } from '../atoms/badge'
+import { Avatar } from '../atoms/avatar'
 import { Button } from '../atoms/button'
+import { AssignMember } from './assign-member'
+import { DependencyBadge } from './dependency-badge'
 
 import { useTaskStore } from '../../store/task-store'
 
 import { getTaskBranch, type TaskBranchInfo } from '../../services/task-api'
 
-
-
 import type { TaskColumnItem } from '../../store/task-store'
-
-import type { AgentRunStatus } from '../../types'
+import type { AgentRunStatus, ProjectMember, ProjectRole } from '../../types'
 
 
 
@@ -39,6 +39,14 @@ export type TaskCardProps = {
   /** Open code review panel (Review column only). */
   onOpenReview?: () => void
   isReviewSelected?: boolean
+  members?: ProjectMember[]
+  currentUserRole?: ProjectRole
+  onAssign?: (userId: string | null) => void
+  blockedByTitles?: string[]
+}
+
+function canAssign(role: ProjectRole | undefined): boolean {
+  return role === 'owner' || role === 'leader'
 }
 
 
@@ -76,6 +84,10 @@ export function TaskCard({
   cancelBusy = false,
   onOpenReview,
   isReviewSelected = false,
+  members = [],
+  currentUserRole,
+  onAssign,
+  blockedByTitles = [],
 }: TaskCardProps) {
 
   const agentRun = useTaskStore((s) => s.taskAgentByTaskId[task.id])
@@ -140,7 +152,7 @@ export function TaskCard({
 
     id: task.id,
 
-    disabled: sortableDisabled,
+    disabled: sortableDisabled || task.is_blocked,
 
   })
 
@@ -169,7 +181,9 @@ export function TaskCard({
 
 
 
-  const dragProps = sortableDisabled ? {} : { ...attributes, ...listeners }
+  const dragProps = sortableDisabled || task.is_blocked ? {} : { ...attributes, ...listeners }
+  const assignee = members.find((m) => m.user_id === task.assigned_to) ?? null
+  const showAssignUi = canAssign(currentUserRole) && onAssign && members.length > 0
 
   return (
     <article
@@ -181,7 +195,8 @@ export function TaskCard({
         isAgentRunning ? styles.rootAgentRunning : '',
         task.status === 'conflict' ? styles.rootConflict : '',
         isReviewSelected ? styles.rootReviewSelected : '',
-        !sortableDisabled ? styles.rootDraggable : '',
+        !sortableDisabled && !task.is_blocked ? styles.rootDraggable : '',
+        task.is_blocked ? styles.rootBlocked : '',
         onOpenReview ? styles.rootClickable : '',
       ]
         .filter(Boolean)
@@ -190,7 +205,7 @@ export function TaskCard({
       onClick={
         onOpenReview
           ? (e) => {
-              if ((e.target as HTMLElement).closest('button')) return
+              if ((e.target as HTMLElement).closest('button, [data-no-dnd]')) return
               onOpenReview()
             }
           : undefined
@@ -208,11 +223,13 @@ export function TaskCard({
       role={onOpenReview ? 'button' : undefined}
       tabIndex={onOpenReview ? 0 : undefined}
       title={
-        onOpenReview
-          ? 'Open code review'
-          : sortableDisabled
-            ? undefined
-            : 'Drag to In progress or use Start'
+        task.is_blocked
+          ? 'Task is blocked by dependencies'
+          : onOpenReview
+            ? 'Open code review'
+            : sortableDisabled
+              ? undefined
+              : 'Drag to In progress or use Start'
       }
     >
       <span
@@ -228,6 +245,13 @@ export function TaskCard({
         <div className={styles.topRow}>
 
           <Badge kind="task" status="todo" label={`#${task.priority}`} className={styles.priorityBadge} />
+
+          {task.is_blocked ? (
+            <DependencyBadge
+              blockedByTitles={blockedByTitles}
+              forceCount={blockedByTitles.length || 1}
+            />
+          ) : null}
 
           {task.status === 'conflict' ? (
 
@@ -295,6 +319,19 @@ export function TaskCard({
 
           <span className={styles.updated}>Updated —</span>
         </div>
+
+        <div className={styles.assigneeRow}>
+          {showAssignUi ? (
+            <AssignMember
+              members={members}
+              currentAssigneeId={task.assigned_to}
+              onAssign={onAssign}
+            />
+          ) : assignee ? (
+            <Avatar name={assignee.display_name} size="sm" />
+          ) : null}
+        </div>
+
         {onCancel ? (
           <Button
             type="button"
@@ -308,7 +345,7 @@ export function TaskCard({
             Cancel
           </Button>
         ) : null}
-        {onStart ? (
+        {onStart && !task.is_blocked ? (
           <Button
             type="button"
             variant="primary"

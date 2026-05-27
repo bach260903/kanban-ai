@@ -238,6 +238,10 @@ async def _run_with_session(state: StateDict) -> StateDict:
                     run.status = AgentRunStatus.FAILURE
                     run.completed_at = datetime.now(timezone.utc)
                 await finalise_log(s, audit_log.id, AuditLogResult.FAILURE, output_refs=[error_code])
+                if t is not None:
+                    from app.services.kanban_service import KanbanService
+
+                    await KanbanService.on_agent_error(s, t)
                 await s.commit()
 
             await _publish_event(
@@ -267,6 +271,9 @@ async def _run_with_session(state: StateDict) -> StateDict:
             if t is not None:
                 t.status = TaskStatus.REVIEW
                 t.updated_at = datetime.now(timezone.utc)
+                from app.services.kanban_service import KanbanService
+
+                await KanbanService.on_task_needs_review(s, t)
             run = await s.get(AgentRun, agent_run_id)
             if run is not None:
                 run.status = AgentRunStatus.AWAITING_HIL

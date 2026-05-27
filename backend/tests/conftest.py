@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import os
+import uuid
+from collections.abc import AsyncGenerator
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -36,9 +38,10 @@ def _merge_dotenv() -> None:
 _merge_dotenv()
 if os.environ.get("TEST_DATABASE_URL"):
     os.environ["DATABASE_URL"] = os.environ["TEST_DATABASE_URL"]
+os.environ.setdefault("DISABLE_WEBHOOK_WORKER", "1")
 
 from app.config import settings  # noqa: E402
-from app.database import engine, get_db  # noqa: E402
+from app.database import engine  # noqa: E402
 from app.main import app  # noqa: E402
 
 
@@ -53,39 +56,50 @@ async def async_db_session() -> Any:
         finally:
             await session.close()
             await trans.rollback()
+    # Return pooled asyncpg connections on this loop before pytest closes it.
+    await engine.dispose()
 
 
 @pytest_asyncio.fixture
 async def test_client() -> Any:
-    """HTTPX async client against the FastAPI ASGI app with ``get_db`` overridden."""
-
-    async def _override_get_db():
-        async with engine.connect() as conn:
-            trans = await conn.begin()
-            session = AsyncSession(bind=conn, expire_on_commit=False)
-            try:
-                yield session
-            finally:
-                await session.close()
-                await trans.rollback()
-
-    app.dependency_overrides[get_db] = _override_get_db
+    """HTTPX async client against the FastAPI ASGI app."""
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
         yield client
-    app.dependency_overrides.clear()
+    await engine.dispose()
 
 
-@pytest.fixture(scope="session")
-def auth_headers() -> dict[str, str]:
-    """JWT Bearer header for authenticated API tests (T017+)."""
+@pytest_asyncio.fixture
+async def auth_headers() -> AsyncGenerator[dict[str, str], None]:
+    """JWT Bearer header for authenticated API tests using a real user id."""
+    user_id = uuid.uuid4()
+    async with engine.begin() as conn:
+        res = await conn.execute(
+            text(
+                """
+                INSERT INTO users (id, email, hashed_password, display_name)
+                VALUES (:id, :email, :hashed_password, :display_name)
+                ON CONFLICT (email) DO UPDATE
+                SET display_name = EXCLUDED.display_name
+                RETURNING id
+                """
+            ),
+            {
+                "id": user_id,
+                "email": "pytest-auth-user@example.com",
+                "hashed_password": "pytest-hash",
+                "display_name": "Pytest Auth User",
+            },
+        )
+        user_id = res.scalar_one()
     now = datetime.now(timezone.utc)
     token = jwt.encode(
-        {"sub": "test-user", "exp": now + timedelta(hours=24)},
-        settings.jwt_secret,
-        algorithm="HS256",
+        {"sub": str(user_id), "exp": now + timedelta(hours=24)},
+        settings.jwt_secret_key,
+        algorithm=settings.jwt_algorithm,
     )
-    return {"Authorization": f"Bearer {token}"}
+    yield {"Authorization": f"Bearer {token}"}
+    await engine.dispose()
 
 
 @pytest_asyncio.fixture

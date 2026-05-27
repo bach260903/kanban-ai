@@ -21,5 +21,13 @@ class SandboxEscapeError(Exception):
     """Path or command outside sandbox root (→ 400)."""
 
 
+class CircularDependencyError(Exception):
+    """Adding a dependency would create a cycle (→ 409)."""
+
+
+class DependencyBlockedError(Exception):
+    """Task cannot start while prerequisite tasks are not done (→ 409)."""
+
+
 class PauseSignal(Exception):
     """Coder detected a task-level pause (Redis); run stops after status/event persist (US11 / T086)."""

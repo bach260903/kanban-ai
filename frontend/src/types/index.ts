@@ -22,7 +22,12 @@ export interface Project {
   updated_at: ISODateTime
 }
 
-/** Row shape from ``GET /api/v1/projects`` (subset of `Project`). */
+/** Row shape from ``GET /api/v1/projects`` (subset of `Project`).
+ *
+ * ``task_count`` / ``member_count`` are forward-compatible aggregate counters: the
+ * backend may attach them in the future; the UI gracefully omits the badge when
+ * undefined, so today's responses keep rendering correctly.
+ */
 export interface ProjectListItem {
   id: UUID
   name: string
@@ -31,6 +36,8 @@ export interface ProjectListItem {
   status: ProjectStatus
   coding_backend: CodingBackend
   updated_at: ISODateTime
+  task_count?: number
+  member_count?: number
 }
 
 export type DocumentType = 'SPEC' | 'PLAN'

@@ -1,5 +1,7 @@
 import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios'
 
+import { buildLoginPath } from '../utils/auth-redirect'
+
 /** Set on a request to avoid full-page redirect on 401 (e.g. token probe on /dev/auth). */
 export type ApiRequestConfig = InternalAxiosRequestConfig & { skipAuthRedirect?: boolean }
 
@@ -62,10 +64,8 @@ function resolve401RedirectPath(): string {
   if (env != null && String(env).trim() !== '') {
     return String(env).trim()
   }
-  if (import.meta.env.DEV) {
-    return '/dev/auth'
-  }
-  return '/auth-required'
+  const returnPath = `${window.location.pathname}${window.location.search}${window.location.hash}`
+  return buildLoginPath(returnPath)
 }
 
 export async function probeAuthToken(): Promise<boolean> {

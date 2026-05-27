@@ -85,9 +85,14 @@ async def update_document(
     body: DocumentContentUpdate,
     _sub: Annotated[str, Depends(require_jwt)],
     session: Annotated[AsyncSession, Depends(get_db)],
+    force: bool = False,
 ) -> DocumentResponse:
     document = await DocumentService.update_content(
-        session, document_id, body.content, project_id=project_id
+        session,
+        document_id,
+        body.content,
+        project_id=project_id,
+        force=force,
     )
     await session.commit()
     await session.refresh(document)

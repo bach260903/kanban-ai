@@ -477,6 +477,9 @@ async def _run_with_session(state: StateDict) -> StateDict:
             )
             task.status = TaskStatus.REVIEW
             task.updated_at = datetime.now(timezone.utc)
+            from app.services.kanban_service import KanbanService
+
+            await KanbanService.on_task_needs_review(session, task)
             await _publish_event(
                 session,
                 task_id,
@@ -587,6 +590,9 @@ async def _run_with_session(state: StateDict) -> StateDict:
         await session.flush()
         task.status = TaskStatus.REVIEW
         task.updated_at = datetime.now(timezone.utc)
+        from app.services.kanban_service import KanbanService
+
+        await KanbanService.on_task_needs_review(session, task)
         await _publish_event(
             session,
             task_id,
@@ -688,6 +694,10 @@ async def run(state: StateDict) -> StateDict:
                         result=AuditLogResult.FAILURE,
                         output_refs=[str(open_run.id)] if open_run else [],
                     )
+                    if task is not None:
+                        from app.services.kanban_service import KanbanService
+
+                        await KanbanService.on_agent_error(session, task)
                     await session.commit()
         except Exception:
             logger.exception("coder_node timeout cleanup failed")
@@ -725,6 +735,11 @@ async def run(state: StateDict) -> StateDict:
                         action_description=str(exc),
                         result=AuditLogResult.FAILURE,
                     )
+                    task = await session.get(Task, task_id)
+                    if task is not None:
+                        from app.services.kanban_service import KanbanService
+
+                        await KanbanService.on_agent_error(session, task)
                     await session.commit()
         except Exception:
             logger.exception("coder_node failure audit failed")

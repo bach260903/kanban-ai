@@ -4,6 +4,8 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from app.exceptions import (
+    CircularDependencyError,
+    DependencyBlockedError,
     DuplicateNameError,
     InvalidTransitionError,
     NotFoundError,
@@ -24,6 +26,14 @@ def register_exception_handlers(app: FastAPI) -> None:
     @app.exception_handler(DuplicateNameError)
     async def _duplicate_name(_request: Request, exc: DuplicateNameError) -> JSONResponse:
         return JSONResponse(status_code=409, content={"detail": str(exc) or "Conflict."})
+
+    @app.exception_handler(CircularDependencyError)
+    async def _circular_dependency(_request: Request, exc: CircularDependencyError) -> JSONResponse:
+        return JSONResponse(status_code=409, content={"detail": str(exc) or "Conflict."})
+
+    @app.exception_handler(DependencyBlockedError)
+    async def _dependency_blocked(_request: Request, exc: DependencyBlockedError) -> JSONResponse:
+        return JSONResponse(status_code=409, content={"detail": str(exc) or "Task is blocked by dependencies."})
 
     @app.exception_handler(InvalidTransitionError)
     async def _invalid_transition(_request: Request, exc: InvalidTransitionError) -> JSONResponse:

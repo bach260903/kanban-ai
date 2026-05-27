@@ -57,3 +57,7 @@
   font-size: var(--t-sm);
   color: var(--font-secondary-color);
 }
+
+.hintError {
+  color: var(--c-danger-700);
+}

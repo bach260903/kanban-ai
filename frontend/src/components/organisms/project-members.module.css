@@ -1,0 +1,117 @@
+.root {
+  padding: var(--space-4) 0;
+}
+
+.loading,
+.empty {
+  margin: 0;
+  font-size: var(--t-sm);
+  color: var(--font-secondary-color);
+}
+
+.tableWrap {
+  overflow-x: auto;
+  margin-bottom: var(--space-6);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-sm);
+}
+
+.table th,
+.table td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.table th {
+  font-weight: 600;
+  color: var(--font-secondary-color);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.roleSelect {
+  font-family: var(--font-ui);
+  font-size: var(--t-sm);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-primary);
+  color: var(--font-primary-color);
+}
+
+.invite {
+  padding: var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  background: var(--surface-secondary, #f8fafc);
+}
+
+.inviteTitle {
+  margin: 0 0 var(--space-3);
+  font-size: var(--t-base);
+  font-weight: 600;
+}
+
+.inviteForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: flex-end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 10rem;
+}
+
+.field label {
+  font-size: var(--t-sm);
+  color: var(--font-secondary-color);
+}
+
+.field input,
+.field select {
+  font-family: var(--font-ui);
+  font-size: var(--t-sm);
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-primary);
+}
+
+.inviteLink {
+  margin-top: var(--space-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.inviteLink code {
+  flex: 1;
+  min-width: 12rem;
+  padding: 8px;
+  font-size: var(--t-sm);
+  word-break: break-all;
+  background: var(--surface-primary);
+  border-radius: 6px;
+  border: 1px solid var(--border-default);
+}
+
+.inviteHint {
+  margin: var(--space-3) 0 0;
+  font-size: var(--t-sm);
+  color: var(--font-secondary-color);
+}

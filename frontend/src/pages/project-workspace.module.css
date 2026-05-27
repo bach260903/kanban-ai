@@ -25,6 +25,18 @@
   color: var(--font-primary-color);
 }
 
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .documentPanels {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -125,6 +137,66 @@
 .auditAgentVer {
   color: var(--font-secondary-color);
   font-size: var(--t-sm);
+}
+
+.auditAgentCell {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.auditAgentIcon {
+  flex-shrink: 0;
+}
+
+.auditResultCell {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+}
+
+.auditResultSuccess {
+  color: var(--c-success-700);
+}
+
+.auditResultFail {
+  color: var(--c-danger-500);
+}
+
+.auditRowFail td {
+  background: color-mix(in srgb, var(--c-danger-500) 5%, transparent);
+}
+
+.auditFilters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.auditFilterField {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--t-sm);
+  color: var(--font-secondary-color);
+}
+
+.auditFilterField select {
+  font-family: var(--font-ui);
+  font-size: var(--t-sm);
+  padding: 6px 10px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-default);
+  background: var(--surface-primary);
+  color: var(--font-primary-color);
+  cursor: pointer;
+}
+
+.auditFilterField select:hover {
+  border-color: var(--c-info-500);
 }
 
 .auditPager {

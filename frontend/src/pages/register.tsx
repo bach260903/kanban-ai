@@ -1,16 +1,20 @@
 import { isAxiosError } from 'axios'
 import { type FormEvent, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 import { Button } from '../components/atoms/button'
 import { Spinner } from '../components/atoms/spinner'
 import { TextInput } from '../components/atoms/text-input'
-import api, { setAuthToken } from '../services/api'
+import { useAuth } from '../contexts/auth-context'
+import { getAuthRedirectTarget } from '../utils/auth-redirect'
 
 import styles from './login.module.css'
 
 export default function RegisterPage() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const [searchParams] = useSearchParams()
+  const { register } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
@@ -22,14 +26,16 @@ export default function RegisterPage() {
     setLoading(true)
     setError(null)
     try {
-      await api.post('/api/v1/auth/register', { email, password, display_name: displayName })
-      const { data } = await api.post<{ access_token: string }>('/api/v1/auth/login', { email, password })
-      setAuthToken(data.access_token)
-      navigate('/projects', { replace: true })
+      await register(email, password, displayName)
+      navigate(getAuthRedirectTarget(location, searchParams), { replace: true })
     } catch (err) {
       if (isAxiosError(err)) {
-        const detail = (err.response?.data as { detail?: string })?.detail
-        setError(detail ?? 'Đăng ký thất bại')
+        if (err.response?.status === 409) {
+          setError('Email đã được sử dụng')
+        } else {
+          const detail = (err.response?.data as { detail?: string })?.detail
+          setError(typeof detail === 'string' ? detail : 'Đăng ký thất bại')
+        }
       } else {
         setError('Đăng ký thất bại')
       }
@@ -79,7 +85,7 @@ export default function RegisterPage() {
         </form>
         <p className={styles.footer}>
           Đã có tài khoản?{' '}
-          <Link to="/login" className={styles.link}>
+          <Link to="/login" state={location.state} className={styles.link}>
             Đăng nhập
           </Link>
         </p>

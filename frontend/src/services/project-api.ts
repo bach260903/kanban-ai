@@ -28,13 +28,16 @@ export type ConstitutionResponse = {
   updated_at: string | null
 }
 
-export async function listProjects(): Promise<ProjectListItem[]> {
-  const { data } = await api.get<ProjectListItem[]>(PREFIX)
+export async function listProjects(opts?: { signal?: AbortSignal }): Promise<ProjectListItem[]> {
+  const { data } = await api.get<ProjectListItem[]>(PREFIX, { signal: opts?.signal })
   return data
 }
 
-export async function createProject(payload: ProjectCreatePayload): Promise<Project> {
-  const { data } = await api.post<Project>(PREFIX, payload)
+export async function createProject(
+  payload: ProjectCreatePayload,
+  opts?: { signal?: AbortSignal },
+): Promise<Project> {
+  const { data } = await api.post<Project>(PREFIX, payload, { signal: opts?.signal })
   return data
 }
 
@@ -46,6 +49,10 @@ export async function getProject(projectId: string): Promise<Project> {
 export async function updateProject(projectId: string, body: ProjectUpdatePayload): Promise<Project> {
   const { data } = await api.put<Project>(`${PREFIX}/${projectId}`, body)
   return data
+}
+
+export async function deleteProject(projectId: string): Promise<void> {
+  await api.delete(`${PREFIX}/${projectId}`)
 }
 
 export async function getConstitution(projectId: string): Promise<ConstitutionResponse> {
@@ -61,7 +68,9 @@ export async function updateConstitution(
   return data
 }
 
-export async function getAvailableBackends(): Promise<BackendAvailability> {
-  const { data } = await api.get<BackendAvailability>('/api/v1/backends/available')
+export async function getAvailableBackends(opts?: { signal?: AbortSignal }): Promise<BackendAvailability> {
+  const { data } = await api.get<BackendAvailability>('/api/v1/backends/available', {
+    signal: opts?.signal,
+  })
   return data
 }

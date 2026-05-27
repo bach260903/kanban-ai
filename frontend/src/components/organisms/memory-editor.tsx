@@ -1,3 +1,4 @@
+import { Brain } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Button } from '../atoms/button'
@@ -8,6 +9,7 @@ import {
   type MemoryEntry,
   updateMemoryEntry,
 } from '../../services/memory-api'
+import { relativeTime } from '../../utils/relative-time'
 
 import styles from './memory-editor.module.css'
 
@@ -24,6 +26,10 @@ function formatWhen(iso: string): string {
   } catch {
     return iso
   }
+}
+
+function formatRelative(iso: string): string {
+  return relativeTime(iso)
 }
 
 export function MemoryEditor({ projectId }: MemoryEditorProps) {
@@ -159,9 +165,6 @@ export function MemoryEditor({ projectId }: MemoryEditorProps) {
 
   return (
     <section className={styles.root} aria-label="Project memory">
-      <p className={styles.hint}>
-        Lessons learned from completed tasks. Expand a row to read details or edit.
-      </p>
       <div className={styles.toolbar}>
         <Button type="button" variant="secondary" onClick={() => void load()} disabled={saving || !!deletingId}>
           Refresh
@@ -173,7 +176,11 @@ export function MemoryEditor({ projectId }: MemoryEditorProps) {
         </p>
       ) : null}
       {entries.length === 0 ? (
-        <p className={styles.hint}>No memory entries yet.</p>
+        <div className={styles.empty}>
+          <Brain size={32} aria-hidden="true" className={styles.emptyIcon} />
+          <p className={styles.emptyTitle}>No lessons learned yet</p>
+          <p className={styles.emptyHint}>Memories are created when tasks are completed.</p>
+        </div>
       ) : (
         <ul className={styles.list}>
           {entries.map((entry) => {
@@ -196,7 +203,12 @@ export function MemoryEditor({ projectId }: MemoryEditorProps) {
                   <div className={styles.cardBody}>
                     <p className={styles.meta}>
                       {entry.task_id ? `Task: ${entry.task_id} · ` : null}
-                      {formatWhen(entry.entry_timestamp)}
+                      <time
+                        dateTime={entry.entry_timestamp}
+                        title={formatWhen(entry.entry_timestamp)}
+                      >
+                        {formatRelative(entry.entry_timestamp)}
+                      </time>
                     </p>
                     {isEditing ? (
                       <div className={styles.form}>

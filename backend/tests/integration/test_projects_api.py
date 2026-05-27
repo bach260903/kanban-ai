@@ -76,6 +76,15 @@ async def test_projects_crud_and_duplicate_name(
     assert r.status_code == 200
     assert r.json()["status"] == "archived"
 
+    r = await test_client.post(
+        "/api/v1/projects",
+        json={"name": a_name, "description": "recreated", "primary_language": "python"},
+        headers=auth_headers,
+    )
+    assert r.status_code == 201, r.text
+    assert r.json()["name"] == a_name
+    assert r.json()["status"] == "active"
+
     # cleanup second project (optional; rolled back if outer test txn — commits are real)
     await test_client.delete(f"/api/v1/projects/{pid_b}", headers=auth_headers)
 

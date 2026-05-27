@@ -1,17 +1,19 @@
 """Development-only JWT issuance (never enable in production)."""
 
-from datetime import datetime, timedelta, timezone
-
-from fastapi import APIRouter, HTTPException, status
-from jose import jwt
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
+from app.database import get_db
+from app.models.user import User
+from app.services import auth_service
 
 router = APIRouter(prefix="/dev", tags=["dev"])
 
 
 @router.post("/token")
-async def issue_dev_token() -> dict[str, str]:
+async def issue_dev_token(session: AsyncSession = Depends(get_db)) -> dict[str, str]:
     """
     Return a short-lived HS256 JWT for local UI testing.
 
@@ -22,10 +24,20 @@ async def issue_dev_token() -> dict[str, str]:
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Dev auth is disabled.",
         )
-    now = datetime.now(timezone.utc)
-    token = jwt.encode(
-        {"sub": "dev-user", "exp": now + timedelta(days=7)},
+    user = await session.scalar(select(User).where(User.email == "dev@example.local"))
+    if user is None:
+        user = User(
+            email="dev@example.local",
+            hashed_password=auth_service.hash_password("dev-password"),
+            display_name="Dev User",
+        )
+        session.add(user)
+        await session.flush()
+    token = auth_service.create_access_token(
+        user.id,
         settings.jwt_secret_key,
-        algorithm="HS256",
+        settings.jwt_algorithm,
+        settings.jwt_expire_days,
     )
+    await session.commit()
     return {"access_token": token, "token_type": "bearer"}

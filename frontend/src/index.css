@@ -1,4 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import './styles/tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Kanban horizontal scrollbar — slim, brand-tinted */
+.kanban-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(13, 148, 136, 0.35) transparent;
+}
+.kanban-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+.kanban-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.kanban-scroll::-webkit-scrollbar-thumb {
+  background: rgba(13, 148, 136, 0.3);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.kanban-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(13, 148, 136, 0.55);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
 
 :root {
   font: var(--t-base) / 1.45 var(--font-ui);

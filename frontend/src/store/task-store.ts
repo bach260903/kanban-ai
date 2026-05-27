@@ -9,6 +9,8 @@ export type TaskColumnItem = {
   description: string | null
   priority: number
   status: TaskStatus
+  assigned_to: UUID | null
+  is_blocked: boolean
 }
 
 export type TaskColumns = Record<TaskStatus, TaskColumnItem[]>

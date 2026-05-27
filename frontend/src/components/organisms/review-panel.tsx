@@ -6,7 +6,10 @@ import { Button } from '../atoms/button'
 import { Spinner } from '../atoms/spinner'
 import { DiffViewer } from '../molecules/diff-viewer'
 import { InlineCommentOverlay } from '../molecules/inline-comment-overlay'
+import { SaveAsTemplateModal } from '../molecules/save-as-template-modal'
 import { AiReviewPanel } from './ai-review-panel'
+import { useAuth } from '../../contexts/auth-context'
+import { getMembers } from '../../services/member-api'
 import {
   approveTask,
   getDiff,
@@ -66,9 +69,32 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
   const [rejectFeedback, setRejectFeedback] = useState('')
   const [modifiedEditor, setModifiedEditor] = useState<editor.IStandaloneCodeEditor | null>(null)
   const [highlightedLine, setHighlightedLine] = useState<{ file: string; line: number | null } | null>(null)
+  const [saveTemplateOpen, setSaveTemplateOpen] = useState(false)
+  const [canSaveTemplate, setCanSaveTemplate] = useState(false)
 
   const reviewState = useReviewReport(reviewTask?.id ?? null)
+  const { user } = useAuth()
   const { events: streamEvents } = useThoughtStream(reviewTask?.id ?? null)
+
+  useEffect(() => {
+    if (!user) {
+      setCanSaveTemplate(false)
+      return
+    }
+    let cancelled = false
+    void getMembers(projectId)
+      .then((rows) => {
+        if (cancelled) return
+        const role = rows.find((m) => m.user_id === user.id)?.role
+        setCanSaveTemplate(role === 'owner' || role === 'leader')
+      })
+      .catch(() => {
+        if (!cancelled) setCanSaveTemplate(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [projectId, user])
 
   // Forward REVIEW_* WS events to the review state for optimistic updates
   useEffect(() => {
@@ -208,9 +234,16 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
             </h2>
             <p className={styles.subtitle}>{reviewTask.title}</p>
           </div>
-          <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="Close review panel">
-            Close
-          </button>
+          <div className="flex items-center gap-2">
+            {canSaveTemplate ? (
+              <Button variant="secondary" onClick={() => setSaveTemplateOpen(true)}>
+                Lưu làm template
+              </Button>
+            ) : null}
+            <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="Close review panel">
+              Close
+            </button>
+          </div>
         </div>
 
         <div className={styles.statusRow}>
@@ -304,6 +337,14 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
           </div>
         </div>
       </aside>
+
+      <SaveAsTemplateModal
+        open={saveTemplateOpen}
+        projectId={projectId}
+        taskTitle={reviewTask.title}
+        taskDescription={reviewTask.description}
+        onClose={() => setSaveTemplateOpen(false)}
+      />
     </>
   )
 }

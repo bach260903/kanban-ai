@@ -21,6 +21,28 @@ class TaskKanbanItem(BaseModel):
     title: str
     description: str | None = None
     priority: int = 0
+    assigned_to: UUID | None = None
+    is_blocked: bool = False
+
+
+class AssignRequest(BaseModel):
+    """Body for ``PATCH .../tasks/{task_id}/assign`` (US3 / T058)."""
+
+    user_id: UUID | None = None
+
+
+class TaskResponse(BaseModel):
+    """Full task payload for assign and other single-task responses (US3 / T058–T059)."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: UUID
+    title: str
+    description: str | None = None
+    priority: int = 0
+    status: TaskStatus
+    assigned_to: UUID | None = None
+    is_blocked: bool = False
 
 
 class TasksGroupedResponse(BaseModel):
@@ -36,6 +58,14 @@ class TaskMoveRequest(BaseModel):
     """Body for ``POST .../tasks/{task_id}/move`` (US8 / T057)."""
 
     to: TaskStatus
+
+
+class TaskCreateRequest(BaseModel):
+    """Body for ``POST .../projects/{project_id}/tasks`` (manual add / US5)."""
+
+    title: str = Field(..., min_length=1, max_length=500)
+    description: str = ""
+    priority: int = 0
 
 
 class TaskMoveResult(BaseModel):

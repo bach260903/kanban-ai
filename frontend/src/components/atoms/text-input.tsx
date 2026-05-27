@@ -21,7 +21,11 @@ export function TextInput({ label, hint, id, invalid, className, disabled, ...re
         </label>
       ) : null}
       <input id={inputId} className={inputClass} disabled={disabled} {...rest} />
-      {hint ? <span className={styles.hint}>{hint}</span> : null}
+      {hint ? (
+        <span className={[styles.hint, invalid ? styles.hintError : ''].filter(Boolean).join(' ')}>
+          {hint}
+        </span>
+      ) : null}
     </div>
   )
 }

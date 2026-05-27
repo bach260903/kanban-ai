@@ -1,4 +1,5 @@
 import { isAxiosError } from 'axios'
+import { CheckCircle2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 
 import { Badge } from '../atoms/badge'
@@ -6,6 +7,7 @@ import { Button } from '../atoms/button'
 import { Spinner } from '../atoms/spinner'
 import { DocumentEditor } from '../molecules/document-editor'
 import { useDocument } from '../../hooks/use-document'
+import { showErrorToast, showSuccessToast } from '../../lib/toast'
 import type { DocumentListItem } from '../../services/document-api'
 import {
   approveDocument,
@@ -14,8 +16,10 @@ import {
   getAgentRun,
   getDocuments,
   reviseDocument,
+  updateDocument,
 } from '../../services/document-api'
-import type { DocumentStatus, DocumentType } from '../../types'
+import type { DocumentType } from '../../types'
+import { ConfirmDialog } from '../molecules/confirm-dialog'
 
 import styles from './document-panel.module.css'
 
@@ -58,48 +62,57 @@ export function DocumentPanel({
   const [pendingRunId, setPendingRunId] = useState<string | null>(null)
   const [revisionFeedback, setRevisionFeedback] = useState('')
   const [hilBusy, setHilBusy] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [draftContent, setDraftContent] = useState('')
+  const [saveConfirmOpen, setSaveConfirmOpen] = useState(false)
+  const [saving, setSaving] = useState(false)
 
-  const refreshDocuments = useCallback(async () => {
-    setListError(null)
-    try {
-      if (documentType === 'SPEC') {
-        const rows = await getDocuments(projectId, 'SPEC')
-        setDocRows(rows)
-        setSpecRowsForPlan([])
-      } else {
-        const [planRows, specRows] = await Promise.all([
-          getDocuments(projectId, 'PLAN'),
-          getDocuments(projectId, 'SPEC'),
-        ])
-        setDocRows(planRows)
-        setSpecRowsForPlan(specRows)
+  const refreshDocuments = useCallback(
+    async (options?: { signal?: AbortSignal; forceRefresh?: boolean }) => {
+      setListError(null)
+      try {
+        if (documentType === 'SPEC') {
+          const rows = await getDocuments(projectId, 'SPEC', options)
+          setDocRows(rows)
+          setSpecRowsForPlan([])
+        } else {
+          const [planRows, specRows] = await Promise.all([
+            getDocuments(projectId, 'PLAN', options),
+            getDocuments(projectId, 'SPEC', options),
+          ])
+          setDocRows(planRows)
+          setSpecRowsForPlan(specRows)
+        }
+      } catch (e) {
+        if (options?.signal?.aborted) return
+        if (e instanceof DOMException && e.name === 'AbortError') return
+        if (isAxiosError(e) && (e.code === 'ERR_CANCELED' || e.name === 'CanceledError')) return
+        setListError(errorMessage(e))
+        setDocRows([])
+        if (documentType === 'PLAN') {
+          setSpecRowsForPlan([])
+        }
       }
-    } catch (e) {
-      setListError(errorMessage(e))
-      setDocRows([])
-      if (documentType === 'PLAN') {
-        setSpecRowsForPlan([])
-      }
-    }
-  }, [projectId, documentType])
+    },
+    [projectId, documentType],
+  )
 
   useEffect(() => {
+    const controller = new AbortController()
     let cancelled = false
     ;(async () => {
       setListLoading(true)
-      await refreshDocuments()
+      await refreshDocuments({
+        signal: controller.signal,
+        forceRefresh: refreshKey > 0,
+      })
       if (!cancelled) setListLoading(false)
     })()
     return () => {
       cancelled = true
+      controller.abort()
     }
   }, [refreshDocuments, refreshKey])
-
-  useEffect(() => {
-    if (refreshKey > 0) {
-      void refreshDocuments()
-    }
-  }, [refreshKey, refreshDocuments])
 
   const latestSpecForGate = specRowsForPlan[0]
   const specApproved = latestSpecForGate?.status === 'approved'
@@ -182,7 +195,7 @@ export function DocumentPanel({
     try {
       setSubmitting(true)
       const res = await generateSpec(projectId, { intent: trimmed })
-      await refreshDocuments()
+      await refreshDocuments({ forceRefresh: true })
       setPendingRunId(res.agent_run_id)
       setIntent('')
       setStatusMessage('SPEC generation started. This may take up to a minute.')
@@ -200,7 +213,7 @@ export function DocumentPanel({
     try {
       setSubmitting(true)
       const res = await generatePlan(projectId)
-      await refreshDocuments()
+      await refreshDocuments({ forceRefresh: true })
       setPendingRunId(res.agent_run_id)
       setStatusMessage('PLAN generation started. This may take up to a minute.')
       setTimeout(() => setStatusMessage(null), 5000)
@@ -218,7 +231,7 @@ export function DocumentPanel({
     try {
       setHilBusy(true)
       const res = await approveDocument(projectId, activeDocumentId)
-      await refreshDocuments()
+      await refreshDocuments({ forceRefresh: true })
       await refetch()
       if (documentType === 'SPEC' && res.plan_generation_started && res.plan_agent_run_id) {
         onPlanAutoStart?.(res.plan_agent_run_id)
@@ -236,6 +249,58 @@ export function DocumentPanel({
     }
   }
 
+  function startEditing() {
+    setDraftContent(document?.content ?? '')
+    setIsEditing(true)
+    setActionError(null)
+  }
+
+  function cancelEditing() {
+    setIsEditing(false)
+    setDraftContent('')
+    setSaveConfirmOpen(false)
+  }
+
+  function requestSaveConfirm() {
+    if (!draftContent.trim()) {
+      setActionError(`${docLabel} content cannot be empty.`)
+      return
+    }
+    setSaveConfirmOpen(true)
+  }
+
+  async function confirmSaveSpec() {
+    if (!activeDocumentId) return
+    setActionError(null)
+    setStatusMessage(null)
+    try {
+      setSaving(true)
+      const force = displayStatus === 'approved'
+      await updateDocument(projectId, activeDocumentId, draftContent, { force })
+      await refreshDocuments({ forceRefresh: true })
+      await refetch()
+      setIsEditing(false)
+      setSaveConfirmOpen(false)
+      setDraftContent('')
+      showSuccessToast(
+        force
+          ? `${docLabel} saved. Status reset to draft — please re-approve.`
+          : `${docLabel} saved.`,
+      )
+      if (force) {
+        setStatusMessage(
+          `${docLabel} reverted to draft. Re-approve when you are done editing.`,
+        )
+        setTimeout(() => setStatusMessage(null), 6000)
+      }
+    } catch (e) {
+      showErrorToast(errorMessage(e))
+      setActionError(errorMessage(e))
+    } finally {
+      setSaving(false)
+    }
+  }
+
   async function onRequestRevision() {
     if (!activeDocumentId) return
     setActionError(null)
@@ -248,7 +313,7 @@ export function DocumentPanel({
     try {
       setHilBusy(true)
       const res = await reviseDocument(projectId, activeDocumentId, fb)
-      await refreshDocuments()
+      await refreshDocuments({ forceRefresh: true })
       setPendingRunId(res.agent_run_id)
       setRevisionFeedback('')
       await refetch()
@@ -266,25 +331,41 @@ export function DocumentPanel({
   }
 
   const editorValue = document?.content ?? ''
-  const noopChange = useCallback(() => {}, [])
+  const canEditSpec =
+    documentType === 'SPEC' &&
+    Boolean(activeDocumentId) &&
+    !isGenerating &&
+    !listLoading &&
+    (displayStatus === 'draft' ||
+      displayStatus === 'revision_requested' ||
+      displayStatus === 'approved')
 
   const combinedError = listError ?? actionError ?? (error ? errorMessage(error) : null)
 
   const showHilActions =
     Boolean(activeDocumentId) &&
     (displayStatus === 'draft' || displayStatus === 'revision_requested') &&
-    !isGenerating
+    !isGenerating &&
+    !isEditing
 
   const panelTitle = documentType === 'SPEC' ? 'SPEC.md' : 'PLAN.md'
 
   return (
     <section className={styles.root} aria-labelledby={headingId}>
       <div className={styles.toolbar}>
-        <h2 id={headingId} className={styles.title}>
+        <h3 id={headingId} className={styles.title}>
+          <span className={styles.breadcrumb} aria-hidden>
+            Documents&nbsp;/&nbsp;
+          </span>
           {panelTitle}
-        </h2>
+        </h3>
         {displayStatus ? (
-          <Badge kind="document" status={displayStatus} role="status" />
+          <span className={styles.statusGroup}>
+            {displayStatus === 'approved' ? (
+              <CheckCircle2 className={styles.statusIcon} aria-hidden="true" size={16} />
+            ) : null}
+            <Badge kind="document" status={displayStatus} role="status" />
+          </span>
         ) : null}
       </div>
 
@@ -383,8 +464,60 @@ export function DocumentPanel({
                 Generating…
               </div>
             ) : null}
-            <DocumentEditor value={editorValue} onChange={noopChange} readOnly height="min(55vh, 520px)" />
+            <DocumentEditor
+              value={isEditing ? draftContent : editorValue}
+              onChange={isEditing ? setDraftContent : () => {}}
+              readOnly={!isEditing || isGenerating}
+              height="min(55vh, 520px)"
+              ariaLabel={`${panelTitle} editor`}
+            />
           </div>
+          {canEditSpec && !isEditing ? (
+            <div className={styles.actions}>
+              <Button type="button" variant="secondary" onClick={startEditing} disabled={isGenerating}>
+                Edit {docLabel}
+              </Button>
+              <Button type="button" variant="secondary" onClick={() => void refetch()} disabled={isGenerating}>
+                Refresh
+              </Button>
+              <Button type="button" variant="secondary" disabled aria-disabled="true" title="Coming soon">
+                Version history
+              </Button>
+            </div>
+          ) : null}
+          {isEditing ? (
+            <div className={styles.actionBar} role="region" aria-label={`Edit ${docLabel}`}>
+              <span className={styles.actionBarLabel}>Manual edit</span>
+              <div className={styles.actionBarRow}>
+                <Button type="button" onClick={requestSaveConfirm} disabled={saving || !draftContent.trim()}>
+                  Save changes
+                </Button>
+                <Button type="button" variant="secondary" onClick={cancelEditing} disabled={saving}>
+                  Cancel
+                </Button>
+              </div>
+              {displayStatus === 'approved' ? (
+                <p className={styles.muted}>
+                  {docLabel} is approved. Saving will revert it to draft and require re-approval before
+                  generating a new PLAN.
+                </p>
+              ) : null}
+            </div>
+          ) : null}
+          <ConfirmDialog
+            open={saveConfirmOpen}
+            title={`Confirm save ${docLabel}`}
+            message={
+              displayStatus === 'approved'
+                ? `${docLabel} is currently approved. Saving will revert it to draft and require re-approval. Continue?`
+                : `Are you sure you want to save changes to ${docLabel}?`
+            }
+            confirmLabel="Save"
+            confirmVariant="primary"
+            busy={saving}
+            onConfirm={() => void confirmSaveSpec()}
+            onCancel={() => setSaveConfirmOpen(false)}
+          />
           {showHilActions ? (
             <div className={styles.actionBar} role="region" aria-label={`${docLabel} review actions`}>
               <span className={styles.actionBarLabel}>Product owner review</span>
@@ -418,11 +551,6 @@ export function DocumentPanel({
               </div>
             </div>
           ) : null}
-          <div className={styles.actions}>
-            <Button type="button" variant="secondary" onClick={() => void refetch()} disabled={isGenerating}>
-              Refresh
-            </Button>
-          </div>
         </>
       ) : null}
     </section>

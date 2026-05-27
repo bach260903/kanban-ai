@@ -25,7 +25,7 @@ export default function DevAuth() {
       const ok = await probeAuthToken()
       if (cancelled) return
       setChecking(false)
-      if (ok) navigate('/projects', { replace: true })
+      if (ok) navigate('/dashboard', { replace: true })
     })()
     return () => {
       cancelled = true
@@ -38,7 +38,7 @@ export default function DevAuth() {
     try {
       const { access_token } = await fetchDevToken()
       setAuthToken(access_token)
-      navigate('/projects', { replace: true })
+      window.location.assign('/dashboard')
     } catch (e) {
       if (isAxiosError(e)) {
         if (e.code === 'ECONNABORTED' || e.message.includes('timeout')) {
