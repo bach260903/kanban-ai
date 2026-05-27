@@ -738,6 +738,153 @@
   border-radius: 2px;
 }
 
+/* ---------- Register: hero panel CTA ---------- */
+.heroPanelCta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+  font-size: 14px;
+  color: rgba(236, 254, 255, 0.72);
+}
+
+.heroPanelCtaLink {
+  color: #5eead4;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+
+.heroPanelCtaLink:hover {
+  color: #ecfeff;
+  text-decoration: underline;
+}
+
+.heroPanelCtaLink:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- Register: password field with toggle ---------- */
+.fieldInputPassword {
+  padding-right: 44px;
+}
+
+/* ---------- Register: field-level errors ---------- */
+.fieldError {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #dc2626;
+}
+
+/* ---------- Register: password strength ---------- */
+.strengthWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.strengthBar {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.strengthSegment {
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  transition: background-color 300ms ease;
+}
+
+.strengthweak {
+  background: #dc2626;
+}
+
+.strengthfair {
+  background: #ea580c;
+}
+
+.strengthgood {
+  background: #ca8a04;
+}
+
+.strengthstrong {
+  background: #16a34a;
+}
+
+.strengthLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  min-width: 48px;
+  text-align: right;
+  transition: color 300ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strengthSegment,
+  .strengthLabel {
+    transition: none;
+  }
+}
+
+/* ---------- Register: terms checkbox ---------- */
+.termsGroup {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.termsCheckbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: #0d9488;
+  cursor: pointer;
+}
+
+.termsCheckbox:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+}
+
+.termsCheckbox:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.termsLabel {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #334155;
+  cursor: pointer;
+  user-select: none;
+}
+
+.termsLink {
+  color: #0f766e;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.termsLink:hover {
+  text-decoration: underline;
+}
+
+.termsLink:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* ---------- Skip-to-content (a11y) ---------- */
 .srOnly {
   position: absolute;
