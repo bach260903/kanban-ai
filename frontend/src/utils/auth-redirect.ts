@@ -1,6 +1,13 @@
 import type { Location } from 'react-router-dom'
 
-const BLOCKED_PATHS = new Set(['/login', '/register', '/dev/auth', '/auth-required'])
+const BLOCKED_PATHS = new Set([
+  '/login',
+  '/register',
+  '/reset-password',
+  '/auth/callback',
+  '/dev/auth',
+  '/auth-required',
+])
 
 /** Only allow same-origin relative paths (prevent open redirects). */
 export function isSafeRedirectPath(path: string): boolean {

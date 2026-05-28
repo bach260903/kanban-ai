@@ -34,7 +34,17 @@ export const authApi = {
       } as ApiRequestConfig)
       return res.data
     }
-    const res = await api.get<User>('/api/v1/auth/me')
+    const res = await api.get<User>('/api/v1/auth/me', {
+      skipAuthRedirect: true,
+    } as ApiRequestConfig)
+    return res.data
+  },
+
+  async resetPassword(token: string, newPassword: string): Promise<{ message: string }> {
+    const res = await api.post<{ message: string }>('/api/v1/auth/reset-password', {
+      token,
+      new_password: newPassword,
+    })
     return res.data
   },
 }

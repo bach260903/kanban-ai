@@ -95,7 +95,9 @@ api.interceptors.response.use(
         path === '/dev/auth' ||
         path === '/auth-required' ||
         path === '/login' ||
-        path === '/register'
+        path === '/register' ||
+        path === '/reset-password' ||
+        path === '/auth/callback'
       ) {
         return Promise.reject(error)
       }

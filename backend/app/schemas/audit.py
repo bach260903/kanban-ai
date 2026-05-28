@@ -26,6 +26,8 @@ class AuditLogListItem(BaseModel):
     result: AuditLogResult
     project_id: UUID | None = None
     task_id: UUID | None = None
+    # Resolved display names (not in DB — populated by the API endpoint)
+    task_title: str | None = None
 
 
 class AuditLogsPageResponse(BaseModel):

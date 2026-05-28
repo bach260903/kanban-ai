@@ -25,6 +25,8 @@ class UserResponse(BaseModel):
     id: uuid.UUID
     email: str
     display_name: str
+    avatar_url: str | None = None
+    github_id: str | None = None
     created_at: datetime
 
 
@@ -38,6 +40,24 @@ class LoginResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
     expires_in: int
+
+
+# ------------------------------------------------------------------ #
+# Password reset                                                       #
+# ------------------------------------------------------------------ #
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str = Field(min_length=10, description="Reset token received by email.")
+    new_password: str = Field(min_length=8, description="New password (min 8 characters).")
+
+
+class MessageResponse(BaseModel):
+    """Generic success response."""
+    message: str
 
 
 # Legacy aliases (Phase 1 routers)

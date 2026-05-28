@@ -15,6 +15,7 @@ from app.models.agent_run import AgentRun, AgentRunStatus
 from app.models.audit_log import AuditLogResult
 from app.models.document import Document
 import app.services.audit_service as audit_service
+from app.services.audit_service import ARCHITECT_AGENT_ID
 
 logger = logging.getLogger(__name__)
 
@@ -94,6 +95,7 @@ async def _run_with_session(
             task_id=None,
             action_type=action_type,
             action_description=action_description,
+            agent_id=ARCHITECT_AGENT_ID,
         )
         _pending_log_id[0] = log.id
 
@@ -111,6 +113,7 @@ async def _run_with_session(
                 action_type=action_type,
                 action_description=result,
                 result=coerced,
+                agent_id=ARCHITECT_AGENT_ID,
             )
 
     async def _noop(*_a: object, **_kw: object) -> None:

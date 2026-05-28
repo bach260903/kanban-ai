@@ -124,6 +124,7 @@ class WebhookDelivery(Base):
         server_default=text("'pending'"),
     )
     http_status: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    response_body: Mapped[str | None] = mapped_column(Text, nullable=True)
     attempts: Mapped[int] = mapped_column(
         SmallInteger,
         nullable=False,

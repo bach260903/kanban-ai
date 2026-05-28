@@ -4,6 +4,7 @@ import { AuthGuard } from './components/molecules/auth-guard'
 import { AuthProvider } from './contexts/auth-context'
 import AcceptInvitePage from './pages/accept-invite'
 import AnalyticsPage from './pages/analytics'
+import AuthCallbackPage from './pages/auth-callback'
 import ConstitutionEditor from './pages/constitution-editor'
 import DashboardPage from './pages/dashboard'
 import DevAuth from './pages/dev-auth'
@@ -12,6 +13,7 @@ import ProjectList from './pages/project-list'
 import ProjectSettings from './pages/project-settings'
 import ProjectWorkspace from './pages/project-workspace'
 import RegisterPage from './pages/register'
+import ResetPasswordPage from './pages/reset-password'
 import './App.css'
 
 export default function App() {
@@ -27,6 +29,8 @@ export default function App() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route path="/auth/callback" element={<AuthCallbackPage />} />
             <Route path="/dev/auth" element={<DevAuth />} />
             <Route
               path="/invitations/:token"

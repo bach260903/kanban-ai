@@ -157,5 +157,45 @@ class Settings(BaseSettings):
         description="When true, exposes POST /api/v1/dev/token for local JWT (DEV_AUTH_ENABLED).",
     )
 
+    # ------------------------------------------------------------------ #
+    # GitHub OAuth (for /auth/github/callback)                            #
+    # ------------------------------------------------------------------ #
+    github_oauth_client_id: str | None = Field(
+        default=None,
+        description="GitHub OAuth App Client ID (GITHUB_OAUTH_CLIENT_ID).",
+    )
+    github_oauth_client_secret: str | None = Field(
+        default=None,
+        description="GitHub OAuth App Client Secret (GITHUB_OAUTH_CLIENT_SECRET).",
+    )
+    github_oauth_redirect_uri: str = Field(
+        default="http://localhost:8000/api/v1/auth/github/callback",
+        description="Must match the callback URL registered in the GitHub OAuth App.",
+    )
+
+    # ------------------------------------------------------------------ #
+    # SMTP — password reset emails                                        #
+    # ------------------------------------------------------------------ #
+    smtp_host: str | None = Field(default=None, description="SMTP server hostname.")
+    smtp_port: int = Field(default=587, description="SMTP port (587 = STARTTLS, 465 = SSL).")
+    smtp_user: str | None = Field(default=None, description="SMTP username / address.")
+    smtp_password: str | None = Field(default=None, description="SMTP password / app password.")
+    smtp_from: str = Field(
+        default="noreply@neokanban.app",
+        description="From address for outbound emails.",
+    )
+    smtp_tls: bool = Field(
+        default=True,
+        description="Use STARTTLS (True) or SMTP_SSL (False). Only applies when smtp_port != 465.",
+    )
+
+    # ------------------------------------------------------------------ #
+    # Frontend                                                            #
+    # ------------------------------------------------------------------ #
+    frontend_url: str = Field(
+        default="http://localhost:5173",
+        description="Base URL of the React frontend — used in reset-password redirect links.",
+    )
+
 
 settings = Settings()

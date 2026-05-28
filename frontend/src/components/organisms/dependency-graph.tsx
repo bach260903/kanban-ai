@@ -50,7 +50,7 @@ const COLUMN_LABELS: { x: number; label: string }[] = [
   { x: 700, label: 'Done' },
 ]
 
-function truncate(text: string, max = 15): string {
+function truncate(text: string, max = 22): string {
   const t = text.trim()
   if (t.length <= max) return t
   return `${t.slice(0, max - 1)}…`
@@ -263,6 +263,7 @@ export function DependencyGraph({ projectId, onChanged }: DependencyGraphProps) 
             const stroke = STATUS_STROKE[node.status] ?? STATUS_STROKE.todo
             return (
               <g key={node.id}>
+                <title>{node.title} ({node.status})</title>
                 <rect
                   x={pos.x}
                   y={pos.y}
@@ -350,7 +351,7 @@ export function DependencyGraph({ projectId, onChanged }: DependencyGraphProps) 
             Current dependencies
           </h3>
           {edges.length === 0 ? (
-            <p className="mt-2 text-[12px] text-slate-500">No dependencies defined.</p>
+            <p className="mt-2 text-[12px] text-slate-500">No dependencies defined yet.</p>
           ) : (
             <ul className="mt-2 max-h-64 space-y-2 overflow-y-auto">
               {edges.map((edge) => {
@@ -362,9 +363,10 @@ export function DependencyGraph({ projectId, onChanged }: DependencyGraphProps) 
                     className="flex items-start justify-between gap-2 rounded-lg bg-slate-50 px-2 py-1.5 text-[12px]"
                   >
                     <span className="min-w-0 text-slate-700">
-                      <strong>{truncate(from?.title ?? edge.from, 20)}</strong>
-                      <span className="text-slate-400"> → </span>
-                      {truncate(to?.title ?? edge.to, 20)}
+                      <strong title={from?.title}>{truncate(from?.title ?? edge.from, 24)}</strong>
+                      <span className="mx-1 text-slate-400">needs</span>
+                      <span title={to?.title} className="text-slate-600">{truncate(to?.title ?? edge.to, 24)}</span>
+                      <span className="ml-1 text-[10px] text-slate-400">({from?.status})</span>
                     </span>
                     <button
                       type="button"

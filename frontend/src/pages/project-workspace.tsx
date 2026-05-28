@@ -62,15 +62,34 @@ function AgentIcon({ kind }: { kind: AuditAgentKind }) {
 
 function humanizeAction(action: string): string {
   const map: Record<string, string> = {
-    coder_llm: 'Coder: LLM call',
-    coder_write_file: 'Coder: Write file',
-    coder_run_tests: 'Coder: Run tests',
+    // Coder
+    coder_llm: 'Coder: Gọi LLM',
+    coder_read_file: 'Coder: Đọc file',
+    coder_write_file: 'Coder: Ghi file',
+    write_file: 'Coder: Ghi file',
+    coder_run_terminal: 'Coder: Chạy lệnh terminal',
+    coder_node: 'Coder: Hoàn thành',
+    coder_paused: 'Coder: Tạm dừng',
+    coder_run_tests: 'Coder: Chạy tests',
     coder_commit: 'Coder: Commit',
-    task_diff_approve: 'Task: Approve diff',
-    task_diff_reject: 'Task: Reject diff',
-    architect_generate_spec: 'Architect: Generate SPEC',
-    architect_generate_plan: 'Architect: Generate PLAN',
-    reviewer_check: 'Reviewer: Run checks',
+    llm_call: 'Agent: Gọi LLM',
+    // Architect
+    plan_node: 'Architect: Lập kế hoạch',
+    spec_generation: 'Architect: Sinh đặc tả',
+    architect_generate_spec: 'Architect: Sinh SPEC',
+    architect_generate_plan: 'Architect: Sinh PLAN',
+    // Reviewer
+    reviewer_node: 'Reviewer: Review diff',
+    reviewer_check: 'Reviewer: Kiểm tra',
+    // PO / System actions
+    task_diff_approve: 'PO: Chấp nhận diff',
+    task_diff_reject: 'PO: Từ chối diff',
+    document_approve: 'PO: Phê duyệt tài liệu',
+    document_revise: 'PO: Yêu cầu chỉnh sửa tài liệu',
+    task_cancel_in_progress: 'PO: Hủy task đang thực hiện',
+    task_cancel: 'PO: Hủy task',
+    task_pause: 'PO: Tạm dừng task',
+    task_resume: 'PO: Tiếp tục task',
   }
   if (map[action]) return map[action]
   return action
@@ -78,6 +97,36 @@ function humanizeAction(action: string): string {
     .filter(Boolean)
     .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
     .join(' ')
+}
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+/** Map a single ref string to a human-readable label based on action context. */
+function labelRef(ref: string, actionType: string, kind: 'input' | 'output'): string {
+  // Non-UUID refs (file paths, commands, short labels like "approved") are already readable
+  if (!UUID_RE.test(ref)) return ref
+  const short = ref.slice(0, 8)
+  // Output refs
+  if (kind === 'output') {
+    if (actionType === 'coder_node' || actionType === 'coder_run_terminal') return `Diff [${short}]`
+    if (actionType === 'coder_paused') return `Agent run [${short}]`
+    if (actionType === 'reviewer_node') return `Báo cáo review [${short}]`
+    if (actionType === 'plan_node' || actionType === 'spec_generation') return `Spec [${short}]`
+    if (actionType === 'document_approve' || actionType === 'document_revise') return `Tài liệu [${short}]`
+    if (actionType === 'llm_call' || actionType === 'coder_llm') return `Kết quả LLM [${short}]`
+    if (actionType === 'write_file' || actionType === 'coder_write_file') return `File [${short}]`
+    return `Output [${short}]`
+  }
+  // Input refs
+  if (kind === 'input') {
+    if (actionType === 'reviewer_node') return `Diff [${short}]`
+    if (actionType === 'coder_node') return `Task [${short}]`
+    if (actionType === 'document_approve' || actionType === 'document_revise') return `Tài liệu [${short}]`
+    if (actionType === 'task_diff_approve' || actionType === 'task_diff_reject') return `Diff [${short}]`
+    if (actionType === 'llm_call' || actionType === 'coder_llm') return `Prompt [${short}]`
+    return `Input [${short}]`
+  }
+  return `[${short}]`
 }
 
 function isSuccessResult(result: string): boolean {
@@ -176,6 +225,7 @@ export default function ProjectWorkspace() {
   const [auditOffset, setAuditOffset] = useState(0)
   const [auditAgentFilter, setAuditAgentFilter] = useState<'all' | AuditAgentKind>('all')
   const [auditResultFilter, setAuditResultFilter] = useState<'all' | 'success' | 'failed'>('all')
+  const [expandedAuditId, setExpandedAuditId] = useState<string | null>(null)
   const inlineComments = useInlineComments()
 
   const filteredAuditRows = useMemo<AuditLogRow[]>(() => {
@@ -316,7 +366,7 @@ export default function ProjectWorkspace() {
             project={currentProject}
             activeTab={activeTab}
             onTabChange={(tab) => {
-              if (tab === 'audit') setAuditOffset(0)
+              if (tab === 'audit') { setAuditOffset(0); setExpandedAuditId(null) }
               setActiveTab(tab)
             }}
             onOpenTask={(taskId) => {
@@ -507,23 +557,30 @@ export default function ProjectWorkspace() {
                             <th scope="col">Action</th>
                             <th scope="col">Timestamp</th>
                             <th scope="col">Result</th>
+                            <th scope="col" className={styles.auditExpandToggleHead}></th>
                           </tr>
                         </thead>
                         <tbody>
                           {filteredAuditRows.length === 0 ? (
                             <tr>
-                              <td colSpan={4} className={styles.auditEmpty}>
+                              <td colSpan={5} className={styles.auditEmpty}>
                                 {auditPage.items.length === 0
                                   ? 'No audit entries yet.'
                                   : 'No entries match the selected filters.'}
                               </td>
                             </tr>
                           ) : (
-                            filteredAuditRows.map((row) => {
+                            filteredAuditRows.flatMap((row) => {
                               const kind = classifyAgent(row.agent_id)
                               const failed = isFailureResult(row.result)
-                              return (
-                                <tr key={row.id} className={failed ? styles.auditRowFail : undefined}>
+                              const isExpanded = expandedAuditId === row.id
+                              return [
+                                <tr
+                                  key={row.id}
+                                  className={`${failed ? styles.auditRowFail : ''} ${styles.auditRowClickable}`}
+                                  onClick={() => setExpandedAuditId(isExpanded ? null : row.id)}
+                                  aria-expanded={isExpanded}
+                                >
                                   <td>
                                     <span className={styles.auditAgentCell}>
                                       <AgentIcon kind={kind} />
@@ -545,8 +602,62 @@ export default function ProjectWorkspace() {
                                     </time>
                                   </td>
                                   <td>{renderResultCell(row.result)}</td>
-                                </tr>
-                              )
+                                  <td className={styles.auditExpandToggle}>
+                                    {isExpanded ? '▲' : '▼'}
+                                  </td>
+                                </tr>,
+                                isExpanded ? (
+                                  <tr key={`${row.id}-detail`} className={styles.auditDetailRow}>
+                                    <td colSpan={5}>
+                                      <div className={styles.auditDetail}>
+                                        {/* Task */}
+                                        {(row.task_title || row.task_id) ? (
+                                          <div className={styles.auditDetailField}>
+                                            <span className={styles.auditDetailLabel}>Task</span>
+                                            <span className={styles.auditDetailValue}>
+                                              {row.task_title ?? `#${row.task_id!.slice(0, 8)}`}
+                                            </span>
+                                          </div>
+                                        ) : null}
+                                        {/* Description */}
+                                        <div className={styles.auditDetailField}>
+                                          <span className={styles.auditDetailLabel}>Mô tả</span>
+                                          <span className={styles.auditDetailValue}>{row.action_description || '—'}</span>
+                                        </div>
+                                        {/* Input refs */}
+                                        {row.input_refs.length > 0 ? (
+                                          <div className={styles.auditDetailField}>
+                                            <span className={styles.auditDetailLabel}>Đầu vào</span>
+                                            <span className={styles.auditDetailValue}>
+                                              {row.input_refs
+                                                .map((r) => labelRef(r, row.action_type, 'input'))
+                                                .join(' · ')}
+                                            </span>
+                                          </div>
+                                        ) : null}
+                                        {/* Output refs */}
+                                        {row.output_refs.length > 0 ? (
+                                          <div className={styles.auditDetailField}>
+                                            <span className={styles.auditDetailLabel}>Đầu ra</span>
+                                            <span className={styles.auditDetailValue}>
+                                              {row.output_refs
+                                                .map((r) => labelRef(r, row.action_type, 'output'))
+                                                .join(' · ')}
+                                            </span>
+                                          </div>
+                                        ) : null}
+                                        {/* Timestamp */}
+                                        <div className={styles.auditDetailField}>
+                                          <span className={styles.auditDetailLabel}>Thời gian</span>
+                                          <span className={styles.auditDetailValue}>
+                                            {new Date(row.timestamp).toLocaleString('vi-VN')}
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                ) : null,
+                              ]
                             })
                           )}
                         </tbody>

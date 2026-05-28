@@ -7,8 +7,13 @@ export type AuditLogRow = {
   agent_id: string
   agent_version: string
   action_type: string
+  action_description: string
   timestamp: string
   result: string
+  input_refs: string[]
+  output_refs: string[]
+  task_id: string | null
+  task_title: string | null
 }
 
 export type AuditLogsPage = {

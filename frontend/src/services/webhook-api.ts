@@ -12,6 +12,18 @@ export interface TestWebhookResult {
   delivered: boolean
   http_status: number | null
   response_time_ms: number
+  response_body: string | null
+}
+
+export interface DeliveryItem {
+  id: string
+  event_type: string
+  status: 'pending' | 'success' | 'failed' | 'retrying' | string
+  http_status: number | null
+  response_body: string | null
+  attempts: number
+  last_attempt_at: string | null
+  created_at: string
 }
 
 export async function listWebhooks(projectId: string): Promise<WebhookItem[]> {
@@ -43,6 +55,16 @@ export async function deleteWebhook(projectId: string, id: string): Promise<void
 export async function testWebhook(projectId: string, id: string): Promise<TestWebhookResult> {
   const res = await api.post<TestWebhookResult>(
     `/api/v1/projects/${projectId}/webhooks/${id}/test`,
+  )
+  return res.data
+}
+
+export async function getWebhookDeliveries(
+  projectId: string,
+  id: string,
+): Promise<DeliveryItem[]> {
+  const res = await api.get<DeliveryItem[]>(
+    `/api/v1/projects/${projectId}/webhooks/${id}/deliveries`,
   )
   return res.data
 }

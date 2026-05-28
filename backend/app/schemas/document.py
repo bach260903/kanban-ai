@@ -66,6 +66,7 @@ class GenerateSpecResponse(BaseModel):
 
 class GeneratePlanResponse(BaseModel):
     agent_run_id: UUID
+    document_id: UUID
     status: str = "running"
     message: str = "PLAN generation started."
 

@@ -27,6 +27,13 @@ class ProjectRole(StrEnum):
     VIEWER = "viewer"
 
 
+class MemberStatus(StrEnum):
+    """Lifecycle status of a project membership."""
+
+    ACTIVE = "active"
+    PENDING = "pending"
+
+
 class ProjectMember(Base):
     """Links a user to a project with a specific role."""
 
@@ -35,6 +42,10 @@ class ProjectMember(Base):
         CheckConstraint(
             "role IN ('owner','leader','developer','viewer')",
             name="ck_project_members_role",
+        ),
+        CheckConstraint(
+            "status IN ('active','pending')",
+            name="ck_project_members_status",
         ),
         UniqueConstraint("project_id", "user_id", name="uq_project_members_project_user"),
         Index("idx_project_members_project", "project_id"),
@@ -57,6 +68,11 @@ class ProjectMember(Base):
         nullable=False,
     )
     role: Mapped[ProjectRole] = mapped_column(String(20), nullable=False)
+    status: Mapped[MemberStatus] = mapped_column(
+        String(20),
+        nullable=False,
+        server_default="active",
+    )
     joined_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,

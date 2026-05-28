@@ -29,8 +29,13 @@ async def list_project_audit_logs(
 ) -> AuditLogsPageResponse:
     await ProjectService.get(session, project_id)
     rows, total = await list_audit_logs_for_project(session, project_id, offset=offset, limit=limit)
+    items: list[AuditLogListItem] = []
+    for audit_log, task_title in rows:
+        item = AuditLogListItem.model_validate(audit_log)
+        item.task_title = task_title
+        items.append(item)
     return AuditLogsPageResponse(
-        items=[AuditLogListItem.model_validate(r) for r in rows],
+        items=items,
         total=total,
         offset=offset,
         limit=limit,

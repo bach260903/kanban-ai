@@ -15,7 +15,7 @@
   pointer-events: auto;
   display: flex;
   flex-direction: column;
-  width: min(var(--aside-w), 100vw);
+  width: min(860px, 100vw);
   max-height: 100vh;
   padding: 1rem 1rem 1.25rem;
   overflow-y: auto;
@@ -24,6 +24,67 @@
   box-shadow: -6px 0 28px rgba(0, 0, 0, 0.12);
   color: var(--text);
   text-align: left;
+}
+
+/* ── Tab bar ── */
+.tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 0.75rem;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--font-secondary-color);
+  cursor: pointer;
+  transition: color 120ms, border-color 120ms;
+  border-radius: 4px 4px 0 0;
+}
+
+.tab:hover {
+  color: var(--font-primary-color);
+  background: var(--c-neutral-100);
+}
+
+.tabActive {
+  color: #0d9488;
+  border-bottom-color: #0d9488;
+}
+
+.tabBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #0d9488;
+  color: #fff;
+}
+
+.tabContent {
+  flex: 1;
+  min-height: 0;
+}
+
+.diffEmpty {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--font-secondary-color);
 }
 
 .panelHeader {
@@ -91,6 +152,12 @@
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-h);
+}
+
+.rejectHint {
+  margin: 2px 0 6px;
+  font-size: 0.78rem;
+  color: var(--font-secondary-color);
 }
 
 .textarea {

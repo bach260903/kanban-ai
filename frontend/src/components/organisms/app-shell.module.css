@@ -1,0 +1,198 @@
+/* ── AppShell — global app chrome with sticky top nav ── */
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--surface-bg);
+}
+
+/* ─────────────────────── Top nav ─────────────────────── */
+
+.topNav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);        /* 56px — matches ProjectHeader token */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 var(--space-6);
+  background: var(--surface-primary);
+  border-bottom: 1px solid var(--border-default);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.05);
+  box-sizing: border-box;
+}
+
+/* ── Left cluster ── */
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.brandMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.brandWord {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--font-primary-color);
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+
+.brandWord span {
+  color: #0d9488;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: var(--radius-card);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--font-secondary-color);
+  text-decoration: none;
+  transition: background 120ms ease, color 120ms ease;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  background: var(--c-neutral-100);
+  color: var(--font-primary-color);
+}
+
+.navLink:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+}
+
+.navLinkActive {
+  background: #f0fdfa;
+  color: #0d9488;
+}
+
+.navLinkActive:hover {
+  background: #ccfbf1;
+  color: #0d9488;
+}
+
+/* ── Right cluster ── */
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.userChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 10px 3px 4px;
+  border-radius: 999px;
+  background: var(--c-neutral-50);
+  border: 1px solid var(--border-default);
+  max-width: 220px;
+  min-width: 0;
+}
+
+.displayName {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--font-primary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logoutBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-default);
+  background: transparent;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--font-secondary-color);
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+  white-space: nowrap;
+}
+
+.logoutBtn:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: var(--c-danger-500);
+}
+
+.logoutBtn:active {
+  background: #fee2e2;
+}
+
+.logoutBtn:focus-visible {
+  outline: 2px solid var(--c-danger-500);
+  outline-offset: 2px;
+}
+
+/* ── Content area ── */
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ── Mobile adjustments ── */
+
+@media (max-width: 640px) {
+  .topNav {
+    padding: 0 var(--space-4);
+    gap: 4px;
+  }
+
+  .brandWord {
+    display: none;
+  }
+
+  .displayName {
+    display: none;
+  }
+
+  .logoutLabel {
+    display: none;
+  }
+
+  .navLink {
+    padding: 6px 8px;
+  }
+}

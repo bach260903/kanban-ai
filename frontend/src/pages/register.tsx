@@ -17,6 +17,9 @@ import { type FormEvent, useMemo, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { useAuth } from '../contexts/auth-context'
+import { ForgotPasswordModal } from '../components/molecules/forgot-password-modal'
+import { TermsModal, type TermsType } from '../components/molecules/terms-modal'
+import { resolveApiBaseURL } from '../services/api'
 
 import styles from './login.module.css'
 
@@ -73,11 +76,14 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [termsAccepted, setTermsAccepted] = useState(false)
+  const [termsModalType, setTermsModalType] = useState<TermsType | null>(null)
+  const [forgotOpen, setForgotOpen] = useState(false)
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
   const [emailError, setEmailError] = useState<string | null>(null)
   const [passwordError, setPasswordError] = useState<string | null>(null)
   const [termsError, setTermsError] = useState<string | null>(null)
   const [generalError, setGeneralError] = useState<string | null>(null)
+  const [githubLoading, setGithubLoading] = useState(false)
 
   const loading = submitState === 'loading'
   const success = submitState === 'success'
@@ -122,6 +128,28 @@ export default function RegisterPage() {
         setGeneralError('Registration failed. Please try again.')
       }
       setSubmitState('idle')
+    }
+  }
+
+  async function handleGithubLogin() {
+    setGithubLoading(true)
+    setGeneralError(null)
+    const url = `${resolveApiBaseURL()}/api/v1/auth/github`
+    try {
+      const res = await fetch(url, { redirect: 'manual' })
+      if (res.type === 'opaqueredirect' || (res.status >= 300 && res.status < 400)) {
+        window.location.href = url
+        return
+      }
+      const data = await res.json().catch(() => null) as { detail?: string } | null
+      setGeneralError(
+        data?.detail ??
+          'GitHub OAuth is not configured on the server. Use email & password instead.',
+      )
+    } catch {
+      setGeneralError('Cannot reach the server. Make sure the backend is running on port 8000.')
+    } finally {
+      setGithubLoading(false)
     }
   }
 
@@ -353,13 +381,23 @@ export default function RegisterPage() {
               />
               <label id="register-terms-label" htmlFor="register-terms" className={styles.termsLabel}>
                 I agree to the{' '}
-                <a href="#" className={styles.termsLink} onClick={(e) => e.preventDefault()}>
+                <button
+                  type="button"
+                  className={styles.termsLink}
+                  onClick={() => setTermsModalType('terms')}
+                  disabled={loading || success}
+                >
                   Terms of Service
-                </a>{' '}
-                and{' '}
-                <a href="#" className={styles.termsLink} onClick={(e) => e.preventDefault()}>
+                </button>
+                {' '}and{' '}
+                <button
+                  type="button"
+                  className={styles.termsLink}
+                  onClick={() => setTermsModalType('privacy')}
+                  disabled={loading || success}
+                >
                   Privacy Policy
-                </a>
+                </button>
               </label>
             </div>
             {termsError ? (
@@ -401,12 +439,12 @@ export default function RegisterPage() {
             <button
               type="button"
               className={styles.oauthBtn}
-              disabled={loading || success}
-              aria-label="Continue with GitHub (coming soon)"
-              title="Coming soon"
+              disabled={loading || success || githubLoading}
+              aria-label="Continue with GitHub"
+              onClick={handleGithubLogin}
             >
               <GithubMark size={18} />
-              <span>Continue with GitHub</span>
+              <span>{githubLoading ? 'Connecting…' : 'Continue with GitHub'}</span>
             </button>
           </form>
 
@@ -416,8 +454,22 @@ export default function RegisterPage() {
               Sign in
             </Link>
           </p>
+
+          <p className={styles.formFooter}>
+            <button
+              type="button"
+              className={styles.forgotLink}
+              onClick={() => setForgotOpen(true)}
+            >
+              Forgot your password?
+            </button>
+          </p>
         </div>
       </section>
+
+      {/* Modals */}
+      <ForgotPasswordModal open={forgotOpen} onClose={() => setForgotOpen(false)} />
+      <TermsModal type={termsModalType} onClose={() => setTermsModalType(null)} />
     </div>
   )
 }

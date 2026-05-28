@@ -8,7 +8,7 @@ import { acceptInvite } from '../services/member-api'
 
 import styles from './accept-invite.module.css'
 
-type AcceptView = 'loading' | 'expired' | 'used' | 'error'
+type AcceptView = 'loading' | 'pending' | 'expired' | 'used' | 'error'
 
 export default function AcceptInvitePage() {
   const { token } = useParams()
@@ -28,7 +28,11 @@ export default function AcceptInvitePage() {
 
     void (async () => {
       try {
-        await acceptInvite(token)
+        const result = await acceptInvite(token)
+        if (result.status === 'pending') {
+          setView('pending')
+          return
+        }
         navigate('/dashboard', {
           replace: true,
           state: { toast: 'Bạn đã tham gia project' },
@@ -45,6 +49,11 @@ export default function AcceptInvitePage() {
             return
           }
           if (err.response?.status === 409) {
+            const msg = typeof detail === 'string' ? detail : null
+            if (msg?.includes('đang chờ')) {
+              setView('pending')
+              return
+            }
             showSuccessToast('Bạn đã là thành viên của project này')
             navigate('/dashboard', { replace: true })
             return
@@ -72,12 +81,24 @@ export default function AcceptInvitePage() {
     )
   }
 
+  if (view === 'pending') {
+    return (
+      <div className={styles.shell}>
+        <span className={styles.icon} aria-hidden="true">⏳</span>
+        <h1 className={styles.title}>Yêu cầu đã gửi</h1>
+        <p className={styles.message}>
+          Yêu cầu tham gia của bạn đang chờ được owner/leader của project phê duyệt.
+          Bạn sẽ nhận thông báo khi được chấp thuận.
+        </p>
+        <Link to="/dashboard">Về Dashboard</Link>
+      </div>
+    )
+  }
+
   if (view === 'expired') {
     return (
       <div className={styles.shell}>
-        <span className={styles.icon} aria-hidden="true">
-          ⏰
-        </span>
+        <span className={styles.icon} aria-hidden="true">⏰</span>
         <h1 className={styles.title}>Link đã hết hạn</h1>
         <p className={styles.message}>Liên hệ Owner để lấy link mới.</p>
         <Link to="/dashboard">Về Dashboard</Link>
@@ -88,9 +109,7 @@ export default function AcceptInvitePage() {
   if (view === 'used') {
     return (
       <div className={styles.shell}>
-        <span className={styles.icon} aria-hidden="true">
-          ✓
-        </span>
+        <span className={styles.icon} aria-hidden="true">✓</span>
         <h1 className={styles.title}>Link đã được sử dụng</h1>
         <p className={styles.message}>Lời mời này không còn hiệu lực.</p>
         <Link to="/dashboard">Về Dashboard</Link>

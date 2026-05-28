@@ -7,10 +7,14 @@ import { Spinner } from '../atoms/spinner'
 import { useAuth } from '../../contexts/auth-context'
 import { showErrorToast, showSuccessToast } from '../../lib/toast'
 import {
+  approveMember,
   changeMemberRole,
   getMembers,
+  getPendingMembers,
   inviteMember,
+  rejectMember,
   removeMember,
+  type PendingMember,
 } from '../../services/member-api'
 import type { ProjectMember, ProjectRole } from '../../types'
 
@@ -26,6 +30,7 @@ type ProjectMembersProps = {
 export function ProjectMembers({ projectId }: ProjectMembersProps) {
   const { user } = useAuth()
   const [members, setMembers] = useState<ProjectMember[]>([])
+  const [pending, setPending] = useState<PendingMember[]>([])
   const [loading, setLoading] = useState(true)
   const [inviteRole, setInviteRole] = useState<ProjectRole>('developer')
   const [inviteEmail, setInviteEmail] = useState('')
@@ -36,18 +41,28 @@ export function ProjectMembers({ projectId }: ProjectMembersProps) {
   const canInvite = currentMember?.role === 'owner'
   const canChangeRoles = currentMember?.role === 'owner' || currentMember?.role === 'leader'
   const canRemoveMembers = currentMember?.role === 'owner'
+  const canApprovePending = canChangeRoles
 
   const load = useCallback(async (showLoading = true) => {
     if (showLoading) setLoading(true)
     try {
       const rows = await getMembers(projectId)
       setMembers(rows)
+      // Leaders/owners can see pending requests
+      if (rows.some((m) => (m.role === 'owner' || m.role === 'leader') && m.user_id === user?.id)) {
+        try {
+          const pendingRows = await getPendingMembers(projectId)
+          setPending(pendingRows)
+        } catch {
+          setPending([])
+        }
+      }
     } catch (err) {
       showErrorToast(isAxiosError(err) ? loadError(err) : 'Không tải được danh sách thành viên')
     } finally {
       setLoading(false)
     }
-  }, [projectId])
+  }, [projectId, user?.id])
 
   useEffect(() => {
     void load()
@@ -103,6 +118,33 @@ export function ProjectMembers({ projectId }: ProjectMembersProps) {
     }
   }
 
+  async function handleApprove(pendingUser: PendingMember) {
+    setBusyUserId(pendingUser.user_id)
+    try {
+      await approveMember(projectId, pendingUser.user_id)
+      showSuccessToast(`Đã chấp thuận ${pendingUser.display_name}`)
+      await load(false)
+    } catch (err) {
+      showErrorToast(isAxiosError(err) ? loadError(err) : 'Không phê duyệt được')
+    } finally {
+      setBusyUserId(null)
+    }
+  }
+
+  async function handleReject(pendingUser: PendingMember) {
+    if (!window.confirm(`Từ chối yêu cầu của ${pendingUser.display_name}?`)) return
+    setBusyUserId(pendingUser.user_id)
+    try {
+      await rejectMember(projectId, pendingUser.user_id)
+      showSuccessToast('Đã từ chối yêu cầu')
+      await load(false)
+    } catch (err) {
+      showErrorToast(isAxiosError(err) ? loadError(err) : 'Không từ chối được')
+    } finally {
+      setBusyUserId(null)
+    }
+  }
+
   async function copyInviteLink() {
     if (!inviteLink) return
     try {
@@ -124,6 +166,7 @@ export function ProjectMembers({ projectId }: ProjectMembersProps) {
 
   return (
     <div className={styles.root}>
+      {/* ── Active members table ── */}
       <div className={styles.tableWrap}>
         {members.length === 0 ? (
           <p className={styles.empty}>Chưa có thành viên nào.</p>
@@ -190,10 +233,60 @@ export function ProjectMembers({ projectId }: ProjectMembersProps) {
         )}
       </div>
 
+      {/* ── Pending approval section ── */}
+      {canApprovePending ? (
+        <section className={styles.pendingSection} aria-labelledby="pending-members-heading">
+          <h3 id="pending-members-heading" className={styles.pendingTitle}>
+            Yêu cầu tham gia
+            {pending.length > 0 ? (
+              <span className={styles.pendingBadge}>{pending.length}</span>
+            ) : null}
+          </h3>
+          {pending.length === 0 ? (
+            <p className={styles.pendingEmpty}>Không có yêu cầu nào đang chờ.</p>
+          ) : (
+            <ul className={styles.pendingList}>
+              {pending.map((p) => (
+                <li key={p.user_id} className={styles.pendingRow}>
+                  <div className={styles.pendingInfo}>
+                    <span className={styles.pendingName}>{p.display_name}</span>
+                    <span className={styles.pendingEmail}>{p.email}</span>
+                    <RoleBadge role={p.role as ProjectRole} />
+                  </div>
+                  <div className={styles.pendingActions}>
+                    <Button
+                      type="button"
+                      variant="primary"
+                      disabled={busyUserId === p.user_id}
+                      onClick={() => void handleApprove(p)}
+                    >
+                      Chấp thuận
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="danger"
+                      disabled={busyUserId === p.user_id}
+                      onClick={() => void handleReject(p)}
+                    >
+                      Từ chối
+                    </Button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ) : null}
+
+      {/* ── Invite section ── */}
       <section className={styles.invite} aria-labelledby="invite-members-heading">
         <h3 id="invite-members-heading" className={styles.inviteTitle}>
           Mời thành viên
         </h3>
+        <p className={styles.inviteNote}>
+          Link không có email → yêu cầu phê duyệt từ owner/leader.
+          Link có email khớp → tham gia ngay.
+        </p>
         <div className={styles.inviteForm}>
           <div className={styles.field}>
             <label htmlFor="invite-email">Email (tùy chọn)</label>
@@ -202,7 +295,7 @@ export function ProjectMembers({ projectId }: ProjectMembersProps) {
               type="email"
               value={inviteEmail}
               onChange={(e) => setInviteEmail(e.target.value)}
-              placeholder="để trống = link công khai"
+              placeholder="để trống = link công khai (cần duyệt)"
               disabled={inviting || !canInvite}
             />
           </div>

@@ -25,7 +25,7 @@ from app.models.diff import Diff, DiffReviewStatus
 from app.models.project import Project
 from app.models.stream_event import StreamEventType
 from app.models.task import Task, TaskStatus
-from app.services.audit_service import finalise_log, write_audit, write_pending_log
+from app.services.audit_service import CODER_AGENT_ID, finalise_log, write_audit, write_pending_log
 from app.services.task_service import TaskService
 from app.websocket.event_publisher import EventPublisher
 
@@ -125,6 +125,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
             task_id=task_id,
             action_type="cli_coder",
             action_description=f"CLI coder ({backend}): subprocess invocation",
+            agent_id=CODER_AGENT_ID,
             input_refs=[backend],
         )
         await session.commit()
@@ -183,6 +184,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                         action_type="cli_coder",
                         action_description=f"CLI_TIMEOUT: {backend} exceeded {int(_CLI_TIMEOUT_SEC)}s limit",
                         result=AuditLogResult.FAILURE,
+                        agent_id=CODER_AGENT_ID,
                         output_refs=[str(agent_run_id)],
                     )
                     await s.commit()
@@ -287,6 +289,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 action_type="cli_coder",
                 action_description=f"CLI coder ({backend}): diff stored, awaiting HIL review.",
                 result=AuditLogResult.SUCCESS,
+                agent_id=CODER_AGENT_ID,
                 output_refs=[str(diff_row.id)],
             )
             await s.commit()

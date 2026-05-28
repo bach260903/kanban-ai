@@ -27,6 +27,7 @@ class NotificationType(StrEnum):
     AGENT_ERROR = "agent_error"
     INVITE_ACCEPTED = "invite_accepted"
     REVIEW_COMPLETE = "review_complete"
+    JOIN_REQUESTED = "join_requested"
 
 
 class Notification(Base):

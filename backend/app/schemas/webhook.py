@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class WebhookCreate(BaseModel):
@@ -35,3 +35,17 @@ class TestWebhookResponse(BaseModel):
     delivered: bool
     http_status: int | None
     response_time_ms: int
+    response_body: str | None = None
+
+
+class WebhookDeliveryResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: UUID
+    event_type: str
+    status: str
+    http_status: int | None
+    response_body: str | None = None
+    attempts: int
+    last_attempt_at: datetime | None
+    created_at: datetime

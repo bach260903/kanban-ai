@@ -11,7 +11,7 @@ import {
   ShieldCheck,
   Zap,
 } from 'lucide-react'
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useEffect, useState } from 'react'
 
 function GithubMark({ size = 18 }: { size?: number }) {
   return (
@@ -31,6 +31,9 @@ function GithubMark({ size = 18 }: { size?: number }) {
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 import { useAuth } from '../contexts/auth-context'
+import { ForgotPasswordModal } from '../components/molecules/forgot-password-modal'
+import { showSuccessToast } from '../lib/toast'
+import { resolveApiBaseURL } from '../services/api'
 import { getAuthRedirectTarget } from '../utils/auth-redirect'
 
 import styles from './login.module.css'
@@ -48,7 +51,21 @@ export default function LoginPage() {
   const [remember, setRemember] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
-  const [error, setError] = useState<string | null>(null)
+  // Pre-populate error if redirected back from a failed GitHub OAuth attempt
+  const [error, setError] = useState<string | null>(() => {
+    const e = searchParams.get('error')
+    return e ? 'GitHub sign-in failed. Please try again or use email & password.' : null
+  })
+  const [forgotOpen, setForgotOpen] = useState(false)
+  const [githubLoading, setGithubLoading] = useState(false)
+
+  useEffect(() => {
+    const toast = (location.state as { toast?: string } | null)?.toast
+    if (toast) {
+      showSuccessToast(toast)
+      navigate(location.pathname + location.search, { replace: true, state: {} })
+    }
+  }, [location.pathname, location.search, location.state, navigate])
 
   const loading = submitState === 'loading'
   const success = submitState === 'success'
@@ -79,6 +96,30 @@ export default function LoginPage() {
       }
       setError(message)
       setSubmitState('idle')
+    }
+  }
+
+  async function handleGithubLogin() {
+    setGithubLoading(true)
+    setError(null)
+    const url = `${resolveApiBaseURL()}/api/v1/auth/github`
+    try {
+      const res = await fetch(url, { redirect: 'manual' })
+      // 'opaqueredirect' → backend returned a 302 to GitHub (happy path)
+      if (res.type === 'opaqueredirect' || (res.status >= 300 && res.status < 400)) {
+        window.location.href = url
+        return
+      }
+      // Non-redirect → backend returned an error
+      const data = await res.json().catch(() => null) as { detail?: string } | null
+      setError(
+        data?.detail ??
+          'GitHub OAuth is not configured on the server. Use email & password instead.',
+      )
+    } catch {
+      setError('Cannot reach the server. Make sure the backend is running on port 8000.')
+    } finally {
+      setGithubLoading(false)
     }
   }
 
@@ -238,9 +279,14 @@ export default function LoginPage() {
                 />
                 <span>Remember me</span>
               </label>
-              <Link to="/login" className={styles.forgotLink}>
+              <button
+                type="button"
+                className={styles.forgotLink}
+                onClick={() => setForgotOpen(true)}
+                disabled={loading || success}
+              >
                 Forgot password?
-              </Link>
+              </button>
             </div>
 
             {/* Error alert — assertive announce */}
@@ -281,12 +327,12 @@ export default function LoginPage() {
             <button
               type="button"
               className={styles.oauthBtn}
-              disabled={loading || success}
-              aria-label="Continue with GitHub (coming soon)"
-              title="Coming soon"
+              disabled={loading || success || githubLoading}
+              aria-label="Continue with GitHub"
+              onClick={handleGithubLogin}
             >
               <GithubMark size={18} />
-              <span>Continue with GitHub</span>
+              <span>{githubLoading ? 'Connecting…' : 'Continue with GitHub'}</span>
             </button>
           </form>
 
@@ -302,6 +348,8 @@ export default function LoginPage() {
           </p>
         </div>
       </section>
+
+      <ForgotPasswordModal open={forgotOpen} onClose={() => setForgotOpen(false)} />
     </div>
   )
 }

@@ -14,10 +14,11 @@ from app.dependencies import get_current_user, require_any_member, require_leade
 from app.exceptions import NotFoundError
 from app.models.project_member import ProjectMember
 from app.models.user import User
-from app.models.webhook import WebhookConfig
+from app.models.webhook import WebhookConfig, WebhookDelivery
 from app.schemas.webhook import (
     TestWebhookResponse,
     WebhookCreate,
+    WebhookDeliveryResponse,
     WebhookResponse,
     WebhookUpdate,
 )
@@ -157,9 +158,29 @@ async def test_webhook(
             detail="Webhook is disabled.",
         )
     result = await webhook_service.test_webhook(session, webhook_id)
-    if not result["delivered"]:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Delivery failed with status {result['http_status']}",
-        )
+    # Always return 200 — let the frontend display success/failure details
     return TestWebhookResponse(**result)
+
+
+@router.get(
+    "/projects/{project_id}/webhooks/{webhook_id}/deliveries",
+    response_model=list[WebhookDeliveryResponse],
+)
+async def list_deliveries(
+    project_id: uuid.UUID,
+    webhook_id: uuid.UUID,
+    _member: Annotated[ProjectMember, require_any_member],
+    session: Annotated[AsyncSession, Depends(get_db)],
+    limit: int = 20,
+) -> list[WebhookDeliveryResponse]:
+    """Return the last N delivery attempts for a webhook (newest first)."""
+    config = await _get_project_webhook(session, project_id, webhook_id)
+    rows = (
+        await session.scalars(
+            select(WebhookDelivery)
+            .where(WebhookDelivery.webhook_config_id == config.id)
+            .order_by(WebhookDelivery.created_at.desc())
+            .limit(min(limit, 50))
+        )
+    ).all()
+    return [WebhookDeliveryResponse.model_validate(row) for row in rows]

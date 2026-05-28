@@ -30,7 +30,7 @@ from app.models.diff import Diff, DiffReviewStatus
 from app.models.project import Project
 from app.models.stream_event import StreamEventType
 from app.models.task import Task, TaskStatus
-from app.services.audit_service import finalise_log, write_audit, write_pending_log
+from app.services.audit_service import CODER_AGENT_ID, finalise_log, write_audit, write_pending_log
 from app.services.pause_service import PauseService
 from app.services.task_service import TaskService
 from app.websocket.event_publisher import EventPublisher
@@ -240,6 +240,7 @@ async def _pause_checkpoint(
         action_type="coder_paused",
         action_description="Coder stopped: Redis pause flag set for task.",
         result=AuditLogResult.SUCCESS,
+        agent_id=CODER_AGENT_ID,
         input_refs=[],
         output_refs=[str(agent_run_id)],
     )
@@ -265,6 +266,7 @@ async def _execute_tool(
             task_id=task_id,
             action_type="coder_read_file",
             action_description=f"read_file `{rel}`",
+            agent_id=CODER_AGENT_ID,
             input_refs=[rel],
         )
         try:
@@ -289,6 +291,7 @@ async def _execute_tool(
             task_id=task_id,
             action_type="coder_write_file",
             action_description=f"write_file `{rel}` ({len(content)} chars)",
+            agent_id=CODER_AGENT_ID,
             input_refs=[rel],
         )
         try:
@@ -324,6 +327,7 @@ async def _execute_tool(
             task_id=task_id,
             action_type="coder_run_terminal",
             action_description=f"run_terminal `{cmd}`",
+            agent_id=CODER_AGENT_ID,
             input_refs=[cmd],
         )
         try:
@@ -473,6 +477,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 action_type="coder_node",
                 action_description="LLM API key missing — placeholder diff recorded.",
                 result=AuditLogResult.FAILURE,
+                agent_id=CODER_AGENT_ID,
                 output_refs=[str(diff_row.id)],
             )
             task.status = TaskStatus.REVIEW
@@ -508,6 +513,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 task_id=task_id,
                 action_type="coder_llm",
                 action_description=f"Coder LLM invoke (round {rounds})",
+                agent_id=CODER_AGENT_ID,
                 input_refs=[],
             )
             try:
@@ -612,6 +618,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
             action_type="coder_node",
             action_description="Coder produced diff; awaiting PO review (HIL).",
             result=AuditLogResult.SUCCESS,
+            agent_id=CODER_AGENT_ID,
             output_refs=[str(diff_row.id)],
         )
         await session.commit()
@@ -692,6 +699,7 @@ async def run(state: StateDict) -> StateDict:
                         action_type="coder_node",
                         action_description=f"ERROR: {err_msg}",
                         result=AuditLogResult.FAILURE,
+                        agent_id=CODER_AGENT_ID,
                         output_refs=[str(open_run.id)] if open_run else [],
                     )
                     if task is not None:
@@ -734,6 +742,7 @@ async def run(state: StateDict) -> StateDict:
                         action_type="coder_node",
                         action_description=str(exc),
                         result=AuditLogResult.FAILURE,
+                        agent_id=CODER_AGENT_ID,
                     )
                     task = await session.get(Task, task_id)
                     if task is not None:

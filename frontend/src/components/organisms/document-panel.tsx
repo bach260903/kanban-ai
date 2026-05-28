@@ -213,6 +213,7 @@ export function DocumentPanel({
     try {
       setSubmitting(true)
       const res = await generatePlan(projectId)
+      // Refresh so the pre-created document row is in docRows immediately
       await refreshDocuments({ forceRefresh: true })
       setPendingRunId(res.agent_run_id)
       setStatusMessage('PLAN generation started. This may take up to a minute.')

@@ -11,11 +11,14 @@ import { getMembers } from '../../services/member-api'
 import {
   createWebhook,
   deleteWebhook,
+  getWebhookDeliveries,
   listWebhooks,
   patchWebhook,
   testWebhook,
+  type DeliveryItem,
   type WebhookItem,
 } from '../../services/webhook-api'
+import { relativeTime } from '../../utils/relative-time'
 
 import styles from './webhook-settings.module.css'
 
@@ -57,6 +60,8 @@ export function WebhookSettings({ projectId }: WebhookSettingsProps) {
   const [urlError, setUrlError] = useState<string | null>(null)
   const [savingWebhook, setSavingWebhook] = useState(false)
   const [busyWebhookId, setBusyWebhookId] = useState<string | null>(null)
+  const [expandedDeliveryId, setExpandedDeliveryId] = useState<string | null>(null)
+  const [deliveriesMap, setDeliveriesMap] = useState<Record<string, DeliveryItem[]>>({})
 
   const [repoName, setRepoName] = useState('')
   const [pat, setPat] = useState('')
@@ -186,6 +191,20 @@ export function WebhookSettings({ projectId }: WebhookSettingsProps) {
     }
   }
 
+  async function handleToggleDeliveries(webhook: WebhookItem) {
+    if (expandedDeliveryId === webhook.id) {
+      setExpandedDeliveryId(null)
+      return
+    }
+    setExpandedDeliveryId(webhook.id)
+    try {
+      const rows = await getWebhookDeliveries(projectId, webhook.id)
+      setDeliveriesMap((prev) => ({ ...prev, [webhook.id]: rows }))
+    } catch {
+      setDeliveriesMap((prev) => ({ ...prev, [webhook.id]: [] }))
+    }
+  }
+
   async function handleTest(webhook: WebhookItem) {
     if (!webhook.enabled) {
       showErrorToast('Webhook đang tắt — bật lại trước khi test')
@@ -194,7 +213,17 @@ export function WebhookSettings({ projectId }: WebhookSettingsProps) {
     setBusyWebhookId(webhook.id)
     try {
       const result = await testWebhook(projectId, webhook.id)
-      showSuccessToast(`Đã gửi: ${result.response_time_ms}ms`)
+      if (result.delivered) {
+        showSuccessToast(`Gửi thành công (${result.response_time_ms}ms, HTTP ${result.http_status ?? '?'})`)
+      } else {
+        const statusText = result.http_status != null
+          ? ` — server trả về HTTP ${result.http_status}`
+          : ' — không kết nối được'
+        const bodyHint = result.response_body
+          ? `\nResponse: ${result.response_body.slice(0, 200)}`
+          : ''
+        showErrorToast(`Gửi thất bại${statusText}${bodyHint}`)
+      }
     } catch (err) {
       showErrorToast(apiError(err, 'Gửi thất bại'))
     } finally {
@@ -252,46 +281,112 @@ export function WebhookSettings({ projectId }: WebhookSettingsProps) {
         ) : (
           <ul className={styles.list}>
             {webhooks.map((webhook) => (
-              <li key={webhook.id} className={styles.row}>
-                <p className={styles.url} title={webhook.url}>
-                  {truncateUrl(webhook.url)}
-                </p>
-                <div className={styles.chips}>
-                  {webhook.events.map((event) => (
-                    <span key={event} className={styles.chip}>
-                      {event}
-                    </span>
-                  ))}
-                </div>
-                <div className={styles.rowActions}>
-                  <label className={styles.toggle}>
-                    <input
-                      type="checkbox"
-                      checked={webhook.enabled}
+              <li key={webhook.id} className={styles.webhookItem}>
+                <div className={styles.row}>
+                  <p className={styles.url} title={webhook.url}>
+                    {truncateUrl(webhook.url)}
+                  </p>
+                  <div className={styles.chips}>
+                    {webhook.events.map((event) => (
+                      <span key={event} className={styles.chip}>
+                        {event}
+                      </span>
+                    ))}
+                  </div>
+                  <div className={styles.rowActions}>
+                    <label className={styles.toggle}>
+                      <input
+                        type="checkbox"
+                        checked={webhook.enabled}
+                        disabled={!canManageWebhooks || busyWebhookId === webhook.id}
+                        onChange={() => void handleToggleEnabled(webhook)}
+                      />
+                      Bật
+                    </label>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      disabled={
+                        !canManageWebhooks || !webhook.enabled || busyWebhookId === webhook.id
+                      }
+                      onClick={() => void handleTest(webhook)}
+                    >
+                      Test
+                    </Button>
+                    <button
+                      type="button"
+                      className={styles.deliveryToggle}
+                      onClick={() => void handleToggleDeliveries(webhook)}
+                      title="Xem lịch sử gửi"
+                    >
+                      {expandedDeliveryId === webhook.id ? '▲ Deliveries' : '▼ Deliveries'}
+                    </button>
+                    <Button
+                      type="button"
+                      variant="danger"
                       disabled={!canManageWebhooks || busyWebhookId === webhook.id}
-                      onChange={() => void handleToggleEnabled(webhook)}
-                    />
-                    Bật
-                  </label>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    disabled={
-                      !canManageWebhooks || !webhook.enabled || busyWebhookId === webhook.id
-                    }
-                    onClick={() => void handleTest(webhook)}
-                  >
-                    Test
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="danger"
-                    disabled={!canManageWebhooks || busyWebhookId === webhook.id}
-                    onClick={() => void handleDelete(webhook)}
-                  >
-                    Xóa
-                  </Button>
+                      onClick={() => void handleDelete(webhook)}
+                    >
+                      Xóa
+                    </Button>
+                  </div>
                 </div>
+
+                {expandedDeliveryId === webhook.id ? (
+                  <div className={styles.deliveryPanel}>
+                    {!deliveriesMap[webhook.id] ? (
+                      <p className={styles.deliveryEmpty}>Đang tải…</p>
+                    ) : deliveriesMap[webhook.id].length === 0 ? (
+                      <p className={styles.deliveryEmpty}>Chưa có lần gửi nào.</p>
+                    ) : (
+                      <table className={styles.deliveryTable}>
+                        <thead>
+                          <tr>
+                            <th>Event</th>
+                            <th>Status</th>
+                            <th>HTTP</th>
+                            <th>Attempts</th>
+                            <th>Time</th>
+                          </tr>
+                        </thead>
+                          {deliveriesMap[webhook.id].map((d) => (
+                            <tbody key={d.id}>
+                              <tr>
+                                <td className={styles.deliveryEvent}>{d.event_type}</td>
+                                <td>
+                                  <span
+                                    className={
+                                      d.status === 'success'
+                                        ? styles.statusSuccess
+                                        : d.status === 'failed'
+                                          ? styles.statusFailed
+                                          : styles.statusPending
+                                    }
+                                  >
+                                    {d.status}
+                                  </span>
+                                </td>
+                                <td className={styles.deliveryHttp}>
+                                  {d.http_status ?? '—'}
+                                </td>
+                                <td className={styles.deliveryAttempts}>{d.attempts}</td>
+                                <td className={styles.deliveryTime}>
+                                  {relativeTime(d.created_at)}
+                                </td>
+                              </tr>
+                              {d.response_body ? (
+                                <tr>
+                                  <td colSpan={5} className={styles.deliveryBody}>
+                                    <strong>Response:</strong> {d.response_body}
+                                  </td>
+                                </tr>
+                              ) : null}
+                            </tbody>
+                          ))}
+                      </table>
+                    )}
+                  </div>
+                ) : null}
               </li>
             ))}
           </ul>

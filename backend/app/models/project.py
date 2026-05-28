@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from app.models.task_template import TaskTemplate
     from app.models.webhook import WebhookConfig
 
-from sqlalchemy import CheckConstraint, DateTime, String, Text, UniqueConstraint, func, text
+from sqlalchemy import CheckConstraint, DateTime, String, Text, func, text
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -44,7 +44,8 @@ class Project(Base):
             "coding_backend IN ('groq','claude_code','openai','gemini')",
             name="ck_projects_coding_backend",
         ),
-        UniqueConstraint("name", name="uq_projects_name"),
+        # name uniqueness is NOT enforced globally — different users/orgs can reuse names.
+        # Projects are identified by UUID.
     )
 
     id: Mapped[uuid.UUID] = mapped_column(

@@ -234,10 +234,15 @@ def calculate_score(
     """Compute a 0–100 review quality score.
 
     Breakdown:
-    - **Test score** (40 pts): neutral 40 when no tests detected;
+    - **Test score** (40 pts): 0 when no tests detected (no tests = no credit);
       otherwise ``floor(pass / total * 40)``.
-    - **Secret score** (30 pts): 30 − 10 × secrets_found (min 0).
-    - **AI score** (30 pts): 30 if ``"approve"``, 10 if ``"needs_changes"``.
+    - **Secret score** (30 pts): 30 − 15 × secrets_found (min 0).
+    - **AI score** (30 pts): 30 if ``"approve"``, 5 if ``"needs_changes"``.
+
+    Rationale: code with no tests should not receive full marks by default.
+    A project with passing tests, no secrets, and AI approval earns 100/100.
+    A project with no tests at all can earn at most 60/100 (needs_changes) or 60/100
+    (approve with no tests).
 
     Args:
         test_pass: Number of passing tests.
@@ -249,7 +254,8 @@ def calculate_score(
         Integer score clamped to [0, 100].
     """
     total = test_pass + test_fail
-    test_score = 40 if total == 0 else int((test_pass / total) * 40)
-    secret_score = max(0, 30 - secret_count * 10)
-    ai_score = 30 if suggestion == "approve" else 10
+    # No tests → 0 pts (penalises untested code rather than rewarding absence of tests)
+    test_score = 0 if total == 0 else int((test_pass / total) * 40)
+    secret_score = max(0, 30 - secret_count * 15)
+    ai_score = 30 if suggestion == "approve" else 5
     return max(0, min(100, test_score + secret_score + ai_score))

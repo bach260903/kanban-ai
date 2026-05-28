@@ -23,6 +23,7 @@ function messageFromUnknown(err: unknown): string {
 
 export default function DashboardPage() {
   const location = useLocation()
+  const navigate = useNavigate()
   const [data, setData] = useState<DashboardResponse | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

@@ -8,8 +8,12 @@ from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.audit_log import AuditLog, AuditLogResult
+from app.models.task import Task
 
 SYSTEM_AGENT_ID = "system"
+ARCHITECT_AGENT_ID = "architect"
+CODER_AGENT_ID = "coder"
+REVIEWER_AGENT_ID = "reviewer"
 SYSTEM_AGENT_VERSION = "1.0.0"
 
 
@@ -32,12 +36,13 @@ async def write_audit(
     action_type: str,
     action_description: str,
     result: AuditLogResult,
+    agent_id: str = SYSTEM_AGENT_ID,
     input_refs: list[str] | None = None,
     output_refs: list[str] | None = None,
 ) -> AuditLog:
     """Insert a single immutable-style audit row (no updates exposed)."""
     row = AuditLog(
-        agent_id=SYSTEM_AGENT_ID,
+        agent_id=agent_id,
         agent_version=SYSTEM_AGENT_VERSION,
         action_type=action_type,
         action_description=action_description,
@@ -59,11 +64,12 @@ async def write_pending_log(
     task_id: UUID | None,
     action_type: str,
     action_description: str,
+    agent_id: str = SYSTEM_AGENT_ID,
     input_refs: list[str] | None = None,
 ) -> AuditLog:
     """Insert a pre-action audit row (``result = awaiting_hil``) — Constitution Principle V."""
     row = AuditLog(
-        agent_id=SYSTEM_AGENT_ID,
+        agent_id=agent_id,
         agent_version=SYSTEM_AGENT_VERSION,
         action_type=action_type,
         action_description=action_description,
@@ -84,19 +90,25 @@ async def list_audit_logs_for_project(
     *,
     offset: int,
     limit: int,
-) -> tuple[list[AuditLog], int]:
-    """Return newest-first audit rows for a project and total count (pagination)."""
-    count_stmt = select(func.count()).select_from(AuditLog).where(AuditLog.project_id == project_id)
+) -> tuple[list[tuple[AuditLog, str | None]], int]:
+    """Return newest-first audit rows + task_title for a project (pagination)."""
+    count_stmt = (
+        select(func.count())
+        .select_from(AuditLog)
+        .where(AuditLog.project_id == project_id)
+    )
     total = int(await session.scalar(count_stmt) or 0)
+
     stmt = (
-        select(AuditLog)
+        select(AuditLog, Task.title.label("task_title"))
+        .outerjoin(Task, AuditLog.task_id == Task.id)
         .where(AuditLog.project_id == project_id)
         .order_by(AuditLog.timestamp.desc())
         .offset(offset)
         .limit(limit)
     )
     result = await session.execute(stmt)
-    rows = list(result.scalars().all())
+    rows = [(audit_log, task_title) for audit_log, task_title in result.all()]
     return rows, total
 
 

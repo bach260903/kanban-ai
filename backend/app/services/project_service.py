@@ -32,12 +32,6 @@ class ProjectService:
     @staticmethod
     async def create(session: AsyncSession, data: ProjectCreate) -> Project:
         name = data.name.strip()
-        existing = await session.scalar(select(Project).where(Project.name == name))
-        if existing is not None:
-            if existing.status == ProjectStatus.ARCHIVED:
-                await ProjectService._release_project_name(session, existing)
-            else:
-                raise DuplicateNameError(f"Project name '{name}' already exists.")
         project = Project(
             name=name,
             description=data.description,

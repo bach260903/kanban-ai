@@ -148,6 +148,7 @@ export async function generateSpec(
 
 export type GeneratePlanResponse = {
   agent_run_id: UUID
+  document_id: UUID
   status: string
   message: string
 }

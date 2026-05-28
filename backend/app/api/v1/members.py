@@ -7,10 +7,11 @@ import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import settings
 from app.database import get_db
 from app.dependencies import (
     get_current_user,
@@ -19,15 +20,17 @@ from app.dependencies import (
     require_owner,
 )
 from app.models.invitation import Invitation, InviteRole
-from app.models.project_member import ProjectMember, ProjectRole
+from app.models.project_member import MemberStatus, ProjectMember, ProjectRole
 from app.models.user import User
 from app.schemas.member import (
     AcceptResponse,
     InvitationResponse,
     InviteRequest,
     MemberResponse,
+    PendingMemberResponse,
     RoleChangeRequest,
 )
+from app.services import notification_service
 
 router = APIRouter(tags=["members"])
 
@@ -39,6 +42,10 @@ def _project_role(value: ProjectRole | InviteRole | str) -> ProjectRole:
     return ProjectRole(raw)
 
 
+# ---------------------------------------------------------------------------
+# List active members
+# ---------------------------------------------------------------------------
+
 @router.get("/projects/{project_id}/members", response_model=list[MemberResponse])
 async def list_members(
     project_id: uuid.UUID,
@@ -48,11 +55,49 @@ async def list_members(
     rows = await session.execute(
         select(ProjectMember, User)
         .join(User, User.id == ProjectMember.user_id)
-        .where(ProjectMember.project_id == project_id)
+        .where(
+            ProjectMember.project_id == project_id,
+            ProjectMember.status == MemberStatus.ACTIVE,
+        )
         .order_by(ProjectMember.joined_at)
     )
     return [
         MemberResponse(
+            user_id=pm.user_id,
+            display_name=user.display_name,
+            email=user.email,
+            role=pm.role,
+            status=pm.status,
+            joined_at=pm.joined_at,
+        )
+        for pm, user in rows.all()
+    ]
+
+
+# ---------------------------------------------------------------------------
+# List pending members (leaders+)
+# ---------------------------------------------------------------------------
+
+@router.get(
+    "/projects/{project_id}/members/pending",
+    response_model=list[PendingMemberResponse],
+)
+async def list_pending_members(
+    project_id: uuid.UUID,
+    _leader: Annotated[ProjectMember, require_leader_or_above],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> list[PendingMemberResponse]:
+    rows = await session.execute(
+        select(ProjectMember, User)
+        .join(User, User.id == ProjectMember.user_id)
+        .where(
+            ProjectMember.project_id == project_id,
+            ProjectMember.status == MemberStatus.PENDING,
+        )
+        .order_by(ProjectMember.joined_at)
+    )
+    return [
+        PendingMemberResponse(
             user_id=pm.user_id,
             display_name=user.display_name,
             email=user.email,
@@ -63,6 +108,10 @@ async def list_members(
     ]
 
 
+# ---------------------------------------------------------------------------
+# Create invite link
+# ---------------------------------------------------------------------------
+
 @router.post(
     "/projects/{project_id}/members/invite",
     response_model=InvitationResponse,
@@ -71,7 +120,6 @@ async def list_members(
 async def invite_member(
     project_id: uuid.UUID,
     body: InviteRequest,
-    request: Request,
     current_user: Annotated[User, Depends(get_current_user)],
     _owner: Annotated[ProjectMember, require_owner],
     session: Annotated[AsyncSession, Depends(get_db)],
@@ -94,7 +142,8 @@ async def invite_member(
     session.add(invitation)
     await session.commit()
     await session.refresh(invitation)
-    base = str(request.base_url).rstrip("/")
+    # Use frontend URL so the invite link opens the React app, not the API server
+    base = settings.frontend_url.rstrip("/")
     invite_url = f"{base}/invitations/{token}"
     return InvitationResponse(
         invitation_id=invitation.id,
@@ -102,6 +151,10 @@ async def invite_member(
         expires_at=invitation.expires_at,
     )
 
+
+# ---------------------------------------------------------------------------
+# Get invitation details (public)
+# ---------------------------------------------------------------------------
 
 @router.get("/invitations/{token}")
 async def get_invitation(
@@ -125,6 +178,10 @@ async def get_invitation(
         "is_used": invitation.is_used,
     }
 
+
+# ---------------------------------------------------------------------------
+# Accept invitation
+# ---------------------------------------------------------------------------
 
 @router.post("/invitations/{token}/accept", response_model=AcceptResponse)
 async def accept_invitation(
@@ -157,23 +214,133 @@ async def accept_invitation(
         )
     )
     if existing is not None:
+        if existing.status == MemberStatus.PENDING:
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail="Yêu cầu của bạn đang chờ phê duyệt",
+            )
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="Already a member",
         )
+
     member_role = _project_role(invitation.role)
-    session.add(
-        ProjectMember(
-            project_id=invitation.project_id,
-            user_id=current_user.id,
-            role=member_role,
+
+    # Email-targeted invites are auto-approved; generic links go through approval
+    is_targeted = (
+        invitation.invitee_email is not None
+        and invitation.invitee_email.lower() == current_user.email.lower()
+    )
+    member_status = MemberStatus.ACTIVE if is_targeted else MemberStatus.PENDING
+
+    new_member = ProjectMember(
+        project_id=invitation.project_id,
+        user_id=current_user.id,
+        role=member_role,
+        status=member_status,
+    )
+    session.add(new_member)
+
+    # Only consume the token for targeted (one-time) invites
+    if is_targeted:
+        invitation.used_at = datetime.now(timezone.utc)
+        invitation.used_by = current_user.id
+
+    await session.flush()
+
+    if member_status == MemberStatus.PENDING:
+        await notification_service.notify_join_requested(
+            session,
+            invitation.project_id,
+            current_user.display_name,
+            new_member.id,
+        )
+
+    await session.commit()
+    return AcceptResponse(
+        project_id=invitation.project_id,
+        role=member_role,
+        status=member_status,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Approve pending member (leaders+)
+# ---------------------------------------------------------------------------
+
+@router.post(
+    "/projects/{project_id}/members/{user_id}/approve",
+    response_model=MemberResponse,
+)
+async def approve_member(
+    project_id: uuid.UUID,
+    user_id: uuid.UUID,
+    _leader: Annotated[ProjectMember, require_leader_or_above],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> MemberResponse:
+    row = await session.execute(
+        select(ProjectMember, User)
+        .join(User, User.id == ProjectMember.user_id)
+        .where(
+            ProjectMember.project_id == project_id,
+            ProjectMember.user_id == user_id,
+            ProjectMember.status == MemberStatus.PENDING,
         )
     )
-    invitation.used_at = datetime.now(timezone.utc)
-    invitation.used_by = current_user.id
+    result = row.one_or_none()
+    if result is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Pending member not found",
+        )
+    member, user = result
+    member.status = MemberStatus.ACTIVE
     await session.commit()
-    return AcceptResponse(project_id=invitation.project_id, role=member_role)
+    await session.refresh(member)
+    return MemberResponse(
+        user_id=member.user_id,
+        display_name=user.display_name,
+        email=user.email,
+        role=member.role,
+        status=member.status,
+        joined_at=member.joined_at,
+    )
 
+
+# ---------------------------------------------------------------------------
+# Reject pending member (leaders+)
+# ---------------------------------------------------------------------------
+
+@router.delete(
+    "/projects/{project_id}/members/{user_id}/reject",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+async def reject_member(
+    project_id: uuid.UUID,
+    user_id: uuid.UUID,
+    _leader: Annotated[ProjectMember, require_leader_or_above],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> Response:
+    member = await session.scalar(
+        select(ProjectMember).where(
+            ProjectMember.project_id == project_id,
+            ProjectMember.user_id == user_id,
+            ProjectMember.status == MemberStatus.PENDING,
+        )
+    )
+    if member is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Pending member not found",
+        )
+    await session.delete(member)
+    await session.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+# ---------------------------------------------------------------------------
+# Change active member role (leaders+)
+# ---------------------------------------------------------------------------
 
 @router.patch(
     "/projects/{project_id}/members/{user_id}",
@@ -192,6 +359,7 @@ async def change_member_role(
         .where(
             ProjectMember.project_id == project_id,
             ProjectMember.user_id == user_id,
+            ProjectMember.status == MemberStatus.ACTIVE,
         )
     )
     result = row.one_or_none()
@@ -219,9 +387,14 @@ async def change_member_role(
         display_name=user.display_name,
         email=user.email,
         role=member.role,
+        status=member.status,
         joined_at=member.joined_at,
     )
 
+
+# ---------------------------------------------------------------------------
+# Remove active member (owner only)
+# ---------------------------------------------------------------------------
 
 @router.delete(
     "/projects/{project_id}/members/{user_id}",
@@ -237,6 +410,7 @@ async def remove_member(
         select(ProjectMember).where(
             ProjectMember.project_id == project_id,
             ProjectMember.user_id == user_id,
+            ProjectMember.status == MemberStatus.ACTIVE,
         )
     )
     if member is None:

@@ -60,36 +60,118 @@ def _build_headers(
     return headers
 
 
+# ── Platform-specific payload adapters ────────────────────────────────────────
+
+_DISCORD_COLORS = {
+    "task.done": 5763719,        # green
+    "task.needs_review": 16776960,  # yellow
+    "agent.error": 15548997,     # red
+    "webhook.test": 3447003,     # blue
+}
+
+
+def _is_discord_url(url: str) -> bool:
+    return "discord.com/api/webhooks" in url or "discordapp.com/api/webhooks" in url
+
+
+def _is_slack_url(url: str) -> bool:
+    return "hooks.slack.com/services" in url or "hooks.slack.com/workflows" in url
+
+
+def _build_discord_payload(event_type: str, payload: dict[str, Any]) -> dict[str, Any]:
+    """Convert NeoKanban payload → Discord Embed message."""
+    task = payload.get("task", {})
+    project = payload.get("project", {})
+    actor = payload.get("actor", {})
+
+    color = _DISCORD_COLORS.get(event_type, 3447003)
+
+    description_parts: list[str] = []
+    if task.get("title"):
+        description_parts.append(f"**Task:** {task['title']}")
+    if actor.get("name"):
+        description_parts.append(f"**By:** {actor['name']}")
+
+    return {
+        "username": "NeoKanban",
+        "embeds": [
+            {
+                "title": event_type.replace(".", " ").title(),
+                "description": "\n".join(description_parts) or event_type,
+                "color": color,
+                "fields": [
+                    {"name": "Project", "value": str(project.get("id", "—")), "inline": True},
+                    {"name": "Task ID", "value": str(task.get("id", "—")), "inline": True},
+                ],
+                "timestamp": payload.get("timestamp"),
+            }
+        ],
+    }
+
+
+def _build_slack_payload(event_type: str, payload: dict[str, Any]) -> dict[str, Any]:
+    """Convert NeoKanban payload → Slack incoming-webhook message."""
+    task = payload.get("task", {})
+    actor = payload.get("actor", {})
+    emoji = {"task.done": ":white_check_mark:", "task.needs_review": ":eyes:", "agent.error": ":rotating_light:"}.get(event_type, ":bell:")
+    return {
+        "text": f"{emoji} *{event_type}*: {task.get('title', '')} — by {actor.get('name', 'agent')}",
+    }
+
+
+def _adapt_payload(url: str, event_type: str, payload: dict[str, Any]) -> dict[str, Any]:
+    """Return platform-specific payload if the URL is a known platform, else original."""
+    if _is_discord_url(url):
+        return _build_discord_payload(event_type, payload)
+    if _is_slack_url(url):
+        return _build_slack_payload(event_type, payload)
+    return payload
+
+
 async def _post_webhook(
     url: str,
     event_type: str,
     payload: dict[str, Any],
     secret: str | None,
-) -> tuple[bool, int | None]:
-    payload_bytes = json.dumps(payload, separators=(",", ":"), sort_keys=True).encode()
-    headers = _build_headers(event_type, payload_bytes, secret)
+) -> tuple[bool, int | None, str | None]:
+    """Send the webhook. Returns (success, http_status, response_body_snippet).
+
+    Automatically adapts payload format for Discord / Slack URLs.
+    """
+    adapted = _adapt_payload(url, event_type, payload)
+    payload_bytes = json.dumps(adapted, separators=(",", ":"), sort_keys=True).encode()
+    # Discord/Slack don't use our custom headers — only send them for generic endpoints
+    if _is_discord_url(url) or _is_slack_url(url):
+        headers: dict[str, str] = {"Content-Type": "application/json"}
+    else:
+        headers = _build_headers(event_type, payload_bytes, secret)
     try:
         async with httpx.AsyncClient(timeout=10) as client:
             resp = await client.post(url, content=payload_bytes, headers=headers)
-        return resp.status_code < 400, resp.status_code
-    except httpx.RequestError:
-        return False, None
+        # Capture up to 1 000 chars of the body for diagnostics
+        try:
+            body_text: str | None = resp.text[:1000] if resp.text else None
+        except Exception:
+            body_text = None
+        return resp.status_code < 400, resp.status_code, body_text
+    except httpx.RequestError as exc:
+        return False, None, str(exc)[:500]
 
 
 async def _deliver_once(
     delivery_id: UUID,
     session: AsyncSession,
-) -> tuple[bool, int | None]:
+) -> tuple[bool, int | None, str | None]:
     delivery = await session.scalar(
         select(WebhookDelivery)
         .where(WebhookDelivery.id == delivery_id)
         .options(selectinload(WebhookDelivery.webhook_config))
     )
     if delivery is None or delivery.webhook_config is None:
-        return False, None
+        return False, None, None
     config = delivery.webhook_config
     if not config.enabled:
-        return False, None
+        return False, None, None
     return await _post_webhook(config.url, delivery.event_type, delivery.payload, config.secret)
 
 
@@ -98,7 +180,7 @@ async def _deliver_once_direct(
     payload: dict[str, Any],
     *,
     event_type: str = "webhook.test",
-) -> tuple[bool, int | None]:
+) -> tuple[bool, int | None, str | None]:
     return await _post_webhook(config.url, event_type, payload, config.secret)
 
 
@@ -177,14 +259,20 @@ async def _process_one_delivery(delivery_id: UUID) -> None:
 
         success = False
         http_status: int | None = None
+        response_body: str | None = None
         for attempt in range(MAX_ATTEMPTS):
             await asyncio.sleep(RETRY_DELAYS[attempt])
-            success, http_status = await _deliver_once(delivery_id, session)
+            success, http_status, response_body = await _deliver_once(delivery_id, session)
             delivery.attempts = attempt + 1
             delivery.last_attempt_at = datetime.now(UTC)
             delivery.http_status = http_status
+            delivery.response_body = response_body
             if success:
                 delivery.status = WebhookDeliveryStatus.SUCCESS
+                break
+            # Client errors (4xx) are permanent — retrying will not help
+            if http_status is not None and 400 <= http_status < 500:
+                delivery.status = WebhookDeliveryStatus.FAILED
                 break
             delivery.status = (
                 WebhookDeliveryStatus.RETRYING
@@ -229,10 +317,11 @@ async def test_webhook(session: AsyncSession, webhook_id: UUID) -> dict[str, Any
         "timestamp": datetime.now(UTC).isoformat(),
     }
     start = asyncio.get_running_loop().time()
-    delivered, http_status = await _deliver_once_direct(config, payload)
+    delivered, http_status, response_body = await _deliver_once_direct(config, payload)
     elapsed_ms = int((asyncio.get_running_loop().time() - start) * 1000)
     return {
         "delivered": delivered,
         "http_status": http_status,
         "response_time_ms": elapsed_ms,
+        "response_body": response_body,
     }

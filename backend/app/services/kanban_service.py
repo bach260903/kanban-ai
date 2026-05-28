@@ -237,8 +237,8 @@ class KanbanService:
         task: Task,
         *,
         current_user_id: UUID | None = None,
-        branch_name: str | None = None,
     ) -> None:
+        """Fire task.done webhook. GitHub PR is created earlier, before squash-merge."""
         try:
             actor = await _actor_for_user(session, current_user_id)
             payload = _build_webhook_payload("task.done", task, actor)
@@ -250,34 +250,6 @@ class KanbanService:
             )
         except Exception:
             logger.exception("webhook enqueue task.done failed task_id=%s", task.id)
-
-        config = await session.scalar(
-            select(GitHubConfig).where(
-                GitHubConfig.project_id == task.project_id,
-                GitHubConfig.enabled.is_(True),
-            )
-        )
-        if config is None:
-            return
-        try:
-            diff = await DiffService.get_latest_approved_for_task(
-                session,
-                task_id=task.id,
-                project_id=task.project_id,
-            )
-            if diff is None:
-                logger.info("Skipping GitHub PR: no approved diff for task_id=%s", task.id)
-                return
-            head = branch_name or task_branch_slug(task.id)
-            pr_url = await github_service.create_pull_request(
-                config,
-                task,
-                diff.content,
-                head,
-            )
-            logger.info("GitHub PR created: %s", pr_url)
-        except Exception:
-            logger.exception("GitHub PR creation failed task_id=%s", task.id)
 
     @staticmethod
     async def cancel_in_progress(session: AsyncSession, task_id: UUID) -> Task:
@@ -384,6 +356,44 @@ class KanbanService:
             if branch_row is not None:
                 branch_name = branch_row.branch_name
             sandbox = _sandbox_project_root(task.project_id)
+
+            # ── GitHub: commit staged changes to task branch, push, create PR ──
+            # Must happen BEFORE squash_and_merge because that call deletes the branch.
+            if branch_name is not None:
+                gh_config = await session.scalar(
+                    select(GitHubConfig).where(
+                        GitHubConfig.project_id == task.project_id,
+                        GitHubConfig.enabled.is_(True),
+                    )
+                )
+                if gh_config is not None:
+                    try:
+                        pushed = await github_service.commit_and_push_branch(
+                            gh_config,
+                            sandbox,
+                            branch_name,
+                            f"feat: {task.title}",
+                        )
+                        if pushed:
+                            diff = await DiffService.get_latest_approved_for_task(
+                                session,
+                                task_id=task.id,
+                                project_id=task.project_id,
+                            )
+                            pr_url = await github_service.create_pull_request(
+                                gh_config,
+                                task,
+                                diff.content if diff else "",
+                                branch_name,
+                            )
+                            logger.info(
+                                "GitHub PR created for task_id=%s: %s", task.id, pr_url
+                            )
+                    except Exception:
+                        logger.exception(
+                            "GitHub push/PR failed task_id=%s", task.id
+                        )
+
             try:
                 await BranchService.squash_and_merge(session, task.id, sandbox)
             except GitCommandError:
@@ -438,7 +448,6 @@ class KanbanService:
                 session,
                 task,
                 current_user_id=current_user_id,
-                branch_name=branch_name,
             )
 
         if to_status == TaskStatus.DONE and from_status != TaskStatus.DONE:

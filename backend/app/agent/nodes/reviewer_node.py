@@ -31,7 +31,7 @@ from app.models.review_report import (
 from app.models.stream_event import StreamEventType
 from app.models.task import Task
 from app.services import reviewer_service
-from app.services.audit_service import finalise_log, write_pending_log
+from app.services.audit_service import REVIEWER_AGENT_ID, finalise_log, write_pending_log
 from app.websocket.event_publisher import EventPublisher
 
 logger = logging.getLogger(__name__)
@@ -153,6 +153,7 @@ async def _run_with_session(state: StateDict) -> StateDict:  # noqa: PLR0912, PL
             task_id=task_id,
             action_type="reviewer_node",
             action_description=f"AI reviewer started for task {task.title!r}",
+            agent_id=REVIEWER_AGENT_ID,
             input_refs=[str(diff_row.id)] if diff_row else [],
         )
 

@@ -13,7 +13,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import Settings, settings
 from app.database import get_db
-from app.models.project_member import ProjectMember, ProjectRole
+from app.models.project_member import MemberStatus, ProjectMember, ProjectRole
 from app.models.user import User
 from app.services import auth_service
 
@@ -30,22 +30,32 @@ async def get_current_user(
     session: AsyncSession = Depends(get_db),
     app_settings: Settings = Depends(get_settings),
 ) -> User:
-    """Require a valid Bearer token and return the authenticated user."""
+    """Require a valid Bearer token and return the authenticated user.
+
+    Also rejects tokens that were issued *before* a password-reset event
+    (tracked via Redis key ``user_tokens_revoked_before:{user_id}``).
+    """
     if creds is None or not creds.credentials:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Not authenticated",
         )
-    user_id = auth_service.decode_token(
+    token_data = auth_service.decode_token_full(
         creds.credentials,
         app_settings.jwt_secret_key,
         app_settings.jwt_algorithm,
     )
-    user = await session.get(User, user_id)
+    user = await session.get(User, token_data.user_id)
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="User not found",
+        )
+    # Reject tokens that were invalidated by a password reset
+    if await auth_service.is_token_revoked(token_data.user_id, token_data.iat):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Session expired — your password was reset. Please log in again.",
         )
     return user
 
@@ -81,6 +91,7 @@ def require_role(*allowed_roles: ProjectRole) -> Any:
             select(ProjectMember).where(
                 ProjectMember.project_id == project_id,
                 ProjectMember.user_id == current_user.id,
+                ProjectMember.status == MemberStatus.ACTIVE,
             )
         )
         if member is None or member.role not in allowed_roles:

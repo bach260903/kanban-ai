@@ -7,8 +7,21 @@ export interface InvitationResponse {
   expires_at: string
 }
 
+export interface PendingMember {
+  user_id: string
+  display_name: string
+  email: string
+  role: string
+  joined_at: string
+}
+
 export async function getMembers(projectId: string): Promise<ProjectMember[]> {
   const res = await api.get<ProjectMember[]>(`/api/v1/projects/${projectId}/members`)
+  return res.data
+}
+
+export async function getPendingMembers(projectId: string): Promise<PendingMember[]> {
+  const res = await api.get<PendingMember[]>(`/api/v1/projects/${projectId}/members/pending`)
   return res.data
 }
 
@@ -24,11 +37,22 @@ export async function inviteMember(
   return res.data
 }
 
-export async function acceptInvite(token: string): Promise<{ project_id: string; role: string }> {
-  const res = await api.post<{ project_id: string; role: string }>(
+export async function acceptInvite(token: string): Promise<{ project_id: string; role: string; status: string }> {
+  const res = await api.post<{ project_id: string; role: string; status: string }>(
     `/api/v1/invitations/${token}/accept`,
   )
   return res.data
+}
+
+export async function approveMember(projectId: string, userId: string): Promise<ProjectMember> {
+  const res = await api.post<ProjectMember>(
+    `/api/v1/projects/${projectId}/members/${userId}/approve`,
+  )
+  return res.data
+}
+
+export async function rejectMember(projectId: string, userId: string): Promise<void> {
+  await api.delete(`/api/v1/projects/${projectId}/members/${userId}/reject`)
 }
 
 export async function changeMemberRole(

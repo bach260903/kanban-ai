@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.exceptions import NotFoundError
 from app.models.notification import Notification, NotificationType
-from app.models.project_member import ProjectMember, ProjectRole
+from app.models.project_member import MemberStatus, ProjectMember, ProjectRole
 from app.models.task import Task
 
 _LEADER_ROLES = (ProjectRole.OWNER, ProjectRole.LEADER)
@@ -159,6 +159,33 @@ async def mark_read(
     notification.is_read = True
     await session.flush()
     return notification
+
+
+async def notify_join_requested(
+    session: AsyncSession,
+    project_id: UUID,
+    requesting_user_name: str,
+    pending_member_id: UUID,
+) -> None:
+    """Notify project owners/leaders when someone requests membership via a generic invite link."""
+    leaders = (
+        await session.scalars(
+            select(ProjectMember).where(
+                ProjectMember.project_id == project_id,
+                ProjectMember.role.in_(_LEADER_ROLES),
+                ProjectMember.status == MemberStatus.ACTIVE,
+            )
+        )
+    ).all()
+    for leader in leaders:
+        await create_notification(
+            session,
+            leader.user_id,
+            NotificationType.JOIN_REQUESTED,
+            f"{requesting_user_name} muốn tham gia project",
+            reference_type="member",
+            reference_id=pending_member_id,
+        )
 
 
 async def mark_all_read(session: AsyncSession, user_id: UUID) -> int:

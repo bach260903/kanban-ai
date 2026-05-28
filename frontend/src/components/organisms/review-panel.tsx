@@ -1,5 +1,6 @@
 import { isAxiosError } from 'axios'
 import type { editor } from 'monaco-editor'
+import { Code2, Eye } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Button } from '../atoms/button'
@@ -16,6 +17,7 @@ import {
   getTaskComments,
   getTasks,
   groupedResponseToTaskColumns,
+  moveTask,
   rejectTask,
 } from '../../services/task-api'
 import type { TaskDiffResponse } from '../../services/task-api'
@@ -108,6 +110,7 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
     getCommentPayload,
   } = inlineComments
   const [activeCommentLine, setActiveCommentLine] = useState<number | null>(null)
+  const [reviewTab, setReviewTab] = useState<'diff' | 'ai'>('diff')
 
   const refreshBoard = useCallback(async () => {
     const data = await getTasks(projectId)
@@ -178,6 +181,22 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
     try {
       await approveTask(projectId, reviewTask.id)
       setRejectFeedback('')
+      await refreshBoard()
+      onClose()
+    } catch (err) {
+      setDiffError(diffErrorMessage(err))
+    } finally {
+      setActionBusy(false)
+    }
+  }, [projectId, reviewTask, refreshBoard, onClose])
+
+  const onPermanentReject = useCallback(async () => {
+    if (!reviewTask) return
+    if (!window.confirm(`Permanently discard "${reviewTask.title}"? The task will move to the Rejected column and no agent retry will be triggered.`)) return
+    setActionBusy(true)
+    setDiffError(null)
+    try {
+      await moveTask(projectId, reviewTask.id, 'rejected')
       await refreshBoard()
       onClose()
     } catch (err) {
@@ -261,17 +280,43 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
           </p>
         ) : null}
 
-        <div className="flex h-full min-h-0">
-          <div className="flex-1 min-w-0">
+        {/* ── Tab bar ── */}
+        <div className={styles.tabs}>
+          <button
+            type="button"
+            className={`${styles.tab} ${reviewTab === 'diff' ? styles.tabActive : ''}`}
+            onClick={() => setReviewTab('diff')}
+          >
+            <Code2 size={14} aria-hidden="true" />
+            Diff (coder output)
+          </button>
+          <button
+            type="button"
+            className={`${styles.tab} ${reviewTab === 'ai' ? styles.tabActive : ''}`}
+            onClick={() => setReviewTab('ai')}
+          >
+            <Eye size={14} aria-hidden="true" />
+            AI Review
+            {reviewState.report?.score != null ? (
+              <span className={styles.tabBadge}>{reviewState.report.score}</span>
+            ) : null}
+          </button>
+        </div>
+
+        {/* ── Diff tab ── */}
+        {reviewTab === 'diff' ? (
+          <div className={styles.tabContent}>
             {!diffLoading && diff ? (
               <>
                 <DiffViewer
                   original={diff.original_content}
                   modified={diff.modified_content}
                   title={diffTitle}
-                  height="42vh"
+                  height="55vh"
                   highlightedLine={
-                    highlightedLine && highlightedLine.file === apiFilePath ? highlightedLine.line : null
+                    highlightedLine && highlightedLine.file === apiFilePath
+                      ? highlightedLine.line
+                      : null
                   }
                   onLineClick={
                     apiFilePath
@@ -295,28 +340,42 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
                   />
                 ) : null}
               </>
+            ) : !diffLoading ? (
+              <p className={styles.diffEmpty}>
+                No diff available yet — agent may still be running.
+              </p>
             ) : null}
           </div>
+        ) : null}
 
-          <AiReviewPanel
-            reviewState={reviewState}
-            onCommentClick={(file, line) => {
-              setHighlightedLine({ file, line })
-              if (typeof line === 'number') setActiveCommentLine(line)
-            }}
-          />
-        </div>
+        {/* ── AI Review tab ── */}
+        {reviewTab === 'ai' ? (
+          <div className={styles.tabContent}>
+            <AiReviewPanel
+              reviewState={reviewState}
+              onCommentClick={(file, line) => {
+                setHighlightedLine({ file, line })
+                if (typeof line === 'number') setActiveCommentLine(line)
+                setReviewTab('diff')
+              }}
+            />
+          </div>
+        ) : null}
 
         <div className={styles.actions}>
           <div className={styles.row}>
             <Button variant="primary" disabled={actionBusy || diffLoading || !diff} onClick={() => void onApprove()}>
-              Approve
+              ✓ Approve &amp; merge
             </Button>
           </div>
+
           <div>
             <label htmlFor="review-reject-feedback" className={styles.rejectLabel}>
-              Reject with feedback
+              Reject with feedback (agent retries)
             </label>
+            <p className={styles.rejectHint}>
+              Write what needs to change. The coder agent will try again with your feedback.
+            </p>
             <textarea
               id="review-reject-feedback"
               className={styles.textarea}
@@ -332,7 +391,15 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
               disabled={actionBusy || !rejectFeedback.trim()}
               onClick={() => void onReject()}
             >
-              Reject
+              ↩ Reject (retry)
+            </Button>
+            <Button
+              variant="secondary"
+              disabled={actionBusy}
+              onClick={() => void onPermanentReject()}
+              title="Move task to Rejected column permanently — no agent retry"
+            >
+              🚫 Discard task
             </Button>
           </div>
         </div>

@@ -168,6 +168,64 @@
   background: color-mix(in srgb, var(--c-danger-500) 5%, transparent);
 }
 
+.auditRowClickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.auditRowClickable:hover td {
+  background: var(--c-neutral-100);
+}
+
+.auditExpandToggle {
+  width: 28px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--font-secondary-color);
+}
+
+.auditExpandToggleHead {
+  width: 28px;
+}
+
+.auditDetailRow td {
+  padding: 0 !important;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.auditDetail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  background: var(--c-neutral-50, #f8fafc);
+  border-top: 1px solid var(--border-default);
+}
+
+.auditDetailField {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 140px;
+  max-width: 100%;
+  flex: 1 1 200px;
+}
+
+.auditDetailLabel {
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--font-secondary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.auditDetailValue {
+  font-size: var(--t-sm);
+  color: var(--font-primary-color);
+  word-break: break-all;
+  font-family: var(--font-mono, monospace);
+}
+
 .auditFilters {
   display: flex;
   flex-wrap: wrap;

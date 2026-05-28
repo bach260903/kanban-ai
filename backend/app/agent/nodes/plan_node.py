@@ -20,7 +20,7 @@ from app.models.agent_run import AgentRun, AgentRunStatus
 from app.models.audit_log import AuditLogResult
 from app.models.document import DocumentStatus, DocumentType
 from app.models.stream_event import StreamEventType
-from app.services.audit_service import finalise_log, write_audit, write_pending_log
+from app.services.audit_service import ARCHITECT_AGENT_ID, finalise_log, write_audit, write_pending_log
 from app.services.document_service import DocumentService
 from app.websocket.event_publisher import EventPublisher
 
@@ -179,6 +179,7 @@ async def _generate_plan(state: StateDict) -> StateDict:
         task_id=task_id,
         action_type="llm_call",
         action_description=llm_desc,
+        agent_id=ARCHITECT_AGENT_ID,
         input_refs=[str(spec_doc.id), str(plan_doc.id)],
     )
     try:
@@ -206,6 +207,7 @@ async def _generate_plan(state: StateDict) -> StateDict:
         task_id=task_id,
         action_type="write_file",
         action_description="Persist generated PLAN to documents table",
+        agent_id=ARCHITECT_AGENT_ID,
         input_refs=[str(plan_doc.id)],
     )
     try:
@@ -234,6 +236,7 @@ async def _generate_plan(state: StateDict) -> StateDict:
         action_type="plan_node",
         action_description="PLAN generation succeeded; awaiting PO review",
         result=AuditLogResult.SUCCESS,
+        agent_id=ARCHITECT_AGENT_ID,
         input_refs=[str(plan_doc.id)],
         output_refs=[str(plan_doc.id)],
     )
@@ -276,6 +279,7 @@ async def run(state: StateDict) -> StateDict:
                     action_type="plan_node",
                     action_description=message,
                     result=AuditLogResult.FAILURE,
+                    agent_id=ARCHITECT_AGENT_ID,
                 )
             except Exception:
                 pass
@@ -301,6 +305,7 @@ async def run(state: StateDict) -> StateDict:
                     action_type="plan_node",
                     action_description=str(exc),
                     result=AuditLogResult.FAILURE,
+                    agent_id=ARCHITECT_AGENT_ID,
                 )
             except Exception:
                 pass

@@ -176,6 +176,16 @@ async def generate_plan(
     if spec_doc.status != DocumentStatus.APPROVED:
         raise InvalidTransitionError("SPEC must be approved before generating PLAN.")
 
+    # Pre-create (or reuse) the PLAN document so the frontend can display it immediately.
+    try:
+        plan_doc = await DocumentService.get_by_type(session, project_id, DocumentType.PLAN)
+        # Reset to draft if it already existed
+        plan_doc.status = DocumentStatus.DRAFT
+        plan_doc.content = ""
+        await session.flush()
+    except NotFoundError:
+        plan_doc = await DocumentService.create(session, project_id, DocumentType.PLAN, "")
+
     agent_run = AgentRun(
         project_id=project_id,
         task_id=None,
@@ -195,7 +205,7 @@ async def generate_plan(
         )
     )
 
-    return GeneratePlanResponse(agent_run_id=agent_run.id)
+    return GeneratePlanResponse(agent_run_id=agent_run.id, document_id=plan_doc.id)
 
 
 @router.post(

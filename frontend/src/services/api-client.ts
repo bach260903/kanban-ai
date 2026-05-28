@@ -19,7 +19,14 @@ export const BASE_URL = resolveApiV1BaseURL()
 
 type ClientRequestConfig = InternalAxiosRequestConfig & { skipAuthRedirect?: boolean }
 
-const AUTH_PATHS = new Set(['/dev/auth', '/auth-required', '/login', '/register'])
+const AUTH_PATHS = new Set([
+  '/dev/auth',
+  '/auth-required',
+  '/login',
+  '/register',
+  '/reset-password',
+  '/auth/callback',
+])
 
 function attachResponseInterceptor(client: AxiosInstance): AxiosInstance {
   client.interceptors.response.use(

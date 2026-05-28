@@ -12,6 +12,14 @@ import { authApi } from '../services/auth-api'
 import { getAuthToken, setAuthToken } from '../services/api'
 import type { User } from '../types'
 
+const PUBLIC_AUTH_PATHS = new Set([
+  '/login',
+  '/register',
+  '/reset-password',
+  '/auth/callback',
+  '/dev/auth',
+])
+
 interface AuthState {
   user: User | null
   token: string | null
@@ -29,6 +37,18 @@ const AuthContext = createContext<AuthContextValue | null>(null)
 async function resolveUser(data: { access_token: string; user: User | null }): Promise<User> {
   if (data.user) return data.user
   return authApi.getMe()
+}
+
+function clearAuthSession(setToken: (v: string | null) => void, setUser: (v: User | null) => void) {
+  setAuthToken(null)
+  setToken(null)
+  setUser(null)
+}
+
+function redirectToLoginIfProtected() {
+  const path = window.location.pathname
+  if (PUBLIC_AUTH_PATHS.has(path)) return
+  window.location.replace('/login')
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -50,14 +70,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const me = await authApi.getMe(stored)
         if (!cancelled && getAuthToken() === stored) setUser(me)
-      } catch (err) {
-        if (isAxiosError(err) && err.response?.status === 401 && getAuthToken() === stored) {
-          setAuthToken(null)
-        }
-        if (!cancelled && getAuthToken() === stored) {
-          setToken(null)
-          setUser(null)
-        }
+      } catch {
+        if (cancelled || getAuthToken() !== stored) return
+        clearAuthSession(setToken, setUser)
+        redirectToLoginIfProtected()
       } finally {
         if (!cancelled) setIsLoading(false)
       }
