@@ -7,6 +7,11 @@ import AnalyticsPage from './pages/analytics'
 import AuthCallbackPage from './pages/auth-callback'
 import ConstitutionEditor from './pages/constitution-editor'
 import DashboardPage from './pages/dashboard'
+import DeploymentDetailPage from './pages/deployments/deployment-detail'
+import DeploymentHistoryPage from './pages/deployments/deployment-history'
+import HealthDashboardPage from './pages/devops/health-dashboard'
+import PipelineListPage from './pages/pipelines/pipeline-list'
+import PipelineRunPage from './pages/pipelines/pipeline-run'
 import DevAuth from './pages/dev-auth'
 import LoginPage from './pages/login'
 import ProjectList from './pages/project-list'
@@ -86,6 +91,46 @@ export default function App() {
               element={
                 <AuthGuard>
                   <ConstitutionEditor />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/projects/:projectId/pipelines"
+              element={
+                <AuthGuard>
+                  <PipelineListPage />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/projects/:projectId/pipeline-runs/:runId"
+              element={
+                <AuthGuard>
+                  <PipelineRunPage />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/projects/:projectId/deployments"
+              element={
+                <AuthGuard>
+                  <DeploymentHistoryPage />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/projects/:projectId/deployments/:deploymentId"
+              element={
+                <AuthGuard>
+                  <DeploymentDetailPage />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/projects/:projectId/devops"
+              element={
+                <AuthGuard>
+                  <HealthDashboardPage />
                 </AuthGuard>
               }
             />

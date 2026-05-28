@@ -1,0 +1,348 @@
+.page {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-6);
+  box-sizing: border-box;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.header {
+  margin-bottom: var(--space-6);
+}
+
+.breadcrumb {
+  font-size: 13px;
+  color: var(--font-secondary-color);
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumbLink {
+  color: var(--c-brand-600);
+  text-decoration: none;
+}
+.breadcrumbLink:hover { text-decoration: underline; }
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--t-h1);
+  font-weight: 600;
+  color: var(--font-primary-color);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.metaRow {
+  margin-top: var(--space-2);
+  font-size: 12px;
+  color: var(--font-secondary-color);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Status Badge ────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badgeQueued    { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+.badgeRunning   { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.badgeSuccess   { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+.badgeFailure   { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+.badgeCancelled { background: #fafafa; color: #6b7280; border: 1px solid #e5e7eb; }
+
+/* ── AI Summary ──────────────────────────────────────────── */
+.aiSummaryCard {
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  border: 1px solid #c7d2fe;
+  background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
+  margin-bottom: var(--space-5);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.aiSummaryIcon {
+  color: #6366f1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.aiSummaryText {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #1e1b4b;
+  margin: 0;
+}
+
+/* ── Steps ───────────────────────────────────────────────── */
+.stepsCard {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-card);
+  overflow: hidden;
+  margin-bottom: var(--space-5);
+}
+
+.stepsHeader {
+  padding: 12px 16px;
+  background: var(--surface-muted);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--font-secondary-color);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.step {
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.12s;
+}
+
+.step:last-child { border-bottom: none; }
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  cursor: pointer;
+  user-select: none;
+  gap: var(--space-3);
+}
+
+.stepHeader:hover { background: var(--surface-muted); }
+
+.stepLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 0;
+}
+
+.stepIcon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepIconPending    { background: #f1f5f9; color: #94a3b8; }
+.stepIconRunning    { background: #eff6ff; color: #3b82f6; }
+.stepIconSuccess    { background: #f0fdf4; color: #16a34a; }
+.stepIconFailure    { background: #fef2f2; color: #dc2626; }
+.stepIconSkipped    { background: #fafafa; color: #9ca3af; }
+
+.stepName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--font-primary-color);
+  text-transform: capitalize;
+}
+
+.stepReasoning {
+  font-size: 12px;
+  color: var(--font-secondary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 350px;
+}
+
+.stepRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.stepDuration {
+  font-size: 12px;
+  color: var(--font-secondary-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.chevron {
+  color: var(--font-secondary-color);
+  transition: transform 0.15s;
+}
+
+.chevronOpen { transform: rotate(180deg); }
+
+/* Step expanded logs */
+.stepBody {
+  padding: 0 16px 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.stepAiReasoning {
+  margin: 10px 0 8px;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border-left: 3px solid #818cf8;
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.logsLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--font-secondary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 4px;
+}
+
+.logs {
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-all;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 10px 12px;
+  border-radius: 6px;
+  max-height: 320px;
+  overflow-y: auto;
+  margin: 0;
+}
+
+/* Running pulse */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.pulsingDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3b82f6;
+  animation: pulse 1.2s ease-in-out infinite;
+  margin-right: 3px;
+}
+
+/* ── Empty / Loading ─────────────────────────────────────── */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--font-secondary-color);
+  padding: var(--space-10) 0;
+  font-size: 14px;
+}
+
+.error {
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--c-danger-500);
+  background: var(--c-danger-50);
+  color: var(--c-danger-700);
+  font-size: 14px;
+  margin-bottom: var(--space-4);
+}
+
+/* ── Retry & analysis indicators ────────────────────────── */
+.stepRetried {
+  border-left: 3px solid var(--c-info-500, #3b82f6) !important;
+}
+
+.retryBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 5px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  background: #dbeafe;
+  color: #1d4ed8;
+  flex-shrink: 0;
+}
+
+.analysisIndicator {
+  display: inline-flex;
+  align-items: center;
+  color: var(--c-danger-500, #dc2626);
+  flex-shrink: 0;
+}
+
+/* ── Preview deployment banner ───────────────────────────── */
+.previewBanner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  border-radius: 8px;
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+.previewBannerIcon {
+  flex-shrink: 0;
+}
+
+.previewBannerLabel {
+  font-size: var(--t-sm);
+  font-weight: 600;
+}
+
+.previewBannerLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--t-sm);
+  color: #15803d;
+  text-decoration: underline;
+  word-break: break-all;
+  margin-left: auto;
+}
+
+.previewBannerLink:hover {
+  color: #166534;
+}
+
+@media (max-width: 640px) {
+  .page { padding: var(--space-4); }
+  .stepReasoning { display: none; }
+  .previewBannerLink { margin-left: 0; }
+}

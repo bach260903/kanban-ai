@@ -13,7 +13,7 @@ from app.database import get_db
 from app.dependencies import get_current_user, require_leader_or_above
 from app.models.project_member import ProjectMember
 from app.models.user import User
-from app.schemas.analytics import AnalyticsResponse, DashboardResponse
+from app.schemas.analytics import AIReviewResponse, AnalyticsResponse, DashboardResponse
 from app.services import analytics_service
 
 router = APIRouter(tags=["analytics"])
@@ -66,6 +66,16 @@ async def get_dashboard(
 ) -> DashboardResponse:
     data = await analytics_service.get_dashboard_data(session, current_user.id)
     return DashboardResponse.model_validate(data)
+
+
+@router.get("/projects/{project_id}/ai-review", response_model=AIReviewResponse)
+async def get_ai_project_review(
+    project_id: UUID,
+    _member: Annotated[ProjectMember, require_leader_or_above],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> AIReviewResponse:
+    data = await analytics_service.get_ai_project_review(session, project_id)
+    return AIReviewResponse.model_validate(data)
 
 
 @router.get("/projects/{project_id}/analytics", response_model=AnalyticsResponse)

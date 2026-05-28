@@ -1,4 +1,23 @@
+import Dagre from '@dagrejs/dagre'
+import {
+  Background,
+  BackgroundVariant,
+  Controls,
+  type Edge,
+  Handle,
+  MarkerType,
+  MiniMap,
+  type Node,
+  type NodeProps,
+  Position,
+  ReactFlow,
+  useEdgesState,
+  useNodesState,
+  useReactFlow,
+} from '@xyflow/react'
+import '@xyflow/react/dist/style.css'
 import { isAxiosError } from 'axios'
+import { Plus, Trash2 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Spinner } from '../atoms/spinner'
@@ -7,142 +26,184 @@ import {
   addDep,
   getGraph,
   removeDep,
-  type DependencyGraphNode,
   type DependencyGraphResponse,
 } from '../../services/dependency-api'
 
-const SVG_WIDTH = 900
-const SVG_HEIGHT = 500
-const NODE_W = 120
-const NODE_H = 40
+// ─── Status styling ────────────────────────────────────────────────────────
 
-const STATUS_X: Record<string, number> = {
-  todo: 100,
-  in_progress: 300,
-  review: 500,
-  done: 700,
-  rejected: 100,
-  conflict: 100,
+const STATUS_COLOR: Record<string, { bg: string; border: string; text: string; badge: string }> = {
+  todo:        { bg: '#f8fafc', border: '#94a3b8', text: '#334155', badge: '#e2e8f0' },
+  in_progress: { bg: '#eff6ff', border: '#3b82f6', text: '#1e40af', badge: '#dbeafe' },
+  review:      { bg: '#fffbeb', border: '#f59e0b', text: '#92400e', badge: '#fef3c7' },
+  done:        { bg: '#f0fdf4', border: '#22c55e', text: '#14532d', badge: '#dcfce7' },
+  rejected:    { bg: '#fff1f2', border: '#f43f5e', text: '#9f1239', badge: '#ffe4e6' },
+  conflict:    { bg: '#fff7ed', border: '#fb923c', text: '#7c2d12', badge: '#ffedd5' },
 }
 
-const STATUS_FILL: Record<string, string> = {
-  todo: '#e2e8f0',
-  in_progress: '#dbeafe',
-  review: '#fef3c7',
-  done: '#d1fae5',
-  rejected: '#fee2e2',
-  conflict: '#fef3c7',
+const STATUS_LABEL: Record<string, string> = {
+  todo: 'Chờ',
+  in_progress: 'Đang làm',
+  review: 'Review',
+  done: 'Xong',
+  rejected: 'Từ chối',
+  conflict: 'Conflict',
 }
 
-const STATUS_STROKE: Record<string, string> = {
-  todo: '#94a3b8',
-  in_progress: '#3b82f6',
-  review: '#d97706',
-  done: '#10b981',
-  rejected: '#ef4444',
-  conflict: '#f59e0b',
+// ─── Custom node ────────────────────────────────────────────────────────────
+
+type TaskNodeData = {
+  label: string
+  status: string
+  isBlocked?: boolean
 }
 
-const COLUMN_LABELS: { x: number; label: string }[] = [
-  { x: 100, label: 'To do' },
-  { x: 300, label: 'In progress' },
-  { x: 500, label: 'Review' },
-  { x: 700, label: 'Done' },
-]
-
-function truncate(text: string, max = 22): string {
-  const t = text.trim()
-  if (t.length <= max) return t
-  return `${t.slice(0, max - 1)}…`
+function TaskNode({ data }: NodeProps<Node<TaskNodeData>>) {
+  const color = STATUS_COLOR[data.status] ?? STATUS_COLOR.todo
+  const label = STATUS_LABEL[data.status] ?? data.status
+  return (
+    <div
+      style={{
+        background: color.bg,
+        borderColor: color.border,
+        color: color.text,
+        borderWidth: 2,
+        borderStyle: 'solid',
+        borderRadius: 10,
+        padding: '8px 14px',
+        minWidth: 150,
+        maxWidth: 200,
+        boxShadow: '0 2px 8px rgba(0,0,0,.08)',
+        fontSize: 12,
+        fontFamily: 'inherit',
+        position: 'relative',
+      }}
+    >
+      <Handle type="target" position={Position.Left} style={{ background: color.border }} />
+      <div style={{ fontWeight: 600, lineHeight: 1.3, marginBottom: 4, wordBreak: 'break-word' }}>
+        {data.label}
+      </div>
+      <span
+        style={{
+          background: color.badge,
+          borderRadius: 4,
+          padding: '1px 6px',
+          fontSize: 10,
+          fontWeight: 500,
+          letterSpacing: '0.02em',
+        }}
+      >
+        {label}
+      </span>
+      {data.isBlocked && (
+        <span
+          title="Bị chặn bởi dependency"
+          style={{
+            position: 'absolute',
+            top: 4,
+            right: 6,
+            fontSize: 11,
+          }}
+        >
+          🔒
+        </span>
+      )}
+      <Handle type="source" position={Position.Right} style={{ background: color.border }} />
+    </div>
+  )
 }
 
-function layoutNodes(
-  nodes: DependencyGraphNode[],
-): { positions: Map<string, { x: number; y: number }>; height: number } {
-  const byColumn = new Map<number, DependencyGraphNode[]>()
-  for (const node of nodes) {
-    const colX = STATUS_X[node.status] ?? 100
-    const list = byColumn.get(colX) ?? []
-    list.push(node)
-    byColumn.set(colX, list)
+const NODE_TYPES = { task: TaskNode }
+
+// ─── Dagre layout ────────────────────────────────────────────────────────────
+
+const NODE_W = 180
+const NODE_H = 64
+
+function applyDagreLayout(
+  nodes: Node[],
+  edges: Edge[],
+): { nodes: Node[]; edges: Edge[] } {
+  const g = new Dagre.graphlib.Graph()
+  g.setDefaultEdgeLabel(() => ({}))
+  g.setGraph({ rankdir: 'LR', ranksep: 90, nodesep: 50, marginx: 30, marginy: 30 })
+
+  nodes.forEach((n) => g.setNode(n.id, { width: NODE_W, height: NODE_H }))
+  edges.forEach((e) => g.setEdge(e.source, e.target))
+
+  Dagre.layout(g)
+
+  return {
+    nodes: nodes.map((n) => {
+      const pos = g.node(n.id)
+      return { ...n, position: { x: pos.x - NODE_W / 2, y: pos.y - NODE_H / 2 } }
+    }),
+    edges,
   }
+}
 
-  const positions = new Map<string, { x: number; y: number }>()
-  let maxY = SVG_HEIGHT
-  for (const [colX, colNodes] of byColumn.entries()) {
-    colNodes
-      .sort((a, b) => a.title.localeCompare(b.title))
-      .forEach((node, index) => {
-        const y = 48 + index * (NODE_H + 18)
-        positions.set(node.id, {
-          x: colX - NODE_W / 2,
-          y,
-        })
-        maxY = Math.max(maxY, y + NODE_H + 24)
-      })
-  }
-  return { positions, height: maxY }
+// ─── Conversion helpers ──────────────────────────────────────────────────────
+
+function buildFlowElements(graph: DependencyGraphResponse): {
+  nodes: Node[]
+  edges: Edge[]
+} {
+  const rawNodes: Node[] = graph.nodes.map((n) => ({
+    id: n.id,
+    type: 'task',
+    position: { x: 0, y: 0 },
+    data: { label: n.title, status: n.status },
+  }))
+
+  const rawEdges: Edge[] = graph.edges.map((e) => ({
+    id: `${e.from}-${e.to}`,
+    source: e.to,   // "to" = prerequisite (source of arrow)
+    target: e.from, // "from" = task that depends (target of arrow)
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#64748b' },
+    style: { stroke: '#64748b', strokeWidth: 1.5 },
+    animated: false,
+  }))
+
+  return applyDagreLayout(rawNodes, rawEdges)
+}
+
+function truncate(text: string, max = 30): string {
+  return text.length <= max ? text : `${text.slice(0, max - 1)}…`
 }
 
 function graphErrorMessage(err: unknown): string {
   if (isAxiosError(err)) {
     const detail = (err.response?.data as { detail?: unknown } | undefined)?.detail
     if (typeof detail === 'string' && detail.trim()) return detail
-    if (err.response?.status === 409) return 'Circular dependency detected.'
+    if (err.response?.status === 409) return 'Phát hiện vòng lặp dependency.'
     return err.message
   }
   if (err instanceof Error) return err.message
-  return 'Dependency operation failed.'
+  return 'Thao tác dependency thất bại.'
 }
 
-export type DependencyGraphProps = {
+// ─── Inner component (needs ReactFlow context) ───────────────────────────────
+
+type InnerProps = {
   projectId: string
-  onChanged?: () => void
+  graph: DependencyGraphResponse
+  onGraphChange: (g: DependencyGraphResponse) => void
 }
 
-export function DependencyGraph({ projectId, onChanged }: DependencyGraphProps) {
-  const [graph, setGraph] = useState<DependencyGraphResponse | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+function DependencyGraphInner({ projectId, graph, onGraphChange }: InnerProps) {
+  const { fitView } = useReactFlow()
+  const [nodes, setNodes, onNodesChange] = useNodesState<Node>([])
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([])
   const [taskId, setTaskId] = useState('')
   const [dependsOnId, setDependsOnId] = useState('')
   const [busy, setBusy] = useState(false)
 
-  const loadGraph = useCallback(async (options?: { silent?: boolean }) => {
-    if (!options?.silent) {
-      setLoading(true)
-      setError(null)
-    }
-    try {
-      const data = await getGraph(projectId)
-      setGraph(data)
-      setError(null)
-    } catch (err) {
-      if (!options?.silent) {
-        setError(graphErrorMessage(err))
-        setGraph(null)
-      }
-    } finally {
-      if (!options?.silent) setLoading(false)
-    }
-  }, [projectId])
-
+  // Rebuild flow whenever graph data changes
   useEffect(() => {
-    void loadGraph()
-  }, [loadGraph])
-
-  const { positions, svgHeight } = useMemo(() => {
-    const laid = layoutNodes(graph?.nodes ?? [])
-    return { positions: laid.positions, svgHeight: laid.height }
-  }, [graph?.nodes])
-
-  const nodeById = useMemo(
-    () => new Map((graph?.nodes ?? []).map((n) => [n.id, n])),
-    [graph?.nodes],
-  )
-
-  const edges = graph?.edges ?? []
-  const nodes = graph?.nodes ?? []
+    const { nodes: ln, edges: le } = buildFlowElements(graph)
+    setNodes(ln)
+    setEdges(le)
+    setTimeout(() => fitView({ padding: 0.15, duration: 400 }), 50)
+  }, [graph, setNodes, setEdges, fitView])
 
   const handleAdd = async () => {
     if (!taskId || !dependsOnId) {
@@ -156,10 +217,10 @@ export function DependencyGraph({ projectId, onChanged }: DependencyGraphProps) 
     setBusy(true)
     try {
       await addDep(projectId, taskId, dependsOnId)
-      showSuccessToast('Dependency added.')
+      showSuccessToast('Đã thêm dependency.')
       setDependsOnId('')
-      await loadGraph({ silent: true })
-      onChanged?.()
+      const updated = await getGraph(projectId)
+      onGraphChange(updated)
     } catch (err) {
       showErrorToast(graphErrorMessage(err))
     } finally {
@@ -171,9 +232,9 @@ export function DependencyGraph({ projectId, onChanged }: DependencyGraphProps) 
     setBusy(true)
     try {
       await removeDep(projectId, fromTaskId, toTaskId)
-      showSuccessToast('Dependency removed.')
-      await loadGraph({ silent: true })
-      onChanged?.()
+      showSuccessToast('Đã xóa dependency.')
+      const updated = await getGraph(projectId)
+      onGraphChange(updated)
     } catch (err) {
       showErrorToast(graphErrorMessage(err))
     } finally {
@@ -181,208 +242,233 @@ export function DependencyGraph({ projectId, onChanged }: DependencyGraphProps) 
     }
   }
 
-  if (loading) {
-    return (
-      <div className="flex h-64 items-center justify-center gap-2 text-slate-500">
-        <Spinner aria-label="Loading dependency graph" />
-        <span className="font-mono text-sm">Loading graph…</span>
-      </div>
-    )
-  }
+  const taskNodes = graph.nodes
+  const edges_list = graph.edges
 
-  if (error) {
-    return (
-      <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
-        {error}
-      </div>
-    )
-  }
+  // Node lookup map
+  const nodeById = useMemo(
+    () => new Map(taskNodes.map((n) => [n.id, n])),
+    [taskNodes],
+  )
 
   return (
-    <div className="flex flex-col gap-6 lg:flex-row">
-      <div className="min-w-0 flex-1 overflow-x-auto rounded-xl border border-slate-200 bg-white p-4 shadow-elev-1">
-        <svg
-          viewBox={`0 0 ${SVG_WIDTH} ${svgHeight}`}
-          width={SVG_WIDTH}
-          height={svgHeight}
-          className="mx-auto max-w-full"
-          role="img"
-          aria-label="Task dependency graph"
-        >
-          <defs>
-            <marker
-              id="dep-arrow"
-              markerWidth="8"
-              markerHeight="8"
-              refX="7"
-              refY="4"
-              orient="auto"
-            >
-              <path d="M0,0 L8,4 L0,8 Z" fill="#64748b" />
-            </marker>
-          </defs>
-
-          {COLUMN_LABELS.map(({ x, label }) => (
-            <text
-              key={label}
-              x={x}
-              y={24}
-              textAnchor="middle"
-              className="fill-slate-500 font-mono text-[11px] font-semibold uppercase tracking-wider"
-            >
-              {label}
-            </text>
-          ))}
-
-          {edges.map((edge) => {
-            const fromPos = positions.get(edge.from)
-            const toPos = positions.get(edge.to)
-            if (!fromPos || !toPos) return null
-            const x1 = toPos.x + NODE_W
-            const y1 = toPos.y + NODE_H / 2
-            const x2 = fromPos.x
-            const y2 = fromPos.y + NODE_H / 2
-            return (
-              <line
-                key={`${edge.from}-${edge.to}`}
-                x1={x1}
-                y1={y1}
-                x2={x2}
-                y2={y2}
-                stroke="#64748b"
-                strokeWidth={1.5}
-                markerEnd="url(#dep-arrow)"
-              />
-            )
-          })}
-
-          {nodes.map((node) => {
-            const pos = positions.get(node.id)
-            if (!pos) return null
-            const fill = STATUS_FILL[node.status] ?? STATUS_FILL.todo
-            const stroke = STATUS_STROKE[node.status] ?? STATUS_STROKE.todo
-            return (
-              <g key={node.id}>
-                <title>{node.title} ({node.status})</title>
-                <rect
-                  x={pos.x}
-                  y={pos.y}
-                  width={NODE_W}
-                  height={NODE_H}
-                  rx={6}
-                  fill={fill}
-                  stroke={stroke}
-                  strokeWidth={1.5}
-                />
-                <text
-                  x={pos.x + NODE_W / 2}
-                  y={pos.y + NODE_H / 2 + 4}
-                  textAnchor="middle"
-                  className="fill-slate-800 font-sans text-[11px] font-medium"
-                >
-                  {truncate(node.title)}
-                </text>
-              </g>
-            )
-          })}
-        </svg>
-
-        {nodes.length === 0 ? (
-          <p className="mt-2 text-center text-sm text-slate-500">No tasks in this project yet.</p>
-        ) : null}
+    <div style={{ display: 'flex', gap: 16, height: '100%', minHeight: 520 }}>
+      {/* ── Graph canvas ─────────────────────────────────── */}
+      <div style={{ flex: 1, borderRadius: 12, overflow: 'hidden', border: '1px solid #e2e8f0', background: '#fafafa' }}>
+        {taskNodes.length === 0 ? (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#94a3b8', fontSize: 14 }}>
+            Chưa có task nào trong dự án.
+          </div>
+        ) : (
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            nodeTypes={NODE_TYPES}
+            fitView
+            proOptions={{ hideAttribution: true }}
+            minZoom={0.3}
+            maxZoom={2}
+          >
+            <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="#e2e8f0" />
+            <Controls />
+            <MiniMap
+              nodeColor={(n) => {
+                const status = (n.data as TaskNodeData).status
+                return STATUS_COLOR[status]?.border ?? '#94a3b8'
+              }}
+              maskColor="rgba(248,250,252,0.7)"
+            />
+          </ReactFlow>
+        )}
       </div>
 
-      <aside className="w-full flex-shrink-0 space-y-4 lg:w-80">
-        <section className="rounded-xl border border-slate-200 bg-white p-4 shadow-elev-1">
-          <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-600">
-            Add dependency
+      {/* ── Right panel ──────────────────────────────────── */}
+      <aside style={{ width: 300, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+
+        {/* Add dependency manually */}
+        <div style={{ borderRadius: 12, border: '1px solid #e2e8f0', background: '#fff', padding: 16 }}>
+          <h3 style={{ margin: '0 0 4px', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#475569', fontFamily: 'monospace' }}>
+            Thêm thủ công
           </h3>
-          <p className="mt-1 text-[12px] text-slate-500">
-            Task below depends on the selected prerequisite.
-          </p>
-          <div className="mt-3 space-y-2">
-            <label className="block text-[12px] font-medium text-slate-700">
-              Task (dependent)
+          <p style={{ margin: '0 0 10px', fontSize: 12, color: '#64748b' }}>Task bên dưới phụ thuộc vào prerequisite.</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <label style={{ fontSize: 12, fontWeight: 500, color: '#374151' }}>
+              Task (phụ thuộc)
               <select
-                className="mt-1 w-full rounded-lg border border-slate-300 px-2 py-1.5 text-sm"
                 value={taskId}
                 onChange={(e) => setTaskId(e.target.value)}
                 disabled={busy}
+                style={{ display: 'block', width: '100%', marginTop: 4, padding: '6px 8px', borderRadius: 6, border: '1px solid #d1d5db', fontSize: 12 }}
               >
-                <option value="">Select task…</option>
-                {nodes.map((n) => (
+                <option value="">Chọn task…</option>
+                {taskNodes.map((n) => (
                   <option key={n.id} value={n.id}>
-                    {truncate(n.title, 40)} ({n.status})
+                    {truncate(n.title, 38)} ({STATUS_LABEL[n.status] ?? n.status})
                   </option>
                 ))}
               </select>
             </label>
-            <label className="block text-[12px] font-medium text-slate-700">
-              Depends on
+            <label style={{ fontSize: 12, fontWeight: 500, color: '#374151' }}>
+              Phụ thuộc vào
               <select
-                className="mt-1 w-full rounded-lg border border-slate-300 px-2 py-1.5 text-sm"
                 value={dependsOnId}
                 onChange={(e) => setDependsOnId(e.target.value)}
                 disabled={busy}
+                style={{ display: 'block', width: '100%', marginTop: 4, padding: '6px 8px', borderRadius: 6, border: '1px solid #d1d5db', fontSize: 12 }}
               >
-                <option value="">Select prerequisite…</option>
-                {nodes
-                  .filter((n) => n.id !== taskId)
-                  .map((n) => (
-                    <option key={n.id} value={n.id}>
-                      {truncate(n.title, 40)} ({n.status})
-                    </option>
-                  ))}
+                <option value="">Chọn prerequisite…</option>
+                {taskNodes.filter((n) => n.id !== taskId).map((n) => (
+                  <option key={n.id} value={n.id}>
+                    {truncate(n.title, 38)} ({STATUS_LABEL[n.status] ?? n.status})
+                  </option>
+                ))}
               </select>
             </label>
             <button
               type="button"
               disabled={busy || !taskId || !dependsOnId}
               onClick={() => void handleAdd()}
-              className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg bg-cta px-3 py-2 font-mono text-xs font-semibold text-white transition hover:bg-cta-hover disabled:cursor-not-allowed disabled:opacity-50"
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                padding: '7px 14px', borderRadius: 8, border: 'none',
+                background: (!taskId || !dependsOnId || busy) ? '#e2e8f0' : '#0f172a',
+                color: (!taskId || !dependsOnId || busy) ? '#94a3b8' : '#fff',
+                fontSize: 12, fontWeight: 600, cursor: (!taskId || !dependsOnId || busy) ? 'not-allowed' : 'pointer',
+              }}
             >
-              {busy ? 'Saving…' : 'Add dependency'}
+              <Plus size={13} />
+              {busy ? 'Đang lưu…' : 'Thêm dependency'}
             </button>
           </div>
-        </section>
+        </div>
 
-        <section className="rounded-xl border border-slate-200 bg-white p-4 shadow-elev-1">
-          <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-600">
-            Current dependencies
+        {/* Current dependencies list */}
+        <div style={{ borderRadius: 12, border: '1px solid #e2e8f0', background: '#fff', padding: 16, flex: 1, minHeight: 0 }}>
+          <h3 style={{ margin: '0 0 8px', fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#475569', fontFamily: 'monospace' }}>
+            Danh sách dependency ({edges_list.length})
           </h3>
-          {edges.length === 0 ? (
-            <p className="mt-2 text-[12px] text-slate-500">No dependencies defined yet.</p>
+          {edges_list.length === 0 ? (
+            <p style={{ fontSize: 12, color: '#94a3b8', margin: 0 }}>Chưa có dependency nào.</p>
           ) : (
-            <ul className="mt-2 max-h-64 space-y-2 overflow-y-auto">
-              {edges.map((edge) => {
+            <ul style={{ margin: 0, padding: 0, listStyle: 'none', maxHeight: 240, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {edges_list.map((edge) => {
                 const from = nodeById.get(edge.from)
                 const to = nodeById.get(edge.to)
+                const fromColor = STATUS_COLOR[from?.status ?? ''] ?? STATUS_COLOR.todo
+                const toColor = STATUS_COLOR[to?.status ?? ''] ?? STATUS_COLOR.todo
                 return (
-                  <li
-                    key={`${edge.from}-${edge.to}`}
-                    className="flex items-start justify-between gap-2 rounded-lg bg-slate-50 px-2 py-1.5 text-[12px]"
-                  >
-                    <span className="min-w-0 text-slate-700">
-                      <strong title={from?.title}>{truncate(from?.title ?? edge.from, 24)}</strong>
-                      <span className="mx-1 text-slate-400">needs</span>
-                      <span title={to?.title} className="text-slate-600">{truncate(to?.title ?? edge.to, 24)}</span>
-                      <span className="ml-1 text-[10px] text-slate-400">({from?.status})</span>
-                    </span>
-                    <button
-                      type="button"
-                      disabled={busy}
-                      onClick={() => void handleRemove(edge.from, edge.to)}
-                      className="flex-shrink-0 cursor-pointer font-mono text-[10px] font-semibold uppercase text-red-600 hover:text-red-800 disabled:opacity-50"
-                    >
-                      Remove
-                    </button>
+                  <li key={`${edge.from}-${edge.to}`} style={{ background: '#f8fafc', borderRadius: 8, padding: '8px 10px', fontSize: 12 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 6 }}>
+                      <div style={{ minWidth: 0, flex: 1 }}>
+                        <span
+                          title={from?.title}
+                          style={{ fontWeight: 600, color: fromColor.text, display: 'inline-block', maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                        >
+                          {truncate(from?.title ?? edge.from, 26)}
+                        </span>
+                        <span style={{ color: '#94a3b8', fontSize: 11, display: 'block', margin: '2px 0' }}>
+                          ← cần hoàn thành trước:
+                        </span>
+                        <span
+                          title={to?.title}
+                          style={{ color: toColor.text, display: 'inline-block', maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                        >
+                          {truncate(to?.title ?? edge.to, 26)}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        disabled={busy}
+                        onClick={() => void handleRemove(edge.from, edge.to)}
+                        title="Xóa dependency"
+                        style={{ flexShrink: 0, background: 'none', border: 'none', cursor: busy ? 'not-allowed' : 'pointer', color: '#f43f5e', padding: 2 }}
+                      >
+                        <Trash2 size={13} />
+                      </button>
+                    </div>
                   </li>
                 )
               })}
             </ul>
           )}
-        </section>
+        </div>
       </aside>
     </div>
+  )
+}
+
+// ─── Public component (provides ReactFlow context) ───────────────────────────
+
+import { ReactFlowProvider } from '@xyflow/react'
+
+export type DependencyGraphProps = {
+  projectId: string
+  onChanged?: () => void
+}
+
+export function DependencyGraph({ projectId, onChanged }: DependencyGraphProps) {
+  const [graph, setGraph] = useState<DependencyGraphResponse | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const loadGraph = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const data = await getGraph(projectId)
+      setGraph(data)
+    } catch (err) {
+      setError(graphErrorMessage(err))
+    } finally {
+      setLoading(false)
+    }
+  }, [projectId])
+
+  useEffect(() => {
+    void loadGraph()
+  }, [loadGraph])
+
+  const handleGraphChange = useCallback(
+    (updated: DependencyGraphResponse) => {
+      setGraph(updated)
+      onChanged?.()
+    },
+    [onChanged],
+  )
+
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200, gap: 8, color: '#64748b' }}>
+        <Spinner aria-label="Đang tải…" />
+        <span style={{ fontSize: 13 }}>Đang tải dependency graph…</span>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div style={{ borderRadius: 10, border: '1px solid #fca5a5', background: '#fff1f2', padding: '12px 16px', fontSize: 13, color: '#be123c' }}>
+        {error}
+        <button
+          type="button"
+          onClick={() => void loadGraph()}
+          style={{ marginLeft: 12, fontSize: 12, color: '#be123c', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}
+        >
+          Thử lại
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <ReactFlowProvider>
+      <DependencyGraphInner
+        projectId={projectId}
+        graph={graph ?? { nodes: [], edges: [] }}
+        onGraphChange={handleGraphChange}
+      />
+    </ReactFlowProvider>
   )
 }

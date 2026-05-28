@@ -132,6 +132,127 @@ async def commit_and_push_branch(
     return await asyncio.to_thread(_do)
 
 
+async def post_pipeline_status(
+    config: "GitHubConfig",
+    sha: str,
+    state: str,
+    description: str,
+    context: str = "neo-kanban/pipeline",
+) -> None:
+    """Post a commit status to GitHub (pending / success / failure).
+
+    Silently no-ops if sha is empty or config is missing.
+    state must be one of: 'pending' | 'success' | 'failure' | 'error'
+    """
+    if not sha:
+        return
+
+    def _post() -> None:
+        try:
+            pat = decrypt_pat(config.pat_encrypted)
+            gh_repo = Github(pat).get_repo(config.repo_full_name)
+            commit = gh_repo.get_commit(sha)
+            commit.create_status(
+                state=state,
+                description=description[:140],  # GitHub limit
+                context=context,
+            )
+            logger.info(
+                "GitHub status posted sha=%s state=%s context=%s", sha[:8], state, context
+            )
+        except GithubException as exc:
+            logger.warning("Failed to post GitHub status: %s", exc)
+
+    await asyncio.to_thread(_post)
+
+
+async def post_deployment_status(
+    config: "GitHubConfig",
+    *,
+    commit_sha: str,
+    environment: str,
+    state: str,
+    preview_url: str,
+    description: str,
+) -> None:
+    """Create a GitHub Deployment + DeploymentStatus for the commit.
+
+    This surfaces as a "Deployments" entry on the GitHub PR timeline.
+    state must be one of: 'success' | 'failure' | 'in_progress' | 'error'
+    """
+    if not commit_sha:
+        return
+
+    def _post() -> None:
+        try:
+            pat = decrypt_pat(config.pat_encrypted)
+            gh_repo = Github(pat).get_repo(config.repo_full_name)
+
+            # Create GitHub deployment object
+            deployment = gh_repo.create_deployment(
+                ref=commit_sha,
+                environment=environment,
+                auto_merge=False,
+                required_contexts=[],
+                description=description[:140],
+            )
+
+            # Attach deployment status with the URL
+            deployment.create_status(
+                state=state,
+                environment_url=preview_url,
+                log_url=preview_url,
+                description=description[:140],
+            )
+            logger.info(
+                "GitHub deployment status posted sha=%s env=%s url=%s",
+                commit_sha[:8], environment, preview_url,
+            )
+        except GithubException as exc:
+            logger.warning("Failed to post GitHub deployment: %s", exc)
+
+    await asyncio.to_thread(_post)
+
+
+async def push_integration_branch(
+    config: "GitHubConfig",
+    sandbox_path: Path,
+) -> bool:
+    """Push the local integration branch (main/master) to GitHub after a task squash-merge.
+
+    This keeps GitHub's main branch in sync with the accumulated completed work.
+    Returns ``True`` if the push succeeded, ``False`` if skipped (nothing ahead of remote).
+    """
+
+    def _do() -> bool:
+        from git import Repo  # local import
+
+        repo = Repo(str(sandbox_path.resolve()))
+        integration = _integration_branch(repo)
+
+        pat = decrypt_pat(config.pat_encrypted)
+        remote_url = (
+            f"https://x-access-token:{pat}@github.com/{config.repo_full_name}.git"
+        )
+
+        remote_name = "origin"
+        if remote_name in [r.name for r in repo.remotes]:
+            repo.remote(remote_name).set_url(remote_url)
+        else:
+            repo.create_remote(remote_name, remote_url)
+
+        # Push integration branch; --force-with-lease guards against accidental overwrites
+        repo.git.push(remote_name, integration, "--force-with-lease")
+        logger.info(
+            "push_integration_branch: pushed %s to %s",
+            integration,
+            config.repo_full_name,
+        )
+        return True
+
+    return await asyncio.to_thread(_do)
+
+
 async def create_pull_request(
     config: GitHubConfig,
     task: Task,

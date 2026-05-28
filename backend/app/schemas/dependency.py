@@ -41,3 +41,10 @@ class DependencyGraphNode(BaseModel):
 class DependencyGraphResponse(BaseModel):
     nodes: list[DependencyGraphNode] = Field(default_factory=list)
     edges: list[dict[str, str]] = Field(default_factory=list)
+
+
+class AISuggestResponse(BaseModel):
+    added: int
+    skipped: int
+    total_tasks: int
+    graph: DependencyGraphResponse

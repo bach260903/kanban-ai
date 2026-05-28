@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+import asyncio
+import json
 import logging
+import re
 from uuid import UUID
 
 from sqlalchemy import delete, select
@@ -186,6 +189,92 @@ async def list_task_dependencies(
         "depends_on": depends_on,
         "blocked_by": blocked_by,
     }
+
+
+async def ai_suggest_dependencies(
+    session: AsyncSession,
+    project_id: UUID,
+) -> dict[str, int]:
+    """Use LLM to analyse task titles/descriptions and automatically add logical dependencies."""
+    from langchain_core.messages import HumanMessage  # lazy import
+
+    from app.config import settings
+    from app.services.llm import get_chat_model
+
+    tasks = await TaskService.list_by_project(session, project_id)
+    if len(tasks) < 2:
+        return {"added": 0, "skipped": 0, "total_tasks": len(tasks)}
+
+    # Build task list for the prompt
+    task_lines = []
+    for t in tasks:
+        desc_snippet = f" | Mô tả: {t.description[:150]}" if t.description else ""
+        task_lines.append(f'- id="{t.id}" | Tên: "{t.title}"{desc_snippet}')
+    task_list_str = "\n".join(task_lines)
+
+    prompt = f"""Bạn là chuyên gia phân tích quy trình phát triển phần mềm.
+Dưới đây là danh sách các task trong dự án:
+
+{task_list_str}
+
+Hãy xác định các dependency LOGIC giữa các task — task nào cần phải hoàn thành TRƯỚC thì task kia mới có thể bắt đầu.
+
+Quy tắc:
+1. Chỉ thêm dependency khi thực sự cần thiết về mặt kỹ thuật hoặc logic nghiệp vụ
+2. Không tạo cycle (vòng lặp)
+3. Trả về ĐÚNG JSON array, không giải thích thêm
+
+Format trả về (chỉ JSON):
+[
+  {{"task_id": "<uuid của task phụ thuộc>", "depends_on_id": "<uuid của task phải làm trước>"}},
+  ...
+]
+
+Nếu không có dependency nào rõ ràng, trả về: []"""
+
+    spec = f"{settings.coder_llm_provider}:{settings.groq_model or 'llama-3.3-70b-versatile'}"
+    llm = get_chat_model(spec, temperature=0.0)
+
+    try:
+        result = await asyncio.to_thread(llm.invoke, [HumanMessage(content=prompt)])
+        content: str = result.content if hasattr(result, "content") else str(result)
+    except Exception:
+        logger.exception("AI suggest dependencies LLM call failed")
+        return {"added": 0, "skipped": 0, "total_tasks": len(tasks)}
+
+    # Extract JSON array from response (LLM sometimes wraps in markdown)
+    match = re.search(r"\[.*?\]", content, re.DOTALL)
+    if not match:
+        logger.warning("AI suggest dependencies: no JSON array found in LLM response")
+        return {"added": 0, "skipped": 0, "total_tasks": len(tasks)}
+
+    try:
+        pairs: list[dict[str, str]] = json.loads(match.group())
+    except json.JSONDecodeError:
+        logger.warning("AI suggest dependencies: invalid JSON from LLM")
+        return {"added": 0, "skipped": 0, "total_tasks": len(tasks)}
+
+    valid_ids = {str(t.id) for t in tasks}
+    added = 0
+    skipped = 0
+
+    for pair in pairs:
+        task_id_str = str(pair.get("task_id", "")).strip()
+        dep_id_str = str(pair.get("depends_on_id", "")).strip()
+        if task_id_str not in valid_ids or dep_id_str not in valid_ids:
+            skipped += 1
+            continue
+        try:
+            _, created = await add_dependency(
+                session, UUID(task_id_str), UUID(dep_id_str), project_id
+            )
+            added += int(created)
+            if not created:
+                skipped += 1
+        except Exception:
+            skipped += 1
+
+    return {"added": added, "skipped": skipped, "total_tasks": len(tasks)}
 
 
 async def unlock_dependents(session: AsyncSession, completed_task_id: UUID) -> list[UUID]:

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { Spinner } from '../components/atoms/spinner'
+import { DeploymentSettings } from '../components/organisms/deployment-settings'
 import { ProjectMembers } from '../components/organisms/project-members'
 import { WebhookSettings } from '../components/organisms/webhook-settings'
 import { getProject } from '../services/project-api'
@@ -11,7 +12,7 @@ import { getProject } from '../services/project-api'
 import pageShell from './page-shell.module.css'
 import styles from './project-settings.module.css'
 
-type SettingsTab = 'members' | 'webhooks'
+type SettingsTab = 'members' | 'webhooks' | 'deployments'
 
 function errorMessage(error: unknown): string {
   if (isAxiosError(error)) {
@@ -90,6 +91,14 @@ export default function ProjectSettings() {
         >
           Webhooks & Integrations
         </button>
+        <button
+          type="button"
+          className={activeTab === 'deployments' ? styles.tabActive : styles.tab}
+          aria-selected={activeTab === 'deployments'}
+          onClick={() => setActiveTab('deployments')}
+        >
+          Deployments
+        </button>
       </nav>
 
       {loading ? (
@@ -106,11 +115,9 @@ export default function ProjectSettings() {
       ) : null}
 
       <div className={styles.panel}>
-        {activeTab === 'members' ? (
-          <ProjectMembers projectId={id} />
-        ) : (
-          <WebhookSettings projectId={id} />
-        )}
+        {activeTab === 'members' && <ProjectMembers projectId={id} />}
+        {activeTab === 'webhooks' && <WebhookSettings projectId={id} />}
+        {activeTab === 'deployments' && <DeploymentSettings projectId={id} />}
       </div>
     </div>
   )

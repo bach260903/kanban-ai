@@ -44,3 +44,16 @@ class AnalyticsResponse(BaseModel):
     by_member: list[MemberMetric] = Field(default_factory=list)
     reviewer_avg_score: float | None = None
     error_breakdown: list[ErrorBreakdownItem] = Field(default_factory=list)
+
+
+class ActiveTaskItem(BaseModel):
+    project_id: str
+    project_name: str
+    task_id: str
+    task_title: str
+
+
+class AIReviewResponse(BaseModel):
+    summary: str
+    active_tasks: list[ActiveTaskItem] = Field(default_factory=list)
+    generated_at: str

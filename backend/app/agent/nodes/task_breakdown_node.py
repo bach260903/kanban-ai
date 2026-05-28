@@ -189,6 +189,20 @@ async def _run_task_breakdown(state: StateDict) -> StateDict:
         raise ValueError("No valid tasks after parsing LLM output.")
     created = await TaskService.create_bulk(session, project_id, bulk_inputs)
 
+    # ── Auto-suggest dependencies via AI (non-fatal) ──────────────────
+    try:
+        from app.services.dependency_service import ai_suggest_dependencies  # lazy import
+
+        dep_result = await ai_suggest_dependencies(session, project_id)
+        logger.info(
+            "AI dependency suggestion completed: added=%s skipped=%s total_tasks=%s",
+            dep_result["added"],
+            dep_result["skipped"],
+            dep_result["total_tasks"],
+        )
+    except Exception:
+        logger.warning("AI dependency suggestion failed (non-fatal)", exc_info=True)
+
     state["tasks_created"] = len(created)
     await _apply_agent_run_status(state, AgentRunStatus.SUCCESS.value)
     return state

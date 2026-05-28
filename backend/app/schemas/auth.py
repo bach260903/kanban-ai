@@ -14,6 +14,19 @@ class RegisterRequest(BaseModel):
     display_name: str = Field(min_length=1, max_length=200)
 
 
+class VerificationSentResponse(BaseModel):
+    """Returned by POST /auth/register — tells the client to show the OTP input."""
+    message: str
+    email: str
+    needs_verification: bool = True
+
+
+class VerifyRegisterRequest(BaseModel):
+    """OTP verification step — completes registration and issues JWT."""
+    email: EmailStr
+    code: str = Field(min_length=6, max_length=6, pattern=r"^\d{6}$")
+
+
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
@@ -52,6 +65,13 @@ class ForgotPasswordRequest(BaseModel):
 
 class ResetPasswordRequest(BaseModel):
     token: str = Field(min_length=10, description="Reset token received by email.")
+    new_password: str = Field(min_length=8, description="New password (min 8 characters).")
+
+
+class VerifyResetRequest(BaseModel):
+    """OTP-based password reset — step 2: verify code + set new password."""
+    email: EmailStr
+    code: str = Field(min_length=6, max_length=6, pattern=r"^\d{6}$")
     new_password: str = Field(min_length=8, description="New password (min 8 characters).")
 
 

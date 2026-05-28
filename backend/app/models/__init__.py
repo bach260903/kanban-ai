@@ -1,6 +1,10 @@
 """SQLAlchemy ORM models."""
 
 from app.models.agent_pause_state import AgentPauseState, PauseRunState
+from app.models.deployment import Deployment, DeploymentEnvironment, DeploymentStatus
+from app.models.deployment_config import DeploymentConfig, DeployProvider
+from app.models.pipeline_run import PipelineRun, PipelineRunStatus
+from app.models.pipeline_step import PipelineStep, PipelineStepStatus
 from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
 from app.models.audit_log import AuditLog, AuditLogResult
 from app.models.base import Base
@@ -33,6 +37,15 @@ from app.models.webhook import WebhookConfig, WebhookDelivery, WebhookDeliverySt
 
 __all__ = [
     "AgentPauseState",
+    "Deployment",
+    "DeploymentConfig",
+    "DeploymentEnvironment",
+    "DeploymentStatus",
+    "DeployProvider",
+    "PipelineRun",
+    "PipelineRunStatus",
+    "PipelineStep",
+    "PipelineStepStatus",
     "AgentRun",
     "AgentRunStatus",
     "AgentType",

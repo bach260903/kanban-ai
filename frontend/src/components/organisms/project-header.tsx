@@ -23,7 +23,7 @@ import type { Project, ProjectMember } from '../../types'
 
 import styles from './project-header.module.css'
 
-export type WorkspaceTab = 'documents' | 'kanban' | 'memory' | 'audit' | 'dependencies'
+export type WorkspaceTab = 'documents' | 'kanban' | 'memory' | 'audit' | 'dependencies' | 'pipelines'
 
 type ProjectHeaderProps = {
   project: Project
@@ -36,6 +36,7 @@ const TABS: { id: WorkspaceTab; label: string }[] = [
   { id: 'documents', label: 'Documents' },
   { id: 'kanban', label: 'Kanban' },
   { id: 'dependencies', label: 'Dependencies' },
+  { id: 'pipelines', label: 'Pipelines' },
   { id: 'memory', label: 'Memory' },
   { id: 'audit', label: 'Audit log' },
 ]
@@ -356,6 +357,15 @@ export function ProjectHeader({ project, activeTab, onTabChange, onOpenTask }: P
                 Analytics
               </NavLink>
             ) : null}
+            <NavLink
+              to={`/projects/${project.id}/devops`}
+              role="tab"
+              className={({ isActive }) =>
+                isActive ? `${styles.tabActive} ${styles.tabLink}` : `${styles.tab} ${styles.tabLink}`
+              }
+            >
+              DevOps
+            </NavLink>
           </div>
         </nav>
       ) : null}

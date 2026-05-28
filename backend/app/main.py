@@ -9,6 +9,8 @@ from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.dev_auth import router as dev_auth_router
+from app.api.v1.devops import router as devops_router
+from app.api.v1.pipelines import router as pipelines_router
 from app.api.v1.agent_runs import router as agent_runs_router
 from app.api.v1.analytics import router as analytics_router
 from app.api.v1.audit_logs import router as audit_logs_router
@@ -55,6 +57,8 @@ api_v1_router.include_router(review_router)
 api_v1_router.include_router(pause_router)
 api_v1_router.include_router(agent_runs_router)
 api_v1_router.include_router(dev_auth_router)
+api_v1_router.include_router(pipelines_router)
+api_v1_router.include_router(devops_router)
 
 logger = logging.getLogger(__name__)
 

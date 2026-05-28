@@ -13,6 +13,19 @@ export type DashboardResponse = {
   projects: ProjectDashboard[]
 }
 
+export type ActiveTaskItem = {
+  project_id: string
+  project_name: string
+  task_id: string
+  task_title: string
+}
+
+export type AIReviewResponse = {
+  summary: string
+  active_tasks: ActiveTaskItem[]
+  generated_at: string
+}
+
 export type BackendMetric = {
   agent_type: string
   avg_seconds: number
@@ -40,6 +53,16 @@ export type AnalyticsResponse = {
 }
 
 export type AnalyticsRange = '7d' | '30d' | 'custom'
+
+export async function getAIProjectReview(
+  projectId: string,
+  opts?: { signal?: AbortSignal },
+): Promise<AIReviewResponse> {
+  const { data } = await api.get<AIReviewResponse>(`/api/v1/projects/${projectId}/ai-review`, {
+    signal: opts?.signal,
+  })
+  return data
+}
 
 export async function getDashboard(opts?: { signal?: AbortSignal }): Promise<DashboardResponse> {
   const { data } = await api.get<DashboardResponse>('/api/v1/dashboard', {

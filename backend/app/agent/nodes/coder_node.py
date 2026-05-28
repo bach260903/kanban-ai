@@ -248,6 +248,31 @@ async def _pause_checkpoint(
     raise PauseSignal()
 
 
+class _TaskCancelledError(Exception):
+    """Raised when the task is no longer in_progress (cancelled / reset by user)."""
+
+
+async def _check_task_cancelled(
+    session: AsyncSession,
+    *,
+    task_id: UUID,
+    agent_run_id: UUID,
+) -> None:
+    """Re-fetch task from DB; raise _TaskCancelledError if it is no longer in_progress."""
+    fresh = await session.get(Task, task_id)
+    if fresh is None or fresh.status != TaskStatus.IN_PROGRESS:
+        status_str = str(fresh.status) if fresh else "deleted"
+        logger.warning(
+            "coder_node: task %s is no longer in_progress (status=%s) — aborting cleanly",
+            task_id,
+            status_str,
+        )
+        await _finalize_agent_run(session, agent_run_id, AgentRunStatus.FAILURE)
+        raise _TaskCancelledError(
+            f"Task was cancelled while agent was running (status={status_str})."
+        )
+
+
 async def _execute_tool(
     *,
     session: AsyncSession,
@@ -506,6 +531,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
         rounds = 0
         while rounds < _MAX_TOOL_ROUNDS:
             await _pause_checkpoint(session, project_id=project_id, task_id=task_id, agent_run_id=agent_run_id)
+            await _check_task_cancelled(session, task_id=task_id, agent_run_id=agent_run_id)
             rounds += 1
             llm_log = await write_pending_log(
                 session,
@@ -581,6 +607,8 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 messages.append(ToolMessage(content=out, tool_call_id=str(tid)))
 
         await _pause_checkpoint(session, project_id=project_id, task_id=task_id, agent_run_id=agent_run_id)
+        # Final guard: abort if task was cancelled while coding was in progress
+        await _check_task_cancelled(session, task_id=task_id, agent_run_id=agent_run_id)
 
         snap = await asyncio.to_thread(GitService.diff_staged, sandbox)
         diff_row = Diff(
@@ -632,6 +660,10 @@ async def run(state: StateDict) -> StateDict:
         return await asyncio.wait_for(_run_with_session(state), timeout=float(_CODER_TASK_TIMEOUT_SEC))
     except PauseSignal:
         return state
+    except _TaskCancelledError as exc:
+        # Task was cancelled by user while agent was running — exit silently (not an error)
+        logger.info("coder_node: aborted cleanly — %s", exc)
+        return {**state, "cancelled": True}
     except asyncio.TimeoutError:
         logger.exception("coder_node timed out")
         err_msg = f"Coder exceeded the {_CODER_TASK_TIMEOUT_SEC}s task budget (timeout)."

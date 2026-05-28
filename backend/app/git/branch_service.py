@@ -43,6 +43,28 @@ def _sync_ensure_task_branch(sandbox_path: Path, branch_name: str) -> None:
     repo.git.checkout("-b", branch_name)
 
 
+def _sync_recreate_task_branch(sandbox_path: Path, branch_name: str) -> None:
+    """Delete the existing branch (if any) and re-create it from the current integration HEAD.
+
+    Used when a conflicted task is retried so the new branch picks up all changes that
+    landed on main after the conflict was detected.
+    """
+    repo = Repo(str(sandbox_path.resolve()))
+    integration = _integration_branch_name(repo)
+    # Make sure we are NOT on the branch we are about to delete
+    if repo.active_branch.name == branch_name:
+        repo.git.checkout(integration)
+    if branch_name in repo.heads:
+        try:
+            repo.git.branch("-D", branch_name)
+            logger.info("Deleted conflicted branch %s before retry", branch_name)
+        except GitCommandError:
+            logger.warning("Could not delete conflicted branch %s", branch_name, exc_info=True)
+    repo.git.checkout(integration)
+    repo.git.checkout("-b", branch_name)
+    logger.info("Re-created branch %s from %s for conflict retry", branch_name, integration)
+
+
 def _sync_abort_squash_attempt(sandbox_path: Path) -> None:
     repo = Repo(str(sandbox_path.resolve()))
     try:
@@ -82,7 +104,17 @@ class BranchService:
         """Create ``task/{{uuid8}}`` from integration HEAD and persist ``task_branches``."""
         existing = await session.scalar(select(TaskBranch).where(TaskBranch.task_id == task_id))
         if existing is not None:
-            await asyncio.to_thread(_sync_ensure_task_branch, sandbox_path, existing.branch_name)
+            if existing.status == TaskBranchStatus.CONFLICT:
+                # Task was previously stuck in conflict — delete the old branch and
+                # re-create from current integration HEAD so the retry starts clean.
+                await asyncio.to_thread(
+                    _sync_recreate_task_branch, sandbox_path, existing.branch_name
+                )
+                existing.status = TaskBranchStatus.ACTIVE
+                existing.merged_at = None
+                await session.flush()
+            else:
+                await asyncio.to_thread(_sync_ensure_task_branch, sandbox_path, existing.branch_name)
             return existing
 
         branch_name = task_branch_slug(task_id)

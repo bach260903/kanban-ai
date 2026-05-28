@@ -1,0 +1,330 @@
+/* ── Failure Analysis Panel ─────────────────────────────────────────────────── */
+
+.panel {
+  margin-top: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.panelLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--c-danger-500, #dc2626);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Confidence bar ── */
+
+.confRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-2) 0;
+}
+
+.confLabel {
+  font-size: 11px;
+  color: var(--font-secondary-color);
+  flex-shrink: 0;
+  width: 70px;
+}
+
+.confTrack {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--c-neutral-200, #e2e8f0);
+  overflow: hidden;
+}
+
+.confFill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 400ms ease;
+}
+
+.confHigh { background: #16a34a; }
+.confMed  { background: #d97706; }
+.confLow  { background: #dc2626; }
+
+.confPct {
+  font-size: 11px;
+  color: var(--font-secondary-color);
+  flex-shrink: 0;
+  width: 32px;
+  text-align: right;
+}
+
+/* ── Risk badge ── */
+
+.riskBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.riskLow  { background: #dcfce7; color: #15803d; }
+.riskMed  { background: #fef3c7; color: #92400e; }
+.riskHigh { background: #fee2e2; color: #b91c1c; }
+
+/* ── Pills ── */
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: var(--space-2);
+}
+
+.pillGreen,
+.pillYellow,
+.pillBlue {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.pillGreen  { background: #dcfce7; color: #15803d; }
+.pillYellow { background: #fef3c7; color: #92400e; }
+.pillBlue   { background: #dbeafe; color: #1d4ed8; }
+
+/* ── Section label / text ── */
+
+.section {
+  margin-top: var(--space-2);
+}
+
+.sectionLabel {
+  margin: 0 0 3px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--font-secondary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.sectionText {
+  margin: 0;
+  font-size: var(--t-sm);
+  color: var(--font-primary-color);
+  line-height: 1.5;
+}
+
+/* ── Patch box ── */
+
+.patchBox {
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 6px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.patchText {
+  margin: 0;
+  font-size: 12px;
+  color: #15803d;
+  font-family: ui-monospace, monospace;
+}
+
+/* ── Persisted card ── */
+
+.persistedCard {
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface-primary);
+}
+
+.persistedHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: #fef2f2;
+  border-bottom: 1px solid #fecaca;
+  cursor: pointer;
+  user-select: none;
+}
+
+.persistedIcon {
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+.persistedTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #b91c1c;
+  flex-shrink: 0;
+}
+
+.persistedRoot {
+  flex: 1;
+  font-size: 12px;
+  color: var(--font-secondary-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--font-secondary-color);
+  transition: transform 150ms;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.persistedBody {
+  padding: var(--space-3);
+}
+
+/* ── Live cards ── */
+
+.liveCard {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: 8px;
+  font-size: var(--t-sm);
+}
+
+.liveAnalyzing {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+}
+
+.liveFixing {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+.liveRetrying {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.liveApproval {
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  gap: var(--space-3);
+}
+
+.approvalTitle {
+  margin: 0 0 4px;
+  font-size: var(--t-sm);
+  font-weight: 600;
+}
+
+.approvalCause {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.approvalStrategy {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.liveDone {
+  flex-direction: column;
+  background: var(--surface-secondary, #f8fafc);
+  border: 1px solid var(--border-default);
+}
+
+.liveDoneHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.liveIcon {
+  color: var(--c-info-500, #3b82f6);
+}
+
+.liveDoneTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--font-primary-color);
+}
+
+.liveCause {
+  margin: 4px 0 0;
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--font-primary-color);
+}
+
+.liveStrategy {
+  margin: 4px 0 0;
+  font-size: var(--t-sm);
+  color: var(--font-secondary-color);
+}
+
+/* ── Spin animation ── */
+
+.spin {
+  animation: spin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Retry timeline ── */
+
+.retryTimeline {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-1) var(--space-2);
+  font-size: 11px;
+  color: var(--font-secondary-color);
+}
+
+.retryDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.retryDot[data-success='false'] { background: #dc2626; }
+.retryDot[data-attempt='2']    { background: #3b82f6; }
+
+.retryLine {
+  flex: 1;
+  height: 2px;
+  background: var(--border-default);
+}
+
+.retryBotIcon {
+  color: var(--c-info-500, #3b82f6);
+  flex-shrink: 0;
+}

@@ -13,6 +13,7 @@ from app.database import get_db
 from app.dependencies import require_any_member, require_developer_or_above
 from app.models.project_member import ProjectMember
 from app.schemas.dependency import (
+    AISuggestResponse,
     DependencyCreate,
     DependencyGraphResponse,
     DependencyRef,
@@ -108,3 +109,26 @@ async def get_dependency_graph(
     await ProjectService.get(session, project_id)
     graph = await dependency_service.get_dependency_graph(session, project_id)
     return DependencyGraphResponse.model_validate(graph)
+
+
+@router.post(
+    "/{project_id}/dependency-graph/ai-suggest",
+    response_model=AISuggestResponse,
+)
+async def ai_suggest_dependencies(
+    project_id: UUID,
+    _developer: Annotated[ProjectMember, require_developer_or_above],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> AISuggestResponse:
+    """Ask the LLM to analyse all tasks and auto-create logical dependencies."""
+    await ProjectService.get(session, project_id)
+    result = await dependency_service.ai_suggest_dependencies(session, project_id)
+    await session.commit()
+    # Return updated graph alongside stats
+    graph_data = await dependency_service.get_dependency_graph(session, project_id)
+    return AISuggestResponse(
+        added=result["added"],
+        skipped=result["skipped"],
+        total_tasks=result["total_tasks"],
+        graph=DependencyGraphResponse.model_validate(graph_data),
+    )

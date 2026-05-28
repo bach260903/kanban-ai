@@ -1,0 +1,357 @@
+/* ── Deployment Settings ────────────────────────────────────────────────────── */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ── Header ── */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.headerIcon {
+  margin-top: 2px;
+  flex-shrink: 0;
+  color: var(--c-info-500);
+}
+
+.title {
+  margin: 0 0 4px;
+  font-size: var(--t-base);
+  font-weight: 600;
+  color: var(--font-primary-color);
+}
+
+.sub {
+  margin: 0;
+  font-size: var(--t-sm);
+  color: var(--font-secondary-color);
+}
+
+/* ── Current config card ── */
+
+.currentCard {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  background: var(--surface-secondary, #f8fafc);
+}
+
+.providerBadge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: var(--c-neutral-100, #f1f5f9);
+  color: var(--font-primary-color);
+}
+
+.badge_vercel {
+  background: #000;
+  color: #fff;
+}
+
+.badge_railway {
+  background: #6366f1;
+  color: #fff;
+}
+
+.badge_none {
+  background: var(--c-neutral-200, #e2e8f0);
+  color: var(--font-secondary-color);
+}
+
+.currentProject {
+  flex: 1;
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--font-primary-color);
+  font-family: ui-monospace, monospace;
+}
+
+.enabledPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.disabledPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: var(--font-secondary-color);
+}
+
+.deleteBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  margin-left: auto;
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--c-danger-500, #dc2626);
+  cursor: pointer;
+  transition: background 120ms, color 120ms;
+}
+
+.deleteBtn:hover:not(:disabled) {
+  background: #fee2e2;
+}
+
+.deleteBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Form ── */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--font-primary-color);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.required {
+  color: var(--c-danger-500, #dc2626);
+}
+
+.input,
+.select {
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  background: var(--surface-primary);
+  color: var(--font-primary-color);
+  font-size: var(--t-sm);
+  font-family: var(--font-ui);
+  outline: none;
+  transition: border-color 120ms;
+}
+
+.input:focus,
+.select:focus {
+  border-color: var(--c-info-500);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-info-500) 15%, transparent);
+}
+
+.input::placeholder {
+  color: var(--font-secondary-color);
+  opacity: 0.7;
+}
+
+.select {
+  cursor: pointer;
+  appearance: auto;
+}
+
+.hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--font-secondary-color);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--c-info-500);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ── Enabled row ── */
+
+.fieldRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+}
+
+.checkbox {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  accent-color: var(--c-info-500);
+}
+
+.checkboxLabel {
+  font-size: var(--t-sm);
+  color: var(--font-primary-color);
+  cursor: pointer;
+}
+
+/* ── Test result ── */
+
+.testOk,
+.testFail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 6px;
+  font-size: var(--t-sm);
+}
+
+.testOk {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.testFail {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+/* ── Actions row ── */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+}
+
+.testBtn,
+.saveBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: var(--t-sm);
+  font-weight: 500;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: background 120ms, color 120ms, border-color 120ms;
+}
+
+.testBtn {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--font-primary-color);
+}
+
+.testBtn:hover:not(:disabled) {
+  background: var(--c-neutral-100, #f1f5f9);
+}
+
+.testBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.saveBtn {
+  background: var(--c-info-500, #3b82f6);
+  border: 1px solid transparent;
+  color: #fff;
+}
+
+.saveBtn:hover:not(:disabled) {
+  background: var(--c-info-600, #2563eb);
+}
+
+.saveBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Error ── */
+
+.error {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 6px;
+  font-size: var(--t-sm);
+  color: var(--c-danger-500, #dc2626);
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+}
+
+/* ── Alert section ── */
+
+.alertSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-default);
+}
+
+.alertSection .headerIcon {
+  color: #9f7aea;
+}
+
+/* ── Optional tag ── */
+
+.optionalTag {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--font-secondary-color);
+  background: var(--c-neutral-100, #f1f5f9);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: 4px;
+}
+
+/* ── Loading ── */
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--t-sm);
+  color: var(--font-secondary-color);
+  padding: var(--space-4) 0;
+}

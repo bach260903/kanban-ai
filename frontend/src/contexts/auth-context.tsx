@@ -29,7 +29,10 @@ interface AuthState {
 interface AuthContextValue extends AuthState {
   login: (email: string, password: string) => Promise<void>
   logout: () => void
-  register: (email: string, password: string, displayName: string) => Promise<void>
+  /** Step 1: sends OTP. Returns the email address (confirmation). */
+  register: (email: string, password: string, displayName: string) => Promise<{ email: string }>
+  /** Step 2: verifies OTP, creates account, logs in. */
+  verifyRegister: (email: string, code: string) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -95,6 +98,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const register = useCallback(async (email: string, password: string, displayName: string) => {
     const data = await authApi.register(email, password, displayName)
+    // OTP sent — user not created yet; return email for the verification step
+    return { email: data.email }
+  }, [])
+
+  const verifyRegister = useCallback(async (email: string, code: string) => {
+    const data = await authApi.verifyRegister(email, code)
     setAuthToken(data.access_token)
     setToken(data.access_token)
     setUser(await resolveUser(data))
@@ -108,7 +117,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, token, isLoading, login, logout, register }}>
+    <AuthContext.Provider value={{ user, token, isLoading, login, logout, register, verifyRegister }}>
       {children}
     </AuthContext.Provider>
   )

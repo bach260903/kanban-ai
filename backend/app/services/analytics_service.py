@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import asyncio
+import logging
 from datetime import datetime, timedelta, timezone
 from uuid import UUID
 
@@ -15,6 +17,8 @@ from app.models.project_member import ProjectMember
 from app.models.review_report import ReviewReport, ReviewStatus
 from app.models.task import Task, TaskStatus
 from app.models.user import User
+
+logger = logging.getLogger(__name__)
 
 _TASK_STATUSES = (
     TaskStatus.TODO,
@@ -212,4 +216,86 @@ async def get_project_analytics(
             {"action_type": action_type, "count": int(count)}
             for action_type, count in error_rows.all()
         ],
+    }
+
+
+async def get_ai_project_review(session: AsyncSession, project_id: UUID) -> dict:
+    """Generate an AI-written overview for a single project."""
+    from langchain_core.messages import HumanMessage
+
+    from app.config import settings
+    from app.services.llm import get_chat_model
+
+    # ── Gather task data for this project ────────────────────────
+    task_rows = await session.execute(
+        select(Task.id, Task.title, Task.status, Task.is_blocked, Task.updated_at)
+        .where(Task.project_id == project_id)
+        .order_by(Task.status, Task.updated_at.desc())
+    )
+    tasks = task_rows.all()
+
+    stale_threshold = datetime.now(timezone.utc) - timedelta(hours=24)
+
+    counts: dict[str, int] = {s.value: 0 for s in TaskStatus}
+    in_progress_tasks: list[dict] = []
+    review_tasks: list[dict] = []
+    blocked_tasks: list[dict] = []
+    stale_tasks: list[dict] = []
+
+    for task_id, title, status_val, is_blocked, updated_at in tasks:
+        s = str(status_val.value if hasattr(status_val, "value") else status_val)
+        counts[s] = counts.get(s, 0) + 1
+        if s == TaskStatus.IN_PROGRESS:
+            in_progress_tasks.append({"id": str(task_id), "title": title})
+        if s == TaskStatus.REVIEW:
+            review_tasks.append({"id": str(task_id), "title": title})
+            if updated_at and updated_at < stale_threshold:
+                stale_tasks.append({"id": str(task_id), "title": title})
+        if is_blocked:
+            blocked_tasks.append({"id": str(task_id), "title": title})
+
+    total = sum(counts.values())
+
+    # ── Build prompt ─────────────────────────────────────────────
+    def _task_list(items: list[dict], limit: int = 5) -> str:
+        lines = [f"  - {t['title']}" for t in items[:limit]]
+        if len(items) > limit:
+            lines.append(f"  - ... và {len(items) - limit} task khác")
+        return "\n".join(lines) if lines else "  (không có)"
+
+    prompt_text = f"""Bạn là trợ lý quản lý dự án phần mềm. Hãy đưa ra nhận xét tổng quan ngắn gọn (4-6 câu) về tình trạng dự án, những điểm nổi bật, rủi ro và gợi ý ưu tiên tiếp theo.
+
+Dữ liệu dự án hiện tại:
+- Tổng tasks: {total}
+- Todo: {counts.get('todo', 0)} | Đang làm: {counts.get('in_progress', 0)} | Review: {counts.get('review', 0)} | Done: {counts.get('done', 0)} | Rejected: {counts.get('rejected', 0)}
+
+Tasks đang AI thực hiện ({len(in_progress_tasks)}):
+{_task_list(in_progress_tasks)}
+
+Tasks đang chờ review ({len(review_tasks)}):
+{_task_list(review_tasks)}
+
+Tasks bị block ({len(blocked_tasks)}):
+{_task_list(blocked_tasks)}
+
+Tasks chờ review quá 24h ({len(stale_tasks)}):
+{_task_list(stale_tasks)}
+
+Viết bằng tiếng Việt, giọng chuyên nghiệp và thực tế. Đừng liệt kê lại số liệu — hãy đưa ra nhận xét phân tích có giá trị."""
+
+    spec = f"{settings.coder_llm_provider}:{settings.groq_model or 'llama-3.3-70b-versatile'}"
+    llm = get_chat_model(spec, temperature=0.3)
+
+    try:
+        result = await asyncio.to_thread(llm.invoke, [HumanMessage(content=prompt_text)])
+        summary: str = result.content if hasattr(result, "content") else str(result)
+        summary = summary.strip()
+    except Exception:
+        logger.warning("AI project review LLM call failed project_id=%s", project_id, exc_info=True)
+        summary = "Không thể tạo nhận xét AI lúc này. Vui lòng thử lại sau."
+
+    return {
+        "summary": summary,
+        "active_tasks": in_progress_tasks,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
     }

@@ -72,3 +72,17 @@ export async function getGraph(projectId: string): Promise<DependencyGraphRespon
   )
   return data
 }
+
+export type AISuggestResult = {
+  added: number
+  skipped: number
+  total_tasks: number
+  graph: DependencyGraphResponse
+}
+
+export async function suggestDependencies(projectId: string): Promise<AISuggestResult> {
+  const { data } = await api.post<AISuggestResult>(
+    `${PROJECTS}/${projectId}/dependency-graph/ai-suggest`,
+  )
+  return data
+}

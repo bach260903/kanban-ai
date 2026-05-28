@@ -62,6 +62,8 @@ _ALLOWED_MOVES: frozenset[tuple[TaskStatus, TaskStatus]] = frozenset(
         (TaskStatus.IN_PROGRESS, TaskStatus.CONFLICT),
         (TaskStatus.REVIEW, TaskStatus.DONE),
         (TaskStatus.REVIEW, TaskStatus.IN_PROGRESS),
+        # Allow PO to reset a conflicted task back to todo for retry
+        (TaskStatus.CONFLICT, TaskStatus.TODO),
     }
 )
 
@@ -357,50 +359,63 @@ class KanbanService:
                 branch_name = branch_row.branch_name
             sandbox = _sandbox_project_root(task.project_id)
 
+            # Load GitHub config once for both the PR push and the later main push
+            gh_config = await session.scalar(
+                select(GitHubConfig).where(
+                    GitHubConfig.project_id == task.project_id,
+                    GitHubConfig.enabled.is_(True),
+                )
+            )
+
             # ── GitHub: commit staged changes to task branch, push, create PR ──
             # Must happen BEFORE squash_and_merge because that call deletes the branch.
-            if branch_name is not None:
-                gh_config = await session.scalar(
-                    select(GitHubConfig).where(
-                        GitHubConfig.project_id == task.project_id,
-                        GitHubConfig.enabled.is_(True),
+            if branch_name is not None and gh_config is not None:
+                try:
+                    pushed = await github_service.commit_and_push_branch(
+                        gh_config,
+                        sandbox,
+                        branch_name,
+                        f"feat: {task.title}",
                     )
-                )
-                if gh_config is not None:
-                    try:
-                        pushed = await github_service.commit_and_push_branch(
+                    if pushed:
+                        diff = await DiffService.get_latest_approved_for_task(
+                            session,
+                            task_id=task.id,
+                            project_id=task.project_id,
+                        )
+                        pr_url = await github_service.create_pull_request(
                             gh_config,
-                            sandbox,
+                            task,
+                            diff.content if diff else "",
                             branch_name,
-                            f"feat: {task.title}",
                         )
-                        if pushed:
-                            diff = await DiffService.get_latest_approved_for_task(
-                                session,
-                                task_id=task.id,
-                                project_id=task.project_id,
-                            )
-                            pr_url = await github_service.create_pull_request(
-                                gh_config,
-                                task,
-                                diff.content if diff else "",
-                                branch_name,
-                            )
-                            logger.info(
-                                "GitHub PR created for task_id=%s: %s", task.id, pr_url
-                            )
-                    except Exception:
-                        logger.exception(
-                            "GitHub push/PR failed task_id=%s", task.id
+                        logger.info(
+                            "GitHub PR created for task_id=%s: %s", task.id, pr_url
                         )
+                except Exception:
+                    logger.exception(
+                        "GitHub push/PR failed task_id=%s", task.id
+                    )
 
+            squash_ok = False
             try:
                 await BranchService.squash_and_merge(session, task.id, sandbox)
+                squash_ok = True
             except GitCommandError:
                 await session.refresh(task)
                 return task
             except NotFoundError:
                 logger.info("squash merge skipped: no task branch for task_id=%s", task.id)
+                squash_ok = True  # nothing to merge, treat as ok
+
+            # ── GitHub: push integration branch (main) so GitHub stays in sync with all done tasks ──
+            if squash_ok and gh_config is not None:
+                try:
+                    await github_service.push_integration_branch(gh_config, sandbox)
+                except Exception:
+                    logger.exception(
+                        "GitHub push main failed after squash task_id=%s", task.id
+                    )
 
         task.status = to_status
         task.updated_at = datetime.now(timezone.utc)
@@ -427,6 +442,25 @@ class KanbanService:
             await asyncio.to_thread(GitService.ensure_baseline_commit, sandbox)
             await BranchService.create_task_branch(session, task.id, sandbox)
         if to_status == TaskStatus.DONE and from_status == TaskStatus.REVIEW:
+            # ── Trigger CI/CD pipeline asynchronously (non-blocking) ──────────
+            try:
+                from app.pipeline.pipeline_service import PipelineService
+                _pipeline_sandbox = _sandbox_project_root(task.project_id)
+                # Gather branch name if available
+                _branch_row = await session.scalar(
+                    select(TaskBranch).where(TaskBranch.task_id == task.id)
+                )
+                await PipelineService.create_and_trigger(
+                    session,
+                    project_id=task.project_id,
+                    task_id=task.id,
+                    sandbox=_pipeline_sandbox,
+                    triggered_by="task_approved",
+                    branch_name=_branch_row.branch_name if _branch_row else None,
+                )
+            except Exception:
+                logger.exception("Failed to create pipeline run for task_id=%s", task.id)
+
             diff = await DiffService.get_latest_approved_for_task(
                 session, task_id=task.id, project_id=task.project_id
             )

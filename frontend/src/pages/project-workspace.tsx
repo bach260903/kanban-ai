@@ -216,7 +216,7 @@ export default function ProjectWorkspace() {
   const [documentsRefreshKey, setDocumentsRefreshKey] = useState(0)
   const [selectedReviewTaskId, setSelectedReviewTaskId] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<
-    'documents' | 'kanban' | 'memory' | 'audit' | 'dependencies'
+    'documents' | 'kanban' | 'memory' | 'audit' | 'dependencies' | 'pipelines'
   >('documents')
   const AUDIT_PAGE_SIZE = 25
   const [auditPage, setAuditPage] = useState<AuditLogsPage | null>(null)
@@ -495,6 +495,21 @@ export default function ProjectWorkspace() {
                   projectId={currentProject.id}
                   onChanged={() => void refreshKanbanColumns()}
                 />
+              </section>
+            ) : activeTab === 'pipelines' ? (
+              <section className={styles.memory} aria-labelledby="workspace-pipelines-heading">
+                <h2 id="workspace-pipelines-heading" className={styles.memoryTitle}>
+                  CI/CD Pipelines
+                </h2>
+                <p className={styles.memoryHint}>
+                  Pipeline runs triggered automatically on task approval.{' '}
+                  <a
+                    href={`/projects/${currentProject.id}/pipelines`}
+                    style={{ color: 'var(--c-brand-600)', fontWeight: 600 }}
+                  >
+                    Open full pipeline view →
+                  </a>
+                </p>
               </section>
             ) : activeTab === 'memory' ? (
               <section className={styles.memory} aria-labelledby="workspace-memory-heading">

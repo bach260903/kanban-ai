@@ -1,0 +1,143 @@
+/* ── OTP Verification Step styles ────────────────────────────────────────── */
+
+.otpIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  margin: 0 auto 16px;
+  flex-shrink: 0;
+}
+
+.otpIcon {
+  color: #16a34a;
+}
+
+/* ── 6-box digit row ── */
+
+.otpBoxes {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 4px 0 8px;
+}
+
+.otpBox {
+  width: 44px;
+  height: 52px;
+  border: 1.5px solid var(--border, #e2e8f0);
+  border-radius: 10px;
+  background: var(--input-bg, #fff);
+  color: var(--text-primary, #0f172a);
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  caret-color: transparent;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+  -moz-appearance: textfield;
+}
+
+.otpBox::-webkit-outer-spin-button,
+.otpBox::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.otpBox:focus {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+
+.otpBox:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.otpBoxFilled {
+  border-color: #22c55e;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+/* ── Email pill ── */
+
+.emailHighlight {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  background: var(--surface-hover, #f1f5f9);
+  border-radius: 6px;
+  padding: 1px 8px;
+  font-size: 0.9em;
+  word-break: break-all;
+}
+
+/* ── Hint text ── */
+
+.otpHint {
+  font-size: 0.8rem;
+  color: var(--text-tertiary, #94a3b8);
+  text-align: center;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ── Resend row ── */
+
+.resendRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary, #64748b);
+  background: none;
+  border: none;
+  padding: 4px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.backBtn:hover {
+  color: var(--text-primary, #0f172a);
+  background: var(--surface-hover, #f1f5f9);
+}
+
+.resendBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #16a34a;
+  background: none;
+  border: none;
+  padding: 4px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.resendBtn:hover:not(:disabled) {
+  color: #15803d;
+  background: #f0fdf4;
+}
+
+.resendBtn:disabled {
+  color: var(--text-tertiary, #94a3b8);
+  cursor: not-allowed;
+}

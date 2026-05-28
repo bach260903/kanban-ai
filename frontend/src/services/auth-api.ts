@@ -7,16 +7,32 @@ export interface AuthTokenResponse {
   user: User | null
 }
 
+export interface VerificationSentResponse {
+  message: string
+  email: string
+  needs_verification: true
+}
+
 export const authApi = {
+  /** Step 1: validate data + send OTP to email. Does NOT create user yet. */
   async register(
     email: string,
     password: string,
     display_name: string,
-  ): Promise<AuthTokenResponse> {
-    const res = await api.post<AuthTokenResponse>('/api/v1/auth/register', {
+  ): Promise<VerificationSentResponse> {
+    const res = await api.post<VerificationSentResponse>('/api/v1/auth/register', {
       email,
       password,
       display_name,
+    })
+    return res.data
+  },
+
+  /** Step 2: submit 6-digit OTP → creates user + returns JWT. */
+  async verifyRegister(email: string, code: string): Promise<AuthTokenResponse> {
+    const res = await api.post<AuthTokenResponse>('/api/v1/auth/verify-register', {
+      email,
+      code,
     })
     return res.data
   },
@@ -43,6 +59,26 @@ export const authApi = {
   async resetPassword(token: string, newPassword: string): Promise<{ message: string }> {
     const res = await api.post<{ message: string }>('/api/v1/auth/reset-password', {
       token,
+      new_password: newPassword,
+    })
+    return res.data
+  },
+
+  /** OTP flow step 1: request a 6-digit code sent to email. */
+  async forgotPasswordOtp(email: string): Promise<{ message: string }> {
+    const res = await api.post<{ message: string }>('/api/v1/auth/forgot-password', { email })
+    return res.data
+  },
+
+  /** OTP flow step 2: verify code + set new password. */
+  async verifyResetOtp(
+    email: string,
+    code: string,
+    newPassword: string,
+  ): Promise<{ message: string }> {
+    const res = await api.post<{ message: string }>('/api/v1/auth/verify-reset', {
+      email,
+      code,
       new_password: newPassword,
     })
     return res.data

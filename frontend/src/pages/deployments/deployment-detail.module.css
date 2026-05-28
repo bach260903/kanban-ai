@@ -1,0 +1,280 @@
+/* ── Deployment Detail Page ─────────────────────────────────────────────────── */
+
+.page {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-6);
+  box-sizing: border-box;
+}
+
+/* ── Breadcrumb ── */
+
+.breadcrumb {
+  font-size: 13px;
+  color: var(--font-secondary-color);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumbLink {
+  color: var(--c-brand-600, var(--c-info-500));
+  text-decoration: none;
+}
+
+.breadcrumbLink:hover {
+  text-decoration: underline;
+}
+
+/* ── Header ── */
+
+.header {
+  margin-bottom: var(--space-5);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: 6px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--font-primary-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.depId {
+  margin: 0;
+  font-size: 12px;
+  font-family: ui-monospace, monospace;
+  color: var(--font-secondary-color);
+}
+
+/* ── Status badge ── */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badgePending     { background: #f1f5f9; color: #64748b; }
+.badgeDeploying   { background: #dbeafe; color: #1d4ed8; }
+.badgeHealthy     { background: #dcfce7; color: #15803d; }
+.badgeDegraded    { background: #fee2e2; color: #b91c1c; }
+.badgeRolledBack  { background: #fef3c7; color: #92400e; }
+.badgeSkipped     { background: #f1f5f9; color: #94a3b8; }
+
+/* ── Risk badge ── */
+
+.riskBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.riskLow  { background: #dcfce7; color: #15803d; }
+.riskMed  { background: #fef3c7; color: #92400e; }
+.riskHigh { background: #fee2e2; color: #b91c1c; }
+
+/* ── Preview banner ── */
+
+.previewBanner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-5);
+  border-radius: 8px;
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+.previewIcon {
+  flex-shrink: 0;
+}
+
+.previewLabel {
+  font-size: var(--t-sm);
+  font-weight: 600;
+}
+
+.previewLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--t-sm);
+  color: #15803d;
+  text-decoration: underline;
+  word-break: break-all;
+  margin-left: auto;
+}
+
+.previewLink:hover {
+  color: #166534;
+}
+
+/* ── Meta grid ── */
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--space-2) var(--space-6);
+  padding: var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  background: var(--surface-secondary, #f8fafc);
+  margin-bottom: var(--space-5);
+}
+
+.metaLabel {
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--font-secondary-color);
+  white-space: nowrap;
+}
+
+.metaValue {
+  font-size: var(--t-sm);
+  color: var(--font-primary-color);
+}
+
+.metaCode {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+}
+
+.runLink {
+  color: var(--c-info-500);
+  text-decoration: none;
+  font-size: var(--t-sm);
+}
+
+.runLink:hover {
+  text-decoration: underline;
+}
+
+/* ── Cards (logs, error) ── */
+
+.logsCard,
+.errorCard {
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: var(--space-5);
+}
+
+.errorCard {
+  border-color: #fecaca;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-secondary, #f8fafc);
+  border-bottom: 1px solid var(--border-default);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--font-primary-color);
+}
+
+.errorCard .cardTitle {
+  background: #fff5f5;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.logs {
+  margin: 0;
+  padding: var(--space-4);
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--font-primary-color);
+  background: #0f172a;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.errorPre {
+  margin: 0;
+  padding: var(--space-4);
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #b91c1c;
+  background: #fff5f5;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ── No logs ── */
+
+.noLogs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-8) 0;
+  color: var(--font-secondary-color);
+  font-size: var(--t-sm);
+}
+
+.noLogs p {
+  margin: 0;
+}
+
+/* ── Loading / Error states ── */
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--t-sm);
+  color: var(--font-secondary-color);
+  padding: var(--space-8) 0;
+}
+
+.errorBox {
+  padding: var(--space-4);
+  border-radius: 8px;
+  border: 1px solid var(--c-danger-500, #dc2626);
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: var(--t-sm);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 640px) {
+  .page { padding: var(--space-4); }
+  .previewLink { margin-left: 0; }
+  .metaGrid { grid-template-columns: 1fr; gap: var(--space-1); }
+  .metaLabel { font-weight: 600; margin-top: var(--space-2); }
+}

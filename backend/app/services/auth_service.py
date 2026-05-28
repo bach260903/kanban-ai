@@ -19,8 +19,10 @@ from app.config import Settings
 from app.models.user import User
 
 # Redis TTLs
-_RESET_TOKEN_TTL_SEC: int = 3600           # 1 hour — password reset token
+_RESET_TOKEN_TTL_SEC: int = 3600           # 1 hour  — password reset token
 _REVOKE_KEY_TTL_SEC: int = 8 * 24 * 3600  # 8 days  — slightly > JWT 7-day expiry
+_OTP_TTL_SEC: int = 600                   # 10 min  — email verification OTP
+_OTP_MAX_ATTEMPTS: int = 5               # max wrong guesses before lockout
 
 
 class _TokenData(NamedTuple):
@@ -74,6 +76,79 @@ def decode_token_full(token: str, secret: str, algorithm: str) -> _TokenData:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired token",
         ) from None
+
+
+# =========================================================================== #
+# Email OTP verification (registration)                                        #
+# =========================================================================== #
+
+async def create_email_otp(
+    email: str,
+    hashed_password: str,
+    display_name: str,
+) -> str:
+    """Generate a 6-digit OTP, persist it (with pending registration data) in Redis.
+
+    Returns the OTP code (caller sends it by email).
+    The key expires after 10 minutes.
+    """
+    import json as _json
+
+    code = f"{secrets.randbelow(1_000_000):06d}"
+    r = await _get_redis()
+    key = f"email_otp:{email.lower()}"
+    payload = _json.dumps({
+        "code": code,
+        "hashed_password": hashed_password,
+        "display_name": display_name,
+    })
+    await r.setex(key, _OTP_TTL_SEC, payload)
+    # reset attempt counter
+    await r.delete(f"email_otp_attempts:{email.lower()}")
+    return code
+
+
+async def verify_email_otp(email: str, code: str) -> dict:
+    """Verify the OTP submitted by the user.
+
+    Returns the pending registration dict ``{hashed_password, display_name}``
+    on success. Raises 400/429 on failure.
+    """
+    import json as _json
+
+    r = await _get_redis()
+    email_lower = email.lower()
+    key = f"email_otp:{email_lower}"
+    attempts_key = f"email_otp_attempts:{email_lower}"
+
+    raw: str | None = await r.get(key)
+    if raw is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Verification code expired or not found. Please register again.",
+        )
+
+    attempts = int(await r.get(attempts_key) or 0)
+    if attempts >= _OTP_MAX_ATTEMPTS:
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail="Too many incorrect attempts. Please register again with a new code.",
+        )
+
+    data = _json.loads(raw)
+    if data["code"] != code.strip():
+        await r.incr(attempts_key)
+        await r.expire(attempts_key, _OTP_TTL_SEC)
+        remaining = _OTP_MAX_ATTEMPTS - attempts - 1
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Incorrect verification code. {remaining} attempt(s) remaining.",
+        )
+
+    # Correct — consume OTP
+    await r.delete(key)
+    await r.delete(attempts_key)
+    return {"hashed_password": data["hashed_password"], "display_name": data["display_name"]}
 
 
 async def register_user(
@@ -184,6 +259,67 @@ async def generate_password_reset_token(user_id: uuid.UUID) -> str:
     r = await _get_redis()
     await r.setex(f"pwd_reset:{token}", _RESET_TOKEN_TTL_SEC, str(user_id))
     return token
+
+
+async def create_password_reset_otp(email: str, user_id: uuid.UUID) -> str:
+    """Generate a 6-digit OTP for password reset; store user_id in Redis.
+
+    Key: ``pwd_reset_otp:{email.lower()}``  TTL: 10 minutes.
+    Attempt counter: ``pwd_reset_otp_attempts:{email.lower()}``
+    Returns the OTP code (caller sends it by email).
+    """
+    import json as _json
+
+    code = f"{secrets.randbelow(1_000_000):06d}"
+    r = await _get_redis()
+    key = f"pwd_reset_otp:{email.lower()}"
+    payload = _json.dumps({"code": code, "user_id": str(user_id)})
+    await r.setex(key, _OTP_TTL_SEC, payload)
+    await r.delete(f"pwd_reset_otp_attempts:{email.lower()}")
+    return code
+
+
+async def verify_password_reset_otp(email: str, code: str) -> uuid.UUID:
+    """Verify the OTP for password reset; return user_id on success.
+
+    Raises 400 for wrong/expired code, 429 for too many attempts.
+    Consumes the OTP on success (single-use).
+    """
+    import json as _json
+
+    r = await _get_redis()
+    email_lower = email.lower()
+    key = f"pwd_reset_otp:{email_lower}"
+    attempts_key = f"pwd_reset_otp_attempts:{email_lower}"
+
+    raw: str | None = await r.get(key)
+    if raw is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Mã xác nhận đã hết hạn hoặc không tồn tại. Vui lòng yêu cầu mã mới.",
+        )
+
+    attempts = int(await r.get(attempts_key) or 0)
+    if attempts >= _OTP_MAX_ATTEMPTS:
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail="Quá nhiều lần thử sai. Vui lòng yêu cầu mã mới.",
+        )
+
+    data = _json.loads(raw)
+    if data["code"] != code.strip():
+        await r.incr(attempts_key)
+        await r.expire(attempts_key, _OTP_TTL_SEC)
+        remaining = _OTP_MAX_ATTEMPTS - attempts - 1
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Mã xác nhận không đúng. Còn {remaining} lần thử.",
+        )
+
+    # Correct — consume OTP
+    await r.delete(key)
+    await r.delete(attempts_key)
+    return uuid.UUID(data["user_id"])
 
 
 async def get_user_id_from_reset_token(token: str) -> uuid.UUID | None:

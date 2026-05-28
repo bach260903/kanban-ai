@@ -19,10 +19,12 @@ const TYPE_ICON: Record<string, string> = {
   task_assigned: '📋',
   task_needs_review: '👁',
   task_done: '✅',
-  agent_error: '⚠',
+  agent_error: '⚠️',
   task_unblocked: '🔓',
   invite_accepted: '👤',
   review_complete: '✓',
+  agent_started: '🤖',
+  task_in_progress: '⚙️',
 }
 
 function timeAgo(isoDate: string): string {
