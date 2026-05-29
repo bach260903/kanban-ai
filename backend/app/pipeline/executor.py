@@ -122,6 +122,9 @@ async def execute_pipeline(run_id: UUID, sandbox: Path) -> None:
         # so failing code never lands on the integration branch (local or GitHub).
         if overall_ok:
             await _promote_to_main_on_success(session, run, sandbox, gh_config)
+        else:
+            # Self-heal: hand the failure back to the Coder (bounded to 1 cycle).
+            await _auto_fix_failed_pipeline(session, run)
 
         # Post final GitHub pipeline status
         if gh_config and run.commit_sha:
@@ -552,6 +555,51 @@ async def _promote_to_main_on_success(
             logger.info("promote: pushed integration branch to GitHub for task=%s", run.task_id)
         except Exception:
             logger.warning("promote: GitHub push main failed for task=%s", run.task_id, exc_info=True)
+
+
+_MAX_AUTO_FIX_CYCLES = 1  # how many times CI failure auto-re-dispatches the Coder
+
+
+async def _auto_fix_failed_pipeline(session: AsyncSession, run: PipelineRun) -> None:
+    """On pipeline failure, hand the error back to the Coder to fix (bounded).
+
+    Re-dispatches the Coder agent with the failed step's logs as feedback, so a
+    failing task is actually repaired instead of just showing an AI analysis.
+    Bounded by the number of pipeline runs for the task so it can't loop / burn
+    free-tier tokens; after the budget, the failure is left for the human (PO).
+    All failures here are logged, never raised.
+    """
+    if run.task_id is None:
+        return
+    try:
+        # Count pipeline runs for this task: original + N auto-fix cycles.
+        from sqlalchemy import func as _func
+        runs_for_task = await session.scalar(
+            select(_func.count()).select_from(PipelineRun).where(PipelineRun.task_id == run.task_id)
+        )
+        if (runs_for_task or 0) > _MAX_AUTO_FIX_CYCLES:
+            logger.info(
+                "auto-fix: task %s already used its auto-fix budget (%d runs) — leaving for human",
+                run.task_id, runs_for_task,
+            )
+            return
+
+        failed = next((s for s in (run.steps or []) if str(s.status) == "failure"), None)
+        if failed is None:
+            return
+        logs_tail = (failed.logs or "")[-2000:]
+        summary = (
+            f"Your previous changes FAILED the CI pipeline at the '{failed.step_key}' step. "
+            f"Read the error below, fix the code so the step passes, and run the tests yourself "
+            f"before finishing.\n\n=== {failed.step_key} error ===\n{logs_tail}"
+        )
+
+        from app.services.kanban_service import KanbanService
+        await KanbanService.retry_pipeline_failure_with_coder(
+            session, run.project_id, run.task_id, summary
+        )
+    except Exception:
+        logger.warning("auto-fix: failed to re-dispatch coder for task %s", run.task_id, exc_info=True)
 
 
 def _build_summary(run: PipelineRun, success: bool) -> str:

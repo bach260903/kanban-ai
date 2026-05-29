@@ -67,18 +67,71 @@ def _strip_json_fence(text: str) -> str:
     return t.strip()
 
 
+def _salvage_task_objects(text: str) -> list[Any]:
+    """Recover complete ``{...}`` task objects from malformed/truncated JSON.
+
+    LLMs sometimes return a long task array that gets cut off mid-object (token
+    limit) or wrapped in reasoning text. Rather than failing the whole breakdown,
+    scan from the first ``[`` and extract every balanced object that parses — the
+    incomplete trailing one is simply dropped.
+    """
+    bracket = text.find("[")
+    scan = text[bracket + 1:] if bracket != -1 else text
+    objs: list[Any] = []
+    depth = 0
+    start: int | None = None
+    in_str = False
+    esc = False
+    for i, ch in enumerate(scan):
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+        elif ch == "{":
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch == "}":
+            if depth > 0:
+                depth -= 1
+                if depth == 0 and start is not None:
+                    try:
+                        objs.append(json.loads(scan[start:i + 1]))
+                    except json.JSONDecodeError:
+                        pass
+                    start = None
+    return objs
+
+
 def _parse_task_payload(raw: str) -> list[TaskBreakdownItem]:
     blob = _strip_json_fence(raw)
-    data = json.loads(blob)
-    if isinstance(data, list):
-        items_raw: list[Any] = data
-    elif isinstance(data, dict) and "tasks" in data:
-        inner = data["tasks"]
-        if not isinstance(inner, list):
-            raise ValueError("`tasks` must be a JSON array.")
-        items_raw = inner
-    else:
-        raise ValueError("LLM output must be a JSON array or an object with a `tasks` array.")
+    items_raw: list[Any] | None = None
+    try:
+        data = json.loads(blob)
+        if isinstance(data, list):
+            items_raw = data
+        elif isinstance(data, dict) and isinstance(data.get("tasks"), list):
+            items_raw = data["tasks"]
+    except json.JSONDecodeError:
+        items_raw = None
+
+    if items_raw is None:
+        # Dirty or truncated output → salvage the complete task objects we can.
+        salvaged = _salvage_task_objects(blob)
+        if not salvaged:
+            raise ValueError(
+                "LLM output was not valid JSON and no task objects could be salvaged."
+            )
+        logger.warning(
+            "task_breakdown: malformed JSON; salvaged %d complete task object(s)", len(salvaged)
+        )
+        items_raw = salvaged
 
     ta = TypeAdapter(list[TaskBreakdownItem])
     return ta.validate_python(items_raw)
@@ -144,13 +197,14 @@ async def _run_task_breakdown(state: StateDict) -> StateDict:
         "Reply with **only** valid JSON: either a top-level array, or an object "
         '`{"tasks": [...]}` where each element has:\n'
         '- "title" (string, required, max 120 chars; verb-first, specific, e.g. "Add JWT login endpoint")\n'
-        '- "description" (string, required, 2–6 sentences: scope, approach, constraints, what NOT to change)\n'
-        '- "acceptance_criteria" (array of strings, required, 2–5 testable bullet points)\n'
-        '- "plan_reference" (string, required; quote or paraphrase the PLAN section this task implements)\n'
+        '- "description" (string, required, 2–3 concise sentences: scope, approach, what NOT to change)\n'
+        '- "acceptance_criteria" (array of strings, required, 2–3 short testable bullet points)\n'
+        '- "plan_reference" (string, required; short reference to the PLAN section — do NOT quote it in full)\n'
         '- "files_hint" (array of strings, optional; likely file paths or modules, e.g. "backend/app/routers/auth.py")\n'
         '- "priority" (integer; lower = higher urgency; default 0)\n\n'
         "Rules:\n"
-        "- Produce 3–40 tasks when the PLAN is substantial; fewer if the PLAN is tiny.\n"
+        "- Produce 3–20 tasks (fewer if the PLAN is small). Be concise — prefer fewer, "
+        "well-scoped tasks over many tiny ones, and keep every field short to stay within limits.\n"
         "- Do NOT create meta tasks (writing docs, creating plans, running reviews only).\n"
         "- Split large PLAN items into independently implementable units.\n"
         "- Every task MUST have a non-empty description and at least 2 acceptance criteria.\n"

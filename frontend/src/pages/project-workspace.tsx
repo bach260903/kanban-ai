@@ -16,6 +16,7 @@ import { DocumentPanel } from '../components/organisms/document-panel'
 import { KanbanBoard } from '../components/organisms/kanban-board'
 import { ProjectHeader } from '../components/organisms/project-header'
 import { MemoryEditor } from '../components/organisms/memory-editor'
+import { PipelinePanel } from '../components/organisms/pipeline-panel'
 import { ReviewPanel } from '../components/organisms/review-panel'
 import { ThoughtStreamPanel } from '../components/organisms/thought-stream-panel'
 import { useInlineComments } from '../hooks/use-inline-comments'
@@ -510,6 +511,7 @@ export default function ProjectWorkspace() {
                     Open full pipeline view →
                   </a>
                 </p>
+                <PipelinePanel projectId={currentProject.id} />
               </section>
             ) : activeTab === 'memory' ? (
               <section className={styles.memory} aria-labelledby="workspace-memory-heading">

@@ -12,6 +12,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import settings
 from app.llm.factory import architect_llm_configured, create_architect_llm
 from app.llm.invoke_helpers import ainvoke_llm
 from app.exceptions import NotFoundError, SandboxEscapeError

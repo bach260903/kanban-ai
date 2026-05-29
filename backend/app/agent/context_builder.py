@@ -21,9 +21,12 @@ from app.tools.token_optimizer import deduplicate_lines, optimize_file_content
 
 logger = logging.getLogger(__name__)
 
-_MAX_MEMORY_MD_CHARS = 24_000
-_MAX_CODEBASE_MAP_JSON_CHARS = 120_000
-_MAX_INLINE_COMMENTS_JSON_CHARS = 12_000
+# Kept small to limit tokens per coder call (free-tier friendly): the codebase map
+# and memory are injected into the coder's context every run, so a 120k-char map was
+# ~30k tokens per call and drained the daily quota in a few tasks.
+_MAX_MEMORY_MD_CHARS = 8_000
+_MAX_CODEBASE_MAP_JSON_CHARS = 20_000
+_MAX_INLINE_COMMENTS_JSON_CHARS = 8_000
 
 
 def _sandbox_project_dir(project_id: UUID) -> Path:

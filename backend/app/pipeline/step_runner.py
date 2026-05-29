@@ -13,10 +13,13 @@ ad-hoc output, only reporting ``skipped`` when there is genuinely nothing to do.
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import logging
+import re
 import shutil
 import subprocess
+import tempfile
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -178,13 +181,49 @@ def _ensure_test_runner(target: Path) -> None:
 
 # ── Test Runner ────────────────────────────────────────────────────────────────
 
-async def _run_pytest_step(target: Path, t0: float) -> StepResult:
-    """Run pytest in ``target``, degrading to ``skipped`` rather than failing when
-    pytest is unavailable or finds no tests.
+# Maps an importable module name to its pip package when they differ.
+_MODULE_TO_PIP = {
+    "cv2": "opencv-python", "yaml": "pyyaml", "PIL": "pillow", "bs4": "beautifulsoup4",
+    "sklearn": "scikit-learn", "dotenv": "python-dotenv", "jwt": "pyjwt",
+    "dateutil": "python-dateutil", "psycopg2": "psycopg2-binary",
+}
+_MISSING_MODULE_RE = re.compile(r"No module named '([\w][\w.]*)'")
+_MAX_MODULE_INSTALLS = 6
 
-    pytest may not be installed in the CI runner image. Treating that as a hard
-    failure would block every Python task; a clear ``skipped`` keeps CI honest
-    (lint/build still validate the code) until pytest is added to the runner.
+
+def _ensure_py_venv(target: Path) -> str:
+    """Create an isolated venv (OUTSIDE the sandbox) and install the project's reqs.
+
+    The venv is created in a container-local temp dir, NOT inside the bind-mounted
+    sandbox — a venv has ~2000 small files, which (a) would be committed/pushed and
+    (b) cripples Docker's host file-sync on Windows. ``--system-site-packages`` lets
+    it inherit the container's pytest/ruff. Returns the venv python, or ``"python"``
+    if setup fails.
+    """
+    key = hashlib.sha1(str(target.resolve()).encode()).hexdigest()[:16]
+    venv = Path(tempfile.gettempdir()) / "neo-ci-venv" / key
+    py = venv / "bin" / "python"
+    if not py.exists():
+        venv.parent.mkdir(parents=True, exist_ok=True)
+        rc, _ = _run_cmd(["python", "-m", "venv", "--system-site-packages", str(venv)], target, timeout=60)
+        if rc != 0 or not py.exists():
+            return "python"
+    if (target / "requirements.txt").exists():
+        _run_cmd(
+            [str(py), "-m", "pip", "install", "-q", "--disable-pip-version-check", "-r", "requirements.txt"],
+            target, timeout=180,
+        )
+    return str(py)
+
+
+async def _run_pytest_step(target: Path, t0: float) -> StepResult:
+    """Run pytest in ``target``, auto-installing missing third-party modules.
+
+    When the code under test imports a library that isn't installed, pytest fails
+    with ``ModuleNotFoundError: No module named 'X'``. Instead of failing the whole
+    task, we ``pip install`` X into the project venv and retry — so "unknown module"
+    errors heal themselves. Bounded by ``_MAX_MODULE_INSTALLS`` to avoid loops.
+    Degrades to ``skipped`` when pytest is unavailable or finds no tests.
     """
     if not _module_available("pytest"):
         dur = int((time.monotonic() - t0) * 1000)
@@ -194,22 +233,47 @@ async def _run_pytest_step(target: Path, t0: float) -> StepResult:
             duration_ms=dur,
             ai_reasoning="Skipped: pytest not available in the CI runner.",
         )
-    rc, logs = await asyncio.to_thread(
-        _run_cmd, ["python", "-m", "pytest", "--tb=short", "-q", "--no-header"], target
-    )
+
+    py_exec = await asyncio.to_thread(_ensure_py_venv, target)
+    pytest_cmd = [py_exec, "-m", "pytest", "--tb=short", "-q", "--no-header", "-o", "asyncio_mode=auto"]
+    installed: list[str] = []
+    rc, logs = 1, ""
+
+    for _ in range(_MAX_MODULE_INSTALLS + 1):
+        rc, logs = await asyncio.to_thread(_run_cmd, pytest_cmd, target)
+        if rc == 0 or rc == 5:
+            break
+        # On a missing-module failure, install it into the venv and retry.
+        if py_exec == "python" or len(installed) >= _MAX_MODULE_INSTALLS:
+            break
+        m = _MISSING_MODULE_RE.search(logs)
+        if not m:
+            break
+        mod = m.group(1).split(".")[0]
+        pkg = _MODULE_TO_PIP.get(mod, mod)
+        if pkg in installed:
+            break  # already tried installing this — avoid a loop
+        installed.append(pkg)
+        logger.info("pytest: auto-installing missing module %r (pip %s)", mod, pkg)
+        pip_rc, _ = await asyncio.to_thread(
+            _run_cmd, [py_exec, "-m", "pip", "install", "-q", pkg], target, timeout=120
+        )
+        if pip_rc != 0:
+            break  # can't install (e.g. name mismatch) → report the real failure
+
     dur = int((time.monotonic() - t0) * 1000)
-    # pytest exit 5 = no tests collected → nothing to run
+    note = f"(auto-installed: {', '.join(installed)})\n" if installed else ""
     if rc == 5:
         return StepResult(
             status="skipped",
-            logs=logs or "No tests collected by pytest.",
+            logs=(note + logs) or "No tests collected by pytest.",
             duration_ms=dur,
             ai_reasoning="Skipped: pytest found no tests to run.",
         )
     status = "success" if rc == 0 else "failure"
     return StepResult(
         status=status,
-        logs=logs,
+        logs=note + logs,
         duration_ms=dur,
         ai_reasoning=f"pytest {'passed' if rc == 0 else 'failed'} (exit {rc}) in {dur}ms.",
     )

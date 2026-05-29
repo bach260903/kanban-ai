@@ -128,6 +128,13 @@ class Settings(BaseSettings):
         default="groq",
         description="Reviewer agent. Env: REVIEW_LLM_PROVIDER.",
     )
+    # Per-agent model overrides (empty = use the provider's default GROQ_MODEL/
+    # GOOGLE_MODEL). Each must be a model of that agent's provider above. Lets every
+    # agent run a different model — also spreads free-tier quota (Groq TPD and Google
+    # free quota are both per-model).
+    coder_model: str = Field(default="", description="Model for Coder. Env: CODER_MODEL.")
+    architect_model: str = Field(default="", description="Model for Architect. Env: ARCHITECT_MODEL.")
+    review_model: str = Field(default="", description="Model for Reviewer. Env: REVIEW_MODEL.")
     google_api_key: str = Field(
         default="",
         description="Google AI Studio API key (https://aistudio.google.com/apikey).",

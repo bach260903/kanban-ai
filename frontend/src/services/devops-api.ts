@@ -86,7 +86,7 @@ export type AlertConfigUpdate = {
 // ── API functions ──────────────────────────────────────────────────────────────
 
 export async function getHealthSummary(projectId: string): Promise<DeploymentHealthSummary[]> {
-  const res = await api.get(`/projects/${projectId}/devops/health-summary`)
+  const res = await api.get(`/api/v1/projects/${projectId}/devops/health-summary`)
   return res.data
 }
 
@@ -97,7 +97,7 @@ export async function listIncidents(
   const params: Record<string, unknown> = {}
   if (options?.resolved !== undefined) params.resolved = options.resolved
   if (options?.limit !== undefined) params.limit = options.limit
-  const res = await api.get(`/projects/${projectId}/devops/incidents`, { params })
+  const res = await api.get(`/api/v1/projects/${projectId}/devops/incidents`, { params })
   return res.data
 }
 
@@ -105,12 +105,12 @@ export async function listRollbacks(
   projectId: string,
   limit = 50
 ): Promise<RollbackEventOut[]> {
-  const res = await api.get(`/projects/${projectId}/devops/rollbacks`, { params: { limit } })
+  const res = await api.get(`/api/v1/projects/${projectId}/devops/rollbacks`, { params: { limit } })
   return res.data
 }
 
 export async function getAlertConfig(projectId: string): Promise<AlertConfigOut> {
-  const res = await api.get(`/projects/${projectId}/devops/alert-config`)
+  const res = await api.get(`/api/v1/projects/${projectId}/devops/alert-config`)
   return res.data
 }
 
@@ -118,7 +118,7 @@ export async function updateAlertConfig(
   projectId: string,
   update: AlertConfigUpdate
 ): Promise<AlertConfigOut> {
-  const res = await api.put(`/projects/${projectId}/devops/alert-config`, update)
+  const res = await api.put(`/api/v1/projects/${projectId}/devops/alert-config`, update)
   return res.data
 }
 
@@ -126,7 +126,7 @@ export async function getHealthChecks(
   deploymentId: string,
   limit = 100
 ): Promise<HealthCheckOut[]> {
-  const res = await api.get(`/deployments/${deploymentId}/health-checks`, { params: { limit } })
+  const res = await api.get(`/api/v1/deployments/${deploymentId}/health-checks`, { params: { limit } })
   return res.data
 }
 
@@ -134,11 +134,11 @@ export async function triggerManualRollback(
   deploymentId: string,
   reason: string
 ): Promise<RollbackEventOut> {
-  const res = await api.post(`/deployments/${deploymentId}/rollback`, { reason })
+  const res = await api.post(`/api/v1/deployments/${deploymentId}/rollback`, { reason })
   return res.data
 }
 
 export async function getRiskAssessment(deploymentId: string): Promise<RiskAssessmentOut> {
-  const res = await api.get(`/deployments/${deploymentId}/risk-assessment`)
+  const res = await api.get(`/api/v1/deployments/${deploymentId}/risk-assessment`)
   return res.data
 }

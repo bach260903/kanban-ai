@@ -19,7 +19,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
 from app.database import async_session_maker
-from app.llm.factory import create_chat_llm
+from app.llm.factory import create_review_llm
 from app.models.diff import Diff
 from app.models.review_report import (
     ReviewComment,
@@ -188,7 +188,7 @@ async def _run_with_session(state: StateDict) -> StateDict:  # noqa: PLR0912, PL
                 secret_count = len(secret_findings)
 
                 # AI review
-                llm = create_chat_llm(provider=settings.review_llm_provider, temperature=0.1)
+                llm = create_review_llm(temperature=0.1)
                 suggestion, ai_comments = await reviewer_service.ai_review_diff(
                     diff=diff_content,
                     constitution=constitution,

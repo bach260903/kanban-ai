@@ -252,18 +252,22 @@ def calculate_score(
     secret_count: int,
     suggestion: str,
 ) -> int:
-    """Compute a 0–100 review quality score.
+    """Compute a 0–100 review quality score (slightly lenient, still discriminating).
 
     Breakdown:
-    - **Test score** (40 pts): 0 when no tests detected (no tests = no credit);
-      otherwise ``floor(pass / total * 40)``.
-    - **Secret score** (30 pts): 30 − 15 × secrets_found (min 0).
-    - **AI score** (30 pts): 30 if ``"approve"``, 5 if ``"needs_changes"``.
+    - **Test score** (40 pts): ``floor(pass / total * 40)`` when tests ran; **18 pts
+      baseline** when no tests are detected (untested ≠ broken, so partial credit
+      rather than zero — but well below a tested project).
+    - **Secret score** (30 pts): 30 − 15 × secrets_found (min 0). Kept strict —
+      hardcoded secrets are a real security problem.
+    - **AI score** (30 pts): 30 if ``"approve"``, **14 if ``"needs_changes"``**
+      (penalised but not crushed).
 
-    Rationale: code with no tests should not receive full marks by default.
-    A project with passing tests, no secrets, and AI approval earns 100/100.
-    A project with no tests at all can earn at most 60/100 (needs_changes) or 60/100
-    (approve with no tests).
+    Rationale: the old scoring was harsh — untested code scored 0 on tests and a
+    "needs_changes" verdict scored only 5, so reasonable work landed in the 40s–60s.
+    This version is a bit more generous while still ranking: tested+approved+clean =
+    100; untested+approved+clean ≈ 78; tested+needs_changes+clean ≈ 84; a leaked
+    secret still drops the score sharply.
 
     Args:
         test_pass: Number of passing tests.
@@ -275,8 +279,9 @@ def calculate_score(
         Integer score clamped to [0, 100].
     """
     total = test_pass + test_fail
-    # No tests → 0 pts (penalises untested code rather than rewarding absence of tests)
-    test_score = 0 if total == 0 else int((test_pass / total) * 40)
+    # No tests → partial baseline credit (untested isn't a failure); tests present →
+    # proportional credit. Failing tests pull this down naturally.
+    test_score = 18 if total == 0 else int((test_pass / total) * 40)
     secret_score = max(0, 30 - secret_count * 15)
-    ai_score = 30 if suggestion == "approve" else 5
+    ai_score = 30 if suggestion == "approve" else 14
     return max(0, min(100, test_score + secret_score + ai_score))

@@ -126,7 +126,9 @@ async def get_project_analytics(
                 )
             ).label("avg_seconds"),
             (
-                func.count().filter(AgentRun.status == AgentRunStatus.SUCCESS)
+                # ``* 1.0`` forces float division — bigint/bigint in Postgres would
+                # truncate (e.g. 3/5 = 0), making the success rate always 0% or 100%.
+                (func.count().filter(AgentRun.status == AgentRunStatus.SUCCESS) * 1.0)
                 / func.nullif(func.count(), 0)
             ).label("first_approve_rate"),
             func.count()

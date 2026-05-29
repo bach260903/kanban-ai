@@ -226,9 +226,14 @@ async def push_integration_branch(
 
     def _do() -> bool:
         from git import Repo  # local import
+        from git.exc import GitCommandError
 
         repo = Repo(str(sandbox_path.resolve()))
         integration = _integration_branch(repo)
+        # Push to the repo's configured default branch (e.g. "main") — the local
+        # integration branch is usually "master", so pushing master->master would
+        # leave GitHub's "main" empty and the user sees "no code in main".
+        target = (config.default_base_branch or integration).strip() or integration
 
         pat = decrypt_pat(config.pat_encrypted)
         remote_url = (
@@ -241,12 +246,17 @@ async def push_integration_branch(
         else:
             repo.create_remote(remote_name, remote_url)
 
-        # Push integration branch; --force-with-lease guards against accidental overwrites
-        repo.git.push(remote_name, integration, "--force-with-lease")
+        # Push local integration -> remote default branch. Try a normal push first;
+        # fall back to --force if histories diverged (avoids --force-with-lease, which
+        # refuses the push whenever the remote-tracking ref is stale, leaving main behind).
+        refspec = f"{integration}:{target}"
+        try:
+            repo.git.push(remote_name, refspec)
+        except GitCommandError:
+            repo.git.push(remote_name, refspec, "--force")
         logger.info(
-            "push_integration_branch: pushed %s to %s",
-            integration,
-            config.repo_full_name,
+            "push_integration_branch: pushed %s -> %s on %s",
+            integration, target, config.repo_full_name,
         )
         return True
 

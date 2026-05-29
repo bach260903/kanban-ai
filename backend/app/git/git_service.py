@@ -84,6 +84,19 @@ class GitService:
     @staticmethod
     def ensure_baseline_commit(sandbox_path: Path) -> None:
         """Create an initial commit so later ``git diff --cached`` has a parent."""
+        # Always ensure a .gitignore (git honours it even untracked) so CI artifacts
+        # — .venv, caches, node_modules — never get swept into the agent's diff or
+        # committed/pushed. Runs on every task start, so existing sandboxes get it too.
+        gi = sandbox_path / ".gitignore"
+        if not gi.exists():
+            try:
+                gi.write_text(
+                    ".venv/\n__pycache__/\n*.pyc\n.pytest_cache/\n.ruff_cache/\n"
+                    ".mypy_cache/\nnode_modules/\ndist/\nbuild/\n",
+                    encoding="utf-8",
+                )
+            except OSError:
+                pass
         r = subprocess.run(
             ["git", "rev-parse", "--verify", "HEAD"],
             cwd=sandbox_path,
@@ -165,6 +178,17 @@ class GitService:
         Used to persist the agent's work onto the task branch as a real commit so a
         later squash-merge is a normal git operation (not reliant on a carried index).
         """
+        # Keep CI/build artifacts (venvs, caches, node_modules) out of commits/GitHub.
+        gitignore = sandbox_path / ".gitignore"
+        if not gitignore.exists():
+            try:
+                gitignore.write_text(
+                    ".venv/\n__pycache__/\n*.pyc\n.pytest_cache/\n.ruff_cache/\n"
+                    ".mypy_cache/\nnode_modules/\ndist/\nbuild/\n",
+                    encoding="utf-8",
+                )
+            except OSError:
+                pass
         subprocess.run(
             ["git", "add", "-A"], cwd=sandbox_path, check=True, capture_output=True, text=True
         )

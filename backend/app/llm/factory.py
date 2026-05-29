@@ -197,21 +197,19 @@ def review_llm_configured() -> bool:
 
 
 def create_coder_llm(*, model: str | None = None, temperature: float = 0.1) -> BaseChatModel:
-    # Prefer CODER_GROQ_MODEL when provider is groq and env var is set.
+    # Resolution order: explicit arg → CODER_MODEL → (groq-only) CODER_GROQ_MODEL → default.
     resolved = model
+    if resolved is None:
+        resolved = settings.coder_model.strip() or None
     if resolved is None and _normalize_provider(settings.coder_llm_provider) == "groq":
         override = settings.coder_groq_model.strip()
         if override:
             resolved = override
 
     return create_chat_llm(
-
         provider=settings.coder_llm_provider,
-
         model=resolved,
-
         temperature=temperature,
-
     )
 
 
@@ -219,17 +217,12 @@ def create_coder_llm(*, model: str | None = None, temperature: float = 0.1) -> B
 
 
 def create_architect_llm(*, model: str | None = None, temperature: float = 0.2) -> BaseChatModel:
-
     """SPEC, PLAN, task breakdown."""
-
+    resolved = model if model is not None else (settings.architect_model.strip() or None)
     return create_chat_llm(
-
         provider=settings.architect_llm_provider,
-
-        model=model,
-
+        model=resolved,
         temperature=temperature,
-
     )
 
 
@@ -237,15 +230,11 @@ def create_architect_llm(*, model: str | None = None, temperature: float = 0.2) 
 
 
 def create_review_llm(*, model: str | None = None, temperature: float = 0.2) -> BaseChatModel:
-
+    resolved = model if model is not None else (settings.review_model.strip() or None)
     return create_chat_llm(
-
         provider=settings.review_llm_provider,
-
-        model=model,
-
+        model=resolved,
         temperature=temperature,
-
     )
 
 

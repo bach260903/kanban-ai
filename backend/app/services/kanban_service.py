@@ -281,6 +281,48 @@ class KanbanService:
         return task
 
     @staticmethod
+    async def retry_pipeline_failure_with_coder(
+        session: AsyncSession,
+        project_id: UUID,
+        task_id: UUID,
+        failure_summary: str,
+    ) -> bool:
+        """Self-heal a CI failure by re-running the Coder with the error as feedback.
+
+        System-controlled retry: a DONE task whose pipeline failed is sent back to
+        In Progress and the Coder is re-dispatched with the CI error text as PO
+        feedback. The Coder (which has tools + can run tests) fixes the code, the diff
+        goes to Review for the PO, then re-runs CI. Returns True if a retry was kicked.
+
+        Bounding (number of attempts) is enforced by the caller (executor) so this
+        only fires when another auto-fix cycle is allowed.
+        """
+        task = await session.get(Task, task_id)
+        if task is None or task.status != TaskStatus.DONE:
+            return False
+        sandbox = _sandbox_project_root(project_id)
+        try:
+            # Idempotent: checks out the existing task branch (it isn't merged on a
+            # failed pipeline) so the Coder edits the right working tree.
+            await BranchService.create_task_branch(session, task_id, sandbox)
+        except Exception:
+            logger.warning("retry_pipeline_failure: could not ensure task branch %s", task_id, exc_info=True)
+        task.status = TaskStatus.IN_PROGRESS
+        task.updated_at = datetime.now(timezone.utc)
+        await session.flush()
+        await session.commit()
+        project = await session.get(Project, project_id)
+        backend = str(project.coding_backend) if project is not None else "groq"
+        logger.info("retry_pipeline_failure: re-dispatching coder for task %s", task_id)
+        _schedule_coder_agent(
+            task_id,
+            project_id,
+            po_feedback=failure_summary,
+            coding_backend=backend,
+        )
+        return True
+
+    @staticmethod
     async def move_task(
         task_id: UUID,
         to_status: TaskStatus,
