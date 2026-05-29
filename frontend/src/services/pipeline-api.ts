@@ -101,6 +101,14 @@ export async function getPipelineRun(runId: string): Promise<PipelineRunOut> {
   return data
 }
 
+/** Re-run the pipeline for an existing run (same task, fresh execution). Returns the new run. */
+export async function rerunPipelineRun(projectId: string, runId: string): Promise<PipelineRunOut> {
+  const { data } = await api.post<PipelineRunOut>(
+    `/api/v1/projects/${projectId}/pipeline-runs/${runId}/rerun`,
+  )
+  return data
+}
+
 export async function listDeployments(projectId: string): Promise<DeploymentOut[]> {
   const { data } = await api.get<DeploymentOut[]>(`/api/v1/projects/${projectId}/deployments`)
   return data

@@ -20,6 +20,7 @@ import {
   ExternalLink,
   GitBranch,
   Loader2,
+  RotateCcw,
   Rocket,
   Terminal,
   XCircle,
@@ -27,7 +28,7 @@ import {
   Workflow,
 } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { Spinner } from '../../components/atoms/spinner'
 import {
@@ -36,6 +37,7 @@ import {
 } from '../../components/organisms/failure-analysis-panel'
 import {
   getPipelineRun,
+  rerunPipelineRun,
   subscribePipelineRun,
   type PipelineEvent,
   type PipelineRunOut,
@@ -213,14 +215,31 @@ function StepRow({
 
 export default function PipelineRunPage() {
   const { projectId = '', runId = '' } = useParams<{ projectId: string; runId: string }>()
+  const navigate = useNavigate()
 
   const [run, setRun] = useState<PipelineRunOut | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [rerunning, setRerunning] = useState(false)
   // Per-step live analysis state map: stepKey → AnalysisState
   const [analysisStates, setAnalysisStates] = useState<Record<string, AnalysisState>>({})
   const cleanupRef = useRef<(() => void) | null>(null)
+
+  const handleRerun = useCallback(async () => {
+    if (rerunning) return
+    setRerunning(true)
+    setError(null)
+    try {
+      const newRun = await rerunPipelineRun(projectId, runId)
+      // Navigate to the freshly created run so the user watches it live.
+      navigate(`/projects/${projectId}/pipeline-runs/${newRun.id}`)
+    } catch (err) {
+      setError(msgFromError(err))
+    } finally {
+      setRerunning(false)
+    }
+  }, [projectId, runId, rerunning, navigate])
 
   const setStepAnalysis = useCallback((stepKey: string, state: AnalysisState) => {
     setAnalysisStates((prev) => ({ ...prev, [stepKey]: state }))
@@ -440,7 +459,23 @@ export default function PipelineRunPage() {
             <Workflow size={22} aria-hidden />
             Pipeline Run
           </h1>
-          <RunStatusBadge status={run.status} />
+          <div className={styles.headerActions}>
+            <RunStatusBadge status={run.status} />
+            <button
+              type="button"
+              className={styles.rerunButton}
+              onClick={handleRerun}
+              disabled={rerunning || run.status === 'running' || run.status === 'queued'}
+              title="Chạy lại pipeline cho task này"
+            >
+              {rerunning ? (
+                <Loader2 size={14} className="animate-spin" aria-hidden />
+              ) : (
+                <RotateCcw size={14} aria-hidden />
+              )}
+              {rerunning ? 'Đang chạy lại…' : 'Chạy lại'}
+            </button>
+          </div>
         </div>
         <div className={styles.metaRow}>
           {run.branch_name && (

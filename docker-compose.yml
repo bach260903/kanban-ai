@@ -39,6 +39,16 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       REDIS_URL: redis://redis:6379/0
+      # Override the host (Windows) path with a clean Linux path shared with the
+      # bind mount below — keeps the container's sandbox identical to the host's.
+      SANDBOX_ROOT: /sandbox
+    volumes:
+      # Hot-reload backend code without rebuilding the image
+      - ./backend/app:/app/app
+      # Share the agent sandbox between host and container
+      - ./sandbox:/sandbox
+    # Scope --reload to the app package (avoids watching .venv / node_modules)
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --reload-dir /app/app
 
 volumes:
   postgres_data:

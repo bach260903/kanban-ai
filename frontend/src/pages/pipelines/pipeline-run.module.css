@@ -43,6 +43,35 @@
   gap: var(--space-2);
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.rerunButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--c-brand-600);
+  background: transparent;
+  border: 1px solid var(--c-brand-600);
+  border-radius: var(--radius-2, 6px);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.rerunButton:hover:not(:disabled) {
+  background: var(--c-brand-600);
+  color: #fff;
+}
+.rerunButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .metaRow {
   margin-top: var(--space-2);
   font-size: 12px;
