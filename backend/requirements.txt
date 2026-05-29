@@ -10,7 +10,7 @@ asyncpg==0.29.0
 alembic==1.13.3
 
 # Validation
-pydantic==2.9.2
+pydantic[email]==2.9.2
 pydantic-settings==2.5.2
 
 # Auth
@@ -30,6 +30,12 @@ langchain-google-genai==2.0.0
 langgraph>=0.3.0,<0.4.0
 langgraph-checkpoint-postgres>=2.0.25,<3
 psycopg[binary]>=3.2.0
+
+# Lint (pipeline CI lint step — app.pipeline.step_runner.run_lint)
+ruff==0.6.9
+
+# Test (pipeline CI test step — app.pipeline.step_runner runs `python -m pytest`)
+pytest==8.3.3
 
 # Git
 gitpython==3.1.43

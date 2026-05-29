@@ -11,6 +11,8 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import settings
+from app.exceptions import SandboxEscapeError
 from app.models.pipeline_run import PipelineRun, PipelineRunStatus
 from app.models.pipeline_step import PipelineStep, PipelineStepStatus
 from app.models.deployment import Deployment, DeploymentStatus
@@ -82,6 +84,39 @@ class PipelineService:
             run_id, task_id, project_id,
         )
         return run
+
+    @staticmethod
+    def _project_sandbox(project_id: UUID) -> Path:
+        """Resolve the project's sandbox root, guarding against path escape."""
+        root = Path(settings.sandbox_root).expanduser().resolve()
+        proj = (root / str(project_id)).resolve()
+        try:
+            proj.relative_to(root)
+        except ValueError as exc:
+            raise SandboxEscapeError("Resolved sandbox path escapes SANDBOX_ROOT.") from exc
+        return proj
+
+    @staticmethod
+    async def rerun(session: AsyncSession, run_id: UUID) -> PipelineRun | None:
+        """Re-run the pipeline for an existing run's task/sandbox.
+
+        Creates a fresh PipelineRun against the same project/task/branch and
+        fires the executor in the background. Returns ``None`` if ``run_id``
+        does not exist. Used by the manual "Re-run" action in the CI UI.
+        """
+        old = await session.get(PipelineRun, run_id)
+        if old is None:
+            return None
+        sandbox = PipelineService._project_sandbox(old.project_id)
+        return await PipelineService.create_and_trigger(
+            session,
+            project_id=old.project_id,
+            task_id=old.task_id,
+            sandbox=sandbox,
+            triggered_by="manual_rerun",
+            branch_name=old.branch_name,
+            commit_sha=old.commit_sha,
+        )
 
     @staticmethod
     async def get_run(session: AsyncSession, run_id: UUID) -> PipelineRun | None:

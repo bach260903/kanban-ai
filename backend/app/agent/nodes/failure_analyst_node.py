@@ -155,6 +155,8 @@ Sandbox path hint: {sandbox_hint}
 {logs}
 === END LOGS ===
 
+{file_contents}
+
 Respond with EXACTLY this JSON structure:
 {{
   "root_cause": "...",
@@ -175,11 +177,57 @@ Rules:
 - is_auto_fixable: true only if fix is safe, low-risk, and you can provide exact file content
 - fix_files: list of files to create/overwrite to fix the issue (only when is_auto_fixable=true)
   * Each entry: {{"path": "relative/path/to/file", "content": "complete file content"}}
-  * Only include files you are CONFIDENT about
-  * Limit to 3 files maximum
+  * "content" MUST be the COMPLETE, corrected source of that file — start from the
+    current content shown above and apply the minimal change. It is RAW CODE only:
+    never an explanation, apology, summary, or placeholder. If you cannot produce the
+    full corrected file, set is_auto_fixable=false and leave fix_files empty.
+  * Keep everything that was correct; change only what the error requires.
+  * Only include files you are CONFIDENT about. Limit to 3 files maximum.
 - human_approval_required: true if fix touches auth/secrets/migrations/security
 - risk_level: "low" | "medium" | "high"
 """
+
+
+# Source files referenced in failure logs (e.g. "models/user.py:1:5:", traceback paths).
+_FILE_REF_RE = re.compile(
+    r"([A-Za-z0-9_][\w./-]*\.(?:py|ts|tsx|js|jsx|mjs|cjs|json|toml|cfg|ini|ya?ml))"
+)
+
+
+def _collect_referenced_files(
+    logs: str,
+    sandbox: Path | None,
+    *,
+    max_files: int = 3,
+    max_bytes: int = 6000,
+) -> dict[str, str]:
+    """Read the current content of source files mentioned in the failure logs.
+
+    Giving the analyst the real file content (not just the error) lets its single
+    LLM call produce a correct full-file fix instead of guessing — no extra LLM
+    calls, so it stays within free-tier budgets.
+    """
+    if sandbox is None:
+        return {}
+    seen: list[str] = []
+    for m in _FILE_REF_RE.finditer(logs):
+        rel = m.group(1).lstrip("./").replace("\\", "/")
+        if rel not in seen:
+            seen.append(rel)
+    out: dict[str, str] = {}
+    sandbox_root = sandbox.resolve()
+    for rel in seen:
+        if len(out) >= max_files:
+            break
+        try:
+            p = (sandbox / rel).resolve()
+            p.relative_to(sandbox_root)  # guard against path escape
+            if p.is_file():
+                text = p.read_text(encoding="utf-8", errors="replace")
+                out[rel] = text[:max_bytes]
+        except Exception:
+            continue
+    return out
 
 
 async def _llm_analysis(
@@ -194,10 +242,24 @@ async def _llm_analysis(
     log_snippet = logs[-4000:] if len(logs) > 4000 else logs
     sandbox_hint = str(sandbox) if sandbox else "(unknown)"
 
+    referenced = _collect_referenced_files(logs, sandbox)
+    if referenced:
+        blocks = "\n\n".join(
+            f"--- {rel} (current content) ---\n{content}" for rel, content in referenced.items()
+        )
+        file_contents = (
+            "=== CURRENT CONTENT OF FILES MENTIONED IN LOGS (fix these) ===\n"
+            f"{blocks}\n"
+            "=== END FILES ==="
+        )
+    else:
+        file_contents = "(No referenced source files could be read from the sandbox.)"
+
     prompt = _HUMAN_PROMPT_TEMPLATE.format(
         step_key=step_key,
         sandbox_hint=sandbox_hint,
         logs=log_snippet,
+        file_contents=file_contents,
     )
 
     messages = [

@@ -51,17 +51,39 @@ class VercelAdapter(BaseDeployAdapter):
         if team_id:
             params["teamId"] = team_id
 
+        # Fetch project info to get repoId + productionBranch (required by Vercel API v13)
+        repo_id: int | None = None
+        production_branch: str = branch_name
+        try:
+            async with httpx.AsyncClient(timeout=15) as client:
+                proj_resp = await client.get(
+                    f"{_VERCEL_API}/v9/projects/{project_name}",
+                    headers=headers,
+                    params=params,
+                )
+            if proj_resp.status_code == 200:
+                link = proj_resp.json().get("link") or {}
+                repo_id = link.get("repoId")
+                production_branch = link.get("productionBranch") or branch_name
+        except Exception as exc:
+            logger.warning("vercel_adapter: failed to fetch project info: %s", exc)
+
+        # Use production branch — sandbox branches are local and not pushed to GitHub
+        deploy_ref = production_branch
+
         # Trigger deployment from git branch
+        git_source: dict = {
+            "type": "github",
+            "ref": deploy_ref,
+        }
+        if repo_id is not None:
+            git_source["repoId"] = repo_id
+
         payload: dict = {
             "name": project_name,
-            "gitSource": {
-                "type": "github",
-                "ref": branch_name,
-            },
-            "target": "preview",
+            "gitSource": git_source,
+            "target": "production",
         }
-        if commit_sha:
-            payload["gitSource"]["sha"] = commit_sha
 
         try:
             async with httpx.AsyncClient(timeout=30) as client:

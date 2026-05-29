@@ -12,8 +12,9 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
-from app.dependencies import require_any_member, require_leader_or_above
+from app.dependencies import require_any_member, require_developer_or_above, require_leader_or_above
 from app.models.deployment import Deployment
+from app.models.pipeline_run import PipelineRun
 from app.models.pipeline_step import PipelineStep
 from app.models.project_member import ProjectMember
 from app.models.step_failure_analysis import StepFailureAnalysis
@@ -66,6 +67,37 @@ async def get_pipeline_run(
     if run is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Pipeline run not found")
     return PipelineRunOut.model_validate(run)
+
+
+@router.post(
+    "/projects/{project_id}/pipeline-runs/{run_id}/rerun",
+    response_model=PipelineRunOut,
+    status_code=status.HTTP_201_CREATED,
+)
+async def rerun_pipeline_run(
+    project_id: UUID,
+    run_id: UUID,
+    _member: Annotated[ProjectMember, require_developer_or_above],
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> PipelineRunOut:
+    """Re-run the CI/CD pipeline for an existing run (same task, fresh execution).
+
+    Used by the "Re-run" button in the pipeline view to re-validate a task's
+    sandbox after fixing the underlying cause of a failure.
+    """
+    old = await PipelineService.get_run(session, run_id)
+    if old is None or old.project_id != project_id:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Pipeline run not found")
+    new_run = await PipelineService.rerun(session, run_id)
+    if new_run is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Pipeline run not found")
+    # create_and_trigger commits, expiring `new_run`; re-select so the selectin
+    # relationships (steps → failure_analyses) load eagerly before serialization
+    # (avoids MissingGreenlet from lazy IO inside sync model_validate).
+    fresh = await session.scalar(select(PipelineRun).where(PipelineRun.id == new_run.id))
+    if fresh is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Pipeline run not found")
+    return PipelineRunOut.model_validate(fresh)
 
 
 # ── SSE live stream ───────────────────────────────────────────────────────────

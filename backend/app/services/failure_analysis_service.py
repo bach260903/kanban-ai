@@ -10,7 +10,9 @@ It:
 
 from __future__ import annotations
 
+import ast
 import asyncio
+import json
 import logging
 from dataclasses import dataclass
 from pathlib import Path
@@ -178,6 +180,52 @@ async def _apply_patch(
     return await asyncio.to_thread(_apply_patch_sync, sandbox, fix_files)
 
 
+# Phrases that mean the LLM wrote an explanation/refusal as the file body instead
+# of real code. These almost never appear verbatim in source files, so they are a
+# safe signal that the "fix" content is prose, not code.
+_EXPLANATION_MARKERS = (
+    "the content of this file",
+    "without the original content",
+    "cannot be provided",
+    "the exact fix cannot",
+    "it is recommended to",
+    "as an ai language model",
+    "i cannot provide",
+    "i'm sorry",
+    "i am sorry",
+    "here is the corrected",
+    "here's the corrected",
+)
+
+
+def _reject_bad_fix_content(rel_path: str, content: str) -> str | None:
+    """Return a reason string if ``content`` is clearly not valid source, else None.
+
+    Guards against the failure-analyst LLM returning an explanation/apology as the
+    file body (which corrupts the file — e.g. it once overwrote a .py module with
+    'The content of this file should be the same as the original…', producing a
+    SyntaxError on every later lint).
+    """
+    stripped = content.strip()
+    if not stripped:
+        return "empty content"
+    low = stripped.lower()
+    if any(marker in low for marker in _EXPLANATION_MARKERS):
+        return "content looks like an LLM explanation, not code"
+    suffix = Path(rel_path).suffix.lower()
+    if suffix == ".py":
+        try:
+            ast.parse(content)
+        except SyntaxError:
+            return "Python content has a syntax error"
+    elif suffix == ".json":
+        try:
+            json.loads(content)
+        except (json.JSONDecodeError, ValueError):
+            return "JSON content is invalid"
+    return None
+
+
 def _apply_patch_sync(
     sandbox: Path,
     fix_files: list[dict[str, str]],
@@ -219,6 +267,15 @@ def _apply_patch_sync(
         # Size guard
         if len(content.encode()) > _MAX_FILE_BYTES:
             errors.append(f"Skipped: content too large for {rel_path}")
+            continue
+
+        # Quality guard: never write non-code. The LLM sometimes returns an
+        # explanation/refusal as the file body, which corrupts the file and makes
+        # every later step fail. Reject it so the original file is left intact.
+        bad_reason = _reject_bad_fix_content(rel_path, content)
+        if bad_reason:
+            errors.append(f"Skipped: {bad_reason} — {rel_path}")
+            logger.warning("patch_apply: rejected bad content for %s — %s", rel_path, bad_reason)
             continue
 
         try:

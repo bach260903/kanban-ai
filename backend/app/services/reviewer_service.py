@@ -8,6 +8,8 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from app.llm.invoke_helpers import ainvoke_llm
+
 # ---------------------------------------------------------------------------
 # Test runner detection (T023)
 # ---------------------------------------------------------------------------
@@ -153,7 +155,22 @@ def scan_secrets(diff_content: str) -> list[dict[str, Any]]:
 # ---------------------------------------------------------------------------
 
 REVIEWER_PROMPT = """\
-You are a code reviewer. Analyze the following git diff.
+You are a senior code reviewer for an autonomous software factory. The diff below was written
+by an AI coding agent and will be merged automatically once approved, so review it as the last
+line of defense before code ships.
+
+Review the diff against these criteria, in priority order:
+1. CORRECTNESS — does the change do what the task intends? Logic errors, off-by-one, wrong
+   conditions, unhandled cases, broken control flow.
+2. BROKEN REFERENCES — imports/exports that won't resolve, calls to undefined symbols, files or
+   modules referenced but not created, mismatched function signatures.
+3. SECURITY — injection (SQL/command/XSS), missing input validation at trust boundaries, unsafe
+   deserialization, path traversal, hardcoded credentials. (Obvious secrets are flagged
+   separately — focus on logic-level security here.)
+4. CONSTITUTION ADHERENCE — violations of the project standards below.
+5. TESTS — missing coverage for new behavior, or tests that don't actually assert anything.
+6. MAINTAINABILITY — only call out issues serious enough to matter; do not nitpick style the
+   linter already handles.
 
 Project constitution (coding standards):
 {constitution}
@@ -169,9 +186,13 @@ Return ONLY valid JSON with this exact shape:
   ]
 }}
 
-Values for "suggestion": "approve" | "needs_changes"
-Values for "severity": "info" | "warning" | "error"
-Limit to the 10 most important comments. Be concise.\
+Rules:
+- "suggestion": "approve" only if there are no "error"-severity issues; otherwise "needs_changes".
+- "severity": "error" (blocks merge: bugs, broken refs, security) | "warning" (should fix) |
+  "info" (minor/optional).
+- Each comment must point to a real file_path and line_number from the diff and explain BOTH the
+  problem and the concrete fix — actionable, not vague.
+- Limit to the 10 most important comments. Be concise. Do not invent issues to fill the list.\
 """
 
 
@@ -211,7 +232,7 @@ async def ai_review_diff(
         diff=diff[:6000],
     )
     try:
-        response = await llm.ainvoke(prompt)
+        response = await ainvoke_llm(llm, prompt)
         raw = getattr(response, "content", "") or ""
         data: dict[str, Any] = json.loads(_extract_json(raw))
         suggestion: str = data.get("suggestion", "needs_changes")

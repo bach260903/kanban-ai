@@ -89,7 +89,7 @@ def _error_body(exc: BaseException, *, recoverable: bool = False) -> dict[str, A
 
 _MAX_READ = 400_000
 _MAX_WRITE = 500_000
-_MAX_TOOL_ROUNDS = 8
+_MAX_TOOL_ROUNDS = 12  # room for the write → run tests → fix → re-run self-verify loop
 _CODER_TASK_TIMEOUT_SEC = 600
 
 
@@ -149,23 +149,41 @@ def _fs_write(sandbox: Path, relative_path: str, content: str) -> str:
     return f"Wrote {len(content)} bytes to {relative_path}"
 
 
-def _run_git_command(sandbox: Path, command: str) -> str:
+# Executables the coder may run to verify its own work (no shell; args tokenised).
+# git + test/compile/lint runners so the agent can catch broken cross-file
+# references (e.g. calling a method the model never defines) before finishing.
+_ALLOWED_TERMINAL_CMDS = {
+    "git", "python", "python3", "pytest", "ruff", "node", "npx", "npm",
+}
+
+
+def _run_terminal_command(sandbox: Path, command: str) -> str:
+    """Run a whitelisted verification command (git + test/compile/lint) in the sandbox.
+
+    No shell is used (arguments are tokenised), only whitelisted executables may run,
+    and each command is capped at 60s per the security constitution.
+    """
     raw = command.strip()
     if not raw:
         raise ValueError("Empty command.")
-    parts = shlex.split(raw)
-    if not parts or parts[0] != "git":
-        raise ValueError("Only `git ...` commands are allowed.")
-    if len(raw) > 300:
+    if len(raw) > 500:
         raise ValueError("Command too long.")
+    parts = shlex.split(raw)
+    if not parts:
+        raise ValueError("Empty command.")
+    if parts[0] not in _ALLOWED_TERMINAL_CMDS:
+        raise ValueError(
+            f"Command '{parts[0]}' is not allowed. "
+            f"Allowed: {', '.join(sorted(_ALLOWED_TERMINAL_CMDS))}."
+        )
     proc = subprocess.run(
         parts,
         cwd=sandbox,
         capture_output=True,
         text=True,
-        timeout=120,
+        timeout=60,
     )
-    out = (proc.stdout or "") + (proc.stderr or "")
+    out = ((proc.stdout or "") + (proc.stderr or ""))[:8000]
     if proc.returncode != 0:
         return f"(exit {proc.returncode})\n{out}"
     return out or "(no output)"
@@ -185,7 +203,12 @@ def write_file(relative_path: str, content: str) -> str:
 
 @tool
 def run_terminal(command: str) -> str:
-    """Run a `git ...` command with cwd set to the sandbox (no shell metacharacters)."""
+    """Run ONE verification command in the sandbox to check your own work.
+
+    Allowed: git, python, pytest, ruff, node, npx, npm. Use it to run your tests and
+    compile/lint checks before finishing, e.g. `python -m pytest -q`,
+    `python -m py_compile models/user.py`, `ruff check .`, `node --check app.js`.
+    No shell metacharacters; one command per call; 60s timeout."""
     return command
 
 
@@ -258,8 +281,15 @@ async def _check_task_cancelled(
     task_id: UUID,
     agent_run_id: UUID,
 ) -> None:
-    """Re-fetch task from DB; raise _TaskCancelledError if it is no longer in_progress."""
+    """Re-fetch task from DB; raise _TaskCancelledError if it is no longer in_progress.
+
+    Forces a fresh DB read: the coder's session has the task cached as IN_PROGRESS
+    from the start of the run, so a plain ``session.get`` would return that stale
+    copy and never observe a cancel committed by another session.
+    """
     fresh = await session.get(Task, task_id)
+    if fresh is not None:
+        await session.refresh(fresh, attribute_names=["status"])
     if fresh is None or fresh.status != TaskStatus.IN_PROGRESS:
         status_str = str(fresh.status) if fresh else "deleted"
         logger.warning(
@@ -368,7 +398,7 @@ async def _execute_tool(
                     "audit_log_id": str(log.id),
                 },
             )
-            out = await asyncio.to_thread(_run_git_command, sandbox, cmd)
+            out = await asyncio.to_thread(_run_terminal_command, sandbox, cmd)
             await finalise_log(session, log.id, AuditLogResult.SUCCESS, output_refs=[cmd])
             return out
         except Exception as exc:

@@ -367,8 +367,14 @@ class KanbanService:
                 )
             )
 
-            # ── GitHub: commit staged changes to task branch, push, create PR ──
-            # Must happen BEFORE squash_and_merge because that call deletes the branch.
+            # Persist the agent's work as a real commit on the task branch. The branch
+            # is merged into the integration branch (main) ONLY after the CI pipeline
+            # passes — done in the pipeline executor — so failing code never reaches
+            # main, locally or on GitHub. (CI-gated promotion.)
+            await asyncio.to_thread(GitService.commit_all, sandbox, f"feat: {task.title}")
+
+            # ── GitHub: push the task branch + open a PR. This does NOT touch main;
+            # the PR is the review/CI surface. main is updated post-CI in the executor.
             if branch_name is not None and gh_config is not None:
                 try:
                     pushed = await github_service.commit_and_push_branch(
@@ -395,26 +401,6 @@ class KanbanService:
                 except Exception:
                     logger.exception(
                         "GitHub push/PR failed task_id=%s", task.id
-                    )
-
-            squash_ok = False
-            try:
-                await BranchService.squash_and_merge(session, task.id, sandbox)
-                squash_ok = True
-            except GitCommandError:
-                await session.refresh(task)
-                return task
-            except NotFoundError:
-                logger.info("squash merge skipped: no task branch for task_id=%s", task.id)
-                squash_ok = True  # nothing to merge, treat as ok
-
-            # ── GitHub: push integration branch (main) so GitHub stays in sync with all done tasks ──
-            if squash_ok and gh_config is not None:
-                try:
-                    await github_service.push_integration_branch(gh_config, sandbox)
-                except Exception:
-                    logger.exception(
-                        "GitHub push main failed after squash task_id=%s", task.id
                     )
 
         task.status = to_status

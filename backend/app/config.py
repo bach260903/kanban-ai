@@ -144,6 +144,15 @@ class Settings(BaseSettings):
         default=4,
         description="Retries on Gemini 429 ResourceExhausted.",
     )
+    llm_auto_failover: bool = Field(
+        default=True,
+        description=(
+            "When a provider's quota/rate limit is exhausted (429), automatically "
+            "retry the request on the other configured provider (Groq <-> Google). "
+            "Requires both GROQ_API_KEY and GOOGLE_API_KEY in .env. "
+            "Set LLM_AUTO_FAILOVER=false to disable."
+        ),
+    )
     openai_api_key: str | None = Field(default=None)
     openai_model: str = Field(default="gpt-4o-mini")
     openai_base_url: str | None = Field(default=None)

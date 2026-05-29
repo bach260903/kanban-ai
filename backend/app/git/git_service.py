@@ -34,7 +34,9 @@ class GitService:
         orig: list[str] = []
         mod: list[str] = []
         for patch in patches:
-            for change in patch.changes:
+            # whatthepatch yields changes=None for entries with no line changes
+            # (binary files, pure mode/rename changes) — skip them instead of crashing.
+            for change in (patch.changes or []):
                 if change.old is not None and change.new is not None:
                     orig.append(change.line)
                     mod.append(change.line)
@@ -154,3 +156,37 @@ class GitService:
         files = [line.strip() for line in (r2.stdout or "").splitlines() if line.strip()]
         orig, mod = GitService.unified_to_monaco(unified)
         return GitDiffResult(unified=unified, files=files, original_content=orig, modified_content=mod)
+
+    @staticmethod
+    def commit_all(sandbox_path: Path, message: str) -> bool:
+        """Stage everything and commit on the current branch.
+
+        Returns ``True`` if a commit was created, ``False`` if the tree was clean.
+        Used to persist the agent's work onto the task branch as a real commit so a
+        later squash-merge is a normal git operation (not reliant on a carried index).
+        """
+        subprocess.run(
+            ["git", "add", "-A"], cwd=sandbox_path, check=True, capture_output=True, text=True
+        )
+        staged = subprocess.run(
+            ["git", "diff", "--cached", "--quiet"], cwd=sandbox_path, capture_output=True
+        )
+        if staged.returncode == 0:
+            return False  # nothing staged → nothing to commit
+        subprocess.run(
+            ["git", "commit", "-m", message],
+            cwd=sandbox_path, check=True, capture_output=True, text=True,
+        )
+        return True
+
+    @staticmethod
+    def discard_unstaged(sandbox_path: Path) -> None:
+        """Reset tracked files to HEAD, discarding uncommitted edits (e.g. lint --fix).
+
+        Lets a subsequent branch checkout/merge run cleanly after CI steps modified
+        the working tree. Untracked files (node_modules, etc.) are left in place.
+        """
+        subprocess.run(
+            ["git", "reset", "--hard", "HEAD"],
+            cwd=sandbox_path, capture_output=True, text=True,
+        )

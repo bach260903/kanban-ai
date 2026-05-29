@@ -15,6 +15,7 @@ Architecture designed for DAG upgrade:
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from datetime import datetime, timezone
 from pathlib import Path
@@ -116,6 +117,11 @@ async def execute_pipeline(run_id: UUID, sandbox: Path) -> None:
         run.completed_at = _now()
         run.ai_summary = _build_summary(run, overall_ok)
         await session.commit()
+
+        # ── CI-gated promotion: merge the task branch into main ONLY when CI passed ──
+        # so failing code never lands on the integration branch (local or GitHub).
+        if overall_ok:
+            await _promote_to_main_on_success(session, run, sandbox, gh_config)
 
         # Post final GitHub pipeline status
         if gh_config and run.commit_sha:
@@ -502,6 +508,50 @@ async def _get_or_create_step(
     session.add(step)
     await session.flush()
     return step
+
+
+async def _promote_to_main_on_success(
+    session: AsyncSession,
+    run: PipelineRun,
+    sandbox: Path,
+    gh_config: object | None,
+) -> None:
+    """Merge the task branch into the integration branch and push it to GitHub.
+
+    Runs only after the pipeline passed, so only CI-validated code reaches main —
+    locally and on GitHub. All failures are logged, never raised, so a promotion
+    problem cannot turn a green pipeline red.
+    """
+    if run.task_id is None:
+        return
+
+    from app.exceptions import NotFoundError
+    from app.git.branch_service import BranchService
+    from app.git.git_service import GitService
+
+    # Discard CI side-effects (e.g. ruff --fix edits) so the branch checkout is clean.
+    try:
+        await asyncio.to_thread(GitService.discard_unstaged, sandbox)
+    except Exception:
+        logger.debug("promote: discard_unstaged failed (non-fatal)", exc_info=True)
+
+    try:
+        await BranchService.squash_and_merge(session, run.task_id, sandbox)
+        await session.commit()
+    except NotFoundError:
+        logger.info("promote: no task branch for task=%s; nothing to merge", run.task_id)
+        return
+    except Exception:
+        logger.warning("promote: squash-merge failed for task=%s", run.task_id, exc_info=True)
+        return
+
+    if gh_config is not None:
+        from app.services import github_service
+        try:
+            await github_service.push_integration_branch(gh_config, sandbox)
+            logger.info("promote: pushed integration branch to GitHub for task=%s", run.task_id)
+        except Exception:
+            logger.warning("promote: GitHub push main failed for task=%s", run.task_id, exc_info=True)
 
 
 def _build_summary(run: PipelineRun, success: bool) -> str:
