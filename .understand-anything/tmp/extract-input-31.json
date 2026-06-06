@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "agents/src/graph_smoke.py",
+                           "language":  "python",
+                           "sizeLines":  35,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/graph.py",
+                           "language":  "python",
+                           "sizeLines":  96,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/state.py",
+                           "language":  "python",
+                           "sizeLines":  65,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/tools/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  4,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/tools/registry.py",
+                           "language":  "python",
+                           "sizeLines":  225,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/env.py",
+                           "language":  "python",
+                           "sizeLines":  89,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/script.py.mako",
+                           "language":  "mako",
+                           "sizeLines":  26,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/001_initial_schema.py",
+                           "language":  "python",
+                           "sizeLines":  428,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/002_phase2_schema.py",
+                           "language":  "python",
+                           "sizeLines":  256,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/003_add_users.py",
+                           "language":  "python",
+                           "sizeLines":  45,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/004_add_coding_backend.py",
+                           "language":  "python",
+                           "sizeLines":  38,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/004_auto_dispatch.py",
+                           "language":  "python",
+                           "sizeLines":  32,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/005_platform_expansion.py",
+                           "language":  "python",
+                           "sizeLines":  541,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/006_wip_per_developer_index.py",
+                           "language":  "python",
+                           "sizeLines":  40,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/007_auth_oauth_fields.py",
+                           "language":  "python",
+                           "sizeLines":  64,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/008_merge_wip_oauth_heads.py",
+                           "language":  "python",
+                           "sizeLines":  29,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/009_drop_project_name_unique.py",
+                           "language":  "python",
+                           "sizeLines":  29,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/010_add_member_status.py",
+                           "language":  "python",
+                           "sizeLines":  38,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/011_webhook_response_body.py",
+                           "language":  "python",
+                           "sizeLines":  27,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/012_pipeline_cicd.py",
+                           "language":  "python",
+                           "sizeLines":  101,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/013_deployment_phase2.py",
+                           "language":  "python",
+                           "sizeLines":  65,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/014fb7e4d101_merge_migration_heads.py",
+                           "language":  "python",
+                           "sizeLines":  26,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/015_failure_analysis.py",
+                           "language":  "python",
+                           "sizeLines":  75,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/alembic/versions/016_devops_monitoring.py",
+                           "language":  "python",
+                           "sizeLines":  150,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  1,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "agents/src/graph_smoke.py":  [
+
+                                                          ],
+                            "agents/src/graph.py":  [
+
+                                                    ],
+                            "agents/src/state.py":  [
+
+                                                    ],
+                            "agents/src/tools/__init__.py":  [
+
+                                                             ],
+                            "agents/src/tools/registry.py":  [
+
+                                                             ],
+                            "backend/alembic/env.py":  [
+
+                                                       ],
+                            "backend/alembic/script.py.mako":  [
+
+                                                               ],
+                            "backend/alembic/versions/001_initial_schema.py":  [
+
+                                                                               ],
+                            "backend/alembic/versions/002_phase2_schema.py":  [
+
+                                                                              ],
+                            "backend/alembic/versions/003_add_users.py":  [
+
+                                                                          ],
+                            "backend/alembic/versions/004_add_coding_backend.py":  [
+
+                                                                                   ],
+                            "backend/alembic/versions/004_auto_dispatch.py":  [
+
+                                                                              ],
+                            "backend/alembic/versions/005_platform_expansion.py":  [
+
+                                                                                   ],
+                            "backend/alembic/versions/006_wip_per_developer_index.py":  [
+
+                                                                                        ],
+                            "backend/alembic/versions/007_auth_oauth_fields.py":  [
+
+                                                                                  ],
+                            "backend/alembic/versions/008_merge_wip_oauth_heads.py":  [
+
+                                                                                      ],
+                            "backend/alembic/versions/009_drop_project_name_unique.py":  [
+
+                                                                                         ],
+                            "backend/alembic/versions/010_add_member_status.py":  [
+
+                                                                                  ],
+                            "backend/alembic/versions/011_webhook_response_body.py":  [
+
+                                                                                      ],
+                            "backend/alembic/versions/012_pipeline_cicd.py":  [
+
+                                                                              ],
+                            "backend/alembic/versions/013_deployment_phase2.py":  [
+
+                                                                                  ],
+                            "backend/alembic/versions/014fb7e4d101_merge_migration_heads.py":  [
+
+                                                                                               ],
+                            "backend/alembic/versions/015_failure_analysis.py":  [
+
+                                                                                 ],
+                            "backend/alembic/versions/016_devops_monitoring.py":  [
+
+                                                                                  ],
+                            "backend/app/__init__.py":  [
+
+                                                        ]
+                        }
+}

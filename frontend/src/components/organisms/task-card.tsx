@@ -64,18 +64,6 @@ const STATUS_TONE: Record<
     chipText: 'text-emerald-700',
     label: 'Done',
   },
-  rejected: {
-    ring: 'ring-red-200',
-    chip: 'bg-red-50',
-    chipText: 'text-red-700',
-    label: 'Rejected',
-  },
-  conflict: {
-    ring: 'ring-amber-300',
-    chip: 'bg-amber-50',
-    chipText: 'text-amber-700',
-    label: 'Conflict',
-  },
 }
 
 const AI_STATUS_TONE: Record<
@@ -281,7 +269,6 @@ function TaskCardInner({
         statusTone.ring,
         isDragging ? 'rotate-1 scale-[1.02] shadow-elev-3 ring-brand-400 opacity-90' : '',
         isAgentRunning ? 'animate-pulse-brand ring-2 ring-brand-400' : '',
-        task.status === 'conflict' ? 'ring-2 ring-amber-400' : '',
         isReviewSelected ? 'ring-2 ring-violet-400 shadow-ring-brand' : '',
         onView ? 'cursor-pointer hover:-translate-y-0.5 hover:shadow-elev-2' : '',
         draggable ? 'cursor-grab active:cursor-grabbing' : '',

@@ -1,10 +1,11 @@
 import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import type { ReactNode } from 'react'
+import { useMemo, type ReactNode } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 
 import { TaskCard, type TaskCardData } from './task-card'
 import { useTaskStore } from '../../store/task-store'
-import type { ProjectMember, ProjectRole, TaskStatus } from '../../types'
+import type { AgentRunStatus, ProjectMember, ProjectRole, TaskStatus } from '../../types'
 
 export type KanbanColumnModel = {
   status: TaskStatus
@@ -75,22 +76,6 @@ const STATUS_THEME: Record<TaskStatus, StatusTheme> = {
     chipText: 'text-emerald-700',
     dropOver: 'ring-emerald-400 bg-emerald-50/70',
   },
-  rejected: {
-    title: 'Rejected',
-    description: 'Needs revision before retry.',
-    headerBar: 'bg-red-500',
-    chipBg: 'bg-red-50',
-    chipText: 'text-red-700',
-    dropOver: 'ring-red-400 bg-red-50/70',
-  },
-  conflict: {
-    title: 'Conflict',
-    description: 'Merge conflict — manual resolve.',
-    headerBar: 'bg-amber-500',
-    chipBg: 'bg-amber-50',
-    chipText: 'text-amber-800',
-    dropOver: 'ring-amber-400 bg-amber-50/70',
-  },
 }
 
 const EMPTY_HINTS: Record<TaskStatus, string> = {
@@ -98,8 +83,6 @@ const EMPTY_HINTS: Record<TaskStatus, string> = {
   in_progress: 'Drag a task here to start the Coder Agent.',
   review: 'Nothing in review yet.',
   done: 'No tasks done yet.',
-  rejected: 'No rejected tasks.',
-  conflict: 'No conflicts — nice!',
 }
 
 function IconPlus() {
@@ -192,7 +175,20 @@ export function KanbanColumn({
   const { status, tasks } = column
   const theme = STATUS_THEME[status]
   const ids = tasks.map((t) => t.id)
-  const agentMap = useTaskStore((s) => s.taskAgentByTaskId)
+
+  // Only subscribe to agent runs for tasks in THIS column, with shallow equality.
+  // Without this, ALL 4 columns re-render every time any task's agent status changes.
+  const taskIds = useMemo(() => tasks.map((t) => t.id), [tasks])
+  const agentMap = useTaskStore(
+    useShallow((s) => {
+      const result: Record<string, { runId: string; status: AgentRunStatus }> = {}
+      for (const id of taskIds) {
+        const meta = s.taskAgentByTaskId[id]
+        if (meta) result[id] = meta
+      }
+      return result
+    })
+  )
 
   const { setNodeRef, isOver } = useDroppable({
     id: `droppable-${status}`,

@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "frontend/src/pages/pipelines/pipeline-run.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  549,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/project-list.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  180,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/project-settings.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  124,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/project-workspace.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  716,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/register.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  598,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/reset-password.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  285,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/analytics-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  89,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/api-client.ts",
+                           "language":  "typescript",
+                           "sizeLines":  70,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  114,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/audit-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  34,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/auth-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  92,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/dependency-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  88,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/deployment-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  65,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/devops-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  144,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/document-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  207,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/github-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  36,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/member-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  68,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/memory-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  38,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/notification-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  34,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/pipeline-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  162,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/project-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  76,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/review-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  262,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/task-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  207,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/template-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  40,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/services/webhook-api.ts",
+                           "language":  "typescript",
+                           "sizeLines":  70,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "frontend/src/pages/pipelines/pipeline-run.tsx":  [
+
+                                                                              ],
+                            "frontend/src/pages/project-list.tsx":  [
+
+                                                                    ],
+                            "frontend/src/pages/project-settings.tsx":  [
+
+                                                                        ],
+                            "frontend/src/pages/project-workspace.tsx":  [
+
+                                                                         ],
+                            "frontend/src/pages/register.tsx":  [
+
+                                                                ],
+                            "frontend/src/pages/reset-password.tsx":  [
+
+                                                                      ],
+                            "frontend/src/services/analytics-api.ts":  [
+
+                                                                       ],
+                            "frontend/src/services/api-client.ts":  [
+
+                                                                    ],
+                            "frontend/src/services/api.ts":  [
+
+                                                             ],
+                            "frontend/src/services/audit-api.ts":  [
+
+                                                                   ],
+                            "frontend/src/services/auth-api.ts":  [
+
+                                                                  ],
+                            "frontend/src/services/dependency-api.ts":  [
+
+                                                                        ],
+                            "frontend/src/services/deployment-api.ts":  [
+
+                                                                        ],
+                            "frontend/src/services/devops-api.ts":  [
+
+                                                                    ],
+                            "frontend/src/services/document-api.ts":  [
+
+                                                                      ],
+                            "frontend/src/services/github-api.ts":  [
+
+                                                                    ],
+                            "frontend/src/services/member-api.ts":  [
+
+                                                                    ],
+                            "frontend/src/services/memory-api.ts":  [
+
+                                                                    ],
+                            "frontend/src/services/notification-api.ts":  [
+
+                                                                          ],
+                            "frontend/src/services/pipeline-api.ts":  [
+
+                                                                      ],
+                            "frontend/src/services/project-api.ts":  [
+
+                                                                     ],
+                            "frontend/src/services/review-api.ts":  [
+
+                                                                    ],
+                            "frontend/src/services/task-api.ts":  [
+
+                                                                  ],
+                            "frontend/src/services/template-api.ts":  [
+
+                                                                      ],
+                            "frontend/src/services/webhook-api.ts":  [
+
+                                                                     ]
+                        }
+}

@@ -51,9 +51,9 @@ def _make_proc(returncode: int = 0, stdout_lines: list[bytes] | None = None, std
 
 @pytest.mark.asyncio
 class TestCliCoderNodeTimeout:
-    """TC-03: timeout path sets status=rejected and publishes CLI_TIMEOUT (T025)."""
+    """TC-03: timeout path resets status to todo and publishes CLI_TIMEOUT (T025)."""
 
-    async def test_timeout_sets_rejected_and_publishes_error(self):
+    async def test_timeout_resets_to_todo_and_publishes_error(self):
         from app.agent.nodes import cli_coder_node
 
         with (

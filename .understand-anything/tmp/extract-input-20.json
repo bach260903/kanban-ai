@@ -1,0 +1,79 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "frontend/.env.example",
+                           "language":  "config",
+                           "sizeLines":  2,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "frontend/README.md",
+                           "language":  "markdown",
+                           "sizeLines":  73,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "frontend/components.json",
+                           "language":  "json",
+                           "sizeLines":  25,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "frontend/index.html",
+                           "language":  "html",
+                           "sizeLines":  24,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/package.json",
+                           "language":  "json",
+                           "sizeLines":  52,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "frontend/tsconfig.app.json",
+                           "language":  "json",
+                           "sizeLines":  26,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "frontend/tsconfig.json",
+                           "language":  "json",
+                           "sizeLines":  7,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "frontend/tsconfig.node.json",
+                           "language":  "json",
+                           "sizeLines":  25,
+                           "fileCategory":  "config"
+                       }
+                   ],
+    "batchImportData":  {
+                            "frontend/.env.example":  [
+
+                                                      ],
+                            "frontend/README.md":  [
+
+                                                   ],
+                            "frontend/components.json":  [
+
+                                                         ],
+                            "frontend/index.html":  [
+
+                                                    ],
+                            "frontend/package.json":  [
+
+                                                      ],
+                            "frontend/tsconfig.app.json":  [
+
+                                                           ],
+                            "frontend/tsconfig.json":  [
+
+                                                       ],
+                            "frontend/tsconfig.node.json":  [
+
+                                                            ]
+                        }
+}

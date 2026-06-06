@@ -1,0 +1,3574 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_postinstall.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_postinstall.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 733,
+      "nonEmptyLines": 641,
+      "functions": [
+        {
+          "name": "get_root_hkey",
+          "startLine": 64,
+          "endLine": 73,
+          "params": []
+        },
+        {
+          "name": "create_shortcut",
+          "startLine": 78,
+          "endLine": 100,
+          "params": [
+            "path",
+            "description",
+            "filename",
+            "arguments",
+            "workdir",
+            "iconpath",
+            "iconindex"
+          ]
+        },
+        {
+          "name": "get_special_folder_path",
+          "startLine": 104,
+          "endLine": 116,
+          "params": [
+            "path_name"
+          ]
+        },
+        {
+          "name": "CopyTo",
+          "startLine": 119,
+          "endLine": 145,
+          "params": [
+            "desc",
+            "src",
+            "dest"
+          ]
+        },
+        {
+          "name": "LoadSystemModule",
+          "startLine": 154,
+          "endLine": 170,
+          "params": [
+            "lib_dir",
+            "modname"
+          ]
+        },
+        {
+          "name": "SetPyKeyVal",
+          "startLine": 173,
+          "endLine": 185,
+          "params": [
+            "key_name",
+            "value_name",
+            "value"
+          ]
+        },
+        {
+          "name": "UnsetPyKeyVal",
+          "startLine": 188,
+          "endLine": 208,
+          "params": [
+            "key_name",
+            "value_name",
+            "delete_key"
+          ]
+        },
+        {
+          "name": "RegisterCOMObjects",
+          "startLine": 211,
+          "endLine": 227,
+          "params": [
+            "register"
+          ]
+        },
+        {
+          "name": "RegisterHelpFile",
+          "startLine": 230,
+          "endLine": 245,
+          "params": [
+            "register",
+            "lib_dir"
+          ]
+        },
+        {
+          "name": "RegisterPythonwin",
+          "startLine": 248,
+          "endLine": 309,
+          "params": [
+            "register",
+            "lib_dir"
+          ]
+        },
+        {
+          "name": "get_shortcuts_folder",
+          "startLine": 312,
+          "endLine": 332,
+          "params": []
+        },
+        {
+          "name": "get_system_dir",
+          "startLine": 337,
+          "endLine": 352,
+          "params": []
+        },
+        {
+          "name": "fixup_dbi",
+          "startLine": 355,
+          "endLine": 378,
+          "params": []
+        },
+        {
+          "name": "install",
+          "startLine": 381,
+          "endLine": 548,
+          "params": [
+            "lib_dir"
+          ]
+        },
+        {
+          "name": "uninstall",
+          "startLine": 551,
+          "endLine": 636,
+          "params": [
+            "lib_dir"
+          ]
+        },
+        {
+          "name": "verify_destination",
+          "startLine": 645,
+          "endLine": 651,
+          "params": [
+            "location"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 654,
+          "endLine": 729,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "Tee",
+          "startLine": 23,
+          "endLine": 41,
+          "methods": [
+            "__init__",
+            "write",
+            "flush"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Tee",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "get_root_hkey",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "create_shortcut",
+          "line": 78,
+          "isDefault": false
+        },
+        {
+          "name": "get_special_folder_path",
+          "line": 104,
+          "isDefault": false
+        },
+        {
+          "name": "CopyTo",
+          "line": 119,
+          "isDefault": false
+        },
+        {
+          "name": "LoadSystemModule",
+          "line": 154,
+          "isDefault": false
+        },
+        {
+          "name": "SetPyKeyVal",
+          "line": 173,
+          "isDefault": false
+        },
+        {
+          "name": "UnsetPyKeyVal",
+          "line": 188,
+          "isDefault": false
+        },
+        {
+          "name": "RegisterCOMObjects",
+          "line": 211,
+          "isDefault": false
+        },
+        {
+          "name": "RegisterHelpFile",
+          "line": 230,
+          "isDefault": false
+        },
+        {
+          "name": "RegisterPythonwin",
+          "line": 248,
+          "isDefault": false
+        },
+        {
+          "name": "get_shortcuts_folder",
+          "line": 312,
+          "isDefault": false
+        },
+        {
+          "name": "get_system_dir",
+          "line": 337,
+          "isDefault": false
+        },
+        {
+          "name": "fixup_dbi",
+          "line": 355,
+          "isDefault": false
+        },
+        {
+          "name": "install",
+          "line": 381,
+          "isDefault": false
+        },
+        {
+          "name": "uninstall",
+          "line": 551,
+          "isDefault": false
+        },
+        {
+          "name": "verify_destination",
+          "line": 645,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 654,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "write",
+          "callee": "self.f.write",
+          "lineNumber": 30
+        },
+        {
+          "caller": "write",
+          "callee": "what.replace",
+          "lineNumber": 30
+        },
+        {
+          "caller": "write",
+          "callee": "tee_f.write",
+          "lineNumber": 33
+        },
+        {
+          "caller": "flush",
+          "callee": "self.f.flush",
+          "lineNumber": 38
+        },
+        {
+          "caller": "flush",
+          "callee": "tee_f.flush",
+          "lineNumber": 41
+        },
+        {
+          "caller": "get_root_hkey",
+          "callee": "winreg.OpenKey",
+          "lineNumber": 66
+        },
+        {
+          "caller": "create_shortcut",
+          "callee": "pythoncom.CoCreateInstance",
+          "lineNumber": 84
+        },
+        {
+          "caller": "create_shortcut",
+          "callee": "ilink.SetPath",
+          "lineNumber": 90
+        },
+        {
+          "caller": "create_shortcut",
+          "callee": "ilink.SetDescription",
+          "lineNumber": 91
+        },
+        {
+          "caller": "create_shortcut",
+          "callee": "ilink.SetArguments",
+          "lineNumber": 93
+        },
+        {
+          "caller": "create_shortcut",
+          "callee": "ilink.SetWorkingDirectory",
+          "lineNumber": 95
+        },
+        {
+          "caller": "create_shortcut",
+          "callee": "ilink.SetIconLocation",
+          "lineNumber": 97
+        },
+        {
+          "caller": "create_shortcut",
+          "callee": "ilink.QueryInterface",
+          "lineNumber": 99
+        },
+        {
+          "caller": "create_shortcut",
+          "callee": "ipf.Save",
+          "lineNumber": 100
+        },
+        {
+          "caller": "get_special_folder_path",
+          "callee": "\"\"\"\r\n        CSIDL_COMMON_STARTMENU CSIDL_STARTMENU CSIDL_COMMON_APPDATA\r\n        CSIDL_LOCAL_APPDATA CSIDL_APPDATA CSIDL_COMMON_DESKTOPDIRECTORY\r\n        CSIDL_DESKTOPDIRECTORY CSIDL_COMMON_STARTUP CSIDL_STARTUP\r\n        CSIDL_COMMON_PROGRAMS CSIDL_PROGRAMS CSIDL_PROGRAM_FILES_COMMON\r\n        CSIDL_PROGRAM_FILES CSIDL_FONTS\"\"\".split",
+          "lineNumber": 107
+        },
+        {
+          "caller": "get_special_folder_path",
+          "callee": "getattr",
+          "lineNumber": 114
+        },
+        {
+          "caller": "get_special_folder_path",
+          "callee": "shell.SHGetSpecialFolderPath",
+          "lineNumber": 115
+        },
+        {
+          "caller": "get_special_folder_path",
+          "callee": "ValueError",
+          "lineNumber": 116
+        },
+        {
+          "caller": "CopyTo",
+          "callee": "win32api.CopyFile",
+          "lineNumber": 125
+        },
+        {
+          "caller": "CopyTo",
+          "callee": "win32api.MessageBox",
+          "lineNumber": 138
+        },
+        {
+          "caller": "LoadSystemModule",
+          "callee": "os.path.join",
+          "lineNumber": 166
+        },
+        {
+          "caller": "LoadSystemModule",
+          "callee": "importlib.machinery.ExtensionFileLoader",
+          "lineNumber": 167
+        },
+        {
+          "caller": "LoadSystemModule",
+          "callee": "importlib.machinery.ModuleSpec",
+          "lineNumber": 168
+        },
+        {
+          "caller": "LoadSystemModule",
+          "callee": "importlib.util.module_from_spec",
+          "lineNumber": 169
+        },
+        {
+          "caller": "LoadSystemModule",
+          "callee": "loader.exec_module",
+          "lineNumber": 170
+        },
+        {
+          "caller": "SetPyKeyVal",
+          "callee": "get_root_hkey",
+          "lineNumber": 174
+        },
+        {
+          "caller": "SetPyKeyVal",
+          "callee": "winreg.OpenKey",
+          "lineNumber": 175
+        },
+        {
+          "caller": "SetPyKeyVal",
+          "callee": "winreg.CreateKey",
+          "lineNumber": 177
+        },
+        {
+          "caller": "SetPyKeyVal",
+          "callee": "winreg.SetValueEx",
+          "lineNumber": 179
+        },
+        {
+          "caller": "SetPyKeyVal",
+          "callee": "print",
+          "lineNumber": 181
+        },
+        {
+          "caller": "SetPyKeyVal",
+          "callee": "my_key.Close",
+          "lineNumber": 183
+        },
+        {
+          "caller": "SetPyKeyVal",
+          "callee": "root_key.Close",
+          "lineNumber": 185
+        },
+        {
+          "caller": "UnsetPyKeyVal",
+          "callee": "get_root_hkey",
+          "lineNumber": 189
+        },
+        {
+          "caller": "UnsetPyKeyVal",
+          "callee": "winreg.OpenKey",
+          "lineNumber": 190
+        },
+        {
+          "caller": "UnsetPyKeyVal",
+          "callee": "winreg.OpenKey",
+          "lineNumber": 192
+        },
+        {
+          "caller": "UnsetPyKeyVal",
+          "callee": "winreg.DeleteValue",
+          "lineNumber": 194
+        },
+        {
+          "caller": "UnsetPyKeyVal",
+          "callee": "print",
+          "lineNumber": 196
+        },
+        {
+          "caller": "UnsetPyKeyVal",
+          "callee": "my_key.Close",
+          "lineNumber": 198
+        },
+        {
+          "caller": "UnsetPyKeyVal",
+          "callee": "winreg.DeleteKey",
+          "lineNumber": 200
+        },
+        {
+          "caller": "UnsetPyKeyVal",
+          "callee": "print",
+          "lineNumber": 202
+        },
+        {
+          "caller": "UnsetPyKeyVal",
+          "callee": "getattr",
+          "lineNumber": 204
+        },
+        {
+          "caller": "UnsetPyKeyVal",
+          "callee": "root_key.Close",
+          "lineNumber": 208
+        },
+        {
+          "caller": "RegisterCOMObjects",
+          "callee": "__import__",
+          "lineNumber": 222
+        },
+        {
+          "caller": "RegisterCOMObjects",
+          "callee": "getattr",
+          "lineNumber": 224
+        },
+        {
+          "caller": "RegisterCOMObjects",
+          "callee": "getattr",
+          "lineNumber": 225
+        },
+        {
+          "caller": "RegisterCOMObjects",
+          "callee": "getattr",
+          "lineNumber": 226
+        },
+        {
+          "caller": "RegisterCOMObjects",
+          "callee": "func",
+          "lineNumber": 227
+        },
+        {
+          "caller": "RegisterHelpFile",
+          "callee": "sysconfig.get_paths",
+          "lineNumber": 232
+        },
+        {
+          "caller": "RegisterHelpFile",
+          "callee": "os.path.join",
+          "lineNumber": 235
+        },
+        {
+          "caller": "RegisterHelpFile",
+          "callee": "os.path.isfile",
+          "lineNumber": 236
+        },
+        {
+          "caller": "RegisterHelpFile",
+          "callee": "SetPyKeyVal",
+          "lineNumber": 238
+        },
+        {
+          "caller": "RegisterHelpFile",
+          "callee": "SetPyKeyVal",
+          "lineNumber": 239
+        },
+        {
+          "caller": "RegisterHelpFile",
+          "callee": "print",
+          "lineNumber": 242
+        },
+        {
+          "caller": "RegisterHelpFile",
+          "callee": "UnsetPyKeyVal",
+          "lineNumber": 244
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "sysconfig.get_paths",
+          "lineNumber": 257
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "get_root_hkey",
+          "lineNumber": 258
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "os.path.join",
+          "lineNumber": 260
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "winreg.CreateKey",
+          "lineNumber": 286
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "winreg.CreateKey",
+          "lineNumber": 288
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "winreg.SetValueEx",
+          "lineNumber": 289
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "hkey.Close",
+          "lineNumber": 290
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "winreg.OpenKey",
+          "lineNumber": 295
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "winreg.DeleteKey",
+          "lineNumber": 296
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "hkey.Close",
+          "lineNumber": 297
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "winreg.DeleteKey",
+          "lineNumber": 298
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "getattr",
+          "lineNumber": 300
+        },
+        {
+          "caller": "RegisterPythonwin",
+          "callee": "shell.SHChangeNotify",
+          "lineNumber": 307
+        },
+        {
+          "caller": "get_shortcuts_folder",
+          "callee": "get_root_hkey",
+          "lineNumber": 313
+        },
+        {
+          "caller": "get_shortcuts_folder",
+          "callee": "get_special_folder_path",
+          "lineNumber": 315
+        },
+        {
+          "caller": "get_shortcuts_folder",
+          "callee": "get_special_folder_path",
+          "lineNumber": 318
+        },
+        {
+          "caller": "get_shortcuts_folder",
+          "callee": "get_special_folder_path",
+          "lineNumber": 321
+        },
+        {
+          "caller": "get_shortcuts_folder",
+          "callee": "winreg.QueryValue",
+          "lineNumber": 324
+        },
+        {
+          "caller": "get_shortcuts_folder",
+          "callee": "get_root_hkey",
+          "lineNumber": 325
+        },
+        {
+          "caller": "get_shortcuts_folder",
+          "callee": "os.path.join",
+          "lineNumber": 332
+        },
+        {
+          "caller": "get_system_dir",
+          "callee": "win32process.IsWow64Process",
+          "lineNumber": 346
+        },
+        {
+          "caller": "get_system_dir",
+          "callee": "shell.SHGetSpecialFolderPath",
+          "lineNumber": 347
+        },
+        {
+          "caller": "get_system_dir",
+          "callee": "shell.SHGetSpecialFolderPath",
+          "lineNumber": 348
+        },
+        {
+          "caller": "get_system_dir",
+          "callee": "win32api.GetSystemDirectory",
+          "lineNumber": 350
+        },
+        {
+          "caller": "get_system_dir",
+          "callee": "win32api.GetSystemDirectory",
+          "lineNumber": 352
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.path.join",
+          "lineNumber": 362
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.path.dirname",
+          "lineNumber": 362
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.path.join",
+          "lineNumber": 363
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.path.dirname",
+          "lineNumber": 363
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.path.join",
+          "lineNumber": 364
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.path.dirname",
+          "lineNumber": 364
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.path.isfile",
+          "lineNumber": 367
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.path.isfile",
+          "lineNumber": 367
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.path.isfile",
+          "lineNumber": 369
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "print",
+          "lineNumber": 370
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.remove",
+          "lineNumber": 373
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "os.rename",
+          "lineNumber": 375
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "print",
+          "lineNumber": 376
+        },
+        {
+          "caller": "fixup_dbi",
+          "callee": "print",
+          "lineNumber": 378
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.isfile",
+          "lineNumber": 387
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 387
+        },
+        {
+          "caller": "install",
+          "callee": "os.unlink",
+          "lineNumber": 388
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 388
+        },
+        {
+          "caller": "install",
+          "callee": "\"win32 win32\\\\lib Pythonwin\".split",
+          "lineNumber": 391
+        },
+        {
+          "caller": "install",
+          "callee": "sys.path.append",
+          "lineNumber": 392
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 392
+        },
+        {
+          "caller": "install",
+          "callee": "\"pythoncom pywintypes\".split",
+          "lineNumber": 396
+        },
+        {
+          "caller": "install",
+          "callee": "winreg.DeleteKey",
+          "lineNumber": 400
+        },
+        {
+          "caller": "install",
+          "callee": "winreg.DeleteKey",
+          "lineNumber": 404
+        },
+        {
+          "caller": "install",
+          "callee": "LoadSystemModule",
+          "lineNumber": 407
+        },
+        {
+          "caller": "install",
+          "callee": "LoadSystemModule",
+          "lineNumber": 408
+        },
+        {
+          "caller": "install",
+          "callee": "glob.glob",
+          "lineNumber": 412
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 412
+        },
+        {
+          "caller": "install",
+          "callee": "RuntimeError",
+          "lineNumber": 414
+        },
+        {
+          "caller": "install",
+          "callee": "get_system_dir",
+          "lineNumber": 417
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.basename",
+          "lineNumber": 422
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 423
+        },
+        {
+          "caller": "install",
+          "callee": "CopyTo",
+          "lineNumber": 424
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 426
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 431
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 432
+        },
+        {
+          "caller": "install",
+          "callee": "bad_dest_dirs.append",
+          "lineNumber": 435
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 437
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.exists",
+          "lineNumber": 438
+        },
+        {
+          "caller": "install",
+          "callee": "os.unlink",
+          "lineNumber": 440
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.exists",
+          "lineNumber": 448
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 454
+        },
+        {
+          "caller": "install",
+          "callee": "RuntimeError",
+          "lineNumber": 455
+        },
+        {
+          "caller": "install",
+          "callee": "RuntimeError",
+          "lineNumber": 459
+        },
+        {
+          "caller": "install",
+          "callee": "RegisterCOMObjects",
+          "lineNumber": 466
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 470
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 471
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 473
+        },
+        {
+          "caller": "install",
+          "callee": "traceback.print_exc",
+          "lineNumber": 474
+        },
+        {
+          "caller": "install",
+          "callee": "winreg.CreateKey",
+          "lineNumber": 478
+        },
+        {
+          "caller": "install",
+          "callee": "get_root_hkey",
+          "lineNumber": 478
+        },
+        {
+          "caller": "install",
+          "callee": "RegisterHelpFile",
+          "lineNumber": 482
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 484
+        },
+        {
+          "caller": "install",
+          "callee": "traceback.print_exc",
+          "lineNumber": 485
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 488
+        },
+        {
+          "caller": "install",
+          "callee": "fixup_dbi",
+          "lineNumber": 491
+        },
+        {
+          "caller": "install",
+          "callee": "RegisterPythonwin",
+          "lineNumber": 495
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 497
+        },
+        {
+          "caller": "install",
+          "callee": "traceback.print_exc",
+          "lineNumber": 498
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 501
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 504
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.isdir",
+          "lineNumber": 505
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 507
+        },
+        {
+          "caller": "install",
+          "callee": "os.mkdir",
+          "lineNumber": 508
+        },
+        {
+          "caller": "install",
+          "callee": "get_shortcuts_folder",
+          "lineNumber": 514
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.isdir",
+          "lineNumber": 517
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 518
+        },
+        {
+          "caller": "install",
+          "callee": "create_shortcut",
+          "lineNumber": 519
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 520
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 527
+        },
+        {
+          "caller": "install",
+          "callee": "os.path.join",
+          "lineNumber": 530
+        },
+        {
+          "caller": "install",
+          "callee": "create_shortcut",
+          "lineNumber": 532
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 534
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 537
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 539
+        },
+        {
+          "caller": "install",
+          "callee": "print",
+          "lineNumber": 548
+        },
+        {
+          "caller": "uninstall",
+          "callee": "LoadSystemModule",
+          "lineNumber": 554
+        },
+        {
+          "caller": "uninstall",
+          "callee": "LoadSystemModule",
+          "lineNumber": 555
+        },
+        {
+          "caller": "uninstall",
+          "callee": "RegisterCOMObjects",
+          "lineNumber": 558
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 560
+        },
+        {
+          "caller": "uninstall",
+          "callee": "RegisterHelpFile",
+          "lineNumber": 563
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 565
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 568
+        },
+        {
+          "caller": "uninstall",
+          "callee": "RegisterPythonwin",
+          "lineNumber": 571
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 573
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 576
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.join",
+          "lineNumber": 580
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.isdir",
+          "lineNumber": 581
+        },
+        {
+          "caller": "uninstall",
+          "callee": "shutil.rmtree",
+          "lineNumber": 582
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 584
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.join",
+          "lineNumber": 587
+        },
+        {
+          "caller": "uninstall",
+          "callee": "glob.glob",
+          "lineNumber": 588
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.join",
+          "lineNumber": 588
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.remove",
+          "lineNumber": 589
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.remove",
+          "lineNumber": 593
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.join",
+          "lineNumber": 593
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.remove",
+          "lineNumber": 597
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.join",
+          "lineNumber": 597
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 602
+        },
+        {
+          "caller": "uninstall",
+          "callee": "get_shortcuts_folder",
+          "lineNumber": 605
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.join",
+          "lineNumber": 607
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.isfile",
+          "lineNumber": 608
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.remove",
+          "lineNumber": 609
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 611
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 613
+        },
+        {
+          "caller": "uninstall",
+          "callee": "glob.glob",
+          "lineNumber": 615
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.join",
+          "lineNumber": 615
+        },
+        {
+          "caller": "uninstall",
+          "callee": "get_system_dir",
+          "lineNumber": 619
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.basename",
+          "lineNumber": 623
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.join",
+          "lineNumber": 624
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.path.isfile",
+          "lineNumber": 625
+        },
+        {
+          "caller": "uninstall",
+          "callee": "os.remove",
+          "lineNumber": 627
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 630
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 632
+        },
+        {
+          "caller": "uninstall",
+          "callee": "print",
+          "lineNumber": 636
+        },
+        {
+          "caller": "verify_destination",
+          "callee": "os.path.abspath",
+          "lineNumber": 646
+        },
+        {
+          "caller": "verify_destination",
+          "callee": "os.path.isdir",
+          "lineNumber": 647
+        },
+        {
+          "caller": "verify_destination",
+          "callee": "argparse.ArgumentTypeError",
+          "lineNumber": 648
+        },
+        {
+          "caller": "main",
+          "callee": "argparse.ArgumentParser",
+          "lineNumber": 655
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 671
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 677
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 683
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 688
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 694
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 700
+        },
+        {
+          "caller": "main",
+          "callee": "sysconfig.get_paths",
+          "lineNumber": 702
+        },
+        {
+          "caller": "main",
+          "callee": "parser.parse_args",
+          "lineNumber": 707
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 710
+        },
+        {
+          "caller": "main",
+          "callee": "parser.error",
+          "lineNumber": 713
+        },
+        {
+          "caller": "main",
+          "callee": "os.waitpid",
+          "lineNumber": 717
+        },
+        {
+          "caller": "main",
+          "callee": "install",
+          "lineNumber": 726
+        },
+        {
+          "caller": "main",
+          "callee": "uninstall",
+          "lineNumber": 729
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 18,
+        "functionCount": 17,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_testall.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_testall.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 120,
+      "nonEmptyLines": 99,
+      "functions": [
+        {
+          "name": "run_test",
+          "startLine": 19,
+          "endLine": 29,
+          "params": [
+            "script",
+            "cmdline_extras"
+          ]
+        },
+        {
+          "name": "find_and_run",
+          "startLine": 32,
+          "endLine": 40,
+          "params": [
+            "possible_locations",
+            "extras"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 43,
+          "endLine": 116,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "run_test",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "find_and_run",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 43,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "run_test",
+          "callee": "os.path.split",
+          "lineNumber": 20
+        },
+        {
+          "caller": "run_test",
+          "callee": "print",
+          "lineNumber": 23
+        },
+        {
+          "caller": "run_test",
+          "callee": "sys.stdout.flush",
+          "lineNumber": 24
+        },
+        {
+          "caller": "run_test",
+          "callee": "subprocess.run",
+          "lineNumber": 25
+        },
+        {
+          "caller": "run_test",
+          "callee": "print",
+          "lineNumber": 26
+        },
+        {
+          "caller": "run_test",
+          "callee": "sys.stdout.flush",
+          "lineNumber": 27
+        },
+        {
+          "caller": "run_test",
+          "callee": "failures.append",
+          "lineNumber": 29
+        },
+        {
+          "caller": "find_and_run",
+          "callee": "os.path.isfile",
+          "lineNumber": 34
+        },
+        {
+          "caller": "find_and_run",
+          "callee": "run_test",
+          "lineNumber": 35
+        },
+        {
+          "caller": "find_and_run",
+          "callee": "RuntimeError",
+          "lineNumber": 38
+        },
+        {
+          "caller": "main",
+          "callee": "argparse.ArgumentParser",
+          "lineNumber": 48
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 51
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 58
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 64
+        },
+        {
+          "caller": "main",
+          "callee": "parser.parse_known_args",
+          "lineNumber": 71
+        },
+        {
+          "caller": "main",
+          "callee": "extras.append",
+          "lineNumber": 77
+        },
+        {
+          "caller": "main",
+          "callee": "extras.extend",
+          "lineNumber": 78
+        },
+        {
+          "caller": "main",
+          "callee": "os.path.join",
+          "lineNumber": 84
+        },
+        {
+          "caller": "main",
+          "callee": "find_and_run",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "os.path.join",
+          "lineNumber": 89
+        },
+        {
+          "caller": "main",
+          "callee": "os.path.join",
+          "lineNumber": 90
+        },
+        {
+          "caller": "main",
+          "callee": "find_and_run",
+          "lineNumber": 93
+        },
+        {
+          "caller": "main",
+          "callee": "os.path.join",
+          "lineNumber": 98
+        },
+        {
+          "caller": "main",
+          "callee": "find_and_run",
+          "lineNumber": 101
+        },
+        {
+          "caller": "main",
+          "callee": "os.path.join",
+          "lineNumber": 106
+        },
+        {
+          "caller": "main",
+          "callee": "find_and_run",
+          "lineNumber": 109
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 112
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 114
+        },
+        {
+          "caller": "main",
+          "callee": "sys.exit",
+          "lineNumber": 115
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 116
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/tiny-agents.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/tqdm.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/typer.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/uv.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 254924,
+      "nonEmptyLines": 253160,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/uvicorn.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/uvw.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 1039,
+      "nonEmptyLines": 1038,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/uvx.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 1024,
+      "nonEmptyLines": 1023,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/watchfiles.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/websockets.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/wsdump.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/demo_autogen.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 64,
+      "functions": [
+        {
+          "name": "_require_groq",
+          "startLine": 26,
+          "endLine": 29,
+          "params": []
+        },
+        {
+          "name": "main",
+          "startLine": 32,
+          "endLine": 72,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "_require_groq",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_require_groq",
+          "callee": "os.getenv",
+          "lineNumber": 27
+        },
+        {
+          "caller": "_require_groq",
+          "callee": "print",
+          "lineNumber": 28
+        },
+        {
+          "caller": "_require_groq",
+          "callee": "sys.exit",
+          "lineNumber": 29
+        },
+        {
+          "caller": "main",
+          "callee": "_require_groq",
+          "lineNumber": 33
+        },
+        {
+          "caller": "main",
+          "callee": "OpenAIChatCompletionClient",
+          "lineNumber": 35
+        },
+        {
+          "caller": "main",
+          "callee": "AssistantAgent",
+          "lineNumber": 49
+        },
+        {
+          "caller": "main",
+          "callee": "AssistantAgent",
+          "lineNumber": 57
+        },
+        {
+          "caller": "main",
+          "callee": "RoundRobinGroupChat",
+          "lineNumber": 66
+        },
+        {
+          "caller": "main",
+          "callee": "team.run_stream",
+          "lineNumber": 71
+        },
+        {
+          "caller": "main",
+          "callee": "Console",
+          "lineNumber": 72
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "evaluation/agent_frameworks/demo_crewai.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 84,
+      "nonEmptyLines": 68,
+      "functions": [
+        {
+          "name": "_require_groq",
+          "startLine": 36,
+          "endLine": 39,
+          "params": []
+        },
+        {
+          "name": "main",
+          "startLine": 42,
+          "endLine": 80,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "_require_groq",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 42,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_require_groq",
+          "callee": "os.getenv",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_require_groq",
+          "callee": "print",
+          "lineNumber": 38
+        },
+        {
+          "caller": "_require_groq",
+          "callee": "sys.exit",
+          "lineNumber": 39
+        },
+        {
+          "caller": "main",
+          "callee": "_require_groq",
+          "lineNumber": 43
+        },
+        {
+          "caller": "main",
+          "callee": "LLM",
+          "lineNumber": 45
+        },
+        {
+          "caller": "main",
+          "callee": "Agent",
+          "lineNumber": 47
+        },
+        {
+          "caller": "main",
+          "callee": "Agent",
+          "lineNumber": 54
+        },
+        {
+          "caller": "main",
+          "callee": "Task",
+          "lineNumber": 62
+        },
+        {
+          "caller": "main",
+          "callee": "Task",
+          "lineNumber": 67
+        },
+        {
+          "caller": "main",
+          "callee": "Crew",
+          "lineNumber": 77
+        },
+        {
+          "caller": "main",
+          "callee": "crew.kickoff",
+          "lineNumber": 78
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 79
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 80
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "evaluation/agent_frameworks/demo_langgraph.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 90,
+      "nonEmptyLines": 74,
+      "functions": [
+        {
+          "name": "_require_groq",
+          "startLine": 30,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "node_planner",
+          "startLine": 36,
+          "endLine": 49,
+          "params": [
+            "state"
+          ]
+        },
+        {
+          "name": "node_worker",
+          "startLine": 52,
+          "endLine": 67,
+          "params": [
+            "state"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 70,
+          "endLine": 86,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "DemoState",
+          "startLine": 24,
+          "endLine": 27,
+          "methods": [],
+          "properties": [
+            "numbers",
+            "plan",
+            "answer"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DemoState",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "_require_groq",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "node_planner",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "node_worker",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 70,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_require_groq",
+          "callee": "os.getenv",
+          "lineNumber": 31
+        },
+        {
+          "caller": "_require_groq",
+          "callee": "print",
+          "lineNumber": 32
+        },
+        {
+          "caller": "_require_groq",
+          "callee": "sys.exit",
+          "lineNumber": 33
+        },
+        {
+          "caller": "node_planner",
+          "callee": "ChatGroq",
+          "lineNumber": 37
+        },
+        {
+          "caller": "node_planner",
+          "callee": "llm.invoke",
+          "lineNumber": 38
+        },
+        {
+          "caller": "node_planner",
+          "callee": "SystemMessage",
+          "lineNumber": 40
+        },
+        {
+          "caller": "node_planner",
+          "callee": "HumanMessage",
+          "lineNumber": 46
+        },
+        {
+          "caller": "node_planner",
+          "callee": "str",
+          "lineNumber": 49
+        },
+        {
+          "caller": "node_worker",
+          "callee": "ChatGroq",
+          "lineNumber": 53
+        },
+        {
+          "caller": "node_worker",
+          "callee": "llm.invoke",
+          "lineNumber": 54
+        },
+        {
+          "caller": "node_worker",
+          "callee": "SystemMessage",
+          "lineNumber": 56
+        },
+        {
+          "caller": "node_worker",
+          "callee": "HumanMessage",
+          "lineNumber": 62
+        },
+        {
+          "caller": "node_worker",
+          "callee": "str",
+          "lineNumber": 67
+        },
+        {
+          "caller": "main",
+          "callee": "_require_groq",
+          "lineNumber": 71
+        },
+        {
+          "caller": "main",
+          "callee": "StateGraph",
+          "lineNumber": 73
+        },
+        {
+          "caller": "main",
+          "callee": "builder.add_node",
+          "lineNumber": 74
+        },
+        {
+          "caller": "main",
+          "callee": "builder.add_node",
+          "lineNumber": 75
+        },
+        {
+          "caller": "main",
+          "callee": "builder.add_edge",
+          "lineNumber": 76
+        },
+        {
+          "caller": "main",
+          "callee": "builder.add_edge",
+          "lineNumber": 77
+        },
+        {
+          "caller": "main",
+          "callee": "builder.add_edge",
+          "lineNumber": 78
+        },
+        {
+          "caller": "main",
+          "callee": "builder.compile",
+          "lineNumber": 79
+        },
+        {
+          "caller": "main",
+          "callee": "graph.invoke",
+          "lineNumber": 80
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 81
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 82
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 83
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 84
+        },
+        {
+          "caller": "main",
+          "callee": "sum",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "int",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "x.strip",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "numbers.replace(\",\", \" \").split",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "numbers.replace",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "x.strip",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 86
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "evaluation/datasets/_fixtures/seed.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 21,
+      "nonEmptyLines": 21,
+      "sections": [
+        {
+          "heading": "users",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "boards",
+          "level": 1,
+          "line": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "evaluation/load_repo_env.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 27,
+      "functions": [
+        {
+          "name": "load_repo_env",
+          "startLine": 14,
+          "endLine": 31,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "load_repo_env",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "load_repo_env",
+          "callee": "path.is_file",
+          "lineNumber": 16
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "path.read_text",
+          "lineNumber": 18
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "text.startswith",
+          "lineNumber": 19
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "text.splitlines",
+          "lineNumber": 21
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "raw.strip",
+          "lineNumber": 22
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "line.startswith",
+          "lineNumber": 23
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "line.partition",
+          "lineNumber": 25
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "key.strip",
+          "lineNumber": 26
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "value.strip().strip('\"').strip",
+          "lineNumber": 29
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "value.strip().strip",
+          "lineNumber": 29
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "value.strip",
+          "lineNumber": 29
+        },
+        {
+          "caller": "load_repo_env",
+          "callee": "os.environ.get",
+          "lineNumber": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "evaluation/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 34,
+      "nonEmptyLines": 28,
+      "sections": [
+        {
+          "heading": "Evaluation",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Quick run",
+          "level": 2,
+          "line": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "evaluation/requirements.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 7,
+      "nonEmptyLines": 7,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/scripts/aggregate_eval.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 93,
+      "nonEmptyLines": 79,
+      "functions": [
+        {
+          "name": "_load_runs",
+          "startLine": 18,
+          "endLine": 29,
+          "params": [
+            "run_id"
+          ]
+        },
+        {
+          "name": "_percentiles",
+          "startLine": 32,
+          "endLine": 45,
+          "params": [
+            "values",
+            "pcts"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 48,
+          "endLine": 89,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "_load_runs",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "_percentiles",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 48,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_load_runs",
+          "callee": "sorted",
+          "lineNumber": 20
+        },
+        {
+          "caller": "_load_runs",
+          "callee": "RESULTS.glob",
+          "lineNumber": 20
+        },
+        {
+          "caller": "_load_runs",
+          "callee": "p.is_dir",
+          "lineNumber": 20
+        },
+        {
+          "caller": "_load_runs",
+          "callee": "SystemExit",
+          "lineNumber": 22
+        },
+        {
+          "caller": "_load_runs",
+          "callee": "run_dir.glob",
+          "lineNumber": 27
+        },
+        {
+          "caller": "_load_runs",
+          "callee": "json.loads",
+          "lineNumber": 28
+        },
+        {
+          "caller": "_load_runs",
+          "callee": "f.read_text(encoding=\"utf-8\").splitlines",
+          "lineNumber": 28
+        },
+        {
+          "caller": "_load_runs",
+          "callee": "f.read_text",
+          "lineNumber": 28
+        },
+        {
+          "caller": "_load_runs",
+          "callee": "line.strip",
+          "lineNumber": 28
+        },
+        {
+          "caller": "_percentiles",
+          "callee": "len",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_percentiles",
+          "callee": "sorted",
+          "lineNumber": 35
+        },
+        {
+          "caller": "_percentiles",
+          "callee": "len",
+          "lineNumber": 38
+        },
+        {
+          "caller": "_percentiles",
+          "callee": "out.append",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_percentiles",
+          "callee": "len",
+          "lineNumber": 41
+        },
+        {
+          "caller": "_percentiles",
+          "callee": "int",
+          "lineNumber": 42
+        },
+        {
+          "caller": "_percentiles",
+          "callee": "min",
+          "lineNumber": 43
+        },
+        {
+          "caller": "_percentiles",
+          "callee": "len",
+          "lineNumber": 43
+        },
+        {
+          "caller": "_percentiles",
+          "callee": "out.append",
+          "lineNumber": 44
+        },
+        {
+          "caller": "main",
+          "callee": "argparse.ArgumentParser",
+          "lineNumber": 49
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 50
+        },
+        {
+          "caller": "main",
+          "callee": "parser.parse_args",
+          "lineNumber": 51
+        },
+        {
+          "caller": "main",
+          "callee": "_load_runs",
+          "lineNumber": 52
+        },
+        {
+          "caller": "main",
+          "callee": "by_dataset.items",
+          "lineNumber": 55
+        },
+        {
+          "caller": "main",
+          "callee": "lines.append",
+          "lineNumber": 56
+        },
+        {
+          "caller": "main",
+          "callee": "len",
+          "lineNumber": 56
+        },
+        {
+          "caller": "main",
+          "callee": "r.get",
+          "lineNumber": 57
+        },
+        {
+          "caller": "main",
+          "callee": "isinstance",
+          "lineNumber": 58
+        },
+        {
+          "caller": "main",
+          "callee": "r.get",
+          "lineNumber": 58
+        },
+        {
+          "caller": "main",
+          "callee": "r.get",
+          "lineNumber": 59
+        },
+        {
+          "caller": "main",
+          "callee": "_percentiles",
+          "lineNumber": 60
+        },
+        {
+          "caller": "main",
+          "callee": "float",
+          "lineNumber": 60
+        },
+        {
+          "caller": "main",
+          "callee": "len",
+          "lineNumber": 61
+        },
+        {
+          "caller": "main",
+          "callee": "len",
+          "lineNumber": 61
+        },
+        {
+          "caller": "main",
+          "callee": "statistics.mean",
+          "lineNumber": 65
+        },
+        {
+          "caller": "main",
+          "callee": "r.get",
+          "lineNumber": 71
+        },
+        {
+          "caller": "main",
+          "callee": "isinstance",
+          "lineNumber": 72
+        },
+        {
+          "caller": "main",
+          "callee": "j.items",
+          "lineNumber": 74
+        },
+        {
+          "caller": "main",
+          "callee": "isinstance",
+          "lineNumber": 75
+        },
+        {
+          "caller": "main",
+          "callee": "scores.setdefault(k, []).append",
+          "lineNumber": 76
+        },
+        {
+          "caller": "main",
+          "callee": "scores.setdefault",
+          "lineNumber": 76
+        },
+        {
+          "caller": "main",
+          "callee": "float",
+          "lineNumber": 76
+        },
+        {
+          "caller": "main",
+          "callee": "lines.append",
+          "lineNumber": 78
+        },
+        {
+          "caller": "main",
+          "callee": "lines.append",
+          "lineNumber": 79
+        },
+        {
+          "caller": "main",
+          "callee": "lines.append",
+          "lineNumber": 80
+        },
+        {
+          "caller": "main",
+          "callee": "sorted",
+          "lineNumber": 81
+        },
+        {
+          "caller": "main",
+          "callee": "scores.items",
+          "lineNumber": 81
+        },
+        {
+          "caller": "main",
+          "callee": "lines.append",
+          "lineNumber": 82
+        },
+        {
+          "caller": "main",
+          "callee": "statistics.mean",
+          "lineNumber": 82
+        },
+        {
+          "caller": "main",
+          "callee": "lines.append",
+          "lineNumber": 83
+        },
+        {
+          "caller": "main",
+          "callee": "out_path.write_text",
+          "lineNumber": 86
+        },
+        {
+          "caller": "main",
+          "callee": "\"\\n\".join",
+          "lineNumber": 86
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 87
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 88
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 89
+        },
+        {
+          "caller": "main",
+          "callee": "\"\\n\".join",
+          "lineNumber": 89
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "evaluation/scripts/llm_latency_smoke.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 133,
+      "nonEmptyLines": 100,
+      "functions": [
+        {
+          "name": "_time_call",
+          "startLine": 38,
+          "endLine": 42,
+          "params": [
+            "name",
+            "fn"
+          ]
+        },
+        {
+          "name": "run_groq",
+          "startLine": 45,
+          "endLine": 60,
+          "params": []
+        },
+        {
+          "name": "run_openai_mini",
+          "startLine": 63,
+          "endLine": 76,
+          "params": []
+        },
+        {
+          "name": "run_anthropic_haiku",
+          "startLine": 79,
+          "endLine": 96,
+          "params": []
+        },
+        {
+          "name": "run_gemini_flash",
+          "startLine": 99,
+          "endLine": 116,
+          "params": []
+        },
+        {
+          "name": "main",
+          "startLine": 119,
+          "endLine": 129,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "Result",
+          "startLine": 32,
+          "endLine": 35,
+          "methods": [],
+          "properties": [
+            "name",
+            "seconds",
+            "text"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Result",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "_time_call",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "run_groq",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "run_openai_mini",
+          "line": 63,
+          "isDefault": false
+        },
+        {
+          "name": "run_anthropic_haiku",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "run_gemini_flash",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 119,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_time_call",
+          "callee": "time.perf_counter",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_time_call",
+          "callee": "fn",
+          "lineNumber": 40
+        },
+        {
+          "caller": "_time_call",
+          "callee": "time.perf_counter",
+          "lineNumber": 41
+        },
+        {
+          "caller": "_time_call",
+          "callee": "Result",
+          "lineNumber": 42
+        },
+        {
+          "caller": "_time_call",
+          "callee": "text.replace",
+          "lineNumber": 42
+        },
+        {
+          "caller": "run_groq",
+          "callee": "os.getenv",
+          "lineNumber": 46
+        },
+        {
+          "caller": "run_groq",
+          "callee": "ChatGroq",
+          "lineNumber": 52
+        },
+        {
+          "caller": "fn",
+          "callee": "llm.invoke",
+          "lineNumber": 55
+        },
+        {
+          "caller": "fn",
+          "callee": "HumanMessage",
+          "lineNumber": 56
+        },
+        {
+          "caller": "fn",
+          "callee": "str",
+          "lineNumber": 58
+        },
+        {
+          "caller": "run_groq",
+          "callee": "_time_call",
+          "lineNumber": 60
+        },
+        {
+          "caller": "run_openai_mini",
+          "callee": "os.getenv",
+          "lineNumber": 64
+        },
+        {
+          "caller": "run_openai_mini",
+          "callee": "ChatOpenAI",
+          "lineNumber": 70
+        },
+        {
+          "caller": "fn",
+          "callee": "llm.invoke",
+          "lineNumber": 73
+        },
+        {
+          "caller": "fn",
+          "callee": "HumanMessage",
+          "lineNumber": 73
+        },
+        {
+          "caller": "fn",
+          "callee": "str",
+          "lineNumber": 74
+        },
+        {
+          "caller": "run_openai_mini",
+          "callee": "_time_call",
+          "lineNumber": 76
+        },
+        {
+          "caller": "run_anthropic_haiku",
+          "callee": "os.getenv",
+          "lineNumber": 80
+        },
+        {
+          "caller": "run_anthropic_haiku",
+          "callee": "print",
+          "lineNumber": 86
+        },
+        {
+          "caller": "run_anthropic_haiku",
+          "callee": "ChatAnthropic",
+          "lineNumber": 90
+        },
+        {
+          "caller": "fn",
+          "callee": "llm.invoke",
+          "lineNumber": 93
+        },
+        {
+          "caller": "fn",
+          "callee": "HumanMessage",
+          "lineNumber": 93
+        },
+        {
+          "caller": "fn",
+          "callee": "str",
+          "lineNumber": 94
+        },
+        {
+          "caller": "run_anthropic_haiku",
+          "callee": "_time_call",
+          "lineNumber": 96
+        },
+        {
+          "caller": "run_gemini_flash",
+          "callee": "os.getenv",
+          "lineNumber": 100
+        },
+        {
+          "caller": "run_gemini_flash",
+          "callee": "os.getenv",
+          "lineNumber": 100
+        },
+        {
+          "caller": "run_gemini_flash",
+          "callee": "print",
+          "lineNumber": 106
+        },
+        {
+          "caller": "run_gemini_flash",
+          "callee": "genai.configure",
+          "lineNumber": 109
+        },
+        {
+          "caller": "run_gemini_flash",
+          "callee": "genai.GenerativeModel",
+          "lineNumber": 110
+        },
+        {
+          "caller": "fn",
+          "callee": "model.generate_content",
+          "lineNumber": 113
+        },
+        {
+          "caller": "fn",
+          "callee": "getattr",
+          "lineNumber": 114
+        },
+        {
+          "caller": "fn",
+          "callee": "str",
+          "lineNumber": 114
+        },
+        {
+          "caller": "run_gemini_flash",
+          "callee": "_time_call",
+          "lineNumber": 116
+        },
+        {
+          "caller": "main",
+          "callee": "rfn",
+          "lineNumber": 123
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 127
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 129
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 6,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "evaluation/scripts/run_eval.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 150,
+      "nonEmptyLines": 128,
+      "functions": [
+        {
+          "name": "_seed_state",
+          "startLine": 30,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "_agent_call",
+          "startLine": 37,
+          "endLine": 64,
+          "params": [
+            "client",
+            "api",
+            "token",
+            "dataset",
+            "sample",
+            "board_id"
+          ]
+        },
+        {
+          "name": "_judge_with_llm",
+          "startLine": 67,
+          "endLine": 89,
+          "params": [
+            "rubric",
+            "sample",
+            "prediction",
+            "judge_spec"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 92,
+          "endLine": 146,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "_seed_state",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "_agent_call",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "_judge_with_llm",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 92,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_seed_state",
+          "callee": "p.exists",
+          "lineNumber": 32
+        },
+        {
+          "caller": "_seed_state",
+          "callee": "SystemExit",
+          "lineNumber": 33
+        },
+        {
+          "caller": "_seed_state",
+          "callee": "json.loads",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_seed_state",
+          "callee": "p.read_text",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "client.post",
+          "lineNumber": 42
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "client.post",
+          "lineNumber": 45
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "client.post",
+          "lineNumber": 48
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "client.post",
+          "lineNumber": 50
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "client.post",
+          "lineNumber": 52
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "ValueError",
+          "lineNumber": 55
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "r.raise_for_status",
+          "lineNumber": 56
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "r.json",
+          "lineNumber": 57
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "range",
+          "lineNumber": 59
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "time.sleep",
+          "lineNumber": 60
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "client.get(f\"{api}/api/agent/runs/{run_id}\", headers=headers).json",
+          "lineNumber": 61
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "client.get",
+          "lineNumber": 61
+        },
+        {
+          "caller": "_agent_call",
+          "callee": "TimeoutError",
+          "lineNumber": 64
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "sys.path.insert",
+          "lineNumber": 69
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "str",
+          "lineNumber": 69
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "sys.path.insert",
+          "lineNumber": 70
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "str",
+          "lineNumber": 70
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "get_chat_model",
+          "lineNumber": 75
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "rubric\r\n        .replace(\"{goal_text}\", sample.get(\"input\", {}).get(\"goal_text\", \"\"))\r\n        .replace(\"{gold_subtasks}\", json.dumps(sample.get(\"gold\", {}).get(\"subtasks\", []), ensure_ascii=False))\r\n        .replace(\"{predicted_subtasks}\", json.dumps((prediction.get(\"result\") or {}).get(\"plan\", {}).get(\"subtasks\", []), ensure_ascii=False))\r\n        .replace(\"{snapshot}\", json.dumps(sample.get(\"input\", {}), ensure_ascii=False))\r\n        .replace",
+          "lineNumber": 77
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "rubric\r\n        .replace(\"{goal_text}\", sample.get(\"input\", {}).get(\"goal_text\", \"\"))\r\n        .replace(\"{gold_subtasks}\", json.dumps(sample.get(\"gold\", {}).get(\"subtasks\", []), ensure_ascii=False))\r\n        .replace(\"{predicted_subtasks}\", json.dumps((prediction.get(\"result\") or {}).get(\"plan\", {}).get(\"subtasks\", []), ensure_ascii=False))\r\n        .replace",
+          "lineNumber": 77
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "rubric\r\n        .replace(\"{goal_text}\", sample.get(\"input\", {}).get(\"goal_text\", \"\"))\r\n        .replace(\"{gold_subtasks}\", json.dumps(sample.get(\"gold\", {}).get(\"subtasks\", []), ensure_ascii=False))\r\n        .replace",
+          "lineNumber": 77
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "rubric\r\n        .replace(\"{goal_text}\", sample.get(\"input\", {}).get(\"goal_text\", \"\"))\r\n        .replace",
+          "lineNumber": 77
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "rubric\r\n        .replace",
+          "lineNumber": 77
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "sample.get(\"input\", {}).get",
+          "lineNumber": 78
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "sample.get",
+          "lineNumber": 78
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "json.dumps",
+          "lineNumber": 79
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "sample.get(\"gold\", {}).get",
+          "lineNumber": 79
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "sample.get",
+          "lineNumber": 79
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "json.dumps",
+          "lineNumber": 80
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "(prediction.get(\"result\") or {}).get(\"plan\", {}).get",
+          "lineNumber": 80
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "(prediction.get(\"result\") or {}).get",
+          "lineNumber": 80
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "prediction.get",
+          "lineNumber": 80
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "json.dumps",
+          "lineNumber": 81
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "sample.get",
+          "lineNumber": 81
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "json.dumps",
+          "lineNumber": 82
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "prediction.get",
+          "lineNumber": 82
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "llm.invoke",
+          "lineNumber": 85
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "SystemMessage",
+          "lineNumber": 85
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "HumanMessage",
+          "lineNumber": 85
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "getattr",
+          "lineNumber": 86
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "json.loads",
+          "lineNumber": 87
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "str",
+          "lineNumber": 87
+        },
+        {
+          "caller": "_judge_with_llm",
+          "callee": "str",
+          "lineNumber": 89
+        },
+        {
+          "caller": "main",
+          "callee": "argparse.ArgumentParser",
+          "lineNumber": 93
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 94
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 95
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 96
+        },
+        {
+          "caller": "main",
+          "callee": "os.getenv",
+          "lineNumber": 96
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 97
+        },
+        {
+          "caller": "main",
+          "callee": "parser.parse_args",
+          "lineNumber": 98
+        },
+        {
+          "caller": "main",
+          "callee": "_seed_state",
+          "lineNumber": 100
+        },
+        {
+          "caller": "main",
+          "callee": "SystemExit",
+          "lineNumber": 102
+        },
+        {
+          "caller": "main",
+          "callee": "next",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "iter",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "(RUBRIC_ROOT / f\"rubric_{args.dataset}.md\").read_text",
+          "lineNumber": 107
+        },
+        {
+          "caller": "main",
+          "callee": "sorted",
+          "lineNumber": 108
+        },
+        {
+          "caller": "main",
+          "callee": "(DATA_ROOT / args.dataset).glob",
+          "lineNumber": 108
+        },
+        {
+          "caller": "main",
+          "callee": "SystemExit",
+          "lineNumber": 112
+        },
+        {
+          "caller": "main",
+          "callee": "time.strftime",
+          "lineNumber": 114
+        },
+        {
+          "caller": "main",
+          "callee": "out_dir.mkdir",
+          "lineNumber": 116
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 118
+        },
+        {
+          "caller": "main",
+          "callee": "len",
+          "lineNumber": 118
+        },
+        {
+          "caller": "main",
+          "callee": "httpx.Client",
+          "lineNumber": 120
+        },
+        {
+          "caller": "main",
+          "callee": "out_path.open",
+          "lineNumber": 120
+        },
+        {
+          "caller": "main",
+          "callee": "json.loads",
+          "lineNumber": 122
+        },
+        {
+          "caller": "main",
+          "callee": "s.read_text",
+          "lineNumber": 122
+        },
+        {
+          "caller": "main",
+          "callee": "time.time",
+          "lineNumber": 123
+        },
+        {
+          "caller": "main",
+          "callee": "_agent_call",
+          "lineNumber": 125
+        },
+        {
+          "caller": "main",
+          "callee": "int",
+          "lineNumber": 126
+        },
+        {
+          "caller": "main",
+          "callee": "time.time",
+          "lineNumber": 126
+        },
+        {
+          "caller": "main",
+          "callee": "_judge_with_llm",
+          "lineNumber": 127
+        },
+        {
+          "caller": "main",
+          "callee": "pred.get",
+          "lineNumber": 132
+        },
+        {
+          "caller": "main",
+          "callee": "pred.get",
+          "lineNumber": 133
+        },
+        {
+          "caller": "main",
+          "callee": "pred.get",
+          "lineNumber": 134
+        },
+        {
+          "caller": "main",
+          "callee": "pred.get",
+          "lineNumber": 135
+        },
+        {
+          "caller": "main",
+          "callee": "pred.get",
+          "lineNumber": 136
+        },
+        {
+          "caller": "main",
+          "callee": "pred.get",
+          "lineNumber": 137
+        },
+        {
+          "caller": "main",
+          "callee": "str",
+          "lineNumber": 141
+        },
+        {
+          "caller": "main",
+          "callee": "fh.write",
+          "lineNumber": 142
+        },
+        {
+          "caller": "main",
+          "callee": "json.dumps",
+          "lineNumber": 142
+        },
+        {
+          "caller": "main",
+          "callee": "fh.flush",
+          "lineNumber": 143
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 144
+        },
+        {
+          "caller": "main",
+          "callee": "row.get",
+          "lineNumber": 144
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 146
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "evaluation/scripts/seed_fixtures.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 96,
+      "nonEmptyLines": 81,
+      "functions": [
+        {
+          "name": "main",
+          "startLine": 24,
+          "endLine": 92,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "main",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "main",
+          "callee": "argparse.ArgumentParser",
+          "lineNumber": 25
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 26
+        },
+        {
+          "caller": "main",
+          "callee": "parser.parse_args",
+          "lineNumber": 27
+        },
+        {
+          "caller": "main",
+          "callee": "args.api.rstrip",
+          "lineNumber": 28
+        },
+        {
+          "caller": "main",
+          "callee": "json.loads",
+          "lineNumber": 30
+        },
+        {
+          "caller": "main",
+          "callee": "SEED_PATH.read_text",
+          "lineNumber": 30
+        },
+        {
+          "caller": "main",
+          "callee": "httpx.Client",
+          "lineNumber": 33
+        },
+        {
+          "caller": "main",
+          "callee": "client.post",
+          "lineNumber": 37
+        },
+        {
+          "caller": "main",
+          "callee": "client.post",
+          "lineNumber": 42
+        },
+        {
+          "caller": "main",
+          "callee": "r.raise_for_status",
+          "lineNumber": 43
+        },
+        {
+          "caller": "main",
+          "callee": "r.json",
+          "lineNumber": 44
+        },
+        {
+          "caller": "main",
+          "callee": "client.get(f\"{api}/api/users/me\", headers={\"Authorization\": f\"Bearer {token}\"}).json",
+          "lineNumber": 47
+        },
+        {
+          "caller": "main",
+          "callee": "client.get",
+          "lineNumber": 47
+        },
+        {
+          "caller": "main",
+          "callee": "u.get",
+          "lineNumber": 51
+        },
+        {
+          "caller": "main",
+          "callee": "client.post",
+          "lineNumber": 52
+        },
+        {
+          "caller": "main",
+          "callee": "r.json",
+          "lineNumber": 55
+        },
+        {
+          "caller": "main",
+          "callee": "u.get",
+          "lineNumber": 58
+        },
+        {
+          "caller": "main",
+          "callee": "state[\"skills\"].get",
+          "lineNumber": 59
+        },
+        {
+          "caller": "main",
+          "callee": "mapping.append",
+          "lineNumber": 61
+        },
+        {
+          "caller": "main",
+          "callee": "client.put(f\"{api}/api/users/{me['id']}/skills\", json=mapping,\r\n                           headers={\"Authorization\": f\"Bearer {token}\"}).raise_for_status",
+          "lineNumber": 63
+        },
+        {
+          "caller": "main",
+          "callee": "client.put",
+          "lineNumber": 63
+        },
+        {
+          "caller": "main",
+          "callee": "client.post",
+          "lineNumber": 70
+        },
+        {
+          "caller": "main",
+          "callee": "b.get",
+          "lineNumber": 70
+        },
+        {
+          "caller": "main",
+          "callee": "r.raise_for_status",
+          "lineNumber": 72
+        },
+        {
+          "caller": "main",
+          "callee": "r.json",
+          "lineNumber": 73
+        },
+        {
+          "caller": "main",
+          "callee": "state[\"boards\"].append",
+          "lineNumber": 74
+        },
+        {
+          "caller": "main",
+          "callee": "b.get",
+          "lineNumber": 76
+        },
+        {
+          "caller": "main",
+          "callee": "client.post(\r\n                    f\"{api}/api/boards/{board['id']}/tasks\",\r\n                    json={\r\n                        \"column_id\": first_col,\r\n                        \"title\": t[\"title\"],\r\n                        \"description\": t.get(\"description\", \"\"),\r\n                        \"priority\": t.get(\"priority\", \"medium\"),\r\n                        \"tags\": t.get(\"tags\"),\r\n                        \"est_hours\": t.get(\"est_hours\"),\r\n                    },\r\n                    headers={\"Authorization\": f\"Bearer {owner_token}\"},\r\n                ).raise_for_status",
+          "lineNumber": 77
+        },
+        {
+          "caller": "main",
+          "callee": "client.post",
+          "lineNumber": 77
+        },
+        {
+          "caller": "main",
+          "callee": "t.get",
+          "lineNumber": 82
+        },
+        {
+          "caller": "main",
+          "callee": "t.get",
+          "lineNumber": 83
+        },
+        {
+          "caller": "main",
+          "callee": "t.get",
+          "lineNumber": 84
+        },
+        {
+          "caller": "main",
+          "callee": "t.get",
+          "lineNumber": 85
+        },
+        {
+          "caller": "main",
+          "callee": "OUT_PATH.parent.mkdir",
+          "lineNumber": 90
+        },
+        {
+          "caller": "main",
+          "callee": "OUT_PATH.write_text",
+          "lineNumber": 91
+        },
+        {
+          "caller": "main",
+          "callee": "json.dumps",
+          "lineNumber": 91
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 92
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

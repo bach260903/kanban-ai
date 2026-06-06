@@ -1,0 +1,181 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".specify/extensions/git/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 100,
+      "nonEmptyLines": 77,
+      "sections": [
+        {
+          "heading": "Git Branching Workflow Extension",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Overview",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Commands",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Hooks",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Configuration",
+          "level": 2,
+          "line": 48
+        },
+        {
+          "heading": "Installation",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "Disabling",
+          "level": 2,
+          "line": 75
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 85
+        },
+        {
+          "heading": "Scripts",
+          "level": 2,
+          "line": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": ".specify/extensions/git/config-template.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 62,
+      "nonEmptyLines": 59,
+      "sections": [
+        {
+          "heading": "branch_numbering",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "init_commit_message",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "auto_commit",
+          "level": 1,
+          "line": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": ".specify/extensions/git/extension.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 140,
+      "nonEmptyLines": 133,
+      "sections": [
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "extension",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "requires",
+          "level": 1,
+          "line": 12
+        },
+        {
+          "heading": "provides",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "hooks",
+          "level": 1,
+          "line": 42
+        },
+        {
+          "heading": "tags",
+          "level": 1,
+          "line": 132
+        },
+        {
+          "heading": "config",
+          "level": 1,
+          "line": 137
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": ".specify/extensions/git/git-config.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 62,
+      "nonEmptyLines": 59,
+      "sections": [
+        {
+          "heading": "branch_numbering",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "init_commit_message",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "auto_commit",
+          "level": 1,
+          "line": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    }
+  ]
+}

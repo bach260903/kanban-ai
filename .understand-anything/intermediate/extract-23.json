@@ -1,0 +1,143 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 17,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "frontend/src/components/organisms/app-shell.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 198,
+      "nonEmptyLines": 168,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/constitution-panel.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 82,
+      "nonEmptyLines": 71,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/deployment-settings.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 357,
+      "nonEmptyLines": 301,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/document-panel.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 167,
+      "nonEmptyLines": 148,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/failure-analysis-panel.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 330,
+      "nonEmptyLines": 274,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/kanban-board.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 24,
+      "nonEmptyLines": 21,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/kanban-column.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 117,
+      "nonEmptyLines": 105,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/memory-editor.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 195,
+      "nonEmptyLines": 168,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/new-project-modal.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 218,
+      "nonEmptyLines": 194,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/project-card-skeleton.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 76,
+      "nonEmptyLines": 69,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/project-card.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 174,
+      "nonEmptyLines": 154,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/project-header.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 297,
+      "nonEmptyLines": 261,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/project-members.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 211,
+      "nonEmptyLines": 183,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/review-panel.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 187,
+      "nonEmptyLines": 166,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/risk-assessment-panel.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 181,
+      "nonEmptyLines": 157,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/thought-stream-panel.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 206,
+      "nonEmptyLines": 179,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/organisms/webhook-settings.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 287,
+      "nonEmptyLines": 248,
+      "metrics": {}
+    }
+  ]
+}

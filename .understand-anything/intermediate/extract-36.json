@@ -1,0 +1,3667 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "backend/app/routers/comments.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 77,
+      "functions": [
+        {
+          "name": "_ensure",
+          "startLine": 18,
+          "endLine": 25,
+          "params": [
+            "db",
+            "board_id",
+            "task_id",
+            "user"
+          ]
+        },
+        {
+          "name": "list_comments",
+          "startLine": 29,
+          "endLine": 39,
+          "params": [
+            "board_id",
+            "task_id",
+            "db",
+            "user"
+          ]
+        },
+        {
+          "name": "create_comment",
+          "startLine": 43,
+          "endLine": 71,
+          "params": [
+            "board_id",
+            "task_id",
+            "body",
+            "db",
+            "user"
+          ]
+        },
+        {
+          "name": "delete_comment",
+          "startLine": 75,
+          "endLine": 89,
+          "params": [
+            "board_id",
+            "task_id",
+            "comment_id",
+            "db",
+            "user"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_ensure",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "list_comments",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "create_comment",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "delete_comment",
+          "line": 74,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_ensure",
+          "callee": "db.get",
+          "lineNumber": 19
+        },
+        {
+          "caller": "_ensure",
+          "callee": "HTTPException",
+          "lineNumber": 21
+        },
+        {
+          "caller": "_ensure",
+          "callee": "db.get",
+          "lineNumber": 22
+        },
+        {
+          "caller": "_ensure",
+          "callee": "HTTPException",
+          "lineNumber": 24
+        },
+        {
+          "caller": "list_comments",
+          "callee": "Depends",
+          "lineNumber": 32
+        },
+        {
+          "caller": "list_comments",
+          "callee": "Depends",
+          "lineNumber": 33
+        },
+        {
+          "caller": "list_comments",
+          "callee": "_ensure",
+          "lineNumber": 35
+        },
+        {
+          "caller": "list_comments",
+          "callee": "db.execute",
+          "lineNumber": 36
+        },
+        {
+          "caller": "list_comments",
+          "callee": "select(Comment).where(Comment.task_id == task_id).order_by",
+          "lineNumber": 37
+        },
+        {
+          "caller": "list_comments",
+          "callee": "select(Comment).where",
+          "lineNumber": 37
+        },
+        {
+          "caller": "list_comments",
+          "callee": "select",
+          "lineNumber": 37
+        },
+        {
+          "caller": "list_comments",
+          "callee": "Comment.created_at.asc",
+          "lineNumber": 37
+        },
+        {
+          "caller": "list_comments",
+          "callee": "list",
+          "lineNumber": 39
+        },
+        {
+          "caller": "list_comments",
+          "callee": "res.scalars().all",
+          "lineNumber": 39
+        },
+        {
+          "caller": "list_comments",
+          "callee": "res.scalars",
+          "lineNumber": 39
+        },
+        {
+          "caller": "create_comment",
+          "callee": "Depends",
+          "lineNumber": 47
+        },
+        {
+          "caller": "create_comment",
+          "callee": "Depends",
+          "lineNumber": 48
+        },
+        {
+          "caller": "create_comment",
+          "callee": "_ensure",
+          "lineNumber": 50
+        },
+        {
+          "caller": "create_comment",
+          "callee": "Comment",
+          "lineNumber": 51
+        },
+        {
+          "caller": "create_comment",
+          "callee": "db.add",
+          "lineNumber": 52
+        },
+        {
+          "caller": "create_comment",
+          "callee": "db.add",
+          "lineNumber": 53
+        },
+        {
+          "caller": "create_comment",
+          "callee": "ActivityLog",
+          "lineNumber": 54
+        },
+        {
+          "caller": "create_comment",
+          "callee": "len",
+          "lineNumber": 59
+        },
+        {
+          "caller": "create_comment",
+          "callee": "db.commit",
+          "lineNumber": 62
+        },
+        {
+          "caller": "create_comment",
+          "callee": "db.refresh",
+          "lineNumber": 63
+        },
+        {
+          "caller": "create_comment",
+          "callee": "vectorstore.upsert_comment",
+          "lineNumber": 64
+        },
+        {
+          "caller": "create_comment",
+          "callee": "str",
+          "lineNumber": 65
+        },
+        {
+          "caller": "create_comment",
+          "callee": "str",
+          "lineNumber": 66
+        },
+        {
+          "caller": "create_comment",
+          "callee": "str",
+          "lineNumber": 67
+        },
+        {
+          "caller": "create_comment",
+          "callee": "str",
+          "lineNumber": 69
+        },
+        {
+          "caller": "delete_comment",
+          "callee": "Depends",
+          "lineNumber": 79
+        },
+        {
+          "caller": "delete_comment",
+          "callee": "Depends",
+          "lineNumber": 80
+        },
+        {
+          "caller": "delete_comment",
+          "callee": "_ensure",
+          "lineNumber": 82
+        },
+        {
+          "caller": "delete_comment",
+          "callee": "db.get",
+          "lineNumber": 83
+        },
+        {
+          "caller": "delete_comment",
+          "callee": "HTTPException",
+          "lineNumber": 85
+        },
+        {
+          "caller": "delete_comment",
+          "callee": "HTTPException",
+          "lineNumber": 87
+        },
+        {
+          "caller": "delete_comment",
+          "callee": "db.delete",
+          "lineNumber": 88
+        },
+        {
+          "caller": "delete_comment",
+          "callee": "db.commit",
+          "lineNumber": 89
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/routers/skills.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 32,
+      "functions": [
+        {
+          "name": "list_skills",
+          "startLine": 18,
+          "endLine": 23,
+          "params": [
+            "db",
+            "_user"
+          ]
+        },
+        {
+          "name": "create_skill",
+          "startLine": 27,
+          "endLine": 40,
+          "params": [
+            "body",
+            "db",
+            "_user"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "list_skills",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "create_skill",
+          "line": 26,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "list_skills",
+          "callee": "Depends",
+          "lineNumber": 19
+        },
+        {
+          "caller": "list_skills",
+          "callee": "Depends",
+          "lineNumber": 20
+        },
+        {
+          "caller": "list_skills",
+          "callee": "db.execute",
+          "lineNumber": 22
+        },
+        {
+          "caller": "list_skills",
+          "callee": "select(Skill).order_by",
+          "lineNumber": 22
+        },
+        {
+          "caller": "list_skills",
+          "callee": "select",
+          "lineNumber": 22
+        },
+        {
+          "caller": "list_skills",
+          "callee": "Skill.name.asc",
+          "lineNumber": 22
+        },
+        {
+          "caller": "list_skills",
+          "callee": "list",
+          "lineNumber": 23
+        },
+        {
+          "caller": "list_skills",
+          "callee": "res.scalars().all",
+          "lineNumber": 23
+        },
+        {
+          "caller": "list_skills",
+          "callee": "res.scalars",
+          "lineNumber": 23
+        },
+        {
+          "caller": "create_skill",
+          "callee": "Depends",
+          "lineNumber": 29
+        },
+        {
+          "caller": "create_skill",
+          "callee": "Depends",
+          "lineNumber": 30
+        },
+        {
+          "caller": "create_skill",
+          "callee": "db.execute",
+          "lineNumber": 32
+        },
+        {
+          "caller": "create_skill",
+          "callee": "select(Skill).where",
+          "lineNumber": 32
+        },
+        {
+          "caller": "create_skill",
+          "callee": "select",
+          "lineNumber": 32
+        },
+        {
+          "caller": "create_skill",
+          "callee": "body.name.lower().strip",
+          "lineNumber": 32
+        },
+        {
+          "caller": "create_skill",
+          "callee": "body.name.lower",
+          "lineNumber": 32
+        },
+        {
+          "caller": "create_skill",
+          "callee": "res.scalar_one_or_none",
+          "lineNumber": 33
+        },
+        {
+          "caller": "create_skill",
+          "callee": "Skill",
+          "lineNumber": 36
+        },
+        {
+          "caller": "create_skill",
+          "callee": "body.name.lower().strip",
+          "lineNumber": 36
+        },
+        {
+          "caller": "create_skill",
+          "callee": "body.name.lower",
+          "lineNumber": 36
+        },
+        {
+          "caller": "create_skill",
+          "callee": "db.add",
+          "lineNumber": 37
+        },
+        {
+          "caller": "create_skill",
+          "callee": "db.commit",
+          "lineNumber": 38
+        },
+        {
+          "caller": "create_skill",
+          "callee": "db.refresh",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/routers/users.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 113,
+      "nonEmptyLines": 99,
+      "functions": [
+        {
+          "name": "list_users",
+          "startLine": 31,
+          "endLine": 36,
+          "params": [
+            "db",
+            "_user"
+          ]
+        },
+        {
+          "name": "me",
+          "startLine": 40,
+          "endLine": 41,
+          "params": [
+            "user"
+          ]
+        },
+        {
+          "name": "get_user_skills",
+          "startLine": 45,
+          "endLine": 61,
+          "params": [
+            "user_id",
+            "db",
+            "_user"
+          ]
+        },
+        {
+          "name": "set_user_skills",
+          "startLine": 65,
+          "endLine": 83,
+          "params": [
+            "user_id",
+            "items",
+            "db",
+            "user"
+          ]
+        },
+        {
+          "name": "workload",
+          "startLine": 87,
+          "endLine": 113,
+          "params": [
+            "user_id",
+            "board_id",
+            "db",
+            "_user"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "list_users",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "me",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "get_user_skills",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "set_user_skills",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "workload",
+          "line": 86,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "list_users",
+          "callee": "Depends",
+          "lineNumber": 32
+        },
+        {
+          "caller": "list_users",
+          "callee": "Depends",
+          "lineNumber": 33
+        },
+        {
+          "caller": "list_users",
+          "callee": "db.execute",
+          "lineNumber": 35
+        },
+        {
+          "caller": "list_users",
+          "callee": "select(User).order_by",
+          "lineNumber": 35
+        },
+        {
+          "caller": "list_users",
+          "callee": "select",
+          "lineNumber": 35
+        },
+        {
+          "caller": "list_users",
+          "callee": "User.display_name.asc",
+          "lineNumber": 35
+        },
+        {
+          "caller": "list_users",
+          "callee": "list",
+          "lineNumber": 36
+        },
+        {
+          "caller": "list_users",
+          "callee": "res.scalars().all",
+          "lineNumber": 36
+        },
+        {
+          "caller": "list_users",
+          "callee": "res.scalars",
+          "lineNumber": 36
+        },
+        {
+          "caller": "me",
+          "callee": "Depends",
+          "lineNumber": 40
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "Depends",
+          "lineNumber": 47
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "Depends",
+          "lineNumber": 48
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "db.get",
+          "lineNumber": 50
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "HTTPException",
+          "lineNumber": 52
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "db.execute",
+          "lineNumber": 53
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "select(UserSkill, Skill)\r\n        .join(Skill, Skill.id == UserSkill.skill_id)\r\n        .where",
+          "lineNumber": 54
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "select(UserSkill, Skill)\r\n        .join",
+          "lineNumber": 54
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "select",
+          "lineNumber": 54
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "res.all",
+          "lineNumber": 59
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "out.append",
+          "lineNumber": 60
+        },
+        {
+          "caller": "get_user_skills",
+          "callee": "UserSkillOut",
+          "lineNumber": 60
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "Depends",
+          "lineNumber": 68
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "Depends",
+          "lineNumber": 69
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "HTTPException",
+          "lineNumber": 72
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "db.execute",
+          "lineNumber": 73
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "select(UserSkill).where",
+          "lineNumber": 73
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "select",
+          "lineNumber": 73
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "res.scalars().all",
+          "lineNumber": 74
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "res.scalars",
+          "lineNumber": 74
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "db.delete",
+          "lineNumber": 75
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "db.flush",
+          "lineNumber": 76
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "db.get",
+          "lineNumber": 78
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "db.add",
+          "lineNumber": 81
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "UserSkill",
+          "lineNumber": 81
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "db.commit",
+          "lineNumber": 82
+        },
+        {
+          "caller": "set_user_skills",
+          "callee": "get_user_skills",
+          "lineNumber": 83
+        },
+        {
+          "caller": "workload",
+          "callee": "Depends",
+          "lineNumber": 90
+        },
+        {
+          "caller": "workload",
+          "callee": "Depends",
+          "lineNumber": 91
+        },
+        {
+          "caller": "workload",
+          "callee": "select(Task)\r\n        .join(TaskAssignment, TaskAssignment.task_id == Task.id)\r\n        .where",
+          "lineNumber": 94
+        },
+        {
+          "caller": "workload",
+          "callee": "select(Task)\r\n        .join",
+          "lineNumber": 94
+        },
+        {
+          "caller": "workload",
+          "callee": "select",
+          "lineNumber": 94
+        },
+        {
+          "caller": "workload",
+          "callee": "stmt.where",
+          "lineNumber": 99
+        },
+        {
+          "caller": "workload",
+          "callee": "db.execute",
+          "lineNumber": 100
+        },
+        {
+          "caller": "workload",
+          "callee": "list",
+          "lineNumber": 101
+        },
+        {
+          "caller": "workload",
+          "callee": "res.scalars().all",
+          "lineNumber": 101
+        },
+        {
+          "caller": "workload",
+          "callee": "res.scalars",
+          "lineNumber": 101
+        },
+        {
+          "caller": "workload",
+          "callee": "datetime.now",
+          "lineNumber": 102
+        },
+        {
+          "caller": "workload",
+          "callee": "sum",
+          "lineNumber": 106
+        },
+        {
+          "caller": "workload",
+          "callee": "WorkloadOut",
+          "lineNumber": 107
+        },
+        {
+          "caller": "workload",
+          "callee": "len",
+          "lineNumber": 109
+        },
+        {
+          "caller": "workload",
+          "callee": "len",
+          "lineNumber": 110
+        },
+        {
+          "caller": "workload",
+          "callee": "len",
+          "lineNumber": 111
+        },
+        {
+          "caller": "workload",
+          "callee": "round",
+          "lineNumber": 112
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/routers/ws.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 79,
+      "nonEmptyLines": 67,
+      "functions": [
+        {
+          "name": "_authenticate",
+          "startLine": 21,
+          "endLine": 31,
+          "params": [
+            "token"
+          ]
+        },
+        {
+          "name": "ws_agent",
+          "startLine": 35,
+          "endLine": 79,
+          "params": [
+            "websocket",
+            "token"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_authenticate",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "ws_agent",
+          "line": 34,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_authenticate",
+          "callee": "jwt.decode",
+          "lineNumber": 23
+        },
+        {
+          "caller": "_authenticate",
+          "callee": "payload.get",
+          "lineNumber": 24
+        },
+        {
+          "caller": "_authenticate",
+          "callee": "uuid.UUID",
+          "lineNumber": 27
+        },
+        {
+          "caller": "_authenticate",
+          "callee": "AsyncSessionLocal",
+          "lineNumber": 30
+        },
+        {
+          "caller": "_authenticate",
+          "callee": "db.get",
+          "lineNumber": 31
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "Query",
+          "lineNumber": 35
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "_authenticate",
+          "lineNumber": 36
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "websocket.close",
+          "lineNumber": 38
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "manager.connect",
+          "lineNumber": 41
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "str",
+          "lineNumber": 41
+        },
+        {
+          "caller": "_writer",
+          "callee": "conn.queue.get",
+          "lineNumber": 46
+        },
+        {
+          "caller": "_writer",
+          "callee": "websocket.send_text",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_writer",
+          "callee": "json.dumps",
+          "lineNumber": 47
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "asyncio.create_task",
+          "lineNumber": 51
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "_writer",
+          "lineNumber": 51
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "websocket.receive_text",
+          "lineNumber": 54
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "json.loads",
+          "lineNumber": 56
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "msg.get",
+          "lineNumber": 59
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "msg.get",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "str",
+          "lineNumber": 62
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "data.get",
+          "lineNumber": 62
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "isinstance",
+          "lineNumber": 62
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "manager.subscribe",
+          "lineNumber": 63
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "websocket.send_text",
+          "lineNumber": 64
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "json.dumps",
+          "lineNumber": 64
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "str",
+          "lineNumber": 66
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "data.get",
+          "lineNumber": 66
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "isinstance",
+          "lineNumber": 66
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "manager.unsubscribe",
+          "lineNumber": 67
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "websocket.send_text",
+          "lineNumber": 68
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "json.dumps",
+          "lineNumber": 68
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "websocket.send_text",
+          "lineNumber": 70
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "json.dumps",
+          "lineNumber": 70
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "websocket.send_text",
+          "lineNumber": 72
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "json.dumps",
+          "lineNumber": 72
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "log.warning",
+          "lineNumber": 76
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "writer_task.cancel",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ws_agent",
+          "callee": "manager.disconnect",
+          "lineNumber": 79
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/schemas.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 284,
+      "nonEmptyLines": 199,
+      "classes": [
+        {
+          "name": "UserCreate",
+          "startLine": 10,
+          "endLine": 13,
+          "methods": [],
+          "properties": [
+            "email",
+            "password",
+            "display_name"
+          ]
+        },
+        {
+          "name": "UserOut",
+          "startLine": 16,
+          "endLine": 22,
+          "methods": [],
+          "properties": [
+            "id",
+            "email",
+            "display_name",
+            "created_at"
+          ]
+        },
+        {
+          "name": "TokenResponse",
+          "startLine": 25,
+          "endLine": 27,
+          "methods": [],
+          "properties": [
+            "access_token",
+            "token_type"
+          ]
+        },
+        {
+          "name": "LoginRequest",
+          "startLine": 30,
+          "endLine": 32,
+          "methods": [],
+          "properties": [
+            "email",
+            "password"
+          ]
+        },
+        {
+          "name": "ColumnCreate",
+          "startLine": 35,
+          "endLine": 38,
+          "methods": [],
+          "properties": [
+            "name",
+            "position",
+            "wip_limit"
+          ]
+        },
+        {
+          "name": "ColumnOut",
+          "startLine": 41,
+          "endLine": 48,
+          "methods": [],
+          "properties": [
+            "id",
+            "board_id",
+            "name",
+            "position",
+            "wip_limit"
+          ]
+        },
+        {
+          "name": "ColumnUpdate",
+          "startLine": 51,
+          "endLine": 54,
+          "methods": [],
+          "properties": [
+            "name",
+            "position",
+            "wip_limit"
+          ]
+        },
+        {
+          "name": "TaskAssigneeOut",
+          "startLine": 57,
+          "endLine": 62,
+          "methods": [],
+          "properties": [
+            "user_id",
+            "display_name",
+            "email"
+          ]
+        },
+        {
+          "name": "TaskCreate",
+          "startLine": 65,
+          "endLine": 74,
+          "methods": [],
+          "properties": [
+            "column_id",
+            "title",
+            "description",
+            "priority",
+            "status",
+            "est_hours",
+            "tags",
+            "due_at",
+            "position"
+          ]
+        },
+        {
+          "name": "TaskUpdate",
+          "startLine": 77,
+          "endLine": 86,
+          "methods": [],
+          "properties": [
+            "column_id",
+            "title",
+            "description",
+            "priority",
+            "status",
+            "est_hours",
+            "tags",
+            "due_at",
+            "position"
+          ]
+        },
+        {
+          "name": "TaskOut",
+          "startLine": 89,
+          "endLine": 105,
+          "methods": [],
+          "properties": [
+            "id",
+            "board_id",
+            "column_id",
+            "title",
+            "description",
+            "priority",
+            "status",
+            "est_hours",
+            "tags",
+            "due_at",
+            "position",
+            "created_at",
+            "updated_at",
+            "assignees"
+          ]
+        },
+        {
+          "name": "BoardCreate",
+          "startLine": 108,
+          "endLine": 110,
+          "methods": [],
+          "properties": [
+            "title",
+            "description"
+          ]
+        },
+        {
+          "name": "BoardUpdate",
+          "startLine": 113,
+          "endLine": 115,
+          "methods": [],
+          "properties": [
+            "title",
+            "description"
+          ]
+        },
+        {
+          "name": "BoardOut",
+          "startLine": 118,
+          "endLine": 125,
+          "methods": [],
+          "properties": [
+            "id",
+            "owner_id",
+            "title",
+            "description",
+            "created_at"
+          ]
+        },
+        {
+          "name": "BoardDetailOut",
+          "startLine": 128,
+          "endLine": 131,
+          "methods": [],
+          "properties": [
+            "columns",
+            "tasks",
+            "members"
+          ]
+        },
+        {
+          "name": "CommentCreate",
+          "startLine": 134,
+          "endLine": 135,
+          "methods": [],
+          "properties": [
+            "body"
+          ]
+        },
+        {
+          "name": "CommentOut",
+          "startLine": 138,
+          "endLine": 145,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "author_id",
+            "body",
+            "created_at"
+          ]
+        },
+        {
+          "name": "SkillCreate",
+          "startLine": 148,
+          "endLine": 149,
+          "methods": [],
+          "properties": [
+            "name"
+          ]
+        },
+        {
+          "name": "SkillOut",
+          "startLine": 152,
+          "endLine": 156,
+          "methods": [],
+          "properties": [
+            "id",
+            "name"
+          ]
+        },
+        {
+          "name": "UserSkillIn",
+          "startLine": 159,
+          "endLine": 161,
+          "methods": [],
+          "properties": [
+            "skill_id",
+            "level"
+          ]
+        },
+        {
+          "name": "UserSkillOut",
+          "startLine": 164,
+          "endLine": 170,
+          "methods": [],
+          "properties": [
+            "user_id",
+            "skill_id",
+            "level",
+            "skill_name"
+          ]
+        },
+        {
+          "name": "UserSummaryOut",
+          "startLine": 173,
+          "endLine": 178,
+          "methods": [],
+          "properties": [
+            "id",
+            "display_name",
+            "email"
+          ]
+        },
+        {
+          "name": "BoardMemberAddIn",
+          "startLine": 181,
+          "endLine": 182,
+          "methods": [],
+          "properties": [
+            "user_id"
+          ]
+        },
+        {
+          "name": "BoardMemberOut",
+          "startLine": 185,
+          "endLine": 188,
+          "methods": [],
+          "properties": [
+            "user_id",
+            "display_name",
+            "email"
+          ]
+        },
+        {
+          "name": "WorkloadOut",
+          "startLine": 191,
+          "endLine": 196,
+          "methods": [],
+          "properties": [
+            "user_id",
+            "open_tasks",
+            "in_progress",
+            "overdue",
+            "est_hours_left"
+          ]
+        },
+        {
+          "name": "AssignTaskIn",
+          "startLine": 199,
+          "endLine": 200,
+          "methods": [],
+          "properties": [
+            "user_id"
+          ]
+        },
+        {
+          "name": "ActivityLogOut",
+          "startLine": 203,
+          "endLine": 212,
+          "methods": [],
+          "properties": [
+            "id",
+            "board_id",
+            "task_id",
+            "actor_id",
+            "action",
+            "details",
+            "created_at"
+          ]
+        },
+        {
+          "name": "AgentChatRequest",
+          "startLine": 217,
+          "endLine": 222,
+          "methods": [],
+          "properties": [
+            "board_id",
+            "message",
+            "intent_hint",
+            "context",
+            "locale"
+          ]
+        },
+        {
+          "name": "AgentBreakdownRequest",
+          "startLine": 225,
+          "endLine": 229,
+          "methods": [],
+          "properties": [
+            "board_id",
+            "goal_text",
+            "target_column_id",
+            "locale"
+          ]
+        },
+        {
+          "name": "AgentSuggestAssigneeRequest",
+          "startLine": 232,
+          "endLine": 235,
+          "methods": [],
+          "properties": [
+            "board_id",
+            "task_id",
+            "locale"
+          ]
+        },
+        {
+          "name": "AgentMonitorRequest",
+          "startLine": 238,
+          "endLine": 240,
+          "methods": [],
+          "properties": [
+            "board_id",
+            "locale"
+          ]
+        },
+        {
+          "name": "AgentReportRequest",
+          "startLine": 243,
+          "endLine": 247,
+          "methods": [],
+          "properties": [
+            "board_id",
+            "since",
+            "until",
+            "locale"
+          ]
+        },
+        {
+          "name": "AgentRunStepOut",
+          "startLine": 250,
+          "endLine": 261,
+          "methods": [],
+          "properties": [
+            "id",
+            "step_index",
+            "node",
+            "input_summary",
+            "output_summary",
+            "payload",
+            "latency_ms",
+            "started_at",
+            "finished_at"
+          ]
+        },
+        {
+          "name": "AgentRunOut",
+          "startLine": 264,
+          "endLine": 278,
+          "methods": [],
+          "properties": [
+            "id",
+            "board_id",
+            "actor_id",
+            "intent",
+            "status",
+            "user_message",
+            "latency_ms",
+            "tokens_in",
+            "tokens_out",
+            "cost_usd",
+            "started_at",
+            "finished_at"
+          ]
+        },
+        {
+          "name": "AgentRunDetailOut",
+          "startLine": 281,
+          "endLine": 284,
+          "methods": [],
+          "properties": [
+            "result",
+            "error",
+            "steps"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "UserCreate",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "UserOut",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "TokenResponse",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "LoginRequest",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "ColumnCreate",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "ColumnOut",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "ColumnUpdate",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "TaskAssigneeOut",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "TaskCreate",
+          "line": 65,
+          "isDefault": false
+        },
+        {
+          "name": "TaskUpdate",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "TaskOut",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "BoardCreate",
+          "line": 108,
+          "isDefault": false
+        },
+        {
+          "name": "BoardUpdate",
+          "line": 113,
+          "isDefault": false
+        },
+        {
+          "name": "BoardOut",
+          "line": 118,
+          "isDefault": false
+        },
+        {
+          "name": "BoardDetailOut",
+          "line": 128,
+          "isDefault": false
+        },
+        {
+          "name": "CommentCreate",
+          "line": 134,
+          "isDefault": false
+        },
+        {
+          "name": "CommentOut",
+          "line": 138,
+          "isDefault": false
+        },
+        {
+          "name": "SkillCreate",
+          "line": 148,
+          "isDefault": false
+        },
+        {
+          "name": "SkillOut",
+          "line": 152,
+          "isDefault": false
+        },
+        {
+          "name": "UserSkillIn",
+          "line": 159,
+          "isDefault": false
+        },
+        {
+          "name": "UserSkillOut",
+          "line": 164,
+          "isDefault": false
+        },
+        {
+          "name": "UserSummaryOut",
+          "line": 173,
+          "isDefault": false
+        },
+        {
+          "name": "BoardMemberAddIn",
+          "line": 181,
+          "isDefault": false
+        },
+        {
+          "name": "BoardMemberOut",
+          "line": 185,
+          "isDefault": false
+        },
+        {
+          "name": "WorkloadOut",
+          "line": 191,
+          "isDefault": false
+        },
+        {
+          "name": "AssignTaskIn",
+          "line": 199,
+          "isDefault": false
+        },
+        {
+          "name": "ActivityLogOut",
+          "line": 203,
+          "isDefault": false
+        },
+        {
+          "name": "AgentChatRequest",
+          "line": 217,
+          "isDefault": false
+        },
+        {
+          "name": "AgentBreakdownRequest",
+          "line": 225,
+          "isDefault": false
+        },
+        {
+          "name": "AgentSuggestAssigneeRequest",
+          "line": 232,
+          "isDefault": false
+        },
+        {
+          "name": "AgentMonitorRequest",
+          "line": 238,
+          "isDefault": false
+        },
+        {
+          "name": "AgentReportRequest",
+          "line": 243,
+          "isDefault": false
+        },
+        {
+          "name": "AgentRunStepOut",
+          "line": 250,
+          "isDefault": false
+        },
+        {
+          "name": "AgentRunOut",
+          "line": 264,
+          "isDefault": false
+        },
+        {
+          "name": "AgentRunDetailOut",
+          "line": 281,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 35,
+        "functionCount": 0,
+        "classCount": 35
+      }
+    },
+    {
+      "path": "backend/app/schemas/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 36,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/schemas/agent_run.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 20,
+      "classes": [
+        {
+          "name": "AgentRunResponse",
+          "startLine": 14,
+          "endLine": 27,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "project_id",
+            "agent_type",
+            "agent_version",
+            "status",
+            "input_artifacts",
+            "output_artifacts",
+            "started_at",
+            "completed_at",
+            "result"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AgentRunResponse",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/app/schemas/analytics.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 40,
+      "classes": [
+        {
+          "name": "BackendMetric",
+          "startLine": 10,
+          "endLine": 14,
+          "methods": [],
+          "properties": [
+            "agent_type",
+            "avg_seconds",
+            "first_approve_rate",
+            "error_count"
+          ]
+        },
+        {
+          "name": "MemberMetric",
+          "startLine": 17,
+          "endLine": 20,
+          "methods": [],
+          "properties": [
+            "display_name",
+            "tasks_done",
+            "tasks_in_progress"
+          ]
+        },
+        {
+          "name": "ProjectDashboard",
+          "startLine": 23,
+          "endLine": 29,
+          "methods": [],
+          "properties": [
+            "id",
+            "name",
+            "primary_language",
+            "task_counts",
+            "stale_count",
+            "member_count"
+          ]
+        },
+        {
+          "name": "DashboardResponse",
+          "startLine": 32,
+          "endLine": 33,
+          "methods": [],
+          "properties": [
+            "projects"
+          ]
+        },
+        {
+          "name": "ErrorBreakdownItem",
+          "startLine": 36,
+          "endLine": 38,
+          "methods": [],
+          "properties": [
+            "action_type",
+            "count"
+          ]
+        },
+        {
+          "name": "AnalyticsResponse",
+          "startLine": 41,
+          "endLine": 46,
+          "methods": [],
+          "properties": [
+            "period",
+            "by_backend",
+            "by_member",
+            "reviewer_avg_score",
+            "error_breakdown"
+          ]
+        },
+        {
+          "name": "ActiveTaskItem",
+          "startLine": 49,
+          "endLine": 53,
+          "methods": [],
+          "properties": [
+            "project_id",
+            "project_name",
+            "task_id",
+            "task_title"
+          ]
+        },
+        {
+          "name": "AIReviewResponse",
+          "startLine": 56,
+          "endLine": 59,
+          "methods": [],
+          "properties": [
+            "summary",
+            "active_tasks",
+            "generated_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "BackendMetric",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "MemberMetric",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "ProjectDashboard",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "DashboardResponse",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "ErrorBreakdownItem",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "AnalyticsResponse",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "ActiveTaskItem",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "AIReviewResponse",
+          "line": 56,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 0,
+        "classCount": 8
+      }
+    },
+    {
+      "path": "backend/app/schemas/audit.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 27,
+      "classes": [
+        {
+          "name": "AuditLogListItem",
+          "startLine": 13,
+          "endLine": 30,
+          "methods": [],
+          "properties": [
+            "id",
+            "agent_id",
+            "agent_version",
+            "action_type",
+            "action_description",
+            "timestamp",
+            "input_refs",
+            "output_refs",
+            "result",
+            "project_id",
+            "task_id",
+            "task_title"
+          ]
+        },
+        {
+          "name": "AuditLogsPageResponse",
+          "startLine": 33,
+          "endLine": 37,
+          "methods": [],
+          "properties": [
+            "items",
+            "total",
+            "offset",
+            "limit"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AuditLogListItem",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "AuditLogsPageResponse",
+          "line": 33,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/schemas/auth.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 85,
+      "nonEmptyLines": 56,
+      "classes": [
+        {
+          "name": "RegisterRequest",
+          "startLine": 11,
+          "endLine": 14,
+          "methods": [],
+          "properties": [
+            "email",
+            "password",
+            "display_name"
+          ]
+        },
+        {
+          "name": "VerificationSentResponse",
+          "startLine": 17,
+          "endLine": 21,
+          "methods": [],
+          "properties": [
+            "message",
+            "email",
+            "needs_verification"
+          ]
+        },
+        {
+          "name": "VerifyRegisterRequest",
+          "startLine": 24,
+          "endLine": 27,
+          "methods": [],
+          "properties": [
+            "email",
+            "code"
+          ]
+        },
+        {
+          "name": "LoginRequest",
+          "startLine": 30,
+          "endLine": 32,
+          "methods": [],
+          "properties": [
+            "email",
+            "password"
+          ]
+        },
+        {
+          "name": "UserResponse",
+          "startLine": 35,
+          "endLine": 43,
+          "methods": [],
+          "properties": [
+            "id",
+            "email",
+            "display_name",
+            "avatar_url",
+            "github_id",
+            "created_at"
+          ]
+        },
+        {
+          "name": "TokenResponse",
+          "startLine": 46,
+          "endLine": 49,
+          "methods": [],
+          "properties": [
+            "access_token",
+            "token_type",
+            "user"
+          ]
+        },
+        {
+          "name": "LoginResponse",
+          "startLine": 52,
+          "endLine": 55,
+          "methods": [],
+          "properties": [
+            "access_token",
+            "token_type",
+            "expires_in"
+          ]
+        },
+        {
+          "name": "ForgotPasswordRequest",
+          "startLine": 62,
+          "endLine": 63,
+          "methods": [],
+          "properties": [
+            "email"
+          ]
+        },
+        {
+          "name": "ResetPasswordRequest",
+          "startLine": 66,
+          "endLine": 68,
+          "methods": [],
+          "properties": [
+            "token",
+            "new_password"
+          ]
+        },
+        {
+          "name": "VerifyResetRequest",
+          "startLine": 71,
+          "endLine": 75,
+          "methods": [],
+          "properties": [
+            "email",
+            "code",
+            "new_password"
+          ]
+        },
+        {
+          "name": "MessageResponse",
+          "startLine": 78,
+          "endLine": 80,
+          "methods": [],
+          "properties": [
+            "message"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RegisterRequest",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "VerificationSentResponse",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "VerifyRegisterRequest",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "LoginRequest",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "UserResponse",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "TokenResponse",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "LoginResponse",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "ForgotPasswordRequest",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "ResetPasswordRequest",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "VerifyResetRequest",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "MessageResponse",
+          "line": 78,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 11,
+        "functionCount": 0,
+        "classCount": 11
+      }
+    },
+    {
+      "path": "backend/app/schemas/dependency.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 32,
+      "classes": [
+        {
+          "name": "DependencyCreate",
+          "startLine": 11,
+          "endLine": 12,
+          "methods": [],
+          "properties": [
+            "depends_on_task_id"
+          ]
+        },
+        {
+          "name": "DependencyRef",
+          "startLine": 15,
+          "endLine": 18,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "title",
+            "status"
+          ]
+        },
+        {
+          "name": "DependencyResponse",
+          "startLine": 21,
+          "endLine": 26,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "depends_on_task_id",
+            "created_at"
+          ]
+        },
+        {
+          "name": "TaskDependenciesResponse",
+          "startLine": 29,
+          "endLine": 32,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "depends_on",
+            "blocked_by"
+          ]
+        },
+        {
+          "name": "DependencyGraphNode",
+          "startLine": 35,
+          "endLine": 38,
+          "methods": [],
+          "properties": [
+            "id",
+            "title",
+            "status"
+          ]
+        },
+        {
+          "name": "DependencyGraphResponse",
+          "startLine": 41,
+          "endLine": 43,
+          "methods": [],
+          "properties": [
+            "nodes",
+            "edges"
+          ]
+        },
+        {
+          "name": "AISuggestResponse",
+          "startLine": 46,
+          "endLine": 50,
+          "methods": [],
+          "properties": [
+            "added",
+            "skipped",
+            "total_tasks",
+            "graph"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DependencyCreate",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "DependencyRef",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "DependencyResponse",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "TaskDependenciesResponse",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "DependencyGraphNode",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "DependencyGraphResponse",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "AISuggestResponse",
+          "line": 46,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 0,
+        "classCount": 7
+      }
+    },
+    {
+      "path": "backend/app/schemas/devops.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 127,
+      "nonEmptyLines": 96,
+      "classes": [
+        {
+          "name": "HealthCheckOut",
+          "startLine": 14,
+          "endLine": 25,
+          "methods": [],
+          "properties": [
+            "id",
+            "deployment_id",
+            "project_id",
+            "status",
+            "http_status",
+            "latency_ms",
+            "response_snippet",
+            "error_message",
+            "checked_at"
+          ]
+        },
+        {
+          "name": "IncidentOut",
+          "startLine": 30,
+          "endLine": 57,
+          "methods": [
+            "from_orm_with_snapshot"
+          ],
+          "properties": [
+            "id",
+            "deployment_id",
+            "project_id",
+            "incident_type",
+            "severity",
+            "title",
+            "description",
+            "ai_reasoning",
+            "risk_score",
+            "metric_snapshot",
+            "rollback_triggered",
+            "resolved",
+            "resolved_at",
+            "created_at"
+          ]
+        },
+        {
+          "name": "RollbackEventOut",
+          "startLine": 62,
+          "endLine": 75,
+          "methods": [],
+          "properties": [
+            "id",
+            "deployment_id",
+            "project_id",
+            "triggered_by",
+            "previous_deployment_id",
+            "status",
+            "reason",
+            "ai_reasoning",
+            "alert_sent",
+            "completed_at",
+            "created_at"
+          ]
+        },
+        {
+          "name": "RiskAssessmentOut",
+          "startLine": 80,
+          "endLine": 87,
+          "methods": [],
+          "properties": [
+            "risk_score",
+            "risk_level",
+            "reasoning",
+            "risk_factors",
+            "blast_radius",
+            "safe_to_deploy",
+            "via_llm"
+          ]
+        },
+        {
+          "name": "DeploymentHealthSummary",
+          "startLine": 92,
+          "endLine": 101,
+          "methods": [],
+          "properties": [
+            "deployment_id",
+            "project_id",
+            "health_status",
+            "last_checked_at",
+            "latest_http_status",
+            "latest_latency_ms",
+            "consecutive_failures",
+            "open_incidents",
+            "last_rollback_at"
+          ]
+        },
+        {
+          "name": "AlertConfigUpdate",
+          "startLine": 106,
+          "endLine": 111,
+          "methods": [],
+          "properties": [
+            "discord_webhook_url",
+            "slack_webhook_url",
+            "health_check_path",
+            "alert_on_anomaly",
+            "monitor_duration_minutes"
+          ]
+        },
+        {
+          "name": "AlertConfigOut",
+          "startLine": 114,
+          "endLine": 121,
+          "methods": [],
+          "properties": [
+            "discord_webhook_url",
+            "slack_webhook_url",
+            "health_check_path",
+            "alert_on_anomaly",
+            "monitor_duration_minutes"
+          ]
+        },
+        {
+          "name": "ManualRollbackRequest",
+          "startLine": 126,
+          "endLine": 127,
+          "methods": [],
+          "properties": [
+            "reason"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "HealthCheckOut",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "IncidentOut",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "RollbackEventOut",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "RiskAssessmentOut",
+          "line": 80,
+          "isDefault": false
+        },
+        {
+          "name": "DeploymentHealthSummary",
+          "line": 92,
+          "isDefault": false
+        },
+        {
+          "name": "AlertConfigUpdate",
+          "line": 106,
+          "isDefault": false
+        },
+        {
+          "name": "AlertConfigOut",
+          "line": 114,
+          "isDefault": false
+        },
+        {
+          "name": "ManualRollbackRequest",
+          "line": 126,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "from_orm_with_snapshot",
+          "callee": "getattr",
+          "lineNumber": 51
+        },
+        {
+          "caller": "from_orm_with_snapshot",
+          "callee": "data.get",
+          "lineNumber": 52
+        },
+        {
+          "caller": "from_orm_with_snapshot",
+          "callee": "json.loads",
+          "lineNumber": 54
+        },
+        {
+          "caller": "from_orm_with_snapshot",
+          "callee": "cls",
+          "lineNumber": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 0,
+        "classCount": 8
+      }
+    },
+    {
+      "path": "backend/app/schemas/document.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 60,
+      "classes": [
+        {
+          "name": "DocumentListItem",
+          "startLine": 16,
+          "endLine": 25,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "document_type",
+            "status",
+            "version",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        {
+          "name": "DocumentResponse",
+          "startLine": 28,
+          "endLine": 38,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "document_type",
+            "content",
+            "status",
+            "version",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        {
+          "name": "DocumentContentUpdate",
+          "startLine": 41,
+          "endLine": 42,
+          "methods": [],
+          "properties": [
+            "content"
+          ]
+        },
+        {
+          "name": "RevisionRequest",
+          "startLine": 49,
+          "endLine": 52,
+          "methods": [],
+          "properties": [
+            "feedback"
+          ]
+        },
+        {
+          "name": "GenerateSpecRequest",
+          "startLine": 55,
+          "endLine": 56,
+          "methods": [],
+          "properties": [
+            "intent"
+          ]
+        },
+        {
+          "name": "GenerateSpecResponse",
+          "startLine": 59,
+          "endLine": 64,
+          "methods": [],
+          "properties": [
+            "agent_run_id",
+            "intent_id",
+            "document_id",
+            "status",
+            "message"
+          ]
+        },
+        {
+          "name": "GeneratePlanResponse",
+          "startLine": 67,
+          "endLine": 71,
+          "methods": [],
+          "properties": [
+            "agent_run_id",
+            "document_id",
+            "status",
+            "message"
+          ]
+        },
+        {
+          "name": "DocumentApproveResponse",
+          "startLine": 74,
+          "endLine": 80,
+          "methods": [],
+          "properties": [
+            "id",
+            "status",
+            "updated_at",
+            "plan_agent_run_id",
+            "plan_generation_started"
+          ]
+        },
+        {
+          "name": "DocumentReviseResponse",
+          "startLine": 83,
+          "endLine": 88,
+          "methods": [],
+          "properties": [
+            "id",
+            "status",
+            "feedback_id",
+            "agent_run_id",
+            "updated_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DocumentListItem",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "DocumentResponse",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "DocumentContentUpdate",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "RevisionRequest",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "GenerateSpecRequest",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "GenerateSpecResponse",
+          "line": 59,
+          "isDefault": false
+        },
+        {
+          "name": "GeneratePlanResponse",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "DocumentApproveResponse",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "DocumentReviseResponse",
+          "line": 83,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 9,
+        "functionCount": 0,
+        "classCount": 9
+      }
+    },
+    {
+      "path": "backend/app/schemas/github.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 11,
+      "classes": [
+        {
+          "name": "GitHubConfigResponse",
+          "startLine": 8,
+          "endLine": 11,
+          "methods": [],
+          "properties": [
+            "repo_full_name",
+            "default_base_branch",
+            "enabled"
+          ]
+        },
+        {
+          "name": "GitHubConfigUpsert",
+          "startLine": 14,
+          "endLine": 17,
+          "methods": [],
+          "properties": [
+            "repo_full_name",
+            "pat",
+            "default_base_branch"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GitHubConfigResponse",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "GitHubConfigUpsert",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/schemas/inline_comment.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 30,
+      "nonEmptyLines": 20,
+      "classes": [
+        {
+          "name": "InlineCommentCreate",
+          "startLine": 11,
+          "endLine": 16,
+          "methods": [],
+          "properties": [
+            "file_path",
+            "line_number",
+            "comment_text"
+          ]
+        },
+        {
+          "name": "InlineCommentResponse",
+          "startLine": 19,
+          "endLine": 30,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "diff_id",
+            "file_path",
+            "line_number",
+            "comment_text",
+            "created_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "InlineCommentCreate",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "InlineCommentResponse",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/schemas/intent.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 11,
+      "classes": [
+        {
+          "name": "IntentResponse",
+          "startLine": 11,
+          "endLine": 17,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "content",
+            "created_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "IntentResponse",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/app/schemas/member.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 36,
+      "classes": [
+        {
+          "name": "InviteRequest",
+          "startLine": 13,
+          "endLine": 15,
+          "methods": [],
+          "properties": [
+            "role",
+            "invitee_email"
+          ]
+        },
+        {
+          "name": "InvitationResponse",
+          "startLine": 18,
+          "endLine": 21,
+          "methods": [],
+          "properties": [
+            "invitation_id",
+            "invite_url",
+            "expires_at"
+          ]
+        },
+        {
+          "name": "AcceptResponse",
+          "startLine": 24,
+          "endLine": 28,
+          "methods": [],
+          "properties": [
+            "project_id",
+            "role",
+            "status"
+          ]
+        },
+        {
+          "name": "MemberResponse",
+          "startLine": 31,
+          "endLine": 39,
+          "methods": [],
+          "properties": [
+            "user_id",
+            "display_name",
+            "email",
+            "role",
+            "status",
+            "joined_at"
+          ]
+        },
+        {
+          "name": "PendingMemberResponse",
+          "startLine": 42,
+          "endLine": 51,
+          "methods": [],
+          "properties": [
+            "user_id",
+            "display_name",
+            "email",
+            "role",
+            "joined_at"
+          ]
+        },
+        {
+          "name": "RoleChangeRequest",
+          "startLine": 54,
+          "endLine": 55,
+          "methods": [],
+          "properties": [
+            "role"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "InviteRequest",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "InvitationResponse",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "AcceptResponse",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "MemberResponse",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "PendingMemberResponse",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "RoleChangeRequest",
+          "line": 54,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 0,
+        "classCount": 6
+      }
+    },
+    {
+      "path": "backend/app/schemas/memory.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 30,
+      "classes": [
+        {
+          "name": "MemoryEntryResponse",
+          "startLine": 11,
+          "endLine": 24,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "task_id",
+            "entry_timestamp",
+            "summary",
+            "files_affected",
+            "lessons_learned",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        {
+          "name": "MemoryEntryUpdate",
+          "startLine": 27,
+          "endLine": 41,
+          "methods": [
+            "validate_patch"
+          ],
+          "properties": [
+            "summary",
+            "lessons_learned"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MemoryEntryResponse",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "MemoryEntryUpdate",
+          "line": 27,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "validate_patch",
+          "callee": "ValueError",
+          "lineNumber": 36
+        },
+        {
+          "caller": "validate_patch",
+          "callee": "self.summary.strip",
+          "lineNumber": 37
+        },
+        {
+          "caller": "validate_patch",
+          "callee": "ValueError",
+          "lineNumber": 38
+        },
+        {
+          "caller": "validate_patch",
+          "callee": "self.lessons_learned.strip",
+          "lineNumber": 39
+        },
+        {
+          "caller": "validate_patch",
+          "callee": "ValueError",
+          "lineNumber": 40
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/schemas/notification.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 56,
+      "nonEmptyLines": 42,
+      "classes": [
+        {
+          "name": "NotificationResponse",
+          "startLine": 13,
+          "endLine": 43,
+          "methods": [
+            "from_notification"
+          ],
+          "properties": [
+            "id",
+            "type",
+            "content",
+            "reference_type",
+            "reference_id",
+            "project_id",
+            "is_read",
+            "created_at"
+          ]
+        },
+        {
+          "name": "NotificationListResponse",
+          "startLine": 46,
+          "endLine": 48,
+          "methods": [],
+          "properties": [
+            "total_unread",
+            "items"
+          ]
+        },
+        {
+          "name": "MarkReadResponse",
+          "startLine": 51,
+          "endLine": 52,
+          "methods": [],
+          "properties": [
+            "ok"
+          ]
+        },
+        {
+          "name": "MarkAllReadResponse",
+          "startLine": 55,
+          "endLine": 56,
+          "methods": [],
+          "properties": [
+            "marked"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NotificationResponse",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "NotificationListResponse",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "MarkReadResponse",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "MarkAllReadResponse",
+          "line": 55,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "from_notification",
+          "callee": "cls",
+          "lineNumber": 32
+        },
+        {
+          "caller": "from_notification",
+          "callee": "str",
+          "lineNumber": 34
+        },
+        {
+          "caller": "from_notification",
+          "callee": "str",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 4
+      }
+    },
+    {
+      "path": "backend/app/schemas/pause.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 24,
+      "classes": [
+        {
+          "name": "TaskResumeBody",
+          "startLine": 11,
+          "endLine": 14,
+          "methods": [],
+          "properties": [
+            "steering_instructions"
+          ]
+        },
+        {
+          "name": "PauseResumeResponse",
+          "startLine": 17,
+          "endLine": 23,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "state",
+            "paused_at",
+            "resumed_at"
+          ]
+        },
+        {
+          "name": "PauseStateResponse",
+          "startLine": 26,
+          "endLine": 37,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "is_paused",
+            "state",
+            "steering_instructions",
+            "agent_run_id",
+            "paused_at",
+            "resumed_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TaskResumeBody",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "PauseResumeResponse",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "PauseStateResponse",
+          "line": 26,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "backend/app/schemas/pipeline.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 128,
+      "nonEmptyLines": 100,
+      "classes": [
+        {
+          "name": "FailureAnalysisOut",
+          "startLine": 13,
+          "endLine": 31,
+          "methods": [],
+          "properties": [
+            "id",
+            "step_id",
+            "run_id",
+            "root_cause",
+            "confidence",
+            "fix_strategy",
+            "risk_level",
+            "is_auto_fixable",
+            "human_approval_required",
+            "patch_applied",
+            "patch_summary",
+            "retry_triggered",
+            "retry_attempt",
+            "approved_by",
+            "approved_at",
+            "created_at"
+          ]
+        },
+        {
+          "name": "PipelineStepOut",
+          "startLine": 36,
+          "endLine": 50,
+          "methods": [],
+          "properties": [
+            "id",
+            "run_id",
+            "step_key",
+            "status",
+            "attempt",
+            "logs",
+            "ai_reasoning",
+            "started_at",
+            "completed_at",
+            "duration_ms",
+            "created_at",
+            "failure_analyses"
+          ]
+        },
+        {
+          "name": "PipelineRunOut",
+          "startLine": 53,
+          "endLine": 67,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "task_id",
+            "status",
+            "triggered_by",
+            "branch_name",
+            "commit_sha",
+            "ai_summary",
+            "started_at",
+            "completed_at",
+            "created_at",
+            "steps"
+          ]
+        },
+        {
+          "name": "DeploymentOut",
+          "startLine": 72,
+          "endLine": 91,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "task_id",
+            "run_id",
+            "status",
+            "environment",
+            "provider",
+            "external_id",
+            "preview_url",
+            "branch_name",
+            "commit_sha",
+            "deploy_logs",
+            "error_message",
+            "risk_score",
+            "duration_ms",
+            "deployed_at",
+            "created_at"
+          ]
+        },
+        {
+          "name": "DeploymentConfigOut",
+          "startLine": 96,
+          "endLine": 107,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "provider",
+            "project_name",
+            "team_id",
+            "base_url",
+            "enabled",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        {
+          "name": "DeploymentConfigCreate",
+          "startLine": 110,
+          "endLine": 116,
+          "methods": [],
+          "properties": [
+            "provider",
+            "token",
+            "project_name",
+            "team_id",
+            "base_url",
+            "enabled"
+          ]
+        },
+        {
+          "name": "DeploymentConfigTestRequest",
+          "startLine": 119,
+          "endLine": 123,
+          "methods": [],
+          "properties": [
+            "provider",
+            "token",
+            "project_name",
+            "team_id"
+          ]
+        },
+        {
+          "name": "DeploymentConfigTestResponse",
+          "startLine": 126,
+          "endLine": 128,
+          "methods": [],
+          "properties": [
+            "ok",
+            "message"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FailureAnalysisOut",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "PipelineStepOut",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "PipelineRunOut",
+          "line": 53,
+          "isDefault": false
+        },
+        {
+          "name": "DeploymentOut",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "DeploymentConfigOut",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "DeploymentConfigCreate",
+          "line": 110,
+          "isDefault": false
+        },
+        {
+          "name": "DeploymentConfigTestRequest",
+          "line": 119,
+          "isDefault": false
+        },
+        {
+          "name": "DeploymentConfigTestResponse",
+          "line": 126,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 0,
+        "classCount": 8
+      }
+    },
+    {
+      "path": "backend/app/schemas/project.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 44,
+      "classes": [
+        {
+          "name": "ProjectCreate",
+          "startLine": 16,
+          "endLine": 20,
+          "methods": [],
+          "properties": [
+            "name",
+            "description",
+            "primary_language",
+            "coding_backend"
+          ]
+        },
+        {
+          "name": "ProjectUpdate",
+          "startLine": 23,
+          "endLine": 26,
+          "methods": [],
+          "properties": [
+            "name",
+            "description",
+            "coding_backend"
+          ]
+        },
+        {
+          "name": "ConstitutionUpdate",
+          "startLine": 29,
+          "endLine": 30,
+          "methods": [],
+          "properties": [
+            "content"
+          ]
+        },
+        {
+          "name": "ConstitutionResponse",
+          "startLine": 33,
+          "endLine": 36,
+          "methods": [],
+          "properties": [
+            "project_id",
+            "content",
+            "updated_at"
+          ]
+        },
+        {
+          "name": "ProjectListItem",
+          "startLine": 39,
+          "endLine": 50,
+          "methods": [],
+          "properties": [
+            "id",
+            "name",
+            "description",
+            "primary_language",
+            "status",
+            "coding_backend",
+            "updated_at"
+          ]
+        },
+        {
+          "name": "ProjectResponse",
+          "startLine": 53,
+          "endLine": 64,
+          "methods": [],
+          "properties": [
+            "id",
+            "name",
+            "description",
+            "primary_language",
+            "constitution",
+            "status",
+            "coding_backend",
+            "created_at",
+            "updated_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProjectCreate",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "ProjectUpdate",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "ConstitutionUpdate",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "ConstitutionResponse",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "ProjectListItem",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "ProjectResponse",
+          "line": 53,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 0,
+        "classCount": 6
+      }
+    },
+    {
+      "path": "backend/app/schemas/review_insight.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 49,
+      "classes": [
+        {
+          "name": "ReviewFinding",
+          "startLine": 16,
+          "endLine": 18,
+          "methods": [],
+          "properties": [
+            "severity",
+            "message"
+          ]
+        },
+        {
+          "name": "ReviewInsightResponse",
+          "startLine": 21,
+          "endLine": 60,
+          "methods": [
+            "from_agent_result"
+          ],
+          "properties": [
+            "available",
+            "agent_run_id",
+            "status",
+            "verdict",
+            "summary",
+            "findings",
+            "model",
+            "updated_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ReviewFinding",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "ReviewInsightResponse",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "from_agent_result",
+          "callee": "cls",
+          "lineNumber": 36
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "result.get",
+          "lineNumber": 37
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "isinstance",
+          "lineNumber": 39
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "isinstance",
+          "lineNumber": 41
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "findings.append",
+          "lineNumber": 42
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "ReviewFinding",
+          "lineNumber": 43
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "str",
+          "lineNumber": 44
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "item.get",
+          "lineNumber": 44
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "str",
+          "lineNumber": 45
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "item.get",
+          "lineNumber": 45
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "result.get",
+          "lineNumber": 48
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "result.get",
+          "lineNumber": 51
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "cls",
+          "lineNumber": 52
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "str",
+          "lineNumber": 57
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "result.get",
+          "lineNumber": 57
+        },
+        {
+          "caller": "from_agent_result",
+          "callee": "str",
+          "lineNumber": 59
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/schemas/review.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 29,
+      "classes": [
+        {
+          "name": "ReviewCommentResponse",
+          "startLine": 13,
+          "endLine": 22,
+          "methods": [],
+          "properties": [
+            "id",
+            "file_path",
+            "line_number",
+            "content",
+            "severity"
+          ]
+        },
+        {
+          "name": "ReviewReportResponse",
+          "startLine": 25,
+          "endLine": 41,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "status",
+            "score",
+            "suggestion",
+            "test_runner",
+            "test_pass",
+            "test_fail",
+            "comments",
+            "error_message",
+            "created_at",
+            "completed_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ReviewCommentResponse",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "ReviewReportResponse",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/schemas/task_branch.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 14,
+      "classes": [
+        {
+          "name": "TaskBranchResponse",
+          "startLine": 13,
+          "endLine": 22,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "branch_name",
+            "status",
+            "created_at",
+            "merged_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TaskBranchResponse",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    }
+  ]
+}

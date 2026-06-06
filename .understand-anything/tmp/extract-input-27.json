@@ -1,0 +1,52 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "specs/002-ai-cli-integration/data-model.md",
+                           "language":  "markdown",
+                           "sizeLines":  110,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/002-ai-cli-integration/plan.md",
+                           "language":  "markdown",
+                           "sizeLines":  224,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/002-ai-cli-integration/research.md",
+                           "language":  "markdown",
+                           "sizeLines":  223,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/002-ai-cli-integration/spec.md",
+                           "language":  "markdown",
+                           "sizeLines":  127,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/002-ai-cli-integration/tasks.md",
+                           "language":  "markdown",
+                           "sizeLines":  206,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            "specs/002-ai-cli-integration/data-model.md":  [
+
+                                                                           ],
+                            "specs/002-ai-cli-integration/plan.md":  [
+
+                                                                     ],
+                            "specs/002-ai-cli-integration/research.md":  [
+
+                                                                         ],
+                            "specs/002-ai-cli-integration/spec.md":  [
+
+                                                                     ],
+                            "specs/002-ai-cli-integration/tasks.md":  [
+
+                                                                      ]
+                        }
+}

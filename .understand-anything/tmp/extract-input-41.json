@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/instructor.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/jsondiff",
+                           "language":  "unknown",
+                           "sizeLines":  41,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonpatch",
+                           "language":  "unknown",
+                           "sizeLines":  107,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonpointer",
+                           "language":  "unknown",
+                           "sizeLines":  66,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonschema.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/litellm-proxy.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/litellm.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/markdown-it.exe",
+                           "language":  "exe",
+                           "sizeLines":  374,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/mcp.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/normalizer.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/numpy-config.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/onnxruntime_test.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/openai.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pdf2txt.py",
+                           "language":  "python",
+                           "sizeLines":  324,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pdfplumber.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pip.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pip3.12.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pip3.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pybase64.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pygmentize.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pyjson5.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pypdfium2.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pyproject-build.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/python.exe",
+                           "language":  "exe",
+                           "sizeLines":  1115,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pythonw.exe",
+                           "language":  "exe",
+                           "sizeLines":  860,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/instructor.exe":  [
+
+                                                                                                ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/jsondiff":  [
+
+                                                                                          ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonpatch":  [
+
+                                                                                           ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonpointer":  [
+
+                                                                                             ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonschema.exe":  [
+
+                                                                                                ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/litellm-proxy.exe":  [
+
+                                                                                                   ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/litellm.exe":  [
+
+                                                                                             ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/markdown-it.exe":  [
+
+                                                                                                 ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/mcp.exe":  [
+
+                                                                                         ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/normalizer.exe":  [
+
+                                                                                                ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/numpy-config.exe":  [
+
+                                                                                                  ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/onnxruntime_test.exe":  [
+
+                                                                                                      ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/openai.exe":  [
+
+                                                                                            ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pdf2txt.py":  [
+
+                                                                                            ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pdfplumber.exe":  [
+
+                                                                                                ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pip.exe":  [
+
+                                                                                         ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pip3.12.exe":  [
+
+                                                                                             ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pip3.exe":  [
+
+                                                                                          ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pybase64.exe":  [
+
+                                                                                              ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pygmentize.exe":  [
+
+                                                                                                ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pyjson5.exe":  [
+
+                                                                                             ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pypdfium2.exe":  [
+
+                                                                                               ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pyproject-build.exe":  [
+
+                                                                                                     ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/python.exe":  [
+
+                                                                                            ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pythonw.exe":  [
+
+                                                                                             ]
+                        }
+}

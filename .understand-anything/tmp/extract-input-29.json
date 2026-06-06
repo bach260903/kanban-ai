@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".claude/projects/d--D---n-KLTN_2/memory/feedback_language.md",
+                           "language":  "markdown",
+                           "sizeLines":  11,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/projects/d--D---n-KLTN_2/memory/MEMORY.md",
+                           "language":  "markdown",
+                           "sizeLines":  3,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/settings.local.json",
+                           "language":  "json",
+                           "sizeLines":  10,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-analyze/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  260,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-approve-spec/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  113,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-checklist/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  372,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-clarify/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  254,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-constitution/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  157,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-git-commit/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  84,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-git-feature/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  71,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-git-initialize/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  53,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-git-remote/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  49,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-git-validate/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  53,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-implement/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  210,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-plan/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  152,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-specify/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  339,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-tasks/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  202,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".claude/skills/speckit-taskstoissues/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  106,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".cursor/rules/specify-rules.mdc",
+                           "language":  "mdc",
+                           "sizeLines":  25,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  ".cursor/skills/speckit-analyze/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  255,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".cursor/skills/speckit-approve-spec/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  113,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".cursor/skills/speckit-checklist/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  367,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".cursor/skills/speckit-clarify/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  249,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".cursor/skills/speckit-constitution/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  152,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".cursor/skills/speckit-implement/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  205,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".claude/projects/d--D---n-KLTN_2/memory/feedback_language.md":  [
+
+                                                                                             ],
+                            ".claude/projects/d--D---n-KLTN_2/memory/MEMORY.md":  [
+
+                                                                                  ],
+                            ".claude/settings.local.json":  [
+
+                                                            ],
+                            ".claude/skills/speckit-analyze/SKILL.md":  [
+
+                                                                        ],
+                            ".claude/skills/speckit-approve-spec/SKILL.md":  [
+
+                                                                             ],
+                            ".claude/skills/speckit-checklist/SKILL.md":  [
+
+                                                                          ],
+                            ".claude/skills/speckit-clarify/SKILL.md":  [
+
+                                                                        ],
+                            ".claude/skills/speckit-constitution/SKILL.md":  [
+
+                                                                             ],
+                            ".claude/skills/speckit-git-commit/SKILL.md":  [
+
+                                                                           ],
+                            ".claude/skills/speckit-git-feature/SKILL.md":  [
+
+                                                                            ],
+                            ".claude/skills/speckit-git-initialize/SKILL.md":  [
+
+                                                                               ],
+                            ".claude/skills/speckit-git-remote/SKILL.md":  [
+
+                                                                           ],
+                            ".claude/skills/speckit-git-validate/SKILL.md":  [
+
+                                                                             ],
+                            ".claude/skills/speckit-implement/SKILL.md":  [
+
+                                                                          ],
+                            ".claude/skills/speckit-plan/SKILL.md":  [
+
+                                                                     ],
+                            ".claude/skills/speckit-specify/SKILL.md":  [
+
+                                                                        ],
+                            ".claude/skills/speckit-tasks/SKILL.md":  [
+
+                                                                      ],
+                            ".claude/skills/speckit-taskstoissues/SKILL.md":  [
+
+                                                                              ],
+                            ".cursor/rules/specify-rules.mdc":  [
+
+                                                                ],
+                            ".cursor/skills/speckit-analyze/SKILL.md":  [
+
+                                                                        ],
+                            ".cursor/skills/speckit-approve-spec/SKILL.md":  [
+
+                                                                             ],
+                            ".cursor/skills/speckit-checklist/SKILL.md":  [
+
+                                                                          ],
+                            ".cursor/skills/speckit-clarify/SKILL.md":  [
+
+                                                                        ],
+                            ".cursor/skills/speckit-constitution/SKILL.md":  [
+
+                                                                             ],
+                            ".cursor/skills/speckit-implement/SKILL.md":  [
+
+                                                                          ]
+                        }
+}

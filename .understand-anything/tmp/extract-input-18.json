@@ -1,0 +1,43 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "evaluation/datasets/planner/001.json",
+                           "language":  "json",
+                           "sizeLines":  19,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "evaluation/datasets/planner/002.json",
+                           "language":  "json",
+                           "sizeLines":  18,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "evaluation/datasets/planner/003.json",
+                           "language":  "json",
+                           "sizeLines":  19,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "evaluation/datasets/planner/_README.md",
+                           "language":  "markdown",
+                           "sizeLines":  18,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            "evaluation/datasets/planner/001.json":  [
+
+                                                                     ],
+                            "evaluation/datasets/planner/002.json":  [
+
+                                                                     ],
+                            "evaluation/datasets/planner/003.json":  [
+
+                                                                     ],
+                            "evaluation/datasets/planner/_README.md":  [
+
+                                                                       ]
+                        }
+}

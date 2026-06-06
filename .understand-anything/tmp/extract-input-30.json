@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".cursor/skills/speckit-plan/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  147,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".cursor/skills/speckit-specify/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  334,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".cursor/skills/speckit-tasks/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  197,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".cursor/skills/speckit-taskstoissues/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  101,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/scripts/core.py",
+                           "language":  "python",
+                           "sizeLines":  253,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/scripts/design_system.py",
+                           "language":  "python",
+                           "sizeLines":  1067,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/scripts/search.py",
+                           "language":  "python",
+                           "sizeLines":  114,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/SKILL.md",
+                           "language":  "markdown",
+                           "sizeLines":  288,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".python-version",
+                           "language":  "unknown",
+                           "sizeLines":  1,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  ".specify/extensions/.registry",
+                           "language":  "unknown",
+                           "sizeLines":  22,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  ".specify/memory/constitution.md",
+                           "language":  "markdown",
+                           "sizeLines":  227,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/workflows/speckit/workflow.yml",
+                           "language":  "yaml",
+                           "sizeLines":  66,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  ".specify/workflows/workflow-registry.json",
+                           "language":  "json",
+                           "sizeLines":  12,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  ".understand-anything/.understandignore",
+                           "language":  "unknown",
+                           "sizeLines":  41,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/README.md",
+                           "language":  "markdown",
+                           "sizeLines":  43,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "agents/requirements.txt",
+                           "language":  "txt",
+                           "sizeLines":  2,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "agents/src/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  1,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/agents/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  20,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/agents/assigner.py",
+                           "language":  "python",
+                           "sizeLines":  103,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/agents/executor.py",
+                           "language":  "python",
+                           "sizeLines":  128,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/agents/monitor.py",
+                           "language":  "python",
+                           "sizeLines":  166,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/agents/orchestrator.py",
+                           "language":  "python",
+                           "sizeLines":  266,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/agents/planner.py",
+                           "language":  "python",
+                           "sizeLines":  72,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/agents/reporter.py",
+                           "language":  "python",
+                           "sizeLines":  130,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "agents/src/agents/roles.py",
+                           "language":  "python",
+                           "sizeLines":  22,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".cursor/skills/speckit-plan/SKILL.md":  [
+
+                                                                     ],
+                            ".cursor/skills/speckit-specify/SKILL.md":  [
+
+                                                                        ],
+                            ".cursor/skills/speckit-tasks/SKILL.md":  [
+
+                                                                      ],
+                            ".cursor/skills/speckit-taskstoissues/SKILL.md":  [
+
+                                                                              ],
+                            ".cursor/skills/ui-ux-pro-max/scripts/core.py":  [
+
+                                                                             ],
+                            ".cursor/skills/ui-ux-pro-max/scripts/design_system.py":  [
+
+                                                                                      ],
+                            ".cursor/skills/ui-ux-pro-max/scripts/search.py":  [
+
+                                                                               ],
+                            ".cursor/skills/ui-ux-pro-max/SKILL.md":  [
+
+                                                                      ],
+                            ".python-version":  [
+
+                                                ],
+                            ".specify/extensions/.registry":  [
+
+                                                              ],
+                            ".specify/memory/constitution.md":  [
+
+                                                                ],
+                            ".specify/workflows/speckit/workflow.yml":  [
+
+                                                                        ],
+                            ".specify/workflows/workflow-registry.json":  [
+
+                                                                          ],
+                            ".understand-anything/.understandignore":  [
+
+                                                                       ],
+                            "agents/README.md":  [
+
+                                                 ],
+                            "agents/requirements.txt":  [
+
+                                                        ],
+                            "agents/src/__init__.py":  [
+
+                                                       ],
+                            "agents/src/agents/__init__.py":  [
+
+                                                              ],
+                            "agents/src/agents/assigner.py":  [
+
+                                                              ],
+                            "agents/src/agents/executor.py":  [
+
+                                                              ],
+                            "agents/src/agents/monitor.py":  [
+
+                                                             ],
+                            "agents/src/agents/orchestrator.py":  [
+
+                                                                  ],
+                            "agents/src/agents/planner.py":  [
+
+                                                             ],
+                            "agents/src/agents/reporter.py":  [
+
+                                                              ],
+                            "agents/src/agents/roles.py":  [
+
+                                                           ]
+                        }
+}

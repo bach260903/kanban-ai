@@ -449,7 +449,7 @@ export default function PipelineRunPage() {
           Pipelines
         </Link>
         <span>›</span>
-        <span>Run {run.id.slice(0, 8)}</span>
+        <span>{run.task_title ?? `Run ${run.id.slice(0, 8)}`}</span>
       </div>
 
       {/* Header */}
@@ -457,7 +457,7 @@ export default function PipelineRunPage() {
         <div className={styles.titleRow}>
           <h1 className={styles.title}>
             <Workflow size={22} aria-hidden />
-            Pipeline Run
+            {run.task_title ? `Pipeline: ${run.task_title}` : 'Pipeline Run'}
           </h1>
           <div className={styles.headerActions}>
             <RunStatusBadge status={run.status} />

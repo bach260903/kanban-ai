@@ -135,7 +135,7 @@ async def test_process_one_delivery_success(
         patch.object(
             webhook_service,
             "_deliver_once",
-            AsyncMock(return_value=(True, 200)),
+            AsyncMock(return_value=(True, 200, None)),
         ),
     ):
         await webhook_service._process_one_delivery(delivery.id)
@@ -172,7 +172,7 @@ async def test_process_one_delivery_retry_then_fail(
         patch.object(
             webhook_service,
             "_deliver_once",
-            AsyncMock(side_effect=[(False, 500), (False, 500), (False, 500)]),
+            AsyncMock(side_effect=[(False, 500, None), (False, 500, None), (False, 500, None)]),
         ),
         patch("app.services.webhook_service.asyncio.sleep", AsyncMock()),
     ):
@@ -210,7 +210,7 @@ async def test_process_one_delivery_retry_then_succeed(
         patch.object(
             webhook_service,
             "_deliver_once",
-            AsyncMock(side_effect=[(False, 503), (True, 200)]),
+            AsyncMock(side_effect=[(False, 503, None), (True, 200, None)]),
         ),
         patch("app.services.webhook_service.asyncio.sleep", AsyncMock()),
     ):
@@ -290,7 +290,7 @@ async def test_test_webhook_returns_metrics(
     with patch.object(
         webhook_service,
         "_deliver_once_direct",
-        AsyncMock(return_value=(True, 204)),
+        AsyncMock(return_value=(True, 204, None)),
     ):
         result = await webhook_service.test_webhook(
             async_db_session,

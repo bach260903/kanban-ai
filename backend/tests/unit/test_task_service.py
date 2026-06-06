@@ -10,6 +10,7 @@ import pytest_asyncio
 from fastapi import HTTPException
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
+from unittest.mock import AsyncMock, MagicMock, patch
 
 from app.exceptions import InvalidTransitionError, WIPLimitError
 from app.models.diff import Diff, DiffReviewStatus
@@ -92,8 +93,12 @@ async def test_move_task_review_to_done_idempotent(
     project_id: UUID,
 ) -> None:
     t = await _insert_task(async_db_session, project_id, status=TaskStatus.REVIEW, title="hil")
-    out1 = await KanbanService.move_task(t.id, TaskStatus.DONE, async_db_session, defer_coder_start=True)
-    out2 = await KanbanService.move_task(t.id, TaskStatus.DONE, async_db_session, defer_coder_start=True)
+    with (
+        patch("app.services.kanban_service.asyncio.to_thread", new=AsyncMock()),
+        patch("app.services.kanban_service.asyncio.create_task", new=MagicMock()),
+    ):
+        out1 = await KanbanService.move_task(t.id, TaskStatus.DONE, async_db_session, defer_coder_start=True)
+        out2 = await KanbanService.move_task(t.id, TaskStatus.DONE, async_db_session, defer_coder_start=True)
     assert out1.id == t.id
     assert out2.id == t.id
     assert out1.status == TaskStatus.DONE
@@ -119,13 +124,14 @@ async def test_second_approve_latest_pending_raises(
     async_db_session.add(diff)
     await async_db_session.flush()
 
-    await DiffService.approve_latest_pending(
+    first = await DiffService.approve_latest_pending(
         async_db_session, task_id=t.id, project_id=project_id
     )
-    with pytest.raises(InvalidTransitionError, match="not pending approval"):
-        await DiffService.approve_latest_pending(
-            async_db_session, task_id=t.id, project_id=project_id
-        )
+    # Second call is idempotent — returns the already-approved diff without raising.
+    second = await DiffService.approve_latest_pending(
+        async_db_session, task_id=t.id, project_id=project_id
+    )
+    assert first.id == second.id
 
 
 async def _insert_user(session: AsyncSession, *, email: str, display_name: str) -> UUID:

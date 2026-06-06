@@ -20,3 +20,8 @@ class AgentState(TypedDict):
     feedback: str
     error: str
     coding_backend: str
+    # CI gate fields
+    ci_run_id: UUID | None      # ID of the triggered PipelineRun
+    ci_passed: bool | None      # True=pass, False=fail, None=not run yet
+    ci_retry_count: int         # how many times coder was sent back for CI failure
+    ci_failure_report: str      # summary of CI failures shown to coder / human

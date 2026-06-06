@@ -171,7 +171,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 async with async_session_maker() as s:
                     t = await s.get(Task, task_id)
                     if t is not None:
-                        t.status = TaskStatus.REJECTED
+                        t.status = TaskStatus.TODO
                         t.updated_at = datetime.now(timezone.utc)
                     run = await s.get(AgentRun, agent_run_id)
                     if run is not None:
@@ -233,7 +233,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
             async with async_session_maker() as s:
                 t = await s.get(Task, task_id)
                 if t is not None:
-                    t.status = TaskStatus.REJECTED
+                    t.status = TaskStatus.TODO
                     t.updated_at = datetime.now(timezone.utc)
                 run = await s.get(AgentRun, agent_run_id)
                 if run is not None:

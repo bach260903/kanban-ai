@@ -1,0 +1,2063 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "backend/app/llm/invoke_helpers.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 274,
+      "nonEmptyLines": 221,
+      "functions": [
+        {
+          "name": "_unwrap_model",
+          "startLine": 40,
+          "endLine": 55,
+          "params": [
+            "llm"
+          ]
+        },
+        {
+          "name": "_provider_of",
+          "startLine": 58,
+          "endLine": 65,
+          "params": [
+            "llm"
+          ]
+        },
+        {
+          "name": "_is_google_llm",
+          "startLine": 68,
+          "endLine": 69,
+          "params": [
+            "llm"
+          ]
+        },
+        {
+          "name": "_is_groq_tool_use_failed",
+          "startLine": 77,
+          "endLine": 79,
+          "params": [
+            "exc"
+          ]
+        },
+        {
+          "name": "_is_quota_exhausted",
+          "startLine": 82,
+          "endLine": 105,
+          "params": [
+            "exc",
+            "provider"
+          ]
+        },
+        {
+          "name": "_retry_delay_seconds",
+          "startLine": 108,
+          "endLine": 112,
+          "params": [
+            "exc"
+          ]
+        },
+        {
+          "name": "_wait_google_spacing",
+          "startLine": 120,
+          "endLine": 131,
+          "params": []
+        },
+        {
+          "name": "_build_alternate_llm",
+          "startLine": 139,
+          "endLine": 178,
+          "params": [
+            "llm"
+          ]
+        },
+        {
+          "name": "_invoke_groq",
+          "startLine": 186,
+          "endLine": 204,
+          "params": [
+            "llm",
+            "messages"
+          ]
+        },
+        {
+          "name": "_invoke_google",
+          "startLine": 207,
+          "endLine": 228,
+          "params": [
+            "llm",
+            "messages"
+          ]
+        },
+        {
+          "name": "_invoke_one",
+          "startLine": 231,
+          "endLine": 236,
+          "params": [
+            "llm",
+            "messages"
+          ]
+        },
+        {
+          "name": "ainvoke_llm",
+          "startLine": 244,
+          "endLine": 274,
+          "params": [
+            "llm",
+            "messages"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_unwrap_model",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "_provider_of",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "_is_google_llm",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "_is_groq_tool_use_failed",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "_is_quota_exhausted",
+          "line": 82,
+          "isDefault": false
+        },
+        {
+          "name": "_retry_delay_seconds",
+          "line": 108,
+          "isDefault": false
+        },
+        {
+          "name": "_wait_google_spacing",
+          "line": 120,
+          "isDefault": false
+        },
+        {
+          "name": "_build_alternate_llm",
+          "line": 139,
+          "isDefault": false
+        },
+        {
+          "name": "_invoke_groq",
+          "line": 186,
+          "isDefault": false
+        },
+        {
+          "name": "_invoke_google",
+          "line": 207,
+          "isDefault": false
+        },
+        {
+          "name": "_invoke_one",
+          "line": 231,
+          "isDefault": false
+        },
+        {
+          "name": "ainvoke_llm",
+          "line": 244,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_unwrap_model",
+          "callee": "range",
+          "lineNumber": 48
+        },
+        {
+          "caller": "_unwrap_model",
+          "callee": "type",
+          "lineNumber": 49
+        },
+        {
+          "caller": "_unwrap_model",
+          "callee": "getattr",
+          "lineNumber": 51
+        },
+        {
+          "caller": "_provider_of",
+          "callee": "type",
+          "lineNumber": 60
+        },
+        {
+          "caller": "_provider_of",
+          "callee": "_unwrap_model",
+          "lineNumber": 60
+        },
+        {
+          "caller": "_is_google_llm",
+          "callee": "_provider_of",
+          "lineNumber": 69
+        },
+        {
+          "caller": "_is_groq_tool_use_failed",
+          "callee": "type",
+          "lineNumber": 79
+        },
+        {
+          "caller": "_is_groq_tool_use_failed",
+          "callee": "str",
+          "lineNumber": 79
+        },
+        {
+          "caller": "_is_quota_exhausted",
+          "callee": "type",
+          "lineNumber": 88
+        },
+        {
+          "caller": "_is_quota_exhausted",
+          "callee": "str(exc).lower",
+          "lineNumber": 89
+        },
+        {
+          "caller": "_is_quota_exhausted",
+          "callee": "str",
+          "lineNumber": 89
+        },
+        {
+          "caller": "_retry_delay_seconds",
+          "callee": "_RETRY_IN_SECONDS.search",
+          "lineNumber": 109
+        },
+        {
+          "caller": "_retry_delay_seconds",
+          "callee": "str",
+          "lineNumber": 109
+        },
+        {
+          "caller": "_retry_delay_seconds",
+          "callee": "float",
+          "lineNumber": 111
+        },
+        {
+          "caller": "_retry_delay_seconds",
+          "callee": "match.group",
+          "lineNumber": 111
+        },
+        {
+          "caller": "_retry_delay_seconds",
+          "callee": "min",
+          "lineNumber": 112
+        },
+        {
+          "caller": "_wait_google_spacing",
+          "callee": "time.monotonic",
+          "lineNumber": 127
+        },
+        {
+          "caller": "_wait_google_spacing",
+          "callee": "asyncio.sleep",
+          "lineNumber": 130
+        },
+        {
+          "caller": "_wait_google_spacing",
+          "callee": "time.monotonic",
+          "lineNumber": 131
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "_unwrap_model",
+          "lineNumber": 148
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "_provider_of",
+          "lineNumber": 149
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "getattr",
+          "lineNumber": 158
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "isinstance",
+          "lineNumber": 159
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "bound_kwargs.get",
+          "lineNumber": 159
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "logger.warning",
+          "lineNumber": 160
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "factory.provider_configured",
+          "lineNumber": 169
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "getattr",
+          "lineNumber": 171
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "factory.create_chat_llm",
+          "lineNumber": 175
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "float",
+          "lineNumber": 175
+        },
+        {
+          "caller": "_build_alternate_llm",
+          "callee": "logger.warning",
+          "lineNumber": 177
+        },
+        {
+          "caller": "_invoke_groq",
+          "callee": "range",
+          "lineNumber": 190
+        },
+        {
+          "caller": "_invoke_groq",
+          "callee": "llm.ainvoke",
+          "lineNumber": 192
+        },
+        {
+          "caller": "_invoke_groq",
+          "callee": "_is_groq_tool_use_failed",
+          "lineNumber": 194
+        },
+        {
+          "caller": "_invoke_groq",
+          "callee": "logger.warning",
+          "lineNumber": 197
+        },
+        {
+          "caller": "_invoke_groq",
+          "callee": "asyncio.sleep",
+          "lineNumber": 201
+        },
+        {
+          "caller": "_invoke_google",
+          "callee": "range",
+          "lineNumber": 213
+        },
+        {
+          "caller": "_invoke_google",
+          "callee": "_wait_google_spacing",
+          "lineNumber": 214
+        },
+        {
+          "caller": "_invoke_google",
+          "callee": "llm.ainvoke",
+          "lineNumber": 216
+        },
+        {
+          "caller": "_invoke_google",
+          "callee": "_retry_delay_seconds",
+          "lineNumber": 221
+        },
+        {
+          "caller": "_invoke_google",
+          "callee": "logger.warning",
+          "lineNumber": 222
+        },
+        {
+          "caller": "_invoke_google",
+          "callee": "asyncio.sleep",
+          "lineNumber": 226
+        },
+        {
+          "caller": "_invoke_one",
+          "callee": "_provider_of",
+          "lineNumber": 233
+        },
+        {
+          "caller": "_invoke_one",
+          "callee": "_invoke_google",
+          "lineNumber": 234
+        },
+        {
+          "caller": "_invoke_one",
+          "callee": "_invoke_groq",
+          "lineNumber": 236
+        },
+        {
+          "caller": "ainvoke_llm",
+          "callee": "_provider_of",
+          "lineNumber": 255
+        },
+        {
+          "caller": "ainvoke_llm",
+          "callee": "_invoke_one",
+          "lineNumber": 257
+        },
+        {
+          "caller": "ainvoke_llm",
+          "callee": "_is_quota_exhausted",
+          "lineNumber": 259
+        },
+        {
+          "caller": "ainvoke_llm",
+          "callee": "_build_alternate_llm",
+          "lineNumber": 261
+        },
+        {
+          "caller": "ainvoke_llm",
+          "callee": "logger.warning",
+          "lineNumber": 263
+        },
+        {
+          "caller": "ainvoke_llm",
+          "callee": "_provider_of",
+          "lineNumber": 269
+        },
+        {
+          "caller": "ainvoke_llm",
+          "callee": "logger.warning",
+          "lineNumber": 270
+        },
+        {
+          "caller": "ainvoke_llm",
+          "callee": "type",
+          "lineNumber": 272
+        },
+        {
+          "caller": "ainvoke_llm",
+          "callee": "_invoke_one",
+          "lineNumber": 274
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 12,
+        "functionCount": 12,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/main.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 125,
+      "nonEmptyLines": 107,
+      "functions": [
+        {
+          "name": "_webhook_worker_enabled",
+          "startLine": 70,
+          "endLine": 71,
+          "params": []
+        },
+        {
+          "name": "lifespan",
+          "startLine": 75,
+          "endLine": 95,
+          "params": [
+            "_app"
+          ]
+        },
+        {
+          "name": "create_app",
+          "startLine": 98,
+          "endLine": 122,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "_webhook_worker_enabled",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "lifespan",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "create_app",
+          "line": 98,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_webhook_worker_enabled",
+          "callee": "os.environ.get(\"DISABLE_WEBHOOK_WORKER\", \"\").lower",
+          "lineNumber": 71
+        },
+        {
+          "caller": "_webhook_worker_enabled",
+          "callee": "os.environ.get",
+          "lineNumber": 71
+        },
+        {
+          "caller": "lifespan",
+          "callee": "logger.info",
+          "lineNumber": 78
+        },
+        {
+          "caller": "lifespan",
+          "callee": "_webhook_worker_enabled",
+          "lineNumber": 84
+        },
+        {
+          "caller": "lifespan",
+          "callee": "asyncio.create_task",
+          "lineNumber": 85
+        },
+        {
+          "caller": "lifespan",
+          "callee": "webhook_service.process_deliveries",
+          "lineNumber": 85
+        },
+        {
+          "caller": "lifespan",
+          "callee": "logger.info",
+          "lineNumber": 86
+        },
+        {
+          "caller": "lifespan",
+          "callee": "logger.info",
+          "lineNumber": 88
+        },
+        {
+          "caller": "lifespan",
+          "callee": "register_slash_commands",
+          "lineNumber": 90
+        },
+        {
+          "caller": "lifespan",
+          "callee": "_webhook_worker.cancel",
+          "lineNumber": 93
+        },
+        {
+          "caller": "lifespan",
+          "callee": "asyncio.gather",
+          "lineNumber": 94
+        },
+        {
+          "caller": "lifespan",
+          "callee": "dispose_engine",
+          "lineNumber": 95
+        },
+        {
+          "caller": "create_app",
+          "callee": "FastAPI",
+          "lineNumber": 99
+        },
+        {
+          "caller": "create_app",
+          "callee": "application.add_middleware",
+          "lineNumber": 101
+        },
+        {
+          "caller": "create_app",
+          "callee": "register_exception_handlers",
+          "lineNumber": 114
+        },
+        {
+          "caller": "create_app",
+          "callee": "application.get",
+          "lineNumber": 116
+        },
+        {
+          "caller": "create_app",
+          "callee": "application.include_router",
+          "lineNumber": 120
+        },
+        {
+          "caller": "create_app",
+          "callee": "application.add_api_websocket_route",
+          "lineNumber": 121
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/middleware/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/middleware/auth.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "require_jwt",
+          "startLine": 14,
+          "endLine": 43,
+          "params": [
+            "credentials"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "require_jwt",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "require_jwt",
+          "callee": "Depends",
+          "lineNumber": 15
+        },
+        {
+          "caller": "require_jwt",
+          "callee": "HTTPException",
+          "lineNumber": 19
+        },
+        {
+          "caller": "require_jwt",
+          "callee": "jwt.decode",
+          "lineNumber": 25
+        },
+        {
+          "caller": "require_jwt",
+          "callee": "HTTPException",
+          "lineNumber": 31
+        },
+        {
+          "caller": "require_jwt",
+          "callee": "payload.get",
+          "lineNumber": 36
+        },
+        {
+          "caller": "require_jwt",
+          "callee": "isinstance",
+          "lineNumber": 37
+        },
+        {
+          "caller": "require_jwt",
+          "callee": "HTTPException",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/middleware/error_handlers.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 34,
+      "functions": [
+        {
+          "name": "register_exception_handlers",
+          "startLine": 17,
+          "endLine": 44,
+          "params": [
+            "app"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "register_exception_handlers",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "register_exception_handlers",
+          "callee": "app.exception_handler",
+          "lineNumber": 18
+        },
+        {
+          "caller": "_not_found",
+          "callee": "JSONResponse",
+          "lineNumber": 20
+        },
+        {
+          "caller": "_not_found",
+          "callee": "str",
+          "lineNumber": 20
+        },
+        {
+          "caller": "register_exception_handlers",
+          "callee": "app.exception_handler",
+          "lineNumber": 22
+        },
+        {
+          "caller": "_wip",
+          "callee": "JSONResponse",
+          "lineNumber": 24
+        },
+        {
+          "caller": "_wip",
+          "callee": "str",
+          "lineNumber": 24
+        },
+        {
+          "caller": "register_exception_handlers",
+          "callee": "app.exception_handler",
+          "lineNumber": 26
+        },
+        {
+          "caller": "_duplicate_name",
+          "callee": "JSONResponse",
+          "lineNumber": 28
+        },
+        {
+          "caller": "_duplicate_name",
+          "callee": "str",
+          "lineNumber": 28
+        },
+        {
+          "caller": "register_exception_handlers",
+          "callee": "app.exception_handler",
+          "lineNumber": 30
+        },
+        {
+          "caller": "_circular_dependency",
+          "callee": "JSONResponse",
+          "lineNumber": 32
+        },
+        {
+          "caller": "_circular_dependency",
+          "callee": "str",
+          "lineNumber": 32
+        },
+        {
+          "caller": "register_exception_handlers",
+          "callee": "app.exception_handler",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_dependency_blocked",
+          "callee": "JSONResponse",
+          "lineNumber": 36
+        },
+        {
+          "caller": "_dependency_blocked",
+          "callee": "str",
+          "lineNumber": 36
+        },
+        {
+          "caller": "register_exception_handlers",
+          "callee": "app.exception_handler",
+          "lineNumber": 38
+        },
+        {
+          "caller": "_invalid_transition",
+          "callee": "JSONResponse",
+          "lineNumber": 40
+        },
+        {
+          "caller": "_invalid_transition",
+          "callee": "str",
+          "lineNumber": 40
+        },
+        {
+          "caller": "register_exception_handlers",
+          "callee": "app.exception_handler",
+          "lineNumber": 42
+        },
+        {
+          "caller": "_sandbox",
+          "callee": "JSONResponse",
+          "lineNumber": 44
+        },
+        {
+          "caller": "_sandbox",
+          "callee": "str",
+          "lineNumber": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/models.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 241,
+      "nonEmptyLines": 186,
+      "classes": [
+        {
+          "name": "User",
+          "startLine": 24,
+          "endLine": 39,
+          "methods": [],
+          "properties": [
+            "id",
+            "email",
+            "hashed_password",
+            "display_name",
+            "created_at",
+            "boards",
+            "board_memberships",
+            "comments",
+            "task_assignments",
+            "user_skills",
+            "activity_logs",
+            "agent_runs"
+          ]
+        },
+        {
+          "name": "Board",
+          "startLine": 42,
+          "endLine": 60,
+          "methods": [],
+          "properties": [
+            "id",
+            "owner_id",
+            "title",
+            "description",
+            "created_at",
+            "owner",
+            "members",
+            "columns",
+            "tasks",
+            "activity_logs",
+            "agent_runs"
+          ]
+        },
+        {
+          "name": "BoardMember",
+          "startLine": 63,
+          "endLine": 73,
+          "methods": [],
+          "properties": [
+            "id",
+            "board_id",
+            "user_id",
+            "added_at",
+            "board",
+            "user"
+          ]
+        },
+        {
+          "name": "Column",
+          "startLine": 76,
+          "endLine": 86,
+          "methods": [],
+          "properties": [
+            "id",
+            "board_id",
+            "name",
+            "position",
+            "wip_limit",
+            "board",
+            "tasks"
+          ]
+        },
+        {
+          "name": "Task",
+          "startLine": 89,
+          "endLine": 119,
+          "methods": [],
+          "properties": [
+            "id",
+            "board_id",
+            "column_id",
+            "title",
+            "description",
+            "priority",
+            "status",
+            "est_hours",
+            "tags",
+            "due_at",
+            "position",
+            "created_at",
+            "updated_at",
+            "board",
+            "column",
+            "comments",
+            "assignments",
+            "activity_logs",
+            "dependencies"
+          ]
+        },
+        {
+          "name": "TaskDependency",
+          "startLine": 122,
+          "endLine": 132,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "depends_on_id",
+            "task"
+          ]
+        },
+        {
+          "name": "Comment",
+          "startLine": 135,
+          "endLine": 145,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "author_id",
+            "body",
+            "created_at",
+            "task",
+            "author"
+          ]
+        },
+        {
+          "name": "Skill",
+          "startLine": 148,
+          "endLine": 154,
+          "methods": [],
+          "properties": [
+            "id",
+            "name",
+            "user_skills"
+          ]
+        },
+        {
+          "name": "UserSkill",
+          "startLine": 157,
+          "endLine": 166,
+          "methods": [],
+          "properties": [
+            "user_id",
+            "skill_id",
+            "level",
+            "user",
+            "skill"
+          ]
+        },
+        {
+          "name": "TaskAssignment",
+          "startLine": 169,
+          "endLine": 179,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "user_id",
+            "assigned_at",
+            "task",
+            "user"
+          ]
+        },
+        {
+          "name": "ActivityLog",
+          "startLine": 182,
+          "endLine": 197,
+          "methods": [],
+          "properties": [
+            "id",
+            "board_id",
+            "task_id",
+            "actor_id",
+            "action",
+            "details",
+            "created_at",
+            "board",
+            "task",
+            "actor"
+          ]
+        },
+        {
+          "name": "AgentRun",
+          "startLine": 200,
+          "endLine": 224,
+          "methods": [],
+          "properties": [
+            "id",
+            "board_id",
+            "actor_id",
+            "intent",
+            "status",
+            "user_message",
+            "result",
+            "error",
+            "latency_ms",
+            "tokens_in",
+            "tokens_out",
+            "cost_usd",
+            "started_at",
+            "finished_at",
+            "board",
+            "actor",
+            "steps"
+          ]
+        },
+        {
+          "name": "AgentRunStep",
+          "startLine": 227,
+          "endLine": 241,
+          "methods": [],
+          "properties": [
+            "id",
+            "run_id",
+            "step_index",
+            "node",
+            "input_summary",
+            "output_summary",
+            "payload",
+            "latency_ms",
+            "started_at",
+            "finished_at",
+            "run"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "User",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "Board",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "BoardMember",
+          "line": 63,
+          "isDefault": false
+        },
+        {
+          "name": "Column",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "Task",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "TaskDependency",
+          "line": 122,
+          "isDefault": false
+        },
+        {
+          "name": "Comment",
+          "line": 135,
+          "isDefault": false
+        },
+        {
+          "name": "Skill",
+          "line": 148,
+          "isDefault": false
+        },
+        {
+          "name": "UserSkill",
+          "line": 157,
+          "isDefault": false
+        },
+        {
+          "name": "TaskAssignment",
+          "line": 169,
+          "isDefault": false
+        },
+        {
+          "name": "ActivityLog",
+          "line": 182,
+          "isDefault": false
+        },
+        {
+          "name": "AgentRun",
+          "line": 200,
+          "isDefault": false
+        },
+        {
+          "name": "AgentRunStep",
+          "line": 227,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 13,
+        "functionCount": 0,
+        "classCount": 13
+      }
+    },
+    {
+      "path": "backend/app/models/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 94,
+      "nonEmptyLines": 92,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/models/agent_pause_state.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 58,
+      "nonEmptyLines": 48,
+      "classes": [
+        {
+          "name": "PauseRunState",
+          "startLine": 16,
+          "endLine": 18,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AgentPauseState",
+          "startLine": 21,
+          "endLine": 58,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "agent_run_id",
+            "state",
+            "steering_instructions",
+            "paused_at",
+            "resumed_at",
+            "updated_at",
+            "task",
+            "agent_run"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PauseRunState",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "AgentPauseState",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/models/agent_run.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 106,
+      "nonEmptyLines": 92,
+      "classes": [
+        {
+          "name": "AgentType",
+          "startLine": 23,
+          "endLine": 26,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AgentRunStatus",
+          "startLine": 29,
+          "endLine": 35,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AgentRun",
+          "startLine": 38,
+          "endLine": 106,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "project_id",
+            "agent_type",
+            "agent_version",
+            "status",
+            "input_artifacts",
+            "output_artifacts",
+            "started_at",
+            "completed_at",
+            "result",
+            "task",
+            "project",
+            "diffs",
+            "review_reports"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AgentType",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "AgentRunStatus",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "AgentRun",
+          "line": 38,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "backend/app/models/audit_log.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 75,
+      "nonEmptyLines": 64,
+      "classes": [
+        {
+          "name": "AuditLogResult",
+          "startLine": 21,
+          "endLine": 24,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AuditLog",
+          "startLine": 27,
+          "endLine": 75,
+          "methods": [],
+          "properties": [
+            "id",
+            "agent_id",
+            "agent_version",
+            "action_type",
+            "action_description",
+            "timestamp",
+            "input_refs",
+            "output_refs",
+            "result",
+            "project_id",
+            "task_id",
+            "project",
+            "task"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AuditLogResult",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "AuditLog",
+          "line": 27,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/models/base.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 7,
+      "nonEmptyLines": 4,
+      "classes": [
+        {
+          "name": "Base",
+          "startLine": 6,
+          "endLine": 7,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Base",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/app/models/codebase_map.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 36,
+      "classes": [
+        {
+          "name": "CodebaseMap",
+          "startLine": 16,
+          "endLine": 44,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "task_id",
+            "map_json",
+            "language",
+            "file_count",
+            "generated_at",
+            "project",
+            "task"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CodebaseMap",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/app/models/deployment_config.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 87,
+      "nonEmptyLines": 75,
+      "classes": [
+        {
+          "name": "DeployProvider",
+          "startLine": 23,
+          "endLine": 26,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "DeploymentConfig",
+          "startLine": 29,
+          "endLine": 87,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "provider",
+            "token_encrypted",
+            "project_name",
+            "team_id",
+            "base_url",
+            "enabled",
+            "discord_webhook_url",
+            "slack_webhook_url",
+            "health_check_path",
+            "alert_on_anomaly",
+            "monitor_duration_minutes",
+            "created_at",
+            "updated_at",
+            "project"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DeployProvider",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "DeploymentConfig",
+          "line": 29,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/models/deployment_health_check.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 57,
+      "nonEmptyLines": 47,
+      "classes": [
+        {
+          "name": "HealthCheckStatus",
+          "startLine": 16,
+          "endLine": 20,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "DeploymentHealthCheck",
+          "startLine": 23,
+          "endLine": 57,
+          "methods": [],
+          "properties": [
+            "id",
+            "deployment_id",
+            "project_id",
+            "status",
+            "http_status",
+            "latency_ms",
+            "response_snippet",
+            "error_message",
+            "checked_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "HealthCheckStatus",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "DeploymentHealthCheck",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/models/deployment_incident.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 77,
+      "nonEmptyLines": 65,
+      "classes": [
+        {
+          "name": "IncidentType",
+          "startLine": 16,
+          "endLine": 21,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "IncidentSeverity",
+          "startLine": 24,
+          "endLine": 28,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "DeploymentIncident",
+          "startLine": 31,
+          "endLine": 77,
+          "methods": [],
+          "properties": [
+            "id",
+            "deployment_id",
+            "project_id",
+            "incident_type",
+            "severity",
+            "title",
+            "description",
+            "ai_reasoning",
+            "risk_score",
+            "metric_snapshot",
+            "rollback_triggered",
+            "resolved",
+            "resolved_at",
+            "created_at"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "IncidentType",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "IncidentSeverity",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "DeploymentIncident",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "backend/app/models/deployment.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 93,
+      "nonEmptyLines": 80,
+      "classes": [
+        {
+          "name": "DeploymentStatus",
+          "startLine": 23,
+          "endLine": 29,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "DeploymentEnvironment",
+          "startLine": 32,
+          "endLine": 35,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "Deployment",
+          "startLine": 38,
+          "endLine": 93,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "task_id",
+            "run_id",
+            "status",
+            "environment",
+            "provider",
+            "external_id",
+            "preview_url",
+            "branch_name",
+            "commit_sha",
+            "deploy_logs",
+            "error_message",
+            "risk_score",
+            "duration_ms",
+            "deployed_at",
+            "health_status",
+            "rollback_of_id",
+            "created_at",
+            "run"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DeploymentStatus",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "DeploymentEnvironment",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "Deployment",
+          "line": 38,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "backend/app/models/diff.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 56,
+      "classes": [
+        {
+          "name": "DiffReviewStatus",
+          "startLine": 16,
+          "endLine": 19,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "Diff",
+          "startLine": 22,
+          "endLine": 66,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "agent_run_id",
+            "content",
+            "original_content",
+            "modified_content",
+            "files_affected",
+            "review_status",
+            "created_at",
+            "task",
+            "agent_run"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DiffReviewStatus",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "Diff",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/models/document.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 72,
+      "nonEmptyLines": 60,
+      "classes": [
+        {
+          "name": "DocumentType",
+          "startLine": 17,
+          "endLine": 19,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "DocumentStatus",
+          "startLine": 22,
+          "endLine": 25,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "Document",
+          "startLine": 28,
+          "endLine": 72,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "document_type",
+            "content",
+            "status",
+            "version",
+            "created_at",
+            "updated_at",
+            "project"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DocumentType",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "DocumentStatus",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "Document",
+          "line": 28,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "backend/app/models/feedback.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 40,
+      "classes": [
+        {
+          "name": "FeedbackReferenceType",
+          "startLine": 17,
+          "endLine": 19,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "Feedback",
+          "startLine": 22,
+          "endLine": 50,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "reference_type",
+            "reference_id",
+            "content",
+            "created_at",
+            "project"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FeedbackReferenceType",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "Feedback",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/models/github_config.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 54,
+      "classes": [
+        {
+          "name": "GitHubConfig",
+          "startLine": 20,
+          "endLine": 64,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "repo_full_name",
+            "pat_encrypted",
+            "default_base_branch",
+            "enabled",
+            "created_by",
+            "created_at",
+            "project",
+            "creator"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GitHubConfig",
+          "line": 20,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/app/models/inline_comment.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 35,
+      "classes": [
+        {
+          "name": "InlineComment",
+          "startLine": 15,
+          "endLine": 43,
+          "methods": [],
+          "properties": [
+            "id",
+            "task_id",
+            "diff_id",
+            "file_path",
+            "line_number",
+            "comment_text",
+            "created_at",
+            "task",
+            "diff"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "InlineComment",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/app/models/intent.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 29,
+      "classes": [
+        {
+          "name": "Intent",
+          "startLine": 16,
+          "endLine": 37,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "content",
+            "created_at",
+            "project"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Intent",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/app/models/invitation.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 93,
+      "nonEmptyLines": 78,
+      "classes": [
+        {
+          "name": "InviteRole",
+          "startLine": 21,
+          "endLine": 26,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "Invitation",
+          "startLine": 29,
+          "endLine": 93,
+          "methods": [
+            "is_expired",
+            "is_used"
+          ],
+          "properties": [
+            "id",
+            "project_id",
+            "invitee_email",
+            "role",
+            "token",
+            "created_by",
+            "expires_at",
+            "used_at",
+            "used_by",
+            "project",
+            "creator",
+            "accepter"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "InviteRole",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "Invitation",
+          "line": 29,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "is_expired",
+          "callee": "datetime.now",
+          "lineNumber": 84
+        },
+        {
+          "caller": "is_expired",
+          "callee": "expires.replace",
+          "lineNumber": 87
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/app/models/memory_entry.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 54,
+      "nonEmptyLines": 46,
+      "classes": [
+        {
+          "name": "MemoryEntry",
+          "startLine": 15,
+          "endLine": 54,
+          "methods": [],
+          "properties": [
+            "id",
+            "project_id",
+            "task_id",
+            "entry_timestamp",
+            "summary",
+            "files_affected",
+            "lessons_learned",
+            "created_at",
+            "updated_at",
+            "project",
+            "task"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MemoryEntry",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "backend/app/models/notification.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 63,
+      "classes": [
+        {
+          "name": "NotificationType",
+          "startLine": 20,
+          "endLine": 30,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "Notification",
+          "startLine": 33,
+          "endLine": 76,
+          "methods": [],
+          "properties": [
+            "id",
+            "user_id",
+            "notification_type",
+            "content",
+            "reference_type",
+            "reference_id",
+            "is_read",
+            "created_at",
+            "user"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NotificationType",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "Notification",
+          "line": 33,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "frontend/src/pages/accept-invite.module.css",
+                           "language":  "css",
+                           "sizeLines":  30,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/analytics.module.css",
+                           "language":  "css",
+                           "sizeLines":  159,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/auth-callback.module.css",
+                           "language":  "css",
+                           "sizeLines":  41,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/constitution-editor.module.css",
+                           "language":  "css",
+                           "sizeLines":  128,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/dashboard.module.css",
+                           "language":  "css",
+                           "sizeLines":  482,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/dev-auth.module.css",
+                           "language":  "css",
+                           "sizeLines":  46,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/login.module.css",
+                           "language":  "css",
+                           "sizeLines":  927,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/page-shell.module.css",
+                           "language":  "css",
+                           "sizeLines":  38,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/project-list.module.css",
+                           "language":  "css",
+                           "sizeLines":  108,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/project-settings.module.css",
+                           "language":  "css",
+                           "sizeLines":  58,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/project-workspace.module.css",
+                           "language":  "css",
+                           "sizeLines":  395,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/register-otp.module.css",
+                           "language":  "css",
+                           "sizeLines":  143,
+                           "fileCategory":  "markup"
+                       }
+                   ],
+    "batchImportData":  {
+                            "frontend/src/pages/accept-invite.module.css":  [
+
+                                                                            ],
+                            "frontend/src/pages/analytics.module.css":  [
+
+                                                                        ],
+                            "frontend/src/pages/auth-callback.module.css":  [
+
+                                                                            ],
+                            "frontend/src/pages/constitution-editor.module.css":  [
+
+                                                                                  ],
+                            "frontend/src/pages/dashboard.module.css":  [
+
+                                                                        ],
+                            "frontend/src/pages/dev-auth.module.css":  [
+
+                                                                       ],
+                            "frontend/src/pages/login.module.css":  [
+
+                                                                    ],
+                            "frontend/src/pages/page-shell.module.css":  [
+
+                                                                         ],
+                            "frontend/src/pages/project-list.module.css":  [
+
+                                                                           ],
+                            "frontend/src/pages/project-settings.module.css":  [
+
+                                                                               ],
+                            "frontend/src/pages/project-workspace.module.css":  [
+
+                                                                                ],
+                            "frontend/src/pages/register-otp.module.css":  [
+
+                                                                           ]
+                        }
+}

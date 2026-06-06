@@ -4,7 +4,7 @@ import type { AgentRun, Document } from '../types'
 
 import { getAgentRun, getDocument } from '../services/document-api'
 
-const POLL_INTERVAL_MS = 3000
+const POLL_INTERVAL_MS = 5000
 
 function isGeneratingStatus(status: AgentRun['status'] | undefined): boolean {
   return status === 'running'

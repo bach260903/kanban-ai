@@ -1,0 +1,7037 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "agents/src/graph_smoke.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "main",
+          "startLine": 24,
+          "endLine": 31,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "main",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "main",
+          "callee": "build_graph",
+          "lineNumber": 25
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 26
+        },
+        {
+          "caller": "main",
+          "callee": "sorted",
+          "lineNumber": 26
+        },
+        {
+          "caller": "main",
+          "callee": "TOOL_REGISTRY.keys",
+          "lineNumber": 26
+        },
+        {
+          "caller": "main",
+          "callee": "graph.invoke",
+          "lineNumber": 28
+        },
+        {
+          "caller": "main",
+          "callee": "out.get",
+          "lineNumber": 29
+        },
+        {
+          "caller": "main",
+          "callee": "out.get",
+          "lineNumber": 30
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 31
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "agents/src/graph.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 96,
+      "nonEmptyLines": 78,
+      "functions": [
+        {
+          "name": "_node_orchestrator",
+          "startLine": 25,
+          "endLine": 43,
+          "params": [
+            "state"
+          ]
+        },
+        {
+          "name": "_passthrough_node",
+          "startLine": 46,
+          "endLine": 51,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "_route",
+          "startLine": 54,
+          "endLine": 64,
+          "params": [
+            "state"
+          ]
+        },
+        {
+          "name": "build_graph",
+          "startLine": 67,
+          "endLine": 93,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "_node_orchestrator",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "_passthrough_node",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "_route",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "build_graph",
+          "line": 67,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_node_orchestrator",
+          "callee": "int",
+          "lineNumber": 27
+        },
+        {
+          "caller": "_node_orchestrator",
+          "callee": "state.get",
+          "lineNumber": 27
+        },
+        {
+          "caller": "_node_orchestrator",
+          "callee": "(state.get(\"user_message\") or \"\").lower",
+          "lineNumber": 31
+        },
+        {
+          "caller": "_node_orchestrator",
+          "callee": "state.get",
+          "lineNumber": 31
+        },
+        {
+          "caller": "_node_orchestrator",
+          "callee": "any",
+          "lineNumber": 33
+        },
+        {
+          "caller": "_node_orchestrator",
+          "callee": "any",
+          "lineNumber": 35
+        },
+        {
+          "caller": "_node_orchestrator",
+          "callee": "any",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_node_orchestrator",
+          "callee": "any",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_node_orchestrator",
+          "callee": "any",
+          "lineNumber": 41
+        },
+        {
+          "caller": "_route",
+          "callee": "state.get",
+          "lineNumber": 55
+        },
+        {
+          "caller": "build_graph",
+          "callee": "StateGraph",
+          "lineNumber": 69
+        },
+        {
+          "caller": "build_graph",
+          "callee": "builder.add_node",
+          "lineNumber": 70
+        },
+        {
+          "caller": "build_graph",
+          "callee": "builder.add_node",
+          "lineNumber": 71
+        },
+        {
+          "caller": "build_graph",
+          "callee": "_passthrough_node",
+          "lineNumber": 71
+        },
+        {
+          "caller": "build_graph",
+          "callee": "builder.add_node",
+          "lineNumber": 72
+        },
+        {
+          "caller": "build_graph",
+          "callee": "_passthrough_node",
+          "lineNumber": 72
+        },
+        {
+          "caller": "build_graph",
+          "callee": "builder.add_node",
+          "lineNumber": 73
+        },
+        {
+          "caller": "build_graph",
+          "callee": "_passthrough_node",
+          "lineNumber": 73
+        },
+        {
+          "caller": "build_graph",
+          "callee": "builder.add_node",
+          "lineNumber": 74
+        },
+        {
+          "caller": "build_graph",
+          "callee": "_passthrough_node",
+          "lineNumber": 74
+        },
+        {
+          "caller": "build_graph",
+          "callee": "builder.add_node",
+          "lineNumber": 75
+        },
+        {
+          "caller": "build_graph",
+          "callee": "_passthrough_node",
+          "lineNumber": 75
+        },
+        {
+          "caller": "build_graph",
+          "callee": "builder.add_edge",
+          "lineNumber": 77
+        },
+        {
+          "caller": "build_graph",
+          "callee": "builder.add_conditional_edges",
+          "lineNumber": 78
+        },
+        {
+          "caller": "build_graph",
+          "callee": "builder.add_edge",
+          "lineNumber": 91
+        },
+        {
+          "caller": "build_graph",
+          "callee": "builder.compile",
+          "lineNumber": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "agents/src/state.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 65,
+      "nonEmptyLines": 45,
+      "classes": [
+        {
+          "name": "AlertItem",
+          "startLine": 15,
+          "endLine": 18,
+          "methods": [],
+          "properties": [
+            "severity",
+            "evidence",
+            "suggestion"
+          ]
+        },
+        {
+          "name": "TaskDraft",
+          "startLine": 21,
+          "endLine": 26,
+          "methods": [],
+          "properties": [
+            "title",
+            "description",
+            "est_hours",
+            "required_skills",
+            "depends_on"
+          ]
+        },
+        {
+          "name": "AssignmentDecision",
+          "startLine": 29,
+          "endLine": 33,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "user_id",
+            "score",
+            "reason"
+          ]
+        },
+        {
+          "name": "ToolCallRecord",
+          "startLine": 36,
+          "endLine": 42,
+          "methods": [],
+          "properties": [
+            "tool",
+            "args",
+            "result",
+            "started_at",
+            "finished_at",
+            "error"
+          ]
+        },
+        {
+          "name": "AgentState",
+          "startLine": 45,
+          "endLine": 61,
+          "methods": [],
+          "properties": [
+            "user_message",
+            "board_id",
+            "user_id",
+            "messages",
+            "intent",
+            "iter_count",
+            "plan",
+            "assignments",
+            "alerts",
+            "report_md",
+            "tool_calls",
+            "error"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AlertItem",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "TaskDraft",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "AssignmentDecision",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "ToolCallRecord",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "AgentState",
+          "line": 45,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "agents/src/tools/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "agents/src/tools/registry.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 225,
+      "nonEmptyLines": 172,
+      "functions": [
+        {
+          "name": "register_tool",
+          "startLine": 31,
+          "endLine": 35,
+          "params": [
+            "spec"
+          ]
+        },
+        {
+          "name": "list_tools",
+          "startLine": 224,
+          "endLine": 225,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ToolSpec",
+          "startLine": 19,
+          "endLine": 25,
+          "methods": [],
+          "properties": [
+            "name",
+            "description",
+            "permission",
+            "input_model",
+            "output_model",
+            "handler"
+          ]
+        },
+        {
+          "name": "QueryTasksIn",
+          "startLine": 38,
+          "endLine": 42,
+          "methods": [],
+          "properties": [
+            "board_id",
+            "column_id",
+            "status",
+            "limit"
+          ]
+        },
+        {
+          "name": "TaskBrief",
+          "startLine": 45,
+          "endLine": 51,
+          "methods": [],
+          "properties": [
+            "id",
+            "title",
+            "status",
+            "priority",
+            "column_id",
+            "due_at"
+          ]
+        },
+        {
+          "name": "QueryTasksOut",
+          "startLine": 54,
+          "endLine": 55,
+          "methods": [],
+          "properties": [
+            "tasks"
+          ]
+        },
+        {
+          "name": "CreateTaskIn",
+          "startLine": 58,
+          "endLine": 65,
+          "methods": [],
+          "properties": [
+            "board_id",
+            "title",
+            "description",
+            "priority",
+            "due_at",
+            "est_hours",
+            "column_id"
+          ]
+        },
+        {
+          "name": "CreateTaskOut",
+          "startLine": 68,
+          "endLine": 69,
+          "methods": [],
+          "properties": [
+            "task"
+          ]
+        },
+        {
+          "name": "UpdateTaskStatusIn",
+          "startLine": 72,
+          "endLine": 74,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "column_id"
+          ]
+        },
+        {
+          "name": "AssignTaskIn",
+          "startLine": 77,
+          "endLine": 79,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "user_id"
+          ]
+        },
+        {
+          "name": "AssignTaskOut",
+          "startLine": 82,
+          "endLine": 85,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "user_id",
+            "assigned_at"
+          ]
+        },
+        {
+          "name": "GetUserWorkloadIn",
+          "startLine": 88,
+          "endLine": 90,
+          "methods": [],
+          "properties": [
+            "user_id",
+            "board_id"
+          ]
+        },
+        {
+          "name": "GetUserWorkloadOut",
+          "startLine": 93,
+          "endLine": 97,
+          "methods": [],
+          "properties": [
+            "open_tasks",
+            "overdue",
+            "in_progress",
+            "est_hours_left"
+          ]
+        },
+        {
+          "name": "GetUserSkillsIn",
+          "startLine": 100,
+          "endLine": 101,
+          "methods": [],
+          "properties": [
+            "user_id"
+          ]
+        },
+        {
+          "name": "UserSkill",
+          "startLine": 104,
+          "endLine": 106,
+          "methods": [],
+          "properties": [
+            "skill",
+            "level"
+          ]
+        },
+        {
+          "name": "GetUserSkillsOut",
+          "startLine": 109,
+          "endLine": 110,
+          "methods": [],
+          "properties": [
+            "skills"
+          ]
+        },
+        {
+          "name": "SearchSimilarTasksIn",
+          "startLine": 113,
+          "endLine": 116,
+          "methods": [],
+          "properties": [
+            "query",
+            "top_k",
+            "board_id"
+          ]
+        },
+        {
+          "name": "SimilarTask",
+          "startLine": 119,
+          "endLine": 122,
+          "methods": [],
+          "properties": [
+            "task_id",
+            "score",
+            "snippet"
+          ]
+        },
+        {
+          "name": "SearchSimilarTasksOut",
+          "startLine": 125,
+          "endLine": 126,
+          "methods": [],
+          "properties": [
+            "matches"
+          ]
+        },
+        {
+          "name": "GetBoardActivityIn",
+          "startLine": 129,
+          "endLine": 133,
+          "methods": [],
+          "properties": [
+            "board_id",
+            "since",
+            "until",
+            "limit"
+          ]
+        },
+        {
+          "name": "ActivityEvent",
+          "startLine": 136,
+          "endLine": 142,
+          "methods": [],
+          "properties": [
+            "id",
+            "actor_id",
+            "action",
+            "task_id",
+            "created_at",
+            "details"
+          ]
+        },
+        {
+          "name": "GetBoardActivityOut",
+          "startLine": 145,
+          "endLine": 146,
+          "methods": [],
+          "properties": [
+            "events"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ToolSpec",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "register_tool",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "QueryTasksIn",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "TaskBrief",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "QueryTasksOut",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "CreateTaskIn",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "CreateTaskOut",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateTaskStatusIn",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "AssignTaskIn",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "AssignTaskOut",
+          "line": 82,
+          "isDefault": false
+        },
+        {
+          "name": "GetUserWorkloadIn",
+          "line": 88,
+          "isDefault": false
+        },
+        {
+          "name": "GetUserWorkloadOut",
+          "line": 93,
+          "isDefault": false
+        },
+        {
+          "name": "GetUserSkillsIn",
+          "line": 100,
+          "isDefault": false
+        },
+        {
+          "name": "UserSkill",
+          "line": 104,
+          "isDefault": false
+        },
+        {
+          "name": "GetUserSkillsOut",
+          "line": 109,
+          "isDefault": false
+        },
+        {
+          "name": "SearchSimilarTasksIn",
+          "line": 113,
+          "isDefault": false
+        },
+        {
+          "name": "SimilarTask",
+          "line": 119,
+          "isDefault": false
+        },
+        {
+          "name": "SearchSimilarTasksOut",
+          "line": 125,
+          "isDefault": false
+        },
+        {
+          "name": "GetBoardActivityIn",
+          "line": 129,
+          "isDefault": false
+        },
+        {
+          "name": "ActivityEvent",
+          "line": 136,
+          "isDefault": false
+        },
+        {
+          "name": "GetBoardActivityOut",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "list_tools",
+          "line": 224,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "register_tool",
+          "callee": "ValueError",
+          "lineNumber": 33
+        },
+        {
+          "caller": "list_tools",
+          "callee": "sorted",
+          "lineNumber": 225
+        },
+        {
+          "caller": "list_tools",
+          "callee": "TOOL_REGISTRY.keys",
+          "lineNumber": 225
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 22,
+        "functionCount": 2,
+        "classCount": 20
+      }
+    },
+    {
+      "path": "backend/alembic/env.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 66,
+      "functions": [
+        {
+          "name": "_load_dotenv_from_repo",
+          "startLine": 23,
+          "endLine": 36,
+          "params": []
+        },
+        {
+          "name": "get_url",
+          "startLine": 39,
+          "endLine": 46,
+          "params": []
+        },
+        {
+          "name": "run_migrations_offline",
+          "startLine": 49,
+          "endLine": 58,
+          "params": []
+        },
+        {
+          "name": "do_run_migrations",
+          "startLine": 61,
+          "endLine": 64,
+          "params": [
+            "connection"
+          ]
+        },
+        {
+          "name": "run_async_migrations",
+          "startLine": 67,
+          "endLine": 79,
+          "params": []
+        },
+        {
+          "name": "run_migrations_online",
+          "startLine": 82,
+          "endLine": 83,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "_load_dotenv_from_repo",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "get_url",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "run_migrations_offline",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "do_run_migrations",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "run_async_migrations",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "run_migrations_online",
+          "line": 82,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "Path(__file__).resolve",
+          "lineNumber": 25
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "Path",
+          "lineNumber": 25
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "env_path.is_file",
+          "lineNumber": 27
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "env_path.read_text(encoding=\"utf-8\").splitlines",
+          "lineNumber": 29
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "env_path.read_text",
+          "lineNumber": 29
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "raw.strip",
+          "lineNumber": 30
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "line.startswith",
+          "lineNumber": 31
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "line.split",
+          "lineNumber": 33
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "key.strip",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "val.strip().strip('\"').strip",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "val.strip().strip",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_load_dotenv_from_repo",
+          "callee": "val.strip",
+          "lineNumber": 34
+        },
+        {
+          "caller": "get_url",
+          "callee": "_load_dotenv_from_repo",
+          "lineNumber": 40
+        },
+        {
+          "caller": "get_url",
+          "callee": "os.environ.get",
+          "lineNumber": 41
+        },
+        {
+          "caller": "get_url",
+          "callee": "RuntimeError",
+          "lineNumber": 43
+        },
+        {
+          "caller": "run_migrations_offline",
+          "callee": "context.configure",
+          "lineNumber": 50
+        },
+        {
+          "caller": "run_migrations_offline",
+          "callee": "get_url",
+          "lineNumber": 51
+        },
+        {
+          "caller": "run_migrations_offline",
+          "callee": "context.begin_transaction",
+          "lineNumber": 57
+        },
+        {
+          "caller": "run_migrations_offline",
+          "callee": "context.run_migrations",
+          "lineNumber": 58
+        },
+        {
+          "caller": "do_run_migrations",
+          "callee": "context.configure",
+          "lineNumber": 62
+        },
+        {
+          "caller": "do_run_migrations",
+          "callee": "context.begin_transaction",
+          "lineNumber": 63
+        },
+        {
+          "caller": "do_run_migrations",
+          "callee": "context.run_migrations",
+          "lineNumber": 64
+        },
+        {
+          "caller": "run_async_migrations",
+          "callee": "config.get_section",
+          "lineNumber": 68
+        },
+        {
+          "caller": "run_async_migrations",
+          "callee": "get_url",
+          "lineNumber": 69
+        },
+        {
+          "caller": "run_async_migrations",
+          "callee": "async_engine_from_config",
+          "lineNumber": 70
+        },
+        {
+          "caller": "run_async_migrations",
+          "callee": "connectable.connect",
+          "lineNumber": 76
+        },
+        {
+          "caller": "run_async_migrations",
+          "callee": "connection.run_sync",
+          "lineNumber": 77
+        },
+        {
+          "caller": "run_async_migrations",
+          "callee": "connectable.dispose",
+          "lineNumber": 79
+        },
+        {
+          "caller": "run_migrations_online",
+          "callee": "asyncio.run",
+          "lineNumber": 83
+        },
+        {
+          "caller": "run_migrations_online",
+          "callee": "run_async_migrations",
+          "lineNumber": 83
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/script.py.mako",
+      "language": "mako",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 18,
+      "metrics": {}
+    },
+    {
+      "path": "backend/alembic/versions/001_initial_schema.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 428,
+      "nonEmptyLines": 402,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 25,
+          "endLine": 394,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 397,
+          "endLine": 428,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 397,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 26
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 28
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 30
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 31
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 34
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 34
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 35
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 35
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 36
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 36
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 37
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 37
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 38
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 38
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 39
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 41
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 42
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 45
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 47
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 48
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 51
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 52
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.UniqueConstraint",
+          "lineNumber": 53
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 56
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 58
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 60
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 61
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 64
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 64
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 65
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 65
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 66
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 66
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 67
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 67
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 68
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Integer",
+          "lineNumber": 68
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 69
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 71
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 72
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 75
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 77
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 78
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 81
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 82
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 86
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 87
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 89
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 96
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 98
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 100
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 101
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 104
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 104
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 105
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 105
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 106
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 106
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 107
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 107
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 108
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Integer",
+          "lineNumber": 108
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 109
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 111
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 112
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 115
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 117
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 118
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 121
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 125
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 126
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 128
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 134
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 139
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 142
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 144
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 146
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 147
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 150
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 150
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 151
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 151
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 152
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 152
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 153
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 153
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 154
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 154
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 155
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.ARRAY",
+          "lineNumber": 157
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 157
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 158
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 161
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.ARRAY",
+          "lineNumber": 163
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 163
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 164
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 167
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 169
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 170
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 173
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 173
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 174
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.JSONB",
+          "lineNumber": 174
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 174
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 175
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 179
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 183
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 184
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 185
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 187
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 189
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 191
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 193
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 194
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 197
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 197
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 198
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 198
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 199
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 199
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 200
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 200
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 201
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 201
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 202
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.ARRAY",
+          "lineNumber": 204
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 204
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 205
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 208
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 208
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 209
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 211
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 212
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 215
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 219
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 220
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 221
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 224
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 226
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 228
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 229
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 232
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 232
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 233
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 233
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 234
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 234
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 235
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 235
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 236
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 238
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 239
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 242
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 246
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 247
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 250
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 252
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 254
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 255
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 258
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 258
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 259
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 259
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 260
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 260
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 261
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 261
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 262
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 264
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 265
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 268
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.ARRAY",
+          "lineNumber": 270
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 270
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 271
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 274
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.ARRAY",
+          "lineNumber": 276
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 276
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 277
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 280
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 280
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 281
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 281
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 282
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 282
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 283
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 287
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 288
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 289
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 291
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 297
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 304
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 306
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 308
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 309
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 312
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 312
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 313
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 313
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 314
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 316
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 317
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 320
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 321
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 323
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 325
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 326
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 336
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 337
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 343
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 344
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 350
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 351
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 358
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 359
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 368
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 369
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 375
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 376
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 388
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 389
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 398
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 398
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 399
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 399
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 400
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 400
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 401
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 401
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 403
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 403
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 404
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 404
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 405
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 405
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 406
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 406
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 408
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 409
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 411
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 412
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 413
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 415
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 416
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 418
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 419
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 421
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 422
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 423
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 425
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 426
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 428
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/002_phase2_schema.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 256,
+      "nonEmptyLines": 239,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 23,
+          "endLine": 241,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 244,
+          "endLine": 256,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 244,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 24
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 25
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 44
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 46
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 48
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 49
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 52
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 52
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 53
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 53
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 54
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 54
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 55
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 55
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 56
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Integer",
+          "lineNumber": 56
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 57
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 59
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 60
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 63
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 67
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 68
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 69
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.UniqueConstraint",
+          "lineNumber": 70
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 72
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 79
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 81
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 83
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 84
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 87
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 87
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 88
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 88
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 89
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 89
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 90
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 90
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 91
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 91
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 92
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 92
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 93
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 95
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 96
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 99
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 100
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 101
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 102
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.UniqueConstraint",
+          "lineNumber": 103
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 106
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 108
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 110
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 111
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 114
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 114
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 115
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 115
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 116
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 116
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 117
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 117
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 118
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.ARRAY",
+          "lineNumber": 120
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 120
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 121
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 124
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 124
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 125
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 127
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 128
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 131
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 133
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 134
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 137
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 138
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 139
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 141
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 148
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 150
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 152
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 153
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 156
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 156
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 157
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 157
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 158
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.JSONB",
+          "lineNumber": 158
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 158
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 159
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 159
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 160
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Integer",
+          "lineNumber": 160
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 161
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 163
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 164
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 167
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 168
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 169
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 171
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 172
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 177
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 179
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 181
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 182
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 185
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 185
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 186
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 186
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 187
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 187
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 188
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 190
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 191
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 194
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 194
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 195
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 199
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 200
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.UniqueConstraint",
+          "lineNumber": 201
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 204
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 206
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 208
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 209
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 212
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 212
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 213
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 213
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 214
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 214
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 215
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Integer",
+          "lineNumber": 215
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 216
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 216
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 217
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 219
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 220
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 223
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 224
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 225
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 228
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 229
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 235
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 236
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 245
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 245
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 246
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 246
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 248
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 249
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 250
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 250
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 251
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 252
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 253
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 254
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 255
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 256
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/003_add_users.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 20,
+          "endLine": 40,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 43,
+          "endLine": 45,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 43,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 21
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 23
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 25
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 26
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 29
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 29
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 30
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 30
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 31
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 31
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 32
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 34
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 35
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 38
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 40
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 44
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/004_add_coding_backend.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 19,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 36,
+          "endLine": 38,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 36,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 20
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 24
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_check_constraint",
+          "lineNumber": 29
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_constraint",
+          "lineNumber": 37
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/004_auto_dispatch.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 19,
+          "endLine": 28,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 31,
+          "endLine": 32,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 20
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Boolean",
+          "lineNumber": 24
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 26
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/005_platform_expansion.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 541,
+      "nonEmptyLines": 513,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 40,
+          "endLine": 501,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 504,
+          "endLine": 541,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 504,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 44
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 46
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 48
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 49
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 52
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 52
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 53
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 53
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 54
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 54
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 55
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 57
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 58
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 61
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 62
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 63
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.UniqueConstraint",
+          "lineNumber": 64
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 65
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 70
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 71
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 78
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 80
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 82
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 83
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 86
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 86
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 87
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 87
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 88
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 88
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 89
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 89
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 90
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 90
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 91
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 91
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 92
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 92
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 93
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 93
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 94
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 95
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 96
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 97
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.UniqueConstraint",
+          "lineNumber": 98
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 99
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 104
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 105
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 110
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 112
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 114
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 115
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 118
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 118
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 119
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 119
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 120
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.SmallInteger",
+          "lineNumber": 120
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 121
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 121
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 122
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 122
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 123
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Integer",
+          "lineNumber": 123
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 123
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 124
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Integer",
+          "lineNumber": 124
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 124
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 125
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 125
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 126
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 128
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 129
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 132
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 132
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 133
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 135
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 136
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 139
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 139
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 140
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 141
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 142
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 143
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 147
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 151
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 156
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 161
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 163
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 165
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 166
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 169
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 169
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 170
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 170
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 171
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Integer",
+          "lineNumber": 171
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 172
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 172
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 173
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 175
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 176
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 179
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 180
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 183
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 188
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 193
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 195
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 195
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 196
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 196
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 197
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 199
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 200
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 203
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 204
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 205
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 206
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 211
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 212
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 221
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 223
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 225
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 226
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 229
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 229
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 230
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 230
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 231
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 233
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 234
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 237
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 239
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 240
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 243
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 243
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 244
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 244
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 245
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 247
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 248
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 251
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 252
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 255
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.UniqueConstraint",
+          "lineNumber": 256
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 257
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 263
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 268
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 274
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 276
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 278
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 279
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 282
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 282
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 283
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 283
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 284
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 284
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 285
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 285
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 286
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 286
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 287
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Boolean",
+          "lineNumber": 289
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 290
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 293
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 295
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 296
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 299
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 300
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 302
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 306
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 310
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 310
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 319
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 321
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 323
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 324
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 327
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 327
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 328
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 328
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 329
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 329
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 330
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.ARRAY",
+          "lineNumber": 332
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 332
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 333
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 336
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Boolean",
+          "lineNumber": 338
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 339
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 342
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 342
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 343
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 345
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 346
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 349
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 350
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 351
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 357
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 359
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 361
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 362
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 365
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 365
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 366
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 366
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 367
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.JSONB",
+          "lineNumber": 367
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 368
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 370
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 371
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 374
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Integer",
+          "lineNumber": 374
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 375
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.SmallInteger",
+          "lineNumber": 377
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 378
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 381
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 381
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 382
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 384
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 385
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 388
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 389
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 392
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 397
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 400
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 404
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 411
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 413
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 415
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 416
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 419
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 419
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 420
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 420
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 421
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Text",
+          "lineNumber": 421
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 422
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 424
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 425
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 428
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Boolean",
+          "lineNumber": 430
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 431
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 434
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 434
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 435
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 437
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 438
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.PrimaryKeyConstraint",
+          "lineNumber": 441
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 442
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKeyConstraint",
+          "lineNumber": 445
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.UniqueConstraint",
+          "lineNumber": 446
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 452
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 454
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 454
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 456
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 458
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Boolean",
+          "lineNumber": 460
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 461
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_foreign_key",
+          "lineNumber": 465
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 473
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.execute",
+          "lineNumber": 480
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 480
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 492
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 497
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 506
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 507
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 510
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 513
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_constraint",
+          "lineNumber": 514
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 515
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 516
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 519
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 520
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 521
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 522
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 523
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.execute",
+          "lineNumber": 524
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 524
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 525
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 526
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 527
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 528
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 529
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 530
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 531
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 532
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 533
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 534
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 535
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 536
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 537
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 538
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 539
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 540
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 541
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/006_wip_per_developer_index.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 31,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 21,
+          "endLine": 29,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 32,
+          "endLine": 40,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 23
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 28
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 33
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.create_index",
+          "lineNumber": 34
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.text",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/007_auth_oauth_fields.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 51,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 27,
+          "endLine": 48,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 51,
+          "endLine": 64,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 51,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.alter_column",
+          "lineNumber": 29
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 32
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 37
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 39
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 39
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_unique_constraint",
+          "lineNumber": 41
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 42
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 45
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 47
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 52
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 53
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_constraint",
+          "lineNumber": 54
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 55
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.alter_column",
+          "lineNumber": 59
+        },
+        {
+          "caller": "downgrade",
+          "callee": "sa.String",
+          "lineNumber": 62
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/008_merge_wip_oauth_heads.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 23,
+          "endLine": 24,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 27,
+          "endLine": 28,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 27,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/009_drop_project_name_unique.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 24,
+          "endLine": 25,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 28,
+          "endLine": 29,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 28,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.drop_constraint",
+          "lineNumber": 25
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.create_unique_constraint",
+          "lineNumber": 29
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/010_add_member_status.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 19,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 36,
+          "endLine": 38,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 36,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 20
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 24
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_check_constraint",
+          "lineNumber": 29
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_constraint",
+          "lineNumber": 37
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/011_webhook_response_body.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 19,
+          "endLine": 23,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 26,
+          "endLine": 27,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 26,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 20
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 22
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/012_pipeline_cicd.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 101,
+      "nonEmptyLines": 91,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 20,
+          "endLine": 95,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 98,
+          "endLine": 101,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 98,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 24
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 24
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 25
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 26
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 26
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 27
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 28
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 28
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 29
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 30
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 30
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 31
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 31
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 32
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 32
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 33
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 33
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 34
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 35
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 35
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 36
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 36
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 37
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 37
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 38
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 39
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 44
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 45
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 48
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 50
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 50
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 51
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 52
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 52
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 53
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 54
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 54
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 55
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 55
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 56
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 57
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 58
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 59
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 59
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 60
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 60
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 61
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 62
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 62
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 63
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 64
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 69
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 72
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 74
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 74
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 75
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 76
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 76
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 77
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 78
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 78
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 79
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 80
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 80
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 81
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 82
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 82
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 83
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 83
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 84
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Numeric",
+          "lineNumber": 84
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 85
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 85
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 86
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 86
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 87
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 88
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 93
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 94
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 95
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 99
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 100
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 101
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/013_deployment_phase2.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 65,
+      "nonEmptyLines": 56,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 20,
+          "endLine": 58,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 61,
+          "endLine": 65,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 61,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 23
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 23
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 23
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 24
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 24
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 24
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 26
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 26
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 27
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 27
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 27
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 28
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 28
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 28
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 29
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 29
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 30
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 30
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 33
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 35
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 35
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 36
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 37
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 37
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 38
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 40
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 40
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 41
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 42
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 42
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 44
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 44
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 46
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 46
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 48
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 49
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 49
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 50
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 51
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 51
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 52
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.CheckConstraint",
+          "lineNumber": 53
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 58
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 62
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 65
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/014fb7e4d101_merge_migration_heads.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 17,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 21,
+          "endLine": 22,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 25,
+          "endLine": 26,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/015_failure_analysis.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 75,
+      "nonEmptyLines": 67,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 20,
+          "endLine": 69,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 72,
+          "endLine": 75,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 72,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 24
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 26
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 28
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 30
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 32
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 33
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 36
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 38
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 39
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 43
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 44
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 44
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 45
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 46
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 46
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 46
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 47
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 47
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 48
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 48
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 50
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 50
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 51
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 53
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 53
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 54
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 54
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 56
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 56
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 57
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 57
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 59
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 60
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 61
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 63
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 65
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 68
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 69
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 73
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 74
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 75
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/alembic/versions/016_devops_monitoring.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 150,
+      "nonEmptyLines": 134,
+      "functions": [
+        {
+          "name": "upgrade",
+          "startLine": 20,
+          "endLine": 126,
+          "params": []
+        },
+        {
+          "name": "downgrade",
+          "startLine": 129,
+          "endLine": 150,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "upgrade",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "downgrade",
+          "line": 129,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 22
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 23
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 26
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 26
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 27
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_foreign_key",
+          "lineNumber": 29
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 37
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 37
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 40
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 40
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 43
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 43
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 44
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 45
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 48
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 48
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 50
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.add_column",
+          "lineNumber": 52
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 52
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 54
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 59
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 61
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 61
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 62
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 63
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 63
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 64
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 65
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 65
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 66
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 67
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 67
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 67
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 68
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 69
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 70
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 71
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 72
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 72
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 73
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 75
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 76
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 79
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 81
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 81
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 82
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 83
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 83
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 84
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 85
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 85
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 86
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 87
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 87
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 88
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 88
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 88
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 89
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 89
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 90
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 91
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 92
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 93
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 94
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 95
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 96
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 96
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 97
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 97
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 98
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 98
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 99
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 101
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 102
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_table",
+          "lineNumber": 105
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 107
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 107
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 108
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 109
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 109
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 110
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 111
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 111
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 112
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 113
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 113
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 114
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 115
+        },
+        {
+          "caller": "upgrade",
+          "callee": "postgresql.UUID",
+          "lineNumber": 115
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.ForeignKey",
+          "lineNumber": 116
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 117
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.String",
+          "lineNumber": 117
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 117
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 118
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 119
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 120
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 120
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 121
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 121
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.Column",
+          "lineNumber": 122
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.DateTime",
+          "lineNumber": 122
+        },
+        {
+          "caller": "upgrade",
+          "callee": "sa.text",
+          "lineNumber": 123
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 125
+        },
+        {
+          "caller": "upgrade",
+          "callee": "op.create_index",
+          "lineNumber": 126
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 130
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 131
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 132
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 134
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 135
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 136
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 138
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_index",
+          "lineNumber": 139
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_table",
+          "lineNumber": 140
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 142
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 143
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 144
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 145
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 146
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_constraint",
+          "lineNumber": 148
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 149
+        },
+        {
+          "caller": "downgrade",
+          "callee": "op.drop_column",
+          "lineNumber": 150
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/app/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

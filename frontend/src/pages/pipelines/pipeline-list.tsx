@@ -122,7 +122,7 @@ export default function PipelineListPage() {
               <div className={styles.rowLeft}>
                 <StatusBadge status={run.status} />
                 <div>
-                  <span className={styles.runId}>#{run.id.slice(0, 8)}</span>
+                  <span className={styles.runId}>{run.task_title ?? `#${run.id.slice(0, 8)}`}</span>
                   {run.branch_name && (
                     <span className={styles.branch}>
                       <GitBranch size={11} aria-hidden />

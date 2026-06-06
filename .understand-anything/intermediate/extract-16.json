@@ -1,0 +1,31 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/Activate.ps1",
+      "language": "powershell",
+      "fileCategory": "script",
+      "totalLines": 247,
+      "nonEmptyLines": 198,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/activate.bat",
+      "language": "batch",
+      "fileCategory": "script",
+      "totalLines": 34,
+      "nonEmptyLines": 25,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/deactivate.bat",
+      "language": "batch",
+      "fileCategory": "script",
+      "totalLines": 22,
+      "nonEmptyLines": 16,
+      "metrics": {}
+    }
+  ]
+}

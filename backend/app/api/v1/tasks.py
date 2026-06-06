@@ -20,6 +20,7 @@ from app.exceptions import InvalidTransitionError, NotFoundError
 from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
 from app.models.audit_log import AuditLogResult
 from app.models.feedback import Feedback, FeedbackReferenceType
+from app.models.project import Project
 from app.models.project_member import ProjectMember
 from app.models.task import Task, TaskStatus
 from app.schemas.task import (
@@ -64,8 +65,6 @@ def _group_tasks_by_status(tasks: list[Task]) -> TasksGroupedResponse:
         in_progress=buckets[TaskStatus.IN_PROGRESS],
         review=buckets[TaskStatus.REVIEW],
         done=buckets[TaskStatus.DONE],
-        rejected=buckets[TaskStatus.REJECTED],
-        conflict=buckets[TaskStatus.CONFLICT],
     )
 
 
@@ -132,6 +131,17 @@ async def approve_task(
 ) -> TaskApproveResponse:
     await ProjectService.get(session, project_id)
     task = await TaskService.get(session, task_id, project_id=project_id)
+    if task.status == TaskStatus.DONE:
+        # Idempotent: already approved and moved to DONE (e.g. double-click)
+        diff = await DiffService.get_latest_for_task(session, task_id=task_id, project_id=project_id)
+        if diff is None:
+            raise InvalidTransitionError("Task is done but no diff was found.")
+        return TaskApproveResponse(
+            task_id=task.id,
+            status=task.status,
+            diff_id=diff.id,
+            updated_at=task.updated_at,
+        )
     if task.status != TaskStatus.REVIEW:
         raise InvalidTransitionError("Task must be in review status to approve the diff.")
     diff = await DiffService.approve_latest_pending(session, task_id=task_id, project_id=project_id)
@@ -142,28 +152,16 @@ async def approve_task(
         current_user_id=leader.user_id,
     )
     await session.refresh(task)
-    if task.status == TaskStatus.CONFLICT:
-        await write_audit(
-            session,
-            project_id=project_id,
-            task_id=task_id,
-            action_type="task_diff_approve",
-            action_description=f"PO approved diff {diff.id}; merge conflict — task left in conflict.",
-            result=AuditLogResult.FAILURE,
-            input_refs=[str(diff.id)],
-            output_refs=[str(task.id)],
-        )
-    else:
-        await write_audit(
-            session,
-            project_id=project_id,
-            task_id=task_id,
-            action_type="task_diff_approve",
-            action_description=f"PO approved code diff {diff.id}; task moved to done.",
-            result=AuditLogResult.SUCCESS,
-            input_refs=[str(diff.id)],
-            output_refs=[str(task.id)],
-        )
+    await write_audit(
+        session,
+        project_id=project_id,
+        task_id=task_id,
+        action_type="task_diff_approve",
+        action_description=f"PO approved code diff {diff.id}; task moved to done.",
+        result=AuditLogResult.SUCCESS,
+        input_refs=[str(diff.id)],
+        output_refs=[str(task.id)],
+    )
     await session.commit()
     await session.refresh(task)
     return TaskApproveResponse(
@@ -254,12 +252,15 @@ async def reject_task(
         output_refs=[str(agent_run.id)],
     )
     await session.commit()
+    project_for_backend = await ProjectService.get(session, project_id)
+    _backend = str(project_for_backend.coding_backend) if project_for_backend else "groq"
     KanbanService.start_coder_agent(
         task_id,
         project_id,
         po_feedback=fb_text,
         agent_run_id=agent_run.id,
         inline_comments=inline_for_coder,
+        coding_backend=_backend,
     )
     await session.refresh(task)
     await session.refresh(feedback)
@@ -323,8 +324,10 @@ async def move_task(
 
     # Pre-create AgentRun so agent_run_id is available in the response immediately.
     # Coder is deferred until after commit to avoid running against an uncommitted task state.
+    # Only on a REAL transition into in_progress — a no-op move (already in_progress)
+    # must not spawn a second coder on the shared sandbox (causes git lock contention).
     pre_created_run: AgentRun | None = None
-    if body.to == TaskStatus.IN_PROGRESS:
+    if body.to == TaskStatus.IN_PROGRESS and from_status != TaskStatus.IN_PROGRESS:
         pre_created_run = AgentRun(
             project_id=project_id,
             task_id=task_id,
@@ -349,7 +352,9 @@ async def move_task(
     await session.refresh(task)
 
     if pre_created_run is not None:
-        KanbanService.start_coder_agent(task_id, project_id, agent_run_id=pre_created_run.id)
+        _project = await session.get(Project, project_id)
+        _backend = str(_project.coding_backend) if _project else "groq"
+        KanbanService.start_coder_agent(task_id, project_id, agent_run_id=pre_created_run.id, coding_backend=_backend)
 
     return TaskMoveResult(
         task_id=task.id,

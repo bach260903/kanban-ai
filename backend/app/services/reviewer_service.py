@@ -3,10 +3,15 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 import subprocess
 from pathlib import Path
 from typing import Any
+
+logger = logging.getLogger(__name__)
+
+from langchain_core.messages import HumanMessage, SystemMessage
 
 from app.llm.invoke_helpers import ainvoke_llm
 
@@ -154,59 +159,70 @@ def scan_secrets(diff_content: str) -> list[dict[str, Any]]:
 # AI review (T026)
 # ---------------------------------------------------------------------------
 
-REVIEWER_PROMPT = """\
-You are a senior code reviewer for an autonomous software factory. The diff below was written
-by an AI coding agent and will be merged automatically once approved, so review it as the last
+_REVIEWER_SYSTEM = """\
+You are a senior code reviewer for an autonomous software factory. The diff was written
+by an AI coding agent and will be merged automatically once approved — you are the last
 line of defense before code ships.
 
-Review the diff against these criteria, in priority order:
-1. CORRECTNESS — does the change do what the task intends? Logic errors, off-by-one, wrong
-   conditions, unhandled cases, broken control flow.
-2. BROKEN REFERENCES — imports/exports that won't resolve, calls to undefined symbols, files or
-   modules referenced but not created, mismatched function signatures.
-3. SECURITY — injection (SQL/command/XSS), missing input validation at trust boundaries, unsafe
-   deserialization, path traversal, hardcoded credentials. (Obvious secrets are flagged
-   separately — focus on logic-level security here.)
-4. CONSTITUTION ADHERENCE — violations of the project standards below.
-5. TESTS — missing coverage for new behavior, or tests that don't actually assert anything.
-6. MAINTAINABILITY — only call out issues serious enough to matter; do not nitpick style the
-   linter already handles.
+Review criteria (priority order):
+1. CORRECTNESS — logic errors, off-by-one, wrong conditions, unhandled cases, broken control flow.
+2. BROKEN REFERENCES — imports/exports that won't resolve, calls to undefined symbols, files
+   referenced but not created, mismatched function signatures.
+3. SECURITY — SQL/command/XSS injection, missing input validation, unsafe deserialization,
+   path traversal, hardcoded credentials.
+4. CONSTITUTION ADHERENCE — violations of the project coding standards provided.
+5. TESTS — missing coverage for new behaviour, or tests that assert nothing meaningful.
+6. MAINTAINABILITY — only issues serious enough to matter; ignore style the linter handles.
 
+Return ONLY valid JSON — no prose, no markdown fences, no explanation outside the JSON:
+{
+  "suggestion": "approve",
+  "comments": [
+    {"file_path": "path/to/file.py", "line_number": 42, "content": "explanation", "severity": "info"}
+  ]
+}
+
+Rules:
+- "suggestion": "approve" only when there are zero "error"-severity issues; else "needs_changes".
+- "severity": "error" (blocks merge) | "warning" (should fix) | "info" (optional).
+- Each comment must cite a real file_path + line_number from the diff and explain the problem
+  AND the concrete fix. Be actionable, not vague.
+- Limit to the 10 most important comments.\
+"""
+
+_REVIEWER_HUMAN = """\
 Project constitution (coding standards):
 {constitution}
 
-Git diff:
-{diff}
-
-Return ONLY valid JSON with this exact shape:
-{{
-  "suggestion": "approve",
-  "comments": [
-    {{"file_path": "path/to/file.py", "line_number": 42, "content": "explanation", "severity": "info"}}
-  ]
-}}
-
-Rules:
-- "suggestion": "approve" only if there are no "error"-severity issues; otherwise "needs_changes".
-- "severity": "error" (blocks merge: bugs, broken refs, security) | "warning" (should fix) |
-  "info" (minor/optional).
-- Each comment must point to a real file_path and line_number from the diff and explain BOTH the
-  problem and the concrete fix — actionable, not vague.
-- Limit to the 10 most important comments. Be concise. Do not invent issues to fill the list.\
+Git diff to review:
+{diff}\
 """
 
 
 _MARKDOWN_JSON_RE = re.compile(r"```(?:json)?\s*([\s\S]*?)\s*```", re.IGNORECASE)
+_THINK_TAG_RE = re.compile(r"<think>[\s\S]*?</think>", re.IGNORECASE)
+_JSON_OBJECT_RE = re.compile(r"\{[\s\S]*\}", re.IGNORECASE)
 
 
 def _extract_json(text: str) -> str:
-    """Strip optional markdown code-fence wrapping from an LLM response.
+    """Extract JSON from an LLM response, handling code fences and thinking tags.
 
-    LLMs commonly wrap JSON in ```json ... ``` blocks. This helper extracts
-    the inner content so ``json.loads`` can handle it.
+    Handles three common LLM output formats:
+    1. Plain JSON
+    2. JSON wrapped in ```json ... ``` code fences
+    3. Thinking-model output with <think>...</think> prefix (Qwen3, DeepSeek-R1, etc.)
     """
+    # Strip <think>...</think> blocks produced by reasoning/thinking models
+    text = _THINK_TAG_RE.sub("", text).strip()
+    # Try markdown code fence first
     m = _MARKDOWN_JSON_RE.search(text)
-    return m.group(1) if m else text.strip()
+    if m:
+        return m.group(1)
+    # Try to find a raw JSON object in the remaining text
+    m2 = _JSON_OBJECT_RE.search(text)
+    if m2:
+        return m2.group(0)
+    return text.strip()
 
 
 async def ai_review_diff(
@@ -227,18 +243,22 @@ async def ai_review_diff(
         Falls back to ``("needs_changes", [])`` on any parse or LLM error
         so that the reviewer node never crashes the task pipeline.
     """
-    prompt = REVIEWER_PROMPT.format(
-        constitution=constitution[:2000],
-        diff=diff[:6000],
-    )
+    messages = [
+        SystemMessage(content=_REVIEWER_SYSTEM),
+        HumanMessage(content=_REVIEWER_HUMAN.format(
+            constitution=constitution[:2000],
+            diff=diff[:6000],
+        )),
+    ]
     try:
-        response = await ainvoke_llm(llm, prompt)
+        response = await ainvoke_llm(llm, messages)
         raw = getattr(response, "content", "") or ""
         data: dict[str, Any] = json.loads(_extract_json(raw))
         suggestion: str = data.get("suggestion", "needs_changes")
         comments: list[dict[str, Any]] = data.get("comments", [])
         return suggestion, comments
-    except Exception:  # noqa: BLE001 — any LLM/network/parse error must not crash the pipeline
+    except Exception as exc:  # noqa: BLE001 — any LLM/network/parse error must not crash the pipeline
+        logger.warning("ai_review_diff failed (%s: %s)", type(exc).__name__, exc)
         return "needs_changes", []
 
 

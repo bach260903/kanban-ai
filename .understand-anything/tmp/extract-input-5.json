@@ -1,0 +1,52 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".specify/PO-WORKFLOW.md",
+                           "language":  "markdown",
+                           "sizeLines":  58,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/extensions.yml",
+                           "language":  "yaml",
+                           "sizeLines":  148,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  ".specify/feature.json",
+                           "language":  "json",
+                           "sizeLines":  3,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  ".specify/init-options.json",
+                           "language":  "json",
+                           "sizeLines":  9,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  ".specify/integration.json",
+                           "language":  "json",
+                           "sizeLines":  15,
+                           "fileCategory":  "config"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".specify/PO-WORKFLOW.md":  [
+
+                                                        ],
+                            ".specify/extensions.yml":  [
+
+                                                        ],
+                            ".specify/feature.json":  [
+
+                                                      ],
+                            ".specify/init-options.json":  [
+
+                                                           ],
+                            ".specify/integration.json":  [
+
+                                                          ]
+                        }
+}

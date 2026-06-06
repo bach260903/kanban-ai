@@ -109,6 +109,59 @@ def _salvage_task_objects(text: str) -> list[Any]:
     return objs
 
 
+_TEST_ONLY_RE = re.compile(
+    r"^(write|add|create|implement)\s+(comprehensive\s+)?(unit\s+|integration\s+)?"
+    r"(jest|pytest|vitest|tests?|test\s+suite|spec)\b",
+    re.IGNORECASE,
+)
+_SETUP_ONLY_RE = re.compile(
+    r"^(initialize|init|set\s*up|setup|scaffold|configure|bootstrap)\b",
+    re.IGNORECASE,
+)
+
+
+def _post_process_tasks(items: list[TaskBreakdownItem]) -> list[TaskBreakdownItem]:
+    """Code-level enforcement: remove tasks that violate breakdown rules.
+
+    - Test-only tasks ("Write Jest tests for X") are folded into the first
+      implementation task's acceptance criteria instead of living as a
+      separate Kanban card.
+    - Setup/init-only tasks ("Initialize project scaffold") are folded into
+      the first implementation task if the list has other tasks; kept if
+      it is the only task.
+    """
+    impl_tasks: list[TaskBreakdownItem] = []
+    folded_criteria: list[str] = []
+    folded_hints: list[str] = []
+
+    for item in items:
+        title = item.title.strip()
+        if _TEST_ONLY_RE.match(title) or _SETUP_ONLY_RE.match(title):
+            folded_criteria.extend(item.acceptance_criteria)
+            folded_hints.extend(item.files_hint)
+            logger.info("task_breakdown: folding standalone task %r into impl task", title)
+        else:
+            impl_tasks.append(item)
+
+    if not impl_tasks:
+        return items  # all tasks were setup/test — keep as-is to avoid empty list
+
+    # Attach folded criteria/hints to the first implementation task
+    if folded_criteria:
+        impl_tasks[0].acceptance_criteria.extend(folded_criteria)
+    if folded_hints:
+        impl_tasks[0].files_hint.extend(
+            h for h in folded_hints if h not in impl_tasks[0].files_hint
+        )
+
+    if len(items) != len(impl_tasks):
+        logger.info(
+            "task_breakdown: post-process merged %d task(s) → %d task(s)",
+            len(items), len(impl_tasks),
+        )
+    return impl_tasks
+
+
 def _parse_task_payload(raw: str) -> list[TaskBreakdownItem]:
     blob = _strip_json_fence(raw)
     items_raw: list[Any] | None = None
@@ -203,10 +256,23 @@ async def _run_task_breakdown(state: StateDict) -> StateDict:
         '- "files_hint" (array of strings, optional; likely file paths or modules, e.g. "backend/app/routers/auth.py")\n'
         '- "priority" (integer; lower = higher urgency; default 0)\n\n'
         "Rules:\n"
-        "- Produce 3–20 tasks (fewer if the PLAN is small). Be concise — prefer fewer, "
-        "well-scoped tasks over many tiny ones, and keep every field short to stay within limits.\n"
-        "- Do NOT create meta tasks (writing docs, creating plans, running reviews only).\n"
-        "- Split large PLAN items into independently implementable units.\n"
+        "- Task count = number of DISTINCT USER-FACING FEATURES in the PLAN, capped at 12.\n"
+        "  A 'feature' is something the user asked for. Sub-steps, setup, config, and testing "
+        "are NOT features — they are part of implementing a feature.\n"
+        "  Count features in the PLAN, then map: 1 feature → 1 task. Merge when features "
+        "share the same file or module. Always default to fewer tasks.\n"
+        "- Each task MUST be a DISTINCT deliverable. Never create two tasks that touch the same "
+        "module/file/feature — merge them into one.\n"
+        "- The coding agent ALWAYS writes the implementation AND its unit tests together in the same "
+        "task. Do NOT create a separate 'write tests for X' task — fold into the feature task.\n"
+        "- Do NOT create meta/quality tasks (writing docs, creating plans, running reviews, linting). "
+        "The CI pipeline runs lint/test/build automatically — these are NOT Kanban tasks.\n"
+        "- Do NOT generate infrastructure or tooling setup tasks (CI/CD, bundler config, "
+        "ESLint setup, npm publishing, GitHub Actions). These are pre-configured.\n"
+        "- Do NOT create separate tasks for: project init, package.json setup, tsconfig, "
+        ".gitignore, README. Fold these into the first feature task.\n"
+        "- Split the PLAN by FEATURE/COMPONENT (a cohesive unit of behaviour), not by activity "
+        "(implement / test / lint / setup). One feature = one task that ships code + tests.\n"
         "- Every task MUST have a non-empty description and at least 2 acceptance criteria.\n"
         "- Order tasks so dependencies come first (models before API, API before UI).\n"
     )
@@ -225,6 +291,7 @@ async def _run_task_breakdown(state: StateDict) -> StateDict:
     items = _parse_task_payload(raw)
     if not items:
         raise ValueError("LLM returned zero tasks.")
+    items = _post_process_tasks(items)
     if len(items) > _MAX_TASKS:
         items = items[:_MAX_TASKS]
         logger.warning("Task breakdown truncated to %s tasks", _MAX_TASKS)

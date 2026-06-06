@@ -12,7 +12,7 @@ import type { ReviewReport } from '../types'
 import { createApiClient } from './api-client'
 import { getAuthToken } from './api'
 
-const REVIEW_POLL_INTERVAL_MS = 2_000
+const REVIEW_POLL_INTERVAL_MS = 4_000
 
 /** Fetch the latest AI review report for a task. Throws AxiosError on failure. */
 export function reviewApi(token: string | null) {

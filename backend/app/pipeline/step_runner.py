@@ -53,13 +53,18 @@ def _iter_files(root: Path, suffixes: tuple[str, ...]) -> list[Path]:
     out: list[Path] = []
     if not root.exists():
         return out
-    for p in root.rglob("*"):
-        if p.is_dir():
-            continue
-        if any(part in _IGNORE_DIRS for part in p.parts):
-            continue
-        if p.suffix in suffixes:
-            out.append(p)
+    try:
+        for p in root.rglob("*"):
+            if p.is_dir():
+                continue
+            if any(part in _IGNORE_DIRS for part in p.parts):
+                continue
+            if p.suffix in suffixes:
+                out.append(p)
+    except (OSError, FileNotFoundError) as e:
+        # Windows bind-mount issue: some directories (e.g. node_modules/fsevents)
+        # may be inaccessible. Log and continue with partial results.
+        logger.warning("_iter_files: error scanning %s: %s", root, e)
     return out
 
 

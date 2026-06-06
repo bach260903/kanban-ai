@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "backend/app/adapters/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  1,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/adapters/base.py",
+                           "language":  "python",
+                           "sizeLines":  43,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/adapters/railway_adapter.py",
+                           "language":  "python",
+                           "sizeLines":  182,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/adapters/vercel_adapter.py",
+                           "language":  "python",
+                           "sizeLines":  194,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/context_builder.py",
+                           "language":  "python",
+                           "sizeLines":  275,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/graph.py",
+                           "language":  "python",
+                           "sizeLines":  123,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/nodes/cli_coder_node.py",
+                           "language":  "python",
+                           "sizeLines":  321,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/nodes/coder_node.py",
+                           "language":  "python",
+                           "sizeLines":  817,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/nodes/devops_node.py",
+                           "language":  "python",
+                           "sizeLines":  425,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/nodes/failure_analyst_node.py",
+                           "language":  "python",
+                           "sizeLines":  434,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/nodes/plan_node.py",
+                           "language":  "python",
+                           "sizeLines":  312,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/nodes/reviewer_node.py",
+                           "language":  "python",
+                           "sizeLines":  350,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/nodes/spec_node.py",
+                           "language":  "python",
+                           "sizeLines":  209,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/nodes/task_breakdown_node.py",
+                           "language":  "python",
+                           "sizeLines":  288,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/agent/state.py",
+                           "language":  "python",
+                           "sizeLines":  22,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  1,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  1,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/agent_runs.py",
+                           "language":  "python",
+                           "sizeLines":  29,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/analytics.py",
+                           "language":  "python",
+                           "sizeLines":  97,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/audit_logs.py",
+                           "language":  "python",
+                           "sizeLines":  42,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/backends.py",
+                           "language":  "python",
+                           "sizeLines":  56,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/branches.py",
+                           "language":  "python",
+                           "sizeLines":  74,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/codebase.py",
+                           "language":  "python",
+                           "sizeLines":  84,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/dependencies.py",
+                           "language":  "python",
+                           "sizeLines":  134,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/dev_auth.py",
+                           "language":  "python",
+                           "sizeLines":  43,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "backend/app/adapters/__init__.py":  [
+
+                                                                 ],
+                            "backend/app/adapters/base.py":  [
+
+                                                             ],
+                            "backend/app/adapters/railway_adapter.py":  [
+
+                                                                        ],
+                            "backend/app/adapters/vercel_adapter.py":  [
+
+                                                                       ],
+                            "backend/app/agent/context_builder.py":  [
+
+                                                                     ],
+                            "backend/app/agent/graph.py":  [
+
+                                                           ],
+                            "backend/app/agent/nodes/cli_coder_node.py":  [
+
+                                                                          ],
+                            "backend/app/agent/nodes/coder_node.py":  [
+
+                                                                      ],
+                            "backend/app/agent/nodes/devops_node.py":  [
+
+                                                                       ],
+                            "backend/app/agent/nodes/failure_analyst_node.py":  [
+
+                                                                                ],
+                            "backend/app/agent/nodes/plan_node.py":  [
+
+                                                                     ],
+                            "backend/app/agent/nodes/reviewer_node.py":  [
+
+                                                                         ],
+                            "backend/app/agent/nodes/spec_node.py":  [
+
+                                                                     ],
+                            "backend/app/agent/nodes/task_breakdown_node.py":  [
+
+                                                                               ],
+                            "backend/app/agent/state.py":  [
+
+                                                           ],
+                            "backend/app/api/__init__.py":  [
+
+                                                            ],
+                            "backend/app/api/v1/__init__.py":  [
+
+                                                               ],
+                            "backend/app/api/v1/agent_runs.py":  [
+
+                                                                 ],
+                            "backend/app/api/v1/analytics.py":  [
+
+                                                                ],
+                            "backend/app/api/v1/audit_logs.py":  [
+
+                                                                 ],
+                            "backend/app/api/v1/backends.py":  [
+
+                                                               ],
+                            "backend/app/api/v1/branches.py":  [
+
+                                                               ],
+                            "backend/app/api/v1/codebase.py":  [
+
+                                                               ],
+                            "backend/app/api/v1/dependencies.py":  [
+
+                                                                   ],
+                            "backend/app/api/v1/dev_auth.py":  [
+
+                                                               ]
+                        }
+}

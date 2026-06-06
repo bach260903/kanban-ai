@@ -1,0 +1,186 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "specs/001-neo-kanban/validation/tc-08-stream-latency.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 57,
+      "nonEmptyLines": 38,
+      "sections": [
+        {
+          "heading": "TC-08 — Thought stream event latency (≤ 2 s)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Criterion",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "Server publish path (coder → browser)",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "Manual measurement — Chrome WebSocket inspector",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Recorded results (T112)",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "References",
+          "level": 2,
+          "line": 54
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/validation/tc-10-memory-done.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 33,
+      "nonEmptyLines": 23,
+      "sections": [
+        {
+          "heading": "TC-10 — Done tasks → memory entries + MEMORY.md (five fields)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Criterion",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "Automated check (CI / local)",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "Manual QA (full approve cycles)",
+          "level": 2,
+          "line": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/validation/tc-11-codebase-map-500-files.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 29,
+      "nonEmptyLines": 18,
+      "sections": [
+        {
+          "heading": "TC-11 — Codebase map scan time (500 Python files, ≤ 10 s)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Criterion",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "Automated benchmark",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Implementation notes (T115)",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Recorded result (fill when you run the benchmark)",
+          "level": 2,
+          "line": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/validation/tc-12-tc-13-git-squash-inline-comments.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 57,
+      "nonEmptyLines": 37,
+      "sections": [
+        {
+          "heading": "TC-12 + TC-13 — Squash (one commit per approve) and inline comment round-trip",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "TC-12 — One squash commit on `main` per approve",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "Manual scenario",
+          "level": 3,
+          "line": 12
+        },
+        {
+          "heading": "Automated check",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "TC-13 — Inline comment `{file, line}` round-trip",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "Manual scenario",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "API quick checks",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "Recorded sign-off (optional)",
+          "level": 2,
+          "line": 53
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    }
+  ]
+}

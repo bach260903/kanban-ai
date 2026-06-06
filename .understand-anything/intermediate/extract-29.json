@@ -1,0 +1,1197 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".claude/projects/d--D---n-KLTN_2/memory/feedback_language.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 11,
+      "nonEmptyLines": 8,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": ".claude/projects/d--D---n-KLTN_2/memory/MEMORY.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 3,
+      "nonEmptyLines": 2,
+      "sections": [
+        {
+          "heading": "Memory Index",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".claude/settings.local.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "sections": [
+        {
+          "heading": "permissions",
+          "level": 1,
+          "line": 2
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-analyze/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 260,
+      "nonEmptyLines": 182,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Goal",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Operating Constraints",
+          "level": 2,
+          "line": 61
+        },
+        {
+          "heading": "Execution Steps",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "1. Initialize Analysis Context",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "2. Load Artifacts (Progressive Disclosure)",
+          "level": 3,
+          "line": 80
+        },
+        {
+          "heading": "3. Build Semantic Models",
+          "level": 3,
+          "line": 111
+        },
+        {
+          "heading": "4. Detection Passes (Token-Efficient Analysis)",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "A. Duplication Detection",
+          "level": 4,
+          "line": 124
+        },
+        {
+          "heading": "B. Ambiguity Detection",
+          "level": 4,
+          "line": 129
+        },
+        {
+          "heading": "C. Underspecification",
+          "level": 4,
+          "line": 134
+        },
+        {
+          "heading": "D. Constitution Alignment",
+          "level": 4,
+          "line": 140
+        },
+        {
+          "heading": "E. Coverage Gaps",
+          "level": 4,
+          "line": 145
+        },
+        {
+          "heading": "F. Inconsistency",
+          "level": 4,
+          "line": 151
+        },
+        {
+          "heading": "5. Severity Assignment",
+          "level": 3,
+          "line": 158
+        },
+        {
+          "heading": "6. Produce Compact Analysis Report",
+          "level": 3,
+          "line": 167
+        },
+        {
+          "heading": "Specification Analysis Report",
+          "level": 2,
+          "line": 171
+        },
+        {
+          "heading": "7. Provide Next Actions",
+          "level": 3,
+          "line": 197
+        },
+        {
+          "heading": "8. Offer Remediation",
+          "level": 3,
+          "line": 205
+        },
+        {
+          "heading": "9. Check for extension hooks",
+          "level": 3,
+          "line": 209
+        },
+        {
+          "heading": "Operating Principles",
+          "level": 2,
+          "line": 241
+        },
+        {
+          "heading": "Context Efficiency",
+          "level": 3,
+          "line": 243
+        },
+        {
+          "heading": "Analysis Guidelines",
+          "level": 3,
+          "line": 250
+        },
+        {
+          "heading": "Context",
+          "level": 2,
+          "line": 258
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 25
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-approve-spec/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 113,
+      "nonEmptyLines": 81,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Purpose",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "Execution Steps",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "Step 1 — Record PO approval",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "Step 2 — Generate plan for PO review (mandatory, same session)",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "Step 3 — Report to PO",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "Triggers (when to run this command)",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "Relationship to bundled workflow",
+          "level": 2,
+          "line": 111
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-checklist/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 372,
+      "nonEmptyLines": 296,
+      "sections": [
+        {
+          "heading": "Checklist Purpose: \"Unit Tests for English\"",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "Execution Steps",
+          "level": 2,
+          "line": 78
+        },
+        {
+          "heading": "Example Checklist Types & Sample Items",
+          "level": 2,
+          "line": 267
+        },
+        {
+          "heading": "Anti-Examples: What NOT To Do",
+          "level": 2,
+          "line": 310
+        },
+        {
+          "heading": "Post-Execution Checks",
+          "level": 2,
+          "line": 341
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-clarify/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 254,
+      "nonEmptyLines": 211,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Post-Execution Checks",
+          "level": 2,
+          "line": 223
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-constitution/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 157,
+      "nonEmptyLines": 125,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Post-Execution Checks",
+          "level": 2,
+          "line": 126
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-git-commit/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 85,
+      "nonEmptyLines": 59,
+      "sections": [
+        {
+          "heading": "Auto-Commit Changes",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "Behavior",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Commit messages (Conventional Commits)",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Execution",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Configuration",
+          "level": 2,
+          "line": 66
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 81
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-git-feature/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 72,
+      "nonEmptyLines": 51,
+      "sections": [
+        {
+          "heading": "Create Feature Branch",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Environment Variable Override",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Branch Numbering Mode",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "Execution",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 62
+        },
+        {
+          "heading": "Output",
+          "level": 2,
+          "line": 68
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-git-initialize/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 54,
+      "nonEmptyLines": 40,
+      "sections": [
+        {
+          "heading": "Initialize Git Repository",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "Execution",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Customization",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Output",
+          "level": 2,
+          "line": 40
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-git-remote/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 50,
+      "nonEmptyLines": 36,
+      "sections": [
+        {
+          "heading": "Detect Git Remote URL",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Execution",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Output",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 46
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-git-validate/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 54,
+      "nonEmptyLines": 40,
+      "sections": [
+        {
+          "heading": "Validate Feature Branch",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Validation Rules",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Execution",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 49
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-implement/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 210,
+      "nonEmptyLines": 175,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-plan/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 152,
+      "nonEmptyLines": 118,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Phases",
+          "level": 2,
+          "line": 104
+        },
+        {
+          "heading": "Phase 0: Outline & Research",
+          "level": 3,
+          "line": 106
+        },
+        {
+          "heading": "Phase 1: Design & Contracts",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "Key rules",
+          "level": 2,
+          "line": 149
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-specify/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 339,
+      "nonEmptyLines": 264,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Quick Guidelines",
+          "level": 2,
+          "line": 280
+        },
+        {
+          "heading": "Section Requirements",
+          "level": 3,
+          "line": 287
+        },
+        {
+          "heading": "For AI Generation",
+          "level": 3,
+          "line": 293
+        },
+        {
+          "heading": "Success Criteria Guidelines",
+          "level": 3,
+          "line": 318
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-tasks/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 202,
+      "nonEmptyLines": 163,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Task Generation Rules",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "Checklist Format (REQUIRED)",
+          "level": 3,
+          "line": 138
+        },
+        {
+          "heading": "Task Organization",
+          "level": 3,
+          "line": 170
+        },
+        {
+          "heading": "Phase Structure",
+          "level": 3,
+          "line": 195
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": ".claude/skills/speckit-taskstoissues/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 106,
+      "nonEmptyLines": 85,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Post-Execution Checks",
+          "level": 2,
+          "line": 75
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".cursor/rules/specify-rules.mdc",
+      "language": "mdc",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 20,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/speckit-analyze/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 255,
+      "nonEmptyLines": 177,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Goal",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "Operating Constraints",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Execution Steps",
+          "level": 2,
+          "line": 63
+        },
+        {
+          "heading": "1. Initialize Analysis Context",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "2. Load Artifacts (Progressive Disclosure)",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "3. Build Semantic Models",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "4. Detection Passes (Token-Efficient Analysis)",
+          "level": 3,
+          "line": 116
+        },
+        {
+          "heading": "A. Duplication Detection",
+          "level": 4,
+          "line": 120
+        },
+        {
+          "heading": "B. Ambiguity Detection",
+          "level": 4,
+          "line": 125
+        },
+        {
+          "heading": "C. Underspecification",
+          "level": 4,
+          "line": 130
+        },
+        {
+          "heading": "D. Constitution Alignment",
+          "level": 4,
+          "line": 136
+        },
+        {
+          "heading": "E. Coverage Gaps",
+          "level": 4,
+          "line": 141
+        },
+        {
+          "heading": "F. Inconsistency",
+          "level": 4,
+          "line": 147
+        },
+        {
+          "heading": "5. Severity Assignment",
+          "level": 3,
+          "line": 154
+        },
+        {
+          "heading": "6. Produce Compact Analysis Report",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "Specification Analysis Report",
+          "level": 2,
+          "line": 167
+        },
+        {
+          "heading": "7. Provide Next Actions",
+          "level": 3,
+          "line": 193
+        },
+        {
+          "heading": "8. Offer Remediation",
+          "level": 3,
+          "line": 201
+        },
+        {
+          "heading": "9. Check for extension hooks",
+          "level": 3,
+          "line": 205
+        },
+        {
+          "heading": "Operating Principles",
+          "level": 2,
+          "line": 236
+        },
+        {
+          "heading": "Context Efficiency",
+          "level": 3,
+          "line": 238
+        },
+        {
+          "heading": "Analysis Guidelines",
+          "level": 3,
+          "line": 245
+        },
+        {
+          "heading": "Context",
+          "level": 2,
+          "line": 253
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 25
+      }
+    },
+    {
+      "path": ".cursor/skills/speckit-approve-spec/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 113,
+      "nonEmptyLines": 81,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Purpose",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "Execution Steps",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "Step 1 — Record PO approval",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "Step 2 — Generate plan for PO review (mandatory, same session)",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "Step 3 — Report to PO",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "Triggers (when to run this command)",
+          "level": 2,
+          "line": 101
+        },
+        {
+          "heading": "Relationship to bundled workflow",
+          "level": 2,
+          "line": 111
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": ".cursor/skills/speckit-checklist/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 367,
+      "nonEmptyLines": 291,
+      "sections": [
+        {
+          "heading": "Checklist Purpose: \"Unit Tests for English\"",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 32
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 40
+        },
+        {
+          "heading": "Execution Steps",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "Example Checklist Types & Sample Items",
+          "level": 2,
+          "line": 263
+        },
+        {
+          "heading": "Anti-Examples: What NOT To Do",
+          "level": 2,
+          "line": 306
+        },
+        {
+          "heading": "Post-Execution Checks",
+          "level": 2,
+          "line": 337
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": ".cursor/skills/speckit-clarify/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 249,
+      "nonEmptyLines": 206,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "Post-Execution Checks",
+          "level": 2,
+          "line": 219
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".cursor/skills/speckit-constitution/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 152,
+      "nonEmptyLines": 120,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "Post-Execution Checks",
+          "level": 2,
+          "line": 122
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".cursor/skills/speckit-implement/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 205,
+      "nonEmptyLines": 170,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 53
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    }
+  ]
+}

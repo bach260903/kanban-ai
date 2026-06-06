@@ -1,0 +1,4094 @@
+{
+  "scriptCompleted": true,
+  "files": [
+    {
+      "path": ".claude/projects/d--D---n-KLTN_2/memory/feedback_language.md",
+      "language": "markdown",
+      "sizeLines": 11,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/projects/d--D---n-KLTN_2/memory/MEMORY.md",
+      "language": "markdown",
+      "sizeLines": 3,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/settings.local.json",
+      "language": "json",
+      "sizeLines": 10,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".claude/skills/speckit-analyze/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 260,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-approve-spec/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 113,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-checklist/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 372,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-clarify/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 254,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-constitution/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 157,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-git-commit/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 84,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-git-feature/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 71,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-git-initialize/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 53,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-git-remote/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 49,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-git-validate/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 53,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-implement/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 210,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-plan/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 152,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-specify/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 339,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-tasks/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 202,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/skills/speckit-taskstoissues/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 106,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/rules/specify-rules.mdc",
+      "language": "mdc",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".cursor/skills/speckit-analyze/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 255,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/skills/speckit-approve-spec/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 113,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/skills/speckit-checklist/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 367,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/skills/speckit-clarify/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 249,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/skills/speckit-constitution/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 152,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/skills/speckit-implement/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 205,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/skills/speckit-plan/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 147,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/skills/speckit-specify/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 334,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/skills/speckit-tasks/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 197,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/skills/speckit-taskstoissues/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 101,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/charts.csv",
+      "language": "csv",
+      "sizeLines": 26,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/colors.csv",
+      "language": "csv",
+      "sizeLines": 97,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/icons.csv",
+      "language": "csv",
+      "sizeLines": 101,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/landing.csv",
+      "language": "csv",
+      "sizeLines": 31,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/products.csv",
+      "language": "csv",
+      "sizeLines": 96,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/react-performance.csv",
+      "language": "csv",
+      "sizeLines": 45,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/astro.csv",
+      "language": "csv",
+      "sizeLines": 54,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/flutter.csv",
+      "language": "csv",
+      "sizeLines": 53,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv",
+      "language": "csv",
+      "sizeLines": 56,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv",
+      "language": "csv",
+      "sizeLines": 53,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/nextjs.csv",
+      "language": "csv",
+      "sizeLines": 53,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv",
+      "language": "csv",
+      "sizeLines": 51,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv",
+      "language": "csv",
+      "sizeLines": 59,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/react-native.csv",
+      "language": "csv",
+      "sizeLines": 52,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/react.csv",
+      "language": "csv",
+      "sizeLines": 54,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/shadcn.csv",
+      "language": "csv",
+      "sizeLines": 61,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/svelte.csv",
+      "language": "csv",
+      "sizeLines": 54,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/swiftui.csv",
+      "language": "csv",
+      "sizeLines": 51,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/stacks/vue.csv",
+      "language": "csv",
+      "sizeLines": 50,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/styles.csv",
+      "language": "csv",
+      "sizeLines": 68,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/typography.csv",
+      "language": "csv",
+      "sizeLines": 57,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/ui-reasoning.csv",
+      "language": "csv",
+      "sizeLines": 101,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/ux-guidelines.csv",
+      "language": "csv",
+      "sizeLines": 99,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/web-interface.csv",
+      "language": "csv",
+      "sizeLines": 31,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/scripts/core.py",
+      "language": "python",
+      "sizeLines": 253,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/scripts/design_system.py",
+      "language": "python",
+      "sizeLines": 1067,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/scripts/search.py",
+      "language": "python",
+      "sizeLines": 114,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 288,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".env.example",
+      "language": "config",
+      "sizeLines": 52,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".python-version",
+      "language": "unknown",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".specify/extensions.yml",
+      "language": "yaml",
+      "sizeLines": 148,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/extensions/.registry",
+      "language": "unknown",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".specify/extensions/git/commands/speckit.git.commit.md",
+      "language": "markdown",
+      "sizeLines": 80,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/extensions/git/commands/speckit.git.feature.md",
+      "language": "markdown",
+      "sizeLines": 67,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/extensions/git/commands/speckit.git.initialize.md",
+      "language": "markdown",
+      "sizeLines": 49,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/extensions/git/commands/speckit.git.remote.md",
+      "language": "markdown",
+      "sizeLines": 45,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/extensions/git/commands/speckit.git.validate.md",
+      "language": "markdown",
+      "sizeLines": 49,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/extensions/git/config-template.yml",
+      "language": "yaml",
+      "sizeLines": 62,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/extensions/git/extension.yml",
+      "language": "yaml",
+      "sizeLines": 140,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/extensions/git/git-config.yml",
+      "language": "yaml",
+      "sizeLines": 62,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/extensions/git/README.md",
+      "language": "markdown",
+      "sizeLines": 100,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/extensions/git/scripts/bash/auto-commit.sh",
+      "language": "shell",
+      "sizeLines": 140,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/extensions/git/scripts/bash/create-new-feature.sh",
+      "language": "shell",
+      "sizeLines": 453,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/extensions/git/scripts/bash/git-common.sh",
+      "language": "shell",
+      "sizeLines": 54,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/extensions/git/scripts/bash/initialize-repo.sh",
+      "language": "shell",
+      "sizeLines": 54,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/extensions/git/scripts/powershell/auto-commit.ps1",
+      "language": "powershell",
+      "sizeLines": 169,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/extensions/git/scripts/powershell/create-new-feature.ps1",
+      "language": "powershell",
+      "sizeLines": 403,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/extensions/git/scripts/powershell/git-common.ps1",
+      "language": "powershell",
+      "sizeLines": 51,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/extensions/git/scripts/powershell/initialize-repo.ps1",
+      "language": "powershell",
+      "sizeLines": 69,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/feature.json",
+      "language": "json",
+      "sizeLines": 3,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/init-options.json",
+      "language": "json",
+      "sizeLines": 9,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/integration.json",
+      "language": "json",
+      "sizeLines": 15,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/integrations/claude.manifest.json",
+      "language": "json",
+      "sizeLines": 16,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/integrations/cursor-agent.manifest.json",
+      "language": "json",
+      "sizeLines": 16,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/integrations/speckit.manifest.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "language": "markdown",
+      "sizeLines": 227,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/PO-WORKFLOW.md",
+      "language": "markdown",
+      "sizeLines": 58,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/scripts/powershell/check-prerequisites.ps1",
+      "language": "powershell",
+      "sizeLines": 151,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/scripts/powershell/common.ps1",
+      "language": "powershell",
+      "sizeLines": 642,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/scripts/powershell/create-new-feature.ps1",
+      "language": "powershell",
+      "sizeLines": 382,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/scripts/powershell/setup-plan.ps1",
+      "language": "powershell",
+      "sizeLines": 63,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/scripts/powershell/setup-tasks.ps1",
+      "language": "powershell",
+      "sizeLines": 74,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".specify/templates/checklist-template.md",
+      "language": "markdown",
+      "sizeLines": 40,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/templates/constitution-template.md",
+      "language": "markdown",
+      "sizeLines": 50,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/templates/plan-template.md",
+      "language": "markdown",
+      "sizeLines": 104,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/templates/spec-template.md",
+      "language": "markdown",
+      "sizeLines": 130,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/templates/tasks-template.md",
+      "language": "markdown",
+      "sizeLines": 251,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".specify/workflows/speckit/workflow.yml",
+      "language": "yaml",
+      "sizeLines": 66,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".specify/workflows/workflow-registry.json",
+      "language": "json",
+      "sizeLines": 12,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/README.md",
+      "language": "markdown",
+      "sizeLines": 43,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "agents/requirements.txt",
+      "language": "txt",
+      "sizeLines": 2,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "agents/src/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/agents/__init__.py",
+      "language": "python",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/agents/assigner.py",
+      "language": "python",
+      "sizeLines": 103,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/agents/executor.py",
+      "language": "python",
+      "sizeLines": 128,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/agents/monitor.py",
+      "language": "python",
+      "sizeLines": 166,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/agents/orchestrator.py",
+      "language": "python",
+      "sizeLines": 266,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/agents/planner.py",
+      "language": "python",
+      "sizeLines": 72,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/agents/reporter.py",
+      "language": "python",
+      "sizeLines": 130,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/agents/roles.py",
+      "language": "python",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/graph_smoke.py",
+      "language": "python",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/graph.py",
+      "language": "python",
+      "sizeLines": 96,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/state.py",
+      "language": "python",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/tools/__init__.py",
+      "language": "python",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "agents/src/tools/registry.py",
+      "language": "python",
+      "sizeLines": 225,
+      "fileCategory": "code"
+    },
+    {
+      "path": "audit/report.html",
+      "language": "html",
+      "sizeLines": 2893,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "audit/report.json",
+      "language": "json",
+      "sizeLines": 3161,
+      "fileCategory": "config"
+    },
+    {
+      "path": "audit/workspace-report.html",
+      "language": "html",
+      "sizeLines": 2893,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "audit/workspace-report.json",
+      "language": "json",
+      "sizeLines": 5670,
+      "fileCategory": "config"
+    },
+    {
+      "path": "backend/.dockerignore",
+      "language": "unknown",
+      "sizeLines": 13,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "backend/.env.example",
+      "language": "config",
+      "sizeLines": 54,
+      "fileCategory": "config"
+    },
+    {
+      "path": "backend/alembic.ini",
+      "language": "config",
+      "sizeLines": 40,
+      "fileCategory": "config"
+    },
+    {
+      "path": "backend/alembic/env.py",
+      "language": "python",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/script.py.mako",
+      "language": "mako",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/001_initial_schema.py",
+      "language": "python",
+      "sizeLines": 428,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/002_phase2_schema.py",
+      "language": "python",
+      "sizeLines": 256,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/003_add_users.py",
+      "language": "python",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/004_add_coding_backend.py",
+      "language": "python",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/004_auto_dispatch.py",
+      "language": "python",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/005_platform_expansion.py",
+      "language": "python",
+      "sizeLines": 541,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/006_wip_per_developer_index.py",
+      "language": "python",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/007_auth_oauth_fields.py",
+      "language": "python",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/008_merge_wip_oauth_heads.py",
+      "language": "python",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/009_drop_project_name_unique.py",
+      "language": "python",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/010_add_member_status.py",
+      "language": "python",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/011_webhook_response_body.py",
+      "language": "python",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/012_pipeline_cicd.py",
+      "language": "python",
+      "sizeLines": 101,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/013_deployment_phase2.py",
+      "language": "python",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/014fb7e4d101_merge_migration_heads.py",
+      "language": "python",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/015_failure_analysis.py",
+      "language": "python",
+      "sizeLines": 75,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/alembic/versions/016_devops_monitoring.py",
+      "language": "python",
+      "sizeLines": 150,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/adapters/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/adapters/base.py",
+      "language": "python",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/adapters/railway_adapter.py",
+      "language": "python",
+      "sizeLines": 182,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/adapters/vercel_adapter.py",
+      "language": "python",
+      "sizeLines": 194,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/context_builder.py",
+      "language": "python",
+      "sizeLines": 275,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/graph.py",
+      "language": "python",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/nodes/cli_coder_node.py",
+      "language": "python",
+      "sizeLines": 321,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/nodes/coder_node.py",
+      "language": "python",
+      "sizeLines": 817,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/nodes/devops_node.py",
+      "language": "python",
+      "sizeLines": 425,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/nodes/failure_analyst_node.py",
+      "language": "python",
+      "sizeLines": 434,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/nodes/plan_node.py",
+      "language": "python",
+      "sizeLines": 312,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/nodes/reviewer_node.py",
+      "language": "python",
+      "sizeLines": 350,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/nodes/spec_node.py",
+      "language": "python",
+      "sizeLines": 209,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/nodes/task_breakdown_node.py",
+      "language": "python",
+      "sizeLines": 288,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/agent/state.py",
+      "language": "python",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/agent_runs.py",
+      "language": "python",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/analytics.py",
+      "language": "python",
+      "sizeLines": 97,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/audit_logs.py",
+      "language": "python",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/backends.py",
+      "language": "python",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/branches.py",
+      "language": "python",
+      "sizeLines": 74,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/codebase.py",
+      "language": "python",
+      "sizeLines": 84,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/dependencies.py",
+      "language": "python",
+      "sizeLines": 134,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/dev_auth.py",
+      "language": "python",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/devops.py",
+      "language": "python",
+      "sizeLines": 391,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/discord_bot.py",
+      "language": "python",
+      "sizeLines": 579,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/documents.py",
+      "language": "python",
+      "sizeLines": 354,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/github.py",
+      "language": "python",
+      "sizeLines": 109,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/members.py",
+      "language": "python",
+      "sizeLines": 428,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/memory.py",
+      "language": "python",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/notifications.py",
+      "language": "python",
+      "sizeLines": 93,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/pause.py",
+      "language": "python",
+      "sizeLines": 116,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/pipelines.py",
+      "language": "python",
+      "sizeLines": 270,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/projects.py",
+      "language": "python",
+      "sizeLines": 142,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/review.py",
+      "language": "python",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/tasks.py",
+      "language": "python",
+      "sizeLines": 391,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/templates.py",
+      "language": "python",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/api/v1/webhooks.py",
+      "language": "python",
+      "sizeLines": 186,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/config.py",
+      "language": "python",
+      "sizeLines": 233,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/database.py",
+      "language": "python",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/dependencies.py",
+      "language": "python",
+      "sizeLines": 122,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/deps.py",
+      "language": "python",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/exceptions.py",
+      "language": "python",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/git/__init__.py",
+      "language": "python",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/git/branch_service.py",
+      "language": "python",
+      "sizeLines": 172,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/git/git_service.py",
+      "language": "python",
+      "sizeLines": 216,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/llm.py",
+      "language": "python",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/llm/__init__.py",
+      "language": "python",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/llm/factory.py",
+      "language": "python",
+      "sizeLines": 240,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/llm/invoke_helpers.py",
+      "language": "python",
+      "sizeLines": 274,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/main.py",
+      "language": "python",
+      "sizeLines": 125,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/middleware/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/middleware/auth.py",
+      "language": "python",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/middleware/error_handlers.py",
+      "language": "python",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models.py",
+      "language": "python",
+      "sizeLines": 241,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/__init__.py",
+      "language": "python",
+      "sizeLines": 94,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/agent_pause_state.py",
+      "language": "python",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/agent_run.py",
+      "language": "python",
+      "sizeLines": 106,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/audit_log.py",
+      "language": "python",
+      "sizeLines": 75,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/base.py",
+      "language": "python",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/codebase_map.py",
+      "language": "python",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/deployment_config.py",
+      "language": "python",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/deployment_health_check.py",
+      "language": "python",
+      "sizeLines": 57,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/deployment_incident.py",
+      "language": "python",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/deployment.py",
+      "language": "python",
+      "sizeLines": 93,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/diff.py",
+      "language": "python",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/document.py",
+      "language": "python",
+      "sizeLines": 72,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/feedback.py",
+      "language": "python",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/github_config.py",
+      "language": "python",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/inline_comment.py",
+      "language": "python",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/intent.py",
+      "language": "python",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/invitation.py",
+      "language": "python",
+      "sizeLines": 93,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/memory_entry.py",
+      "language": "python",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/notification.py",
+      "language": "python",
+      "sizeLines": 76,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/pipeline_run.py",
+      "language": "python",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/pipeline_step.py",
+      "language": "python",
+      "sizeLines": 78,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/project_member.py",
+      "language": "python",
+      "sizeLines": 83,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/project.py",
+      "language": "python",
+      "sizeLines": 138,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/review_report.py",
+      "language": "python",
+      "sizeLines": 147,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/rollback_event.py",
+      "language": "python",
+      "sizeLines": 76,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/step_failure_analysis.py",
+      "language": "python",
+      "sizeLines": 96,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/stream_event.py",
+      "language": "python",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/task_branch.py",
+      "language": "python",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/task_dependency_hooks.py",
+      "language": "python",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/task_dependency.py",
+      "language": "python",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/task_template.py",
+      "language": "python",
+      "sizeLines": 83,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/task.py",
+      "language": "python",
+      "sizeLines": 127,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/user.py",
+      "language": "python",
+      "sizeLines": 76,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/models/webhook.py",
+      "language": "python",
+      "sizeLines": 140,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/pipeline/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/pipeline/event_bus.py",
+      "language": "python",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/pipeline/executor.py",
+      "language": "python",
+      "sizeLines": 614,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/pipeline/pipeline_service.py",
+      "language": "python",
+      "sizeLines": 171,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/pipeline/step_runner.py",
+      "language": "python",
+      "sizeLines": 553,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/routers/__init__.py",
+      "language": "python",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/routers/activity.py",
+      "language": "python",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/routers/agent.py",
+      "language": "python",
+      "sizeLines": 233,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/routers/auth.py",
+      "language": "python",
+      "sizeLines": 375,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/routers/boards.py",
+      "language": "python",
+      "sizeLines": 595,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/routers/comments.py",
+      "language": "python",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/routers/skills.py",
+      "language": "python",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/routers/users.py",
+      "language": "python",
+      "sizeLines": 113,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/routers/ws.py",
+      "language": "python",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas.py",
+      "language": "python",
+      "sizeLines": 284,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/__init__.py",
+      "language": "python",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/agent_run.py",
+      "language": "python",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/analytics.py",
+      "language": "python",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/audit.py",
+      "language": "python",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/auth.py",
+      "language": "python",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/dependency.py",
+      "language": "python",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/devops.py",
+      "language": "python",
+      "sizeLines": 127,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/document.py",
+      "language": "python",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/github.py",
+      "language": "python",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/inline_comment.py",
+      "language": "python",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/intent.py",
+      "language": "python",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/member.py",
+      "language": "python",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/memory.py",
+      "language": "python",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/notification.py",
+      "language": "python",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/pause.py",
+      "language": "python",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/pipeline.py",
+      "language": "python",
+      "sizeLines": 128,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/project.py",
+      "language": "python",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/review_insight.py",
+      "language": "python",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/review.py",
+      "language": "python",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/task_branch.py",
+      "language": "python",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/task.py",
+      "language": "python",
+      "sizeLines": 134,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/template.py",
+      "language": "python",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/schemas/webhook.py",
+      "language": "python",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/security.py",
+      "language": "python",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/__init__.py",
+      "language": "python",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/agent_runner.py",
+      "language": "python",
+      "sizeLines": 476,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/alert_service.py",
+      "language": "python",
+      "sizeLines": 223,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/analytics_service.py",
+      "language": "python",
+      "sizeLines": 303,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/audit_service.py",
+      "language": "python",
+      "sizeLines": 130,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/auth_service.py",
+      "language": "python",
+      "sizeLines": 523,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/codebase_mapper.py",
+      "language": "python",
+      "sizeLines": 524,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/dependency_service.py",
+      "language": "python",
+      "sizeLines": 302,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/deployment_service.py",
+      "language": "python",
+      "sizeLines": 218,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/diff_service.py",
+      "language": "python",
+      "sizeLines": 97,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/document_service.py",
+      "language": "python",
+      "sizeLines": 159,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/email_service.py",
+      "language": "python",
+      "sizeLines": 400,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/failure_analysis_service.py",
+      "language": "python",
+      "sizeLines": 297,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/github_service.py",
+      "language": "python",
+      "sizeLines": 287,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/inline_comment_service.py",
+      "language": "python",
+      "sizeLines": 105,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/intent_service.py",
+      "language": "python",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/kanban_service.py",
+      "language": "python",
+      "sizeLines": 564,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/llm.py",
+      "language": "python",
+      "sizeLines": 125,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/memory_service.py",
+      "language": "python",
+      "sizeLines": 254,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/notification_service.py",
+      "language": "python",
+      "sizeLines": 201,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/observability_service.py",
+      "language": "python",
+      "sizeLines": 362,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/pause_service.py",
+      "language": "python",
+      "sizeLines": 93,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/plan_generation_runner.py",
+      "language": "python",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/project_service.py",
+      "language": "python",
+      "sizeLines": 97,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/review_insight_service.py",
+      "language": "python",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/review_orchestration_service.py",
+      "language": "python",
+      "sizeLines": 227,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/review_runner.py",
+      "language": "python",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/reviewer_service.py",
+      "language": "python",
+      "sizeLines": 287,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/rollback_service.py",
+      "language": "python",
+      "sizeLines": 254,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/spec_generation_runner.py",
+      "language": "python",
+      "sizeLines": 134,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/task_breakdown_runner.py",
+      "language": "python",
+      "sizeLines": 67,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/task_dispatch_service.py",
+      "language": "python",
+      "sizeLines": 120,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/task_service.py",
+      "language": "python",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/template_service.py",
+      "language": "python",
+      "sizeLines": 180,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/tool_handlers.py",
+      "language": "python",
+      "sizeLines": 378,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/vectorstore.py",
+      "language": "python",
+      "sizeLines": 150,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/webhook_service.py",
+      "language": "python",
+      "sizeLines": 327,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/services/ws_manager.py",
+      "language": "python",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/tools/file_tools.py",
+      "language": "python",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/tools/sandbox_tools.py",
+      "language": "python",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/tools/token_optimizer.py",
+      "language": "python",
+      "sizeLines": 339,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/websocket/__init__.py",
+      "language": "python",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/websocket/event_consumer.py",
+      "language": "python",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/websocket/event_publisher.py",
+      "language": "python",
+      "sizeLines": 94,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/app/websocket/ws_handler.py",
+      "language": "python",
+      "sizeLines": 334,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/Dockerfile",
+      "language": "dockerfile",
+      "sizeLines": 12,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "backend/pyproject.toml",
+      "language": "toml",
+      "sizeLines": 5,
+      "fileCategory": "config"
+    },
+    {
+      "path": "backend/pytest.ini",
+      "language": "config",
+      "sizeLines": 5,
+      "fileCategory": "config"
+    },
+    {
+      "path": "backend/README.md",
+      "language": "markdown",
+      "sizeLines": 81,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "backend/requirements-dev.txt",
+      "language": "txt",
+      "sizeLines": 6,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "backend/requirements.txt",
+      "language": "txt",
+      "sizeLines": 56,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "backend/run-dev.ps1",
+      "language": "powershell",
+      "sizeLines": 6,
+      "fileCategory": "script"
+    },
+    {
+      "path": "backend/tests/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/conftest.py",
+      "language": "python",
+      "sizeLines": 119,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/helpers.py",
+      "language": "python",
+      "sizeLines": 70,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_analytics_api.py",
+      "language": "python",
+      "sizeLines": 244,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_backend_switch.py",
+      "language": "python",
+      "sizeLines": 112,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_create_task_api.py",
+      "language": "python",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_dependencies_api.py",
+      "language": "python",
+      "sizeLines": 130,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_documents_api.py",
+      "language": "python",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_github_api.py",
+      "language": "python",
+      "sizeLines": 121,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_notifications_api.py",
+      "language": "python",
+      "sizeLines": 193,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_projects_api.py",
+      "language": "python",
+      "sizeLines": 95,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_smoke_platform_flow.py",
+      "language": "python",
+      "sizeLines": 259,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_tasks_api.py",
+      "language": "python",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_tc10_memory_five_done_cycles.py",
+      "language": "python",
+      "sizeLines": 148,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_templates_api.py",
+      "language": "python",
+      "sizeLines": 286,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_webhooks_api.py",
+      "language": "python",
+      "sizeLines": 132,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/integration/test_ws_pause_tc09.py",
+      "language": "python",
+      "sizeLines": 109,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/test_placeholder.py",
+      "language": "python",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_analytics_service.py",
+      "language": "python",
+      "sizeLines": 205,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_backend_routing.py",
+      "language": "python",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_branch_service.py",
+      "language": "python",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_branch_squash_tc12.py",
+      "language": "python",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_cli_coder_node.py",
+      "language": "python",
+      "sizeLines": 213,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_codebase_mapper.py",
+      "language": "python",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_dependency_service.py",
+      "language": "python",
+      "sizeLines": 190,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_github_service.py",
+      "language": "python",
+      "sizeLines": 111,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_inline_comment_service.py",
+      "language": "python",
+      "sizeLines": 209,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_kanban_integrations.py",
+      "language": "python",
+      "sizeLines": 206,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_kanban_transitions.py",
+      "language": "python",
+      "sizeLines": 145,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_main_routers.py",
+      "language": "python",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_notification_service.py",
+      "language": "python",
+      "sizeLines": 217,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_task_service.py",
+      "language": "python",
+      "sizeLines": 248,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_token_optimizer.py",
+      "language": "python",
+      "sizeLines": 332,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_tree_sitter_grammars.py",
+      "language": "python",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/tests/unit/test_webhook_service.py",
+      "language": "python",
+      "sizeLines": 310,
+      "fileCategory": "code"
+    },
+    {
+      "path": "backend/uvicorn.err",
+      "language": "err",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "sizeLines": 5,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "design-system/neo-kanban/MASTER.md",
+      "language": "markdown",
+      "sizeLines": 203,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "design-system/neo-kanban/pages/kanban-board.md",
+      "language": "markdown",
+      "sizeLines": 48,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "design/neo-kanban.pen",
+      "language": "pen",
+      "sizeLines": 5961,
+      "fileCategory": "code"
+    },
+    {
+      "path": "docker-compose.yml",
+      "language": "yaml",
+      "sizeLines": 54,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "docs/.gitkeep",
+      "language": "unknown",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "docs/api.md",
+      "language": "markdown",
+      "sizeLines": 1054,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/erd-phase1.md",
+      "language": "markdown",
+      "sizeLines": 107,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/phase1-full-test.md",
+      "language": "markdown",
+      "sizeLines": 159,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/phase1-technology-decisions.md",
+      "language": "markdown",
+      "sizeLines": 160,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/phase2-agent-architecture.md",
+      "language": "markdown",
+      "sizeLines": 187,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/phase2-api-contract.md",
+      "language": "markdown",
+      "sizeLines": 193,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/phase2-database-design.md",
+      "language": "markdown",
+      "sizeLines": 218,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/phase2-evaluation-framework.md",
+      "language": "markdown",
+      "sizeLines": 181,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/phase2-full-test.md",
+      "language": "markdown",
+      "sizeLines": 128,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/pyvenv.cfg",
+      "language": "config",
+      "sizeLines": 5,
+      "fileCategory": "config"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/activate",
+      "language": "unknown",
+      "sizeLines": 76,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/activate.bat",
+      "language": "batch",
+      "sizeLines": 34,
+      "fileCategory": "script"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/Activate.ps1",
+      "language": "powershell",
+      "sizeLines": 247,
+      "fileCategory": "script"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/chroma.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/crewai.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/deactivate.bat",
+      "language": "batch",
+      "sizeLines": 22,
+      "fileCategory": "script"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/distro.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/dotenv.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/dumppdf.py",
+      "language": "python",
+      "sizeLines": 468,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/f2py.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/hf.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/httpx.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/huggingface-cli.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/instructor.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/jsondiff",
+      "language": "unknown",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonpatch",
+      "language": "unknown",
+      "sizeLines": 107,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonpointer",
+      "language": "unknown",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonschema.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/litellm-proxy.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/litellm.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/markdown-it.exe",
+      "language": "exe",
+      "sizeLines": 374,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/mcp.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/normalizer.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/numpy-config.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/onnxruntime_test.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/openai.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pdf2txt.py",
+      "language": "python",
+      "sizeLines": 324,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pdfplumber.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pip.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pip3.12.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pip3.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pybase64.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pygmentize.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pyjson5.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pypdfium2.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pyproject-build.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/python.exe",
+      "language": "exe",
+      "sizeLines": 1115,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pythonw.exe",
+      "language": "exe",
+      "sizeLines": 860,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_postinstall.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_postinstall.py",
+      "language": "python",
+      "sizeLines": 733,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_testall.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_testall.py",
+      "language": "python",
+      "sizeLines": 120,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/tiny-agents.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/tqdm.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/typer.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/uv.exe",
+      "language": "exe",
+      "sizeLines": 254923,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/uvicorn.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/uvw.exe",
+      "language": "exe",
+      "sizeLines": 1038,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/uvx.exe",
+      "language": "exe",
+      "sizeLines": 1023,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/watchfiles.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/websockets.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/wsdump.exe",
+      "language": "exe",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/demo_autogen.py",
+      "language": "python",
+      "sizeLines": 76,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/demo_crewai.py",
+      "language": "python",
+      "sizeLines": 84,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/demo_langgraph.py",
+      "language": "python",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/agent_frameworks/README.md",
+      "language": "markdown",
+      "sizeLines": 42,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/agent_frameworks/requirements-autogen.txt",
+      "language": "txt",
+      "sizeLines": 3,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/agent_frameworks/requirements-crewai.txt",
+      "language": "txt",
+      "sizeLines": 5,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/agent_frameworks/requirements-langgraph.txt",
+      "language": "txt",
+      "sizeLines": 4,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/agent_frameworks/requirements.txt",
+      "language": "txt",
+      "sizeLines": 6,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/datasets/_fixtures/seed.json",
+      "language": "json",
+      "sizeLines": 21,
+      "fileCategory": "config"
+    },
+    {
+      "path": "evaluation/datasets/planner/_README.md",
+      "language": "markdown",
+      "sizeLines": 18,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/datasets/planner/001.json",
+      "language": "json",
+      "sizeLines": 19,
+      "fileCategory": "config"
+    },
+    {
+      "path": "evaluation/datasets/planner/002.json",
+      "language": "json",
+      "sizeLines": 18,
+      "fileCategory": "config"
+    },
+    {
+      "path": "evaluation/datasets/planner/003.json",
+      "language": "json",
+      "sizeLines": 19,
+      "fileCategory": "config"
+    },
+    {
+      "path": "evaluation/judge/rubric_assigner.md",
+      "language": "markdown",
+      "sizeLines": 24,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/judge/rubric_executor.md",
+      "language": "markdown",
+      "sizeLines": 24,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/judge/rubric_monitor.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/judge/rubric_planner.md",
+      "language": "markdown",
+      "sizeLines": 28,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/judge/rubric_reporter.md",
+      "language": "markdown",
+      "sizeLines": 21,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/load_repo_env.py",
+      "language": "python",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/README.md",
+      "language": "markdown",
+      "sizeLines": 34,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/requirements.txt",
+      "language": "txt",
+      "sizeLines": 7,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "evaluation/scripts/aggregate_eval.py",
+      "language": "python",
+      "sizeLines": 93,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/scripts/llm_latency_smoke.py",
+      "language": "python",
+      "sizeLines": 133,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/scripts/run_eval.py",
+      "language": "python",
+      "sizeLines": 150,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/scripts/seed_fixtures.py",
+      "language": "python",
+      "sizeLines": 96,
+      "fileCategory": "code"
+    },
+    {
+      "path": "evaluation/scripts/verify_groq.py",
+      "language": "python",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "extract_pdf.py",
+      "language": "python",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/_archive/app/(app)/boards/[id]/page.tsx",
+      "language": "typescript",
+      "sizeLines": 239,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/_archive/app/(app)/boards/page.tsx",
+      "language": "typescript",
+      "sizeLines": 86,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/_archive/app/(app)/layout.tsx",
+      "language": "typescript",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/_archive/app/(app)/profile/page.tsx",
+      "language": "typescript",
+      "sizeLines": 118,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/_archive/app/globals.css",
+      "language": "css",
+      "sizeLines": 92,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/_archive/app/layout.tsx",
+      "language": "typescript",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/_archive/app/login/page.tsx",
+      "language": "typescript",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/_archive/app/page.tsx",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/_archive/app/register/page.tsx",
+      "language": "typescript",
+      "sizeLines": 74,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/.env.example",
+      "language": "config",
+      "sizeLines": 2,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frontend/.prettierignore",
+      "language": "unknown",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/components.json",
+      "language": "json",
+      "sizeLines": 25,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frontend/eslint.config.js",
+      "language": "javascript",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/index.html",
+      "language": "html",
+      "sizeLines": 24,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/next.config.mjs",
+      "language": "javascript",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/package.json",
+      "language": "json",
+      "sizeLines": 52,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frontend/postcss.config.mjs",
+      "language": "javascript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/public/robots.txt",
+      "language": "txt",
+      "sizeLines": 3,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "frontend/README.md",
+      "language": "markdown",
+      "sizeLines": 73,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "frontend/src/App.css",
+      "language": "css",
+      "sizeLines": 182,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "language": "typescript",
+      "sizeLines": 143,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ai/agent-trace.tsx",
+      "language": "typescript",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ai/breakdown-modal.tsx",
+      "language": "typescript",
+      "sizeLines": 136,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ai/chat-panel.tsx",
+      "language": "typescript",
+      "sizeLines": 309,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ai/monitor-banner.tsx",
+      "language": "typescript",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ai/report-modal.tsx",
+      "language": "typescript",
+      "sizeLines": 97,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ai/suggest-assignee.tsx",
+      "language": "typescript",
+      "sizeLines": 104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/atoms/avatar.tsx",
+      "language": "typescript",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/atoms/backend-badge.tsx",
+      "language": "typescript",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/atoms/badge.module.css",
+      "language": "css",
+      "sizeLines": 60,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/atoms/badge.tsx",
+      "language": "typescript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/atoms/button.module.css",
+      "language": "css",
+      "sizeLines": 61,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/atoms/button.tsx",
+      "language": "typescript",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/atoms/notification-badge.module.css",
+      "language": "css",
+      "sizeLines": 17,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/atoms/notification-badge.tsx",
+      "language": "typescript",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/atoms/role-badge.tsx",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/atoms/score-gauge.tsx",
+      "language": "typescript",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/atoms/spinner.module.css",
+      "language": "css",
+      "sizeLines": 22,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/atoms/spinner.tsx",
+      "language": "typescript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/atoms/text-input.module.css",
+      "language": "css",
+      "sizeLines": 63,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/atoms/text-input.tsx",
+      "language": "typescript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/assign-member.tsx",
+      "language": "typescript",
+      "sizeLines": 99,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/auth-guard.module.css",
+      "language": "css",
+      "sizeLines": 7,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/auth-guard.tsx",
+      "language": "typescript",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/backend-selector.tsx",
+      "language": "typescript",
+      "sizeLines": 73,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/confirm-dialog.module.css",
+      "language": "css",
+      "sizeLines": 42,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/confirm-dialog.tsx",
+      "language": "typescript",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/create-task-modal.tsx",
+      "language": "typescript",
+      "sizeLines": 155,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/dependency-badge.tsx",
+      "language": "typescript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/diff-viewer.module.css",
+      "language": "css",
+      "sizeLines": 33,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/diff-viewer.tsx",
+      "language": "typescript",
+      "sizeLines": 140,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/document-editor.tsx",
+      "language": "typescript",
+      "sizeLines": 67,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/empty-state.module.css",
+      "language": "css",
+      "sizeLines": 67,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/empty-state.tsx",
+      "language": "typescript",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/forgot-password-modal.module.css",
+      "language": "css",
+      "sizeLines": 499,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/forgot-password-modal.tsx",
+      "language": "typescript",
+      "sizeLines": 458,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/inline-comment-overlay.css",
+      "language": "css",
+      "sizeLines": 63,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/inline-comment-overlay.tsx",
+      "language": "typescript",
+      "sizeLines": 212,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/notification-bell.module.css",
+      "language": "css",
+      "sizeLines": 191,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/notification-bell.tsx",
+      "language": "typescript",
+      "sizeLines": 177,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/notification-panel.module.css",
+      "language": "css",
+      "sizeLines": 156,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/notification-panel.tsx",
+      "language": "typescript",
+      "sizeLines": 187,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/pause-resume-controls.module.css",
+      "language": "css",
+      "sizeLines": 77,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/pause-resume-controls.tsx",
+      "language": "typescript",
+      "sizeLines": 112,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/save-as-template-modal.tsx",
+      "language": "typescript",
+      "sizeLines": 164,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/task-card.module.css",
+      "language": "css",
+      "sizeLines": 350,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/task-card.tsx",
+      "language": "typescript",
+      "sizeLines": 370,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/template-selector.tsx",
+      "language": "typescript",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/molecules/terms-modal.module.css",
+      "language": "css",
+      "sizeLines": 191,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/molecules/terms-modal.tsx",
+      "language": "typescript",
+      "sizeLines": 161,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/ai-review-panel.tsx",
+      "language": "typescript",
+      "sizeLines": 226,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/app-shell.module.css",
+      "language": "css",
+      "sizeLines": 198,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/app-shell.tsx",
+      "language": "typescript",
+      "sizeLines": 78,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/constitution-panel.module.css",
+      "language": "css",
+      "sizeLines": 82,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/constitution-panel.tsx",
+      "language": "typescript",
+      "sizeLines": 104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/dependency-graph.tsx",
+      "language": "typescript",
+      "sizeLines": 474,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/deployment-settings.module.css",
+      "language": "css",
+      "sizeLines": 357,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/deployment-settings.tsx",
+      "language": "typescript",
+      "sizeLines": 483,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/document-panel.module.css",
+      "language": "css",
+      "sizeLines": 167,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/document-panel.tsx",
+      "language": "typescript",
+      "sizeLines": 559,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/failure-analysis-panel.module.css",
+      "language": "css",
+      "sizeLines": 330,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/failure-analysis-panel.tsx",
+      "language": "typescript",
+      "sizeLines": 287,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/kanban-board.module.css",
+      "language": "css",
+      "sizeLines": 24,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/kanban-board.tsx",
+      "language": "typescript",
+      "sizeLines": 431,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/kanban-column.module.css",
+      "language": "css",
+      "sizeLines": 117,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/kanban-column.tsx",
+      "language": "typescript",
+      "sizeLines": 328,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/memory-editor.module.css",
+      "language": "css",
+      "sizeLines": 195,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/memory-editor.tsx",
+      "language": "typescript",
+      "sizeLines": 304,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/new-project-modal.module.css",
+      "language": "css",
+      "sizeLines": 218,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/new-project-modal.tsx",
+      "language": "typescript",
+      "sizeLines": 239,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/pipeline-panel.tsx",
+      "language": "typescript",
+      "sizeLines": 154,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/project-card-skeleton.module.css",
+      "language": "css",
+      "sizeLines": 76,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/project-card-skeleton.tsx",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/project-card.module.css",
+      "language": "css",
+      "sizeLines": 174,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/project-card.tsx",
+      "language": "typescript",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/project-header.module.css",
+      "language": "css",
+      "sizeLines": 297,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/project-header.tsx",
+      "language": "typescript",
+      "sizeLines": 386,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/project-members.module.css",
+      "language": "css",
+      "sizeLines": 211,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/project-members.tsx",
+      "language": "typescript",
+      "sizeLines": 347,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/review-panel.module.css",
+      "language": "css",
+      "sizeLines": 187,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/review-panel.tsx",
+      "language": "typescript",
+      "sizeLines": 417,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/risk-assessment-panel.module.css",
+      "language": "css",
+      "sizeLines": 181,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/risk-assessment-panel.tsx",
+      "language": "typescript",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/task-card.tsx",
+      "language": "typescript",
+      "sizeLines": 454,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/thought-stream-panel.module.css",
+      "language": "css",
+      "sizeLines": 206,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/thought-stream-panel.tsx",
+      "language": "typescript",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/webhook-settings.module.css",
+      "language": "css",
+      "sizeLines": 287,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/components/organisms/webhook-settings.tsx",
+      "language": "typescript",
+      "sizeLines": 505,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/organisms/wip-warning.tsx",
+      "language": "typescript",
+      "sizeLines": 179,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/providers.tsx",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ui/button.tsx",
+      "language": "typescript",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/components/ui/primitives.tsx",
+      "language": "typescript",
+      "sizeLines": 129,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/contexts/auth-context.tsx",
+      "language": "typescript",
+      "sizeLines": 132,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/hooks/use-document.ts",
+      "language": "typescript",
+      "sizeLines": 125,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/hooks/use-inline-comments.ts",
+      "language": "typescript",
+      "sizeLines": 81,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/hooks/use-kanban.ts",
+      "language": "typescript",
+      "sizeLines": 267,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/hooks/use-thought-stream.ts",
+      "language": "typescript",
+      "sizeLines": 172,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/index.css",
+      "language": "css",
+      "sizeLines": 121,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/lib/toast.ts",
+      "language": "typescript",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "language": "typescript",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/accept-invite.module.css",
+      "language": "css",
+      "sizeLines": 30,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/accept-invite.tsx",
+      "language": "typescript",
+      "sizeLines": 127,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/analytics.module.css",
+      "language": "css",
+      "sizeLines": 159,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/analytics.tsx",
+      "language": "typescript",
+      "sizeLines": 265,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/auth-callback.module.css",
+      "language": "css",
+      "sizeLines": 41,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/auth-callback.tsx",
+      "language": "typescript",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/constitution-editor.module.css",
+      "language": "css",
+      "sizeLines": 128,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/constitution-editor.tsx",
+      "language": "typescript",
+      "sizeLines": 208,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/dashboard.module.css",
+      "language": "css",
+      "sizeLines": 482,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/dashboard.tsx",
+      "language": "typescript",
+      "sizeLines": 287,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/deployments/deployment-detail.module.css",
+      "language": "css",
+      "sizeLines": 280,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/deployments/deployment-detail.tsx",
+      "language": "typescript",
+      "sizeLines": 258,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/deployments/deployment-history.module.css",
+      "language": "css",
+      "sizeLines": 124,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/deployments/deployment-history.tsx",
+      "language": "typescript",
+      "sizeLines": 139,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/dev-auth.module.css",
+      "language": "css",
+      "sizeLines": 46,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/dev-auth.tsx",
+      "language": "typescript",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/devops/health-dashboard.module.css",
+      "language": "css",
+      "sizeLines": 457,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/devops/health-dashboard.tsx",
+      "language": "typescript",
+      "sizeLines": 350,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/login.module.css",
+      "language": "css",
+      "sizeLines": 927,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/login.tsx",
+      "language": "typescript",
+      "sizeLines": 355,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/page-shell.module.css",
+      "language": "css",
+      "sizeLines": 38,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/pipelines/pipeline-list.module.css",
+      "language": "css",
+      "sizeLines": 151,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/pipelines/pipeline-list.tsx",
+      "language": "typescript",
+      "sizeLines": 145,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/pipelines/pipeline-run.module.css",
+      "language": "css",
+      "sizeLines": 377,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/pipelines/pipeline-run.tsx",
+      "language": "typescript",
+      "sizeLines": 549,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/project-list.module.css",
+      "language": "css",
+      "sizeLines": 108,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/project-list.tsx",
+      "language": "typescript",
+      "sizeLines": 180,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/project-settings.module.css",
+      "language": "css",
+      "sizeLines": 58,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/project-settings.tsx",
+      "language": "typescript",
+      "sizeLines": 124,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/project-workspace.module.css",
+      "language": "css",
+      "sizeLines": 395,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/project-workspace.tsx",
+      "language": "typescript",
+      "sizeLines": 716,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/register-otp.module.css",
+      "language": "css",
+      "sizeLines": 143,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/pages/register.tsx",
+      "language": "typescript",
+      "sizeLines": 598,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/pages/reset-password.tsx",
+      "language": "typescript",
+      "sizeLines": 285,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/analytics-api.ts",
+      "language": "typescript",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/api-client.ts",
+      "language": "typescript",
+      "sizeLines": 70,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/api.ts",
+      "language": "typescript",
+      "sizeLines": 114,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/audit-api.ts",
+      "language": "typescript",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/auth-api.ts",
+      "language": "typescript",
+      "sizeLines": 92,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/dependency-api.ts",
+      "language": "typescript",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/deployment-api.ts",
+      "language": "typescript",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/devops-api.ts",
+      "language": "typescript",
+      "sizeLines": 144,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/document-api.ts",
+      "language": "typescript",
+      "sizeLines": 207,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/github-api.ts",
+      "language": "typescript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/member-api.ts",
+      "language": "typescript",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/memory-api.ts",
+      "language": "typescript",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/notification-api.ts",
+      "language": "typescript",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/pipeline-api.ts",
+      "language": "typescript",
+      "sizeLines": 162,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/project-api.ts",
+      "language": "typescript",
+      "sizeLines": 76,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/review-api.ts",
+      "language": "typescript",
+      "sizeLines": 262,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/task-api.ts",
+      "language": "typescript",
+      "sizeLines": 207,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/template-api.ts",
+      "language": "typescript",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/webhook-api.ts",
+      "language": "typescript",
+      "sizeLines": 70,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/websocket-client.ts",
+      "language": "typescript",
+      "sizeLines": 199,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/services/ws-handler.ts",
+      "language": "typescript",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/store/project-store.ts",
+      "language": "typescript",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/store/task-store.ts",
+      "language": "typescript",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/styles/tokens.css",
+      "language": "css",
+      "sizeLines": 130,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "frontend/src/types/index.ts",
+      "language": "typescript",
+      "sizeLines": 324,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/utils/auth-redirect.ts",
+      "language": "typescript",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/utils/dependency-map.ts",
+      "language": "typescript",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/utils/relative-time.ts",
+      "language": "typescript",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/utils/strip-markdown.ts",
+      "language": "typescript",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/utils/wip-limit.ts",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/src/vite-env.d.ts",
+      "language": "typescript",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/tailwind.config.ts",
+      "language": "typescript",
+      "sizeLines": 134,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frontend/tsconfig.app.json",
+      "language": "json",
+      "sizeLines": 26,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frontend/tsconfig.json",
+      "language": "json",
+      "sizeLines": 7,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frontend/tsconfig.node.json",
+      "language": "json",
+      "sizeLines": 25,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "language": "typescript",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "sizeLines": 16,
+      "fileCategory": "config"
+    },
+    {
+      "path": "pdf_content.txt",
+      "language": "txt",
+      "sizeLines": 2362,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "pdf_extract.txt",
+      "language": "txt",
+      "sizeLines": 14,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 212,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/checklists/pre-implementation.md",
+      "language": "markdown",
+      "sizeLines": 99,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/checklists/requirements.md",
+      "language": "markdown",
+      "sizeLines": 38,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/contracts/rest-api.md",
+      "language": "markdown",
+      "sizeLines": 800,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/contracts/websocket-protocol.md",
+      "language": "markdown",
+      "sizeLines": 304,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/data-model.md",
+      "language": "markdown",
+      "sizeLines": 372,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/plan.md",
+      "language": "markdown",
+      "sizeLines": 996,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/research.md",
+      "language": "markdown",
+      "sizeLines": 137,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/spec.md",
+      "language": "markdown",
+      "sizeLines": 480,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/tasks.md",
+      "language": "markdown",
+      "sizeLines": 531,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/ui-spec.md",
+      "language": "markdown",
+      "sizeLines": 1089,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/validation/tc-08-stream-latency.md",
+      "language": "markdown",
+      "sizeLines": 57,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/validation/tc-10-memory-done.md",
+      "language": "markdown",
+      "sizeLines": 33,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/validation/tc-11-codebase-map-500-files.md",
+      "language": "markdown",
+      "sizeLines": 29,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/001-neo-kanban/validation/tc-12-tc-13-git-squash-inline-comments.md",
+      "language": "markdown",
+      "sizeLines": 57,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/002-ai-cli-integration/contracts/rest-api.md",
+      "language": "markdown",
+      "sizeLines": 124,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/002-ai-cli-integration/data-model.md",
+      "language": "markdown",
+      "sizeLines": 110,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/002-ai-cli-integration/plan.md",
+      "language": "markdown",
+      "sizeLines": 224,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/002-ai-cli-integration/research.md",
+      "language": "markdown",
+      "sizeLines": 223,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/002-ai-cli-integration/spec.md",
+      "language": "markdown",
+      "sizeLines": 127,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/002-ai-cli-integration/tasks.md",
+      "language": "markdown",
+      "sizeLines": 206,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/checklists/requirements.md",
+      "language": "markdown",
+      "sizeLines": 47,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/contracts/rest-api.md",
+      "language": "markdown",
+      "sizeLines": 268,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/data-model.md",
+      "language": "markdown",
+      "sizeLines": 252,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/plan.md",
+      "language": "markdown",
+      "sizeLines": 2603,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/research.md",
+      "language": "markdown",
+      "sizeLines": 197,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/spec.md",
+      "language": "markdown",
+      "sizeLines": 335,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/tasks.md",
+      "language": "markdown",
+      "sizeLines": 1652,
+      "fileCategory": "docs"
+    }
+  ],
+  "totalFiles": 675,
+  "filteredByIgnore": 0,
+  "estimatedComplexity": "very-large",
+  "stats": {
+    "filesScanned": 675,
+    "byCategory": {
+      "docs": 103,
+      "config": 32,
+      "code": 439,
+      "data": 24,
+      "script": 17,
+      "markup": 57,
+      "infra": 3
+    },
+    "byLanguage": {
+      "markdown": 92,
+      "json": 20,
+      "mdc": 1,
+      "csv": 24,
+      "python": 259,
+      "config": 6,
+      "unknown": 10,
+      "yaml": 6,
+      "shell": 4,
+      "powershell": 11,
+      "txt": 11,
+      "html": 3,
+      "mako": 1,
+      "dockerfile": 1,
+      "toml": 1,
+      "err": 1,
+      "pen": 1,
+      "batch": 2,
+      "exe": 41,
+      "typescript": 123,
+      "css": 54,
+      "javascript": 3
+    }
+  }
+}

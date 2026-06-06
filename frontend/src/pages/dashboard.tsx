@@ -98,7 +98,6 @@ function AIReviewModal({ project, onClose }: AIReviewModalProps) {
             { label: 'Đang làm',   key: 'in_progress', cls: styles.pillProgress },
             { label: 'Review',     key: 'review',      cls: styles.pillReview },
             { label: 'Done',       key: 'done',        cls: styles.pillDone },
-            { label: 'Rejected',   key: 'rejected',    cls: styles.pillRejected },
           ].map(({ label, key, cls }) => (
             <span key={key} className={`${styles.pill} ${cls}`}>
               {label}: {project.task_counts?.[key] ?? 0}

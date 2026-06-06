@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_postinstall.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_postinstall.py",
+                           "language":  "python",
+                           "sizeLines":  733,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_testall.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_testall.py",
+                           "language":  "python",
+                           "sizeLines":  120,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/tiny-agents.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/tqdm.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/typer.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/uv.exe",
+                           "language":  "exe",
+                           "sizeLines":  254923,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/uvicorn.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/uvw.exe",
+                           "language":  "exe",
+                           "sizeLines":  1038,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/uvx.exe",
+                           "language":  "exe",
+                           "sizeLines":  1023,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/watchfiles.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/websockets.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/wsdump.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/demo_autogen.py",
+                           "language":  "python",
+                           "sizeLines":  76,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/demo_crewai.py",
+                           "language":  "python",
+                           "sizeLines":  84,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/demo_langgraph.py",
+                           "language":  "python",
+                           "sizeLines":  90,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/datasets/_fixtures/seed.json",
+                           "language":  "json",
+                           "sizeLines":  21,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "evaluation/load_repo_env.py",
+                           "language":  "python",
+                           "sizeLines":  31,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/README.md",
+                           "language":  "markdown",
+                           "sizeLines":  34,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "evaluation/requirements.txt",
+                           "language":  "txt",
+                           "sizeLines":  7,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "evaluation/scripts/aggregate_eval.py",
+                           "language":  "python",
+                           "sizeLines":  93,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/scripts/llm_latency_smoke.py",
+                           "language":  "python",
+                           "sizeLines":  133,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/scripts/run_eval.py",
+                           "language":  "python",
+                           "sizeLines":  150,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/scripts/seed_fixtures.py",
+                           "language":  "python",
+                           "sizeLines":  96,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_postinstall.exe":  [
+
+                                                                                                         ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_postinstall.py":  [
+
+                                                                                                        ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_testall.exe":  [
+
+                                                                                                     ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_testall.py":  [
+
+                                                                                                    ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/tiny-agents.exe":  [
+
+                                                                                                 ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/tqdm.exe":  [
+
+                                                                                          ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/typer.exe":  [
+
+                                                                                           ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/uv.exe":  [
+
+                                                                                        ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/uvicorn.exe":  [
+
+                                                                                             ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/uvw.exe":  [
+
+                                                                                         ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/uvx.exe":  [
+
+                                                                                         ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/watchfiles.exe":  [
+
+                                                                                                ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/websockets.exe":  [
+
+                                                                                                ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/wsdump.exe":  [
+
+                                                                                            ],
+                            "evaluation/agent_frameworks/demo_autogen.py":  [
+
+                                                                            ],
+                            "evaluation/agent_frameworks/demo_crewai.py":  [
+
+                                                                           ],
+                            "evaluation/agent_frameworks/demo_langgraph.py":  [
+
+                                                                              ],
+                            "evaluation/datasets/_fixtures/seed.json":  [
+
+                                                                        ],
+                            "evaluation/load_repo_env.py":  [
+
+                                                            ],
+                            "evaluation/README.md":  [
+
+                                                     ],
+                            "evaluation/requirements.txt":  [
+
+                                                            ],
+                            "evaluation/scripts/aggregate_eval.py":  [
+
+                                                                     ],
+                            "evaluation/scripts/llm_latency_smoke.py":  [
+
+                                                                        ],
+                            "evaluation/scripts/run_eval.py":  [
+
+                                                               ],
+                            "evaluation/scripts/seed_fixtures.py":  [
+
+                                                                    ]
+                        }
+}

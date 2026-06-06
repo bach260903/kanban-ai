@@ -1,0 +1,550 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/instructor.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/jsondiff",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 32,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonpatch",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 107,
+      "nonEmptyLines": 84,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonpointer",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 47,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonschema.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/litellm-proxy.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/litellm.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/markdown-it.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 375,
+      "nonEmptyLines": 373,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/mcp.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/normalizer.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/numpy-config.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/onnxruntime_test.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/openai.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pdf2txt.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 324,
+      "nonEmptyLines": 296,
+      "functions": [
+        {
+          "name": "float_or_disabled",
+          "startLine": 22,
+          "endLine": 28,
+          "params": [
+            "x"
+          ]
+        },
+        {
+          "name": "extract_text",
+          "startLine": 31,
+          "endLine": 69,
+          "params": [
+            "files",
+            "outfile",
+            "laparams",
+            "output_type",
+            "codec",
+            "strip_control",
+            "maxpages",
+            "page_numbers",
+            "password",
+            "scale",
+            "rotation",
+            "layoutmode",
+            "output_dir",
+            "debug",
+            "disable_caching"
+          ]
+        },
+        {
+          "name": "create_parser",
+          "startLine": 72,
+          "endLine": 283,
+          "params": []
+        },
+        {
+          "name": "parse_args",
+          "startLine": 286,
+          "endLine": 314,
+          "params": [
+            "args"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 317,
+          "endLine": 320,
+          "params": [
+            "args"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "float_or_disabled",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "extract_text",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "create_parser",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "parse_args",
+          "line": 286,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 317,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "float_or_disabled",
+          "callee": "x.lower().strip",
+          "lineNumber": 23
+        },
+        {
+          "caller": "float_or_disabled",
+          "callee": "x.lower",
+          "lineNumber": 23
+        },
+        {
+          "caller": "float_or_disabled",
+          "callee": "float",
+          "lineNumber": 26
+        },
+        {
+          "caller": "float_or_disabled",
+          "callee": "argparse.ArgumentTypeError",
+          "lineNumber": 28
+        },
+        {
+          "caller": "extract_text",
+          "callee": "PDFValueError",
+          "lineNumber": 50
+        },
+        {
+          "caller": "extract_text",
+          "callee": "outfile.endswith",
+          "lineNumber": 54
+        },
+        {
+          "caller": "extract_text",
+          "callee": "open",
+          "lineNumber": 62
+        },
+        {
+          "caller": "extract_text",
+          "callee": "pdfminer.high_level.extract_text_to_fp",
+          "lineNumber": 63
+        },
+        {
+          "caller": "extract_text",
+          "callee": "locals",
+          "lineNumber": 63
+        },
+        {
+          "caller": "extract_text",
+          "callee": "open",
+          "lineNumber": 66
+        },
+        {
+          "caller": "extract_text",
+          "callee": "open",
+          "lineNumber": 68
+        },
+        {
+          "caller": "extract_text",
+          "callee": "pdfminer.high_level.extract_text_to_fp",
+          "lineNumber": 69
+        },
+        {
+          "caller": "extract_text",
+          "callee": "locals",
+          "lineNumber": 69
+        },
+        {
+          "caller": "create_parser",
+          "callee": "argparse.ArgumentParser",
+          "lineNumber": 73
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parser.add_argument",
+          "lineNumber": 74
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parser.add_argument",
+          "lineNumber": 82
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parser.add_argument",
+          "lineNumber": 88
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parser.add_argument",
+          "lineNumber": 95
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parser.add_argument_group",
+          "lineNumber": 103
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parse_params.add_argument",
+          "lineNumber": 107
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parse_params.add_argument",
+          "lineNumber": 114
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parse_params.add_argument",
+          "lineNumber": 122
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parse_params.add_argument",
+          "lineNumber": 129
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parse_params.add_argument",
+          "lineNumber": 136
+        },
+        {
+          "caller": "create_parser",
+          "callee": "LAParams",
+          "lineNumber": 145
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parser.add_argument_group",
+          "lineNumber": 146
+        },
+        {
+          "caller": "create_parser",
+          "callee": "la_param_group.add_argument",
+          "lineNumber": 150
+        },
+        {
+          "caller": "create_parser",
+          "callee": "la_param_group.add_argument",
+          "lineNumber": 157
+        },
+        {
+          "caller": "create_parser",
+          "callee": "la_param_group.add_argument",
+          "lineNumber": 164
+        },
+        {
+          "caller": "create_parser",
+          "callee": "la_param_group.add_argument",
+          "lineNumber": 172
+        },
+        {
+          "caller": "create_parser",
+          "callee": "la_param_group.add_argument",
+          "lineNumber": 181
+        },
+        {
+          "caller": "create_parser",
+          "callee": "la_param_group.add_argument",
+          "lineNumber": 191
+        },
+        {
+          "caller": "create_parser",
+          "callee": "la_param_group.add_argument",
+          "lineNumber": 200
+        },
+        {
+          "caller": "create_parser",
+          "callee": "la_param_group.add_argument",
+          "lineNumber": 213
+        },
+        {
+          "caller": "create_parser",
+          "callee": "parser.add_argument_group",
+          "lineNumber": 221
+        },
+        {
+          "caller": "create_parser",
+          "callee": "output_params.add_argument",
+          "lineNumber": 225
+        },
+        {
+          "caller": "create_parser",
+          "callee": "output_params.add_argument",
+          "lineNumber": 233
+        },
+        {
+          "caller": "create_parser",
+          "callee": "output_params.add_argument",
+          "lineNumber": 240
+        },
+        {
+          "caller": "create_parser",
+          "callee": "output_params.add_argument",
+          "lineNumber": 247
+        },
+        {
+          "caller": "create_parser",
+          "callee": "output_params.add_argument",
+          "lineNumber": 254
+        },
+        {
+          "caller": "create_parser",
+          "callee": "output_params.add_argument",
+          "lineNumber": 267
+        },
+        {
+          "caller": "create_parser",
+          "callee": "output_params.add_argument",
+          "lineNumber": 275
+        },
+        {
+          "caller": "parse_args",
+          "callee": "create_parser().parse_args",
+          "lineNumber": 287
+        },
+        {
+          "caller": "parse_args",
+          "callee": "create_parser",
+          "lineNumber": 287
+        },
+        {
+          "caller": "parse_args",
+          "callee": "LAParams",
+          "lineNumber": 293
+        },
+        {
+          "caller": "parse_args",
+          "callee": "int",
+          "lineNumber": 307
+        },
+        {
+          "caller": "parse_args",
+          "callee": "parsed_args.pagenos.split",
+          "lineNumber": 307
+        },
+        {
+          "caller": "parse_args",
+          "callee": "parsed_args.outfile.endswith",
+          "lineNumber": 311
+        },
+        {
+          "caller": "main",
+          "callee": "parse_args",
+          "lineNumber": 318
+        },
+        {
+          "caller": "main",
+          "callee": "extract_text",
+          "lineNumber": 319
+        },
+        {
+          "caller": "main",
+          "callee": "vars",
+          "lineNumber": 319
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pdfplumber.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pip.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pip3.12.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pip3.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pybase64.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pygmentize.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pyjson5.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pypdfium2.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pyproject-build.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 373,
+      "nonEmptyLines": 371,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/python.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 1116,
+      "nonEmptyLines": 983,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/.venv-crewai/Scripts/pythonw.exe",
+      "language": "exe",
+      "fileCategory": "code",
+      "totalLines": 861,
+      "nonEmptyLines": 838,
+      "metrics": {}
+    }
+  ]
+}

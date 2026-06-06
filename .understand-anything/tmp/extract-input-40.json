@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "backend/tests/unit/test_inline_comment_service.py",
+                           "language":  "python",
+                           "sizeLines":  209,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_kanban_integrations.py",
+                           "language":  "python",
+                           "sizeLines":  206,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_kanban_transitions.py",
+                           "language":  "python",
+                           "sizeLines":  145,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_main_routers.py",
+                           "language":  "python",
+                           "sizeLines":  54,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_notification_service.py",
+                           "language":  "python",
+                           "sizeLines":  217,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_task_service.py",
+                           "language":  "python",
+                           "sizeLines":  248,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_token_optimizer.py",
+                           "language":  "python",
+                           "sizeLines":  332,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_tree_sitter_grammars.py",
+                           "language":  "python",
+                           "sizeLines":  41,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_webhook_service.py",
+                           "language":  "python",
+                           "sizeLines":  310,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/uvicorn.err",
+                           "language":  "err",
+                           "sizeLines":  13,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "design-system/neo-kanban/MASTER.md",
+                           "language":  "markdown",
+                           "sizeLines":  203,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "design-system/neo-kanban/pages/kanban-board.md",
+                           "language":  "markdown",
+                           "sizeLines":  48,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "design/neo-kanban.pen",
+                           "language":  "pen",
+                           "sizeLines":  5961,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "docs/.gitkeep",
+                           "language":  "unknown",
+                           "sizeLines":  1,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/pyvenv.cfg",
+                           "language":  "config",
+                           "sizeLines":  5,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/activate",
+                           "language":  "unknown",
+                           "sizeLines":  76,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/chroma.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/crewai.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/distro.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/dotenv.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/dumppdf.py",
+                           "language":  "python",
+                           "sizeLines":  468,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/f2py.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/hf.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/httpx.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/huggingface-cli.exe",
+                           "language":  "exe",
+                           "sizeLines":  372,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "backend/tests/unit/test_inline_comment_service.py":  [
+
+                                                                                  ],
+                            "backend/tests/unit/test_kanban_integrations.py":  [
+
+                                                                               ],
+                            "backend/tests/unit/test_kanban_transitions.py":  [
+
+                                                                              ],
+                            "backend/tests/unit/test_main_routers.py":  [
+
+                                                                        ],
+                            "backend/tests/unit/test_notification_service.py":  [
+
+                                                                                ],
+                            "backend/tests/unit/test_task_service.py":  [
+
+                                                                        ],
+                            "backend/tests/unit/test_token_optimizer.py":  [
+
+                                                                           ],
+                            "backend/tests/unit/test_tree_sitter_grammars.py":  [
+
+                                                                                ],
+                            "backend/tests/unit/test_webhook_service.py":  [
+
+                                                                           ],
+                            "backend/uvicorn.err":  [
+
+                                                    ],
+                            "design-system/neo-kanban/MASTER.md":  [
+
+                                                                   ],
+                            "design-system/neo-kanban/pages/kanban-board.md":  [
+
+                                                                               ],
+                            "design/neo-kanban.pen":  [
+
+                                                      ],
+                            "docs/.gitkeep":  [
+
+                                              ],
+                            "evaluation/agent_frameworks/.venv-crewai/pyvenv.cfg":  [
+
+                                                                                    ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/activate":  [
+
+                                                                                          ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/chroma.exe":  [
+
+                                                                                            ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/crewai.exe":  [
+
+                                                                                            ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/distro.exe":  [
+
+                                                                                            ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/dotenv.exe":  [
+
+                                                                                            ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/dumppdf.py":  [
+
+                                                                                            ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/f2py.exe":  [
+
+                                                                                          ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/hf.exe":  [
+
+                                                                                        ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/httpx.exe":  [
+
+                                                                                           ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/huggingface-cli.exe":  [
+
+                                                                                                     ]
+                        }
+}

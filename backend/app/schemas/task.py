@@ -50,8 +50,6 @@ class TasksGroupedResponse(BaseModel):
     in_progress: list[TaskKanbanItem] = Field(default_factory=list)
     review: list[TaskKanbanItem] = Field(default_factory=list)
     done: list[TaskKanbanItem] = Field(default_factory=list)
-    rejected: list[TaskKanbanItem] = Field(default_factory=list)
-    conflict: list[TaskKanbanItem] = Field(default_factory=list)
 
 
 class TaskMoveRequest(BaseModel):

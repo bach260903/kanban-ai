@@ -1,0 +1,103 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 12,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "frontend/src/pages/accept-invite.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 30,
+      "nonEmptyLines": 27,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/analytics.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 159,
+      "nonEmptyLines": 136,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/auth-callback.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 41,
+      "nonEmptyLines": 38,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/constitution-editor.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 128,
+      "nonEmptyLines": 110,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/dashboard.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 482,
+      "nonEmptyLines": 420,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/dev-auth.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 46,
+      "nonEmptyLines": 40,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/login.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 927,
+      "nonEmptyLines": 807,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/page-shell.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 38,
+      "nonEmptyLines": 33,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/project-list.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 108,
+      "nonEmptyLines": 95,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/project-settings.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 58,
+      "nonEmptyLines": 50,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/project-workspace.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 395,
+      "nonEmptyLines": 340,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/pages/register-otp.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 143,
+      "nonEmptyLines": 123,
+      "metrics": {}
+    }
+  ]
+}

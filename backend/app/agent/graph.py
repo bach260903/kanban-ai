@@ -84,9 +84,8 @@ def build_state_graph() -> StateGraph:
         _route_after_plan,
         {"task_breakdown": "task_breakdown", END: END},
     )
-    # TASK_BREAKDOWN → IDLE (no automatic coder hand-off until US8 / T058).
     workflow.add_edge("task_breakdown", END)
-    # CODER / CLI_CODER → REVIEWER → HIL interrupt
+    # CI gate is handled in kanban_service._run_coder_agent_background (not in the graph)
     workflow.add_edge("coder_node", "reviewer_node")
     workflow.add_edge("cli_coder_node", "reviewer_node")
     workflow.add_edge("reviewer_node", "interrupt_node")

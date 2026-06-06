@@ -3,10 +3,14 @@ import type { editor } from 'monaco-editor'
 import { Code2, Eye } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { lazy, Suspense } from 'react'
 import { Button } from '../atoms/button'
 import { Spinner } from '../atoms/spinner'
-import { DiffViewer } from '../molecules/diff-viewer'
 import { InlineCommentOverlay } from '../molecules/inline-comment-overlay'
+
+const DiffViewer = lazy(() =>
+  import('../molecules/diff-viewer').then((m) => ({ default: m.DiffViewer }))
+)
 import { SaveAsTemplateModal } from '../molecules/save-as-template-modal'
 import { AiReviewPanel } from './ai-review-panel'
 import { useAuth } from '../../contexts/auth-context'
@@ -17,7 +21,6 @@ import {
   getTaskComments,
   getTasks,
   groupedResponseToTaskColumns,
-  moveTask,
   rejectTask,
 } from '../../services/task-api'
 import type { TaskDiffResponse } from '../../services/task-api'
@@ -78,6 +81,16 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
   const { user } = useAuth()
   const { events: streamEvents } = useThoughtStream(reviewTask?.id ?? null)
 
+  // All state declarations before any useEffect
+  const {
+    comments: inlineCommentRows,
+    replaceFromApi,
+    getCommentPayload,
+  } = inlineComments
+  const [activeCommentLine, setActiveCommentLine] = useState<number | null>(null)
+  const [reviewTab, setReviewTab] = useState<'diff' | 'ai'>('diff')
+  const [aiTabSwitched, setAiTabSwitched] = useState(false)
+
   useEffect(() => {
     if (!user) {
       setCanSaveTemplate(false)
@@ -104,13 +117,14 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
     const last = streamEvents[streamEvents.length - 1]
     if (last) handleReviewStreamEvent(last, reviewState.applyStreamEvent)
   }, [streamEvents, reviewState.applyStreamEvent])
-  const {
-    comments: inlineCommentRows,
-    replaceFromApi,
-    getCommentPayload,
-  } = inlineComments
-  const [activeCommentLine, setActiveCommentLine] = useState<number | null>(null)
-  const [reviewTab, setReviewTab] = useState<'diff' | 'ai'>('diff')
+
+  // Auto-switch to AI Review tab when review completes (once only)
+  useEffect(() => {
+    if (!aiTabSwitched && reviewState.report?.status === 'complete') {
+      setReviewTab('ai')
+      setAiTabSwitched(true)
+    }
+  }, [reviewState.report?.status, aiTabSwitched])
 
   const refreshBoard = useCallback(async () => {
     const data = await getTasks(projectId)
@@ -181,22 +195,6 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
     try {
       await approveTask(projectId, reviewTask.id)
       setRejectFeedback('')
-      await refreshBoard()
-      onClose()
-    } catch (err) {
-      setDiffError(diffErrorMessage(err))
-    } finally {
-      setActionBusy(false)
-    }
-  }, [projectId, reviewTask, refreshBoard, onClose])
-
-  const onPermanentReject = useCallback(async () => {
-    if (!reviewTask) return
-    if (!window.confirm(`Permanently discard "${reviewTask.title}"? The task will move to the Rejected column and no agent retry will be triggered.`)) return
-    setActionBusy(true)
-    setDiffError(null)
-    try {
-      await moveTask(projectId, reviewTask.id, 'rejected')
       await refreshBoard()
       onClose()
     } catch (err) {
@@ -307,7 +305,7 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
         {reviewTab === 'diff' ? (
           <div className={styles.tabContent}>
             {!diffLoading && diff ? (
-              <>
+              <Suspense fallback={<div style={{ padding: 16 }}><Spinner /></div>}>
                 <DiffViewer
                   original={diff.original_content}
                   modified={diff.modified_content}
@@ -339,7 +337,7 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
                     onSaved={refreshInlineComments}
                   />
                 ) : null}
-              </>
+              </Suspense>
             ) : !diffLoading ? (
               <p className={styles.diffEmpty}>
                 No diff available yet — agent may still be running.
@@ -370,9 +368,25 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
           </div>
 
           <div>
-            <label htmlFor="review-reject-feedback" className={styles.rejectLabel}>
-              Reject with feedback (agent retries)
-            </label>
+            <div className="flex items-center justify-between">
+              <label htmlFor="review-reject-feedback" className={styles.rejectLabel}>
+                Reject with feedback (agent retries)
+              </label>
+              {reviewState.report?.comments && reviewState.report.comments.length > 0 && (
+                <button
+                  type="button"
+                  className="text-xs text-blue-600 hover:underline"
+                  onClick={() => {
+                    const lines = reviewState.report!.comments.map(
+                      (c) => `[${c.severity.toUpperCase()}] ${c.file_path}${c.line_number != null ? `:${c.line_number}` : ''}: ${c.content}`
+                    )
+                    setRejectFeedback(lines.join('\n'))
+                  }}
+                >
+                  ← Dùng AI review làm feedback
+                </button>
+              )}
+            </div>
             <p className={styles.rejectHint}>
               Write what needs to change. The coder agent will try again with your feedback.
             </p>
@@ -392,14 +406,6 @@ export function ReviewPanel({ projectId, taskId, inlineComments, onClose }: Revi
               onClick={() => void onReject()}
             >
               ↩ Reject (retry)
-            </Button>
-            <Button
-              variant="secondary"
-              disabled={actionBusy}
-              onClick={() => void onPermanentReject()}
-              title="Move task to Rejected column permanently — no agent retry"
-            >
-              🚫 Discard task
             </Button>
           </div>
         </div>

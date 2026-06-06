@@ -18,8 +18,6 @@ const TASK_TONE: Record<TaskStatus, keyof typeof styles> = {
   in_progress: 'progress',
   review: 'review',
   done: 'success',
-  rejected: 'danger',
-  conflict: 'warn',
 }
 
 const DOCUMENT_TONE: Record<DocumentStatus, keyof typeof styles> = {

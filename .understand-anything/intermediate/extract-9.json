@@ -1,0 +1,39 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".specify/extensions/git/scripts/powershell/auto-commit.ps1",
+      "language": "powershell",
+      "fileCategory": "script",
+      "totalLines": 169,
+      "nonEmptyLines": 150,
+      "metrics": {}
+    },
+    {
+      "path": ".specify/extensions/git/scripts/powershell/create-new-feature.ps1",
+      "language": "powershell",
+      "fileCategory": "script",
+      "totalLines": 403,
+      "nonEmptyLines": 362,
+      "metrics": {}
+    },
+    {
+      "path": ".specify/extensions/git/scripts/powershell/git-common.ps1",
+      "language": "powershell",
+      "fileCategory": "script",
+      "totalLines": 51,
+      "nonEmptyLines": 45,
+      "metrics": {}
+    },
+    {
+      "path": ".specify/extensions/git/scripts/powershell/initialize-repo.ps1",
+      "language": "powershell",
+      "fileCategory": "script",
+      "totalLines": 69,
+      "nonEmptyLines": 62,
+      "metrics": {}
+    }
+  ]
+}

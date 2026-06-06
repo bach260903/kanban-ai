@@ -1,0 +1,345 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "backend/.env.example",
+      "language": "config",
+      "fileCategory": "config",
+      "totalLines": 54,
+      "nonEmptyLines": 49,
+      "definitions": [
+        {
+          "name": "DATABASE_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 5,
+          "endLine": 5
+        },
+        {
+          "name": "REDIS_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 6,
+          "endLine": 6
+        },
+        {
+          "name": "JWT_SECRET",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 7,
+          "endLine": 7
+        },
+        {
+          "name": "JWT_SECRET_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 8,
+          "endLine": 8
+        },
+        {
+          "name": "GITHUB_ENCRYPTION_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 9,
+          "endLine": 9
+        },
+        {
+          "name": "GROQ_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 11,
+          "endLine": 11
+        },
+        {
+          "name": "GROQ_MODEL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 13,
+          "endLine": 13
+        },
+        {
+          "name": "CODER_GROQ_MODEL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 16,
+          "endLine": 16
+        },
+        {
+          "name": "SANDBOX_ROOT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 17,
+          "endLine": 17
+        },
+        {
+          "name": "CODER_LLM_PROVIDER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 19,
+          "endLine": 19
+        },
+        {
+          "name": "ARCHITECT_LLM_PROVIDER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 20,
+          "endLine": 20
+        },
+        {
+          "name": "REVIEW_LLM_PROVIDER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 21,
+          "endLine": 21
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 26,
+          "endLine": 26
+        },
+        {
+          "name": "OPENAI_MODEL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 27,
+          "endLine": 27
+        },
+        {
+          "name": "OPENAI_BASE_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 28,
+          "endLine": 28
+        },
+        {
+          "name": "GOOGLE_AI_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 29,
+          "endLine": 29
+        },
+        {
+          "name": "GEMINI_MODEL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 30,
+          "endLine": 30
+        },
+        {
+          "name": "GEMINI_CLI_PATH",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 31,
+          "endLine": 31
+        },
+        {
+          "name": "CLAUDE_CODE_PATH",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 32,
+          "endLine": 32
+        },
+        {
+          "name": "DEV_AUTH_ENABLED",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 35,
+          "endLine": 35
+        },
+        {
+          "name": "GITHUB_OAUTH_CLIENT_ID",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 39,
+          "endLine": 39
+        },
+        {
+          "name": "GITHUB_OAUTH_CLIENT_SECRET",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 40,
+          "endLine": 40
+        },
+        {
+          "name": "GITHUB_OAUTH_REDIRECT_URI",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 41,
+          "endLine": 41
+        },
+        {
+          "name": "SMTP_HOST",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 46,
+          "endLine": 46
+        },
+        {
+          "name": "SMTP_PORT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 47,
+          "endLine": 47
+        },
+        {
+          "name": "SMTP_USER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 48,
+          "endLine": 48
+        },
+        {
+          "name": "SMTP_PASSWORD",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 49,
+          "endLine": 49
+        },
+        {
+          "name": "SMTP_FROM",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 50,
+          "endLine": 50
+        },
+        {
+          "name": "SMTP_TLS",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 51,
+          "endLine": 51
+        },
+        {
+          "name": "FRONTEND_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 54,
+          "endLine": 54
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 30
+      }
+    },
+    {
+      "path": "backend/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 81,
+      "nonEmptyLines": 60,
+      "sections": [
+        {
+          "heading": "Backend",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Khởi động (development)",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Database migration",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Migrations hiện có",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "API (v1)",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "Cấu hình môi trường (`.env`)",
+          "level": 2,
+          "line": 61
+        },
+        {
+          "heading": "CORS",
+          "level": 2,
+          "line": 75
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "backend/alembic.ini",
+      "language": "config",
+      "fileCategory": "config",
+      "totalLines": 40,
+      "nonEmptyLines": 31,
+      "metrics": {}
+    },
+    {
+      "path": "backend/pyproject.toml",
+      "language": "toml",
+      "fileCategory": "config",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "sections": [
+        {
+          "heading": "project",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "backend/pytest.ini",
+      "language": "config",
+      "fileCategory": "config",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "metrics": {}
+    },
+    {
+      "path": "backend/requirements-dev.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 6,
+      "nonEmptyLines": 5,
+      "metrics": {}
+    },
+    {
+      "path": "backend/requirements.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 56,
+      "nonEmptyLines": 44,
+      "metrics": {}
+    },
+    {
+      "path": "backend/run-dev.ps1",
+      "language": "powershell",
+      "fileCategory": "script",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "metrics": {}
+    }
+  ]
+}

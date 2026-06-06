@@ -26,6 +26,9 @@ export type ConnectionStateCallback = (open: boolean) => void
  * Browser WebSocket client for the task thought stream (`/ws/tasks/{task_id}/stream`).
  * See `specs/001-neo-kanban/contracts/websocket-protocol.md`.
  */
+const WS_RECONNECT_BASE_MS = 2_000
+const WS_RECONNECT_MAX_MS = 30_000
+
 export class TaskThoughtStreamClient {
   private ws: WebSocket | null = null
   private _lastSequence = 0
@@ -34,6 +37,7 @@ export class TaskThoughtStreamClient {
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null
   private manualClose = false
   private streamEnded = false
+  private reconnectAttempt = 0
 
   constructor(
     private readonly taskId: string,
@@ -91,6 +95,7 @@ export class TaskThoughtStreamClient {
   connect(): void {
     this.manualClose = false
     this.streamEnded = false
+    this.reconnectAttempt = 0
     this.clearReconnectTimer()
     this.openSocket()
   }
@@ -139,6 +144,7 @@ export class TaskThoughtStreamClient {
     this.ws = socket
 
     socket.onopen = () => {
+      this.reconnectAttempt = 0  // reset backoff on successful connect
       this.notifyConnection(true)
     }
 
@@ -161,10 +167,16 @@ export class TaskThoughtStreamClient {
       if (this.manualClose || this.streamEnded) {
         return
       }
+      // Exponential backoff: 2s → 4s → 8s → 16s … capped at 30s
+      const delay = Math.min(
+        WS_RECONNECT_BASE_MS * 2 ** this.reconnectAttempt,
+        WS_RECONNECT_MAX_MS,
+      )
+      this.reconnectAttempt += 1
       this.reconnectTimer = setTimeout(() => {
         this.reconnectTimer = null
         this.openSocket()
-      }, 1000)
+      }, delay)
     }
   }
 

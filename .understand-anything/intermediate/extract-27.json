@@ -1,0 +1,562 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "specs/002-ai-cli-integration/data-model.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 110,
+      "nonEmptyLines": 79,
+      "sections": [
+        {
+          "heading": "Data Model: AI CLI Integration",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Changes to Existing Entities",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "`projects` (modified)",
+          "level": 3,
+          "line": 11
+        },
+        {
+          "heading": "New ORM Enum",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "AgentState Changes",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "No New Tables",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "Schema Migration SQL",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "Project Response Schema (updated)",
+          "level": 2,
+          "line": 78
+        },
+        {
+          "heading": ".env.example (new fields)",
+          "level": 2,
+          "line": 96
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "specs/002-ai-cli-integration/plan.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 224,
+      "nonEmptyLines": 174,
+      "sections": [
+        {
+          "heading": "Implementation Plan: AI CLI Integration — Vibe Coding Backends",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Technical Context",
+          "level": 2,
+          "line": 24
+        },
+        {
+          "heading": "Constitution Check",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "Project Structure Changes",
+          "level": 2,
+          "line": 54
+        },
+        {
+          "heading": "Phase 1: Setup & Migration",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "Phase 2: Backend — CLICoderRunner",
+          "level": 2,
+          "line": 108
+        },
+        {
+          "heading": "Phase 3: Backend — Projects API",
+          "level": 2,
+          "line": 139
+        },
+        {
+          "heading": "Phase 4: Frontend",
+          "level": 2,
+          "line": 153
+        },
+        {
+          "heading": "Phase 5: Hardening & Tests",
+          "level": 2,
+          "line": 172
+        },
+        {
+          "heading": "Dependencies & Execution Order",
+          "level": 2,
+          "line": 182
+        },
+        {
+          "heading": "Technical Risks",
+          "level": 2,
+          "line": 199
+        },
+        {
+          "heading": "Post-Design Constitution Re-Check",
+          "level": 2,
+          "line": 211
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "specs/002-ai-cli-integration/research.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 223,
+      "nonEmptyLines": 163,
+      "sections": [
+        {
+          "heading": "Research: AI CLI Integration — Vibe Coding Backends",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Claude Code CLI",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "1.1 CLI Interface",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "1.2 Integration Decision",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "1.3 Prompt Design",
+          "level": 3,
+          "line": 34
+        },
+        {
+          "heading": "2. OpenAI Integration",
+          "level": 2,
+          "line": 50
+        },
+        {
+          "heading": "2.1 CLI vs SDK Decision",
+          "level": 3,
+          "line": 52
+        },
+        {
+          "heading": "2.2 Configuration",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "2.3 Integration Pattern",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "3. Gemini CLI",
+          "level": 2,
+          "line": 85
+        },
+        {
+          "heading": "3.1 CLI Interface",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "3.2 Integration Decision",
+          "level": 3,
+          "line": 98
+        },
+        {
+          "heading": "4. Architecture: CLICoderRunner",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "4.1 Thiết kế",
+          "level": 3,
+          "line": 112
+        },
+        {
+          "heading": "4.2 CLICoderRunner (mới)",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "4.3 Routing trong graph.py",
+          "level": 3,
+          "line": 141
+        },
+        {
+          "heading": "5. Data Model Changes",
+          "level": 2,
+          "line": 154
+        },
+        {
+          "heading": "5.1 DB Migration",
+          "level": 3,
+          "line": 156
+        },
+        {
+          "heading": "5.2 ORM",
+          "level": 3,
+          "line": 167
+        },
+        {
+          "heading": "6. Config Changes",
+          "level": 2,
+          "line": 184
+        },
+        {
+          "heading": "7. Dependency Changes",
+          "level": 2,
+          "line": 201
+        },
+        {
+          "heading": "8. Resolved Unknowns",
+          "level": 2,
+          "line": 212
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 22
+      }
+    },
+    {
+      "path": "specs/002-ai-cli-integration/spec.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 127,
+      "nonEmptyLines": 95,
+      "sections": [
+        {
+          "heading": "Feature Specification: AI CLI Integration — Vibe Coding Backends",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Tóm Tắt",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Mục Tiêu Người Dùng",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Yêu Cầu Chức Năng",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "YC-01 — Backend Selection",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "YC-02 — Claude Code Integration",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "YC-03 — OpenAI Integration",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "YC-04 — Gemini Integration",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "YC-05 — Streaming & Observability",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "YC-06 — Diff Generation",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "YC-07 — Fallback & Error",
+          "level": 3,
+          "line": 64
+        },
+        {
+          "heading": "YC-08 — Backward Compatibility",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "Yêu Cầu Phi Chức Năng",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "Kịch Bản Chấp Thuận (Acceptance Scenarios)",
+          "level": 2,
+          "line": 86
+        },
+        {
+          "heading": "Kịch Bản 1 — Chọn Claude Code khi tạo project",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "Kịch Bản 2 — Vibe code với Claude Code",
+          "level": 3,
+          "line": 93
+        },
+        {
+          "heading": "Kịch Bản 3 — Đổi backend giữa chừng",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "Kịch Bản 4 — CLI không khả dụng",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "Giả Định",
+          "level": 2,
+          "line": 111
+        },
+        {
+          "heading": "Ngoài Phạm Vi",
+          "level": 2,
+          "line": 121
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 20
+      }
+    },
+    {
+      "path": "specs/002-ai-cli-integration/tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 206,
+      "nonEmptyLines": 148,
+      "sections": [
+        {
+          "heading": "Tasks: AI CLI Integration — Vibe Coding Backends",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Format: `[ID] [P?] [Story?] Description`",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 17
+        },
+        {
+          "heading": "PHASE 1 — Setup (DB Migration + Config)",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 19
+        },
+        {
+          "heading": "Phase 1: Setup (Shared Infrastructure)",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 35
+        },
+        {
+          "heading": "PHASE 2 — Foundational (Agent State + Graph Routing)",
+          "level": 1,
+          "line": 36
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 37
+        },
+        {
+          "heading": "Phase 2: Foundational (Blocking Prerequisites)",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 53
+        },
+        {
+          "heading": "PHASE 3 — US-01 + US-05: Backend Selection & Switching",
+          "level": 1,
+          "line": 54
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 55
+        },
+        {
+          "heading": "Phase 3: User Story 1 — Chọn AI CLI Backend (Priority: P1) 🎯 MVP",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 77
+        },
+        {
+          "heading": "PHASE 4 — US-02 + US-03: Vibe Coding Execution + Streaming",
+          "level": 1,
+          "line": 78
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 79
+        },
+        {
+          "heading": "Phase 4: User Story 2 — Vibe Coding Execution (Priority: P1)",
+          "level": 2,
+          "line": 81
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 106
+        },
+        {
+          "heading": "PHASE 5 — Polish & Hardening",
+          "level": 1,
+          "line": 107
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 108
+        },
+        {
+          "heading": "Phase 5: Hardening & Tests",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "Dependencies & Execution Order",
+          "level": 2,
+          "line": 122
+        },
+        {
+          "heading": "Cross-Phase Dependencies",
+          "level": 3,
+          "line": 124
+        },
+        {
+          "heading": "Task-Level Dependencies",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "Parallel Opportunities",
+          "level": 3,
+          "line": 148
+        },
+        {
+          "heading": "Parallel Example: Phase 3 Frontend",
+          "level": 2,
+          "line": 158
+        },
+        {
+          "heading": "Implementation Strategy",
+          "level": 2,
+          "line": 176
+        },
+        {
+          "heading": "MVP First (US-01 + US-02 via Claude Code)",
+          "level": 3,
+          "line": 178
+        },
+        {
+          "heading": "Full Delivery Order",
+          "level": 3,
+          "line": 188
+        },
+        {
+          "heading": "Notes",
+          "level": 2,
+          "line": 197
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 31
+      }
+    }
+  ]
+}

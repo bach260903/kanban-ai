@@ -44,20 +44,29 @@ function TestResultLine({
   runner,
   pass,
   fail,
+  errorOutput,
 }: {
   runner: string | null
   pass: number | null
   fail: number | null
+  errorOutput?: string | null
 }) {
-  if (!runner) return null
+  if (!runner) return <p className="text-xs mt-1 text-gray-400">No test runner detected.</p>
   const p = pass ?? 0
   const f = fail ?? 0
   const label = runner === 'npm_test' ? 'Jest' : 'pytest'
   const color = f > 0 ? 'text-red-600' : 'text-green-700'
   return (
-    <p className={`text-xs mt-1 ${color}`}>
-      {label}: {p} passed, {f} failed
-    </p>
+    <div className="mt-1">
+      <p className={`text-xs ${color}`}>
+        {label}: {p} passed, {f} failed
+      </p>
+      {f > 0 && errorOutput && (
+        <pre className="mt-1 max-h-32 overflow-y-auto text-xs bg-red-50 text-red-700 rounded p-2 whitespace-pre-wrap">
+          {errorOutput}
+        </pre>
+      )}
+    </div>
   )
 }
 
@@ -211,6 +220,7 @@ export function AiReviewPanel({ reviewState, onCommentClick }: AiReviewPanelProp
                   runner={report.test_runner}
                   pass={report.test_pass}
                   fail={report.test_fail}
+                  errorOutput={(report as any).test_error}
                 />
                 <CommentsSection
                   comments={report.comments}

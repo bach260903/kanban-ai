@@ -29,6 +29,7 @@ from app.api.v1.review import router as review_router
 from app.api.v1.tasks import router as tasks_router
 from app.api.v1.templates import router as templates_router
 from app.api.v1.webhooks import router as webhooks_router
+from app.api.v1.discord_bot import router as discord_bot_router, register_slash_commands
 from app.config import settings
 from app.database import dispose_engine, get_db  # noqa: F401 — dependency + lifespan
 from app.middleware.error_handlers import register_exception_handlers
@@ -59,6 +60,7 @@ api_v1_router.include_router(agent_runs_router)
 api_v1_router.include_router(dev_auth_router)
 api_v1_router.include_router(pipelines_router)
 api_v1_router.include_router(devops_router)
+api_v1_router.include_router(discord_bot_router)
 
 logger = logging.getLogger(__name__)
 
@@ -84,6 +86,8 @@ async def lifespan(_app: FastAPI):
         logger.info("Webhook delivery worker started")
     else:
         logger.info("Webhook delivery worker disabled")
+    # Đăng ký Discord slash commands (no-op nếu chưa cấu hình)
+    await register_slash_commands()
     yield
     if _webhook_worker is not None:
         _webhook_worker.cancel()

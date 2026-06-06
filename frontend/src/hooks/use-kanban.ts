@@ -25,7 +25,7 @@ const BOARD_STATUSES = ['todo', 'in_progress', 'review', 'done'] as const satisf
 
 const SORTABLE_PREFIX = 'sortable-'
 
-const POLL_MS = 2000
+const POLL_MS = 4000
 
 /** Coder finished (or failed) — stop polling and refresh Kanban columns from API. */
 function isTerminalAgentStatus(status: AgentRunStatus): boolean {
@@ -176,7 +176,14 @@ export function useKanban(projectId: string, options: UseKanbanOptions = {}): Us
     }
 
     reconcilePollers()
-    const unsub = useTaskStore.subscribe(reconcilePollers)
+    // Only re-run when taskAgentByTaskId changes — not on every store update.
+    let prev = useTaskStore.getState().taskAgentByTaskId
+    const unsub = useTaskStore.subscribe((state) => {
+      if (state.taskAgentByTaskId !== prev) {
+        prev = state.taskAgentByTaskId
+        reconcilePollers()
+      }
+    })
     return () => {
       unsub()
       clearAllPollers()
@@ -186,7 +193,7 @@ export function useKanban(projectId: string, options: UseKanbanOptions = {}): Us
   const startTask = useCallback(
     (taskId: string) => {
       const cols = useTaskStore.getState().columns
-      const task = [...cols.todo, ...cols.in_progress, ...cols.review, ...cols.done, ...cols.rejected, ...cols.conflict].find(
+      const task = [...cols.todo, ...cols.in_progress, ...cols.review, ...cols.done].find(
         (t) => t.id === taskId,
       )
       if (task?.is_blocked) {

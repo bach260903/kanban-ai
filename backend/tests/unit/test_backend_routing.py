@@ -34,4 +34,6 @@ class TestAgentStateHasCodingBackend:
         assert "coding_backend" in annotations
 
     def test_coding_backend_type_is_str(self):
-        assert AgentState.__annotations__["coding_backend"] is str
+        import typing, sys
+        hints = typing.get_type_hints(AgentState)
+        assert hints["coding_backend"] is str

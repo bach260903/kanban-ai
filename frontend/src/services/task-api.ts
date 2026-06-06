@@ -25,12 +25,10 @@ export type TasksGroupedResponse = {
   in_progress: TaskKanbanListItem[]
   review: TaskKanbanListItem[]
   done: TaskKanbanListItem[]
-  rejected: TaskKanbanListItem[]
-  conflict: TaskKanbanListItem[]
 }
 
 function withStatus(items: TaskKanbanListItem[], status: TaskStatus): TaskColumnItem[] {
-  return items.map((row) => ({
+  return (items ?? []).map((row) => ({
     ...row,
     status,
     assigned_to: row.assigned_to ?? null,
@@ -41,12 +39,10 @@ function withStatus(items: TaskKanbanListItem[], status: TaskStatus): TaskColumn
 /** Maps API grouped payload into ``taskStore`` column shape (every card carries ``status``). */
 export function groupedResponseToTaskColumns(data: TasksGroupedResponse): TaskColumns {
   return {
-    todo: withStatus(data.todo, 'todo'),
+    todo:        withStatus(data.todo,        'todo'),
     in_progress: withStatus(data.in_progress, 'in_progress'),
-    review: withStatus(data.review, 'review'),
-    done: withStatus(data.done, 'done'),
-    rejected: withStatus(data.rejected, 'rejected'),
-    conflict: withStatus(data.conflict, 'conflict'),
+    review:      withStatus(data.review,      'review'),
+    done:        withStatus(data.done,        'done'),
   }
 }
 

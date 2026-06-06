@@ -8,13 +8,14 @@ Given a failed step's logs, key, and sandbox context, this node:
 
 Design:
 - Pure function: no DB access, no side effects.
-- Uses existing LLM factory (same provider as reviewer agent).
+- Uses the architect LLM (strong code model) for full-file fix generation.
 - Falls back to a heuristic analysis if LLM is unavailable.
 - All dangerous fixes are flagged for human approval.
 """
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import re
@@ -183,6 +184,9 @@ Rules:
     full corrected file, set is_auto_fixable=false and leave fix_files empty.
   * Keep everything that was correct; change only what the error requires.
   * Only include files you are CONFIDENT about. Limit to 3 files maximum.
+  * NEVER produce a fix_files entry for a file marked "TRUNCATED" above — you were
+    only shown partial content, so a full rewrite would delete the rest of the file.
+    If the only possible fix is in a truncated file, set is_auto_fixable=false.
 - human_approval_required: true if fix touches auth/secrets/migrations/security
 - risk_level: "low" | "medium" | "high"
 """
@@ -194,27 +198,39 @@ _FILE_REF_RE = re.compile(
 )
 
 
+@dataclass
+class _ReferencedFile:
+    """A source file mentioned in the failure logs, read from the sandbox."""
+
+    rel_path: str
+    content: str
+    truncated: bool  # True if the file was larger than max_bytes (content is partial)
+
+
 def _collect_referenced_files(
     logs: str,
     sandbox: Path | None,
     *,
     max_files: int = 3,
     max_bytes: int = 6000,
-) -> dict[str, str]:
+) -> list[_ReferencedFile]:
     """Read the current content of source files mentioned in the failure logs.
 
     Giving the analyst the real file content (not just the error) lets its single
     LLM call produce a correct full-file fix instead of guessing — no extra LLM
     calls, so it stays within free-tier budgets.
+
+    Files larger than ``max_bytes`` are flagged ``truncated=True`` so the prompt can
+    forbid a full-file rewrite of them (a truncated rewrite would corrupt the file).
     """
     if sandbox is None:
-        return {}
+        return []
     seen: list[str] = []
     for m in _FILE_REF_RE.finditer(logs):
         rel = m.group(1).lstrip("./").replace("\\", "/")
         if rel not in seen:
             seen.append(rel)
-    out: dict[str, str] = {}
+    out: list[_ReferencedFile] = []
     sandbox_root = sandbox.resolve()
     for rel in seen:
         if len(out) >= max_files:
@@ -224,7 +240,8 @@ def _collect_referenced_files(
             p.relative_to(sandbox_root)  # guard against path escape
             if p.is_file():
                 text = p.read_text(encoding="utf-8", errors="replace")
-                out[rel] = text[:max_bytes]
+                truncated = len(text) > max_bytes
+                out.append(_ReferencedFile(rel, text[:max_bytes], truncated))
         except Exception:
             continue
     return out
@@ -242,15 +259,21 @@ async def _llm_analysis(
     log_snippet = logs[-4000:] if len(logs) > 4000 else logs
     sandbox_hint = str(sandbox) if sandbox else "(unknown)"
 
-    referenced = _collect_referenced_files(logs, sandbox)
+    # Read referenced files off the event loop (blocking disk I/O).
+    referenced = await asyncio.to_thread(_collect_referenced_files, logs, sandbox)
+    truncated_paths = {f.rel_path for f in referenced if f.truncated}
     if referenced:
-        blocks = "\n\n".join(
-            f"--- {rel} (current content) ---\n{content}" for rel, content in referenced.items()
-        )
+        blocks = []
+        for f in referenced:
+            if f.truncated:
+                header = f"--- {f.rel_path} (TRUNCATED — partial content, DO NOT rewrite this file) ---"
+            else:
+                header = f"--- {f.rel_path} (current content) ---"
+            blocks.append(f"{header}\n{f.content}")
         file_contents = (
             "=== CURRENT CONTENT OF FILES MENTIONED IN LOGS (fix these) ===\n"
-            f"{blocks}\n"
-            "=== END FILES ==="
+            + "\n\n".join(blocks)
+            + "\n=== END FILES ==="
         )
     else:
         file_contents = "(No referenced source files could be read from the sandbox.)"
@@ -287,14 +310,31 @@ async def _llm_analysis(
             human_required = True
             break
 
+    raw_fix_files = parsed.get("fix_files") or []
+    if not isinstance(raw_fix_files, list):
+        raw_fix_files = []
+
+    # Safety override: drop any fix targeting a TRUNCATED file — we only showed the
+    # LLM partial content, so a "full file" rewrite would chop off the rest.
+    fix_files: list[dict[str, str]] = []
+    for ff in raw_fix_files:
+        if not isinstance(ff, dict):
+            continue
+        path_norm = str(ff.get("path", "")).replace("\\", "/").lstrip("./")
+        if path_norm in truncated_paths:
+            logger.warning(
+                "failure_analyst: dropping fix for truncated file %s (would corrupt it)",
+                path_norm,
+            )
+            continue
+        fix_files.append(ff)
+
     # Safety override: if fix_files touch critical paths → require approval
-    fix_files: list[dict[str, str]] = parsed.get("fix_files", [])
     for ff in fix_files:
         path_lower = str(ff.get("path", "")).lower()
-        for frag in _CRITICAL_PATH_FRAGMENTS:
-            if frag in path_lower:
-                human_required = True
-                break
+        if any(frag in path_lower for frag in _CRITICAL_PATH_FRAGMENTS):
+            human_required = True
+            break
 
     # If human approval required, don't auto-apply
     is_fixable = bool(parsed.get("is_auto_fixable", False)) and not human_required
@@ -302,17 +342,37 @@ async def _llm_analysis(
         fix_files = []
 
     return FailureAnalysis(
-        root_cause=parsed.get("root_cause", "Unknown failure"),
-        confidence=float(parsed.get("confidence", 0.5)),
-        fix_strategy=parsed.get("fix_strategy", "Manual investigation required"),
+        root_cause=str(parsed.get("root_cause") or "Unknown failure"),
+        confidence=_coerce_confidence(parsed.get("confidence")),
+        fix_strategy=str(parsed.get("fix_strategy") or "Manual investigation required"),
         is_auto_fixable=is_fixable,
         human_approval_required=human_required,
-        risk_level=parsed.get("risk_level", "medium"),
+        risk_level=_coerce_risk_level(parsed.get("risk_level")),
         fix_files=fix_files,
         ai_raw_response=raw_text[:8000],
         ai_prompt_snippet=prompt[:2000],
         via_llm=True,
     )
+
+
+_VALID_RISK_LEVELS = {"low", "medium", "high"}
+
+
+def _coerce_confidence(value: Any) -> float:
+    """Parse confidence into a float clamped to [0.0, 1.0]; default 0.5 on garbage."""
+    try:
+        conf = float(value)
+    except (TypeError, ValueError):
+        return 0.5
+    if conf != conf:  # NaN
+        return 0.5
+    return max(0.0, min(1.0, conf))
+
+
+def _coerce_risk_level(value: Any) -> str:
+    """Normalize risk_level to one of low/medium/high; default 'medium'."""
+    level = str(value or "").strip().lower()
+    return level if level in _VALID_RISK_LEVELS else "medium"
 
 
 def _parse_llm_json(text: str) -> dict[str, Any]:

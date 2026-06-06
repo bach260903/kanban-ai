@@ -33,8 +33,25 @@ def _integration_branch_name(repo: Repo) -> str:
     return repo.active_branch.name
 
 
+def _commit_if_dirty(repo: Repo, message: str = "chore: auto-commit before branch switch") -> None:
+    """Stage and commit any dirty working-tree changes on the current branch.
+
+    Prevents 'your local changes would be overwritten by checkout' errors when
+    files like MEMORY.md are written after the last explicit commit.
+    """
+    try:
+        repo.git.add("-A")
+        staged = repo.git.diff("--cached", "--name-only").strip()
+        if staged:
+            repo.git.commit("-m", message)
+            logger.debug("auto-committed dirty files before branch switch: %s", staged)
+    except GitCommandError:
+        logger.warning("auto-commit before branch switch failed; proceeding anyway", exc_info=True)
+
+
 def _sync_ensure_task_branch(sandbox_path: Path, branch_name: str) -> None:
     repo = Repo(str(sandbox_path.resolve()))
+    _commit_if_dirty(repo)
     if branch_name in repo.heads:
         repo.git.checkout(branch_name)
         return
@@ -51,6 +68,7 @@ def _sync_recreate_task_branch(sandbox_path: Path, branch_name: str) -> None:
     """
     repo = Repo(str(sandbox_path.resolve()))
     integration = _integration_branch_name(repo)
+    _commit_if_dirty(repo)
     # Make sure we are NOT on the branch we are about to delete
     if repo.active_branch.name == branch_name:
         repo.git.checkout(integration)
@@ -76,6 +94,7 @@ def _sync_abort_squash_attempt(sandbox_path: Path) -> None:
 def _sync_squash_merge_to_integration(sandbox_path: Path, branch_name: str) -> None:
     repo = Repo(str(sandbox_path.resolve()))
     integration = _integration_branch_name(repo)
+    _commit_if_dirty(repo)
     repo.git.checkout(integration)
     repo.git.merge("--squash", branch_name)
     staged = repo.git.diff("--cached", "--name-only")
@@ -141,7 +160,7 @@ class BranchService:
             row.status = TaskBranchStatus.CONFLICT
         task = await session.get(Task, task_id)
         if task is not None:
-            task.status = TaskStatus.CONFLICT
+            task.status = TaskStatus.TODO
             task.updated_at = datetime.now(timezone.utc)
         await session.flush()
 

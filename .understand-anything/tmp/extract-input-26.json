@@ -1,0 +1,43 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "specs/001-neo-kanban/validation/tc-08-stream-latency.md",
+                           "language":  "markdown",
+                           "sizeLines":  57,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/001-neo-kanban/validation/tc-10-memory-done.md",
+                           "language":  "markdown",
+                           "sizeLines":  33,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/001-neo-kanban/validation/tc-11-codebase-map-500-files.md",
+                           "language":  "markdown",
+                           "sizeLines":  29,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/001-neo-kanban/validation/tc-12-tc-13-git-squash-inline-comments.md",
+                           "language":  "markdown",
+                           "sizeLines":  57,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            "specs/001-neo-kanban/validation/tc-08-stream-latency.md":  [
+
+                                                                                        ],
+                            "specs/001-neo-kanban/validation/tc-10-memory-done.md":  [
+
+                                                                                     ],
+                            "specs/001-neo-kanban/validation/tc-11-codebase-map-500-files.md":  [
+
+                                                                                                ],
+                            "specs/001-neo-kanban/validation/tc-12-tc-13-git-squash-inline-comments.md":  [
+
+                                                                                                          ]
+                        }
+}

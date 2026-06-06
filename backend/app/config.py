@@ -213,5 +213,21 @@ class Settings(BaseSettings):
         description="Base URL of the React frontend — used in reset-password redirect links.",
     )
 
+    # ------------------------------------------------------------------ #
+    # Discord Bot (slash command interactions)                            #
+    # ------------------------------------------------------------------ #
+    discord_public_key: str = Field(
+        default="",
+        description="Discord Application Public Key — used to verify interaction signatures.",
+    )
+    discord_bot_token: str = Field(
+        default="",
+        description="Discord Bot Token — used to register slash commands on startup.",
+    )
+    discord_app_id: str = Field(
+        default="",
+        description="Discord Application ID.",
+    )
+
 
 settings = Settings()

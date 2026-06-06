@@ -1,0 +1,43 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".specify/extensions/git/README.md",
+                           "language":  "markdown",
+                           "sizeLines":  100,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/config-template.yml",
+                           "language":  "yaml",
+                           "sizeLines":  62,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/extension.yml",
+                           "language":  "yaml",
+                           "sizeLines":  140,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/git-config.yml",
+                           "language":  "yaml",
+                           "sizeLines":  62,
+                           "fileCategory":  "config"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".specify/extensions/git/README.md":  [
+
+                                                                  ],
+                            ".specify/extensions/git/config-template.yml":  [
+
+                                                                            ],
+                            ".specify/extensions/git/extension.yml":  [
+
+                                                                      ],
+                            ".specify/extensions/git/git-config.yml":  [
+
+                                                                       ]
+                        }
+}

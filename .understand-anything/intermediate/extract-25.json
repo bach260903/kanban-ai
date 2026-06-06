@@ -1,0 +1,1498 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "specs/001-neo-kanban/data-model.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 372,
+      "nonEmptyLines": 294,
+      "sections": [
+        {
+          "heading": "Data Model: Neo-Kanban",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Entity Relationship Overview",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "Auth Entities (Migration 003)",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "`users`",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "Phase 1 Entities",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "`projects`",
+          "level": 3,
+          "line": 58
+        },
+        {
+          "heading": "`documents`",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "`tasks`",
+          "level": 3,
+          "line": 98
+        },
+        {
+          "heading": "`agent_runs`",
+          "level": 3,
+          "line": 133
+        },
+        {
+          "heading": "`diffs`",
+          "level": 3,
+          "line": 151
+        },
+        {
+          "heading": "`feedbacks`",
+          "level": 3,
+          "line": 167
+        },
+        {
+          "heading": "`audit_logs` — Immutable",
+          "level": 3,
+          "line": 180
+        },
+        {
+          "heading": "Phase 2 Entities",
+          "level": 2,
+          "line": 207
+        },
+        {
+          "heading": "`stream_events` [Phase 2]",
+          "level": 3,
+          "line": 209
+        },
+        {
+          "heading": "`agent_pause_states` [Phase 2]",
+          "level": 3,
+          "line": 228
+        },
+        {
+          "heading": "`memory_entries` [Phase 2]",
+          "level": 3,
+          "line": 246
+        },
+        {
+          "heading": "`codebase_maps` [Phase 2]",
+          "level": 3,
+          "line": 266
+        },
+        {
+          "heading": "`task_branches` [Phase 2]",
+          "level": 3,
+          "line": 284
+        },
+        {
+          "heading": "`inline_comments` [Phase 2]",
+          "level": 3,
+          "line": 299
+        },
+        {
+          "heading": "Alembic Migration Files",
+          "level": 2,
+          "line": 324
+        },
+        {
+          "heading": "`001_initial_schema.py` (Phase 1)",
+          "level": 3,
+          "line": 326
+        },
+        {
+          "heading": "`002_phase2_schema.py` (Phase 2)",
+          "level": 3,
+          "line": 331
+        },
+        {
+          "heading": "Index Strategy",
+          "level": 2,
+          "line": 339
+        },
+        {
+          "heading": "Enum Reference",
+          "level": 2,
+          "line": 357
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 24
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/plan.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 996,
+      "nonEmptyLines": 846,
+      "sections": [
+        {
+          "heading": "Implementation Plan: Neo-Kanban — AI-Agentic Project Management Platform",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Technical Context",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "Constitution Check",
+          "level": 2,
+          "line": 40
+        },
+        {
+          "heading": "Project Structure",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "Documentation (this feature)",
+          "level": 3,
+          "line": 61
+        },
+        {
+          "heading": "Source Code Layout",
+          "level": 3,
+          "line": 74
+        },
+        {
+          "heading": "LangGraph State Machine",
+          "level": 2,
+          "line": 202
+        },
+        {
+          "heading": "Database Schema — Phase 1",
+          "level": 2,
+          "line": 254
+        },
+        {
+          "heading": "Database Schema — Phase 2 Additions",
+          "level": 2,
+          "line": 373
+        },
+        {
+          "heading": "API Endpoints — Phase 1",
+          "level": 2,
+          "line": 470
+        },
+        {
+          "heading": "Projects",
+          "level": 3,
+          "line": 472
+        },
+        {
+          "heading": "Documents (SPEC / PLAN)",
+          "level": 3,
+          "line": 484
+        },
+        {
+          "heading": "Agent Triggers",
+          "level": 3,
+          "line": 494
+        },
+        {
+          "heading": "Tasks (Kanban)",
+          "level": 3,
+          "line": 502
+        },
+        {
+          "heading": "Audit",
+          "level": 3,
+          "line": 513
+        },
+        {
+          "heading": "API Endpoints — Phase 2 Additions",
+          "level": 2,
+          "line": 521
+        },
+        {
+          "heading": "Real-time Thought Stream",
+          "level": 3,
+          "line": 523
+        },
+        {
+          "heading": "Pause & Steer",
+          "level": 3,
+          "line": 529
+        },
+        {
+          "heading": "Memory Management",
+          "level": 3,
+          "line": 537
+        },
+        {
+          "heading": "Codebase Map",
+          "level": 3,
+          "line": 546
+        },
+        {
+          "heading": "Git Branch + Inline Comments",
+          "level": 3,
+          "line": 552
+        },
+        {
+          "heading": "WebSocket Event Protocol (Phase 2)",
+          "level": 2,
+          "line": 563
+        },
+        {
+          "heading": "Server → Client events",
+          "level": 3,
+          "line": 565
+        },
+        {
+          "heading": "Client → Server messages",
+          "level": 3,
+          "line": 597
+        },
+        {
+          "heading": "Codebase Map JSON Schema (Phase 2)",
+          "level": 2,
+          "line": 612
+        },
+        {
+          "heading": "MEMORY.md Entry Format (Phase 2)",
+          "level": 2,
+          "line": 667
+        },
+        {
+          "heading": "Files to Create — Phase 1",
+          "level": 2,
+          "line": 688
+        },
+        {
+          "heading": "Backend",
+          "level": 3,
+          "line": 690
+        },
+        {
+          "heading": "Frontend",
+          "level": 3,
+          "line": 733
+        },
+        {
+          "heading": "Files to Create — Phase 2 (New Files Only)",
+          "level": 2,
+          "line": 770
+        },
+        {
+          "heading": "Backend — New Files",
+          "level": 3,
+          "line": 772
+        },
+        {
+          "heading": "Backend — Files Modified from Phase 1",
+          "level": 3,
+          "line": 790
+        },
+        {
+          "heading": "Frontend — New Files",
+          "level": 3,
+          "line": 800
+        },
+        {
+          "heading": "Frontend — Files Modified from Phase 1",
+          "level": 3,
+          "line": 812
+        },
+        {
+          "heading": "Dependencies",
+          "level": 2,
+          "line": 823
+        },
+        {
+          "heading": "Python — `backend/requirements.txt`",
+          "level": 3,
+          "line": 825
+        },
+        {
+          "heading": "Node.js — `frontend/package.json`",
+          "level": 3,
+          "line": 874
+        },
+        {
+          "heading": "Deployment Order — Phase 1",
+          "level": 2,
+          "line": 922
+        },
+        {
+          "heading": "Deployment Order — Phase 2",
+          "level": 2,
+          "line": 941
+        },
+        {
+          "heading": "Technical Risks",
+          "level": 2,
+          "line": 954
+        },
+        {
+          "heading": "Phase 1",
+          "level": 3,
+          "line": 956
+        },
+        {
+          "heading": "Phase 2",
+          "level": 3,
+          "line": 966
+        },
+        {
+          "heading": "Post-Phase-1 Constitution Re-Check",
+          "level": 2,
+          "line": 979
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 44
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/research.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 137,
+      "nonEmptyLines": 99,
+      "sections": [
+        {
+          "heading": "Research: Neo-Kanban — RTK Token Optimizer + Constitution Tab",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. RTK-AI/RTK — Core Technology Analysis",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1.1 Architecture",
+          "level": 3,
+          "line": 12
+        },
+        {
+          "heading": "1.2 The Four Core Techniques",
+          "level": 3,
+          "line": 23
+        },
+        {
+          "heading": "A. Smart Filtering",
+          "level": 4,
+          "line": 25
+        },
+        {
+          "heading": "B. Grouping",
+          "level": 4,
+          "line": 30
+        },
+        {
+          "heading": "C. Truncation",
+          "level": 4,
+          "line": 38
+        },
+        {
+          "heading": "D. Deduplication",
+          "level": 4,
+          "line": 43
+        },
+        {
+          "heading": "1.3 Command-Specific Transformations",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "1.4 Implementation Decision for Neo-Kanban",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "2. Constitution Tab — Gap Analysis",
+          "level": 2,
+          "line": 78
+        },
+        {
+          "heading": "2.1 Implementation Status",
+          "level": 3,
+          "line": 80
+        },
+        {
+          "heading": "2.2 Implementation Decision (Resolved)",
+          "level": 3,
+          "line": 92
+        },
+        {
+          "heading": "3. RTK Optimizer — Implementation Details (2026-05-18)",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "3.1 Public API (`backend/app/tools/token_optimizer.py`)",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "3.2 Integration Points",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "3.3 Resolved Technical Context",
+          "level": 3,
+          "line": 128
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/spec.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 480,
+      "nonEmptyLines": 326,
+      "sections": [
+        {
+          "heading": "Đặc Tả Dự Án: Neo-Kanban — Nền Tảng Quản Lý Dự Án AI-Agentic",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Kịch Bản Người Dùng & Kiểm Thử *(bắt buộc)*",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Epic 1 — Quản Lý Dự Án",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "Kịch Bản 1 — Tạo Dự Án Mới `[Phase 1]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "Kịch Bản 2 — Xem Danh Sách & Mở Dự Án `[Phase 1]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "Kịch Bản 3 — Khai Báo Constitution Dự Án `[Phase 1]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "Epic 2 — Sinh & Duyệt Tài Liệu",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "Kịch Bản 4 — Nhập Intent & Nhận SPEC.md Tự Động `[Phase 1]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "Kịch Bản 5 — Duyệt SPEC.md `[Phase 1]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "Kịch Bản 6 — Nhận & Duyệt PLAN.md `[Phase 1]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "Epic 3 — Kanban & Coding",
+          "level": 3,
+          "line": 141
+        },
+        {
+          "heading": "Kịch Bản 7 — Task Tự Động Xuất Hiện Trong To Do `[Phase 1]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 143
+        },
+        {
+          "heading": "Kịch Bản 8 — Kéo Task Vào In Progress & Kích Hoạt Agent `[Phase 1]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 162
+        },
+        {
+          "heading": "Kịch Bản 9 — Xem Diff & Approve hoặc Reject Code `[Phase 1]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 181
+        },
+        {
+          "heading": "Epic 4 — Giám Sát AI",
+          "level": 3,
+          "line": 202
+        },
+        {
+          "heading": "Kịch Bản 10 — Giám Sát Hoạt Động AI Theo Thời Gian Thực `[Phase 2]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 204
+        },
+        {
+          "heading": "Kịch Bản 11 — Tạm Dừng & Điều Hướng Lại Agent `[Phase 2]` (Ưu Tiên: P1)",
+          "level": 3,
+          "line": 224
+        },
+        {
+          "heading": "Epic 5 — Bộ Nhớ & Ngữ Cảnh",
+          "level": 3,
+          "line": 244
+        },
+        {
+          "heading": "Kịch Bản 12 — Ghi Bài Học Tự Động Vào Bộ Nhớ `[Phase 2]` (Ưu Tiên: P2)",
+          "level": 3,
+          "line": 246
+        },
+        {
+          "heading": "Kịch Bản 13 — Chỉnh Sửa Bộ Nhớ Thủ Công `[Phase 2]` (Ưu Tiên: P2)",
+          "level": 3,
+          "line": 265
+        },
+        {
+          "heading": "Epic 6 — Codebase Intelligence",
+          "level": 3,
+          "line": 284
+        },
+        {
+          "heading": "Kịch Bản 14 — Phân Tích Cấu Trúc Codebase `[Phase 2]` (Ưu Tiên: P2)",
+          "level": 3,
+          "line": 286
+        },
+        {
+          "heading": "Epic 7 — Git & Diff Nâng Cao",
+          "level": 3,
+          "line": 306
+        },
+        {
+          "heading": "Kịch Bản 15 — Quản Lý Git Tự Động Theo Task `[Phase 2]` (Ưu Tiên: P3)",
+          "level": 3,
+          "line": 308
+        },
+        {
+          "heading": "Kịch Bản 16 — Inline Comment Trên Diff Khi Reject `[Phase 2]` (Ưu Tiên: P3)",
+          "level": 3,
+          "line": 328
+        },
+        {
+          "heading": "Trường Hợp Biên",
+          "level": 3,
+          "line": 348
+        },
+        {
+          "heading": "Yêu Cầu *(bắt buộc)*",
+          "level": 2,
+          "line": 366
+        },
+        {
+          "heading": "Yêu Cầu Chức Năng",
+          "level": 3,
+          "line": 368
+        },
+        {
+          "heading": "Nhóm A — Quản Lý Dự Án `[Phase 1]`",
+          "level": 4,
+          "line": 370
+        },
+        {
+          "heading": "Nhóm B — Sinh & Duyệt Tài Liệu `[Phase 1]`",
+          "level": 4,
+          "line": 379
+        },
+        {
+          "heading": "Nhóm C — Kanban & Coding `[Phase 1]`",
+          "level": 4,
+          "line": 390
+        },
+        {
+          "heading": "Nhóm D — Giám Sát AI `[Phase 2]`",
+          "level": 4,
+          "line": 401
+        },
+        {
+          "heading": "Nhóm E — Bộ Nhớ & Ngữ Cảnh `[Phase 2]`",
+          "level": 4,
+          "line": 409
+        },
+        {
+          "heading": "Nhóm F — Codebase Intelligence `[Phase 2]`",
+          "level": 4,
+          "line": 415
+        },
+        {
+          "heading": "Nhóm G — Git & Diff Nâng Cao `[Phase 2]`",
+          "level": 4,
+          "line": 420
+        },
+        {
+          "heading": "Thực Thể Chính",
+          "level": 3,
+          "line": 428
+        },
+        {
+          "heading": "Tiêu Chí Thành Công *(bắt buộc)*",
+          "level": 2,
+          "line": 444
+        },
+        {
+          "heading": "Kết Quả Đo Lường Được",
+          "level": 3,
+          "line": 446
+        },
+        {
+          "heading": "Giả Định",
+          "level": 2,
+          "line": 468
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 39
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 531,
+      "nonEmptyLines": 365,
+      "sections": [
+        {
+          "heading": "Tasks: Neo-Kanban — AI-Agentic Project Management Platform",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Format: `[ID] [P?] [Story?] Description`",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "PHASE 1 — Neo-Kanban Core Agentic Loop",
+          "level": 1,
+          "line": 19
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 20
+        },
+        {
+          "heading": "Phase 1: Setup (Shared Infrastructure)",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Phase 2: Foundational (Blocking Prerequisites)",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "Phase 3: User Story 1 — Tạo Dự Án Mới (Priority: P1) 🎯 MVP",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "Phase 4: User Story 2 — Xem Danh Sách & Mở Dự Án (Priority: P1)",
+          "level": 2,
+          "line": 79
+        },
+        {
+          "heading": "Phase 5: User Story 3 — Khai Báo Constitution (Priority: P1)",
+          "level": 2,
+          "line": 92
+        },
+        {
+          "heading": "Phase 6: User Story 4 — Nhập Intent & Nhận SPEC.md (Priority: P1)",
+          "level": 2,
+          "line": 106
+        },
+        {
+          "heading": "Phase 7: User Story 5 — Duyệt SPEC.md (Priority: P1)",
+          "level": 2,
+          "line": 128
+        },
+        {
+          "heading": "Phase 8: User Story 6 — Nhận & Duyệt PLAN.md (Priority: P1)",
+          "level": 2,
+          "line": 142
+        },
+        {
+          "heading": "Phase 9: User Story 7 — Task Tự Động Xuất Hiện Trong To Do (Priority: P1)",
+          "level": 2,
+          "line": 156
+        },
+        {
+          "heading": "Phase 10: User Story 8 — Kéo Task Vào In Progress & Kích Hoạt Agent (Priority: P1)",
+          "level": 2,
+          "line": 176
+        },
+        {
+          "heading": "Phase 11: User Story 9 — Xem Diff & Approve hoặc Reject Code (Priority: P1)",
+          "level": 2,
+          "line": 193
+        },
+        {
+          "heading": "Phase 12: Phase 1 Polish & Hardening",
+          "level": 2,
+          "line": 209
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 223
+        },
+        {
+          "heading": "PHASE 2 — Neo-Kanban AI Enhancements",
+          "level": 1,
+          "line": 224
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 225
+        },
+        {
+          "heading": "Prerequisites: Phase 1 fully complete and stable.",
+          "level": 1,
+          "line": 227
+        },
+        {
+          "heading": "Do not start Phase 2 tasks before Phase 1 checkpoint passes.",
+          "level": 1,
+          "line": 228
+        },
+        {
+          "heading": "Phase 13: User Story 10 — Giám Sát AI Theo Thời Gian Thực (Priority: P1) [Phase 2]",
+          "level": 2,
+          "line": 232
+        },
+        {
+          "heading": "Phase 14: User Story 11 — Tạm Dừng & Điều Hướng Lại Agent (Priority: P1) [Phase 2]",
+          "level": 2,
+          "line": 256
+        },
+        {
+          "heading": "Phase 15: User Story 12 — Ghi Bài Học Tự Động Vào Bộ Nhớ (Priority: P2) [Phase 2]",
+          "level": 2,
+          "line": 274
+        },
+        {
+          "heading": "Phase 16: User Story 13 — Chỉnh Sửa Bộ Nhớ Thủ Công (Priority: P2) [Phase 2]",
+          "level": 2,
+          "line": 288
+        },
+        {
+          "heading": "Phase 17: User Story 14 — Phân Tích Cấu Trúc Codebase (Priority: P2) [Phase 2]",
+          "level": 2,
+          "line": 303
+        },
+        {
+          "heading": "Phase 18: User Story 15 — Quản Lý Git Tự Động Theo Task (Priority: P3) [Phase 2]",
+          "level": 2,
+          "line": 318
+        },
+        {
+          "heading": "Phase 19: User Story 16 — Inline Comment Trên Diff Khi Reject (Priority: P3) [Phase 2]",
+          "level": 2,
+          "line": 333
+        },
+        {
+          "heading": "Phase 20: Phase 2 Polish & Validation",
+          "level": 2,
+          "line": 350
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 363
+        },
+        {
+          "heading": "PHASE 3 — RTK Token Optimizer + Constitution Tab",
+          "level": 1,
+          "line": 364
+        },
+        {
+          "heading": "══════════════════════════════════════════════",
+          "level": 1,
+          "line": 365
+        },
+        {
+          "heading": "Prerequisites: Phase 1 fully complete.",
+          "level": 1,
+          "line": 367
+        },
+        {
+          "heading": "These phases are independent of Phase 2 — can be worked in parallel with Phase 2 tasks.",
+          "level": 1,
+          "line": 368
+        },
+        {
+          "heading": "Phase 21: RTK Token Optimizer (Priority: P1) [Phase 3]",
+          "level": 2,
+          "line": 372
+        },
+        {
+          "heading": "Phase 22: Constitution Tab (Priority: P1) [Phase 3]",
+          "level": 2,
+          "line": 388
+        },
+        {
+          "heading": "Dependencies & Execution Order",
+          "level": 2,
+          "line": 402
+        },
+        {
+          "heading": "Cross-Phase Dependencies",
+          "level": 3,
+          "line": 404
+        },
+        {
+          "heading": "Phase 2 Inter-Dependencies",
+          "level": 3,
+          "line": 428
+        },
+        {
+          "heading": "Parallel Opportunities Within Phases",
+          "level": 3,
+          "line": 440
+        },
+        {
+          "heading": "Parallel Example: Phase 13 (WebSocket Infrastructure)",
+          "level": 2,
+          "line": 450
+        },
+        {
+          "heading": "Implementation Strategy",
+          "level": 2,
+          "line": 472
+        },
+        {
+          "heading": "MVP First (Phase 1 Only)",
+          "level": 3,
+          "line": 474
+        },
+        {
+          "heading": "Incremental Phase 2 Delivery",
+          "level": 3,
+          "line": 490
+        },
+        {
+          "heading": "Phase 3 Strategy (RTK + Constitution Tab)",
+          "level": 3,
+          "line": 501
+        },
+        {
+          "heading": "Notes",
+          "level": 2,
+          "line": 522
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 47
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/ui-spec.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1089,
+      "nonEmptyLines": 869,
+      "sections": [
+        {
+          "heading": "Đặc Tả Giao Diện (UI Spec) — Neo-Kanban",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Tổng Quan & Nguyên Tắc UX",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "1.1 Ngữ cảnh sản phẩm",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "1.2 Nguyên tắc UX bắt buộc",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "1.3 Đối tượng thiết bị",
+          "level": 3,
+          "line": 39
+        },
+        {
+          "heading": "2. Bản Đồ Màn Hình & Điều Hướng",
+          "level": 2,
+          "line": 49
+        },
+        {
+          "heading": "2.1 Bảng route",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "3. Bản Đồ Luồng Agentic (HIL Gates)",
+          "level": 2,
+          "line": 84
+        },
+        {
+          "heading": "3.1 Các HIL gate",
+          "level": 3,
+          "line": 106
+        },
+        {
+          "heading": "4. Shell Chung (mọi màn)",
+          "level": 2,
+          "line": 118
+        },
+        {
+          "heading": "4.1 Project Header (organism)",
+          "level": 3,
+          "line": 141
+        },
+        {
+          "heading": "4.2 Toast system",
+          "level": 3,
+          "line": 149
+        },
+        {
+          "heading": "5. Wireframes Từng Màn",
+          "level": 2,
+          "line": 159
+        },
+        {
+          "heading": "5.1 Project List — `/projects`",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 166
+        },
+        {
+          "heading": "Bố cục",
+          "level": 4,
+          "line": 170
+        },
+        {
+          "heading": "Components",
+          "level": 4,
+          "line": 198
+        },
+        {
+          "heading": "Trạng thái UI",
+          "level": 4,
+          "line": 206
+        },
+        {
+          "heading": "Tương tác chính",
+          "level": 4,
+          "line": 217
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 225
+        },
+        {
+          "heading": "5.2 Constitution Editor — `/projects/:id/constitution`",
+          "level": 3,
+          "line": 231
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 233
+        },
+        {
+          "heading": "Bố cục",
+          "level": 4,
+          "line": 236
+        },
+        {
+          "heading": "Components",
+          "level": 4,
+          "line": 254
+        },
+        {
+          "heading": "Trạng thái UI",
+          "level": 4,
+          "line": 260
+        },
+        {
+          "heading": "Tương tác chính",
+          "level": 4,
+          "line": 272
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 281
+        },
+        {
+          "heading": "5.3 Project Workspace Shell — `/projects/:id`",
+          "level": 3,
+          "line": 287
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 289
+        },
+        {
+          "heading": "Bố cục",
+          "level": 4,
+          "line": 292
+        },
+        {
+          "heading": "Components & states",
+          "level": 4,
+          "line": 313
+        },
+        {
+          "heading": "Tương tác chính",
+          "level": 4,
+          "line": 321
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 326
+        },
+        {
+          "heading": "5.4 Tab Documents (SPEC + PLAN)",
+          "level": 3,
+          "line": 332
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 334
+        },
+        {
+          "heading": "Bố cục (2 cột song song khi ≥ 1280 px)",
+          "level": 4,
+          "line": 337
+        },
+        {
+          "heading": "Components",
+          "level": 4,
+          "line": 367
+        },
+        {
+          "heading": "Trạng thái UI mỗi panel",
+          "level": 4,
+          "line": 374
+        },
+        {
+          "heading": "Tương tác chính",
+          "level": 4,
+          "line": 389
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 400
+        },
+        {
+          "heading": "5.5 Tab Kanban",
+          "level": 3,
+          "line": 406
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 408
+        },
+        {
+          "heading": "Bố cục (5 cột)",
+          "level": 4,
+          "line": 412
+        },
+        {
+          "heading": "Task Card (molecule)",
+          "level": 4,
+          "line": 438
+        },
+        {
+          "heading": "Components",
+          "level": 4,
+          "line": 454
+        },
+        {
+          "heading": "Trạng thái UI",
+          "level": 4,
+          "line": 462
+        },
+        {
+          "heading": "Tương tác chính",
+          "level": 4,
+          "line": 474
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 483
+        },
+        {
+          "heading": "5.6 Tab Memory (P2)",
+          "level": 3,
+          "line": 489
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 491
+        },
+        {
+          "heading": "Bố cục",
+          "level": 4,
+          "line": 494
+        },
+        {
+          "heading": "Components",
+          "level": 4,
+          "line": 520
+        },
+        {
+          "heading": "Trạng thái UI",
+          "level": 4,
+          "line": 526
+        },
+        {
+          "heading": "Tương tác chính",
+          "level": 4,
+          "line": 538
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 547
+        },
+        {
+          "heading": "5.7 Tab Audit Log",
+          "level": 3,
+          "line": 553
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 555
+        },
+        {
+          "heading": "Bố cục",
+          "level": 4,
+          "line": 558
+        },
+        {
+          "heading": "Components",
+          "level": 4,
+          "line": 580
+        },
+        {
+          "heading": "Trạng thái UI",
+          "level": 4,
+          "line": 585
+        },
+        {
+          "heading": "Tương tác chính",
+          "level": 4,
+          "line": 595
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 600
+        },
+        {
+          "heading": "5.8 Review Panel (floating, hiện khi có task `review`)",
+          "level": 3,
+          "line": 606
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 608
+        },
+        {
+          "heading": "Bố cục",
+          "level": 4,
+          "line": 612
+        },
+        {
+          "heading": "Components",
+          "level": 4,
+          "line": 649
+        },
+        {
+          "heading": "Trạng thái UI",
+          "level": 4,
+          "line": 656
+        },
+        {
+          "heading": "Tương tác chính",
+          "level": 4,
+          "line": 669
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 678
+        },
+        {
+          "heading": "5.9 Thought Stream Panel (P2 — floating)",
+          "level": 3,
+          "line": 684
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 686
+        },
+        {
+          "heading": "Bố cục",
+          "level": 4,
+          "line": 690
+        },
+        {
+          "heading": "Components",
+          "level": 4,
+          "line": 731
+        },
+        {
+          "heading": "Trạng thái UI",
+          "level": 4,
+          "line": 738
+        },
+        {
+          "heading": "Tương tác chính",
+          "level": 4,
+          "line": 752
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 762
+        },
+        {
+          "heading": "5.10 Inline Comment Overlay (P2)",
+          "level": 3,
+          "line": 768
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 770
+        },
+        {
+          "heading": "Bố cục (popover gắn dòng)",
+          "level": 4,
+          "line": 773
+        },
+        {
+          "heading": "Components",
+          "level": 4,
+          "line": 792
+        },
+        {
+          "heading": "Trạng thái UI",
+          "level": 4,
+          "line": 797
+        },
+        {
+          "heading": "Tương tác chính",
+          "level": 4,
+          "line": 807
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 815
+        },
+        {
+          "heading": "5.11 Codebase Map Viewer (P2)",
+          "level": 3,
+          "line": 821
+        },
+        {
+          "heading": "Khi nào hiển thị",
+          "level": 4,
+          "line": 823
+        },
+        {
+          "heading": "Bố cục",
+          "level": 4,
+          "line": 827
+        },
+        {
+          "heading": "Components",
+          "level": 4,
+          "line": 847
+        },
+        {
+          "heading": "Trạng thái UI",
+          "level": 4,
+          "line": 853
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 862
+        },
+        {
+          "heading": "5.12 Task Branch Indicator (P2)",
+          "level": 3,
+          "line": 868
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 880
+        },
+        {
+          "heading": "5.13 Modals & Confirms",
+          "level": 3,
+          "line": 886
+        },
+        {
+          "heading": "Mapping",
+          "level": 4,
+          "line": 898
+        },
+        {
+          "heading": "6. Common UI Patterns",
+          "level": 2,
+          "line": 905
+        },
+        {
+          "heading": "6.1 Status badges",
+          "level": 3,
+          "line": 907
+        },
+        {
+          "heading": "6.2 Empty states",
+          "level": 3,
+          "line": 930
+        },
+        {
+          "heading": "6.3 Error states",
+          "level": 3,
+          "line": 940
+        },
+        {
+          "heading": "6.4 Loading patterns",
+          "level": 3,
+          "line": 946
+        },
+        {
+          "heading": "6.5 Toast",
+          "level": 3,
+          "line": 956
+        },
+        {
+          "heading": "7. States Matrix (tổng hợp số artboard tối thiểu)",
+          "level": 2,
+          "line": 964
+        },
+        {
+          "heading": "8. Design Tokens Gợi Ý (designer Pencil tự quyết chi tiết)",
+          "level": 2,
+          "line": 986
+        },
+        {
+          "heading": "8.1 Màu trạng thái",
+          "level": 3,
+          "line": 988
+        },
+        {
+          "heading": "8.2 Spacing scale",
+          "level": 3,
+          "line": 1000
+        },
+        {
+          "heading": "8.3 Typography",
+          "level": 3,
+          "line": 1005
+        },
+        {
+          "heading": "8.4 Layout",
+          "level": 3,
+          "line": 1011
+        },
+        {
+          "heading": "8.5 Iconography",
+          "level": 3,
+          "line": 1018
+        },
+        {
+          "heading": "9. Mapping Ngược YC ↔ Màn",
+          "level": 2,
+          "line": 1026
+        },
+        {
+          "heading": "10. Phụ Lục — Quy Tắc Đặt Tên Cho Pencil",
+          "level": 2,
+          "line": 1072
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 108
+      }
+    }
+  ]
+}

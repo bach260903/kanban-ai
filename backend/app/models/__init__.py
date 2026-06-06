@@ -5,6 +5,7 @@ from app.models.deployment import Deployment, DeploymentEnvironment, DeploymentS
 from app.models.deployment_config import DeploymentConfig, DeployProvider
 from app.models.pipeline_run import PipelineRun, PipelineRunStatus
 from app.models.pipeline_step import PipelineStep, PipelineStepStatus
+from app.models.step_failure_analysis import StepFailureAnalysis
 from app.models.agent_run import AgentRun, AgentRunStatus, AgentType
 from app.models.audit_log import AuditLog, AuditLogResult
 from app.models.base import Base
@@ -46,6 +47,7 @@ __all__ = [
     "PipelineRunStatus",
     "PipelineStep",
     "PipelineStepStatus",
+    "StepFailureAnalysis",
     "AgentRun",
     "AgentRunStatus",
     "AgentType",

@@ -1,0 +1,47 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "frontend/src/components/atoms/badge.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 60,
+      "nonEmptyLines": 53,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/atoms/button.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 61,
+      "nonEmptyLines": 53,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/atoms/notification-badge.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 17,
+      "nonEmptyLines": 17,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/atoms/spinner.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 22,
+      "nonEmptyLines": 20,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/atoms/text-input.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 63,
+      "nonEmptyLines": 54,
+      "metrics": {}
+    }
+  ]
+}

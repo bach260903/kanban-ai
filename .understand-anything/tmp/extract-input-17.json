@@ -1,0 +1,52 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "evaluation/agent_frameworks/README.md",
+                           "language":  "markdown",
+                           "sizeLines":  42,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/requirements-autogen.txt",
+                           "language":  "txt",
+                           "sizeLines":  3,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/requirements-crewai.txt",
+                           "language":  "txt",
+                           "sizeLines":  5,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/requirements-langgraph.txt",
+                           "language":  "txt",
+                           "sizeLines":  4,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/requirements.txt",
+                           "language":  "txt",
+                           "sizeLines":  6,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            "evaluation/agent_frameworks/README.md":  [
+
+                                                                      ],
+                            "evaluation/agent_frameworks/requirements-autogen.txt":  [
+
+                                                                                     ],
+                            "evaluation/agent_frameworks/requirements-crewai.txt":  [
+
+                                                                                    ],
+                            "evaluation/agent_frameworks/requirements-langgraph.txt":  [
+
+                                                                                       ],
+                            "evaluation/agent_frameworks/requirements.txt":  [
+
+                                                                             ]
+                        }
+}

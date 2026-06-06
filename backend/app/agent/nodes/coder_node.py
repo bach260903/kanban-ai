@@ -87,9 +87,51 @@ def _error_body(exc: BaseException, *, recoverable: bool = False) -> dict[str, A
         "step": "CODING",
     }
 
+
+def _is_rate_limit(exc: BaseException) -> bool:
+    """Return True if *exc* is a provider rate-limit / quota error."""
+    name = type(exc).__name__.lower()
+    msg = str(exc).lower()
+    return (
+        "ratelimit" in name
+        or "rate_limit" in name
+        or "429" in msg
+        or "rate limit" in msg
+        or "quota" in msg
+        or "tokens per day" in msg
+        or "tokens per minute" in msg
+    )
+
+
+def _rate_limit_message(exc: BaseException) -> str:
+    """Extract a human-friendly wait message from a rate-limit error."""
+    import re
+    raw = str(exc)
+    # Extract "try again in Xm Ys" from Groq error body
+    m = re.search(r"try again in ([\d\w. ]+?)(?:\.|'|\"|$)", raw, re.IGNORECASE)
+    wait = m.group(1).strip() if m else None
+    # Extract limit info
+    lim = re.search(r"Limit (\d+)", raw)
+    used = re.search(r"Used (\d+)", raw)
+    limit_info = ""
+    if lim and used:
+        limit_info = f" (quota: {int(used.group(1)):,}/{int(lim.group(1)):,} tokens used)"
+    if wait:
+        return f"API rate limit reached{limit_info}. Please wait {wait} then move the task back to In Progress to retry."
+    return f"API rate limit reached{limit_info}. Please wait a few minutes then retry."
+
 _MAX_READ = 400_000
 _MAX_WRITE = 500_000
 _MAX_TOOL_ROUNDS = 12  # room for the write → run tests → fix → re-run self-verify loop
+
+_WARN_LINES = 200    # soft warning returned to agent
+_HARD_LINES = 500    # hard reject — force agent to split
+
+# Auto-generated files that are exempt from line limits
+_GENERATED_FILENAMES = frozenset({
+    "package-lock.json", "yarn.lock", "pnpm-lock.yaml",
+    "poetry.lock", "Pipfile.lock", ".agent_baseline", "MEMORY.md",
+})
 _CODER_TASK_TIMEOUT_SEC = 600
 
 
@@ -142,11 +184,34 @@ def _fs_read(sandbox: Path, relative_path: str) -> str:
 
 def _fs_write(sandbox: Path, relative_path: str, content: str) -> str:
     if len(content) > _MAX_WRITE:
-        raise ValueError("Content exceeds maximum size.")
+        raise ValueError("Content exceeds maximum size (500 KB).")
+
+    filename = relative_path.rsplit("/", 1)[-1]
+    is_generated = filename in _GENERATED_FILENAMES or filename.endswith(".lock")
+
+    if not is_generated:
+        line_count = content.count("\n") + 1
+        if line_count > _HARD_LINES:
+            raise ValueError(
+                f"File '{relative_path}' has {line_count} lines — maximum is {_HARD_LINES}. "
+                "Split it into smaller focused modules (e.g. separate the logic, models, "
+                "and utils into distinct files) then write each one separately."
+            )
+
     path = _safe_path(sandbox, relative_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
-    return f"Wrote {len(content)} bytes to {relative_path}"
+    result = f"Wrote {len(content)} bytes to {relative_path}"
+
+    if not is_generated:
+        line_count = content.count("\n") + 1
+        if line_count > _WARN_LINES:
+            result += (
+                f"\nWARNING: {relative_path} has {line_count} lines (limit: {_WARN_LINES}). "
+                "You MUST split this into smaller modules before finishing — "
+                "do not call any more tools until you have refactored it."
+            )
+    return result
 
 
 # Executables the coder may run to verify its own work (no shell; args tokenised).
@@ -478,6 +543,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 parsed.append({"file_path": fp, "line_number": ln_int, "comment_text": ct})
             if parsed:
                 ic_kw = parsed
+        ci_report = state.get("ci_failure_report") or None
         prompts = await ContextBuilder.build_coder_context(
             project_id,
             task_id,
@@ -486,6 +552,7 @@ async def _run_with_session(state: StateDict) -> StateDict:
             project=project,
             po_feedback=po_kw,
             inline_comments=ic_kw,
+            ci_failure_report=ci_report,
         )
         system = prompts["system"]
         human = prompts["human"]
@@ -586,6 +653,30 @@ async def _run_with_session(state: StateDict) -> StateDict:
                 await finalise_log(session, llm_log.id, AuditLogResult.SUCCESS)
             except Exception as exc:
                 await finalise_log(session, llm_log.id, AuditLogResult.FAILURE, output_refs=[str(exc)])
+                if _is_rate_limit(exc):
+                    # Graceful rate-limit handling: revert task to TODO with clear message
+                    friendly = _rate_limit_message(exc)
+                    await _publish_event(
+                        session, task_id, agent_run_id, StreamEventType.ERROR,
+                        {
+                            "error_type": "RateLimitError",
+                            "message": friendly,
+                            "recoverable": True,
+                            "step": "CODING",
+                        },
+                    )
+                    await _publish_event(
+                        session, task_id, agent_run_id, StreamEventType.STATUS_CHANGE,
+                        {"from": "CODING", "to": "TODO", "reason": friendly},
+                    )
+                    task.status = TaskStatus.TODO
+                    task.updated_at = datetime.now(timezone.utc)
+                    await _finalize_agent_run(session, agent_run_id, AgentRunStatus.FAILURE)
+                    run = await session.get(AgentRun, agent_run_id)
+                    if run is not None:
+                        run.result = {"error": friendly, "code": "RATE_LIMIT"}
+                    await session.commit()
+                    return state
                 await _publish_event(session, task_id, agent_run_id, StreamEventType.ERROR, _error_body(exc))
                 raise
 
@@ -704,7 +795,7 @@ async def run(state: StateDict) -> StateDict:
                 if isinstance(task_id, UUID) and isinstance(project_id, UUID):
                     task = await session.get(Task, task_id)
                     if task is not None:
-                        task.status = TaskStatus.REJECTED
+                        task.status = TaskStatus.TODO
                         task.updated_at = datetime.now(timezone.utc)
                     run_result = await session.execute(
                         select(AgentRun)
@@ -746,7 +837,7 @@ async def run(state: StateDict) -> StateDict:
                             json.dumps(
                                 {
                                     "from": "CODING",
-                                    "to": "REJECTED",
+                                    "to": "TODO",
                                     "reason": err_msg,
                                 },
                                 separators=(",", ":"),
@@ -790,6 +881,12 @@ async def run(state: StateDict) -> StateDict:
                     )
                     last_run = run_q.scalar_one_or_none()
                     rid = last_run.id if last_run else None
+                    # Finalize the open run as FAILURE so the UI stops polling and
+                    # the run isn't left stuck in RUNNING forever.
+                    if last_run is not None and last_run.status == AgentRunStatus.RUNNING:
+                        last_run.status = AgentRunStatus.FAILURE
+                        last_run.completed_at = datetime.now(timezone.utc)
+                        last_run.result = {"error": str(exc), "error_type": type(exc).__name__}
                     await EventPublisher.publish(
                         task_id,
                         StreamEventType.ERROR,
@@ -810,6 +907,21 @@ async def run(state: StateDict) -> StateDict:
                     if task is not None:
                         from app.services.kanban_service import KanbanService
 
+                        # Return the task to To do so it stays visible and retryable
+                        # (board has no rejected/failed column — failures go to TODO).
+                        if task.status == TaskStatus.IN_PROGRESS:
+                            task.status = TaskStatus.TODO
+                            task.updated_at = datetime.now(timezone.utc)
+                            await EventPublisher.publish(
+                                task_id,
+                                StreamEventType.STATUS_CHANGE,
+                                json.dumps(
+                                    {"from": "CODING", "to": "TODO", "reason": str(exc)[:500]},
+                                    separators=(",", ":"),
+                                ),
+                                session,
+                                rid,
+                            )
                         await KanbanService.on_agent_error(session, task)
                     await session.commit()
         except Exception:

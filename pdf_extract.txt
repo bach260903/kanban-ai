@@ -1,0 +1,14 @@
+﻿python : Traceback (most recent call last):
+At line:15 char:11
++ $script | python -c "import sys; exec(sys.stdin.read())" 2>&1 | Out-F ...
++           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "<string>", line 1, in <module>
+    import sys; exec(sys.stdin.read())
+                ~~~~^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1
+    ﻿import sys
+     ^
+SyntaxError: invalid character '�' (U+00BB)

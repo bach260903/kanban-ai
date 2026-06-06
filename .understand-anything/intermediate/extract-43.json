@@ -1,0 +1,2567 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "evaluation/scripts/verify_groq.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 35,
+      "functions": [
+        {
+          "name": "main",
+          "startLine": 14,
+          "endLine": 37,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "main",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "main",
+          "callee": "load_repo_env",
+          "lineNumber": 15
+        },
+        {
+          "caller": "main",
+          "callee": "os.getenv(\"GROQ_API_KEY\", \"\").strip",
+          "lineNumber": 16
+        },
+        {
+          "caller": "main",
+          "callee": "os.getenv",
+          "lineNumber": 16
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 18
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 19
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 20
+        },
+        {
+          "caller": "main",
+          "callee": "sys.exit",
+          "lineNumber": 21
+        },
+        {
+          "caller": "main",
+          "callee": "key.startswith",
+          "lineNumber": 22
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 23
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 27
+        },
+        {
+          "caller": "main",
+          "callee": "sys.exit",
+          "lineNumber": 28
+        },
+        {
+          "caller": "main",
+          "callee": "Groq",
+          "lineNumber": 29
+        },
+        {
+          "caller": "main",
+          "callee": "client.chat.completions.create",
+          "lineNumber": 30
+        },
+        {
+          "caller": "main",
+          "callee": "(r.choices[0].message.content or \"\").strip",
+          "lineNumber": 36
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 37
+        },
+        {
+          "caller": "main",
+          "callee": "repr",
+          "lineNumber": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "extract_pdf.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 12,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/_archive/app/(app)/boards/[id]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 239,
+      "nonEmptyLines": 222,
+      "functions": [
+        {
+          "name": "BoardPage",
+          "startLine": 19,
+          "endLine": 239,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BoardPage",
+          "line": 19,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "BoardPage",
+          "callee": "useParams",
+          "lineNumber": 20
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useBoard",
+          "lineNumber": 22
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 25
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 26
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 27
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 28
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 29
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 30
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 31
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 32
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 33
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 34
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useCreateTask",
+          "lineNumber": 36
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useAuth",
+          "lineNumber": 37
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useRef",
+          "lineNumber": 38
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useRef",
+          "lineNumber": 39
+        },
+        {
+          "caller": "submitNewTask",
+          "callee": "e.preventDefault",
+          "lineNumber": 42
+        },
+        {
+          "caller": "submitNewTask",
+          "callee": "createTask.mutateAsync",
+          "lineNumber": 44
+        },
+        {
+          "caller": "submitNewTask",
+          "callee": "setAddColumn",
+          "lineNumber": 45
+        },
+        {
+          "caller": "submitNewTask",
+          "callee": "setNewTitle",
+          "lineNumber": 46
+        },
+        {
+          "caller": "submitNewTask",
+          "callee": "setNewDesc",
+          "lineNumber": 47
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "e.preventDefault",
+          "lineNumber": 51
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "memberUid.trim",
+          "lineNumber": 52
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "setMemberBusy",
+          "lineNumber": 53
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "setMemberError",
+          "lineNumber": 54
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "api.addBoardMember",
+          "lineNumber": 56
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "memberUid.trim",
+          "lineNumber": 56
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "setMemberUid",
+          "lineNumber": 57
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "window.location.reload",
+          "lineNumber": 58
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "detail.toLowerCase().includes",
+          "lineNumber": 61
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "detail.toLowerCase",
+          "lineNumber": 61
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "setMemberError",
+          "lineNumber": 62
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "detail.toLowerCase().includes",
+          "lineNumber": 63
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "detail.toLowerCase",
+          "lineNumber": 63
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "setMemberError",
+          "lineNumber": 64
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "setMemberError",
+          "lineNumber": 66
+        },
+        {
+          "caller": "addMemberByUid",
+          "callee": "setMemberBusy",
+          "lineNumber": 69
+        },
+        {
+          "caller": "removeMember",
+          "callee": "setMemberBusy",
+          "lineNumber": 74
+        },
+        {
+          "caller": "removeMember",
+          "callee": "api.removeBoardMember",
+          "lineNumber": 76
+        },
+        {
+          "caller": "removeMember",
+          "callee": "window.location.reload",
+          "lineNumber": 77
+        },
+        {
+          "caller": "removeMember",
+          "callee": "setMemberBusy",
+          "lineNumber": 79
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "useEffect",
+          "lineNumber": 83
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "board.tasks.filter((t) => t.assignees.some((a) => a.user_id === me.id)).map",
+          "lineNumber": 86
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "board.tasks.filter",
+          "lineNumber": 86
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "t.assignees.some",
+          "lineNumber": 86
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "board.tasks.filter",
+          "lineNumber": 93
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "mineNow.has",
+          "lineNumber": 93
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "prevMineRef.current.has",
+          "lineNumber": 93
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setAssignNotices",
+          "lineNumber": 95
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "[\r\n        ...newlyAssigned.map((t) => ({ taskId: t.id, title: t.title })),\r\n        ...prev,\r\n      ].slice",
+          "lineNumber": 95
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "newlyAssigned.map",
+          "lineNumber": 96
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setMembersOpen",
+          "lineNumber": 122
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setBreakdownOpen",
+          "lineNumber": 123
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setReportOpen",
+          "lineNumber": 124
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setChatOpen",
+          "lineNumber": 125
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "assignNotices.map",
+          "lineNumber": 132
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setAssignNotices",
+          "lineNumber": 143
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "prev.filter",
+          "lineNumber": 143
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setOpenTask",
+          "lineNumber": 159
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setAddColumn",
+          "lineNumber": 160
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setOpenTask",
+          "lineNumber": 168
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setOpenTask",
+          "lineNumber": 170
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setSuggestForTask",
+          "lineNumber": 171
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setChatOpen",
+          "lineNumber": 175
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setBreakdownOpen",
+          "lineNumber": 177
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setReportOpen",
+          "lineNumber": 179
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setSuggestForTask",
+          "lineNumber": 184
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setAddColumn",
+          "lineNumber": 187
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setNewTitle",
+          "lineNumber": 191
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setNewDesc",
+          "lineNumber": 195
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setAddColumn",
+          "lineNumber": 198
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setMembersOpen",
+          "lineNumber": 207
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "setMemberUid",
+          "lineNumber": 211
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "memberUid.trim",
+          "lineNumber": 212
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "board.members.map",
+          "lineNumber": 221
+        },
+        {
+          "caller": "BoardPage",
+          "callee": "removeMember",
+          "lineNumber": 229
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/_archive/app/(app)/boards/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 86,
+      "nonEmptyLines": 80,
+      "functions": [
+        {
+          "name": "BoardsPage",
+          "startLine": 10,
+          "endLine": 86,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BoardsPage",
+          "line": 10,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "BoardsPage",
+          "callee": "useBoards",
+          "lineNumber": 11
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "useState",
+          "lineNumber": 12
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "useQueryClient",
+          "lineNumber": 16
+        },
+        {
+          "caller": "create",
+          "callee": "e.preventDefault",
+          "lineNumber": 19
+        },
+        {
+          "caller": "create",
+          "callee": "setCreating",
+          "lineNumber": 20
+        },
+        {
+          "caller": "create",
+          "callee": "api.createBoard",
+          "lineNumber": 22
+        },
+        {
+          "caller": "create",
+          "callee": "setOpen",
+          "lineNumber": 23
+        },
+        {
+          "caller": "create",
+          "callee": "setTitle",
+          "lineNumber": 24
+        },
+        {
+          "caller": "create",
+          "callee": "setDescription",
+          "lineNumber": 25
+        },
+        {
+          "caller": "create",
+          "callee": "qc.invalidateQueries",
+          "lineNumber": 26
+        },
+        {
+          "caller": "create",
+          "callee": "setCreating",
+          "lineNumber": 28
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "setOpen",
+          "lineNumber": 39
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "setOpen",
+          "lineNumber": 49
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "boards.map",
+          "lineNumber": 53
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "new Date(b.created_at).toLocaleDateString",
+          "lineNumber": 58
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "setOpen",
+          "lineNumber": 65
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "setTitle",
+          "lineNumber": 69
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "setDescription",
+          "lineNumber": 73
+        },
+        {
+          "caller": "BoardsPage",
+          "callee": "setOpen",
+          "lineNumber": 76
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/_archive/app/(app)/layout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 63,
+      "nonEmptyLines": 57,
+      "functions": [
+        {
+          "name": "AppLayout",
+          "startLine": 9,
+          "endLine": 47,
+          "params": [
+            "{ children }"
+          ]
+        },
+        {
+          "name": "NavLink",
+          "startLine": 49,
+          "endLine": 63,
+          "params": [
+            "{ href, pathname, icon, children }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AppLayout",
+          "line": 9,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AppLayout",
+          "callee": "useRouter",
+          "lineNumber": 10
+        },
+        {
+          "caller": "AppLayout",
+          "callee": "usePathname",
+          "lineNumber": 11
+        },
+        {
+          "caller": "AppLayout",
+          "callee": "useAuth",
+          "lineNumber": 12
+        },
+        {
+          "caller": "AppLayout",
+          "callee": "useEffect",
+          "lineNumber": 14
+        },
+        {
+          "caller": "AppLayout",
+          "callee": "router.replace",
+          "lineNumber": 15
+        },
+        {
+          "caller": "AppLayout",
+          "callee": "clear",
+          "lineNumber": 39
+        },
+        {
+          "caller": "AppLayout",
+          "callee": "router.replace",
+          "lineNumber": 39
+        },
+        {
+          "caller": "NavLink",
+          "callee": "pathname.startsWith",
+          "lineNumber": 50
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/_archive/app/(app)/profile/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 118,
+      "nonEmptyLines": 107,
+      "functions": [
+        {
+          "name": "ProfilePage",
+          "startLine": 16,
+          "endLine": 118,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProfilePage",
+          "line": 16,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProfilePage",
+          "callee": "useAuth",
+          "lineNumber": 17
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "useSkills",
+          "lineNumber": 18
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "useUserSkills",
+          "lineNumber": 19
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "useQueryClient",
+          "lineNumber": 23
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "useEffect",
+          "lineNumber": 25
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "setSelected",
+          "lineNumber": 28
+        },
+        {
+          "caller": "toggle",
+          "callee": "setSelected",
+          "lineNumber": 32
+        },
+        {
+          "caller": "changeLevel",
+          "callee": "setSelected",
+          "lineNumber": 41
+        },
+        {
+          "caller": "save",
+          "callee": "setBusy",
+          "lineNumber": 46
+        },
+        {
+          "caller": "save",
+          "callee": "api.setUserSkills",
+          "lineNumber": 48
+        },
+        {
+          "caller": "save",
+          "callee": "Object.entries(selected).map",
+          "lineNumber": 50
+        },
+        {
+          "caller": "save",
+          "callee": "Object.entries",
+          "lineNumber": 50
+        },
+        {
+          "caller": "save",
+          "callee": "qc.invalidateQueries",
+          "lineNumber": 52
+        },
+        {
+          "caller": "save",
+          "callee": "setBusy",
+          "lineNumber": 54
+        },
+        {
+          "caller": "createNew",
+          "callee": "newSkill.trim",
+          "lineNumber": 59
+        },
+        {
+          "caller": "createNew",
+          "callee": "api.createSkill",
+          "lineNumber": 60
+        },
+        {
+          "caller": "createNew",
+          "callee": "newSkill.trim().toLowerCase",
+          "lineNumber": 60
+        },
+        {
+          "caller": "createNew",
+          "callee": "newSkill.trim",
+          "lineNumber": 60
+        },
+        {
+          "caller": "createNew",
+          "callee": "setNewSkill",
+          "lineNumber": 61
+        },
+        {
+          "caller": "createNew",
+          "callee": "qc.invalidateQueries",
+          "lineNumber": 62
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "Object.keys",
+          "lineNumber": 83
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "setNewSkill",
+          "lineNumber": 86
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "newSkill.trim",
+          "lineNumber": 87
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "skills.map",
+          "lineNumber": 90
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "toggle",
+          "lineNumber": 94
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "changeLevel",
+          "lineNumber": 100
+        },
+        {
+          "caller": "ProfilePage",
+          "callee": "LEVELS.map",
+          "lineNumber": 102
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/_archive/app/globals.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 93,
+      "nonEmptyLines": 91,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/_archive/app/layout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "RootLayout",
+          "startLine": 17,
+          "endLine": 29,
+          "params": [
+            "{\r\n  children,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "metadata",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "RootLayout",
+          "line": 17,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RootLayout",
+          "callee": "cn",
+          "lineNumber": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/_archive/app/login/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 64,
+      "functions": [
+        {
+          "name": "LoginPage",
+          "startLine": 10,
+          "endLine": 68,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LoginPage",
+          "line": 10,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LoginPage",
+          "callee": "useRouter",
+          "lineNumber": 11
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "useAuth",
+          "lineNumber": 12
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "submit",
+          "callee": "e.preventDefault",
+          "lineNumber": 19
+        },
+        {
+          "caller": "submit",
+          "callee": "setLoading",
+          "lineNumber": 20
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 21
+        },
+        {
+          "caller": "submit",
+          "callee": "api.login",
+          "lineNumber": 23
+        },
+        {
+          "caller": "submit",
+          "callee": "localStorage.setItem",
+          "lineNumber": 24
+        },
+        {
+          "caller": "submit",
+          "callee": "api.me",
+          "lineNumber": 25
+        },
+        {
+          "caller": "submit",
+          "callee": "setSession",
+          "lineNumber": 26
+        },
+        {
+          "caller": "submit",
+          "callee": "router.replace",
+          "lineNumber": 27
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 30
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 32
+        },
+        {
+          "caller": "submit",
+          "callee": "setLoading",
+          "lineNumber": 35
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "setEmail",
+          "lineNumber": 47
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "setPassword",
+          "lineNumber": 51
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/_archive/app/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 16,
+      "functions": [
+        {
+          "name": "Home",
+          "startLine": 7,
+          "endLine": 18,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Home",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Home",
+          "callee": "useRouter",
+          "lineNumber": 8
+        },
+        {
+          "caller": "Home",
+          "callee": "useAuth",
+          "lineNumber": 9
+        },
+        {
+          "caller": "Home",
+          "callee": "useEffect",
+          "lineNumber": 10
+        },
+        {
+          "caller": "Home",
+          "callee": "router.replace",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/_archive/app/register/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 74,
+      "nonEmptyLines": 70,
+      "functions": [
+        {
+          "name": "RegisterPage",
+          "startLine": 10,
+          "endLine": 74,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RegisterPage",
+          "line": 10,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RegisterPage",
+          "callee": "useRouter",
+          "lineNumber": 11
+        },
+        {
+          "caller": "RegisterPage",
+          "callee": "useAuth",
+          "lineNumber": 12
+        },
+        {
+          "caller": "RegisterPage",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "RegisterPage",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "RegisterPage",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "RegisterPage",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "RegisterPage",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "submit",
+          "callee": "e.preventDefault",
+          "lineNumber": 20
+        },
+        {
+          "caller": "submit",
+          "callee": "setLoading",
+          "lineNumber": 21
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 22
+        },
+        {
+          "caller": "submit",
+          "callee": "api.register",
+          "lineNumber": 24
+        },
+        {
+          "caller": "submit",
+          "callee": "api.login",
+          "lineNumber": 25
+        },
+        {
+          "caller": "submit",
+          "callee": "localStorage.setItem",
+          "lineNumber": 26
+        },
+        {
+          "caller": "submit",
+          "callee": "api.me",
+          "lineNumber": 27
+        },
+        {
+          "caller": "submit",
+          "callee": "setSession",
+          "lineNumber": 28
+        },
+        {
+          "caller": "submit",
+          "callee": "router.replace",
+          "lineNumber": 29
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 32
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 34
+        },
+        {
+          "caller": "submit",
+          "callee": "setLoading",
+          "lineNumber": 37
+        },
+        {
+          "caller": "RegisterPage",
+          "callee": "setDisplayName",
+          "lineNumber": 49
+        },
+        {
+          "caller": "RegisterPage",
+          "callee": "setEmail",
+          "lineNumber": 53
+        },
+        {
+          "caller": "RegisterPage",
+          "callee": "setPassword",
+          "lineNumber": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/.prettierignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 4,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/eslint.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 16,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/next.config.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/postcss.config.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/public/robots.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 3,
+      "nonEmptyLines": 3,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/App.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 182,
+      "nonEmptyLines": 156,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 143,
+      "nonEmptyLines": 141,
+      "functions": [
+        {
+          "name": "App",
+          "startLine": 24,
+          "endLine": 143,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "App",
+          "line": 24,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 20,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/ai/agent-trace.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 63,
+      "nonEmptyLines": 59,
+      "functions": [
+        {
+          "name": "AgentTrace",
+          "startLine": 26,
+          "endLine": 63,
+          "params": [
+            "{ items, running }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AgentTrace",
+          "line": 26,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AgentTrace",
+          "callee": "items.map",
+          "lineNumber": 30
+        },
+        {
+          "caller": "AgentTrace",
+          "callee": "JSON.stringify(it.args).slice",
+          "lineNumber": 50
+        },
+        {
+          "caller": "AgentTrace",
+          "callee": "JSON.stringify",
+          "lineNumber": 50
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/ai/breakdown-modal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 136,
+      "nonEmptyLines": 131,
+      "functions": [
+        {
+          "name": "BreakdownModal",
+          "startLine": 9,
+          "endLine": 136,
+          "params": [
+            "{\r\n  board,\r\n  open,\r\n  onClose,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "BreakdownModal",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "BreakdownModal",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "useQueryClient",
+          "lineNumber": 23
+        },
+        {
+          "caller": "generate",
+          "callee": "e.preventDefault",
+          "lineNumber": 26
+        },
+        {
+          "caller": "generate",
+          "callee": "setBusy",
+          "lineNumber": 27
+        },
+        {
+          "caller": "generate",
+          "callee": "setError",
+          "lineNumber": 28
+        },
+        {
+          "caller": "generate",
+          "callee": "setPlan",
+          "lineNumber": 29
+        },
+        {
+          "caller": "generate",
+          "callee": "api.agentBreakdown",
+          "lineNumber": 31
+        },
+        {
+          "caller": "generate",
+          "callee": "setTimeout",
+          "lineNumber": 34
+        },
+        {
+          "caller": "generate",
+          "callee": "api.getRun",
+          "lineNumber": 35
+        },
+        {
+          "caller": "generate",
+          "callee": "setPlan",
+          "lineNumber": 37
+        },
+        {
+          "caller": "generate",
+          "callee": "setError",
+          "lineNumber": 41
+        },
+        {
+          "caller": "generate",
+          "callee": "setError",
+          "lineNumber": 46
+        },
+        {
+          "caller": "generate",
+          "callee": "setBusy",
+          "lineNumber": 48
+        },
+        {
+          "caller": "commit",
+          "callee": "setBusy",
+          "lineNumber": 54
+        },
+        {
+          "caller": "commit",
+          "callee": "api.createTask",
+          "lineNumber": 57
+        },
+        {
+          "caller": "commit",
+          "callee": "qc.invalidateQueries",
+          "lineNumber": 66
+        },
+        {
+          "caller": "commit",
+          "callee": "onClose",
+          "lineNumber": 67
+        },
+        {
+          "caller": "commit",
+          "callee": "setPlan",
+          "lineNumber": 68
+        },
+        {
+          "caller": "commit",
+          "callee": "setGoal",
+          "lineNumber": 69
+        },
+        {
+          "caller": "commit",
+          "callee": "setBusy",
+          "lineNumber": 71
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "setGoal",
+          "lineNumber": 85
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "setColumnId",
+          "lineNumber": 94
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "board.columns.map",
+          "lineNumber": 96
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "goal.trim",
+          "lineNumber": 104
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "(plan.subtasks || []).map",
+          "lineNumber": 114
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "(s.required_skills || []).join",
+          "lineNumber": 120
+        },
+        {
+          "caller": "BreakdownModal",
+          "callee": "setPlan",
+          "lineNumber": 126
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/ai/chat-panel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 309,
+      "nonEmptyLines": 293,
+      "functions": [
+        {
+          "name": "ChatPanel",
+          "startLine": 33,
+          "endLine": 262,
+          "params": [
+            "{ board, open, onClose }"
+          ]
+        },
+        {
+          "name": "isLowSignalPrompt",
+          "startLine": 264,
+          "endLine": 270,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "buildTaskIndex",
+          "startLine": 272,
+          "endLine": 278,
+          "params": [
+            "tasks"
+          ]
+        },
+        {
+          "name": "renderResult",
+          "startLine": 280,
+          "endLine": 309,
+          "params": [
+            "result"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ChatPanel",
+          "line": 33,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ChatPanel",
+          "callee": "useState",
+          "lineNumber": 34
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "useState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "useState",
+          "lineNumber": 36
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "useRef",
+          "lineNumber": 39
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "useQueryClient",
+          "lineNumber": 40
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "useAgentEvents",
+          "lineNumber": 44
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "setMessages",
+          "lineNumber": 46
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "next.findIndex",
+          "lineNumber": 48
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "trace.push",
+          "lineNumber": 53
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "trace.push",
+          "lineNumber": 62
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "renderResult",
+          "lineNumber": 73
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "qc.invalidateQueries",
+          "lineNumber": 74
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "qc.invalidateQueries",
+          "lineNumber": 75
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "useEffect",
+          "lineNumber": 85
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "scrollRef.current?.scrollTo",
+          "lineNumber": 86
+        },
+        {
+          "caller": "send",
+          "callee": "text.trim",
+          "lineNumber": 90
+        },
+        {
+          "caller": "send",
+          "callee": "isLowSignalPrompt",
+          "lineNumber": 91
+        },
+        {
+          "caller": "send",
+          "callee": "setMessages",
+          "lineNumber": 92
+        },
+        {
+          "caller": "send",
+          "callee": "setInput",
+          "lineNumber": 102
+        },
+        {
+          "caller": "send",
+          "callee": "setSubmitting",
+          "lineNumber": 105
+        },
+        {
+          "caller": "send",
+          "callee": "setInput",
+          "lineNumber": 106
+        },
+        {
+          "caller": "send",
+          "callee": "setMessages",
+          "lineNumber": 107
+        },
+        {
+          "caller": "send",
+          "callee": "buildTaskIndex",
+          "lineNumber": 109
+        },
+        {
+          "caller": "send",
+          "callee": "api.agentChat",
+          "lineNumber": 110
+        },
+        {
+          "caller": "send",
+          "callee": "setActiveRunId",
+          "lineNumber": 116
+        },
+        {
+          "caller": "send",
+          "callee": "setMessages",
+          "lineNumber": 117
+        },
+        {
+          "caller": "send",
+          "callee": "pollUntilDone",
+          "lineNumber": 119
+        },
+        {
+          "caller": "send",
+          "callee": "setMessages",
+          "lineNumber": 121
+        },
+        {
+          "caller": "send",
+          "callee": "setSubmitting",
+          "lineNumber": 123
+        },
+        {
+          "caller": "pollUntilDone",
+          "callee": "setTimeout",
+          "lineNumber": 129
+        },
+        {
+          "caller": "pollUntilDone",
+          "callee": "api.getRun",
+          "lineNumber": 131
+        },
+        {
+          "caller": "pollUntilDone",
+          "callee": "setMessages",
+          "lineNumber": 133
+        },
+        {
+          "caller": "pollUntilDone",
+          "callee": "next.findIndex",
+          "lineNumber": 135
+        },
+        {
+          "caller": "pollUntilDone",
+          "callee": "renderResult",
+          "lineNumber": 141
+        },
+        {
+          "caller": "pollUntilDone",
+          "callee": "detail.steps.map",
+          "lineNumber": 142
+        },
+        {
+          "caller": "pollUntilDone",
+          "callee": "qc.invalidateQueries",
+          "lineNumber": 153
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "board.tasks.slice(0, 20).map",
+          "lineNumber": 187
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "board.tasks.slice",
+          "lineNumber": 187
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "suggested.map",
+          "lineNumber": 200
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "send",
+          "lineNumber": 203
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "messages.map",
+          "lineNumber": 212
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "e.preventDefault",
+          "lineNumber": 243
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "send",
+          "lineNumber": 244
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "setInput",
+          "lineNumber": 250
+        },
+        {
+          "caller": "ChatPanel",
+          "callee": "input.trim",
+          "lineNumber": 254
+        },
+        {
+          "caller": "isLowSignalPrompt",
+          "callee": "(text || \"\").trim().toLowerCase",
+          "lineNumber": 265
+        },
+        {
+          "caller": "isLowSignalPrompt",
+          "callee": "(text || \"\").trim",
+          "lineNumber": 265
+        },
+        {
+          "caller": "isLowSignalPrompt",
+          "callee": "useful.some",
+          "lineNumber": 269
+        },
+        {
+          "caller": "isLowSignalPrompt",
+          "callee": "s.includes",
+          "lineNumber": 269
+        },
+        {
+          "caller": "buildTaskIndex",
+          "callee": "tasks.forEach",
+          "lineNumber": 274
+        },
+        {
+          "caller": "buildTaskIndex",
+          "callee": "String",
+          "lineNumber": 275
+        },
+        {
+          "caller": "renderResult",
+          "callee": "result.message.trim",
+          "lineNumber": 282
+        },
+        {
+          "caller": "renderResult",
+          "callee": "(result.alerts || [])\r\n      .map((a: any) => `• [${a.severity}] ${a.kind}: ${a.evidence}`)\r\n      .join",
+          "lineNumber": 285
+        },
+        {
+          "caller": "renderResult",
+          "callee": "(result.alerts || [])\r\n      .map",
+          "lineNumber": 285
+        },
+        {
+          "caller": "renderResult",
+          "callee": "`${result.summary}\\n${alerts}`.trim",
+          "lineNumber": 288
+        },
+        {
+          "caller": "renderResult",
+          "callee": "(result.plan.subtasks || [])\r\n      .map((s: any, i: number) => `${i + 1}. ${s.title} (${s.est_hours ?? \"?\"}h)`)\r\n      .join",
+          "lineNumber": 291
+        },
+        {
+          "caller": "renderResult",
+          "callee": "(result.plan.subtasks || [])\r\n      .map",
+          "lineNumber": 291
+        },
+        {
+          "caller": "renderResult",
+          "callee": "result.assignments.suggestions\r\n      .map((a: any) => `• ${a.user_id.slice(0, 8)} — điểm ${a.score} — ${a.reason}`)\r\n      .join",
+          "lineNumber": 297
+        },
+        {
+          "caller": "renderResult",
+          "callee": "result.assignments.suggestions\r\n      .map",
+          "lineNumber": 297
+        },
+        {
+          "caller": "renderResult",
+          "callee": "a.user_id.slice",
+          "lineNumber": 298
+        },
+        {
+          "caller": "renderResult",
+          "callee": "(result.executor.tool_calls || [])\r\n      .map((c: any) => `• ${c.tool}(${JSON.stringify(c.args).slice(0, 120)}) → ${c.ok ? \"thành công\" : \"lỗi\"}`)\r\n      .join",
+          "lineNumber": 303
+        },
+        {
+          "caller": "renderResult",
+          "callee": "(result.executor.tool_calls || [])\r\n      .map",
+          "lineNumber": 303
+        },
+        {
+          "caller": "renderResult",
+          "callee": "JSON.stringify(c.args).slice",
+          "lineNumber": 304
+        },
+        {
+          "caller": "renderResult",
+          "callee": "JSON.stringify",
+          "lineNumber": 304
+        },
+        {
+          "caller": "renderResult",
+          "callee": "`${result.executor.final}\\n${calls}`.trim",
+          "lineNumber": 306
+        },
+        {
+          "caller": "renderResult",
+          "callee": "JSON.stringify(result, null, 2).slice",
+          "lineNumber": 308
+        },
+        {
+          "caller": "renderResult",
+          "callee": "JSON.stringify",
+          "lineNumber": 308
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/ai/monitor-banner.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 83,
+      "functions": [
+        {
+          "name": "MonitorBanner",
+          "startLine": 7,
+          "endLine": 88,
+          "params": [
+            "{ boardId }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MonitorBanner",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MonitorBanner",
+          "callee": "useState",
+          "lineNumber": 8
+        },
+        {
+          "caller": "MonitorBanner",
+          "callee": "useState",
+          "lineNumber": 9
+        },
+        {
+          "caller": "MonitorBanner",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "run",
+          "callee": "setRunning",
+          "lineNumber": 13
+        },
+        {
+          "caller": "run",
+          "callee": "setError",
+          "lineNumber": 14
+        },
+        {
+          "caller": "run",
+          "callee": "api.agentMonitor",
+          "lineNumber": 16
+        },
+        {
+          "caller": "run",
+          "callee": "setTimeout",
+          "lineNumber": 18
+        },
+        {
+          "caller": "run",
+          "callee": "api.getRun",
+          "lineNumber": 19
+        },
+        {
+          "caller": "run",
+          "callee": "setResult",
+          "lineNumber": 21
+        },
+        {
+          "caller": "run",
+          "callee": "setError",
+          "lineNumber": 25
+        },
+        {
+          "caller": "run",
+          "callee": "setError",
+          "lineNumber": 30
+        },
+        {
+          "caller": "run",
+          "callee": "setRunning",
+          "lineNumber": 32
+        },
+        {
+          "caller": "MonitorBanner",
+          "callee": "setResult",
+          "lineNumber": 50
+        },
+        {
+          "caller": "MonitorBanner",
+          "callee": "setError",
+          "lineNumber": 50
+        },
+        {
+          "caller": "MonitorBanner",
+          "callee": "result.alerts.map",
+          "lineNumber": 67
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/ai/report-modal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 97,
+      "nonEmptyLines": 92,
+      "functions": [
+        {
+          "name": "ReportModal",
+          "startLine": 7,
+          "endLine": 75,
+          "params": [
+            "{\r\n  boardId,\r\n  open,\r\n  onClose,\r\n}"
+          ]
+        },
+        {
+          "name": "ReportPreview",
+          "startLine": 77,
+          "endLine": 97,
+          "params": [
+            "{ report }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ReportModal",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ReportModal",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "ReportModal",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "ReportModal",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "generate",
+          "callee": "setBusy",
+          "lineNumber": 21
+        },
+        {
+          "caller": "generate",
+          "callee": "setError",
+          "lineNumber": 22
+        },
+        {
+          "caller": "generate",
+          "callee": "setReport",
+          "lineNumber": 23
+        },
+        {
+          "caller": "generate",
+          "callee": "api.agentReport",
+          "lineNumber": 25
+        },
+        {
+          "caller": "generate",
+          "callee": "setTimeout",
+          "lineNumber": 27
+        },
+        {
+          "caller": "generate",
+          "callee": "api.getRun",
+          "lineNumber": 28
+        },
+        {
+          "caller": "generate",
+          "callee": "setReport",
+          "lineNumber": 30
+        },
+        {
+          "caller": "generate",
+          "callee": "setError",
+          "lineNumber": 34
+        },
+        {
+          "caller": "generate",
+          "callee": "setError",
+          "lineNumber": 39
+        },
+        {
+          "caller": "generate",
+          "callee": "setBusy",
+          "lineNumber": 41
+        },
+        {
+          "caller": "ReportPreview",
+          "callee": "report.split(/\\r?\\n/).map((l) => l.trim()).filter",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ReportPreview",
+          "callee": "report.split(/\\r?\\n/).map",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ReportPreview",
+          "callee": "report.split",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ReportPreview",
+          "callee": "l.trim",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ReportPreview",
+          "callee": "lines.map",
+          "lineNumber": 81
+        },
+        {
+          "caller": "ReportPreview",
+          "callee": "line.replace(/^[-*]\\s+/, \"\").replace",
+          "lineNumber": 82
+        },
+        {
+          "caller": "ReportPreview",
+          "callee": "line.replace",
+          "lineNumber": 82
+        },
+        {
+          "caller": "ReportPreview",
+          "callee": "line.startsWith",
+          "lineNumber": 83
+        },
+        {
+          "caller": "ReportPreview",
+          "callee": "line.startsWith",
+          "lineNumber": 86
+        },
+        {
+          "caller": "ReportPreview",
+          "callee": "line.startsWith",
+          "lineNumber": 86
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/ai/suggest-assignee.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 104,
+      "nonEmptyLines": 99,
+      "functions": [
+        {
+          "name": "SuggestAssigneeDialog",
+          "startLine": 9,
+          "endLine": 104,
+          "params": [
+            "{\r\n  boardId,\r\n  taskId,\r\n  onClose,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SuggestAssigneeDialog",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "useUsers",
+          "lineNumber": 21
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "useQueryClient",
+          "lineNumber": 22
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "useEffect",
+          "lineNumber": 25
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "setBusy",
+          "lineNumber": 28
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "setSuggestions",
+          "lineNumber": 29
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "setError",
+          "lineNumber": 30
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "(async () => {\r\n      try {\r\n        const run = await api.agentSuggestAssignee({ board_id: boardId, task_id: taskId });\r\n        for (let i = 0; i < 30; i++) {\r\n          await new Promise((r) => setTimeout(r, 1200));\r\n          if (cancelled) return;\r\n          const detail = await api.getRun(run.id);\r\n          if (detail.status === \"done\") {\r\n            setSuggestions(detail.result?.assignments?.suggestions || []);\r\n            break;\r\n          }\r\n          if (detail.status === \"error\") {\r\n            setError(detail.error || \"Thất bại\");\r\n            break;\r\n          }\r\n        }\r\n      } catch (e: any) {\r\n        setError(e?.message || \"Thất bại\");\r\n      } finally {\r\n        if (!cancelled) setBusy(false);\r\n      }\r\n    })",
+          "lineNumber": 31
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "api.agentSuggestAssignee",
+          "lineNumber": 33
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "setTimeout",
+          "lineNumber": 35
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "api.getRun",
+          "lineNumber": 37
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "setSuggestions",
+          "lineNumber": 39
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "setError",
+          "lineNumber": 43
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "setError",
+          "lineNumber": 48
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "setBusy",
+          "lineNumber": 50
+        },
+        {
+          "caller": "pick",
+          "callee": "api.assignUser",
+          "lineNumber": 60
+        },
+        {
+          "caller": "pick",
+          "callee": "qc.invalidateQueries",
+          "lineNumber": 61
+        },
+        {
+          "caller": "pick",
+          "callee": "onClose",
+          "lineNumber": 62
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "[...suggestions]\r\n            .sort((a, b) => Number(b.score || 0) - Number(a.score || 0))\r\n            .map",
+          "lineNumber": 77
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "[...suggestions]\r\n            .sort",
+          "lineNumber": 77
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "Number",
+          "lineNumber": 78
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "Number",
+          "lineNumber": 78
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "users.find",
+          "lineNumber": 80
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "Math.max",
+          "lineNumber": 81
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "Math.min",
+          "lineNumber": 81
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "Math.round",
+          "lineNumber": 81
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "Number",
+          "lineNumber": 81
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "(user?.display_name || s.user_id).slice(0, 1).toUpperCase",
+          "lineNumber": 85
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "(user?.display_name || s.user_id).slice",
+          "lineNumber": 85
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "s.user_id.slice",
+          "lineNumber": 89
+        },
+        {
+          "caller": "SuggestAssigneeDialog",
+          "callee": "pick",
+          "lineNumber": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/atoms/avatar.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "Avatar",
+          "startLine": 15,
+          "endLine": 34,
+          "params": [
+            "{ name, size = 'md', className = '' }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Avatar",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Avatar",
+          "callee": "name.trim",
+          "lineNumber": 16
+        },
+        {
+          "caller": "Avatar",
+          "callee": "safeName\r\n    .split(' ')\r\n    .map((w) => w[0] ?? '')\r\n    .join('')\r\n    .slice(0, 2)\r\n    .toUpperCase",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Avatar",
+          "callee": "safeName\r\n    .split(' ')\r\n    .map((w) => w[0] ?? '')\r\n    .join('')\r\n    .slice",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Avatar",
+          "callee": "safeName\r\n    .split(' ')\r\n    .map((w) => w[0] ?? '')\r\n    .join",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Avatar",
+          "callee": "safeName\r\n    .split(' ')\r\n    .map",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Avatar",
+          "callee": "safeName\r\n    .split",
+          "lineNumber": 17
+        },
+        {
+          "caller": "Avatar",
+          "callee": "safeName.charCodeAt",
+          "lineNumber": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

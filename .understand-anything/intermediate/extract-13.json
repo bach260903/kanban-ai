@@ -1,0 +1,215 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "audit/report.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 2893,
+      "nonEmptyLines": 2574,
+      "metrics": {}
+    },
+    {
+      "path": "audit/report.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 3162,
+      "nonEmptyLines": 3162,
+      "sections": [
+        {
+          "heading": "lighthouseVersion",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "finalDisplayedUrl",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "fetchTime",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "gatherMode",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "runWarnings",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "userAgent",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "environment",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "audits",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "configSettings",
+          "level": 1,
+          "line": 1134
+        },
+        {
+          "heading": "categories",
+          "level": 1,
+          "line": 1193
+        },
+        {
+          "heading": "categoryGroups",
+          "level": 1,
+          "line": 1700
+        },
+        {
+          "heading": "stackPacks",
+          "level": 1,
+          "line": 1780
+        },
+        {
+          "heading": "timing",
+          "level": 1,
+          "line": 1781
+        },
+        {
+          "heading": "i18n",
+          "level": 1,
+          "line": 2482
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "audit/workspace-report.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 2893,
+      "nonEmptyLines": 2574,
+      "metrics": {}
+    },
+    {
+      "path": "audit/workspace-report.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 5671,
+      "nonEmptyLines": 5671,
+      "sections": [
+        {
+          "heading": "lighthouseVersion",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "requestedUrl",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "mainDocumentUrl",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "finalDisplayedUrl",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "finalUrl",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "fetchTime",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "gatherMode",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "runWarnings",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "userAgent",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "environment",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "audits",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "configSettings",
+          "level": 1,
+          "line": 3057
+        },
+        {
+          "heading": "categories",
+          "level": 1,
+          "line": 3116
+        },
+        {
+          "heading": "categoryGroups",
+          "level": 1,
+          "line": 3728
+        },
+        {
+          "heading": "stackPacks",
+          "level": 1,
+          "line": 3808
+        },
+        {
+          "heading": "entities",
+          "level": 1,
+          "line": 3809
+        },
+        {
+          "heading": "timing",
+          "level": 1,
+          "line": 3810
+        },
+        {
+          "heading": "i18n",
+          "level": 1,
+          "line": 4769
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    }
+  ]
+}

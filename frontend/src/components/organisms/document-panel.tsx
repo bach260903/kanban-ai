@@ -142,7 +142,7 @@ export function DocumentPanel({
       }
     }
     void poll()
-    const id = window.setInterval(() => void poll(), 3000)
+    const id = window.setInterval(() => void poll(), 5000)
     return () => {
       cancelled = true
       window.clearInterval(id)

@@ -188,8 +188,6 @@ const BOARD_STATUSES: TaskStatus[] = [
   'in_progress',
   'review',
   'done',
-  'rejected',
-  'conflict',
 ]
 
 function findTaskStatus(columns: TaskColumns, taskId: string): TaskStatus | null {

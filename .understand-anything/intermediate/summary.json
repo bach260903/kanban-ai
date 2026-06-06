@@ -1,0 +1,60 @@
+{
+  "files": 675,
+  "filteredByIgnore": 0,
+  "categories": {
+    "docs": 103,
+    "config": 32,
+    "code": 439,
+    "data": 24,
+    "script": 17,
+    "markup": 57,
+    "infra": 3
+  },
+  "languages": {
+    "markdown": 92,
+    "json": 20,
+    "mdc": 1,
+    "csv": 24,
+    "python": 259,
+    "config": 6,
+    "unknown": 10,
+    "yaml": 6,
+    "shell": 4,
+    "powershell": 11,
+    "txt": 11,
+    "html": 3,
+    "mako": 1,
+    "dockerfile": 1,
+    "toml": 1,
+    "err": 1,
+    "pen": 1,
+    "batch": 2,
+    "exe": 41,
+    "typescript": 123,
+    "css": 54,
+    "javascript": 3
+  },
+  "nodes": {
+    "document": 127,
+    "config": 32,
+    "file": 513,
+    "function": 1257,
+    "class": 324,
+    "service": 3
+  },
+  "edges": {
+    "contains": 1581,
+    "imports": 1048
+  },
+  "layers": [
+    "Tooling",
+    "AI Agents",
+    "Evaluation and Audit",
+    "Backend",
+    "Project Root",
+    "Design",
+    "Documentation and Specs",
+    "Frontend"
+  ],
+  "tourSteps": 4
+}

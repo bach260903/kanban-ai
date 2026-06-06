@@ -1,0 +1,52 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".specify/extensions/git/commands/speckit.git.commit.md",
+                           "language":  "markdown",
+                           "sizeLines":  80,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/commands/speckit.git.feature.md",
+                           "language":  "markdown",
+                           "sizeLines":  67,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/commands/speckit.git.initialize.md",
+                           "language":  "markdown",
+                           "sizeLines":  49,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/commands/speckit.git.remote.md",
+                           "language":  "markdown",
+                           "sizeLines":  45,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/commands/speckit.git.validate.md",
+                           "language":  "markdown",
+                           "sizeLines":  49,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".specify/extensions/git/commands/speckit.git.commit.md":  [
+
+                                                                                       ],
+                            ".specify/extensions/git/commands/speckit.git.feature.md":  [
+
+                                                                                        ],
+                            ".specify/extensions/git/commands/speckit.git.initialize.md":  [
+
+                                                                                           ],
+                            ".specify/extensions/git/commands/speckit.git.remote.md":  [
+
+                                                                                       ],
+                            ".specify/extensions/git/commands/speckit.git.validate.md":  [
+
+                                                                                         ]
+                        }
+}

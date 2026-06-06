@@ -56,6 +56,7 @@ class PipelineRunOut(BaseModel):
     id: UUID
     project_id: UUID
     task_id: UUID | None
+    task_title: str | None = None
     status: str
     triggered_by: str | None
     branch_name: str | None

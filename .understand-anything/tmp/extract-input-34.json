@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "backend/app/llm/invoke_helpers.py",
+                           "language":  "python",
+                           "sizeLines":  274,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/main.py",
+                           "language":  "python",
+                           "sizeLines":  125,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/middleware/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  1,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/middleware/auth.py",
+                           "language":  "python",
+                           "sizeLines":  43,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/middleware/error_handlers.py",
+                           "language":  "python",
+                           "sizeLines":  44,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models.py",
+                           "language":  "python",
+                           "sizeLines":  241,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  94,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/agent_pause_state.py",
+                           "language":  "python",
+                           "sizeLines":  58,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/agent_run.py",
+                           "language":  "python",
+                           "sizeLines":  106,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/audit_log.py",
+                           "language":  "python",
+                           "sizeLines":  75,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/base.py",
+                           "language":  "python",
+                           "sizeLines":  7,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/codebase_map.py",
+                           "language":  "python",
+                           "sizeLines":  44,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/deployment_config.py",
+                           "language":  "python",
+                           "sizeLines":  87,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/deployment_health_check.py",
+                           "language":  "python",
+                           "sizeLines":  57,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/deployment_incident.py",
+                           "language":  "python",
+                           "sizeLines":  77,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/deployment.py",
+                           "language":  "python",
+                           "sizeLines":  93,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/diff.py",
+                           "language":  "python",
+                           "sizeLines":  66,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/document.py",
+                           "language":  "python",
+                           "sizeLines":  72,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/feedback.py",
+                           "language":  "python",
+                           "sizeLines":  50,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/github_config.py",
+                           "language":  "python",
+                           "sizeLines":  64,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/inline_comment.py",
+                           "language":  "python",
+                           "sizeLines":  43,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/intent.py",
+                           "language":  "python",
+                           "sizeLines":  37,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/invitation.py",
+                           "language":  "python",
+                           "sizeLines":  93,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/memory_entry.py",
+                           "language":  "python",
+                           "sizeLines":  54,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/notification.py",
+                           "language":  "python",
+                           "sizeLines":  76,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "backend/app/llm/invoke_helpers.py":  [
+
+                                                                  ],
+                            "backend/app/main.py":  [
+
+                                                    ],
+                            "backend/app/middleware/__init__.py":  [
+
+                                                                   ],
+                            "backend/app/middleware/auth.py":  [
+
+                                                               ],
+                            "backend/app/middleware/error_handlers.py":  [
+
+                                                                         ],
+                            "backend/app/models.py":  [
+
+                                                      ],
+                            "backend/app/models/__init__.py":  [
+
+                                                               ],
+                            "backend/app/models/agent_pause_state.py":  [
+
+                                                                        ],
+                            "backend/app/models/agent_run.py":  [
+
+                                                                ],
+                            "backend/app/models/audit_log.py":  [
+
+                                                                ],
+                            "backend/app/models/base.py":  [
+
+                                                           ],
+                            "backend/app/models/codebase_map.py":  [
+
+                                                                   ],
+                            "backend/app/models/deployment_config.py":  [
+
+                                                                        ],
+                            "backend/app/models/deployment_health_check.py":  [
+
+                                                                              ],
+                            "backend/app/models/deployment_incident.py":  [
+
+                                                                          ],
+                            "backend/app/models/deployment.py":  [
+
+                                                                 ],
+                            "backend/app/models/diff.py":  [
+
+                                                           ],
+                            "backend/app/models/document.py":  [
+
+                                                               ],
+                            "backend/app/models/feedback.py":  [
+
+                                                               ],
+                            "backend/app/models/github_config.py":  [
+
+                                                                    ],
+                            "backend/app/models/inline_comment.py":  [
+
+                                                                     ],
+                            "backend/app/models/intent.py":  [
+
+                                                             ],
+                            "backend/app/models/invitation.py":  [
+
+                                                                 ],
+                            "backend/app/models/memory_entry.py":  [
+
+                                                                   ],
+                            "backend/app/models/notification.py":  [
+
+                                                                   ]
+                        }
+}

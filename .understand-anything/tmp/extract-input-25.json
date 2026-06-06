@@ -1,0 +1,61 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "specs/001-neo-kanban/data-model.md",
+                           "language":  "markdown",
+                           "sizeLines":  372,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/001-neo-kanban/plan.md",
+                           "language":  "markdown",
+                           "sizeLines":  996,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/001-neo-kanban/research.md",
+                           "language":  "markdown",
+                           "sizeLines":  137,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/001-neo-kanban/spec.md",
+                           "language":  "markdown",
+                           "sizeLines":  480,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/001-neo-kanban/tasks.md",
+                           "language":  "markdown",
+                           "sizeLines":  531,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/001-neo-kanban/ui-spec.md",
+                           "language":  "markdown",
+                           "sizeLines":  1089,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            "specs/001-neo-kanban/data-model.md":  [
+
+                                                                   ],
+                            "specs/001-neo-kanban/plan.md":  [
+
+                                                             ],
+                            "specs/001-neo-kanban/research.md":  [
+
+                                                                 ],
+                            "specs/001-neo-kanban/spec.md":  [
+
+                                                             ],
+                            "specs/001-neo-kanban/tasks.md":  [
+
+                                                              ],
+                            "specs/001-neo-kanban/ui-spec.md":  [
+
+                                                                ]
+                        }
+}

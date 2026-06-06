@@ -63,6 +63,8 @@ function StepPills({ steps }: { steps: PipelineRunOut['steps'] }) {
   )
 }
 
+const ACTIVE_STATUSES = new Set(['queued', 'running'])
+
 export function PipelinePanel({ projectId, limit = 10 }: { projectId: string; limit?: number }) {
   const [runs, setRuns] = useState<PipelineRunOut[]>([])
   const [loading, setLoading] = useState(true)
@@ -78,6 +80,14 @@ export function PipelinePanel({ projectId, limit = 10 }: { projectId: string; li
         if (!cancelled) {
           setRuns(data)
           setError(null)
+          // Only keep polling if there are active runs
+          const hasActive = data.some((r) => ACTIVE_STATUSES.has(r.status))
+          if (!hasActive && timer.current) {
+            clearInterval(timer.current)
+            timer.current = null
+          } else if (hasActive && !timer.current) {
+            timer.current = setInterval(load, 8000)
+          }
         }
       } catch (err) {
         if (!cancelled) {
@@ -94,8 +104,8 @@ export function PipelinePanel({ projectId, limit = 10 }: { projectId: string; li
     }
 
     void load()
-    // Light polling so an in-progress run updates without a manual refresh.
-    timer.current = setInterval(load, 5000)
+    // Start polling — load() will stop it automatically when no active runs
+    timer.current = setInterval(load, 8000)
     return () => {
       cancelled = true
       if (timer.current) clearInterval(timer.current)
@@ -133,7 +143,7 @@ export function PipelinePanel({ projectId, limit = 10 }: { projectId: string; li
           <div className={styles.rowLeft}>
             <StatusBadge status={run.status} />
             <div>
-              <span className={styles.runId}>#{run.id.slice(0, 8)}</span>
+              <span className={styles.runId}>{run.task_title ?? `#${run.id.slice(0, 8)}`}</span>
               {run.branch_name && (
                 <span className={styles.branch}>
                   <GitBranch size={11} aria-hidden />

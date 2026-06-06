@@ -1,0 +1,41 @@
+# .understandignore - patterns for files/dirs to exclude from analysis
+# Syntax: same as .gitignore (globs, # comments, ! negation, trailing / for dirs)
+#
+# Keep secrets and generated dependencies out of the knowledge graph.
+
+# Dependencies and build outputs
+node_modules/
+dist/
+build/
+out/
+.next/
+.cache/
+.turbo/
+
+# Python caches and environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local environment and secrets
+.env
+!.env.example
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE and tooling state
+.idea/
+.vscode/
+.tools/
+
+# Local/generated analysis artifacts
+.understand-anything/intermediate/
+.understand-anything/tmp/

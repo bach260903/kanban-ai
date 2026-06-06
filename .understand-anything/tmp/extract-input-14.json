@@ -1,0 +1,79 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "backend/.env.example",
+                           "language":  "config",
+                           "sizeLines":  54,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "backend/README.md",
+                           "language":  "markdown",
+                           "sizeLines":  81,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "backend/alembic.ini",
+                           "language":  "config",
+                           "sizeLines":  40,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "backend/pyproject.toml",
+                           "language":  "toml",
+                           "sizeLines":  5,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "backend/pytest.ini",
+                           "language":  "config",
+                           "sizeLines":  5,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "backend/requirements-dev.txt",
+                           "language":  "txt",
+                           "sizeLines":  6,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "backend/requirements.txt",
+                           "language":  "txt",
+                           "sizeLines":  56,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "backend/run-dev.ps1",
+                           "language":  "powershell",
+                           "sizeLines":  6,
+                           "fileCategory":  "script"
+                       }
+                   ],
+    "batchImportData":  {
+                            "backend/.env.example":  [
+
+                                                     ],
+                            "backend/README.md":  [
+
+                                                  ],
+                            "backend/alembic.ini":  [
+
+                                                    ],
+                            "backend/pyproject.toml":  [
+
+                                                       ],
+                            "backend/pytest.ini":  [
+
+                                                   ],
+                            "backend/requirements-dev.txt":  [
+
+                                                             ],
+                            "backend/requirements.txt":  [
+
+                                                         ],
+                            "backend/run-dev.ps1":  [
+
+                                                    ]
+                        }
+}

@@ -26,7 +26,7 @@ function notifLabel(type: string): string {
   return NOTIFICATION_LABELS[type] ?? type
 }
 
-const POLL_INTERVAL_MS = 30_000
+const POLL_INTERVAL_MS = 60_000
 
 export function NotificationBell() {
   const [open, setOpen] = useState(false)

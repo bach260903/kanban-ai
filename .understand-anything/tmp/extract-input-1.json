@@ -1,0 +1,25 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "backend/.dockerignore",
+                           "language":  "unknown",
+                           "sizeLines":  13,
+                           "fileCategory":  "infra"
+                       },
+                       {
+                           "path":  "backend/Dockerfile",
+                           "language":  "dockerfile",
+                           "sizeLines":  12,
+                           "fileCategory":  "infra"
+                       }
+                   ],
+    "batchImportData":  {
+                            "backend/.dockerignore":  [
+
+                                                      ],
+                            "backend/Dockerfile":  [
+
+                                                   ]
+                        }
+}

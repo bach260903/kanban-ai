@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "evaluation/scripts/verify_groq.py",
+                           "language":  "python",
+                           "sizeLines":  41,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "extract_pdf.py",
+                           "language":  "python",
+                           "sizeLines":  14,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/_archive/app/(app)/boards/[id]/page.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  239,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/_archive/app/(app)/boards/page.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  86,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/_archive/app/(app)/layout.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  63,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/_archive/app/(app)/profile/page.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  118,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/_archive/app/globals.css",
+                           "language":  "css",
+                           "sizeLines":  92,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/_archive/app/layout.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  29,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/_archive/app/login/page.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  68,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/_archive/app/page.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  18,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/_archive/app/register/page.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  74,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/.prettierignore",
+                           "language":  "unknown",
+                           "sizeLines":  4,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/eslint.config.js",
+                           "language":  "javascript",
+                           "sizeLines":  20,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/next.config.mjs",
+                           "language":  "javascript",
+                           "sizeLines":  4,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/postcss.config.mjs",
+                           "language":  "javascript",
+                           "sizeLines":  9,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/public/robots.txt",
+                           "language":  "txt",
+                           "sizeLines":  3,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "frontend/src/App.css",
+                           "language":  "css",
+                           "sizeLines":  182,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/App.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  143,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/ai/agent-trace.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  63,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/ai/breakdown-modal.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  136,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/ai/chat-panel.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  309,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/ai/monitor-banner.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  88,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/ai/report-modal.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  97,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/ai/suggest-assignee.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  104,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/avatar.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  34,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "evaluation/scripts/verify_groq.py":  [
+
+                                                                  ],
+                            "extract_pdf.py":  [
+
+                                               ],
+                            "frontend/_archive/app/(app)/boards/[id]/page.tsx":  [
+
+                                                                                 ],
+                            "frontend/_archive/app/(app)/boards/page.tsx":  [
+
+                                                                            ],
+                            "frontend/_archive/app/(app)/layout.tsx":  [
+
+                                                                       ],
+                            "frontend/_archive/app/(app)/profile/page.tsx":  [
+
+                                                                             ],
+                            "frontend/_archive/app/globals.css":  [
+
+                                                                  ],
+                            "frontend/_archive/app/layout.tsx":  [
+
+                                                                 ],
+                            "frontend/_archive/app/login/page.tsx":  [
+
+                                                                     ],
+                            "frontend/_archive/app/page.tsx":  [
+
+                                                               ],
+                            "frontend/_archive/app/register/page.tsx":  [
+
+                                                                        ],
+                            "frontend/.prettierignore":  [
+
+                                                         ],
+                            "frontend/eslint.config.js":  [
+
+                                                          ],
+                            "frontend/next.config.mjs":  [
+
+                                                         ],
+                            "frontend/postcss.config.mjs":  [
+
+                                                            ],
+                            "frontend/public/robots.txt":  [
+
+                                                           ],
+                            "frontend/src/App.css":  [
+
+                                                     ],
+                            "frontend/src/App.tsx":  [
+
+                                                     ],
+                            "frontend/src/components/ai/agent-trace.tsx":  [
+
+                                                                           ],
+                            "frontend/src/components/ai/breakdown-modal.tsx":  [
+
+                                                                               ],
+                            "frontend/src/components/ai/chat-panel.tsx":  [
+
+                                                                          ],
+                            "frontend/src/components/ai/monitor-banner.tsx":  [
+
+                                                                              ],
+                            "frontend/src/components/ai/report-modal.tsx":  [
+
+                                                                            ],
+                            "frontend/src/components/ai/suggest-assignee.tsx":  [
+
+                                                                                ],
+                            "frontend/src/components/atoms/avatar.tsx":  [
+
+                                                                         ]
+                        }
+}

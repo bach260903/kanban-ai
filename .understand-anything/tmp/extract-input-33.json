@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "backend/app/api/v1/devops.py",
+                           "language":  "python",
+                           "sizeLines":  391,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/discord_bot.py",
+                           "language":  "python",
+                           "sizeLines":  579,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/documents.py",
+                           "language":  "python",
+                           "sizeLines":  354,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/github.py",
+                           "language":  "python",
+                           "sizeLines":  109,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/members.py",
+                           "language":  "python",
+                           "sizeLines":  428,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/memory.py",
+                           "language":  "python",
+                           "sizeLines":  85,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/notifications.py",
+                           "language":  "python",
+                           "sizeLines":  93,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/pause.py",
+                           "language":  "python",
+                           "sizeLines":  116,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/pipelines.py",
+                           "language":  "python",
+                           "sizeLines":  270,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/projects.py",
+                           "language":  "python",
+                           "sizeLines":  142,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/review.py",
+                           "language":  "python",
+                           "sizeLines":  51,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/tasks.py",
+                           "language":  "python",
+                           "sizeLines":  391,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/templates.py",
+                           "language":  "python",
+                           "sizeLines":  79,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/api/v1/webhooks.py",
+                           "language":  "python",
+                           "sizeLines":  186,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/config.py",
+                           "language":  "python",
+                           "sizeLines":  233,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/database.py",
+                           "language":  "python",
+                           "sizeLines":  50,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/dependencies.py",
+                           "language":  "python",
+                           "sizeLines":  122,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/deps.py",
+                           "language":  "python",
+                           "sizeLines":  21,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/exceptions.py",
+                           "language":  "python",
+                           "sizeLines":  33,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/git/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  19,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/git/branch_service.py",
+                           "language":  "python",
+                           "sizeLines":  172,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/git/git_service.py",
+                           "language":  "python",
+                           "sizeLines":  216,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/llm.py",
+                           "language":  "python",
+                           "sizeLines":  14,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/llm/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  47,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/llm/factory.py",
+                           "language":  "python",
+                           "sizeLines":  240,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "backend/app/api/v1/devops.py":  [
+
+                                                             ],
+                            "backend/app/api/v1/discord_bot.py":  [
+
+                                                                  ],
+                            "backend/app/api/v1/documents.py":  [
+
+                                                                ],
+                            "backend/app/api/v1/github.py":  [
+
+                                                             ],
+                            "backend/app/api/v1/members.py":  [
+
+                                                              ],
+                            "backend/app/api/v1/memory.py":  [
+
+                                                             ],
+                            "backend/app/api/v1/notifications.py":  [
+
+                                                                    ],
+                            "backend/app/api/v1/pause.py":  [
+
+                                                            ],
+                            "backend/app/api/v1/pipelines.py":  [
+
+                                                                ],
+                            "backend/app/api/v1/projects.py":  [
+
+                                                               ],
+                            "backend/app/api/v1/review.py":  [
+
+                                                             ],
+                            "backend/app/api/v1/tasks.py":  [
+
+                                                            ],
+                            "backend/app/api/v1/templates.py":  [
+
+                                                                ],
+                            "backend/app/api/v1/webhooks.py":  [
+
+                                                               ],
+                            "backend/app/config.py":  [
+
+                                                      ],
+                            "backend/app/database.py":  [
+
+                                                        ],
+                            "backend/app/dependencies.py":  [
+
+                                                            ],
+                            "backend/app/deps.py":  [
+
+                                                    ],
+                            "backend/app/exceptions.py":  [
+
+                                                          ],
+                            "backend/app/git/__init__.py":  [
+
+                                                            ],
+                            "backend/app/git/branch_service.py":  [
+
+                                                                  ],
+                            "backend/app/git/git_service.py":  [
+
+                                                               ],
+                            "backend/app/llm.py":  [
+
+                                                   ],
+                            "backend/app/llm/__init__.py":  [
+
+                                                            ],
+                            "backend/app/llm/factory.py":  [
+
+                                                           ]
+                        }
+}

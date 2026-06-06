@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "frontend/src/components/atoms/backend-badge.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  29,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/badge.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  62,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/button.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  26,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/notification-badge.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  14,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/role-badge.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  18,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/score-gauge.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  27,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/spinner.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  16,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/text-input.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  31,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/assign-member.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  99,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/auth-guard.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  26,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/backend-selector.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  73,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/confirm-dialog.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  54,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/create-task-modal.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  155,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/dependency-badge.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  36,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/diff-viewer.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  140,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/document-editor.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  67,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/empty-state.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  38,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/forgot-password-modal.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  458,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/inline-comment-overlay.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  212,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/notification-bell.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  177,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/notification-panel.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  187,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/pause-resume-controls.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  112,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/save-as-template-modal.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  164,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/task-card.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  370,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/template-selector.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  91,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "frontend/src/components/atoms/backend-badge.tsx":  [
+
+                                                                                ],
+                            "frontend/src/components/atoms/badge.tsx":  [
+
+                                                                        ],
+                            "frontend/src/components/atoms/button.tsx":  [
+
+                                                                         ],
+                            "frontend/src/components/atoms/notification-badge.tsx":  [
+
+                                                                                     ],
+                            "frontend/src/components/atoms/role-badge.tsx":  [
+
+                                                                             ],
+                            "frontend/src/components/atoms/score-gauge.tsx":  [
+
+                                                                              ],
+                            "frontend/src/components/atoms/spinner.tsx":  [
+
+                                                                          ],
+                            "frontend/src/components/atoms/text-input.tsx":  [
+
+                                                                             ],
+                            "frontend/src/components/molecules/assign-member.tsx":  [
+
+                                                                                    ],
+                            "frontend/src/components/molecules/auth-guard.tsx":  [
+
+                                                                                 ],
+                            "frontend/src/components/molecules/backend-selector.tsx":  [
+
+                                                                                       ],
+                            "frontend/src/components/molecules/confirm-dialog.tsx":  [
+
+                                                                                     ],
+                            "frontend/src/components/molecules/create-task-modal.tsx":  [
+
+                                                                                        ],
+                            "frontend/src/components/molecules/dependency-badge.tsx":  [
+
+                                                                                       ],
+                            "frontend/src/components/molecules/diff-viewer.tsx":  [
+
+                                                                                  ],
+                            "frontend/src/components/molecules/document-editor.tsx":  [
+
+                                                                                      ],
+                            "frontend/src/components/molecules/empty-state.tsx":  [
+
+                                                                                  ],
+                            "frontend/src/components/molecules/forgot-password-modal.tsx":  [
+
+                                                                                            ],
+                            "frontend/src/components/molecules/inline-comment-overlay.tsx":  [
+
+                                                                                             ],
+                            "frontend/src/components/molecules/notification-bell.tsx":  [
+
+                                                                                        ],
+                            "frontend/src/components/molecules/notification-panel.tsx":  [
+
+                                                                                         ],
+                            "frontend/src/components/molecules/pause-resume-controls.tsx":  [
+
+                                                                                            ],
+                            "frontend/src/components/molecules/save-as-template-modal.tsx":  [
+
+                                                                                             ],
+                            "frontend/src/components/molecules/task-card.tsx":  [
+
+                                                                                ],
+                            "frontend/src/components/molecules/template-selector.tsx":  [
+
+                                                                                        ]
+                        }
+}

@@ -1,0 +1,95 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 11,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "frontend/src/components/molecules/auth-guard.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 7,
+      "nonEmptyLines": 7,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/molecules/confirm-dialog.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 42,
+      "nonEmptyLines": 38,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/molecules/diff-viewer.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 33,
+      "nonEmptyLines": 30,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/molecules/empty-state.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 67,
+      "nonEmptyLines": 60,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/molecules/forgot-password-modal.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 499,
+      "nonEmptyLines": 433,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/molecules/inline-comment-overlay.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 63,
+      "nonEmptyLines": 56,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/molecules/notification-bell.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 191,
+      "nonEmptyLines": 166,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/molecules/notification-panel.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 156,
+      "nonEmptyLines": 136,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/molecules/pause-resume-controls.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 77,
+      "nonEmptyLines": 68,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/molecules/task-card.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 350,
+      "nonEmptyLines": 175,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/components/molecules/terms-modal.module.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 191,
+      "nonEmptyLines": 168,
+      "metrics": {}
+    }
+  ]
+}

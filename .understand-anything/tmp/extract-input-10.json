@@ -1,0 +1,34 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".specify/integrations/claude.manifest.json",
+                           "language":  "json",
+                           "sizeLines":  16,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  ".specify/integrations/cursor-agent.manifest.json",
+                           "language":  "json",
+                           "sizeLines":  16,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  ".specify/integrations/speckit.manifest.json",
+                           "language":  "json",
+                           "sizeLines":  17,
+                           "fileCategory":  "config"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".specify/integrations/claude.manifest.json":  [
+
+                                                                           ],
+                            ".specify/integrations/cursor-agent.manifest.json":  [
+
+                                                                                 ],
+                            ".specify/integrations/speckit.manifest.json":  [
+
+                                                                            ]
+                        }
+}

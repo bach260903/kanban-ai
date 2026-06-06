@@ -1,0 +1,136 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "evaluation/datasets/planner/001.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 19,
+      "nonEmptyLines": 19,
+      "sections": [
+        {
+          "heading": "id",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "intent",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "input",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "gold",
+          "level": 1,
+          "line": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "evaluation/datasets/planner/002.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 18,
+      "nonEmptyLines": 18,
+      "sections": [
+        {
+          "heading": "id",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "intent",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "input",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "gold",
+          "level": 1,
+          "line": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "evaluation/datasets/planner/003.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 19,
+      "nonEmptyLines": 19,
+      "sections": [
+        {
+          "heading": "id",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "intent",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "input",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "gold",
+          "level": 1,
+          "line": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "evaluation/datasets/planner/_README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "sections": [
+        {
+          "heading": "Planner dataset",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    }
+  ]
+}

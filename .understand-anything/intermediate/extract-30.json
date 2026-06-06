@@ -1,0 +1,6298 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".cursor/skills/speckit-plan/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 147,
+      "nonEmptyLines": 113,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "Phases",
+          "level": 2,
+          "line": 99
+        },
+        {
+          "heading": "Phase 0: Outline & Research",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "Phase 1: Design & Contracts",
+          "level": 3,
+          "line": 124
+        },
+        {
+          "heading": "Key rules",
+          "level": 2,
+          "line": 144
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": ".cursor/skills/speckit-specify/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 334,
+      "nonEmptyLines": 259,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "Quick Guidelines",
+          "level": 2,
+          "line": 275
+        },
+        {
+          "heading": "Section Requirements",
+          "level": 3,
+          "line": 282
+        },
+        {
+          "heading": "For AI Generation",
+          "level": 3,
+          "line": 288
+        },
+        {
+          "heading": "Success Criteria Guidelines",
+          "level": 3,
+          "line": 313
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": ".cursor/skills/speckit-tasks/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 197,
+      "nonEmptyLines": 158,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "Task Generation Rules",
+          "level": 2,
+          "line": 127
+        },
+        {
+          "heading": "Checklist Format (REQUIRED)",
+          "level": 3,
+          "line": 133
+        },
+        {
+          "heading": "Task Organization",
+          "level": 3,
+          "line": 165
+        },
+        {
+          "heading": "Phase Structure",
+          "level": 3,
+          "line": 190
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": ".cursor/skills/speckit-taskstoissues/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 101,
+      "nonEmptyLines": 80,
+      "sections": [
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Pre-Execution Checks",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Outline",
+          "level": 2,
+          "line": 53
+        },
+        {
+          "heading": "Post-Execution Checks",
+          "level": 2,
+          "line": 71
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/scripts/core.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 253,
+      "nonEmptyLines": 210,
+      "functions": [
+        {
+          "name": "_load_csv",
+          "startLine": 159,
+          "endLine": 162,
+          "params": [
+            "filepath"
+          ]
+        },
+        {
+          "name": "_search_csv",
+          "startLine": 165,
+          "endLine": 187,
+          "params": [
+            "filepath",
+            "search_cols",
+            "output_cols",
+            "query",
+            "max_results"
+          ]
+        },
+        {
+          "name": "detect_domain",
+          "startLine": 190,
+          "endLine": 209,
+          "params": [
+            "query"
+          ]
+        },
+        {
+          "name": "search",
+          "startLine": 212,
+          "endLine": 231,
+          "params": [
+            "query",
+            "domain",
+            "max_results"
+          ]
+        },
+        {
+          "name": "search_stack",
+          "startLine": 234,
+          "endLine": 253,
+          "params": [
+            "query",
+            "stack",
+            "max_results"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "BM25",
+          "startLine": 96,
+          "endLine": 155,
+          "methods": [
+            "__init__",
+            "tokenize",
+            "fit",
+            "score"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BM25",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "_load_csv",
+          "line": 159,
+          "isDefault": false
+        },
+        {
+          "name": "_search_csv",
+          "line": 165,
+          "isDefault": false
+        },
+        {
+          "name": "detect_domain",
+          "line": 190,
+          "isDefault": false
+        },
+        {
+          "name": "search",
+          "line": 212,
+          "isDefault": false
+        },
+        {
+          "name": "search_stack",
+          "line": 234,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "__init__",
+          "callee": "defaultdict",
+          "lineNumber": 106
+        },
+        {
+          "caller": "tokenize",
+          "callee": "re.sub",
+          "lineNumber": 111
+        },
+        {
+          "caller": "tokenize",
+          "callee": "str(text).lower",
+          "lineNumber": 111
+        },
+        {
+          "caller": "tokenize",
+          "callee": "str",
+          "lineNumber": 111
+        },
+        {
+          "caller": "tokenize",
+          "callee": "text.split",
+          "lineNumber": 112
+        },
+        {
+          "caller": "tokenize",
+          "callee": "len",
+          "lineNumber": 112
+        },
+        {
+          "caller": "fit",
+          "callee": "self.tokenize",
+          "lineNumber": 116
+        },
+        {
+          "caller": "fit",
+          "callee": "len",
+          "lineNumber": 117
+        },
+        {
+          "caller": "fit",
+          "callee": "len",
+          "lineNumber": 120
+        },
+        {
+          "caller": "fit",
+          "callee": "sum",
+          "lineNumber": 121
+        },
+        {
+          "caller": "fit",
+          "callee": "set",
+          "lineNumber": 124
+        },
+        {
+          "caller": "fit",
+          "callee": "seen.add",
+          "lineNumber": 128
+        },
+        {
+          "caller": "fit",
+          "callee": "self.doc_freqs.items",
+          "lineNumber": 130
+        },
+        {
+          "caller": "fit",
+          "callee": "log",
+          "lineNumber": 131
+        },
+        {
+          "caller": "score",
+          "callee": "self.tokenize",
+          "lineNumber": 135
+        },
+        {
+          "caller": "score",
+          "callee": "enumerate",
+          "lineNumber": 138
+        },
+        {
+          "caller": "score",
+          "callee": "defaultdict",
+          "lineNumber": 141
+        },
+        {
+          "caller": "score",
+          "callee": "scores.append",
+          "lineNumber": 153
+        },
+        {
+          "caller": "score",
+          "callee": "sorted",
+          "lineNumber": 155
+        },
+        {
+          "caller": "_load_csv",
+          "callee": "open",
+          "lineNumber": 161
+        },
+        {
+          "caller": "_load_csv",
+          "callee": "list",
+          "lineNumber": 162
+        },
+        {
+          "caller": "_load_csv",
+          "callee": "csv.DictReader",
+          "lineNumber": 162
+        },
+        {
+          "caller": "_search_csv",
+          "callee": "filepath.exists",
+          "lineNumber": 167
+        },
+        {
+          "caller": "_search_csv",
+          "callee": "_load_csv",
+          "lineNumber": 170
+        },
+        {
+          "caller": "_search_csv",
+          "callee": "\" \".join",
+          "lineNumber": 173
+        },
+        {
+          "caller": "_search_csv",
+          "callee": "str",
+          "lineNumber": 173
+        },
+        {
+          "caller": "_search_csv",
+          "callee": "row.get",
+          "lineNumber": 173
+        },
+        {
+          "caller": "_search_csv",
+          "callee": "BM25",
+          "lineNumber": 176
+        },
+        {
+          "caller": "_search_csv",
+          "callee": "bm25.fit",
+          "lineNumber": 177
+        },
+        {
+          "caller": "_search_csv",
+          "callee": "bm25.score",
+          "lineNumber": 178
+        },
+        {
+          "caller": "_search_csv",
+          "callee": "results.append",
+          "lineNumber": 185
+        },
+        {
+          "caller": "_search_csv",
+          "callee": "row.get",
+          "lineNumber": 185
+        },
+        {
+          "caller": "detect_domain",
+          "callee": "query.lower",
+          "lineNumber": 192
+        },
+        {
+          "caller": "detect_domain",
+          "callee": "sum",
+          "lineNumber": 207
+        },
+        {
+          "caller": "detect_domain",
+          "callee": "domain_keywords.items",
+          "lineNumber": 207
+        },
+        {
+          "caller": "detect_domain",
+          "callee": "max",
+          "lineNumber": 208
+        },
+        {
+          "caller": "search",
+          "callee": "detect_domain",
+          "lineNumber": 215
+        },
+        {
+          "caller": "search",
+          "callee": "CSV_CONFIG.get",
+          "lineNumber": 217
+        },
+        {
+          "caller": "search",
+          "callee": "filepath.exists",
+          "lineNumber": 220
+        },
+        {
+          "caller": "search",
+          "callee": "_search_csv",
+          "lineNumber": 223
+        },
+        {
+          "caller": "search",
+          "callee": "len",
+          "lineNumber": 229
+        },
+        {
+          "caller": "search_stack",
+          "callee": "', '.join",
+          "lineNumber": 237
+        },
+        {
+          "caller": "search_stack",
+          "callee": "filepath.exists",
+          "lineNumber": 241
+        },
+        {
+          "caller": "search_stack",
+          "callee": "_search_csv",
+          "lineNumber": 244
+        },
+        {
+          "caller": "search_stack",
+          "callee": "len",
+          "lineNumber": 251
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/scripts/design_system.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1067,
+      "nonEmptyLines": 926,
+      "functions": [
+        {
+          "name": "format_ascii_box",
+          "startLine": 242,
+          "endLine": 364,
+          "params": [
+            "design_system"
+          ]
+        },
+        {
+          "name": "format_markdown",
+          "startLine": 367,
+          "endLine": 458,
+          "params": [
+            "design_system"
+          ]
+        },
+        {
+          "name": "generate_design_system",
+          "startLine": 462,
+          "endLine": 487,
+          "params": [
+            "query",
+            "project_name",
+            "output_format",
+            "persist",
+            "page",
+            "output_dir"
+          ]
+        },
+        {
+          "name": "persist_design_system",
+          "startLine": 491,
+          "endLine": 539,
+          "params": [
+            "design_system",
+            "page",
+            "output_dir",
+            "page_query"
+          ]
+        },
+        {
+          "name": "format_master_md",
+          "startLine": 542,
+          "endLine": 802,
+          "params": [
+            "design_system"
+          ]
+        },
+        {
+          "name": "format_page_override_md",
+          "startLine": 805,
+          "endLine": 911,
+          "params": [
+            "design_system",
+            "page_name",
+            "page_query"
+          ]
+        },
+        {
+          "name": "_generate_intelligent_overrides",
+          "startLine": 914,
+          "endLine": 1017,
+          "params": [
+            "page_name",
+            "page_query",
+            "design_system"
+          ]
+        },
+        {
+          "name": "_detect_page_type",
+          "startLine": 1020,
+          "endLine": 1052,
+          "params": [
+            "context",
+            "style_results"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "DesignSystemGenerator",
+          "startLine": 37,
+          "endLine": 236,
+          "methods": [
+            "__init__",
+            "_load_reasoning",
+            "_multi_domain_search",
+            "_find_reasoning_rule",
+            "_apply_reasoning",
+            "_select_best_match",
+            "_extract_results",
+            "generate"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "DesignSystemGenerator",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "format_ascii_box",
+          "line": 242,
+          "isDefault": false
+        },
+        {
+          "name": "format_markdown",
+          "line": 367,
+          "isDefault": false
+        },
+        {
+          "name": "generate_design_system",
+          "line": 462,
+          "isDefault": false
+        },
+        {
+          "name": "persist_design_system",
+          "line": 491,
+          "isDefault": false
+        },
+        {
+          "name": "format_master_md",
+          "line": 542,
+          "isDefault": false
+        },
+        {
+          "name": "format_page_override_md",
+          "line": 805,
+          "isDefault": false
+        },
+        {
+          "name": "_generate_intelligent_overrides",
+          "line": 914,
+          "isDefault": false
+        },
+        {
+          "name": "_detect_page_type",
+          "line": 1020,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "__init__",
+          "callee": "self._load_reasoning",
+          "lineNumber": 41
+        },
+        {
+          "caller": "_load_reasoning",
+          "callee": "filepath.exists",
+          "lineNumber": 46
+        },
+        {
+          "caller": "_load_reasoning",
+          "callee": "open",
+          "lineNumber": 48
+        },
+        {
+          "caller": "_load_reasoning",
+          "callee": "list",
+          "lineNumber": 49
+        },
+        {
+          "caller": "_load_reasoning",
+          "callee": "csv.DictReader",
+          "lineNumber": 49
+        },
+        {
+          "caller": "_multi_domain_search",
+          "callee": "SEARCH_CONFIG.items",
+          "lineNumber": 54
+        },
+        {
+          "caller": "_multi_domain_search",
+          "callee": "\" \".join",
+          "lineNumber": 57
+        },
+        {
+          "caller": "_multi_domain_search",
+          "callee": "search",
+          "lineNumber": 59
+        },
+        {
+          "caller": "_multi_domain_search",
+          "callee": "search",
+          "lineNumber": 61
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "category.lower",
+          "lineNumber": 66
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "rule.get(\"UI_Category\", \"\").lower",
+          "lineNumber": 70
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "rule.get",
+          "lineNumber": 70
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "rule.get(\"UI_Category\", \"\").lower",
+          "lineNumber": 75
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "rule.get",
+          "lineNumber": 75
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "rule.get(\"UI_Category\", \"\").lower",
+          "lineNumber": 81
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "rule.get",
+          "lineNumber": 81
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "ui_cat.replace(\"/\", \" \").replace(\"-\", \" \").split",
+          "lineNumber": 82
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "ui_cat.replace(\"/\", \" \").replace",
+          "lineNumber": 82
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "ui_cat.replace",
+          "lineNumber": 82
+        },
+        {
+          "caller": "_find_reasoning_rule",
+          "callee": "any",
+          "lineNumber": 83
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "self._find_reasoning_rule",
+          "lineNumber": 90
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "json.loads",
+          "lineNumber": 107
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "rule.get",
+          "lineNumber": 107
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "rule.get",
+          "lineNumber": 112
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "s.strip",
+          "lineNumber": 113
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "rule.get(\"Style_Priority\", \"\").split",
+          "lineNumber": 113
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "rule.get",
+          "lineNumber": 113
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "rule.get",
+          "lineNumber": 114
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "rule.get",
+          "lineNumber": 115
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "rule.get",
+          "lineNumber": 116
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "rule.get",
+          "lineNumber": 117
+        },
+        {
+          "caller": "_apply_reasoning",
+          "callee": "rule.get",
+          "lineNumber": 119
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "priority.lower().strip",
+          "lineNumber": 132
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "priority.lower",
+          "lineNumber": 132
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "result.get(\"Style Category\", \"\").lower",
+          "lineNumber": 134
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "result.get",
+          "lineNumber": 134
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "str(result).lower",
+          "lineNumber": 141
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "str",
+          "lineNumber": 141
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "kw.lower().strip",
+          "lineNumber": 144
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "kw.lower",
+          "lineNumber": 144
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "result.get(\"Style Category\", \"\").lower",
+          "lineNumber": 146
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "result.get",
+          "lineNumber": 146
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "result.get(\"Keywords\", \"\").lower",
+          "lineNumber": 149
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "result.get",
+          "lineNumber": 149
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "scored.append",
+          "lineNumber": 154
+        },
+        {
+          "caller": "_select_best_match",
+          "callee": "scored.sort",
+          "lineNumber": 156
+        },
+        {
+          "caller": "_extract_results",
+          "callee": "search_result.get",
+          "lineNumber": 161
+        },
+        {
+          "caller": "generate",
+          "callee": "search",
+          "lineNumber": 166
+        },
+        {
+          "caller": "generate",
+          "callee": "product_result.get",
+          "lineNumber": 167
+        },
+        {
+          "caller": "generate",
+          "callee": "product_results[0].get",
+          "lineNumber": 170
+        },
+        {
+          "caller": "generate",
+          "callee": "self._apply_reasoning",
+          "lineNumber": 173
+        },
+        {
+          "caller": "generate",
+          "callee": "reasoning.get",
+          "lineNumber": 174
+        },
+        {
+          "caller": "generate",
+          "callee": "self._multi_domain_search",
+          "lineNumber": 177
+        },
+        {
+          "caller": "generate",
+          "callee": "self._extract_results",
+          "lineNumber": 181
+        },
+        {
+          "caller": "generate",
+          "callee": "search_results.get",
+          "lineNumber": 181
+        },
+        {
+          "caller": "generate",
+          "callee": "self._extract_results",
+          "lineNumber": 182
+        },
+        {
+          "caller": "generate",
+          "callee": "search_results.get",
+          "lineNumber": 182
+        },
+        {
+          "caller": "generate",
+          "callee": "self._extract_results",
+          "lineNumber": 183
+        },
+        {
+          "caller": "generate",
+          "callee": "search_results.get",
+          "lineNumber": 183
+        },
+        {
+          "caller": "generate",
+          "callee": "self._extract_results",
+          "lineNumber": 184
+        },
+        {
+          "caller": "generate",
+          "callee": "search_results.get",
+          "lineNumber": 184
+        },
+        {
+          "caller": "generate",
+          "callee": "self._select_best_match",
+          "lineNumber": 186
+        },
+        {
+          "caller": "generate",
+          "callee": "reasoning.get",
+          "lineNumber": 186
+        },
+        {
+          "caller": "generate",
+          "callee": "best_style.get",
+          "lineNumber": 193
+        },
+        {
+          "caller": "generate",
+          "callee": "reasoning.get",
+          "lineNumber": 194
+        },
+        {
+          "caller": "generate",
+          "callee": "query.upper",
+          "lineNumber": 198
+        },
+        {
+          "caller": "generate",
+          "callee": "best_landing.get",
+          "lineNumber": 201
+        },
+        {
+          "caller": "generate",
+          "callee": "reasoning.get",
+          "lineNumber": 201
+        },
+        {
+          "caller": "generate",
+          "callee": "best_landing.get",
+          "lineNumber": 202
+        },
+        {
+          "caller": "generate",
+          "callee": "best_landing.get",
+          "lineNumber": 203
+        },
+        {
+          "caller": "generate",
+          "callee": "best_landing.get",
+          "lineNumber": 204
+        },
+        {
+          "caller": "generate",
+          "callee": "best_landing.get",
+          "lineNumber": 205
+        },
+        {
+          "caller": "generate",
+          "callee": "best_style.get",
+          "lineNumber": 208
+        },
+        {
+          "caller": "generate",
+          "callee": "best_style.get",
+          "lineNumber": 209
+        },
+        {
+          "caller": "generate",
+          "callee": "best_style.get",
+          "lineNumber": 211
+        },
+        {
+          "caller": "generate",
+          "callee": "best_style.get",
+          "lineNumber": 212
+        },
+        {
+          "caller": "generate",
+          "callee": "best_style.get",
+          "lineNumber": 213
+        },
+        {
+          "caller": "generate",
+          "callee": "best_style.get",
+          "lineNumber": 214
+        },
+        {
+          "caller": "generate",
+          "callee": "best_color.get",
+          "lineNumber": 217
+        },
+        {
+          "caller": "generate",
+          "callee": "best_color.get",
+          "lineNumber": 218
+        },
+        {
+          "caller": "generate",
+          "callee": "best_color.get",
+          "lineNumber": 219
+        },
+        {
+          "caller": "generate",
+          "callee": "best_color.get",
+          "lineNumber": 220
+        },
+        {
+          "caller": "generate",
+          "callee": "best_color.get",
+          "lineNumber": 221
+        },
+        {
+          "caller": "generate",
+          "callee": "best_color.get",
+          "lineNumber": 222
+        },
+        {
+          "caller": "generate",
+          "callee": "best_typography.get",
+          "lineNumber": 225
+        },
+        {
+          "caller": "generate",
+          "callee": "best_typography.get",
+          "lineNumber": 226
+        },
+        {
+          "caller": "generate",
+          "callee": "best_typography.get",
+          "lineNumber": 227
+        },
+        {
+          "caller": "generate",
+          "callee": "reasoning.get",
+          "lineNumber": 227
+        },
+        {
+          "caller": "generate",
+          "callee": "best_typography.get",
+          "lineNumber": 228
+        },
+        {
+          "caller": "generate",
+          "callee": "best_typography.get",
+          "lineNumber": 229
+        },
+        {
+          "caller": "generate",
+          "callee": "best_typography.get",
+          "lineNumber": 230
+        },
+        {
+          "caller": "generate",
+          "callee": "reasoning.get",
+          "lineNumber": 233
+        },
+        {
+          "caller": "generate",
+          "callee": "reasoning.get",
+          "lineNumber": 234
+        },
+        {
+          "caller": "generate",
+          "callee": "reasoning.get",
+          "lineNumber": 235
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "design_system.get",
+          "lineNumber": 244
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "design_system.get",
+          "lineNumber": 245
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "design_system.get",
+          "lineNumber": 246
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "design_system.get",
+          "lineNumber": 247
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "design_system.get",
+          "lineNumber": 248
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "design_system.get",
+          "lineNumber": 249
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "design_system.get",
+          "lineNumber": 250
+        },
+        {
+          "caller": "wrap_text",
+          "callee": "text.split",
+          "lineNumber": 256
+        },
+        {
+          "caller": "wrap_text",
+          "callee": "len",
+          "lineNumber": 260
+        },
+        {
+          "caller": "wrap_text",
+          "callee": "len",
+          "lineNumber": 260
+        },
+        {
+          "caller": "wrap_text",
+          "callee": "lines.append",
+          "lineNumber": 264
+        },
+        {
+          "caller": "wrap_text",
+          "callee": "lines.append",
+          "lineNumber": 267
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "pattern.get(\"sections\", \"\").split",
+          "lineNumber": 271
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "pattern.get",
+          "lineNumber": 271
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "s.strip",
+          "lineNumber": 272
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "s.strip",
+          "lineNumber": 272
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 278
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 279
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|  TARGET: {project} - RECOMMENDED DESIGN SYSTEM\".ljust",
+          "lineNumber": 279
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 280
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 281
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 284
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|  PATTERN: {pattern.get('name', '')}\".ljust",
+          "lineNumber": 284
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "pattern.get",
+          "lineNumber": 284
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "pattern.get",
+          "lineNumber": 285
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 286
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     Conversion: {pattern.get('conversion', '')}\".ljust",
+          "lineNumber": 286
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "pattern.get",
+          "lineNumber": 286
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "pattern.get",
+          "lineNumber": 287
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 288
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     CTA: {pattern.get('cta_placement', '')}\".ljust",
+          "lineNumber": 288
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "pattern.get",
+          "lineNumber": 288
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 289
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "\"|     Sections:\".ljust",
+          "lineNumber": 289
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "enumerate",
+          "lineNumber": 290
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 291
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|       {i}. {section}\".ljust",
+          "lineNumber": 291
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 292
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 295
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|  STYLE: {style.get('name', '')}\".ljust",
+          "lineNumber": 295
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "style.get",
+          "lineNumber": 295
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "style.get",
+          "lineNumber": 296
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "wrap_text",
+          "lineNumber": 297
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "style.get",
+          "lineNumber": 297
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 298
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "line.ljust",
+          "lineNumber": 298
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "style.get",
+          "lineNumber": 299
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "wrap_text",
+          "lineNumber": 300
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "style.get",
+          "lineNumber": 300
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 301
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "line.ljust",
+          "lineNumber": 301
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "style.get",
+          "lineNumber": 302
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "style.get",
+          "lineNumber": 302
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "style.get",
+          "lineNumber": 303
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "style.get",
+          "lineNumber": 303
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 304
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     {perf_a11y}\".ljust",
+          "lineNumber": 304
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 305
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 308
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "\"|  COLORS:\".ljust",
+          "lineNumber": 308
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 309
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     Primary:    {colors.get('primary', '')}\".ljust",
+          "lineNumber": 309
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "colors.get",
+          "lineNumber": 309
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 310
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     Secondary:  {colors.get('secondary', '')}\".ljust",
+          "lineNumber": 310
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "colors.get",
+          "lineNumber": 310
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 311
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     CTA:        {colors.get('cta', '')}\".ljust",
+          "lineNumber": 311
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "colors.get",
+          "lineNumber": 311
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 312
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     Background: {colors.get('background', '')}\".ljust",
+          "lineNumber": 312
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "colors.get",
+          "lineNumber": 312
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 313
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     Text:       {colors.get('text', '')}\".ljust",
+          "lineNumber": 313
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "colors.get",
+          "lineNumber": 313
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "colors.get",
+          "lineNumber": 314
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "wrap_text",
+          "lineNumber": 315
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "colors.get",
+          "lineNumber": 315
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 316
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "line.ljust",
+          "lineNumber": 316
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 317
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 320
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|  TYPOGRAPHY: {typography.get('heading', '')} / {typography.get('body', '')}\".ljust",
+          "lineNumber": 320
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "typography.get",
+          "lineNumber": 320
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "typography.get",
+          "lineNumber": 320
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "typography.get",
+          "lineNumber": 321
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "wrap_text",
+          "lineNumber": 322
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "typography.get",
+          "lineNumber": 322
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 323
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "line.ljust",
+          "lineNumber": 323
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "typography.get",
+          "lineNumber": 324
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "wrap_text",
+          "lineNumber": 325
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "typography.get",
+          "lineNumber": 325
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 326
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "line.ljust",
+          "lineNumber": 326
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "typography.get",
+          "lineNumber": 327
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 328
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     Google Fonts: {typography.get('google_fonts_url', '')}\".ljust",
+          "lineNumber": 328
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "typography.get",
+          "lineNumber": 328
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "typography.get",
+          "lineNumber": 329
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 330
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     CSS Import: {typography.get('css_import', '')[:70]}...\".ljust",
+          "lineNumber": 330
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "typography.get",
+          "lineNumber": 330
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 331
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 335
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "\"|  KEY EFFECTS:\".ljust",
+          "lineNumber": 335
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "wrap_text",
+          "lineNumber": 336
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 337
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "line.ljust",
+          "lineNumber": 337
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 338
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 342
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "\"|  AVOID (Anti-patterns):\".ljust",
+          "lineNumber": 342
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "wrap_text",
+          "lineNumber": 343
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 344
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "line.ljust",
+          "lineNumber": 344
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 345
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 348
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "\"|  PRE-DELIVERY CHECKLIST:\".ljust",
+          "lineNumber": 348
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 359
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "f\"|     {item}\".ljust",
+          "lineNumber": 359
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 360
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "lines.append",
+          "lineNumber": 362
+        },
+        {
+          "caller": "format_ascii_box",
+          "callee": "\"\\n\".join",
+          "lineNumber": 364
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "design_system.get",
+          "lineNumber": 369
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "design_system.get",
+          "lineNumber": 370
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "design_system.get",
+          "lineNumber": 371
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "design_system.get",
+          "lineNumber": 372
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "design_system.get",
+          "lineNumber": 373
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "design_system.get",
+          "lineNumber": 374
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "design_system.get",
+          "lineNumber": 375
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 378
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 379
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 382
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 383
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "pattern.get",
+          "lineNumber": 383
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "pattern.get",
+          "lineNumber": 384
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 385
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "pattern.get",
+          "lineNumber": 385
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "pattern.get",
+          "lineNumber": 386
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 387
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "pattern.get",
+          "lineNumber": 387
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "pattern.get",
+          "lineNumber": 388
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 389
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "pattern.get",
+          "lineNumber": 389
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 390
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "pattern.get",
+          "lineNumber": 390
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 391
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 394
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 395
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "style.get",
+          "lineNumber": 395
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "style.get",
+          "lineNumber": 396
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 397
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "style.get",
+          "lineNumber": 397
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "style.get",
+          "lineNumber": 398
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 399
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "style.get",
+          "lineNumber": 399
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "style.get",
+          "lineNumber": 400
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "style.get",
+          "lineNumber": 400
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 401
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "style.get",
+          "lineNumber": 401
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "style.get",
+          "lineNumber": 401
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 402
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 405
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 406
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 407
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 408
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "colors.get",
+          "lineNumber": 408
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 409
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "colors.get",
+          "lineNumber": 409
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 410
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "colors.get",
+          "lineNumber": 410
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 411
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "colors.get",
+          "lineNumber": 411
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 412
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "colors.get",
+          "lineNumber": 412
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "colors.get",
+          "lineNumber": 413
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 414
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "colors.get",
+          "lineNumber": 414
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 415
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 418
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 419
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "typography.get",
+          "lineNumber": 419
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 420
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "typography.get",
+          "lineNumber": 420
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "typography.get",
+          "lineNumber": 421
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 422
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "typography.get",
+          "lineNumber": 422
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "typography.get",
+          "lineNumber": 423
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 424
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "typography.get",
+          "lineNumber": 424
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "typography.get",
+          "lineNumber": 425
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 426
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "typography.get",
+          "lineNumber": 426
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "typography.get",
+          "lineNumber": 427
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 428
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 429
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 430
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "typography.get",
+          "lineNumber": 430
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 431
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 432
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 436
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 437
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 438
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 442
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 444
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "anti_patterns.replace",
+          "lineNumber": 444
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 445
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 448
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 449
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 450
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 451
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 452
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 453
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 454
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 455
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "lines.append",
+          "lineNumber": 456
+        },
+        {
+          "caller": "format_markdown",
+          "callee": "\"\\n\".join",
+          "lineNumber": 458
+        },
+        {
+          "caller": "generate_design_system",
+          "callee": "DesignSystemGenerator",
+          "lineNumber": 478
+        },
+        {
+          "caller": "generate_design_system",
+          "callee": "generator.generate",
+          "lineNumber": 479
+        },
+        {
+          "caller": "generate_design_system",
+          "callee": "persist_design_system",
+          "lineNumber": 483
+        },
+        {
+          "caller": "generate_design_system",
+          "callee": "format_markdown",
+          "lineNumber": 486
+        },
+        {
+          "caller": "generate_design_system",
+          "callee": "format_ascii_box",
+          "lineNumber": 487
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "Path",
+          "lineNumber": 504
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "Path.cwd",
+          "lineNumber": 504
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "design_system.get",
+          "lineNumber": 507
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "project_name.lower().replace",
+          "lineNumber": 508
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "project_name.lower",
+          "lineNumber": 508
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "design_system_dir.mkdir",
+          "lineNumber": 516
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "pages_dir.mkdir",
+          "lineNumber": 517
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "format_master_md",
+          "lineNumber": 522
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "open",
+          "lineNumber": 523
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "f.write",
+          "lineNumber": 524
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "created_files.append",
+          "lineNumber": 525
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "str",
+          "lineNumber": 525
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "page.lower().replace",
+          "lineNumber": 529
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "page.lower",
+          "lineNumber": 529
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "format_page_override_md",
+          "lineNumber": 530
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "open",
+          "lineNumber": 531
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "f.write",
+          "lineNumber": 532
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "created_files.append",
+          "lineNumber": 533
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "str",
+          "lineNumber": 533
+        },
+        {
+          "caller": "persist_design_system",
+          "callee": "str",
+          "lineNumber": 537
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "design_system.get",
+          "lineNumber": 544
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "design_system.get",
+          "lineNumber": 545
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "design_system.get",
+          "lineNumber": 546
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "design_system.get",
+          "lineNumber": 547
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "design_system.get",
+          "lineNumber": 548
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "design_system.get",
+          "lineNumber": 549
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "design_system.get",
+          "lineNumber": 550
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "datetime.now().strftime",
+          "lineNumber": 552
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "datetime.now",
+          "lineNumber": 552
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 557
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 558
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 559
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 560
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 561
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 562
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 563
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 564
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 565
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 566
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 567
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "design_system.get",
+          "lineNumber": 567
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 568
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 569
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 570
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 573
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 574
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 577
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 578
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 579
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 580
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 581
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 581
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 582
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 582
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 583
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 583
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 584
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 584
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 585
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 585
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 586
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 587
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 588
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 588
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 589
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 592
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 593
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 594
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "typography.get",
+          "lineNumber": 594
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 595
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "typography.get",
+          "lineNumber": 595
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "typography.get",
+          "lineNumber": 596
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 597
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "typography.get",
+          "lineNumber": 597
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "typography.get",
+          "lineNumber": 598
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 599
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "typography.get",
+          "lineNumber": 599
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "typography.get",
+          "lineNumber": 599
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "typography.get",
+          "lineNumber": 599
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 600
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "typography.get",
+          "lineNumber": 601
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 602
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 603
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 604
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "typography.get",
+          "lineNumber": 604
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 605
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 606
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 609
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 610
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 611
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 612
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 613
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 614
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 615
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 616
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 617
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 618
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 619
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 620
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 623
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 624
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 625
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 626
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 627
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 628
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 629
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 630
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 631
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 634
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 635
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 636
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 637
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 640
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 641
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 642
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 643
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 644
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 645
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 645
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 646
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 647
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 648
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 649
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 650
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 651
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 652
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 653
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 654
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 655
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 656
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 657
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 658
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 659
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 660
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 661
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 662
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 662
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 663
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 663
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 664
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 665
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 666
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 667
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 668
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 669
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 670
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 671
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 674
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 675
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 676
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 677
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 678
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 678
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 679
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 680
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 681
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 682
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 683
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 684
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 685
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 686
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 687
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 688
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 689
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 690
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 691
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 694
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 695
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 696
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 697
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 698
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 699
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 700
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 701
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 702
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 703
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 704
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 705
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 706
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 706
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 707
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 708
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "colors.get",
+          "lineNumber": 708
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 709
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 710
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 711
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 714
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 715
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 716
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 717
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 718
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 719
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 720
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 721
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 722
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 723
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 724
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 725
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 726
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 727
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 728
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 729
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 730
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 731
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 734
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 735
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 736
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 737
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 738
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "style.get",
+          "lineNumber": 738
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 739
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "style.get",
+          "lineNumber": 740
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 741
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "style.get",
+          "lineNumber": 741
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 742
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "style.get",
+          "lineNumber": 743
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 744
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "style.get",
+          "lineNumber": 744
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 745
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 747
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 748
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 751
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 752
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 753
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "pattern.get",
+          "lineNumber": 753
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 754
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "pattern.get",
+          "lineNumber": 755
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 756
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "pattern.get",
+          "lineNumber": 756
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "pattern.get",
+          "lineNumber": 757
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 758
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "pattern.get",
+          "lineNumber": 758
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 759
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "pattern.get",
+          "lineNumber": 759
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 760
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 763
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 764
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 765
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 766
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "a.strip",
+          "lineNumber": 768
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "anti_patterns.split",
+          "lineNumber": 768
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 771
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 772
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 773
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 774
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 775
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 776
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 777
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 778
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 779
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 780
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 781
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 784
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 785
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 786
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 787
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 788
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 789
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 790
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 791
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 792
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 793
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 794
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 795
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 796
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 797
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 798
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 799
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "lines.append",
+          "lineNumber": 800
+        },
+        {
+          "caller": "format_master_md",
+          "callee": "\"\\n\".join",
+          "lineNumber": 802
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "design_system.get",
+          "lineNumber": 807
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "datetime.now().strftime",
+          "lineNumber": 808
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "datetime.now",
+          "lineNumber": 808
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_name.replace(\"-\", \" \").replace(\"_\", \" \").title",
+          "lineNumber": 809
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_name.replace(\"-\", \" \").replace",
+          "lineNumber": 809
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_name.replace",
+          "lineNumber": 809
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "_generate_intelligent_overrides",
+          "lineNumber": 812
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 816
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 817
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 818
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 819
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 820
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_overrides.get",
+          "lineNumber": 820
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 821
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 822
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 823
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 824
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 825
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 826
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 829
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 830
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 833
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 834
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_overrides.get",
+          "lineNumber": 835
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "layout.items",
+          "lineNumber": 837
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 838
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 840
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 841
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 844
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 845
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_overrides.get",
+          "lineNumber": 846
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "spacing.items",
+          "lineNumber": 848
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 849
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 851
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 852
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 855
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 856
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_overrides.get",
+          "lineNumber": 857
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "typography.items",
+          "lineNumber": 859
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 860
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 862
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 863
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 866
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 867
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_overrides.get",
+          "lineNumber": 868
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "colors.items",
+          "lineNumber": 870
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 871
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 873
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 874
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 877
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 878
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_overrides.get",
+          "lineNumber": 879
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 882
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 884
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 885
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 888
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 889
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 890
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 891
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_overrides.get",
+          "lineNumber": 892
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 895
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 897
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 898
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 901
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 902
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 903
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 904
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "page_overrides.get",
+          "lineNumber": 905
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 908
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "lines.append",
+          "lineNumber": 909
+        },
+        {
+          "caller": "format_page_override_md",
+          "callee": "\"\\n\".join",
+          "lineNumber": 911
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "page_name.lower",
+          "lineNumber": 923
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "(page_query or \"\").lower",
+          "lineNumber": 924
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "search",
+          "lineNumber": 928
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "search",
+          "lineNumber": 929
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "search",
+          "lineNumber": 930
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "style_search.get",
+          "lineNumber": 933
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "ux_search.get",
+          "lineNumber": 934
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "landing_search.get",
+          "lineNumber": 935
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "_detect_page_type",
+          "lineNumber": 938
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "style.get",
+          "lineNumber": 952
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "style.get",
+          "lineNumber": 953
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "style.get",
+          "lineNumber": 954
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "style.get",
+          "lineNumber": 955
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "any",
+          "lineNumber": 958
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "keywords.lower",
+          "lineNumber": 958
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "any",
+          "lineNumber": 962
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "keywords.lower",
+          "lineNumber": 962
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "recommendations.append",
+          "lineNumber": 971
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "ux.get",
+          "lineNumber": 975
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "ux.get",
+          "lineNumber": 976
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "ux.get",
+          "lineNumber": 977
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "recommendations.append",
+          "lineNumber": 979
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "components.append",
+          "lineNumber": 981
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "landing.get",
+          "lineNumber": 986
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "landing.get",
+          "lineNumber": 987
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "landing.get",
+          "lineNumber": 988
+        },
+        {
+          "caller": "_generate_intelligent_overrides",
+          "callee": "recommendations.append",
+          "lineNumber": 993
+        },
+        {
+          "caller": "_detect_page_type",
+          "callee": "context.lower",
+          "lineNumber": 1022
+        },
+        {
+          "caller": "_detect_page_type",
+          "callee": "any",
+          "lineNumber": 1039
+        },
+        {
+          "caller": "_detect_page_type",
+          "callee": "style_results[0].get(\"Style Category\", \"\").lower",
+          "lineNumber": 1044
+        },
+        {
+          "caller": "_detect_page_type",
+          "callee": "style_results[0].get",
+          "lineNumber": 1044
+        },
+        {
+          "caller": "_detect_page_type",
+          "callee": "style_results[0].get(\"Best For\", \"\").lower",
+          "lineNumber": 1045
+        },
+        {
+          "caller": "_detect_page_type",
+          "callee": "style_results[0].get",
+          "lineNumber": 1045
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 9,
+        "functionCount": 8,
+        "classCount": 1
+      }
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/scripts/search.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 114,
+      "nonEmptyLines": 100,
+      "functions": [
+        {
+          "name": "format_output",
+          "startLine": 30,
+          "endLine": 53,
+          "params": [
+            "result"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "format_output",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "format_output",
+          "callee": "result.get",
+          "lineNumber": 36
+        },
+        {
+          "caller": "format_output",
+          "callee": "output.append",
+          "lineNumber": 37
+        },
+        {
+          "caller": "format_output",
+          "callee": "output.append",
+          "lineNumber": 38
+        },
+        {
+          "caller": "format_output",
+          "callee": "output.append",
+          "lineNumber": 40
+        },
+        {
+          "caller": "format_output",
+          "callee": "output.append",
+          "lineNumber": 41
+        },
+        {
+          "caller": "format_output",
+          "callee": "output.append",
+          "lineNumber": 42
+        },
+        {
+          "caller": "format_output",
+          "callee": "enumerate",
+          "lineNumber": 44
+        },
+        {
+          "caller": "format_output",
+          "callee": "output.append",
+          "lineNumber": 45
+        },
+        {
+          "caller": "format_output",
+          "callee": "row.items",
+          "lineNumber": 46
+        },
+        {
+          "caller": "format_output",
+          "callee": "str",
+          "lineNumber": 47
+        },
+        {
+          "caller": "format_output",
+          "callee": "len",
+          "lineNumber": 48
+        },
+        {
+          "caller": "format_output",
+          "callee": "output.append",
+          "lineNumber": 50
+        },
+        {
+          "caller": "format_output",
+          "callee": "output.append",
+          "lineNumber": 51
+        },
+        {
+          "caller": "format_output",
+          "callee": "\"\\n\".join",
+          "lineNumber": 53
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 288,
+      "nonEmptyLines": 208,
+      "sections": [
+        {
+          "heading": "ui-ux-pro-max",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "How to Use This Skill",
+          "level": 2,
+          "line": 32
+        },
+        {
+          "heading": "Step 1: Analyze User Requirements",
+          "level": 3,
+          "line": 36
+        },
+        {
+          "heading": "Step 2: Generate Design System (REQUIRED)",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "Step 2b: Persist Design System (Master + Overrides Pattern)",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "Step 3: Supplement with Detailed Searches (as needed)",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "Step 4: Stack Guidelines (Default: html-tailwind)",
+          "level": 3,
+          "line": 106
+        },
+        {
+          "heading": "Search Reference",
+          "level": 2,
+          "line": 118
+        },
+        {
+          "heading": "Available Domains",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "Available Stacks",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "Example Workflow",
+          "level": 2,
+          "line": 152
+        },
+        {
+          "heading": "Step 1: Analyze Requirements",
+          "level": 3,
+          "line": 156
+        },
+        {
+          "heading": "Step 2: Generate Design System (REQUIRED)",
+          "level": 3,
+          "line": 162
+        },
+        {
+          "heading": "Step 3: Supplement with Detailed Searches (as needed)",
+          "level": 3,
+          "line": 170
+        },
+        {
+          "heading": "Step 4: Stack Guidelines",
+          "level": 3,
+          "line": 180
+        },
+        {
+          "heading": "Output Formats",
+          "level": 2,
+          "line": 190
+        },
+        {
+          "heading": "Tips for Better Results",
+          "level": 2,
+          "line": 204
+        },
+        {
+          "heading": "Common Rules for Professional UI",
+          "level": 2,
+          "line": 215
+        },
+        {
+          "heading": "Icons & Visual Elements",
+          "level": 3,
+          "line": 219
+        },
+        {
+          "heading": "Interaction & Cursor",
+          "level": 3,
+          "line": 228
+        },
+        {
+          "heading": "Light/Dark Mode Contrast",
+          "level": 3,
+          "line": 236
+        },
+        {
+          "heading": "Layout & Spacing",
+          "level": 3,
+          "line": 245
+        },
+        {
+          "heading": "Pre-Delivery Checklist",
+          "level": 2,
+          "line": 255
+        },
+        {
+          "heading": "Visual Quality",
+          "level": 3,
+          "line": 259
+        },
+        {
+          "heading": "Interaction",
+          "level": 3,
+          "line": 266
+        },
+        {
+          "heading": "Light/Dark Mode",
+          "level": 3,
+          "line": 272
+        },
+        {
+          "heading": "Layout",
+          "level": 3,
+          "line": 278
+        },
+        {
+          "heading": "Accessibility",
+          "level": 3,
+          "line": 284
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 29
+      }
+    },
+    {
+      "path": ".python-version",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": ".specify/extensions/.registry",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 227,
+      "nonEmptyLines": 169,
+      "sections": [
+        {
+          "heading": "Hiến Pháp Dự Án Neo-Kanban",
+          "level": 1,
+          "line": 25
+        },
+        {
+          "heading": "Nguyên Tắc Cốt Lõi",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "I. Giao Tiếp Qua Artifact (BẮT BUỘC TUYỆT ĐỐI)",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "II. Điểm Kiểm Tra Human-in-the-Loop (HIL) (BẮT BUỘC TUYỆT ĐỐI)",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "III. Kỷ Luật WIP",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "IV. Tính Toàn Vẹn Luồng Kanban",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "V. Ghi Log Kiểm Tra Đầy Đủ Hành Động Agent (BẮT BUỘC TUYỆT ĐỐI)",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "VI. Bảo Mật Theo Thiết Kế (BẮT BUỘC TUYỆT ĐỐI)",
+          "level": 3,
+          "line": 86
+        },
+        {
+          "heading": "VII. Kỷ Luật Phạm Vi MVP (BẮT BUỘC TUYỆT ĐỐI)",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "VIII. Chất Lượng Code & Quy Ước (BẮT BUỘC TUYỆT ĐỐI)",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "Ràng Buộc Công Nghệ",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "Quy Trình Phát Triển",
+          "level": 2,
+          "line": 157
+        },
+        {
+          "heading": "Quản Trị",
+          "level": 2,
+          "line": 173
+        },
+        {
+          "heading": "Amendment A — WIP Limit trong Multi-User Mode (APPROVED)",
+          "level": 3,
+          "line": 201
+        },
+        {
+          "heading": "Amendment B — Multi-User/Team là Post-MVP Phase 1 (APPROVED)",
+          "level": 3,
+          "line": 211
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": ".specify/workflows/speckit/workflow.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 66,
+      "nonEmptyLines": 58,
+      "sections": [
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "workflow",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "requires",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "inputs",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "steps",
+          "level": 1,
+          "line": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": ".specify/workflows/workflow-registry.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 13,
+      "nonEmptyLines": 13,
+      "sections": [
+        {
+          "heading": "schema_version",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "workflows",
+          "level": 1,
+          "line": 3
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 35,
+      "metrics": {}
+    },
+    {
+      "path": "agents/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 43,
+      "nonEmptyLines": 34,
+      "sections": [
+        {
+          "heading": "Agents",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Layout (Phase 2 chốt)",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "Cài đặt",
+          "level": 2,
+          "line": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "agents/requirements.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 2,
+      "nonEmptyLines": 2,
+      "metrics": {}
+    },
+    {
+      "path": "agents/src/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "agents/src/agents/__init__.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 19,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "agents/src/agents/assigner.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 103,
+      "nonEmptyLines": 89,
+      "functions": [
+        {
+          "name": "suggest_assignee",
+          "startLine": 32,
+          "endLine": 103,
+          "params": [
+            "llm",
+            "task",
+            "candidates",
+            "locale"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AssignmentSuggestion",
+          "startLine": 11,
+          "endLine": 14,
+          "methods": [],
+          "properties": [
+            "user_id",
+            "score",
+            "reason"
+          ]
+        },
+        {
+          "name": "AssignmentResult",
+          "startLine": 17,
+          "endLine": 18,
+          "methods": [],
+          "properties": [
+            "suggestions"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AssignmentSuggestion",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "AssignmentResult",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "suggest_assignee",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "suggest_assignee",
+          "callee": "AssignmentResult",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "s[\"skill\"].lower",
+          "lineNumber": 43
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "c.get",
+          "lineNumber": 43
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "(t or \"\").lower",
+          "lineNumber": 44
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "task.get",
+          "lineNumber": 44
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "task.get",
+          "lineNumber": 44
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "len",
+          "lineNumber": 45
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "max",
+          "lineNumber": 45
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "len",
+          "lineNumber": 45
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "c.get",
+          "lineNumber": 46
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "int",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "workload.get",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "round",
+          "lineNumber": 49
+        },
+        {
+          "caller": "_heuristic_score",
+          "callee": "min",
+          "lineNumber": 49
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "AssignmentResult",
+          "lineNumber": 51
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "AssignmentSuggestion",
+          "lineNumber": 53
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "_heuristic_score",
+          "lineNumber": 55
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "c.get",
+          "lineNumber": 57
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "c.get('workload', {}).get",
+          "lineNumber": 58
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "c.get",
+          "lineNumber": 58
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "fallback.suggestions.sort",
+          "lineNumber": 64
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "(locale or \"en\").lower().startswith",
+          "lineNumber": 67
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "(locale or \"en\").lower",
+          "lineNumber": 67
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "llm.with_structured_output",
+          "lineNumber": 69
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "json.dumps",
+          "lineNumber": 70
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "task.get",
+          "lineNumber": 73
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "task.get",
+          "lineNumber": 74
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "task.get",
+          "lineNumber": 75
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "task.get",
+          "lineNumber": 76
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "task.get",
+          "lineNumber": 76
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "c.get",
+          "lineNumber": 81
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "c.get",
+          "lineNumber": 82
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "c.get",
+          "lineNumber": 83
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "structured.invoke",
+          "lineNumber": 90
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "SystemMessage",
+          "lineNumber": 90
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "HumanMessage",
+          "lineNumber": 90
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "isinstance",
+          "lineNumber": 91
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "out.suggestions.sort",
+          "lineNumber": 92
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "isinstance",
+          "lineNumber": 95
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "AssignmentResult",
+          "lineNumber": 96
+        },
+        {
+          "caller": "suggest_assignee",
+          "callee": "r.suggestions.sort",
+          "lineNumber": 98
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 1,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "agents/src/agents/executor.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 128,
+      "nonEmptyLines": 109,
+      "functions": [
+        {
+          "name": "_make_lc_tools",
+          "startLine": 32,
+          "endLine": 65,
+          "params": [
+            "handler_factory"
+          ]
+        },
+        {
+          "name": "execute",
+          "startLine": 68,
+          "endLine": 128,
+          "params": [
+            "llm",
+            "user_message",
+            "sync_handler_factory",
+            "on_tool_event",
+            "max_steps",
+            "locale"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_make_lc_tools",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "execute",
+          "line": 68,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_make_lc_tools",
+          "callee": "tool",
+          "lineNumber": 39
+        },
+        {
+          "caller": "create_task",
+          "callee": "handler_factory",
+          "lineNumber": 43
+        },
+        {
+          "caller": "_make_lc_tools",
+          "callee": "tool",
+          "lineNumber": 48
+        },
+        {
+          "caller": "update_task_status",
+          "callee": "handler_factory",
+          "lineNumber": 51
+        },
+        {
+          "caller": "_make_lc_tools",
+          "callee": "tool",
+          "lineNumber": 53
+        },
+        {
+          "caller": "assign_task",
+          "callee": "handler_factory",
+          "lineNumber": 56
+        },
+        {
+          "caller": "_make_lc_tools",
+          "callee": "tool",
+          "lineNumber": 58
+        },
+        {
+          "caller": "query_tasks",
+          "callee": "handler_factory",
+          "lineNumber": 61
+        },
+        {
+          "caller": "execute",
+          "callee": "_make_lc_tools",
+          "lineNumber": 77
+        },
+        {
+          "caller": "execute",
+          "callee": "llm.bind_tools",
+          "lineNumber": 79
+        },
+        {
+          "caller": "execute",
+          "callee": "(locale or \"en\").lower().startswith",
+          "lineNumber": 83
+        },
+        {
+          "caller": "execute",
+          "callee": "(locale or \"en\").lower",
+          "lineNumber": 83
+        },
+        {
+          "caller": "execute",
+          "callee": "SystemMessage",
+          "lineNumber": 85
+        },
+        {
+          "caller": "execute",
+          "callee": "HumanMessage",
+          "lineNumber": 86
+        },
+        {
+          "caller": "execute",
+          "callee": "range",
+          "lineNumber": 90
+        },
+        {
+          "caller": "execute",
+          "callee": "bound.invoke",
+          "lineNumber": 92
+        },
+        {
+          "caller": "execute",
+          "callee": "messages.append",
+          "lineNumber": 95
+        },
+        {
+          "caller": "execute",
+          "callee": "getattr",
+          "lineNumber": 96
+        },
+        {
+          "caller": "execute",
+          "callee": "str",
+          "lineNumber": 98
+        },
+        {
+          "caller": "execute",
+          "callee": "tc.get",
+          "lineNumber": 101
+        },
+        {
+          "caller": "execute",
+          "callee": "tc.get(\"function\", {}).get",
+          "lineNumber": 101
+        },
+        {
+          "caller": "execute",
+          "callee": "tc.get",
+          "lineNumber": 101
+        },
+        {
+          "caller": "execute",
+          "callee": "tc.get",
+          "lineNumber": 102
+        },
+        {
+          "caller": "execute",
+          "callee": "isinstance",
+          "lineNumber": 103
+        },
+        {
+          "caller": "execute",
+          "callee": "json.loads",
+          "lineNumber": 105
+        },
+        {
+          "caller": "execute",
+          "callee": "sync_handler_factory",
+          "lineNumber": 109
+        },
+        {
+          "caller": "execute",
+          "callee": "handler",
+          "lineNumber": 110
+        },
+        {
+          "caller": "execute",
+          "callee": "str",
+          "lineNumber": 113
+        },
+        {
+          "caller": "execute",
+          "callee": "tool_calls_log.append",
+          "lineNumber": 115
+        },
+        {
+          "caller": "execute",
+          "callee": "on_tool_event",
+          "lineNumber": 118
+        },
+        {
+          "caller": "execute",
+          "callee": "messages.append",
+          "lineNumber": 121
+        },
+        {
+          "caller": "execute",
+          "callee": "ToolMessage",
+          "lineNumber": 122
+        },
+        {
+          "caller": "execute",
+          "callee": "json.dumps",
+          "lineNumber": 123
+        },
+        {
+          "caller": "execute",
+          "callee": "tc.get",
+          "lineNumber": 124
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "agents/src/agents/monitor.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 166,
+      "nonEmptyLines": 150,
+      "functions": [
+        {
+          "name": "_parse_iso_as_utc",
+          "startLine": 24,
+          "endLine": 32,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "detect_bottlenecks",
+          "startLine": 35,
+          "endLine": 166,
+          "params": [
+            "llm",
+            "columns",
+            "tasks",
+            "activity",
+            "locale"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Alert",
+          "startLine": 12,
+          "endLine": 16,
+          "methods": [],
+          "properties": [
+            "severity",
+            "kind",
+            "evidence",
+            "suggestion"
+          ]
+        },
+        {
+          "name": "MonitorResult",
+          "startLine": 19,
+          "endLine": 21,
+          "methods": [],
+          "properties": [
+            "alerts",
+            "summary"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Alert",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "MonitorResult",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "_parse_iso_as_utc",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "detect_bottlenecks",
+          "line": 35,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_parse_iso_as_utc",
+          "callee": "datetime.fromisoformat",
+          "lineNumber": 27
+        },
+        {
+          "caller": "_parse_iso_as_utc",
+          "callee": "str(value).replace",
+          "lineNumber": 27
+        },
+        {
+          "caller": "_parse_iso_as_utc",
+          "callee": "str",
+          "lineNumber": 27
+        },
+        {
+          "caller": "_parse_iso_as_utc",
+          "callee": "dt.replace",
+          "lineNumber": 31
+        },
+        {
+          "caller": "_parse_iso_as_utc",
+          "callee": "dt.astimezone",
+          "lineNumber": 32
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "datetime.now",
+          "lineNumber": 43
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "c.get",
+          "lineNumber": 47
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "by_col.setdefault(t[\"column_id\"], []).append",
+          "lineNumber": 50
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "by_col.setdefault",
+          "lineNumber": 50
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "wip.items",
+          "lineNumber": 51
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "len",
+          "lineNumber": 52
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "by_col.get",
+          "lineNumber": 52
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "int",
+          "lineNumber": 53
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "alerts.append",
+          "lineNumber": 54
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "Alert",
+          "lineNumber": 55
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "t.get",
+          "lineNumber": 66
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "t.get",
+          "lineNumber": 68
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "_parse_iso_as_utc",
+          "lineNumber": 71
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "overdue.append",
+          "lineNumber": 75
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "alerts.append",
+          "lineNumber": 77
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "Alert",
+          "lineNumber": 78
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "len",
+          "lineNumber": 81
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "\", \".join",
+          "lineNumber": 81
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "ev.get",
+          "lineNumber": 90
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "ev.get",
+          "lineNumber": 91
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "_parse_iso_as_utc",
+          "lineNumber": 94
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "last_seen.get",
+          "lineNumber": 97
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "t.get",
+          "lineNumber": 101
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "last_seen.get",
+          "lineNumber": 103
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "stale.append",
+          "lineNumber": 105
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "alerts.append",
+          "lineNumber": 107
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "Alert",
+          "lineNumber": 108
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "len",
+          "lineNumber": 111
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "\", \".join",
+          "lineNumber": 111
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "str(t.get(\"title\") or \"\").strip",
+          "lineNumber": 120
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "str",
+          "lineNumber": 120
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "t.get",
+          "lineNumber": 120
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "re.sub",
+          "lineNumber": 121
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "title.lower",
+          "lineNumber": 121
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "len",
+          "lineNumber": 122
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "re.fullmatch",
+          "lineNumber": 122
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "low_quality.append",
+          "lineNumber": 123
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "(locale or \"en\").lower().startswith",
+          "lineNumber": 125
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "(locale or \"en\").lower",
+          "lineNumber": 125
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "len",
+          "lineNumber": 127
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "\", \".join",
+          "lineNumber": 127
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "len",
+          "lineNumber": 129
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "\", \".join",
+          "lineNumber": 129
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "alerts.append",
+          "lineNumber": 136
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "Alert",
+          "lineNumber": 137
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "(locale or \"en\").lower().startswith",
+          "lineNumber": 146
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "(locale or \"en\").lower",
+          "lineNumber": 146
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "\"\\n\".join",
+          "lineNumber": 149
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "llm.invoke",
+          "lineNumber": 159
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "SystemMessage",
+          "lineNumber": 159
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "HumanMessage",
+          "lineNumber": 159
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "getattr",
+          "lineNumber": 160
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "str(content).strip",
+          "lineNumber": 161
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "str",
+          "lineNumber": 161
+        },
+        {
+          "caller": "detect_bottlenecks",
+          "callee": "MonitorResult",
+          "lineNumber": 166
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "agents/src/agents/orchestrator.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 266,
+      "nonEmptyLines": 236,
+      "functions": [
+        {
+          "name": "_is_pure_greeting",
+          "startLine": 35,
+          "endLine": 39,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "_looks_like_question_or_board_topic",
+          "startLine": 71,
+          "endLine": 79,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "classify",
+          "startLine": 101,
+          "endLine": 160,
+          "params": [
+            "llm",
+            "user_message",
+            "intent_hint",
+            "locale"
+          ]
+        },
+        {
+          "name": "_heuristic_intent",
+          "startLine": 163,
+          "endLine": 266,
+          "params": [
+            "msg"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "IntentDecision",
+          "startLine": 16,
+          "endLine": 20,
+          "methods": [],
+          "properties": [
+            "intent",
+            "reason"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "IntentDecision",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "_is_pure_greeting",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "_looks_like_question_or_board_topic",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "classify",
+          "line": 101,
+          "isDefault": false
+        },
+        {
+          "name": "_heuristic_intent",
+          "line": 163,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_is_pure_greeting",
+          "callee": "(text or \"\").strip",
+          "lineNumber": 36
+        },
+        {
+          "caller": "_is_pure_greeting",
+          "callee": "len",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_is_pure_greeting",
+          "callee": "bool",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_is_pure_greeting",
+          "callee": "_GREETING_ONLY.match",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_looks_like_question_or_board_topic",
+          "callee": "(text or \"\").strip().lower",
+          "lineNumber": 72
+        },
+        {
+          "caller": "_looks_like_question_or_board_topic",
+          "callee": "(text or \"\").strip",
+          "lineNumber": 72
+        },
+        {
+          "caller": "_looks_like_question_or_board_topic",
+          "callee": "len",
+          "lineNumber": 77
+        },
+        {
+          "caller": "_looks_like_question_or_board_topic",
+          "callee": "any",
+          "lineNumber": 79
+        },
+        {
+          "caller": "classify",
+          "callee": "IntentDecision",
+          "lineNumber": 109
+        },
+        {
+          "caller": "classify",
+          "callee": "(user_message or \"\").strip",
+          "lineNumber": 111
+        },
+        {
+          "caller": "classify",
+          "callee": "_heuristic_intent",
+          "lineNumber": 114
+        },
+        {
+          "caller": "classify",
+          "callee": "IntentDecision",
+          "lineNumber": 116
+        },
+        {
+          "caller": "classify",
+          "callee": "_is_pure_greeting",
+          "lineNumber": 118
+        },
+        {
+          "caller": "classify",
+          "callee": "IntentDecision",
+          "lineNumber": 119
+        },
+        {
+          "caller": "classify",
+          "callee": "(locale or \"\").lower().startswith",
+          "lineNumber": 122
+        },
+        {
+          "caller": "classify",
+          "callee": "(locale or \"\").lower",
+          "lineNumber": 122
+        },
+        {
+          "caller": "classify",
+          "callee": "llm.with_structured_output",
+          "lineNumber": 126
+        },
+        {
+          "caller": "classify",
+          "callee": "structured.invoke",
+          "lineNumber": 127
+        },
+        {
+          "caller": "classify",
+          "callee": "SystemMessage",
+          "lineNumber": 129
+        },
+        {
+          "caller": "classify",
+          "callee": "HumanMessage",
+          "lineNumber": 130
+        },
+        {
+          "caller": "classify",
+          "callee": "isinstance",
+          "lineNumber": 134
+        },
+        {
+          "caller": "classify",
+          "callee": "isinstance",
+          "lineNumber": 136
+        },
+        {
+          "caller": "classify",
+          "callee": "IntentDecision",
+          "lineNumber": 137
+        },
+        {
+          "caller": "classify",
+          "callee": "IntentDecision",
+          "lineNumber": 139
+        },
+        {
+          "caller": "classify",
+          "callee": "_is_pure_greeting",
+          "lineNumber": 142
+        },
+        {
+          "caller": "classify",
+          "callee": "_looks_like_question_or_board_topic",
+          "lineNumber": 143
+        },
+        {
+          "caller": "classify",
+          "callee": "IntentDecision",
+          "lineNumber": 144
+        },
+        {
+          "caller": "classify",
+          "callee": "len",
+          "lineNumber": 149
+        },
+        {
+          "caller": "classify",
+          "callee": "IntentDecision",
+          "lineNumber": 150
+        },
+        {
+          "caller": "classify",
+          "callee": "_is_pure_greeting",
+          "lineNumber": 158
+        },
+        {
+          "caller": "classify",
+          "callee": "IntentDecision",
+          "lineNumber": 159
+        },
+        {
+          "caller": "classify",
+          "callee": "IntentDecision",
+          "lineNumber": 160
+        },
+        {
+          "caller": "_heuristic_intent",
+          "callee": "(msg or \"\").lower",
+          "lineNumber": 164
+        },
+        {
+          "caller": "_heuristic_intent",
+          "callee": "any",
+          "lineNumber": 166
+        },
+        {
+          "caller": "_heuristic_intent",
+          "callee": "any",
+          "lineNumber": 186
+        },
+        {
+          "caller": "_heuristic_intent",
+          "callee": "any",
+          "lineNumber": 203
+        },
+        {
+          "caller": "_heuristic_intent",
+          "callee": "any",
+          "lineNumber": 225
+        },
+        {
+          "caller": "_heuristic_intent",
+          "callee": "any",
+          "lineNumber": 244
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "agents/src/agents/planner.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 72,
+      "nonEmptyLines": 61,
+      "functions": [
+        {
+          "name": "plan_goal",
+          "startLine": 38,
+          "endLine": 72,
+          "params": [
+            "llm",
+            "goal_text",
+            "similar_examples",
+            "locale"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SubTask",
+          "startLine": 10,
+          "endLine": 15,
+          "methods": [],
+          "properties": [
+            "title",
+            "description",
+            "est_hours",
+            "required_skills",
+            "depends_on"
+          ]
+        },
+        {
+          "name": "Plan",
+          "startLine": 18,
+          "endLine": 20,
+          "methods": [],
+          "properties": [
+            "subtasks",
+            "notes"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SubTask",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "Plan",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "plan_goal",
+          "line": 38,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "plan_goal",
+          "callee": "(locale or \"en\").lower().startswith",
+          "lineNumber": 45
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "(locale or \"en\").lower",
+          "lineNumber": 45
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "\"\\n\".join",
+          "lineNumber": 48
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "ex.get",
+          "lineNumber": 48
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "llm.with_structured_output",
+          "lineNumber": 56
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "structured.invoke",
+          "lineNumber": 57
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "SystemMessage",
+          "lineNumber": 57
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "HumanMessage",
+          "lineNumber": 57
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "isinstance",
+          "lineNumber": 58
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "isinstance",
+          "lineNumber": 60
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "Plan",
+          "lineNumber": 61
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "Plan",
+          "lineNumber": 65
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "SubTask",
+          "lineNumber": 67
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "SubTask",
+          "lineNumber": 68
+        },
+        {
+          "caller": "plan_goal",
+          "callee": "SubTask",
+          "lineNumber": 69
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 1,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "agents/src/agents/reporter.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 130,
+      "nonEmptyLines": 115,
+      "functions": [
+        {
+          "name": "make_report",
+          "startLine": 32,
+          "endLine": 117,
+          "params": [
+            "llm",
+            "period",
+            "tasks",
+            "activity",
+            "members",
+            "locale",
+            "user_question"
+          ]
+        },
+        {
+          "name": "_fallback_qa",
+          "startLine": 120,
+          "endLine": 130,
+          "params": [
+            "payload",
+            "question",
+            "vi"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "make_report",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "_fallback_qa",
+          "line": 120,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_s",
+          "callee": "str",
+          "lineNumber": 44
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 48
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 48
+        },
+        {
+          "caller": "make_report",
+          "callee": "m.get",
+          "lineNumber": 48
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 51
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 52
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 53
+        },
+        {
+          "caller": "make_report",
+          "callee": "t.get",
+          "lineNumber": 53
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 54
+        },
+        {
+          "caller": "make_report",
+          "callee": "t.get",
+          "lineNumber": 54
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 55
+        },
+        {
+          "caller": "make_report",
+          "callee": "t.get",
+          "lineNumber": 55
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 56
+        },
+        {
+          "caller": "make_report",
+          "callee": "t.get",
+          "lineNumber": 56
+        },
+        {
+          "caller": "make_report",
+          "callee": "str",
+          "lineNumber": 57
+        },
+        {
+          "caller": "make_report",
+          "callee": "t.get",
+          "lineNumber": 57
+        },
+        {
+          "caller": "make_report",
+          "callee": "t.get",
+          "lineNumber": 58
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 64
+        },
+        {
+          "caller": "make_report",
+          "callee": "ev.get",
+          "lineNumber": 64
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 65
+        },
+        {
+          "caller": "make_report",
+          "callee": "ev.get",
+          "lineNumber": 65
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 66
+        },
+        {
+          "caller": "make_report",
+          "callee": "ev.get",
+          "lineNumber": 66
+        },
+        {
+          "caller": "make_report",
+          "callee": "_s",
+          "lineNumber": 67
+        },
+        {
+          "caller": "make_report",
+          "callee": "ev.get",
+          "lineNumber": 67
+        },
+        {
+          "caller": "make_report",
+          "callee": "json.dumps",
+          "lineNumber": 72
+        },
+        {
+          "caller": "make_report",
+          "callee": "user_question.strip",
+          "lineNumber": 74
+        },
+        {
+          "caller": "make_report",
+          "callee": "(locale or \"en\").lower().startswith",
+          "lineNumber": 75
+        },
+        {
+          "caller": "make_report",
+          "callee": "(locale or \"en\").lower",
+          "lineNumber": 75
+        },
+        {
+          "caller": "make_report",
+          "callee": "user_question.strip",
+          "lineNumber": 77
+        },
+        {
+          "caller": "make_report",
+          "callee": "user_question.strip",
+          "lineNumber": 79
+        },
+        {
+          "caller": "make_report",
+          "callee": "llm.invoke",
+          "lineNumber": 81
+        },
+        {
+          "caller": "make_report",
+          "callee": "SystemMessage",
+          "lineNumber": 81
+        },
+        {
+          "caller": "make_report",
+          "callee": "HumanMessage",
+          "lineNumber": 81
+        },
+        {
+          "caller": "make_report",
+          "callee": "getattr",
+          "lineNumber": 82
+        },
+        {
+          "caller": "make_report",
+          "callee": "str(text).strip",
+          "lineNumber": 83
+        },
+        {
+          "caller": "make_report",
+          "callee": "str",
+          "lineNumber": 83
+        },
+        {
+          "caller": "make_report",
+          "callee": "_fallback_qa",
+          "lineNumber": 88
+        },
+        {
+          "caller": "make_report",
+          "callee": "(locale or \"en\").lower().startswith",
+          "lineNumber": 92
+        },
+        {
+          "caller": "make_report",
+          "callee": "(locale or \"en\").lower",
+          "lineNumber": 92
+        },
+        {
+          "caller": "make_report",
+          "callee": "llm.invoke",
+          "lineNumber": 96
+        },
+        {
+          "caller": "make_report",
+          "callee": "SystemMessage",
+          "lineNumber": 96
+        },
+        {
+          "caller": "make_report",
+          "callee": "HumanMessage",
+          "lineNumber": 96
+        },
+        {
+          "caller": "make_report",
+          "callee": "getattr",
+          "lineNumber": 97
+        },
+        {
+          "caller": "make_report",
+          "callee": "str(text).strip",
+          "lineNumber": 98
+        },
+        {
+          "caller": "make_report",
+          "callee": "str",
+          "lineNumber": 98
+        },
+        {
+          "caller": "make_report",
+          "callee": "t.get",
+          "lineNumber": 104
+        },
+        {
+          "caller": "make_report",
+          "callee": "t.get",
+          "lineNumber": 105
+        },
+        {
+          "caller": "make_report",
+          "callee": "t.get",
+          "lineNumber": 106
+        },
+        {
+          "caller": "make_report",
+          "callee": "len",
+          "lineNumber": 109
+        },
+        {
+          "caller": "make_report",
+          "callee": "len",
+          "lineNumber": 109
+        },
+        {
+          "caller": "make_report",
+          "callee": "len",
+          "lineNumber": 109
+        },
+        {
+          "caller": "make_report",
+          "callee": "\"\\n\".join",
+          "lineNumber": 117
+        },
+        {
+          "caller": "_fallback_qa",
+          "callee": "payload.get",
+          "lineNumber": 121
+        },
+        {
+          "caller": "_fallback_qa",
+          "callee": "len",
+          "lineNumber": 124
+        },
+        {
+          "caller": "_fallback_qa",
+          "callee": "len",
+          "lineNumber": 128
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "agents/src/agents/roles.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 19,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

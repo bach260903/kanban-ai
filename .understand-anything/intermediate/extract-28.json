@@ -1,0 +1,667 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "specs/003-multi-agent-team-platform/data-model.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 252,
+      "nonEmptyLines": 221,
+      "sections": [
+        {
+          "heading": "Data Model: Platform Expansion — Feature 003",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Bảng Mới",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "`project_members`",
+          "level": 3,
+          "line": 10
+        },
+        {
+          "heading": "`invitations`",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "`review_reports`",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "`review_comments`",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "`task_dependencies`",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "`task_templates`",
+          "level": 3,
+          "line": 89
+        },
+        {
+          "heading": "`notifications`",
+          "level": 3,
+          "line": 105
+        },
+        {
+          "heading": "`webhook_configs`",
+          "level": 3,
+          "line": 124
+        },
+        {
+          "heading": "`webhook_deliveries`",
+          "level": 3,
+          "line": 138
+        },
+        {
+          "heading": "`github_configs`",
+          "level": 3,
+          "line": 157
+        },
+        {
+          "heading": "Bảng Sửa Đổi",
+          "level": 2,
+          "line": 173
+        },
+        {
+          "heading": "`tasks` — thêm cột",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "`users` — kiểm tra và bổ sung (migration 003 đã tạo bảng này)",
+          "level": 3,
+          "line": 187
+        },
+        {
+          "heading": "State Transitions",
+          "level": 2,
+          "line": 200
+        },
+        {
+          "heading": "Task (mở rộng existing)",
+          "level": 3,
+          "line": 202
+        },
+        {
+          "heading": "ReviewReport",
+          "level": 3,
+          "line": 216
+        },
+        {
+          "heading": "WebhookDelivery",
+          "level": 3,
+          "line": 222
+        },
+        {
+          "heading": "Quan Hệ Chính",
+          "level": 2,
+          "line": 230
+        },
+        {
+          "heading": "Indexes Cho Analytics",
+          "level": 2,
+          "line": 245
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 21
+      }
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/plan.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 2603,
+      "nonEmptyLines": 2261,
+      "sections": [
+        {
+          "heading": "Implementation Plan: Platform Expansion — Multi-Agent Review, Team Management & Integrations",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Technical Context",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Constitution Check",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "Project Structure Changes",
+          "level": 2,
+          "line": 62
+        },
+        {
+          "heading": "Phase 1: Setup — DB Migration & Config",
+          "level": 2,
+          "line": 165
+        },
+        {
+          "heading": "Phase 2: F-004 Backend — Auth & Multi-user",
+          "level": 2,
+          "line": 382
+        },
+        {
+          "heading": "Phase 3: F-003 Backend — Reviewer Agent",
+          "level": 2,
+          "line": 680
+        },
+        {
+          "heading": "Phase 4: F-005 Backend — Dependencies & Templates",
+          "level": 2,
+          "line": 958
+        },
+        {
+          "heading": "Phase 5: F-007 Backend — Notifications & Webhooks",
+          "level": 2,
+          "line": 1165
+        },
+        {
+          "heading": "Phase 6: F-006 Backend — Dashboard & Analytics",
+          "level": 2,
+          "line": 1432
+        },
+        {
+          "heading": "Phase 7: Frontend — Auth & Team UI",
+          "level": 2,
+          "line": 1593
+        },
+        {
+          "heading": "Phase 8: Frontend — AI Review Panel",
+          "level": 2,
+          "line": 1810
+        },
+        {
+          "heading": "Phase 9: Frontend — Task Enhancements UI",
+          "level": 2,
+          "line": 1957
+        },
+        {
+          "heading": "Phase 10: Frontend — Dashboard, Analytics & Notifications",
+          "level": 2,
+          "line": 2129
+        },
+        {
+          "heading": "Phase 11: Tests & Hardening",
+          "level": 2,
+          "line": 2331
+        },
+        {
+          "heading": "Dependencies & Execution Order",
+          "level": 2,
+          "line": 2544
+        },
+        {
+          "heading": "Technical Risks",
+          "level": 2,
+          "line": 2576
+        },
+        {
+          "heading": "Post-Design Constitution Re-Check",
+          "level": 2,
+          "line": 2590
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 19
+      }
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/research.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 197,
+      "nonEmptyLines": 139,
+      "sections": [
+        {
+          "heading": "Research: Platform Expansion — Multi-Agent Review, Team Management & Integrations",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Decision 1 — JWT Authentication Library",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Decision 2 — Reviewer Agent: LLM Backend",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Decision 3 — Test Runner Auto-Detection",
+          "level": 2,
+          "line": 44
+        },
+        {
+          "heading": "Decision 4 — Security Scan Pattern",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "Decision 5 — Webhook Delivery: Retry Mechanism",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "Decision 6 — Circular Dependency Detection",
+          "level": 2,
+          "line": 90
+        },
+        {
+          "heading": "Decision 7 — WIP Limit: Per-Developer Enforcement",
+          "level": 2,
+          "line": 114
+        },
+        {
+          "heading": "Decision 8 — GitHub PR Integration",
+          "level": 2,
+          "line": 133
+        },
+        {
+          "heading": "Decision 9 — Analytics Queries",
+          "level": 2,
+          "line": 151
+        },
+        {
+          "heading": "Decision 10 — Reviewer LangGraph Integration",
+          "level": 2,
+          "line": 168
+        },
+        {
+          "heading": "Resolution Summary",
+          "level": 2,
+          "line": 184
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/spec.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 335,
+      "nonEmptyLines": 242,
+      "sections": [
+        {
+          "heading": "Feature Specification: Platform Expansion — Multi-Agent Review, Team Management & Integrations",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Tóm Tắt",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Mục Tiêu Người Dùng",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "Kịch Bản Người Dùng & Kiểm Thử *(bắt buộc)*",
+          "level": 2,
+          "line": 36
+        },
+        {
+          "heading": "User Story 1 — AI Tự Động Review Code (Priority: P1) 🎯 MVP",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "User Story 2 — Đăng Nhập & Phân Quyền Team (Priority: P1)",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "User Story 3 — Assign Task & WIP per Developer (Priority: P1)",
+          "level": 3,
+          "line": 84
+        },
+        {
+          "heading": "User Story 4 — Task Dependencies (Priority: P2)",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "User Story 5 — Task Templates (Priority: P2)",
+          "level": 3,
+          "line": 123
+        },
+        {
+          "heading": "User Story 6 — Team Dashboard & Agent Analytics (Priority: P2)",
+          "level": 3,
+          "line": 141
+        },
+        {
+          "heading": "User Story 7 — Notifications & Webhook (Priority: P2)",
+          "level": 3,
+          "line": 159
+        },
+        {
+          "heading": "Edge Cases",
+          "level": 3,
+          "line": 179
+        },
+        {
+          "heading": "Yêu Cầu Chức Năng",
+          "level": 2,
+          "line": 191
+        },
+        {
+          "heading": "F-003 — Multi-Agent Review Pipeline",
+          "level": 3,
+          "line": 193
+        },
+        {
+          "heading": "F-004 — Multi-user & Team Management",
+          "level": 3,
+          "line": 205
+        },
+        {
+          "heading": "F-005 — Task Dependencies & Templates",
+          "level": 3,
+          "line": 217
+        },
+        {
+          "heading": "F-006 — Team Dashboard & Analytics",
+          "level": 3,
+          "line": 228
+        },
+        {
+          "heading": "F-007 — Notifications & Integrations",
+          "level": 3,
+          "line": 238
+        },
+        {
+          "heading": "Thực Thể Chính",
+          "level": 3,
+          "line": 248
+        },
+        {
+          "heading": "Yêu Cầu Phi Chức Năng",
+          "level": 2,
+          "line": 264
+        },
+        {
+          "heading": "Kịch Bản Chấp Thuận Tổng Hợp",
+          "level": 2,
+          "line": 278
+        },
+        {
+          "heading": "Kịch Bản A — Luồng Team Đầy Đủ (End-to-End)",
+          "level": 3,
+          "line": 280
+        },
+        {
+          "heading": "Kịch Bản B — Reviewer Agent Phát Hiện Vấn Đề",
+          "level": 3,
+          "line": 291
+        },
+        {
+          "heading": "Kịch Bản C — Xung Đột Phân Quyền",
+          "level": 3,
+          "line": 300
+        },
+        {
+          "heading": "Giả Định",
+          "level": 2,
+          "line": 310
+        },
+        {
+          "heading": "Ngoài Phạm Vi",
+          "level": 2,
+          "line": 325
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 26
+      }
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1652,
+      "nonEmptyLines": 1378,
+      "sections": [
+        {
+          "heading": "Tasks: Platform Expansion — Multi-Agent Review, Team Management & Integrations",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "🗺️ Codebase Map (đọc trước khi bắt đầu bất kỳ task nào)",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Backend hiện tại (`backend/app/`)",
+          "level": 3,
+          "line": 13
+        },
+        {
+          "heading": "Frontend hiện tại (`frontend/src/`)",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "Patterns quan trọng để follow:",
+          "level": 3,
+          "line": 78
+        },
+        {
+          "heading": "Format: `[ID] [P?] [Story] Description`",
+          "level": 2,
+          "line": 118
+        },
+        {
+          "heading": "Phase 1: Setup (Shared Infrastructure) ✅ DONE",
+          "level": 2,
+          "line": 125
+        },
+        {
+          "heading": "Phase 2: Foundational (Blocking Prerequisites) ✅ DONE",
+          "level": 2,
+          "line": 136
+        },
+        {
+          "heading": "Phase 3: User Story 1 — AI Tự Động Review Code ✅ DONE",
+          "level": 2,
+          "line": 157
+        },
+        {
+          "heading": "Phase 4: User Story 2 — Đăng Nhập & Phân Quyền Team",
+          "level": 2,
+          "line": 163
+        },
+        {
+          "heading": "Backend: Auth Endpoints",
+          "level": 3,
+          "line": 177
+        },
+        {
+          "heading": "Backend: Members & Invitations",
+          "level": 3,
+          "line": 204
+        },
+        {
+          "heading": "Backend: Auth Guard Existing Routes",
+          "level": 3,
+          "line": 301
+        },
+        {
+          "heading": "Frontend: Auth Context & Pages",
+          "level": 3,
+          "line": 369
+        },
+        {
+          "heading": "Frontend: Member Management UI",
+          "level": 3,
+          "line": 498
+        },
+        {
+          "heading": "Phase 5: User Story 3 — Assign Task & WIP per Developer",
+          "level": 2,
+          "line": 617
+        },
+        {
+          "heading": "Backend: WIP & Assignment Logic",
+          "level": 3,
+          "line": 628
+        },
+        {
+          "heading": "Frontend: Assignee Avatar & Assign UI",
+          "level": 3,
+          "line": 701
+        },
+        {
+          "heading": "Phase 6: User Story 4 — Task Dependencies",
+          "level": 2,
+          "line": 755
+        },
+        {
+          "heading": "Backend: Dependency Service & API",
+          "level": 3,
+          "line": 761
+        },
+        {
+          "heading": "Frontend: Blocked Badge & DAG",
+          "level": 3,
+          "line": 870
+        },
+        {
+          "heading": "Phase 7: User Story 5 — Task Templates",
+          "level": 2,
+          "line": 928
+        },
+        {
+          "heading": "Backend: Template Service & API",
+          "level": 3,
+          "line": 934
+        },
+        {
+          "heading": "Frontend: Template Selector",
+          "level": 3,
+          "line": 994
+        },
+        {
+          "heading": "Phase 8: User Story 6 — Team Dashboard & Analytics",
+          "level": 2,
+          "line": 1036
+        },
+        {
+          "heading": "Backend: Analytics Service & API",
+          "level": 3,
+          "line": 1042
+        },
+        {
+          "heading": "Frontend: Dashboard & Analytics Pages",
+          "level": 3,
+          "line": 1092
+        },
+        {
+          "heading": "Phase 9: User Story 7 — Notifications & Webhooks",
+          "level": 2,
+          "line": 1153
+        },
+        {
+          "heading": "Backend: Notification Service",
+          "level": 3,
+          "line": 1159
+        },
+        {
+          "heading": "Backend: Webhook Service",
+          "level": 3,
+          "line": 1224
+        },
+        {
+          "heading": "Backend: Webhook & GitHub APIs",
+          "level": 3,
+          "line": 1284
+        },
+        {
+          "heading": "Backend: Kanban Integration (Notifications + Webhooks)",
+          "level": 3,
+          "line": 1350
+        },
+        {
+          "heading": "Frontend: Notification Panel",
+          "level": 3,
+          "line": 1418
+        },
+        {
+          "heading": "Frontend: Webhook Settings UI",
+          "level": 3,
+          "line": 1472
+        },
+        {
+          "heading": "Phase 10: Polish & Cross-Cutting",
+          "level": 2,
+          "line": 1518
+        },
+        {
+          "heading": "Dependencies & Execution Order",
+          "level": 2,
+          "line": 1616
+        },
+        {
+          "heading": "Parallel opportunities trong Phase 4:",
+          "level": 3,
+          "line": 1631
+        },
+        {
+          "heading": "Notes cho Agent Coder",
+          "level": 2,
+          "line": 1643
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 38
+      }
+    }
+  ]
+}

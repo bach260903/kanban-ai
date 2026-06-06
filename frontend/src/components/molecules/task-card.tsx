@@ -177,7 +177,7 @@ export function TaskCard({
 
     branch?.branch_name ??
 
-    (task.status === 'done' ? 'merged' : task.status === 'conflict' ? 'Conflict' : null)
+    (task.status === 'done' ? 'merged' : null)
 
 
 
@@ -193,7 +193,6 @@ export function TaskCard({
         styles.root,
         isDragging ? styles.rootDragging : '',
         isAgentRunning ? styles.rootAgentRunning : '',
-        task.status === 'conflict' ? styles.rootConflict : '',
         isReviewSelected ? styles.rootReviewSelected : '',
         !sortableDisabled && !task.is_blocked ? styles.rootDraggable : '',
         task.is_blocked ? styles.rootBlocked : '',
@@ -253,15 +252,7 @@ export function TaskCard({
             />
           ) : null}
 
-          {task.status === 'conflict' ? (
-
-            <Badge kind="task" status="conflict" label="Conflict" />
-
-          ) : (
-
-            <Badge kind="task" status={task.status} />
-
-          )}
+          <Badge kind="task" status={task.status} />
 
         </div>
 
@@ -307,7 +298,7 @@ export function TaskCard({
 
               kind="task"
 
-              status={task.status === 'conflict' ? 'conflict' : task.status === 'done' ? 'done' : 'in_progress'}
+              status={task.status === 'done' ? 'done' : 'in_progress'}
 
               label={branchLabel}
 

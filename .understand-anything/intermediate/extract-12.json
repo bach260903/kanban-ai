@@ -1,0 +1,387 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".specify/templates/checklist-template.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 40,
+      "nonEmptyLines": 29,
+      "sections": [
+        {
+          "heading": "[CHECKLIST TYPE] Checklist: [FEATURE NAME]",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "[Category 1]",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "[Category 2]",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Notes",
+          "level": 2,
+          "line": 35
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".specify/templates/constitution-template.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 50,
+      "nonEmptyLines": 37,
+      "sections": [
+        {
+          "heading": "[PROJECT_NAME] Constitution",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Core Principles",
+          "level": 2,
+          "line": 4
+        },
+        {
+          "heading": "[PRINCIPLE_1_NAME]",
+          "level": 3,
+          "line": 6
+        },
+        {
+          "heading": "[PRINCIPLE_2_NAME]",
+          "level": 3,
+          "line": 11
+        },
+        {
+          "heading": "[PRINCIPLE_3_NAME]",
+          "level": 3,
+          "line": 16
+        },
+        {
+          "heading": "[PRINCIPLE_4_NAME]",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "[PRINCIPLE_5_NAME]",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "[SECTION_2_NAME]",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "[SECTION_3_NAME]",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "Governance",
+          "level": 2,
+          "line": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": ".specify/templates/plan-template.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 104,
+      "nonEmptyLines": 80,
+      "sections": [
+        {
+          "heading": "Implementation Plan: [FEATURE]",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Summary",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "Technical Context",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "Constitution Check",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Project Structure",
+          "level": 2,
+          "line": 36
+        },
+        {
+          "heading": "Documentation (this feature)",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "Source Code (repository root)",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "Complexity Tracking",
+          "level": 2,
+          "line": 97
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": ".specify/templates/spec-template.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 130,
+      "nonEmptyLines": 86,
+      "sections": [
+        {
+          "heading": "Feature Specification: [FEATURE NAME]",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "User Scenarios & Testing *(mandatory)*",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "User Story 1 - [Brief Title] (Priority: P1)",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "User Story 2 - [Brief Title] (Priority: P2)",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "User Story 3 - [Brief Title] (Priority: P3)",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "Edge Cases",
+          "level": 3,
+          "line": 70
+        },
+        {
+          "heading": "Requirements *(mandatory)*",
+          "level": 2,
+          "line": 80
+        },
+        {
+          "heading": "Functional Requirements",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "Key Entities *(include if feature involves data)*",
+          "level": 3,
+          "line": 100
+        },
+        {
+          "heading": "Success Criteria *(mandatory)*",
+          "level": 2,
+          "line": 105
+        },
+        {
+          "heading": "Measurable Outcomes",
+          "level": 3,
+          "line": 112
+        },
+        {
+          "heading": "Assumptions",
+          "level": 2,
+          "line": 119
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": ".specify/templates/tasks-template.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 251,
+      "nonEmptyLines": 168,
+      "sections": [
+        {
+          "heading": "Tasks: [FEATURE NAME]",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "Format: `[ID] [P?] [Story] Description`",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Path Conventions",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Phase 1: Setup (Shared Infrastructure)",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "Phase 2: Foundational (Blocking Prerequisites)",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Phase 3: User Story 1 - [Title] (Priority: P1) 🎯 MVP",
+          "level": 2,
+          "line": 76
+        },
+        {
+          "heading": "Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️",
+          "level": 3,
+          "line": 82
+        },
+        {
+          "heading": "Implementation for User Story 1",
+          "level": 3,
+          "line": 89
+        },
+        {
+          "heading": "Phase 4: User Story 2 - [Title] (Priority: P2)",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️",
+          "level": 3,
+          "line": 108
+        },
+        {
+          "heading": "Implementation for User Story 2",
+          "level": 3,
+          "line": 113
+        },
+        {
+          "heading": "Phase 5: User Story 3 - [Title] (Priority: P3)",
+          "level": 2,
+          "line": 124
+        },
+        {
+          "heading": "Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️",
+          "level": 3,
+          "line": 130
+        },
+        {
+          "heading": "Implementation for User Story 3",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "Phase N: Polish & Cross-Cutting Concerns",
+          "level": 2,
+          "line": 149
+        },
+        {
+          "heading": "Dependencies & Execution Order",
+          "level": 2,
+          "line": 162
+        },
+        {
+          "heading": "Phase Dependencies",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "User Story Dependencies",
+          "level": 3,
+          "line": 173
+        },
+        {
+          "heading": "Within Each User Story",
+          "level": 3,
+          "line": 179
+        },
+        {
+          "heading": "Parallel Opportunities",
+          "level": 3,
+          "line": 187
+        },
+        {
+          "heading": "Parallel Example: User Story 1",
+          "level": 2,
+          "line": 198
+        },
+        {
+          "heading": "Implementation Strategy",
+          "level": 2,
+          "line": 212
+        },
+        {
+          "heading": "MVP First (User Story 1 Only)",
+          "level": 3,
+          "line": 214
+        },
+        {
+          "heading": "Incremental Delivery",
+          "level": 3,
+          "line": 222
+        },
+        {
+          "heading": "Parallel Team Strategy",
+          "level": 3,
+          "line": 230
+        },
+        {
+          "heading": "Notes",
+          "level": 2,
+          "line": 243
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 26
+      }
+    }
+  ]
+}

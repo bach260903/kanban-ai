@@ -1,0 +1,106 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "frontend/src/components/molecules/auth-guard.module.css",
+                           "language":  "css",
+                           "sizeLines":  7,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/confirm-dialog.module.css",
+                           "language":  "css",
+                           "sizeLines":  42,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/diff-viewer.module.css",
+                           "language":  "css",
+                           "sizeLines":  33,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/empty-state.module.css",
+                           "language":  "css",
+                           "sizeLines":  67,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/forgot-password-modal.module.css",
+                           "language":  "css",
+                           "sizeLines":  499,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/inline-comment-overlay.css",
+                           "language":  "css",
+                           "sizeLines":  63,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/notification-bell.module.css",
+                           "language":  "css",
+                           "sizeLines":  191,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/notification-panel.module.css",
+                           "language":  "css",
+                           "sizeLines":  156,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/pause-resume-controls.module.css",
+                           "language":  "css",
+                           "sizeLines":  77,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/task-card.module.css",
+                           "language":  "css",
+                           "sizeLines":  350,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/molecules/terms-modal.module.css",
+                           "language":  "css",
+                           "sizeLines":  191,
+                           "fileCategory":  "markup"
+                       }
+                   ],
+    "batchImportData":  {
+                            "frontend/src/components/molecules/auth-guard.module.css":  [
+
+                                                                                        ],
+                            "frontend/src/components/molecules/confirm-dialog.module.css":  [
+
+                                                                                            ],
+                            "frontend/src/components/molecules/diff-viewer.module.css":  [
+
+                                                                                         ],
+                            "frontend/src/components/molecules/empty-state.module.css":  [
+
+                                                                                         ],
+                            "frontend/src/components/molecules/forgot-password-modal.module.css":  [
+
+                                                                                                   ],
+                            "frontend/src/components/molecules/inline-comment-overlay.css":  [
+
+                                                                                             ],
+                            "frontend/src/components/molecules/notification-bell.module.css":  [
+
+                                                                                               ],
+                            "frontend/src/components/molecules/notification-panel.module.css":  [
+
+                                                                                                ],
+                            "frontend/src/components/molecules/pause-resume-controls.module.css":  [
+
+                                                                                                   ],
+                            "frontend/src/components/molecules/task-card.module.css":  [
+
+                                                                                       ],
+                            "frontend/src/components/molecules/terms-modal.module.css":  [
+
+                                                                                         ]
+                        }
+}

@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "backend/app/routers/comments.py",
+                           "language":  "python",
+                           "sizeLines":  89,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/routers/skills.py",
+                           "language":  "python",
+                           "sizeLines":  40,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/routers/users.py",
+                           "language":  "python",
+                           "sizeLines":  113,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/routers/ws.py",
+                           "language":  "python",
+                           "sizeLines":  79,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas.py",
+                           "language":  "python",
+                           "sizeLines":  284,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  38,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/agent_run.py",
+                           "language":  "python",
+                           "sizeLines":  27,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/analytics.py",
+                           "language":  "python",
+                           "sizeLines":  59,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/audit.py",
+                           "language":  "python",
+                           "sizeLines":  37,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/auth.py",
+                           "language":  "python",
+                           "sizeLines":  85,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/dependency.py",
+                           "language":  "python",
+                           "sizeLines":  50,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/devops.py",
+                           "language":  "python",
+                           "sizeLines":  127,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/document.py",
+                           "language":  "python",
+                           "sizeLines":  88,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/github.py",
+                           "language":  "python",
+                           "sizeLines":  17,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/inline_comment.py",
+                           "language":  "python",
+                           "sizeLines":  30,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/intent.py",
+                           "language":  "python",
+                           "sizeLines":  17,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/member.py",
+                           "language":  "python",
+                           "sizeLines":  55,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/memory.py",
+                           "language":  "python",
+                           "sizeLines":  41,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/notification.py",
+                           "language":  "python",
+                           "sizeLines":  56,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/pause.py",
+                           "language":  "python",
+                           "sizeLines":  37,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/pipeline.py",
+                           "language":  "python",
+                           "sizeLines":  128,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/project.py",
+                           "language":  "python",
+                           "sizeLines":  64,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/review_insight.py",
+                           "language":  "python",
+                           "sizeLines":  60,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/review.py",
+                           "language":  "python",
+                           "sizeLines":  41,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/schemas/task_branch.py",
+                           "language":  "python",
+                           "sizeLines":  22,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "backend/app/routers/comments.py":  [
+
+                                                                ],
+                            "backend/app/routers/skills.py":  [
+
+                                                              ],
+                            "backend/app/routers/users.py":  [
+
+                                                             ],
+                            "backend/app/routers/ws.py":  [
+
+                                                          ],
+                            "backend/app/schemas.py":  [
+
+                                                       ],
+                            "backend/app/schemas/__init__.py":  [
+
+                                                                ],
+                            "backend/app/schemas/agent_run.py":  [
+
+                                                                 ],
+                            "backend/app/schemas/analytics.py":  [
+
+                                                                 ],
+                            "backend/app/schemas/audit.py":  [
+
+                                                             ],
+                            "backend/app/schemas/auth.py":  [
+
+                                                            ],
+                            "backend/app/schemas/dependency.py":  [
+
+                                                                  ],
+                            "backend/app/schemas/devops.py":  [
+
+                                                              ],
+                            "backend/app/schemas/document.py":  [
+
+                                                                ],
+                            "backend/app/schemas/github.py":  [
+
+                                                              ],
+                            "backend/app/schemas/inline_comment.py":  [
+
+                                                                      ],
+                            "backend/app/schemas/intent.py":  [
+
+                                                              ],
+                            "backend/app/schemas/member.py":  [
+
+                                                              ],
+                            "backend/app/schemas/memory.py":  [
+
+                                                              ],
+                            "backend/app/schemas/notification.py":  [
+
+                                                                    ],
+                            "backend/app/schemas/pause.py":  [
+
+                                                             ],
+                            "backend/app/schemas/pipeline.py":  [
+
+                                                                ],
+                            "backend/app/schemas/project.py":  [
+
+                                                               ],
+                            "backend/app/schemas/review_insight.py":  [
+
+                                                                      ],
+                            "backend/app/schemas/review.py":  [
+
+                                                              ],
+                            "backend/app/schemas/task_branch.py":  [
+
+                                                                   ]
+                        }
+}

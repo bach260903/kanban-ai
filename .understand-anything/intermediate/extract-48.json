@@ -1,0 +1,1663 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 21,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "frontend/src/services/websocket-client.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 199,
+      "nonEmptyLines": 174,
+      "functions": [
+        {
+          "name": "normalizeHttpBase",
+          "startLine": 5,
+          "endLine": 9,
+          "params": [
+            "url"
+          ]
+        },
+        {
+          "name": "httpBaseToWsBase",
+          "startLine": 11,
+          "endLine": 19,
+          "params": [
+            "httpBase"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TaskThoughtStreamClient",
+          "startLine": 29,
+          "endLine": 199,
+          "methods": [
+            "constructor",
+            "lastSequence",
+            "onEvent",
+            "onConnectionChange",
+            "notifyConnection",
+            "emit",
+            "send",
+            "connect",
+            "disconnect",
+            "clearReconnectTimer",
+            "sendCatchUp",
+            "buildUrl",
+            "openSocket",
+            "handleServerMessage"
+          ],
+          "properties": [
+            "ws",
+            "_lastSequence",
+            "listeners",
+            "connectionListeners",
+            "reconnectTimer",
+            "manualClose",
+            "streamEnded"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TaskThoughtStreamClient",
+          "line": 29,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "normalizeHttpBase",
+          "callee": "(url ?? '').trim",
+          "lineNumber": 6
+        },
+        {
+          "caller": "normalizeHttpBase",
+          "callee": "raw.replace",
+          "lineNumber": 8
+        },
+        {
+          "caller": "httpBaseToWsBase",
+          "callee": "httpBase.startsWith",
+          "lineNumber": 12
+        },
+        {
+          "caller": "httpBaseToWsBase",
+          "callee": "httpBase.slice",
+          "lineNumber": 13
+        },
+        {
+          "caller": "httpBaseToWsBase",
+          "callee": "httpBase.startsWith",
+          "lineNumber": 15
+        },
+        {
+          "caller": "httpBaseToWsBase",
+          "callee": "httpBase.slice",
+          "lineNumber": 16
+        },
+        {
+          "caller": "constructor",
+          "callee": "normalizeHttpBase",
+          "lineNumber": 41
+        },
+        {
+          "caller": "onEvent",
+          "callee": "this.listeners.add",
+          "lineNumber": 50
+        },
+        {
+          "caller": "onEvent",
+          "callee": "this.listeners.delete",
+          "lineNumber": 52
+        },
+        {
+          "caller": "onConnectionChange",
+          "callee": "this.connectionListeners.add",
+          "lineNumber": 57
+        },
+        {
+          "caller": "onConnectionChange",
+          "callee": "this.connectionListeners.delete",
+          "lineNumber": 59
+        },
+        {
+          "caller": "notifyConnection",
+          "callee": "cb",
+          "lineNumber": 66
+        },
+        {
+          "caller": "emit",
+          "callee": "cb",
+          "lineNumber": 76
+        },
+        {
+          "caller": "send",
+          "callee": "JSON.stringify",
+          "lineNumber": 87
+        },
+        {
+          "caller": "send",
+          "callee": "this.ws.send",
+          "lineNumber": 88
+        },
+        {
+          "caller": "connect",
+          "callee": "this.clearReconnectTimer",
+          "lineNumber": 94
+        },
+        {
+          "caller": "connect",
+          "callee": "this.openSocket",
+          "lineNumber": 95
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.clearReconnectTimer",
+          "lineNumber": 101
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.notifyConnection",
+          "lineNumber": 104
+        },
+        {
+          "caller": "disconnect",
+          "callee": "this.ws.close",
+          "lineNumber": 105
+        },
+        {
+          "caller": "clearReconnectTimer",
+          "callee": "clearTimeout",
+          "lineNumber": 112
+        },
+        {
+          "caller": "sendCatchUp",
+          "callee": "this.send",
+          "lineNumber": 118
+        },
+        {
+          "caller": "buildUrl",
+          "callee": "httpBaseToWsBase",
+          "lineNumber": 122
+        },
+        {
+          "caller": "buildUrl",
+          "callee": "encodeURIComponent",
+          "lineNumber": 124
+        },
+        {
+          "caller": "buildUrl",
+          "callee": "q.toString",
+          "lineNumber": 124
+        },
+        {
+          "caller": "openSocket",
+          "callee": "this.getToken",
+          "lineNumber": 131
+        },
+        {
+          "caller": "openSocket",
+          "callee": "this.emit",
+          "lineNumber": 133
+        },
+        {
+          "caller": "openSocket",
+          "callee": "this.buildUrl",
+          "lineNumber": 137
+        },
+        {
+          "caller": "openSocket",
+          "callee": "this.notifyConnection",
+          "lineNumber": 142
+        },
+        {
+          "caller": "openSocket",
+          "callee": "JSON.parse",
+          "lineNumber": 147
+        },
+        {
+          "caller": "openSocket",
+          "callee": "this.handleServerMessage",
+          "lineNumber": 148
+        },
+        {
+          "caller": "openSocket",
+          "callee": "this.emit",
+          "lineNumber": 155
+        },
+        {
+          "caller": "openSocket",
+          "callee": "this.notifyConnection",
+          "lineNumber": 159
+        },
+        {
+          "caller": "openSocket",
+          "callee": "setTimeout",
+          "lineNumber": 164
+        },
+        {
+          "caller": "openSocket",
+          "callee": "this.openSocket",
+          "lineNumber": 166
+        },
+        {
+          "caller": "handleServerMessage",
+          "callee": "this.emit",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handleServerMessage",
+          "callee": "this.sendCatchUp",
+          "lineNumber": 175
+        },
+        {
+          "caller": "handleServerMessage",
+          "callee": "this.emit",
+          "lineNumber": 180
+        },
+        {
+          "caller": "handleServerMessage",
+          "callee": "this.disconnect",
+          "lineNumber": 181
+        },
+        {
+          "caller": "handleServerMessage",
+          "callee": "this.emit",
+          "lineNumber": 185
+        },
+        {
+          "caller": "handleServerMessage",
+          "callee": "this.disconnect",
+          "lineNumber": 189
+        },
+        {
+          "caller": "handleServerMessage",
+          "callee": "Number.isNaN",
+          "lineNumber": 194
+        },
+        {
+          "caller": "handleServerMessage",
+          "callee": "Math.max",
+          "lineNumber": 195
+        },
+        {
+          "caller": "handleServerMessage",
+          "callee": "this.emit",
+          "lineNumber": 197
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "frontend/src/services/ws-handler.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 47,
+      "nonEmptyLines": 42,
+      "functions": [
+        {
+          "name": "isReviewEvent",
+          "startLine": 25,
+          "endLine": 27,
+          "params": [
+            "msg"
+          ]
+        },
+        {
+          "name": "handleReviewStreamEvent",
+          "startLine": 40,
+          "endLine": 47,
+          "params": [
+            "msg",
+            "applyStreamEvent"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "REVIEW_EVENT_TYPES",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "isReviewEvent",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "handleReviewStreamEvent",
+          "line": 40,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "isReviewEvent",
+          "callee": "REVIEW_EVENT_TYPES.includes",
+          "lineNumber": 26
+        },
+        {
+          "caller": "handleReviewStreamEvent",
+          "callee": "isReviewEvent",
+          "lineNumber": 44
+        },
+        {
+          "caller": "handleReviewStreamEvent",
+          "callee": "applyStreamEvent",
+          "lineNumber": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/store/project-store.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 14,
+      "exports": [
+        {
+          "name": "useProjectStore",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/store/task-store.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 82,
+      "nonEmptyLines": 74,
+      "functions": [
+        {
+          "name": "emptyTaskColumns",
+          "startLine": 25,
+          "endLine": 27,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "emptyTaskColumns",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "useTaskStore",
+          "line": 46,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "emptyTaskColumns",
+          "callee": "Object.fromEntries",
+          "lineNumber": 26
+        },
+        {
+          "caller": "emptyTaskColumns",
+          "callee": "STATUSES.map",
+          "lineNumber": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/styles/tokens.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 130,
+      "nonEmptyLines": 113,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/src/types/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 324,
+      "nonEmptyLines": 276,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/utils/auth-redirect.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "isSafeRedirectPath",
+          "startLine": 13,
+          "endLine": 17,
+          "params": [
+            "path"
+          ]
+        },
+        {
+          "name": "getAuthRedirectTarget",
+          "startLine": 19,
+          "endLine": 35,
+          "params": [
+            "location",
+            "searchParams"
+          ]
+        },
+        {
+          "name": "buildLoginPath",
+          "startLine": 37,
+          "endLine": 42,
+          "params": [
+            "returnPath"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "isSafeRedirectPath",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "getAuthRedirectTarget",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "buildLoginPath",
+          "line": 37,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "isSafeRedirectPath",
+          "callee": "path.startsWith",
+          "lineNumber": 14
+        },
+        {
+          "caller": "isSafeRedirectPath",
+          "callee": "path.startsWith",
+          "lineNumber": 14
+        },
+        {
+          "caller": "isSafeRedirectPath",
+          "callee": "path.split",
+          "lineNumber": 15
+        },
+        {
+          "caller": "isSafeRedirectPath",
+          "callee": "BLOCKED_PATHS.has",
+          "lineNumber": 16
+        },
+        {
+          "caller": "getAuthRedirectTarget",
+          "callee": "isSafeRedirectPath",
+          "lineNumber": 25
+        },
+        {
+          "caller": "getAuthRedirectTarget",
+          "callee": "searchParams?.get",
+          "lineNumber": 29
+        },
+        {
+          "caller": "getAuthRedirectTarget",
+          "callee": "isSafeRedirectPath",
+          "lineNumber": 30
+        },
+        {
+          "caller": "buildLoginPath",
+          "callee": "isSafeRedirectPath",
+          "lineNumber": 38
+        },
+        {
+          "caller": "buildLoginPath",
+          "callee": "encodeURIComponent",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/utils/dependency-map.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "buildBlockedByTitlesMap",
+          "startLine": 4,
+          "endLine": 19,
+          "params": [
+            "graph"
+          ]
+        },
+        {
+          "name": "buildDependsOnCountMap",
+          "startLine": 22,
+          "endLine": 28,
+          "params": [
+            "graph"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "buildBlockedByTitlesMap",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "buildDependsOnCountMap",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "buildBlockedByTitlesMap",
+          "callee": "graph.nodes.map",
+          "lineNumber": 7
+        },
+        {
+          "caller": "buildBlockedByTitlesMap",
+          "callee": "nodeById.get",
+          "lineNumber": 11
+        },
+        {
+          "caller": "buildBlockedByTitlesMap",
+          "callee": "map.get",
+          "lineNumber": 13
+        },
+        {
+          "caller": "buildBlockedByTitlesMap",
+          "callee": "list.push",
+          "lineNumber": 14
+        },
+        {
+          "caller": "buildBlockedByTitlesMap",
+          "callee": "map.set",
+          "lineNumber": 15
+        },
+        {
+          "caller": "buildDependsOnCountMap",
+          "callee": "map.set",
+          "lineNumber": 25
+        },
+        {
+          "caller": "buildDependsOnCountMap",
+          "callee": "map.get",
+          "lineNumber": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/utils/relative-time.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 31,
+      "functions": [
+        {
+          "name": "relativeTime",
+          "startLine": 20,
+          "endLine": 33,
+          "params": [
+            "iso",
+            "now"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "relativeTime",
+          "line": 20,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "relativeTime",
+          "callee": "Number.isNaN",
+          "lineNumber": 22
+        },
+        {
+          "caller": "relativeTime",
+          "callee": "date.getTime",
+          "lineNumber": 22
+        },
+        {
+          "caller": "relativeTime",
+          "callee": "Math.round",
+          "lineNumber": 23
+        },
+        {
+          "caller": "relativeTime",
+          "callee": "date.getTime",
+          "lineNumber": 23
+        },
+        {
+          "caller": "relativeTime",
+          "callee": "now.getTime",
+          "lineNumber": 23
+        },
+        {
+          "caller": "relativeTime",
+          "callee": "Math.abs",
+          "lineNumber": 24
+        },
+        {
+          "caller": "relativeTime",
+          "callee": "date.toLocaleString",
+          "lineNumber": 26
+        },
+        {
+          "caller": "relativeTime",
+          "callee": "RTF.format",
+          "lineNumber": 29
+        },
+        {
+          "caller": "relativeTime",
+          "callee": "Math.round",
+          "lineNumber": 29
+        },
+        {
+          "caller": "relativeTime",
+          "callee": "RTF.format",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/utils/strip-markdown.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "stripMarkdown",
+          "startLine": 32,
+          "endLine": 39,
+          "params": [
+            "input"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "stripMarkdown",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "stripMarkdown",
+          "callee": "out.replace",
+          "lineNumber": 36
+        },
+        {
+          "caller": "stripMarkdown",
+          "callee": "out.replace(/\\s+/g, ' ').trim",
+          "lineNumber": 38
+        },
+        {
+          "caller": "stripMarkdown",
+          "callee": "out.replace",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/utils/wip-limit.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 16,
+      "functions": [
+        {
+          "name": "isMultiUserWipMode",
+          "startLine": 4,
+          "endLine": 6,
+          "params": [
+            "memberCount"
+          ]
+        },
+        {
+          "name": "isUserWipFull",
+          "startLine": 8,
+          "endLine": 18,
+          "params": [
+            "columns",
+            "userId",
+            "multiUser"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "isMultiUserWipMode",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "isUserWipFull",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "isUserWipFull",
+          "callee": "columns.in_progress.some",
+          "lineNumber": 15
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/vite-env.d.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 9,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/tailwind.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 134,
+      "nonEmptyLines": 133,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 25,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/checklists/pre-implementation.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 99,
+      "nonEmptyLines": 51,
+      "sections": [
+        {
+          "heading": "Pre-Implementation Checklist: Neo-Kanban",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Đóng checklist triển khai",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "1. Human-in-the-Loop Compliance",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "2. Agent Isolation",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "3. Data Integrity",
+          "level": 2,
+          "line": 49
+        },
+        {
+          "heading": "4. Error Handling",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "5. Security",
+          "level": 2,
+          "line": 85
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/checklists/requirements.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 38,
+      "nonEmptyLines": 28,
+      "sections": [
+        {
+          "heading": "Checklist Chất Lượng Đặc Tả: Neo-Kanban (Toàn Dự Án)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Chất Lượng Nội Dung",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Mức Độ Hoàn Chỉnh Yêu Cầu",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Sẵn Sàng Triển Khai",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Ghi Chú",
+          "level": 2,
+          "line": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/contracts/rest-api.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 800,
+      "nonEmptyLines": 598,
+      "sections": [
+        {
+          "heading": "REST API Contract: Neo-Kanban",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Common Response Codes",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Authentication",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "`POST /api/v1/auth/register`",
+          "level": 3,
+          "line": 30
+        },
+        {
+          "heading": "`POST /api/v1/auth/login`",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "Health",
+          "level": 2,
+          "line": 89
+        },
+        {
+          "heading": "`GET /health`",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "Projects",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "`GET /api/v1/projects`",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "`POST /api/v1/projects`",
+          "level": 3,
+          "line": 124
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}`",
+          "level": 3,
+          "line": 162
+        },
+        {
+          "heading": "`PUT /api/v1/projects/{project_id}`",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "`DELETE /api/v1/projects/{project_id}`",
+          "level": 3,
+          "line": 191
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}/constitution`",
+          "level": 3,
+          "line": 199
+        },
+        {
+          "heading": "`PUT /api/v1/projects/{project_id}/constitution`",
+          "level": 3,
+          "line": 213
+        },
+        {
+          "heading": "Documents (SPEC / PLAN)",
+          "level": 2,
+          "line": 235
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}/documents`",
+          "level": 3,
+          "line": 237
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}/documents/{doc_id}`",
+          "level": 3,
+          "line": 260
+        },
+        {
+          "heading": "`PUT /api/v1/projects/{project_id}/documents/{doc_id}`",
+          "level": 3,
+          "line": 280
+        },
+        {
+          "heading": "`POST /api/v1/projects/{project_id}/documents/{doc_id}/approve`",
+          "level": 3,
+          "line": 295
+        },
+        {
+          "heading": "`POST /api/v1/projects/{project_id}/documents/{doc_id}/revise`",
+          "level": 3,
+          "line": 320
+        },
+        {
+          "heading": "Agent Triggers",
+          "level": 2,
+          "line": 348
+        },
+        {
+          "heading": "`POST /api/v1/projects/{project_id}/generate-spec`",
+          "level": 3,
+          "line": 350
+        },
+        {
+          "heading": "`POST /api/v1/projects/{project_id}/generate-plan`",
+          "level": 3,
+          "line": 385
+        },
+        {
+          "heading": "`GET /api/v1/agent-runs/{run_id}`",
+          "level": 3,
+          "line": 409
+        },
+        {
+          "heading": "Tasks (Kanban)",
+          "level": 2,
+          "line": 431
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}/tasks`",
+          "level": 3,
+          "line": 433
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}/tasks/{task_id}`",
+          "level": 3,
+          "line": 451
+        },
+        {
+          "heading": "`POST /api/v1/projects/{project_id}/tasks/{task_id}/move`",
+          "level": 3,
+          "line": 471
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}/tasks/{task_id}/diff`",
+          "level": 3,
+          "line": 505
+        },
+        {
+          "heading": "`POST /api/v1/projects/{project_id}/tasks/{task_id}/approve`",
+          "level": 3,
+          "line": 530
+        },
+        {
+          "heading": "`POST /api/v1/projects/{project_id}/tasks/{task_id}/reject`",
+          "level": 3,
+          "line": 548
+        },
+        {
+          "heading": "Audit Logs",
+          "level": 2,
+          "line": 572
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}/audit-logs`",
+          "level": 3,
+          "line": 574
+        },
+        {
+          "heading": "Phase 2 Endpoints",
+          "level": 2,
+          "line": 606
+        },
+        {
+          "heading": "Pause & Steer",
+          "level": 3,
+          "line": 608
+        },
+        {
+          "heading": "`POST /api/v1/projects/{project_id}/tasks/{task_id}/pause`",
+          "level": 4,
+          "line": 612
+        },
+        {
+          "heading": "`POST /api/v1/projects/{project_id}/tasks/{task_id}/resume`",
+          "level": 4,
+          "line": 634
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}/tasks/{task_id}/pause-state`",
+          "level": 4,
+          "line": 656
+        },
+        {
+          "heading": "Memory Management",
+          "level": 3,
+          "line": 673
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}/memory`",
+          "level": 4,
+          "line": 675
+        },
+        {
+          "heading": "`PUT /api/v1/projects/{project_id}/memory/{entry_id}`",
+          "level": 4,
+          "line": 698
+        },
+        {
+          "heading": "`DELETE /api/v1/projects/{project_id}/memory/{entry_id}`",
+          "level": 4,
+          "line": 714
+        },
+        {
+          "heading": "Codebase Map",
+          "level": 3,
+          "line": 722
+        },
+        {
+          "heading": "`GET /api/v1/projects/{project_id}/codebase-map`",
+          "level": 4,
+          "line": 724
+        },
+        {
+          "heading": "Git Branch + Inline Comments",
+          "level": 3,
+          "line": 737
+        },
+        {
+          "heading": "`GET /api/v1/tasks/{task_id}/branch`",
+          "level": 4,
+          "line": 739
+        },
+        {
+          "heading": "`GET /api/v1/tasks/{task_id}/comments`",
+          "level": 4,
+          "line": 756
+        },
+        {
+          "heading": "`POST /api/v1/tasks/{task_id}/comments`",
+          "level": 4,
+          "line": 777
+        },
+        {
+          "heading": "`DELETE /api/v1/tasks/{task_id}/comments/{comment_id}`",
+          "level": 4,
+          "line": 796
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 50
+      }
+    },
+    {
+      "path": "specs/001-neo-kanban/contracts/websocket-protocol.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 304,
+      "nonEmptyLines": 238,
+      "sections": [
+        {
+          "heading": "WebSocket Protocol Contract: Neo-Kanban Thought Stream",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Connection Lifecycle",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Server → Client Messages",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "Base Envelope (all stream events)",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "`THOUGHT`",
+          "level": 3,
+          "line": 58
+        },
+        {
+          "heading": "`TOOL_CALL`",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "`TOOL_RESULT`",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "`ACTION`",
+          "level": 3,
+          "line": 105
+        },
+        {
+          "heading": "`ERROR`",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "`STATUS_CHANGE`",
+          "level": 3,
+          "line": 138
+        },
+        {
+          "heading": "Control Messages (server → client, not stream events)",
+          "level": 3,
+          "line": 155
+        },
+        {
+          "heading": "`CONNECTED`",
+          "level": 4,
+          "line": 159
+        },
+        {
+          "heading": "`STREAM_END`",
+          "level": 4,
+          "line": 172
+        },
+        {
+          "heading": "`ERROR` (connection-level)",
+          "level": 4,
+          "line": 192
+        },
+        {
+          "heading": "Client → Server Messages",
+          "level": 2,
+          "line": 206
+        },
+        {
+          "heading": "`CATCH_UP`",
+          "level": 3,
+          "line": 208
+        },
+        {
+          "heading": "`PAUSE`",
+          "level": 3,
+          "line": 222
+        },
+        {
+          "heading": "`RESUME`",
+          "level": 3,
+          "line": 236
+        },
+        {
+          "heading": "Reconnection Algorithm (Client Side)",
+          "level": 2,
+          "line": 254
+        },
+        {
+          "heading": "Sequence Number Guarantees",
+          "level": 2,
+          "line": 284
+        },
+        {
+          "heading": "Redis Channel Naming",
+          "level": 2,
+          "line": 295
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 21
+      }
+    },
+    {
+      "path": "specs/002-ai-cli-integration/contracts/rest-api.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 124,
+      "nonEmptyLines": 91,
+      "sections": [
+        {
+          "heading": "REST API Contract: AI CLI Integration (Feature 002)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Modified Endpoints",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "✏️ `POST /api/v1/projects` — Create Project",
+          "level": 3,
+          "line": 11
+        },
+        {
+          "heading": "✏️ `PUT /api/v1/projects/{id}` — Update Project",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "✏️ `GET /api/v1/projects/{id}` — Get Project",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "✏️ `GET /api/v1/projects` — List Projects",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "New Endpoint",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "`GET /api/v1/backends/available`",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "Unchanged Endpoints",
+          "level": 2,
+          "line": 99
+        },
+        {
+          "heading": "Error Codes (new)",
+          "level": 2,
+          "line": 105
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/checklists/requirements.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 47,
+      "nonEmptyLines": 36,
+      "sections": [
+        {
+          "heading": "Specification Quality Checklist: Platform Expansion — Multi-Agent Review, Team Management & Integrations",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Content Quality",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Requirement Completeness",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Feature Readiness",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Coverage Summary",
+          "level": 2,
+          "line": 32
+        },
+        {
+          "heading": "Notes",
+          "level": 2,
+          "line": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "specs/003-multi-agent-team-platform/contracts/rest-api.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 268,
+      "nonEmptyLines": 219,
+      "sections": [
+        {
+          "heading": "REST API Contracts: Platform Expansion — Feature 003",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "F-004: Auth & Multi-user",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "POST /auth/register",
+          "level": 3,
+          "line": 10
+        },
+        {
+          "heading": "POST /auth/login",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "GET /auth/me",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "GET /projects/{id}/members",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "POST /projects/{id}/members/invite",
+          "level": 3,
+          "line": 36
+        },
+        {
+          "heading": "GET /invitations/{token}",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "POST /invitations/{token}/accept",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "PATCH /projects/{id}/members/{user_id}",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "DELETE /projects/{id}/members/{user_id}",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "F-003: Reviewer Agent",
+          "level": 2,
+          "line": 70
+        },
+        {
+          "heading": "GET /tasks/{id}/review",
+          "level": 3,
+          "line": 72
+        },
+        {
+          "heading": "F-005: Task Dependencies",
+          "level": 2,
+          "line": 95
+        },
+        {
+          "heading": "GET /projects/{id}/tasks/{task_id}/dependencies",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "POST /projects/{id}/tasks/{task_id}/dependencies",
+          "level": 3,
+          "line": 106
+        },
+        {
+          "heading": "DELETE /projects/{id}/tasks/{task_id}/dependencies/{dep_task_id}",
+          "level": 3,
+          "line": 113
+        },
+        {
+          "heading": "GET /projects/{id}/dependency-graph",
+          "level": 3,
+          "line": 118
+        },
+        {
+          "heading": "F-005: Task Templates",
+          "level": 2,
+          "line": 126
+        },
+        {
+          "heading": "GET /templates?scope=project|global&project_id={id}",
+          "level": 3,
+          "line": 128
+        },
+        {
+          "heading": "POST /templates",
+          "level": 3,
+          "line": 133
+        },
+        {
+          "heading": "DELETE /templates/{id}",
+          "level": 3,
+          "line": 140
+        },
+        {
+          "heading": "F-005: Task Assignment",
+          "level": 2,
+          "line": 148
+        },
+        {
+          "heading": "PATCH /tasks/{id}/assign",
+          "level": 3,
+          "line": 150
+        },
+        {
+          "heading": "F-006: Dashboard & Analytics",
+          "level": 2,
+          "line": 159
+        },
+        {
+          "heading": "GET /dashboard",
+          "level": 3,
+          "line": 161
+        },
+        {
+          "heading": "GET /projects/{id}/analytics?range=7d|30d|custom&from=&to=",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "F-007: Notifications",
+          "level": 2,
+          "line": 192
+        },
+        {
+          "heading": "GET /notifications?unread_only=true&limit=20&offset=0",
+          "level": 3,
+          "line": 194
+        },
+        {
+          "heading": "PATCH /notifications/{id}/read",
+          "level": 3,
+          "line": 204
+        },
+        {
+          "heading": "POST /notifications/read-all",
+          "level": 3,
+          "line": 209
+        },
+        {
+          "heading": "F-007: Webhooks",
+          "level": 2,
+          "line": 214
+        },
+        {
+          "heading": "GET /projects/{id}/webhooks",
+          "level": 3,
+          "line": 216
+        },
+        {
+          "heading": "POST /projects/{id}/webhooks",
+          "level": 3,
+          "line": 221
+        },
+        {
+          "heading": "DELETE /projects/{id}/webhooks/{webhook_id}",
+          "level": 3,
+          "line": 228
+        },
+        {
+          "heading": "POST /projects/{id}/webhooks/{webhook_id}/test",
+          "level": 3,
+          "line": 233
+        },
+        {
+          "heading": "F-007: GitHub Integration",
+          "level": 2,
+          "line": 239
+        },
+        {
+          "heading": "GET /projects/{id}/github",
+          "level": 3,
+          "line": 241
+        },
+        {
+          "heading": "PUT /projects/{id}/github",
+          "level": 3,
+          "line": 246
+        },
+        {
+          "heading": "Webhook Payload Schema (outbound)",
+          "level": 2,
+          "line": 255
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 40
+      }
+    }
+  ]
+}

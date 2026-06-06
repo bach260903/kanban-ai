@@ -20,6 +20,7 @@ export type PipelineRunOut = {
   id: string
   project_id: string
   task_id: string | null
+  task_title: string | null
   status: 'queued' | 'running' | 'success' | 'failure' | 'cancelled'
   triggered_by: string | null
   branch_name: string | null

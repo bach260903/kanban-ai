@@ -1,0 +1,124 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/astro.csv",
+                           "language":  "csv",
+                           "sizeLines":  54,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/flutter.csv",
+                           "language":  "csv",
+                           "sizeLines":  53,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv",
+                           "language":  "csv",
+                           "sizeLines":  56,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv",
+                           "language":  "csv",
+                           "sizeLines":  53,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/nextjs.csv",
+                           "language":  "csv",
+                           "sizeLines":  53,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv",
+                           "language":  "csv",
+                           "sizeLines":  51,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv",
+                           "language":  "csv",
+                           "sizeLines":  59,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/react-native.csv",
+                           "language":  "csv",
+                           "sizeLines":  52,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/react.csv",
+                           "language":  "csv",
+                           "sizeLines":  54,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/shadcn.csv",
+                           "language":  "csv",
+                           "sizeLines":  61,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/svelte.csv",
+                           "language":  "csv",
+                           "sizeLines":  54,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/swiftui.csv",
+                           "language":  "csv",
+                           "sizeLines":  51,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/stacks/vue.csv",
+                           "language":  "csv",
+                           "sizeLines":  50,
+                           "fileCategory":  "data"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/astro.csv":  [
+
+                                                                                   ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/flutter.csv":  [
+
+                                                                                     ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv":  [
+
+                                                                                           ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv":  [
+
+                                                                                             ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/nextjs.csv":  [
+
+                                                                                    ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv":  [
+
+                                                                                     ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv":  [
+
+                                                                                    ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/react-native.csv":  [
+
+                                                                                          ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/react.csv":  [
+
+                                                                                   ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/shadcn.csv":  [
+
+                                                                                    ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/svelte.csv":  [
+
+                                                                                    ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/swiftui.csv":  [
+
+                                                                                     ],
+                            ".cursor/skills/ui-ux-pro-max/data/stacks/vue.csv":  [
+
+                                                                                 ]
+                        }
+}

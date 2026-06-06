@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "frontend/src/components/ui/primitives.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  129,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/contexts/auth-context.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  132,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/hooks/use-document.ts",
+                           "language":  "typescript",
+                           "sizeLines":  125,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/hooks/use-inline-comments.ts",
+                           "language":  "typescript",
+                           "sizeLines":  81,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/hooks/use-kanban.ts",
+                           "language":  "typescript",
+                           "sizeLines":  267,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/hooks/use-thought-stream.ts",
+                           "language":  "typescript",
+                           "sizeLines":  172,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/index.css",
+                           "language":  "css",
+                           "sizeLines":  121,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/lib/toast.ts",
+                           "language":  "typescript",
+                           "sizeLines":  65,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/main.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  11,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/accept-invite.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  127,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/analytics.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  265,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/auth-callback.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  79,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/constitution-editor.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  208,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/dashboard.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  287,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/deployments/deployment-detail.module.css",
+                           "language":  "css",
+                           "sizeLines":  280,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/deployments/deployment-detail.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  258,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/deployments/deployment-history.module.css",
+                           "language":  "css",
+                           "sizeLines":  124,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/deployments/deployment-history.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  139,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/dev-auth.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  98,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/devops/health-dashboard.module.css",
+                           "language":  "css",
+                           "sizeLines":  457,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/devops/health-dashboard.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  350,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/login.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  355,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/pipelines/pipeline-list.module.css",
+                           "language":  "css",
+                           "sizeLines":  151,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/pages/pipelines/pipeline-list.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  145,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/pages/pipelines/pipeline-run.module.css",
+                           "language":  "css",
+                           "sizeLines":  377,
+                           "fileCategory":  "markup"
+                       }
+                   ],
+    "batchImportData":  {
+                            "frontend/src/components/ui/primitives.tsx":  [
+
+                                                                          ],
+                            "frontend/src/contexts/auth-context.tsx":  [
+
+                                                                       ],
+                            "frontend/src/hooks/use-document.ts":  [
+
+                                                                   ],
+                            "frontend/src/hooks/use-inline-comments.ts":  [
+
+                                                                          ],
+                            "frontend/src/hooks/use-kanban.ts":  [
+
+                                                                 ],
+                            "frontend/src/hooks/use-thought-stream.ts":  [
+
+                                                                         ],
+                            "frontend/src/index.css":  [
+
+                                                       ],
+                            "frontend/src/lib/toast.ts":  [
+
+                                                          ],
+                            "frontend/src/main.tsx":  [
+
+                                                      ],
+                            "frontend/src/pages/accept-invite.tsx":  [
+
+                                                                     ],
+                            "frontend/src/pages/analytics.tsx":  [
+
+                                                                 ],
+                            "frontend/src/pages/auth-callback.tsx":  [
+
+                                                                     ],
+                            "frontend/src/pages/constitution-editor.tsx":  [
+
+                                                                           ],
+                            "frontend/src/pages/dashboard.tsx":  [
+
+                                                                 ],
+                            "frontend/src/pages/deployments/deployment-detail.module.css":  [
+
+                                                                                            ],
+                            "frontend/src/pages/deployments/deployment-detail.tsx":  [
+
+                                                                                     ],
+                            "frontend/src/pages/deployments/deployment-history.module.css":  [
+
+                                                                                             ],
+                            "frontend/src/pages/deployments/deployment-history.tsx":  [
+
+                                                                                      ],
+                            "frontend/src/pages/dev-auth.tsx":  [
+
+                                                                ],
+                            "frontend/src/pages/devops/health-dashboard.module.css":  [
+
+                                                                                      ],
+                            "frontend/src/pages/devops/health-dashboard.tsx":  [
+
+                                                                               ],
+                            "frontend/src/pages/login.tsx":  [
+
+                                                             ],
+                            "frontend/src/pages/pipelines/pipeline-list.module.css":  [
+
+                                                                                      ],
+                            "frontend/src/pages/pipelines/pipeline-list.tsx":  [
+
+                                                                               ],
+                            "frontend/src/pages/pipelines/pipeline-run.module.css":  [
+
+                                                                                     ]
+                        }
+}

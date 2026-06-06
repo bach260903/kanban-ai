@@ -24,8 +24,6 @@ const BOARD_STATUSES = [
   'in_progress',
   'review',
   'done',
-  'rejected',
-  'conflict',
 ] as const satisfies readonly TaskStatus[]
 
 export type KanbanBoardProps = {
@@ -75,8 +73,6 @@ function enrichColumnsWithDeps(
     in_progress: enrich(columns.in_progress),
     review: enrich(columns.review),
     done: enrich(columns.done),
-    rejected: enrich(columns.rejected),
-    conflict: enrich(columns.conflict),
   }
 }
 

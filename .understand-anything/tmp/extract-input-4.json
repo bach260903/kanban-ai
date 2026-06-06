@@ -1,0 +1,70 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".env.example",
+                           "language":  "config",
+                           "sizeLines":  52,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "CLAUDE.md",
+                           "language":  "markdown",
+                           "sizeLines":  5,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "README.md",
+                           "language":  "markdown",
+                           "sizeLines":  212,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "docker-compose.yml",
+                           "language":  "yaml",
+                           "sizeLines":  54,
+                           "fileCategory":  "infra"
+                       },
+                       {
+                           "path":  "package.json",
+                           "language":  "json",
+                           "sizeLines":  16,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "pdf_content.txt",
+                           "language":  "txt",
+                           "sizeLines":  2362,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "pdf_extract.txt",
+                           "language":  "txt",
+                           "sizeLines":  14,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".env.example":  [
+
+                                             ],
+                            "CLAUDE.md":  [
+
+                                          ],
+                            "README.md":  [
+
+                                          ],
+                            "docker-compose.yml":  [
+
+                                                   ],
+                            "package.json":  [
+
+                                             ],
+                            "pdf_content.txt":  [
+
+                                                ],
+                            "pdf_extract.txt":  [
+
+                                                ]
+                        }
+}

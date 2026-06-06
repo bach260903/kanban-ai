@@ -9,6 +9,8 @@ from pathlib import Path
 from typing import Any
 from uuid import UUID
 
+import subprocess
+
 from fastapi import HTTPException, status
 from git.exc import GitCommandError
 from sqlalchemy import func, select
@@ -16,6 +18,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.agent.graph import route_coder
 from app.agent.nodes import cli_coder_node, coder_node, reviewer_node
+from app.models.pipeline_run import PipelineRun, PipelineRunStatus
 from app.config import settings
 from app.database import async_session_maker
 from app.exceptions import InvalidTransitionError, NotFoundError, SandboxEscapeError, WIPLimitError
@@ -35,6 +38,61 @@ from app.services.task_service import TaskService
 
 logger = logging.getLogger(__name__)
 
+_MAX_CI_RETRIES = 2
+_CI_POLL_INTERVAL = 5   # seconds
+_CI_TIMEOUT = 300       # 5 minutes
+
+
+async def _run_ci_gate(project_id: UUID, task_id: UUID | None) -> tuple[bool, str]:
+    """Trigger pipeline, wait synchronously, return (passed, failure_report).
+
+    Opens its own DB sessions so it can be called from any background context.
+    Returns (True, "") on success or timeout-as-skip; (False, report) on failure.
+    """
+    from app.pipeline.pipeline_service import PipelineService  # avoid circular at module level
+
+    try:
+        sandbox = _sandbox_project_root(project_id)
+        async with async_session_maker() as session:
+            run = await PipelineService.create_and_trigger(
+                session,
+                project_id=project_id,
+                task_id=task_id,
+                sandbox=sandbox,
+                triggered_by="agent_ci_gate",
+            )
+            run_id = run.id
+
+        elapsed = 0
+        run_status = PipelineRunStatus.QUEUED
+        while elapsed < _CI_TIMEOUT:
+            await asyncio.sleep(_CI_POLL_INTERVAL)
+            elapsed += _CI_POLL_INTERVAL
+            async with async_session_maker() as session:
+                fresh = await session.get(PipelineRun, run_id)
+                if fresh is None:
+                    return False, "CI pipeline run disappeared from DB."
+                run_status = fresh.status
+                if run_status not in (PipelineRunStatus.QUEUED, PipelineRunStatus.RUNNING):
+                    steps = list(fresh.steps or [])
+                    break
+        else:
+            return True, ""  # timeout → don't block forever, let human review
+
+        if run_status == PipelineRunStatus.SUCCESS:
+            return True, ""
+
+        lines = [f"CI pipeline failed (status={run_status})."]
+        for step in steps:
+            if step.status.value in ("failure", "error") and step.logs:
+                tail = "\n".join(step.logs.splitlines()[-40:])
+                lines.append(f"\n### {step.step_key}\n```\n{tail}\n```")
+        return False, "\n".join(lines)
+
+    except Exception as exc:
+        logger.exception("CI gate error project_id=%s", project_id)
+        return True, ""  # on unexpected error, don't block — let human review
+
 
 def _sandbox_project_root(project_id: UUID) -> Path:
     root = Path(settings.sandbox_root).expanduser().resolve()
@@ -44,6 +102,57 @@ def _sandbox_project_root(project_id: UUID) -> Path:
     except ValueError as exc:
         raise SandboxEscapeError("Resolved sandbox path escapes SANDBOX_ROOT.") from exc
     return proj
+
+
+async def _github_push_pr_bg(
+    project_id: UUID,
+    task_id: UUID,
+    branch_name: str,
+    sandbox: Path,
+    task_title: str,
+) -> None:
+    """Background: push task branch to GitHub and open a PR. Opens its own DB session."""
+    try:
+        async with async_session_maker() as session:
+            gh_config = await session.scalar(
+                select(GitHubConfig).where(
+                    GitHubConfig.project_id == project_id,
+                    GitHubConfig.enabled.is_(True),
+                )
+            )
+            if gh_config is None:
+                return
+            pushed = await github_service.commit_and_push_branch(
+                gh_config, sandbox, branch_name, f"feat: {task_title}"
+            )
+            if not pushed:
+                return
+            task = await session.get(Task, task_id)
+            diff = await DiffService.get_latest_approved_for_task(
+                session, task_id=task_id, project_id=project_id
+            )
+            pr_url = await github_service.create_pull_request(
+                gh_config, task, diff.content if diff else "", branch_name
+            )
+            logger.info("GitHub PR created for task_id=%s: %s", task_id, pr_url)
+    except Exception:
+        logger.exception("_github_push_pr_bg failed task_id=%s", task_id)
+
+
+async def _memory_export_bg(project_id: UUID, task_id: UUID) -> None:
+    """Background: write memory entry + export MEMORY.md + git commit. Opens its own DB session."""
+    try:
+        async with async_session_maker() as session:
+            diff = await DiffService.get_latest_approved_for_task(
+                session, task_id=task_id, project_id=project_id
+            )
+            if diff is not None:
+                await MemoryService.create_entry(session, project_id, task_id, diff)
+                await MemoryService.export_memory_file(session, project_id)
+            sandbox = _sandbox_project_root(project_id)
+            await asyncio.to_thread(GitService.commit_all, sandbox, "chore: update MEMORY.md")
+    except Exception:
+        logger.exception("_memory_export_bg failed project_id=%s", project_id)
 
 
 async def get_wip_mode(session: AsyncSession, project_id: UUID) -> str:
@@ -58,12 +167,8 @@ _ALLOWED_MOVES: frozenset[tuple[TaskStatus, TaskStatus]] = frozenset(
     {
         (TaskStatus.TODO, TaskStatus.IN_PROGRESS),
         (TaskStatus.IN_PROGRESS, TaskStatus.REVIEW),
-        (TaskStatus.IN_PROGRESS, TaskStatus.REJECTED),
-        (TaskStatus.IN_PROGRESS, TaskStatus.CONFLICT),
         (TaskStatus.REVIEW, TaskStatus.DONE),
         (TaskStatus.REVIEW, TaskStatus.IN_PROGRESS),
-        # Allow PO to reset a conflicted task back to todo for retry
-        (TaskStatus.CONFLICT, TaskStatus.TODO),
     }
 )
 
@@ -110,7 +215,8 @@ async def _mark_agent_run_failed(task_id: UUID, agent_run_id: UUID | None) -> No
                 run.result = {"error": "Coder background task failed"}
             task = await session.get(Task, task_id)
             if task is not None and task.status == TaskStatus.IN_PROGRESS:
-                task.status = TaskStatus.REJECTED
+                # Failed run returns the task to To do so it stays visible and retryable.
+                task.status = TaskStatus.TODO
                 task.updated_at = datetime.now(timezone.utc)
             await session.commit()
     except Exception:
@@ -125,8 +231,10 @@ async def _run_coder_agent_background(
     agent_run_id: UUID | None = None,
     inline_comments: list[dict[str, str | int]] | None = None,
     coding_backend: str = "groq",
+    _ci_retry_count: int = 0,
+    _crash_retry_count: int = 0,
 ) -> None:
-    """Fire-and-forget entry for coder agent dispatch."""
+    """Fire-and-forget entry: Coder → CI gate → (pass) Reviewer  |  (fail, retry) re-Coder."""
     try:
         payload: dict[str, Any] = {
             "task_id": task_id,
@@ -139,15 +247,56 @@ async def _run_coder_agent_background(
             payload["agent_run_id"] = agent_run_id
         if inline_comments:
             payload["inline_comments"] = inline_comments
+
         node_name = route_coder(payload)
         if node_name == "cli_coder_node":
             state = await cli_coder_node.run(payload)
         else:
             state = await coder_node.run(payload)
-        # Run reviewer automatically after coder (plan.md F-003)
+
+        # Coder handled its own error (task reset to TODO, run finalised, notification sent).
+        # Don't proceed to CI or reviewer — there is nothing to review.
+        if state.get("error"):
+            return
+
+        # ── CI gate ──────────────────────────────────────────────────────────
+        ci_passed, ci_report = await _run_ci_gate(project_id, task_id)
+
+        if not ci_passed and _ci_retry_count < _MAX_CI_RETRIES:
+            logger.info(
+                "CI failed (attempt %d/%d) task_id=%s — re-dispatching coder with error context",
+                _ci_retry_count + 1, _MAX_CI_RETRIES, task_id,
+            )
+            _schedule_coder_agent(
+                task_id, project_id,
+                po_feedback=ci_report,
+                agent_run_id=agent_run_id,
+                coding_backend=coding_backend,
+                _ci_retry_count=_ci_retry_count + 1,
+            )
+            return
+
+        # CI passed (or max retries reached) → reviewer
+        if ci_report:
+            state["ci_failure_report"] = ci_report  # human will see it in review panel
         await reviewer_node.run(state)
-    except Exception:
+
+    except Exception as exc:
         logger.exception("Coder agent background task failed task_id=%s", task_id)
+        # Retry once on transient crash (LLM timeout, network error, etc.)
+        # before marking the task as failed so human doesn't need to intervene.
+        if _crash_retry_count < 1:
+            logger.info("Coder crashed (attempt %d) — retrying task_id=%s", _crash_retry_count + 1, task_id)
+            _schedule_coder_agent(
+                task_id, project_id,
+                po_feedback=po_feedback,
+                agent_run_id=agent_run_id,
+                inline_comments=inline_comments,
+                coding_backend=coding_backend,
+                _ci_retry_count=_ci_retry_count,
+                _crash_retry_count=_crash_retry_count + 1,
+            )
+            return
         async with async_session_maker() as session:
             task = await session.get(Task, task_id)
             if task is not None and task.status == TaskStatus.IN_PROGRESS:
@@ -164,6 +313,8 @@ def _schedule_coder_agent(
     agent_run_id: UUID | None = None,
     inline_comments: list[dict[str, str | int]] | None = None,
     coding_backend: str = "groq",
+    _ci_retry_count: int = 0,
+    _crash_retry_count: int = 0,
 ) -> None:
     asyncio.create_task(
         _run_coder_agent_background(
@@ -173,6 +324,8 @@ def _schedule_coder_agent(
             agent_run_id=agent_run_id,
             inline_comments=inline_comments,
             coding_backend=coding_backend,
+            _ci_retry_count=_ci_retry_count,
+            _crash_retry_count=_crash_retry_count,
         )
     )
 
@@ -370,9 +523,17 @@ class KanbanService:
                 ProjectRole.OWNER,
                 ProjectRole.LEADER,
             )
-            if is_privileged:
-                pass
-            elif wip_mode == "user":
+            # The per-assignee WIP=1 rule is backed by the partial unique index
+            # ``one_in_progress_per_assignee`` (project_id, assigned_to WHERE
+            # status='in_progress'), so it holds even for owners/leaders. Their
+            # privilege only lets them act on tasks assigned to OTHERS (the 403
+            # above) — it does NOT let them stack two in-progress tasks on a
+            # single assignee. Skipping this check would let the move reach the
+            # DB index and surface as a raw UniqueViolation (HTTP 500) instead
+            # of a clean WIP conflict (HTTP 409). Owners/leaders still bypass the
+            # stricter project-wide limit so they can run work in parallel across
+            # different developers.
+            if is_privileged or wip_mode == "user":
                 assignee_id = task.assigned_to
                 if assignee_id is not None:
                     in_progress_count = await session.scalar(
@@ -401,49 +562,30 @@ class KanbanService:
                 branch_name = branch_row.branch_name
             sandbox = _sandbox_project_root(task.project_id)
 
-            # Load GitHub config once for both the PR push and the later main push
-            gh_config = await session.scalar(
-                select(GitHubConfig).where(
-                    GitHubConfig.project_id == task.project_id,
-                    GitHubConfig.enabled.is_(True),
-                )
-            )
-
-            # Persist the agent's work as a real commit on the task branch. The branch
-            # is merged into the integration branch (main) ONLY after the CI pipeline
-            # passes — done in the pipeline executor — so failing code never reaches
-            # main, locally or on GitHub. (CI-gated promotion.)
-            await asyncio.to_thread(GitService.commit_all, sandbox, f"feat: {task.title}")
-
-            # ── GitHub: push the task branch + open a PR. This does NOT touch main;
-            # the PR is the review/CI surface. main is updated post-CI in the executor.
-            if branch_name is not None and gh_config is not None:
+            # Fire-and-forget: git commit runs in background — pipeline executor
+            # only accesses the sandbox seconds later so the commit is always done first.
+            _commit_msg = f"feat: {task.title}"
+            _sandbox_commit = sandbox
+            async def _commit_bg() -> None:
                 try:
-                    pushed = await github_service.commit_and_push_branch(
-                        gh_config,
-                        sandbox,
-                        branch_name,
-                        f"feat: {task.title}",
-                    )
-                    if pushed:
-                        diff = await DiffService.get_latest_approved_for_task(
-                            session,
-                            task_id=task.id,
-                            project_id=task.project_id,
-                        )
-                        pr_url = await github_service.create_pull_request(
-                            gh_config,
-                            task,
-                            diff.content if diff else "",
-                            branch_name,
-                        )
-                        logger.info(
-                            "GitHub PR created for task_id=%s: %s", task.id, pr_url
-                        )
+                    await asyncio.to_thread(GitService.commit_all, _sandbox_commit, _commit_msg)
                 except Exception:
-                    logger.exception(
-                        "GitHub push/PR failed task_id=%s", task.id
-                    )
+                    logger.exception("Background commit_all failed (task %s)", task_id)
+            asyncio.create_task(_commit_bg(), name=f"git-commit-{task_id}")
+
+            # GitHub push + PR: fire-and-forget background task (2-13s network I/O).
+            # Does not block the HTTP response; failures are logged, never surface to user.
+            if branch_name is not None:
+                asyncio.create_task(
+                    _github_push_pr_bg(
+                        project_id=task.project_id,
+                        task_id=task.id,
+                        branch_name=branch_name,
+                        sandbox=sandbox,
+                        task_title=task.title,
+                    ),
+                    name=f"github-push-{task.id}",
+                )
 
         task.status = to_status
         task.updated_at = datetime.now(timezone.utc)
@@ -464,48 +606,80 @@ class KanbanService:
             )
 
         if to_status == TaskStatus.IN_PROGRESS and from_status == TaskStatus.TODO:
-            sandbox = _sandbox_project_root(task.project_id)
-            await asyncio.to_thread(GitService.init_repo, sandbox)
-            await asyncio.to_thread(GitService.configure_identity, sandbox)
-            await asyncio.to_thread(GitService.ensure_baseline_commit, sandbox)
-            await BranchService.create_task_branch(session, task.id, sandbox)
+            # Fire-and-forget: git init/configure/branch are disk-heavy (300-1100 ms).
+            # The coder agent calls an LLM first (2-30 s), so sandbox is always ready
+            # before the agent touches any files.
+            _sandbox_init = _sandbox_project_root(task.project_id)
+            _init_task_id = task.id
+            _init_project_id = task.project_id
+
+            async def _git_init_bg() -> None:
+                try:
+                    await asyncio.to_thread(GitService.init_repo, _sandbox_init)
+                    await asyncio.to_thread(GitService.configure_identity, _sandbox_init)
+                    await asyncio.to_thread(GitService.ensure_baseline_commit, _sandbox_init)
+                    async with async_session_maker() as bg_session:
+                        await BranchService.create_task_branch(bg_session, _init_task_id, _sandbox_init)
+                        await bg_session.commit()
+                except Exception:
+                    logger.exception(
+                        "Background git init FAILED for task_id=%s — reverting to TODO",
+                        _init_task_id,
+                    )
+                    # Revert the task so the user can retry
+                    try:
+                        async with async_session_maker() as bg_session:
+                            t = await bg_session.get(Task, _init_task_id)
+                            if t is not None and t.status == TaskStatus.IN_PROGRESS:
+                                t.status = TaskStatus.TODO
+                                t.updated_at = datetime.now(timezone.utc)
+                                await bg_session.commit()
+                    except Exception:
+                        logger.exception("Failed to revert task_id=%s after git init failure", _init_task_id)
+
+            asyncio.create_task(_git_init_bg(), name=f"git-init-{task.id}")
         if to_status == TaskStatus.DONE and from_status == TaskStatus.REVIEW:
-            # ── Trigger CI/CD pipeline asynchronously (non-blocking) ──────────
+            # ── Trigger CI/CD pipeline only if no passing run exists yet ──────
+            # The agent's ci_gate_node already ran CI before moving to REVIEW.
+            # Re-running is wasteful when code hasn't changed since that run.
             try:
                 from app.pipeline.pipeline_service import PipelineService
                 _pipeline_sandbox = _sandbox_project_root(task.project_id)
-                # Gather branch name if available
                 _branch_row = await session.scalar(
                     select(TaskBranch).where(TaskBranch.task_id == task.id)
                 )
-                await PipelineService.create_and_trigger(
-                    session,
-                    project_id=task.project_id,
-                    task_id=task.id,
-                    sandbox=_pipeline_sandbox,
-                    triggered_by="task_approved",
-                    branch_name=_branch_row.branch_name if _branch_row else None,
+                _last_success = await session.scalar(
+                    select(PipelineRun)
+                    .where(
+                        PipelineRun.task_id == task.id,
+                        PipelineRun.status == PipelineRunStatus.SUCCESS,
+                    )
+                    .order_by(PipelineRun.created_at.desc())
+                    .limit(1)
                 )
+                if _last_success is None:
+                    await PipelineService.create_and_trigger(
+                        session,
+                        project_id=task.project_id,
+                        task_id=task.id,
+                        sandbox=_pipeline_sandbox,
+                        triggered_by="task_approved",
+                        branch_name=_branch_row.branch_name if _branch_row else None,
+                    )
+                else:
+                    logger.info(
+                        "Skipping CI re-run for task_id=%s — already has a passing run (%s)",
+                        task.id, _last_success.id,
+                    )
             except Exception:
                 logger.exception("Failed to create pipeline run for task_id=%s", task.id)
 
-            diff = await DiffService.get_latest_approved_for_task(
-                session, task_id=task.id, project_id=task.project_id
+            # Memory export + MEMORY.md commit: fire-and-forget background task.
+            asyncio.create_task(
+                _memory_export_bg(task.project_id, task.id),
+                name=f"memory-export-{task.id}",
             )
-            if diff is not None:
-                try:
-                    await MemoryService.create_entry(session, task.project_id, task.id, diff)
-                except Exception:
-                    logger.exception("MemoryService.create_entry failed task_id=%s", task.id)
-                try:
-                    await MemoryService.export_memory_file(session, task.project_id)
-                except Exception:
-                    logger.exception("MemoryService.export_memory_file failed project_id=%s", task.project_id)
-            else:
-                logger.info(
-                    "Skipping memory write: no approved diff for task_id=%s when moving to done",
-                    task.id,
-                )
+
             await KanbanService._on_task_done(
                 session,
                 task,
@@ -553,6 +727,7 @@ class KanbanService:
         po_feedback: str | None = None,
         agent_run_id: UUID | None = None,
         inline_comments: list[dict[str, str | int]] | None = None,
+        coding_backend: str = "groq",
     ) -> None:
         """Schedule coder after DB commit (e.g. diff reject / T064)."""
         _schedule_coder_agent(
@@ -561,4 +736,5 @@ class KanbanService:
             po_feedback=po_feedback,
             agent_run_id=agent_run_id,
             inline_comments=inline_comments,
+            coding_backend=coding_backend,
         )

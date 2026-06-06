@@ -36,8 +36,6 @@ const STATUS_COLOR: Record<string, { bg: string; border: string; text: string; b
   in_progress: { bg: '#eff6ff', border: '#3b82f6', text: '#1e40af', badge: '#dbeafe' },
   review:      { bg: '#fffbeb', border: '#f59e0b', text: '#92400e', badge: '#fef3c7' },
   done:        { bg: '#f0fdf4', border: '#22c55e', text: '#14532d', badge: '#dcfce7' },
-  rejected:    { bg: '#fff1f2', border: '#f43f5e', text: '#9f1239', badge: '#ffe4e6' },
-  conflict:    { bg: '#fff7ed', border: '#fb923c', text: '#7c2d12', badge: '#ffedd5' },
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -45,8 +43,6 @@ const STATUS_LABEL: Record<string, string> = {
   in_progress: 'Đang làm',
   review: 'Review',
   done: 'Xong',
-  rejected: 'Từ chối',
-  conflict: 'Conflict',
 }
 
 // ─── Custom node ────────────────────────────────────────────────────────────

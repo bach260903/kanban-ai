@@ -1,0 +1,52 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "specs/003-multi-agent-team-platform/data-model.md",
+                           "language":  "markdown",
+                           "sizeLines":  252,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/003-multi-agent-team-platform/plan.md",
+                           "language":  "markdown",
+                           "sizeLines":  2603,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/003-multi-agent-team-platform/research.md",
+                           "language":  "markdown",
+                           "sizeLines":  197,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/003-multi-agent-team-platform/spec.md",
+                           "language":  "markdown",
+                           "sizeLines":  335,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "specs/003-multi-agent-team-platform/tasks.md",
+                           "language":  "markdown",
+                           "sizeLines":  1652,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            "specs/003-multi-agent-team-platform/data-model.md":  [
+
+                                                                                  ],
+                            "specs/003-multi-agent-team-platform/plan.md":  [
+
+                                                                            ],
+                            "specs/003-multi-agent-team-platform/research.md":  [
+
+                                                                                ],
+                            "specs/003-multi-agent-team-platform/spec.md":  [
+
+                                                                            ],
+                            "specs/003-multi-agent-team-platform/tasks.md":  [
+
+                                                                             ]
+                        }
+}

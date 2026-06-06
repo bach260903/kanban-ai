@@ -73,6 +73,8 @@ class DiffService:
         diff = await DiffService.get_latest_for_task(session, task_id=task_id, project_id=project_id)
         if diff is None:
             raise InvalidTransitionError("No diff available to approve.")
+        if diff.review_status == DiffReviewStatus.APPROVED:
+            return diff  # idempotent — already approved
         if diff.review_status != DiffReviewStatus.PENDING:
             raise InvalidTransitionError("Latest diff is not pending approval.")
         diff.review_status = DiffReviewStatus.APPROVED

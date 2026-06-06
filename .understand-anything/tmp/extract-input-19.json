@@ -1,0 +1,52 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "evaluation/judge/rubric_assigner.md",
+                           "language":  "markdown",
+                           "sizeLines":  24,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "evaluation/judge/rubric_executor.md",
+                           "language":  "markdown",
+                           "sizeLines":  24,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "evaluation/judge/rubric_monitor.md",
+                           "language":  "markdown",
+                           "sizeLines":  25,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "evaluation/judge/rubric_planner.md",
+                           "language":  "markdown",
+                           "sizeLines":  28,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "evaluation/judge/rubric_reporter.md",
+                           "language":  "markdown",
+                           "sizeLines":  21,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            "evaluation/judge/rubric_assigner.md":  [
+
+                                                                    ],
+                            "evaluation/judge/rubric_executor.md":  [
+
+                                                                    ],
+                            "evaluation/judge/rubric_monitor.md":  [
+
+                                                                   ],
+                            "evaluation/judge/rubric_planner.md":  [
+
+                                                                   ],
+                            "evaluation/judge/rubric_reporter.md":  [
+
+                                                                    ]
+                        }
+}

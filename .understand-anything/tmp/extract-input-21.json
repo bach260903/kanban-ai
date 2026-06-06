@@ -1,0 +1,52 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "frontend/src/components/atoms/badge.module.css",
+                           "language":  "css",
+                           "sizeLines":  60,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/button.module.css",
+                           "language":  "css",
+                           "sizeLines":  61,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/notification-badge.module.css",
+                           "language":  "css",
+                           "sizeLines":  17,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/spinner.module.css",
+                           "language":  "css",
+                           "sizeLines":  22,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/atoms/text-input.module.css",
+                           "language":  "css",
+                           "sizeLines":  63,
+                           "fileCategory":  "markup"
+                       }
+                   ],
+    "batchImportData":  {
+                            "frontend/src/components/atoms/badge.module.css":  [
+
+                                                                               ],
+                            "frontend/src/components/atoms/button.module.css":  [
+
+                                                                                ],
+                            "frontend/src/components/atoms/notification-badge.module.css":  [
+
+                                                                                            ],
+                            "frontend/src/components/atoms/spinner.module.css":  [
+
+                                                                                 ],
+                            "frontend/src/components/atoms/text-input.module.css":  [
+
+                                                                                    ]
+                        }
+}

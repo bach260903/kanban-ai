@@ -18,6 +18,7 @@ from app.models.pipeline_run import PipelineRun
 from app.models.pipeline_step import PipelineStep
 from app.models.project_member import ProjectMember
 from app.models.step_failure_analysis import StepFailureAnalysis
+from app.models.task import Task
 from app.pipeline import event_bus
 from app.pipeline.pipeline_service import PipelineService
 from app.schemas.pipeline import (
@@ -35,6 +36,23 @@ from app.services import failure_analysis_service
 router = APIRouter(tags=["pipelines"])
 
 
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+async def _task_titles(session: AsyncSession, runs: list[PipelineRun]) -> dict[UUID, str]:
+    """Batch-load task titles for a list of pipeline runs."""
+    ids = {r.task_id for r in runs if r.task_id is not None}
+    if not ids:
+        return {}
+    rows = await session.execute(select(Task.id, Task.title).where(Task.id.in_(ids)))
+    return {row.id: row.title for row in rows}
+
+
+def _to_out(run: PipelineRun, titles: dict) -> PipelineRunOut:
+    out = PipelineRunOut.model_validate(run)
+    out.task_title = titles.get(run.task_id) if run.task_id else None
+    return out
+
+
 # ── Pipeline runs ─────────────────────────────────────────────────────────────
 
 @router.get("/projects/{project_id}/pipeline-runs", response_model=list[PipelineRunOut])
@@ -44,7 +62,8 @@ async def list_pipeline_runs(
     session: Annotated[AsyncSession, Depends(get_db)],
 ) -> list[PipelineRunOut]:
     runs = await PipelineService.list_runs_for_project(session, project_id)
-    return [PipelineRunOut.model_validate(r) for r in runs]
+    titles = await _task_titles(session, runs)
+    return [_to_out(r, titles) for r in runs]
 
 
 @router.get("/projects/{project_id}/tasks/{task_id}/pipeline-runs", response_model=list[PipelineRunOut])
@@ -55,7 +74,8 @@ async def list_task_pipeline_runs(
     session: Annotated[AsyncSession, Depends(get_db)],
 ) -> list[PipelineRunOut]:
     runs = await PipelineService.list_runs_for_task(session, task_id)
-    return [PipelineRunOut.model_validate(r) for r in runs]
+    titles = await _task_titles(session, runs)
+    return [_to_out(r, titles) for r in runs]
 
 
 @router.get("/pipeline-runs/{run_id}", response_model=PipelineRunOut)
@@ -66,7 +86,8 @@ async def get_pipeline_run(
     run = await PipelineService.get_run(session, run_id)
     if run is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Pipeline run not found")
-    return PipelineRunOut.model_validate(run)
+    titles = await _task_titles(session, [run])
+    return _to_out(run, titles)
 
 
 @router.post(
@@ -97,7 +118,8 @@ async def rerun_pipeline_run(
     fresh = await session.scalar(select(PipelineRun).where(PipelineRun.id == new_run.id))
     if fresh is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Pipeline run not found")
-    return PipelineRunOut.model_validate(fresh)
+    titles = await _task_titles(session, [fresh])
+    return _to_out(fresh, titles)
 
 
 # ── SSE live stream ───────────────────────────────────────────────────────────

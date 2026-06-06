@@ -1,0 +1,52 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".specify/templates/checklist-template.md",
+                           "language":  "markdown",
+                           "sizeLines":  40,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/templates/constitution-template.md",
+                           "language":  "markdown",
+                           "sizeLines":  50,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/templates/plan-template.md",
+                           "language":  "markdown",
+                           "sizeLines":  104,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/templates/spec-template.md",
+                           "language":  "markdown",
+                           "sizeLines":  130,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  ".specify/templates/tasks-template.md",
+                           "language":  "markdown",
+                           "sizeLines":  251,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".specify/templates/checklist-template.md":  [
+
+                                                                         ],
+                            ".specify/templates/constitution-template.md":  [
+
+                                                                            ],
+                            ".specify/templates/plan-template.md":  [
+
+                                                                    ],
+                            ".specify/templates/spec-template.md":  [
+
+                                                                    ],
+                            ".specify/templates/tasks-template.md":  [
+
+                                                                     ]
+                        }
+}

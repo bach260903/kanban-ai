@@ -1,0 +1,95 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 11,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/charts.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 26,
+      "nonEmptyLines": 26,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/colors.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 97,
+      "nonEmptyLines": 97,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/icons.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 101,
+      "nonEmptyLines": 101,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/landing.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 31,
+      "nonEmptyLines": 31,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/products.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 97,
+      "nonEmptyLines": 97,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/react-performance.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 45,
+      "nonEmptyLines": 45,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/styles.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 68,
+      "nonEmptyLines": 68,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/typography.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 58,
+      "nonEmptyLines": 58,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/ui-reasoning.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 101,
+      "nonEmptyLines": 101,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/ux-guidelines.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 100,
+      "nonEmptyLines": 100,
+      "metrics": {}
+    },
+    {
+      "path": ".cursor/skills/ui-ux-pro-max/data/web-interface.csv",
+      "language": "csv",
+      "fileCategory": "data",
+      "totalLines": 31,
+      "nonEmptyLines": 31,
+      "metrics": {}
+    }
+  ]
+}

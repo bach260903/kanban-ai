@@ -102,20 +102,24 @@ async def test_on_task_done_enqueues_webhook(
 
 
 @pytest.mark.asyncio
-async def test_on_task_done_creates_github_pr_when_configured(
+async def test_github_push_pr_bg_creates_pr_when_configured(
     async_db_session: AsyncSession,
     project_id: UUID,
 ) -> None:
+    """GitHub push + PR creation fires in the background (_github_push_pr_bg)."""
+    from pathlib import Path
+    from app.services.kanban_service import _github_push_pr_bg
+
     task = await _insert_task(async_db_session, project_id, status=TaskStatus.DONE, title="Done task")
     mock_diff = type("Diff", (), {"content": "diff text"})()
-    mock_config = object()
+    mock_config = type("GH", (), {"enabled": True})()
 
     with (
+        patch("app.services.kanban_service.async_session_maker") as session_maker_mock,
         patch(
-            "app.services.kanban_service.webhook_service.enqueue_delivery",
-            AsyncMock(),
+            "app.services.kanban_service.github_service.commit_and_push_branch",
+            AsyncMock(return_value=True),
         ),
-        patch.object(async_db_session, "scalar", AsyncMock(return_value=mock_config)),
         patch(
             "app.services.kanban_service.DiffService.get_latest_approved_for_task",
             AsyncMock(return_value=mock_diff),
@@ -125,10 +129,19 @@ async def test_on_task_done_creates_github_pr_when_configured(
             AsyncMock(return_value="https://github.com/o/r/pull/1"),
         ) as pr_mock,
     ):
-        await KanbanService._on_task_done(
-            async_db_session,
-            task,
+        session_mock = AsyncMock()
+        session_mock.scalar = AsyncMock(return_value=mock_config)
+        session_mock.get = AsyncMock(return_value=task)
+        session_mock.__aenter__ = AsyncMock(return_value=session_mock)
+        session_mock.__aexit__ = AsyncMock(return_value=False)
+        session_maker_mock.return_value = session_mock
+
+        await _github_push_pr_bg(
+            project_id=project_id,
+            task_id=task.id,
             branch_name="task/abc12345",
+            sandbox=Path("/tmp/fake-sandbox"),
+            task_title="Done task",
         )
 
     pr_mock.assert_awaited_once()
@@ -189,7 +202,7 @@ async def test_on_agent_error_notifies_and_enqueues(
     async_db_session: AsyncSession,
     project_id: UUID,
 ) -> None:
-    task = await _insert_task(async_db_session, project_id, status=TaskStatus.REJECTED, title="Failed")
+    task = await _insert_task(async_db_session, project_id, status=TaskStatus.IN_PROGRESS, title="Failed")
     with (
         patch(
             "app.services.kanban_service.notification_service.notify_agent_error",

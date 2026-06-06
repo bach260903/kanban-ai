@@ -557,7 +557,7 @@ async def _promote_to_main_on_success(
             logger.warning("promote: GitHub push main failed for task=%s", run.task_id, exc_info=True)
 
 
-_MAX_AUTO_FIX_CYCLES = 1  # how many times CI failure auto-re-dispatches the Coder
+_MAX_AUTO_FIX_CYCLES = 2  # how many times CI failure auto-re-dispatches the Coder
 
 
 async def _auto_fix_failed_pipeline(session: AsyncSession, run: PipelineRun) -> None:
@@ -579,9 +579,20 @@ async def _auto_fix_failed_pipeline(session: AsyncSession, run: PipelineRun) -> 
         )
         if (runs_for_task or 0) > _MAX_AUTO_FIX_CYCLES:
             logger.info(
-                "auto-fix: task %s already used its auto-fix budget (%d runs) — leaving for human",
+                "auto-fix: task %s exhausted auto-fix budget (%d runs) — moving back to review",
                 run.task_id, runs_for_task,
             )
+            # CI keeps failing after all retries — code is NOT merged to main.
+            # Move task back to REVIEW so human can see the failure and decide.
+            from datetime import datetime, timezone as _tz
+            from app.models.task import Task as _Task, TaskStatus as _TaskStatus
+            task_row = await session.get(_Task, run.task_id)
+            if task_row is not None and task_row.status == _TaskStatus.DONE:
+                task_row.status = _TaskStatus.REVIEW
+                task_row.updated_at = datetime.now(_tz.utc)
+                await session.flush()
+                await session.commit()
+                logger.info("auto-fix: task %s moved DONE → REVIEW (CI budget exhausted)", run.task_id)
             return
 
         failed = next((s for s in (run.steps or []) if str(s.status) == "failure"), None)

@@ -25,15 +25,13 @@ class TaskStatus(StrEnum):
     IN_PROGRESS = "in_progress"
     REVIEW = "review"
     DONE = "done"
-    REJECTED = "rejected"
-    CONFLICT = "conflict"
 
 
 class Task(Base):
     __tablename__ = "tasks"
     __table_args__ = (
         CheckConstraint(
-            "status IN ('todo','in_progress','review','done','rejected','conflict')",
+            "status IN ('todo','in_progress','review','done')",
             name="ck_tasks_status",
         ),
         Index("idx_tasks_project_status", "project_id", "status"),

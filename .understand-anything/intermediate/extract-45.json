@@ -1,0 +1,6935 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "frontend/src/components/molecules/terms-modal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 161,
+      "nonEmptyLines": 147,
+      "functions": [
+        {
+          "name": "TermsModal",
+          "startLine": 87,
+          "endLine": 161,
+          "params": [
+            "{ type, onClose }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TermsModal",
+          "line": 87,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "TermsModal",
+          "callee": "useCallback",
+          "lineNumber": 91
+        },
+        {
+          "caller": "TermsModal",
+          "callee": "onClose",
+          "lineNumber": 92
+        },
+        {
+          "caller": "TermsModal",
+          "callee": "useEffect",
+          "lineNumber": 96
+        },
+        {
+          "caller": "TermsModal",
+          "callee": "window.addEventListener",
+          "lineNumber": 98
+        },
+        {
+          "caller": "TermsModal",
+          "callee": "window.removeEventListener",
+          "lineNumber": 99
+        },
+        {
+          "caller": "TermsModal",
+          "callee": "e.stopPropagation",
+          "lineNumber": 117
+        },
+        {
+          "caller": "TermsModal",
+          "callee": "content.sections.map",
+          "lineNumber": 144
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/ai-review-panel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 226,
+      "nonEmptyLines": 204,
+      "functions": [
+        {
+          "name": "SuggestionChip",
+          "startLine": 34,
+          "endLine": 41,
+          "params": [
+            "{ suggestion }"
+          ]
+        },
+        {
+          "name": "TestResultLine",
+          "startLine": 43,
+          "endLine": 62,
+          "params": [
+            "{\r\n  runner,\r\n  pass,\r\n  fail,\r\n}"
+          ]
+        },
+        {
+          "name": "CommentItem",
+          "startLine": 64,
+          "endLine": 87,
+          "params": [
+            "{\r\n  comment,\r\n  onCommentClick,\r\n}"
+          ]
+        },
+        {
+          "name": "CommentsSection",
+          "startLine": 89,
+          "endLine": 128,
+          "params": [
+            "{\r\n  comments,\r\n  onCommentClick,\r\n}"
+          ]
+        },
+        {
+          "name": "AiReviewPanel",
+          "startLine": 145,
+          "endLine": 226,
+          "params": [
+            "{ reviewState, onCommentClick }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AiReviewPanel",
+          "line": 145,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CommentItem",
+          "callee": "onCommentClick",
+          "lineNumber": 76
+        },
+        {
+          "caller": "CommentsSection",
+          "callee": "useMemo",
+          "lineNumber": 97
+        },
+        {
+          "caller": "CommentsSection",
+          "callee": "groups.has",
+          "lineNumber": 101
+        },
+        {
+          "caller": "CommentsSection",
+          "callee": "groups.set",
+          "lineNumber": 101
+        },
+        {
+          "caller": "CommentsSection",
+          "callee": "groups.get(key)!.push",
+          "lineNumber": 102
+        },
+        {
+          "caller": "CommentsSection",
+          "callee": "groups.get",
+          "lineNumber": 102
+        },
+        {
+          "caller": "CommentsSection",
+          "callee": "Array.from(byFile.entries()).map",
+          "lineNumber": 114
+        },
+        {
+          "caller": "CommentsSection",
+          "callee": "Array.from",
+          "lineNumber": 114
+        },
+        {
+          "caller": "CommentsSection",
+          "callee": "byFile.entries",
+          "lineNumber": 114
+        },
+        {
+          "caller": "CommentsSection",
+          "callee": "items.map",
+          "lineNumber": 120
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/app-shell.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 78,
+      "nonEmptyLines": 67,
+      "functions": [
+        {
+          "name": "AppShell",
+          "startLine": 10,
+          "endLine": 78,
+          "params": [
+            "{ children }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AppShell",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AppShell",
+          "callee": "useAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "AppShell",
+          "callee": "useNavigate",
+          "lineNumber": 12
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "logout",
+          "lineNumber": 15
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "navigate",
+          "lineNumber": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/constitution-panel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 104,
+      "nonEmptyLines": 95,
+      "functions": [
+        {
+          "name": "ConstitutionPanel",
+          "startLine": 12,
+          "endLine": 104,
+          "params": [
+            "{ projectId }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ConstitutionPanel",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "useEffect",
+          "lineNumber": 21
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "(async () => {\r\n      try {\r\n        setLoading(true)\r\n        setError(null)\r\n        const res = await getConstitution(projectId)\r\n        if (!cancelled) {\r\n          setContent(res.content)\r\n          setSavedContent(res.content)\r\n          if (res.updated_at) {\r\n            setLastSavedAt(new Date(res.updated_at).toLocaleString())\r\n          }\r\n        }\r\n      } catch (err) {\r\n        if (!cancelled) {\r\n          setError(err instanceof Error ? err.message : 'Failed to load constitution.')\r\n        }\r\n      } finally {\r\n        if (!cancelled) setLoading(false)\r\n      }\r\n    })",
+          "lineNumber": 23
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "setLoading",
+          "lineNumber": 25
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "setError",
+          "lineNumber": 26
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "getConstitution",
+          "lineNumber": 27
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "setContent",
+          "lineNumber": 29
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "setSavedContent",
+          "lineNumber": 30
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "setLastSavedAt",
+          "lineNumber": 32
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "new Date(res.updated_at).toLocaleString",
+          "lineNumber": 32
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "setError",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ConstitutionPanel",
+          "callee": "setLoading",
+          "lineNumber": 40
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setSaving",
+          "lineNumber": 50
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setStatusMessage",
+          "lineNumber": 51
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setError",
+          "lineNumber": 52
+        },
+        {
+          "caller": "handleSave",
+          "callee": "updateConstitution",
+          "lineNumber": 53
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setSavedContent",
+          "lineNumber": 54
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setStatusMessage",
+          "lineNumber": 55
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setLastSavedAt",
+          "lineNumber": 57
+        },
+        {
+          "caller": "handleSave",
+          "callee": "new Date(res.updated_at).toLocaleString",
+          "lineNumber": 57
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setError",
+          "lineNumber": 60
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setSaving",
+          "lineNumber": 62
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/dependency-graph.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 474,
+      "nonEmptyLines": 432,
+      "functions": [
+        {
+          "name": "TaskNode",
+          "startLine": 60,
+          "endLine": 113,
+          "params": [
+            "{ data }"
+          ]
+        },
+        {
+          "name": "applyDagreLayout",
+          "startLine": 122,
+          "endLine": 142,
+          "params": [
+            "nodes",
+            "edges"
+          ]
+        },
+        {
+          "name": "buildFlowElements",
+          "startLine": 146,
+          "endLine": 167,
+          "params": [
+            "graph"
+          ]
+        },
+        {
+          "name": "truncate",
+          "startLine": 169,
+          "endLine": 171,
+          "params": [
+            "text",
+            "max"
+          ]
+        },
+        {
+          "name": "graphErrorMessage",
+          "startLine": 173,
+          "endLine": 182,
+          "params": [
+            "err"
+          ]
+        },
+        {
+          "name": "DependencyGraphInner",
+          "startLine": 192,
+          "endLine": 400,
+          "params": [
+            "{ projectId, graph, onGraphChange }"
+          ]
+        },
+        {
+          "name": "DependencyGraph",
+          "startLine": 411,
+          "endLine": 474,
+          "params": [
+            "{ projectId, onChanged }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DependencyGraph",
+          "line": 411,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "applyDagreLayout",
+          "callee": "g.setDefaultEdgeLabel",
+          "lineNumber": 127
+        },
+        {
+          "caller": "applyDagreLayout",
+          "callee": "g.setGraph",
+          "lineNumber": 128
+        },
+        {
+          "caller": "applyDagreLayout",
+          "callee": "nodes.forEach",
+          "lineNumber": 130
+        },
+        {
+          "caller": "applyDagreLayout",
+          "callee": "g.setNode",
+          "lineNumber": 130
+        },
+        {
+          "caller": "applyDagreLayout",
+          "callee": "edges.forEach",
+          "lineNumber": 131
+        },
+        {
+          "caller": "applyDagreLayout",
+          "callee": "g.setEdge",
+          "lineNumber": 131
+        },
+        {
+          "caller": "applyDagreLayout",
+          "callee": "Dagre.layout",
+          "lineNumber": 133
+        },
+        {
+          "caller": "applyDagreLayout",
+          "callee": "nodes.map",
+          "lineNumber": 136
+        },
+        {
+          "caller": "applyDagreLayout",
+          "callee": "g.node",
+          "lineNumber": 137
+        },
+        {
+          "caller": "buildFlowElements",
+          "callee": "graph.nodes.map",
+          "lineNumber": 150
+        },
+        {
+          "caller": "buildFlowElements",
+          "callee": "graph.edges.map",
+          "lineNumber": 157
+        },
+        {
+          "caller": "buildFlowElements",
+          "callee": "applyDagreLayout",
+          "lineNumber": 166
+        },
+        {
+          "caller": "truncate",
+          "callee": "text.slice",
+          "lineNumber": 170
+        },
+        {
+          "caller": "graphErrorMessage",
+          "callee": "isAxiosError",
+          "lineNumber": 174
+        },
+        {
+          "caller": "graphErrorMessage",
+          "callee": "detail.trim",
+          "lineNumber": 176
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "useReactFlow",
+          "lineNumber": 193
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "useNodesState",
+          "lineNumber": 194
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "useEdgesState",
+          "lineNumber": 195
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "useState",
+          "lineNumber": 196
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "useState",
+          "lineNumber": 197
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "useState",
+          "lineNumber": 198
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "useEffect",
+          "lineNumber": 201
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "buildFlowElements",
+          "lineNumber": 202
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "setNodes",
+          "lineNumber": 203
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "setEdges",
+          "lineNumber": 204
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "setTimeout",
+          "lineNumber": 205
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "fitView",
+          "lineNumber": 205
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "showErrorToast",
+          "lineNumber": 210
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "showErrorToast",
+          "lineNumber": 214
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "setBusy",
+          "lineNumber": 217
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "addDep",
+          "lineNumber": 219
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "showSuccessToast",
+          "lineNumber": 220
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "setDependsOnId",
+          "lineNumber": 221
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "getGraph",
+          "lineNumber": 222
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "onGraphChange",
+          "lineNumber": 223
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "showErrorToast",
+          "lineNumber": 225
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "graphErrorMessage",
+          "lineNumber": 225
+        },
+        {
+          "caller": "handleAdd",
+          "callee": "setBusy",
+          "lineNumber": 227
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "setBusy",
+          "lineNumber": 232
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "removeDep",
+          "lineNumber": 234
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "showSuccessToast",
+          "lineNumber": 235
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "getGraph",
+          "lineNumber": 236
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "onGraphChange",
+          "lineNumber": 237
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "showErrorToast",
+          "lineNumber": 239
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "graphErrorMessage",
+          "lineNumber": 239
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "setBusy",
+          "lineNumber": 241
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "useMemo",
+          "lineNumber": 249
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "taskNodes.map",
+          "lineNumber": 250
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "setTaskId",
+          "lineNumber": 301
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "taskNodes.map",
+          "lineNumber": 306
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "truncate",
+          "lineNumber": 308
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "setDependsOnId",
+          "lineNumber": 317
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "taskNodes.filter((n) => n.id !== taskId).map",
+          "lineNumber": 322
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "taskNodes.filter",
+          "lineNumber": 322
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "truncate",
+          "lineNumber": 324
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "handleAdd",
+          "lineNumber": 332
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "edges_list.map",
+          "lineNumber": 356
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "nodeById.get",
+          "lineNumber": 357
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "nodeById.get",
+          "lineNumber": 358
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "truncate",
+          "lineNumber": 369
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "truncate",
+          "lineNumber": 378
+        },
+        {
+          "caller": "DependencyGraphInner",
+          "callee": "handleRemove",
+          "lineNumber": 384
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "useState",
+          "lineNumber": 412
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "useState",
+          "lineNumber": 413
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "useState",
+          "lineNumber": 414
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "useCallback",
+          "lineNumber": 416
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "setLoading",
+          "lineNumber": 417
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "setError",
+          "lineNumber": 418
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "getGraph",
+          "lineNumber": 420
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "setGraph",
+          "lineNumber": 421
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "setError",
+          "lineNumber": 423
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "graphErrorMessage",
+          "lineNumber": 423
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "setLoading",
+          "lineNumber": 425
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "useEffect",
+          "lineNumber": 429
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "loadGraph",
+          "lineNumber": 430
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "useCallback",
+          "lineNumber": 433
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "setGraph",
+          "lineNumber": 435
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "onChanged",
+          "lineNumber": 436
+        },
+        {
+          "caller": "DependencyGraph",
+          "callee": "loadGraph",
+          "lineNumber": 456
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 7,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/deployment-settings.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 483,
+      "nonEmptyLines": 449,
+      "functions": [
+        {
+          "name": "errMsg",
+          "startLine": 24,
+          "endLine": 28,
+          "params": [
+            "err"
+          ]
+        },
+        {
+          "name": "DeploymentSettings",
+          "startLine": 30,
+          "endLine": 483,
+          "params": [
+            "{ projectId }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DeploymentSettings",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "errMsg",
+          "callee": "isAxiosError",
+          "lineNumber": 25
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 31
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 32
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 33
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 34
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 36
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 40
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 41
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 42
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 43
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 45
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 48
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 49
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 50
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 52
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 53
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 54
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useState",
+          "lineNumber": 55
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "useEffect",
+          "lineNumber": 57
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "(async () => {\n      try {\n        const [cfg, alert] = await Promise.allSettled([\n          getDeploymentConfig(projectId),\n          getAlertConfig(projectId),\n        ])\n        if (!cancelled) {\n          if (cfg.status === 'fulfilled' && cfg.value) {\n            setConfig(cfg.value)\n            setProvider(cfg.value.provider)\n            setProjectName(cfg.value.project_name)\n            setTeamId(cfg.value.team_id ?? '')\n            setBaseUrl(cfg.value.base_url ?? '')\n            setEnabled(cfg.value.enabled)\n          }\n          if (alert.status === 'fulfilled') {\n            const a = alert.value\n            setAlertCfg(a)\n            setDiscordUrl(a.discord_webhook_url ?? '')\n            setSlackUrl(a.slack_webhook_url ?? '')\n            setHealthPath(a.health_check_path ?? '/health')\n            setAlertOnAnomaly(a.alert_on_anomaly)\n            setMonitorMins(a.monitor_duration_minutes)\n          }\n        }\n      } catch (err) {\n        if (!cancelled) setError(errMsg(err))\n      } finally {\n        if (!cancelled) setLoading(false)\n      }\n    })",
+          "lineNumber": 59
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "Promise.allSettled",
+          "lineNumber": 61
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "getDeploymentConfig",
+          "lineNumber": 62
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "getAlertConfig",
+          "lineNumber": 63
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setConfig",
+          "lineNumber": 67
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setProvider",
+          "lineNumber": 68
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setProjectName",
+          "lineNumber": 69
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setTeamId",
+          "lineNumber": 70
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setBaseUrl",
+          "lineNumber": 71
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setEnabled",
+          "lineNumber": 72
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setAlertCfg",
+          "lineNumber": 76
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setDiscordUrl",
+          "lineNumber": 77
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setSlackUrl",
+          "lineNumber": 78
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setHealthPath",
+          "lineNumber": 79
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setAlertOnAnomaly",
+          "lineNumber": 80
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setMonitorMins",
+          "lineNumber": 81
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setError",
+          "lineNumber": 85
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "errMsg",
+          "lineNumber": 85
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setLoading",
+          "lineNumber": 87
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "e.preventDefault",
+          "lineNumber": 94
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "setSavingAlert",
+          "lineNumber": 95
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "setAlertSaved",
+          "lineNumber": 96
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "updateAlertConfig",
+          "lineNumber": 98
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "setAlertCfg",
+          "lineNumber": 105
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "setAlertSaved",
+          "lineNumber": 106
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "setTimeout",
+          "lineNumber": 107
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "setAlertSaved",
+          "lineNumber": 107
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "setError",
+          "lineNumber": 109
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "errMsg",
+          "lineNumber": 109
+        },
+        {
+          "caller": "handleSaveAlert",
+          "callee": "setSavingAlert",
+          "lineNumber": 111
+        },
+        {
+          "caller": "handleSave",
+          "callee": "e.preventDefault",
+          "lineNumber": 116
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setSaving",
+          "lineNumber": 117
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setError",
+          "lineNumber": 118
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setTestResult",
+          "lineNumber": 119
+        },
+        {
+          "caller": "handleSave",
+          "callee": "upsertDeploymentConfig",
+          "lineNumber": 121
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setConfig",
+          "lineNumber": 129
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setToken",
+          "lineNumber": 130
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setError",
+          "lineNumber": 132
+        },
+        {
+          "caller": "handleSave",
+          "callee": "errMsg",
+          "lineNumber": 132
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setSaving",
+          "lineNumber": 134
+        },
+        {
+          "caller": "handleTest",
+          "callee": "setTesting",
+          "lineNumber": 140
+        },
+        {
+          "caller": "handleTest",
+          "callee": "setTestResult",
+          "lineNumber": 141
+        },
+        {
+          "caller": "handleTest",
+          "callee": "testDeploymentConfig",
+          "lineNumber": 143
+        },
+        {
+          "caller": "handleTest",
+          "callee": "setTestResult",
+          "lineNumber": 149
+        },
+        {
+          "caller": "handleTest",
+          "callee": "setTestResult",
+          "lineNumber": 151
+        },
+        {
+          "caller": "handleTest",
+          "callee": "errMsg",
+          "lineNumber": 151
+        },
+        {
+          "caller": "handleTest",
+          "callee": "setTesting",
+          "lineNumber": 153
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "window.confirm",
+          "lineNumber": 158
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setDeleting",
+          "lineNumber": 159
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "deleteDeploymentConfig",
+          "lineNumber": 161
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setConfig",
+          "lineNumber": 162
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setProvider",
+          "lineNumber": 163
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setToken",
+          "lineNumber": 164
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setProjectName",
+          "lineNumber": 165
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setTeamId",
+          "lineNumber": 166
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setBaseUrl",
+          "lineNumber": 167
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setError",
+          "lineNumber": 169
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "errMsg",
+          "lineNumber": 169
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setDeleting",
+          "lineNumber": 171
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "config.provider.toUpperCase",
+          "lineNumber": 192
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "handleDelete",
+          "lineNumber": 203
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "handleSave",
+          "lineNumber": 212
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setProvider",
+          "lineNumber": 220
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setToken",
+          "lineNumber": 242
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setProjectName",
+          "lineNumber": 273
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setTeamId",
+          "lineNumber": 289
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setBaseUrl",
+          "lineNumber": 304
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setEnabled",
+          "lineNumber": 314
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "handleTest",
+          "lineNumber": 336
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "handleSaveAlert",
+          "lineNumber": 379
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setHealthPath",
+          "lineNumber": 389
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setMonitorMins",
+          "lineNumber": 404
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "Number",
+          "lineNumber": 404
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setAlertOnAnomaly",
+          "lineNumber": 414
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setDiscordUrl",
+          "lineNumber": 434
+        },
+        {
+          "caller": "DeploymentSettings",
+          "callee": "setSlackUrl",
+          "lineNumber": 450
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/document-panel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 559,
+      "nonEmptyLines": 524,
+      "functions": [
+        {
+          "name": "errorMessage",
+          "startLine": 37,
+          "endLine": 45,
+          "params": [
+            "err"
+          ]
+        },
+        {
+          "name": "DocumentPanel",
+          "startLine": 47,
+          "endLine": 559,
+          "params": [
+            "{\r\n  projectId,\r\n  documentType,\r\n  linkedAgentRunId = null,\r\n  refreshKey = 0,\r\n  onPlanAutoStart,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DocumentPanel",
+          "line": 47,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "errorMessage",
+          "callee": "isAxiosError",
+          "lineNumber": 38
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 54
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 55
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 56
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 57
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 58
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 59
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 60
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 61
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 62
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 63
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 64
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 65
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 66
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 67
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useState",
+          "lineNumber": 68
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useCallback",
+          "lineNumber": 70
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setListError",
+          "lineNumber": 72
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "getDocuments",
+          "lineNumber": 75
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setDocRows",
+          "lineNumber": 76
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setSpecRowsForPlan",
+          "lineNumber": 77
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "Promise.all",
+          "lineNumber": 79
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "getDocuments",
+          "lineNumber": 80
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "getDocuments",
+          "lineNumber": 81
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setDocRows",
+          "lineNumber": 83
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setSpecRowsForPlan",
+          "lineNumber": 84
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "isAxiosError",
+          "lineNumber": 89
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setListError",
+          "lineNumber": 90
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "errorMessage",
+          "lineNumber": 90
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setDocRows",
+          "lineNumber": 91
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setSpecRowsForPlan",
+          "lineNumber": 93
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useEffect",
+          "lineNumber": 100
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "(async () => {\r\n      setListLoading(true)\r\n      await refreshDocuments({\r\n        signal: controller.signal,\r\n        forceRefresh: refreshKey > 0,\r\n      })\r\n      if (!cancelled) setListLoading(false)\r\n    })",
+          "lineNumber": 103
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setListLoading",
+          "lineNumber": 104
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "refreshDocuments",
+          "lineNumber": 105
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setListLoading",
+          "lineNumber": 109
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "controller.abort",
+          "lineNumber": 113
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useDocument",
+          "lineNumber": 123
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useEffect",
+          "lineNumber": 130
+        },
+        {
+          "caller": "poll",
+          "callee": "getAgentRun",
+          "lineNumber": 135
+        },
+        {
+          "caller": "poll",
+          "callee": "refreshDocuments",
+          "lineNumber": 138
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "poll",
+          "lineNumber": 144
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "window.setInterval",
+          "lineNumber": 145
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "poll",
+          "lineNumber": 145
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "window.clearInterval",
+          "lineNumber": 148
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "useEffect",
+          "lineNumber": 152
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setPendingRunId",
+          "lineNumber": 154
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "(() => {\r\n    if (!agentFailed || agentRun?.result == null || typeof agentRun.result !== 'object') {\r\n      return null\r\n    }\r\n    const r = agentRun.result as Record<string, unknown>\r\n    const msg = r.error ?? r.message ?? r.detail\r\n    return typeof msg === 'string' && msg.trim() !== '' ? msg.trim() : null\r\n  })",
+          "lineNumber": 160
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "msg.trim",
+          "lineNumber": 166
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "msg.trim",
+          "lineNumber": 166
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "Boolean",
+          "lineNumber": 172
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "documentType.toLowerCase",
+          "lineNumber": 185
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setActionError",
+          "lineNumber": 188
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setStatusMessage",
+          "lineNumber": 189
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "intent.trim",
+          "lineNumber": 190
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setActionError",
+          "lineNumber": 192
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setSubmitting",
+          "lineNumber": 196
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "generateSpec",
+          "lineNumber": 197
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "refreshDocuments",
+          "lineNumber": 198
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setPendingRunId",
+          "lineNumber": 199
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setIntent",
+          "lineNumber": 200
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setStatusMessage",
+          "lineNumber": 201
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setTimeout",
+          "lineNumber": 202
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setStatusMessage",
+          "lineNumber": 202
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setActionError",
+          "lineNumber": 204
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "errorMessage",
+          "lineNumber": 204
+        },
+        {
+          "caller": "onGenerateSpec",
+          "callee": "setSubmitting",
+          "lineNumber": 206
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "setActionError",
+          "lineNumber": 211
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "setStatusMessage",
+          "lineNumber": 212
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "setSubmitting",
+          "lineNumber": 214
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "generatePlan",
+          "lineNumber": 215
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "refreshDocuments",
+          "lineNumber": 217
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "setPendingRunId",
+          "lineNumber": 218
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "setStatusMessage",
+          "lineNumber": 219
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "setTimeout",
+          "lineNumber": 220
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "setStatusMessage",
+          "lineNumber": 220
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "setActionError",
+          "lineNumber": 222
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "errorMessage",
+          "lineNumber": 222
+        },
+        {
+          "caller": "onGeneratePlan",
+          "callee": "setSubmitting",
+          "lineNumber": 224
+        },
+        {
+          "caller": "onApprove",
+          "callee": "setActionError",
+          "lineNumber": 230
+        },
+        {
+          "caller": "onApprove",
+          "callee": "setStatusMessage",
+          "lineNumber": 231
+        },
+        {
+          "caller": "onApprove",
+          "callee": "setHilBusy",
+          "lineNumber": 233
+        },
+        {
+          "caller": "onApprove",
+          "callee": "approveDocument",
+          "lineNumber": 234
+        },
+        {
+          "caller": "onApprove",
+          "callee": "refreshDocuments",
+          "lineNumber": 235
+        },
+        {
+          "caller": "onApprove",
+          "callee": "refetch",
+          "lineNumber": 236
+        },
+        {
+          "caller": "onApprove",
+          "callee": "onPlanAutoStart",
+          "lineNumber": 238
+        },
+        {
+          "caller": "onApprove",
+          "callee": "setStatusMessage",
+          "lineNumber": 239
+        },
+        {
+          "caller": "onApprove",
+          "callee": "setStatusMessage",
+          "lineNumber": 243
+        },
+        {
+          "caller": "onApprove",
+          "callee": "setTimeout",
+          "lineNumber": 245
+        },
+        {
+          "caller": "onApprove",
+          "callee": "setStatusMessage",
+          "lineNumber": 245
+        },
+        {
+          "caller": "onApprove",
+          "callee": "setActionError",
+          "lineNumber": 247
+        },
+        {
+          "caller": "onApprove",
+          "callee": "errorMessage",
+          "lineNumber": 247
+        },
+        {
+          "caller": "onApprove",
+          "callee": "setHilBusy",
+          "lineNumber": 249
+        },
+        {
+          "caller": "startEditing",
+          "callee": "setDraftContent",
+          "lineNumber": 254
+        },
+        {
+          "caller": "startEditing",
+          "callee": "setIsEditing",
+          "lineNumber": 255
+        },
+        {
+          "caller": "startEditing",
+          "callee": "setActionError",
+          "lineNumber": 256
+        },
+        {
+          "caller": "cancelEditing",
+          "callee": "setIsEditing",
+          "lineNumber": 260
+        },
+        {
+          "caller": "cancelEditing",
+          "callee": "setDraftContent",
+          "lineNumber": 261
+        },
+        {
+          "caller": "cancelEditing",
+          "callee": "setSaveConfirmOpen",
+          "lineNumber": 262
+        },
+        {
+          "caller": "requestSaveConfirm",
+          "callee": "draftContent.trim",
+          "lineNumber": 266
+        },
+        {
+          "caller": "requestSaveConfirm",
+          "callee": "setActionError",
+          "lineNumber": 267
+        },
+        {
+          "caller": "requestSaveConfirm",
+          "callee": "setSaveConfirmOpen",
+          "lineNumber": 270
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setActionError",
+          "lineNumber": 275
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setStatusMessage",
+          "lineNumber": 276
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setSaving",
+          "lineNumber": 278
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "updateDocument",
+          "lineNumber": 280
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "refreshDocuments",
+          "lineNumber": 281
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "refetch",
+          "lineNumber": 282
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setIsEditing",
+          "lineNumber": 283
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setSaveConfirmOpen",
+          "lineNumber": 284
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setDraftContent",
+          "lineNumber": 285
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "showSuccessToast",
+          "lineNumber": 286
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setStatusMessage",
+          "lineNumber": 292
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setTimeout",
+          "lineNumber": 295
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setStatusMessage",
+          "lineNumber": 295
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "showErrorToast",
+          "lineNumber": 298
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "errorMessage",
+          "lineNumber": 298
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setActionError",
+          "lineNumber": 299
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "errorMessage",
+          "lineNumber": 299
+        },
+        {
+          "caller": "confirmSaveSpec",
+          "callee": "setSaving",
+          "lineNumber": 301
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setActionError",
+          "lineNumber": 307
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setStatusMessage",
+          "lineNumber": 308
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "revisionFeedback.trim",
+          "lineNumber": 309
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setActionError",
+          "lineNumber": 311
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setHilBusy",
+          "lineNumber": 315
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "reviseDocument",
+          "lineNumber": 316
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "refreshDocuments",
+          "lineNumber": 317
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setPendingRunId",
+          "lineNumber": 318
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setRevisionFeedback",
+          "lineNumber": 319
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "refetch",
+          "lineNumber": 320
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setStatusMessage",
+          "lineNumber": 321
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setTimeout",
+          "lineNumber": 326
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setStatusMessage",
+          "lineNumber": 326
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setActionError",
+          "lineNumber": 328
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "errorMessage",
+          "lineNumber": 328
+        },
+        {
+          "caller": "onRequestRevision",
+          "callee": "setHilBusy",
+          "lineNumber": 330
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "Boolean",
+          "lineNumber": 337
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "errorMessage",
+          "lineNumber": 344
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "Boolean",
+          "lineNumber": 347
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setIntent",
+          "lineNumber": 399
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "onGenerateSpec",
+          "lineNumber": 408
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "intent.trim",
+          "lineNumber": 409
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "onGeneratePlan",
+          "lineNumber": 422
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "refetch",
+          "lineNumber": 481
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "draftContent.trim",
+          "lineNumber": 493
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "confirmSaveSpec",
+          "lineNumber": 519
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setSaveConfirmOpen",
+          "lineNumber": 520
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "onApprove",
+          "lineNumber": 526
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "setRevisionFeedback",
+          "lineNumber": 538
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "onRequestRevision",
+          "lineNumber": 547
+        },
+        {
+          "caller": "DocumentPanel",
+          "callee": "revisionFeedback.trim",
+          "lineNumber": 548
+        }
+      ],
+      "metrics": {
+        "importCount": 11,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/failure-analysis-panel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 287,
+      "nonEmptyLines": 251,
+      "functions": [
+        {
+          "name": "ConfidenceBar",
+          "startLine": 49,
+          "endLine": 62,
+          "params": [
+            "{ score }"
+          ]
+        },
+        {
+          "name": "RiskBadge",
+          "startLine": 66,
+          "endLine": 74,
+          "params": [
+            "{ level }"
+          ]
+        },
+        {
+          "name": "PersistedAnalysisCard",
+          "startLine": 78,
+          "endLine": 149,
+          "params": [
+            "{ fa }"
+          ]
+        },
+        {
+          "name": "LiveAnalysisCard",
+          "startLine": 153,
+          "endLine": 227,
+          "params": [
+            "{ state }"
+          ]
+        },
+        {
+          "name": "RetryTimeline",
+          "startLine": 231,
+          "endLine": 244,
+          "params": [
+            "{ attempt }"
+          ]
+        },
+        {
+          "name": "FailureAnalysisPanel",
+          "startLine": 257,
+          "endLine": 287,
+          "params": [
+            "{\n  persistedAnalyses = [],\n  liveState = { phase: 'idle' },\n  attempt = 1,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LiveAnalysis",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "AnalysisState",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "FailureAnalysisPanel",
+          "line": 257,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ConfidenceBar",
+          "callee": "Math.round",
+          "lineNumber": 50
+        },
+        {
+          "caller": "PersistedAnalysisCard",
+          "callee": "useState",
+          "lineNumber": 79
+        },
+        {
+          "caller": "PersistedAnalysisCard",
+          "callee": "setOpen",
+          "lineNumber": 85
+        },
+        {
+          "caller": "PersistedAnalysisCard",
+          "callee": "setOpen",
+          "lineNumber": 88
+        },
+        {
+          "caller": "FailureAnalysisPanel",
+          "callee": "persistedAnalyses.map",
+          "lineNumber": 282
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/kanban-board.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 431,
+      "nonEmptyLines": 395,
+      "functions": [
+        {
+          "name": "loadErrorMessage",
+          "startLine": 38,
+          "endLine": 46,
+          "params": [
+            "err"
+          ]
+        },
+        {
+          "name": "findTaskById",
+          "startLine": 48,
+          "endLine": 57,
+          "params": [
+            "columns",
+            "taskId"
+          ]
+        },
+        {
+          "name": "enrichColumnsWithDeps",
+          "startLine": 59,
+          "endLine": 79,
+          "params": [
+            "columns",
+            "graph"
+          ]
+        },
+        {
+          "name": "KanbanBoard",
+          "startLine": 81,
+          "endLine": 422,
+          "params": [
+            "{\r\n  projectId,\r\n  planApproved = false,\r\n  selectedReviewTaskId = null,\r\n  onSelectReviewTask,\r\n  onRejectTask,\r\n  onAddTask,\r\n}"
+          ]
+        },
+        {
+          "name": "LegendDot",
+          "startLine": 424,
+          "endLine": 431,
+          "params": [
+            "{ tone, label }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "KanbanBoard",
+          "line": 81,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadErrorMessage",
+          "callee": "isAxiosError",
+          "lineNumber": 39
+        },
+        {
+          "caller": "findTaskById",
+          "callee": "columns[status].find",
+          "lineNumber": 53
+        },
+        {
+          "caller": "enrichColumnsWithDeps",
+          "callee": "buildBlockedByTitlesMap",
+          "lineNumber": 63
+        },
+        {
+          "caller": "enrichColumnsWithDeps",
+          "callee": "buildDependsOnCountMap",
+          "lineNumber": 64
+        },
+        {
+          "caller": "enrich",
+          "callee": "items.map",
+          "lineNumber": 66
+        },
+        {
+          "caller": "enrich",
+          "callee": "blockedByMap.get",
+          "lineNumber": 68
+        },
+        {
+          "caller": "enrich",
+          "callee": "dependsOnMap.get",
+          "lineNumber": 69
+        },
+        {
+          "caller": "enrichColumnsWithDeps",
+          "callee": "enrich",
+          "lineNumber": 72
+        },
+        {
+          "caller": "enrichColumnsWithDeps",
+          "callee": "enrich",
+          "lineNumber": 73
+        },
+        {
+          "caller": "enrichColumnsWithDeps",
+          "callee": "enrich",
+          "lineNumber": 74
+        },
+        {
+          "caller": "enrichColumnsWithDeps",
+          "callee": "enrich",
+          "lineNumber": 75
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useAuth",
+          "lineNumber": 89
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useTaskStore",
+          "lineNumber": 90
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useTaskStore",
+          "lineNumber": 91
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useTaskStore",
+          "lineNumber": 92
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useState",
+          "lineNumber": 94
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useState",
+          "lineNumber": 95
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useState",
+          "lineNumber": 96
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useState",
+          "lineNumber": 97
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useState",
+          "lineNumber": 98
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useState",
+          "lineNumber": 99
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useState",
+          "lineNumber": 100
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useState",
+          "lineNumber": 101
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useState",
+          "lineNumber": 102
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useState",
+          "lineNumber": 107
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useKanban",
+          "lineNumber": 111
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "isMultiUserWipMode",
+          "lineNumber": 113
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "isMultiUserWipMode",
+          "lineNumber": 116
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useMemo",
+          "lineNumber": 118
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "members.find",
+          "lineNumber": 120
+        },
+        {
+          "caller": "handleAddTaskClick",
+          "callee": "onAddTask",
+          "lineNumber": 131
+        },
+        {
+          "caller": "handleAddTaskClick",
+          "callee": "setCreateModalOpen",
+          "lineNumber": 134
+        },
+        {
+          "caller": "handleDragStart",
+          "callee": "String",
+          "lineNumber": 138
+        },
+        {
+          "caller": "handleDragStart",
+          "callee": "findTaskById",
+          "lineNumber": 139
+        },
+        {
+          "caller": "handleDragStart",
+          "callee": "showErrorToast",
+          "lineNumber": 141
+        },
+        {
+          "caller": "handleDragStart",
+          "callee": "setActiveDragId",
+          "lineNumber": 144
+        },
+        {
+          "caller": "handleDragEnd",
+          "callee": "setActiveDragId",
+          "lineNumber": 148
+        },
+        {
+          "caller": "handleDragEnd",
+          "callee": "String",
+          "lineNumber": 149
+        },
+        {
+          "caller": "handleDragEnd",
+          "callee": "findTaskById",
+          "lineNumber": 150
+        },
+        {
+          "caller": "handleDragEnd",
+          "callee": "showErrorToast",
+          "lineNumber": 152
+        },
+        {
+          "caller": "handleDragEnd",
+          "callee": "columns.todo.some",
+          "lineNumber": 158
+        },
+        {
+          "caller": "handleDragEnd",
+          "callee": "isUserWipFull",
+          "lineNumber": 159
+        },
+        {
+          "caller": "handleDragEnd",
+          "callee": "columns.in_progress.find",
+          "lineNumber": 161
+        },
+        {
+          "caller": "handleDragEnd",
+          "callee": "setWipWarning",
+          "lineNumber": 163
+        },
+        {
+          "caller": "handleDragEnd",
+          "callee": "onDragEnd",
+          "lineNumber": 168
+        },
+        {
+          "caller": "handleStartTask",
+          "callee": "findTaskById",
+          "lineNumber": 172
+        },
+        {
+          "caller": "handleStartTask",
+          "callee": "showErrorToast",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handleStartTask",
+          "callee": "isUserWipFull",
+          "lineNumber": 177
+        },
+        {
+          "caller": "handleStartTask",
+          "callee": "columns.in_progress.find",
+          "lineNumber": 179
+        },
+        {
+          "caller": "handleStartTask",
+          "callee": "setWipWarning",
+          "lineNumber": 181
+        },
+        {
+          "caller": "handleStartTask",
+          "callee": "setStartingTaskId",
+          "lineNumber": 184
+        },
+        {
+          "caller": "handleStartTask",
+          "callee": "startTask",
+          "lineNumber": 185
+        },
+        {
+          "caller": "handleStartTask",
+          "callee": "window.setTimeout",
+          "lineNumber": 186
+        },
+        {
+          "caller": "handleStartTask",
+          "callee": "setStartingTaskId",
+          "lineNumber": 186
+        },
+        {
+          "caller": "handleCancelTask",
+          "callee": "setCancellingTaskId",
+          "lineNumber": 190
+        },
+        {
+          "caller": "handleCancelTask",
+          "callee": "cancelTask",
+          "lineNumber": 192
+        },
+        {
+          "caller": "handleCancelTask",
+          "callee": "refreshBoardData",
+          "lineNumber": 193
+        },
+        {
+          "caller": "handleCancelTask",
+          "callee": "showSuccessToast",
+          "lineNumber": 194
+        },
+        {
+          "caller": "handleCancelTask",
+          "callee": "showErrorToast",
+          "lineNumber": 196
+        },
+        {
+          "caller": "handleCancelTask",
+          "callee": "loadErrorMessage",
+          "lineNumber": 196
+        },
+        {
+          "caller": "handleCancelTask",
+          "callee": "setCancellingTaskId",
+          "lineNumber": 198
+        },
+        {
+          "caller": "handleAssignUser",
+          "callee": "assignTask",
+          "lineNumber": 204
+        },
+        {
+          "caller": "handleAssignUser",
+          "callee": "refreshBoardData",
+          "lineNumber": 205
+        },
+        {
+          "caller": "handleAssignUser",
+          "callee": "showSuccessToast",
+          "lineNumber": 206
+        },
+        {
+          "caller": "handleAssignUser",
+          "callee": "showErrorToast",
+          "lineNumber": 208
+        },
+        {
+          "caller": "handleAssignUser",
+          "callee": "loadErrorMessage",
+          "lineNumber": 208
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useMemo",
+          "lineNumber": 212
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "enrichColumnsWithDeps",
+          "lineNumber": 213
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useMemo",
+          "lineNumber": 217
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "BOARD_STATUSES.map((status) =>\r\n        columns[status]\r\n          .map((t) => `${t.id}:${t.status}:${t.is_blocked ? 1 : 0}`)\r\n          .sort()\r\n          .join(','),\r\n      ).join",
+          "lineNumber": 219
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "BOARD_STATUSES.map",
+          "lineNumber": 219
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "columns[status]\r\n          .map((t) => `${t.id}:${t.status}:${t.is_blocked ? 1 : 0}`)\r\n          .sort()\r\n          .join",
+          "lineNumber": 220
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "columns[status]\r\n          .map((t) => `${t.id}:${t.status}:${t.is_blocked ? 1 : 0}`)\r\n          .sort",
+          "lineNumber": 220
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "columns[status]\r\n          .map",
+          "lineNumber": 220
+        },
+        {
+          "caller": "refreshBoardData",
+          "callee": "Promise.all",
+          "lineNumber": 229
+        },
+        {
+          "caller": "refreshBoardData",
+          "callee": "getTasks",
+          "lineNumber": 230
+        },
+        {
+          "caller": "refreshBoardData",
+          "callee": "getGraph(projectId).catch",
+          "lineNumber": 231
+        },
+        {
+          "caller": "refreshBoardData",
+          "callee": "getGraph",
+          "lineNumber": 231
+        },
+        {
+          "caller": "refreshBoardData",
+          "callee": "clearTaskAgentRuns",
+          "lineNumber": 233
+        },
+        {
+          "caller": "refreshBoardData",
+          "callee": "setColumns",
+          "lineNumber": 234
+        },
+        {
+          "caller": "refreshBoardData",
+          "callee": "groupedResponseToTaskColumns",
+          "lineNumber": 234
+        },
+        {
+          "caller": "refreshBoardData",
+          "callee": "setDepGraph",
+          "lineNumber": 235
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useEffect",
+          "lineNumber": 238
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "(async () => {\r\n      setLoading(true)\r\n      setError(null)\r\n      try {\r\n        const [data, graph] = await Promise.all([\r\n          getTasks(projectId),\r\n          getGraph(projectId).catch(() => null),\r\n        ])\r\n        if (!cancelled) {\r\n          clearTaskAgentRuns()\r\n          setColumns(groupedResponseToTaskColumns(data))\r\n          setDepGraph(graph)\r\n        }\r\n        try {\r\n          const memberRows = await getMembers(projectId)\r\n          if (!cancelled) setMembers(memberRows)\r\n        } catch {\r\n          if (!cancelled) setMembers([])\r\n        }\r\n      } catch (err) {\r\n        if (!cancelled) {\r\n          setError(loadErrorMessage(err))\r\n          clearTaskAgentRuns()\r\n          setColumns(emptyTaskColumns())\r\n        }\r\n      } finally {\r\n        if (!cancelled) setLoading(false)\r\n      }\r\n    })",
+          "lineNumber": 240
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setLoading",
+          "lineNumber": 241
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setError",
+          "lineNumber": 242
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "Promise.all",
+          "lineNumber": 244
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "getTasks",
+          "lineNumber": 245
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "getGraph(projectId).catch",
+          "lineNumber": 246
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "getGraph",
+          "lineNumber": 246
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "clearTaskAgentRuns",
+          "lineNumber": 249
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setColumns",
+          "lineNumber": 250
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "groupedResponseToTaskColumns",
+          "lineNumber": 250
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setDepGraph",
+          "lineNumber": 251
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "getMembers",
+          "lineNumber": 254
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setMembers",
+          "lineNumber": 255
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setMembers",
+          "lineNumber": 257
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setError",
+          "lineNumber": 261
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "loadErrorMessage",
+          "lineNumber": 261
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "clearTaskAgentRuns",
+          "lineNumber": 262
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setColumns",
+          "lineNumber": 263
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "emptyTaskColumns",
+          "lineNumber": 263
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setLoading",
+          "lineNumber": 266
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useEffect",
+          "lineNumber": 274
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "getGraph(projectId)\r\n      .then((graph) => {\r\n        if (!cancelled) setDepGraph(graph)\r\n      })\r\n      .catch",
+          "lineNumber": 277
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "getGraph(projectId)\r\n      .then",
+          "lineNumber": 277
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "getGraph",
+          "lineNumber": 277
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setDepGraph",
+          "lineNumber": 279
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setDepGraph",
+          "lineNumber": 282
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "useMemo",
+          "lineNumber": 289
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "enrichedColumns[status].find",
+          "lineNumber": 292
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setActiveDragId",
+          "lineNumber": 345
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "BOARD_STATUSES.map",
+          "lineNumber": 352
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setSaveTemplateTask",
+          "lineNumber": 378
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setWipWarning",
+          "lineNumber": 401
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setCreateModalOpen",
+          "lineNumber": 407
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "refreshBoardData",
+          "lineNumber": 408
+        },
+        {
+          "caller": "KanbanBoard",
+          "callee": "setSaveTemplateTask",
+          "lineNumber": 417
+        }
+      ],
+      "metrics": {
+        "importCount": 16,
+        "exportCount": 1,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/kanban-column.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 328,
+      "nonEmptyLines": 309,
+      "functions": [
+        {
+          "name": "IconPlus",
+          "startLine": 105,
+          "endLine": 111,
+          "params": []
+        },
+        {
+          "name": "IconLock",
+          "startLine": 113,
+          "endLine": 120,
+          "params": []
+        },
+        {
+          "name": "IconHourglass",
+          "startLine": 122,
+          "endLine": 128,
+          "params": []
+        },
+        {
+          "name": "EmptyState",
+          "startLine": 130,
+          "endLine": 151,
+          "params": [
+            "{ status, planApproved }"
+          ]
+        },
+        {
+          "name": "WIPLockBlock",
+          "startLine": 153,
+          "endLine": 169,
+          "params": []
+        },
+        {
+          "name": "KanbanColumn",
+          "startLine": 171,
+          "endLine": 328,
+          "params": [
+            "{\r\n  column,\r\n  taskCardSortableDisabled = true,\r\n  isWipColumn = false,\r\n  wipLimit = 1,\r\n  multiUserWip = false,\r\n  currentUserId,\r\n  planApproved = false,\r\n  onAddTask,\r\n  onStartTask,\r\n  startingTaskId = null,\r\n  selectedReviewTaskId = null,\r\n  onOpenReview,\r\n  onCancelTask,\r\n  cancellingTaskId = null,\r\n  members = [],\r\n  currentUserRole,\r\n  onAssignUser,\r\n  onRejectTask,\r\n  onSaveAsTemplate,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "KanbanColumn",
+          "line": 171,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "KanbanColumn",
+          "callee": "tasks.map",
+          "lineNumber": 194
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "useTaskStore",
+          "lineNumber": 195
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "useDroppable",
+          "lineNumber": 197
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "tasks.filter",
+          "lineNumber": 207
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "[\r\n          'relative flex flex-1 flex-col gap-2 overflow-y-auto p-2 transition-colors duration-150',\r\n          isOver ? `rounded-b-2xl ring-2 ring-inset ${theme.dropOver}` : '',\r\n          isLocked && isOver ? 'ring-2 ring-inset ring-red-400 bg-red-50/40' : '',\r\n        ]\r\n          .filter(Boolean)\r\n          .join",
+          "lineNumber": 252
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "[\r\n          'relative flex flex-1 flex-col gap-2 overflow-y-auto p-2 transition-colors duration-150',\r\n          isOver ? `rounded-b-2xl ring-2 ring-inset ${theme.dropOver}` : '',\r\n          isLocked && isOver ? 'ring-2 ring-inset ring-red-400 bg-red-50/40' : '',\r\n        ]\r\n          .filter",
+          "lineNumber": 252
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "tasks.map",
+          "lineNumber": 267
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "onAssignUser",
+          "lineNumber": 282
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "onOpenReview",
+          "lineNumber": 285
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "onRejectTask",
+          "lineNumber": 287
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "onSaveAsTemplate",
+          "lineNumber": 289
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "onStartTask",
+          "lineNumber": 292
+        },
+        {
+          "caller": "KanbanColumn",
+          "callee": "onCancelTask",
+          "lineNumber": 297
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/memory-editor.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 304,
+      "nonEmptyLines": 283,
+      "functions": [
+        {
+          "name": "formatWhen",
+          "startLine": 20,
+          "endLine": 29,
+          "params": [
+            "iso"
+          ]
+        },
+        {
+          "name": "formatRelative",
+          "startLine": 31,
+          "endLine": 33,
+          "params": [
+            "iso"
+          ]
+        },
+        {
+          "name": "MemoryEditor",
+          "startLine": 35,
+          "endLine": 304,
+          "params": [
+            "{ projectId }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MemoryEditor",
+          "line": 35,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "formatWhen",
+          "callee": "new Date(iso).toLocaleString",
+          "lineNumber": 22
+        },
+        {
+          "caller": "formatRelative",
+          "callee": "relativeTime",
+          "lineNumber": 32
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useState",
+          "lineNumber": 36
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useState",
+          "lineNumber": 38
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useState",
+          "lineNumber": 39
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useState",
+          "lineNumber": 40
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useState",
+          "lineNumber": 41
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useState",
+          "lineNumber": 42
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useState",
+          "lineNumber": 43
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useState",
+          "lineNumber": 45
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useRef",
+          "lineNumber": 46
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useCallback",
+          "lineNumber": 48
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "setLoading",
+          "lineNumber": 49
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "setError",
+          "lineNumber": 50
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "listMemoryEntries",
+          "lineNumber": 52
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "setEntries",
+          "lineNumber": 53
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "setError",
+          "lineNumber": 56
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "setLoading",
+          "lineNumber": 58
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useEffect",
+          "lineNumber": 62
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "load",
+          "lineNumber": 63
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "useEffect",
+          "lineNumber": 66
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "el.showModal",
+          "lineNumber": 70
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "el.close",
+          "lineNumber": 72
+        },
+        {
+          "caller": "toggleExpanded",
+          "callee": "setExpanded",
+          "lineNumber": 77
+        },
+        {
+          "caller": "startEdit",
+          "callee": "setEditingId",
+          "lineNumber": 81
+        },
+        {
+          "caller": "startEdit",
+          "callee": "setEditSummary",
+          "lineNumber": 82
+        },
+        {
+          "caller": "startEdit",
+          "callee": "setEditLessons",
+          "lineNumber": 83
+        },
+        {
+          "caller": "startEdit",
+          "callee": "setExpanded",
+          "lineNumber": 84
+        },
+        {
+          "caller": "cancelEdit",
+          "callee": "setEditingId",
+          "lineNumber": 88
+        },
+        {
+          "caller": "cancelEdit",
+          "callee": "setEditSummary",
+          "lineNumber": 89
+        },
+        {
+          "caller": "cancelEdit",
+          "callee": "setEditLessons",
+          "lineNumber": 90
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "entries.find",
+          "lineNumber": 96
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "editSummary.trim",
+          "lineNumber": 99
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "editLessons.trim",
+          "lineNumber": 100
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "setError",
+          "lineNumber": 102
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "new Date().toISOString",
+          "lineNumber": 109
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "setEntries",
+          "lineNumber": 112
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "list.map",
+          "lineNumber": 112
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "setSaving",
+          "lineNumber": 113
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "setError",
+          "lineNumber": 114
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "updateMemoryEntry",
+          "lineNumber": 116
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "setEntries",
+          "lineNumber": 120
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "list.map",
+          "lineNumber": 120
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "cancelEdit",
+          "lineNumber": 121
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "setEntries",
+          "lineNumber": 123
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "list.map",
+          "lineNumber": 123
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "setError",
+          "lineNumber": 125
+        },
+        {
+          "caller": "saveEdit",
+          "callee": "setSaving",
+          "lineNumber": 127
+        },
+        {
+          "caller": "requestDelete",
+          "callee": "setDeleteTarget",
+          "lineNumber": 132
+        },
+        {
+          "caller": "closeDeleteDialog",
+          "callee": "setDeleteTarget",
+          "lineNumber": 136
+        },
+        {
+          "caller": "confirmDelete",
+          "callee": "setEntries",
+          "lineNumber": 143
+        },
+        {
+          "caller": "confirmDelete",
+          "callee": "list.filter",
+          "lineNumber": 143
+        },
+        {
+          "caller": "confirmDelete",
+          "callee": "setDeletingId",
+          "lineNumber": 144
+        },
+        {
+          "caller": "confirmDelete",
+          "callee": "setError",
+          "lineNumber": 145
+        },
+        {
+          "caller": "confirmDelete",
+          "callee": "closeDeleteDialog",
+          "lineNumber": 146
+        },
+        {
+          "caller": "confirmDelete",
+          "callee": "deleteMemoryEntry",
+          "lineNumber": 148
+        },
+        {
+          "caller": "confirmDelete",
+          "callee": "setEntries",
+          "lineNumber": 150
+        },
+        {
+          "caller": "confirmDelete",
+          "callee": "setError",
+          "lineNumber": 152
+        },
+        {
+          "caller": "confirmDelete",
+          "callee": "setDeletingId",
+          "lineNumber": 154
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "load",
+          "lineNumber": 169
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "entries.map",
+          "lineNumber": 186
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "toggleExpanded",
+          "lineNumber": 194
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "formatWhen",
+          "lineNumber": 208
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "formatRelative",
+          "lineNumber": 210
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "setEditSummary",
+          "lineNumber": 223
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "setEditLessons",
+          "lineNumber": 233
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "saveEdit",
+          "lineNumber": 236
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "entry.files_affected.map",
+          "lineNumber": 255
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "startEdit",
+          "lineNumber": 262
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "requestDelete",
+          "lineNumber": 268
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "deleteTarget.summary.slice",
+          "lineNumber": 289
+        },
+        {
+          "caller": "MemoryEditor",
+          "callee": "confirmDelete",
+          "lineNumber": 296
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/new-project-modal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 239,
+      "nonEmptyLines": 220,
+      "functions": [
+        {
+          "name": "NewProjectModal",
+          "startLine": 38,
+          "endLine": 239,
+          "params": [
+            "{ open, onClose, onSubmit }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NewProjectModal",
+          "line": 38,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "NewProjectModal",
+          "callee": "useRef",
+          "lineNumber": 39
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "useRef",
+          "lineNumber": 40
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "useRef",
+          "lineNumber": 41
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "useState",
+          "lineNumber": 43
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "useState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "useState",
+          "lineNumber": 45
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "useState",
+          "lineNumber": 46
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "useState",
+          "lineNumber": 47
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "useEffect",
+          "lineNumber": 49
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "setName",
+          "lineNumber": 52
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "setDescription",
+          "lineNumber": 53
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "setLanguage",
+          "lineNumber": 54
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "setError",
+          "lineNumber": 55
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "setSubmitting",
+          "lineNumber": 56
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "window.setTimeout",
+          "lineNumber": 57
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "nameInputRef.current?.focus",
+          "lineNumber": 57
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "window.clearTimeout",
+          "lineNumber": 61
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "previouslyFocused.current?.focus",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "event.stopPropagation",
+          "lineNumber": 69
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "onClose",
+          "lineNumber": 70
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "Array.from(\r\n      node.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),\r\n    ).filter",
+          "lineNumber": 76
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "Array.from",
+          "lineNumber": 76
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "node.querySelectorAll",
+          "lineNumber": 77
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "el.hasAttribute",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "event.preventDefault",
+          "lineNumber": 84
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "last.focus",
+          "lineNumber": 85
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "event.preventDefault",
+          "lineNumber": 87
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "first.focus",
+          "lineNumber": 88
+        },
+        {
+          "caller": "handleBackdropClick",
+          "callee": "onClose",
+          "lineNumber": 94
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "event.preventDefault",
+          "lineNumber": 98
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 99
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "name.trim",
+          "lineNumber": 100
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 102
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "nameInputRef.current?.focus",
+          "lineNumber": 103
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setSubmitting",
+          "lineNumber": 106
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "onSubmit",
+          "lineNumber": 108
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "description.trim",
+          "lineNumber": 110
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setSubmitting",
+          "lineNumber": 115
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 116
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "setName",
+          "lineNumber": 173
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "setDescription",
+          "lineNumber": 191
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "setLanguage",
+          "lineNumber": 209
+        },
+        {
+          "caller": "NewProjectModal",
+          "callee": "LANGUAGES.map",
+          "lineNumber": 213
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/pipeline-panel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 154,
+      "nonEmptyLines": 140,
+      "functions": [
+        {
+          "name": "fmtTime",
+          "startLine": 18,
+          "endLine": 25,
+          "params": [
+            "iso"
+          ]
+        },
+        {
+          "name": "fmtDuration",
+          "startLine": 27,
+          "endLine": 32,
+          "params": [
+            "startIso",
+            "endIso"
+          ]
+        },
+        {
+          "name": "StatusBadge",
+          "startLine": 34,
+          "endLine": 44,
+          "params": [
+            "{ status }"
+          ]
+        },
+        {
+          "name": "StepPills",
+          "startLine": 46,
+          "endLine": 64,
+          "params": [
+            "{ steps }"
+          ]
+        },
+        {
+          "name": "PipelinePanel",
+          "startLine": 66,
+          "endLine": 154,
+          "params": [
+            "{ projectId, limit = 10 }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PipelinePanel",
+          "line": 66,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fmtTime",
+          "callee": "new Date(iso).toLocaleString",
+          "lineNumber": 21
+        },
+        {
+          "caller": "fmtDuration",
+          "callee": "new Date(endIso).getTime",
+          "lineNumber": 29
+        },
+        {
+          "caller": "fmtDuration",
+          "callee": "new Date(startIso).getTime",
+          "lineNumber": 29
+        },
+        {
+          "caller": "fmtDuration",
+          "callee": "(ms / 1000).toFixed",
+          "lineNumber": 31
+        },
+        {
+          "caller": "StepPills",
+          "callee": "steps.map",
+          "lineNumber": 56
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "useState",
+          "lineNumber": 67
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "useState",
+          "lineNumber": 68
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "useState",
+          "lineNumber": 69
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "useRef",
+          "lineNumber": 70
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "useEffect",
+          "lineNumber": 72
+        },
+        {
+          "caller": "load",
+          "callee": "listPipelineRuns",
+          "lineNumber": 77
+        },
+        {
+          "caller": "load",
+          "callee": "setRuns",
+          "lineNumber": 79
+        },
+        {
+          "caller": "load",
+          "callee": "setError",
+          "lineNumber": 80
+        },
+        {
+          "caller": "load",
+          "callee": "isAxiosError",
+          "lineNumber": 84
+        },
+        {
+          "caller": "load",
+          "callee": "setError",
+          "lineNumber": 89
+        },
+        {
+          "caller": "load",
+          "callee": "setLoading",
+          "lineNumber": 92
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "load",
+          "lineNumber": 96
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "setInterval",
+          "lineNumber": 98
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "clearInterval",
+          "lineNumber": 101
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "runs.slice(0, limit).map",
+          "lineNumber": 127
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "runs.slice",
+          "lineNumber": 127
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "run.id.slice",
+          "lineNumber": 136
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "fmtDuration",
+          "lineNumber": 147
+        },
+        {
+          "caller": "PipelinePanel",
+          "callee": "fmtTime",
+          "lineNumber": 148
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/project-card-skeleton.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "ProjectCardSkeleton",
+          "startLine": 3,
+          "endLine": 25,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProjectCardSkeleton",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/project-card.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 85,
+      "nonEmptyLines": 76,
+      "functions": [
+        {
+          "name": "ProjectCard",
+          "startLine": 20,
+          "endLine": 85,
+          "params": [
+            "{ project }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProjectCard",
+          "line": 20,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProjectCard",
+          "callee": "project.description?.trim",
+          "lineNumber": 22
+        },
+        {
+          "caller": "ProjectCard",
+          "callee": "relativeTime",
+          "lineNumber": 80
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/project-header.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 386,
+      "nonEmptyLines": 363,
+      "functions": [
+        {
+          "name": "memberInitials",
+          "startLine": 46,
+          "endLine": 52,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "avatarColor",
+          "startLine": 77,
+          "endLine": 85,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "ProjectHeader",
+          "startLine": 87,
+          "endLine": 386,
+          "params": [
+            "{ project, activeTab, onTabChange, onOpenTask }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProjectHeader",
+          "line": 87,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "memberInitials",
+          "callee": "name.trim().split(/\\s+/).filter",
+          "lineNumber": 47
+        },
+        {
+          "caller": "memberInitials",
+          "callee": "name.trim().split",
+          "lineNumber": 47
+        },
+        {
+          "caller": "memberInitials",
+          "callee": "name.trim",
+          "lineNumber": 47
+        },
+        {
+          "caller": "memberInitials",
+          "callee": "`${parts[0][0] ?? ''}${parts[parts.length - 1][0] ?? ''}`.toUpperCase",
+          "lineNumber": 49
+        },
+        {
+          "caller": "memberInitials",
+          "callee": "(parts[0] ?? '?').slice(0, 2).toUpperCase",
+          "lineNumber": 51
+        },
+        {
+          "caller": "memberInitials",
+          "callee": "(parts[0] ?? '?').slice",
+          "lineNumber": 51
+        },
+        {
+          "caller": "avatarColor",
+          "callee": "name.trim",
+          "lineNumber": 78
+        },
+        {
+          "caller": "avatarColor",
+          "callee": "trimmed.charCodeAt",
+          "lineNumber": 82
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useNavigate",
+          "lineNumber": 88
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useAuth",
+          "lineNumber": 89
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useState",
+          "lineNumber": 91
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useState",
+          "lineNumber": 92
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useState",
+          "lineNumber": 93
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useState",
+          "lineNumber": 94
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useState",
+          "lineNumber": 95
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useState",
+          "lineNumber": 96
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useRef",
+          "lineNumber": 97
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useRef",
+          "lineNumber": 98
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "members.find",
+          "lineNumber": 100
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useEffect",
+          "lineNumber": 105
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "(async () => {\n      try {\n        const rows = await getMembers(project.id)\n        if (!cancelled) setMembers(rows)\n      } catch {\n        if (!cancelled) setMembers([])\n      }\n    })",
+          "lineNumber": 107
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "getMembers",
+          "lineNumber": 109
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "setMembers",
+          "lineNumber": 110
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "setMembers",
+          "lineNumber": 112
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useEffect",
+          "lineNumber": 120
+        },
+        {
+          "caller": "pollUnread",
+          "callee": "getNotifications",
+          "lineNumber": 125
+        },
+        {
+          "caller": "pollUnread",
+          "callee": "setUnreadCount",
+          "lineNumber": 126
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "pollUnread",
+          "lineNumber": 131
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "window.setInterval",
+          "lineNumber": 132
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "pollUnread",
+          "lineNumber": 132
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "window.clearInterval",
+          "lineNumber": 135
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useEffect",
+          "lineNumber": 139
+        },
+        {
+          "caller": "onDocClick",
+          "callee": "notifRef.current.contains",
+          "lineNumber": 143
+        },
+        {
+          "caller": "onDocClick",
+          "callee": "setNotifOpen",
+          "lineNumber": 143
+        },
+        {
+          "caller": "onEsc",
+          "callee": "setNotifOpen",
+          "lineNumber": 146
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "document.addEventListener",
+          "lineNumber": 148
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "document.addEventListener",
+          "lineNumber": 149
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "document.removeEventListener",
+          "lineNumber": 151
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "document.removeEventListener",
+          "lineNumber": 152
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "useEffect",
+          "lineNumber": 156
+        },
+        {
+          "caller": "onDocClick",
+          "callee": "menuRef.current.contains",
+          "lineNumber": 160
+        },
+        {
+          "caller": "onDocClick",
+          "callee": "setMenuOpen",
+          "lineNumber": 160
+        },
+        {
+          "caller": "onEsc",
+          "callee": "setMenuOpen",
+          "lineNumber": 163
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "document.addEventListener",
+          "lineNumber": 165
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "document.addEventListener",
+          "lineNumber": 166
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "document.removeEventListener",
+          "lineNumber": 168
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "document.removeEventListener",
+          "lineNumber": 169
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "members.slice",
+          "lineNumber": 173
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "Math.max",
+          "lineNumber": 174
+        },
+        {
+          "caller": "confirmDeleteProject",
+          "callee": "setDeleting",
+          "lineNumber": 178
+        },
+        {
+          "caller": "confirmDeleteProject",
+          "callee": "deleteProject",
+          "lineNumber": 179
+        },
+        {
+          "caller": "confirmDeleteProject",
+          "callee": "showSuccessToast",
+          "lineNumber": 180
+        },
+        {
+          "caller": "confirmDeleteProject",
+          "callee": "setDeleteOpen",
+          "lineNumber": 181
+        },
+        {
+          "caller": "confirmDeleteProject",
+          "callee": "navigate",
+          "lineNumber": 182
+        },
+        {
+          "caller": "confirmDeleteProject",
+          "callee": "isAxiosError",
+          "lineNumber": 184
+        },
+        {
+          "caller": "confirmDeleteProject",
+          "callee": "showErrorToast",
+          "lineNumber": 187
+        },
+        {
+          "caller": "confirmDeleteProject",
+          "callee": "setDeleting",
+          "lineNumber": 189
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "setNotifOpen",
+          "lineNumber": 215
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "setNotifOpen",
+          "lineNumber": 230
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "onOpenTask",
+          "lineNumber": 234
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "navigate",
+          "lineNumber": 236
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "visibleMembers.map",
+          "lineNumber": 244
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "avatarColor",
+          "lineNumber": 248
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "memberInitials",
+          "lineNumber": 252
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "setMenuOpen",
+          "lineNumber": 272
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "setMenuOpen",
+          "lineNumber": 283
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "navigate",
+          "lineNumber": 284
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "project.primary_language.toUpperCase",
+          "lineNumber": 294
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "setMenuOpen",
+          "lineNumber": 307
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "setDeleteOpen",
+          "lineNumber": 308
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "TABS.map",
+          "lineNumber": 326
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "onTabChange",
+          "lineNumber": 334
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "confirmDeleteProject",
+          "lineNumber": 381
+        },
+        {
+          "caller": "ProjectHeader",
+          "callee": "setDeleteOpen",
+          "lineNumber": 382
+        }
+      ],
+      "metrics": {
+        "importCount": 12,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/project-members.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 347,
+      "nonEmptyLines": 329,
+      "functions": [
+        {
+          "name": "ProjectMembers",
+          "startLine": 30,
+          "endLine": 340,
+          "params": [
+            "{ projectId }"
+          ]
+        },
+        {
+          "name": "loadError",
+          "startLine": 342,
+          "endLine": 347,
+          "params": [
+            "err"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProjectMembers",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProjectMembers",
+          "callee": "useAuth",
+          "lineNumber": 31
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "useState",
+          "lineNumber": 32
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "useState",
+          "lineNumber": 33
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "useState",
+          "lineNumber": 34
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "useState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "useState",
+          "lineNumber": 36
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "useState",
+          "lineNumber": 38
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "useState",
+          "lineNumber": 39
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "members.find",
+          "lineNumber": 40
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "useCallback",
+          "lineNumber": 46
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "setLoading",
+          "lineNumber": 47
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "getMembers",
+          "lineNumber": 49
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "setMembers",
+          "lineNumber": 50
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "rows.some",
+          "lineNumber": 52
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "getPendingMembers",
+          "lineNumber": 54
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "setPending",
+          "lineNumber": 55
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "setPending",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "showErrorToast",
+          "lineNumber": 61
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "isAxiosError",
+          "lineNumber": 61
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "loadError",
+          "lineNumber": 61
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "setLoading",
+          "lineNumber": 63
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "useEffect",
+          "lineNumber": 67
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "load",
+          "lineNumber": 68
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "showErrorToast",
+          "lineNumber": 73
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "setInviting",
+          "lineNumber": 76
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "setInviteLink",
+          "lineNumber": 77
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "inviteMember",
+          "lineNumber": 79
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "inviteEmail.trim",
+          "lineNumber": 82
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "setInviteLink",
+          "lineNumber": 84
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "showSuccessToast",
+          "lineNumber": 85
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "showErrorToast",
+          "lineNumber": 87
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "isAxiosError",
+          "lineNumber": 87
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "loadError",
+          "lineNumber": 87
+        },
+        {
+          "caller": "handleInvite",
+          "callee": "setInviting",
+          "lineNumber": 89
+        },
+        {
+          "caller": "handleRoleChange",
+          "callee": "setBusyUserId",
+          "lineNumber": 95
+        },
+        {
+          "caller": "handleRoleChange",
+          "callee": "changeMemberRole",
+          "lineNumber": 97
+        },
+        {
+          "caller": "handleRoleChange",
+          "callee": "showSuccessToast",
+          "lineNumber": 98
+        },
+        {
+          "caller": "handleRoleChange",
+          "callee": "load",
+          "lineNumber": 99
+        },
+        {
+          "caller": "handleRoleChange",
+          "callee": "showErrorToast",
+          "lineNumber": 101
+        },
+        {
+          "caller": "handleRoleChange",
+          "callee": "isAxiosError",
+          "lineNumber": 101
+        },
+        {
+          "caller": "handleRoleChange",
+          "callee": "loadError",
+          "lineNumber": 101
+        },
+        {
+          "caller": "handleRoleChange",
+          "callee": "setBusyUserId",
+          "lineNumber": 103
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "window.confirm",
+          "lineNumber": 108
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "setBusyUserId",
+          "lineNumber": 109
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "removeMember",
+          "lineNumber": 111
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "showSuccessToast",
+          "lineNumber": 112
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "load",
+          "lineNumber": 113
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "showErrorToast",
+          "lineNumber": 115
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "isAxiosError",
+          "lineNumber": 115
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "loadError",
+          "lineNumber": 115
+        },
+        {
+          "caller": "handleRemove",
+          "callee": "setBusyUserId",
+          "lineNumber": 117
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setBusyUserId",
+          "lineNumber": 122
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "approveMember",
+          "lineNumber": 124
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "showSuccessToast",
+          "lineNumber": 125
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "load",
+          "lineNumber": 126
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "showErrorToast",
+          "lineNumber": 128
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "isAxiosError",
+          "lineNumber": 128
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "loadError",
+          "lineNumber": 128
+        },
+        {
+          "caller": "handleApprove",
+          "callee": "setBusyUserId",
+          "lineNumber": 130
+        },
+        {
+          "caller": "handleReject",
+          "callee": "window.confirm",
+          "lineNumber": 135
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setBusyUserId",
+          "lineNumber": 136
+        },
+        {
+          "caller": "handleReject",
+          "callee": "rejectMember",
+          "lineNumber": 138
+        },
+        {
+          "caller": "handleReject",
+          "callee": "showSuccessToast",
+          "lineNumber": 139
+        },
+        {
+          "caller": "handleReject",
+          "callee": "load",
+          "lineNumber": 140
+        },
+        {
+          "caller": "handleReject",
+          "callee": "showErrorToast",
+          "lineNumber": 142
+        },
+        {
+          "caller": "handleReject",
+          "callee": "isAxiosError",
+          "lineNumber": 142
+        },
+        {
+          "caller": "handleReject",
+          "callee": "loadError",
+          "lineNumber": 142
+        },
+        {
+          "caller": "handleReject",
+          "callee": "setBusyUserId",
+          "lineNumber": 144
+        },
+        {
+          "caller": "copyInviteLink",
+          "callee": "navigator.clipboard.writeText",
+          "lineNumber": 151
+        },
+        {
+          "caller": "copyInviteLink",
+          "callee": "showSuccessToast",
+          "lineNumber": 152
+        },
+        {
+          "caller": "copyInviteLink",
+          "callee": "showErrorToast",
+          "lineNumber": 154
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "members.map",
+          "lineNumber": 184
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "handleRoleChange",
+          "lineNumber": 206
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "CHANGEABLE_ROLES.map",
+          "lineNumber": 209
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "handleRemove",
+          "lineNumber": 222
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "pending.map",
+          "lineNumber": 249
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "handleApprove",
+          "lineNumber": 261
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "handleReject",
+          "lineNumber": 269
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "setInviteEmail",
+          "lineNumber": 297
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "setInviteRole",
+          "lineNumber": 307
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "INVITE_ROLES.map",
+          "lineNumber": 310
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "handleInvite",
+          "lineNumber": 321
+        },
+        {
+          "caller": "ProjectMembers",
+          "callee": "copyInviteLink",
+          "lineNumber": 332
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/review-panel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 417,
+      "nonEmptyLines": 387,
+      "functions": [
+        {
+          "name": "diffErrorMessage",
+          "startLine": 32,
+          "endLine": 45,
+          "params": [
+            "err"
+          ]
+        },
+        {
+          "name": "ReviewPanel",
+          "startLine": 58,
+          "endLine": 417,
+          "params": [
+            "{ projectId, taskId, inlineComments, onClose }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ReviewPanel",
+          "line": 58,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "diffErrorMessage",
+          "callee": "isAxiosError",
+          "lineNumber": 33
+        },
+        {
+          "caller": "diffErrorMessage",
+          "callee": "isAxiosError",
+          "lineNumber": 38
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useTaskStore",
+          "lineNumber": 59
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useTaskStore",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useMemo",
+          "lineNumber": 62
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "columns.review.find",
+          "lineNumber": 63
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 67
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 68
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 69
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 70
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 71
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 72
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 73
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 74
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 75
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useReviewReport",
+          "lineNumber": 77
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useAuth",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useThoughtStream",
+          "lineNumber": 79
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useEffect",
+          "lineNumber": 81
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setCanSaveTemplate",
+          "lineNumber": 83
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "getMembers(projectId)\r\n      .then((rows) => {\r\n        if (cancelled) return\r\n        const role = rows.find((m) => m.user_id === user.id)?.role\r\n        setCanSaveTemplate(role === 'owner' || role === 'leader')\r\n      })\r\n      .catch",
+          "lineNumber": 87
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "getMembers(projectId)\r\n      .then",
+          "lineNumber": 87
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "getMembers",
+          "lineNumber": 87
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "rows.find",
+          "lineNumber": 90
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setCanSaveTemplate",
+          "lineNumber": 91
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setCanSaveTemplate",
+          "lineNumber": 94
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useEffect",
+          "lineNumber": 102
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "handleReviewStreamEvent",
+          "lineNumber": 105
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 112
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useState",
+          "lineNumber": 113
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useCallback",
+          "lineNumber": 115
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "getTasks",
+          "lineNumber": 116
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setColumns",
+          "lineNumber": 117
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "groupedResponseToTaskColumns",
+          "lineNumber": 117
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useCallback",
+          "lineNumber": 120
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "getTaskComments",
+          "lineNumber": 124
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "replaceFromApi",
+          "lineNumber": 125
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "replaceFromApi",
+          "lineNumber": 127
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useEffect",
+          "lineNumber": 131
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiff",
+          "lineNumber": 133
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffError",
+          "lineNumber": 134
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffLoading",
+          "lineNumber": 135
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffLoading",
+          "lineNumber": 139
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffError",
+          "lineNumber": 140
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiff",
+          "lineNumber": 141
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "(async () => {\r\n      try {\r\n        const d = await getDiff(projectId, reviewTask.id)\r\n        if (!cancelled) setDiff(d)\r\n      } catch (err) {\r\n        if (!cancelled) setDiffError(diffErrorMessage(err))\r\n      } finally {\r\n        if (!cancelled) setDiffLoading(false)\r\n      }\r\n    })",
+          "lineNumber": 142
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "getDiff",
+          "lineNumber": 144
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiff",
+          "lineNumber": 145
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffError",
+          "lineNumber": 147
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "diffErrorMessage",
+          "lineNumber": 147
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffLoading",
+          "lineNumber": 149
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useEffect",
+          "lineNumber": 157
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "replaceFromApi",
+          "lineNumber": 159
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "refreshInlineComments",
+          "lineNumber": 162
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useEffect",
+          "lineNumber": 165
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActiveCommentLine",
+          "lineNumber": 166
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setHighlightedLine",
+          "lineNumber": 167
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useEffect",
+          "lineNumber": 170
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setModifiedEditor",
+          "lineNumber": 172
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActiveCommentLine",
+          "lineNumber": 173
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useCallback",
+          "lineNumber": 177
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActionBusy",
+          "lineNumber": 179
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffError",
+          "lineNumber": 180
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "approveTask",
+          "lineNumber": 182
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setRejectFeedback",
+          "lineNumber": 183
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "refreshBoard",
+          "lineNumber": 184
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "onClose",
+          "lineNumber": 185
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffError",
+          "lineNumber": 187
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "diffErrorMessage",
+          "lineNumber": 187
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActionBusy",
+          "lineNumber": 189
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useCallback",
+          "lineNumber": 193
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "window.confirm",
+          "lineNumber": 195
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActionBusy",
+          "lineNumber": 196
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffError",
+          "lineNumber": 197
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "moveTask",
+          "lineNumber": 199
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "refreshBoard",
+          "lineNumber": 200
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "onClose",
+          "lineNumber": 201
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffError",
+          "lineNumber": 203
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "diffErrorMessage",
+          "lineNumber": 203
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActionBusy",
+          "lineNumber": 205
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "useCallback",
+          "lineNumber": 209
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "rejectFeedback.trim",
+          "lineNumber": 211
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActionBusy",
+          "lineNumber": 213
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffError",
+          "lineNumber": 214
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "rejectTask",
+          "lineNumber": 216
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "getCommentPayload",
+          "lineNumber": 218
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setRejectFeedback",
+          "lineNumber": 220
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "refreshBoard",
+          "lineNumber": 221
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "onClose",
+          "lineNumber": 222
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setDiffError",
+          "lineNumber": 224
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "diffErrorMessage",
+          "lineNumber": 224
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActionBusy",
+          "lineNumber": 226
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "(diff?.files_affected?.[0] ?? '').trim",
+          "lineNumber": 238
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setSaveTemplateOpen",
+          "lineNumber": 258
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setReviewTab",
+          "lineNumber": 288
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setReviewTab",
+          "lineNumber": 296
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActiveCommentLine",
+          "lineNumber": 324
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setHighlightedLine",
+          "lineNumber": 325
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActiveCommentLine",
+          "lineNumber": 338
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setHighlightedLine",
+          "lineNumber": 357
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setActiveCommentLine",
+          "lineNumber": 358
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setReviewTab",
+          "lineNumber": 359
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "onApprove",
+          "lineNumber": 367
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setRejectFeedback",
+          "lineNumber": 383
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "rejectFeedback.trim",
+          "lineNumber": 391
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "onReject",
+          "lineNumber": 392
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "onPermanentReject",
+          "lineNumber": 399
+        },
+        {
+          "caller": "ReviewPanel",
+          "callee": "setSaveTemplateOpen",
+          "lineNumber": 413
+        }
+      ],
+      "metrics": {
+        "importCount": 16,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/risk-assessment-panel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 77,
+      "nonEmptyLines": 69,
+      "functions": [
+        {
+          "name": "RiskAssessmentPanel",
+          "startLine": 11,
+          "endLine": 77,
+          "params": [
+            "{ assessment, compact = false }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RiskAssessmentPanel",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RiskAssessmentPanel",
+          "callee": "useState",
+          "lineNumber": 12
+        },
+        {
+          "caller": "RiskAssessmentPanel",
+          "callee": "setExpanded",
+          "lineNumber": 19
+        },
+        {
+          "caller": "RiskAssessmentPanel",
+          "callee": "Math.round",
+          "lineNumber": 28
+        },
+        {
+          "caller": "RiskAssessmentPanel",
+          "callee": "Math.round",
+          "lineNumber": 31
+        },
+        {
+          "caller": "RiskAssessmentPanel",
+          "callee": "risk_level.toUpperCase",
+          "lineNumber": 37
+        },
+        {
+          "caller": "RiskAssessmentPanel",
+          "callee": "risk_factors.map",
+          "lineNumber": 65
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/task-card.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 454,
+      "nonEmptyLines": 422,
+      "functions": [
+        {
+          "name": "canAssign",
+          "startLine": 35,
+          "endLine": 37,
+          "params": [
+            "role"
+          ]
+        },
+        {
+          "name": "PriorityIndicator",
+          "startLine": 93,
+          "endLine": 109,
+          "params": [
+            "{ value }"
+          ]
+        },
+        {
+          "name": "IconEye",
+          "startLine": 111,
+          "endLine": 118,
+          "params": []
+        },
+        {
+          "name": "IconXCircle",
+          "startLine": 120,
+          "endLine": 127,
+          "params": []
+        },
+        {
+          "name": "IconPlay",
+          "startLine": 129,
+          "endLine": 135,
+          "params": []
+        },
+        {
+          "name": "IconLink",
+          "startLine": 137,
+          "endLine": 144,
+          "params": []
+        },
+        {
+          "name": "IconLock",
+          "startLine": 146,
+          "endLine": 153,
+          "params": []
+        },
+        {
+          "name": "IconBookmark",
+          "startLine": 155,
+          "endLine": 161,
+          "params": []
+        },
+        {
+          "name": "IconGripDots",
+          "startLine": 163,
+          "endLine": 174,
+          "params": []
+        },
+        {
+          "name": "HoverActionButton",
+          "startLine": 176,
+          "endLine": 211,
+          "params": [
+            "{\r\n  label,\r\n  tone,\r\n  onClick,\r\n  children,\r\n  disabled,\r\n}"
+          ]
+        },
+        {
+          "name": "TaskCardInner",
+          "startLine": 213,
+          "endLine": 452,
+          "params": [
+            "{\r\n  task,\r\n  sortableDisabled = true,\r\n  isAgentRunning = false,\r\n  isReviewSelected = false,\r\n  members = [],\r\n  currentUserRole,\r\n  onAssignUser,\r\n  onView,\r\n  onReject,\r\n  onStart,\r\n  onCancel,\r\n  startBusy = false,\r\n  cancelBusy = false,\r\n  onSaveAsTemplate,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TaskCard",
+          "line": 454,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "HoverActionButton",
+          "callee": "e.stopPropagation",
+          "lineNumber": 203
+        },
+        {
+          "caller": "HoverActionButton",
+          "callee": "onClick",
+          "lineNumber": 204
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "useSortable",
+          "lineNumber": 229
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "CSS.Transform.toString",
+          "lineNumber": 235
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "Boolean",
+          "lineNumber": 241
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "members.find",
+          "lineNumber": 245
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "canAssign",
+          "lineNumber": 246
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "useMemo",
+          "lineNumber": 247
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "stripMarkdown",
+          "lineNumber": 248
+        },
+        {
+          "caller": "handleCardClick",
+          "callee": "(e.target as HTMLElement).closest",
+          "lineNumber": 254
+        },
+        {
+          "caller": "handleCardClick",
+          "callee": "onView",
+          "lineNumber": 255
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "e.preventDefault",
+          "lineNumber": 261
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "onView",
+          "lineNumber": 262
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "[\r\n        'group relative flex w-full select-none flex-col gap-2 rounded-xl bg-white p-3 text-left shadow-elev-1 ring-1 transition-all duration-200',\r\n        statusTone.ring,\r\n        isDragging ? 'rotate-1 scale-[1.02] shadow-elev-3 ring-brand-400 opacity-90' : '',\r\n        isAgentRunning ? 'animate-pulse-brand ring-2 ring-brand-400' : '',\r\n        task.status === 'conflict' ? 'ring-2 ring-amber-400' : '',\r\n        isReviewSelected ? 'ring-2 ring-violet-400 shadow-ring-brand' : '',\r\n        onView ? 'cursor-pointer hover:-translate-y-0.5 hover:shadow-elev-2' : '',\r\n        draggable ? 'cursor-grab active:cursor-grabbing' : '',\r\n        blocked ? 'opacity-60 cursor-not-allowed' : '',\r\n      ]\r\n        .filter(Boolean)\r\n        .join",
+          "lineNumber": 279
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "[\r\n        'group relative flex w-full select-none flex-col gap-2 rounded-xl bg-white p-3 text-left shadow-elev-1 ring-1 transition-all duration-200',\r\n        statusTone.ring,\r\n        isDragging ? 'rotate-1 scale-[1.02] shadow-elev-3 ring-brand-400 opacity-90' : '',\r\n        isAgentRunning ? 'animate-pulse-brand ring-2 ring-brand-400' : '',\r\n        task.status === 'conflict' ? 'ring-2 ring-amber-400' : '',\r\n        isReviewSelected ? 'ring-2 ring-violet-400 shadow-ring-brand' : '',\r\n        onView ? 'cursor-pointer hover:-translate-y-0.5 hover:shadow-elev-2' : '',\r\n        draggable ? 'cursor-grab active:cursor-grabbing' : '',\r\n        blocked ? 'opacity-60 cursor-not-allowed' : '',\r\n      ]\r\n        .filter",
+          "lineNumber": 279
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "assignee.display_name.split",
+          "lineNumber": 364
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "e.stopPropagation",
+          "lineNumber": 426
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "onCancel",
+          "lineNumber": 427
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "e.stopPropagation",
+          "lineNumber": 439
+        },
+        {
+          "caller": "TaskCardInner",
+          "callee": "onStart",
+          "lineNumber": 440
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 11,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/thought-stream-panel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 228,
+      "nonEmptyLines": 214,
+      "functions": [
+        {
+          "name": "eventKind",
+          "startLine": 16,
+          "endLine": 25,
+          "params": [
+            "msg"
+          ]
+        },
+        {
+          "name": "labelClass",
+          "startLine": 27,
+          "endLine": 49,
+          "params": [
+            "kind"
+          ]
+        },
+        {
+          "name": "formatTimestamp",
+          "startLine": 51,
+          "endLine": 67,
+          "params": [
+            "ts"
+          ]
+        },
+        {
+          "name": "formatPayloadContent",
+          "startLine": 69,
+          "endLine": 91,
+          "params": [
+            "msg"
+          ]
+        },
+        {
+          "name": "rowContent",
+          "startLine": 93,
+          "endLine": 117,
+          "params": [
+            "msg",
+            "kind"
+          ]
+        },
+        {
+          "name": "rowKey",
+          "startLine": 119,
+          "endLine": 128,
+          "params": [
+            "msg",
+            "index"
+          ]
+        },
+        {
+          "name": "ThoughtStreamPanel",
+          "startLine": 134,
+          "endLine": 228,
+          "params": [
+            "{\r\n  taskId,\r\n  embedded = false,\r\n  onStreamEnded,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ThoughtStreamPanel",
+          "line": 134,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "formatTimestamp",
+          "callee": "Number.isNaN",
+          "lineNumber": 55
+        },
+        {
+          "caller": "formatTimestamp",
+          "callee": "d.getTime",
+          "lineNumber": 55
+        },
+        {
+          "caller": "formatTimestamp",
+          "callee": "d.toLocaleString",
+          "lineNumber": 56
+        },
+        {
+          "caller": "formatTimestamp",
+          "callee": "String",
+          "lineNumber": 66
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "JSON.stringify",
+          "lineNumber": 74
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "String",
+          "lineNumber": 76
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "raw.trim",
+          "lineNumber": 80
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "s.startsWith",
+          "lineNumber": 81
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "s.endsWith",
+          "lineNumber": 81
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "s.startsWith",
+          "lineNumber": 81
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "s.endsWith",
+          "lineNumber": 81
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "JSON.stringify",
+          "lineNumber": 83
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "JSON.parse",
+          "lineNumber": 83
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "raw.slice",
+          "lineNumber": 85
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "raw.slice",
+          "lineNumber": 88
+        },
+        {
+          "caller": "formatPayloadContent",
+          "callee": "String",
+          "lineNumber": 90
+        },
+        {
+          "caller": "rowContent",
+          "callee": "String",
+          "lineNumber": 97
+        },
+        {
+          "caller": "rowContent",
+          "callee": "String",
+          "lineNumber": 97
+        },
+        {
+          "caller": "rowContent",
+          "callee": "[typeof code === 'string' ? code : '', typeof m === 'string' ? m : '']\r\n      .filter(Boolean)\r\n      .join",
+          "lineNumber": 102
+        },
+        {
+          "caller": "rowContent",
+          "callee": "[typeof code === 'string' ? code : '', typeof m === 'string' ? m : '']\r\n      .filter",
+          "lineNumber": 102
+        },
+        {
+          "caller": "rowContent",
+          "callee": "parts.push",
+          "lineNumber": 110
+        },
+        {
+          "caller": "rowContent",
+          "callee": "parts.push",
+          "lineNumber": 112
+        },
+        {
+          "caller": "rowContent",
+          "callee": "JSON.stringify",
+          "lineNumber": 112
+        },
+        {
+          "caller": "rowContent",
+          "callee": "parts.join",
+          "lineNumber": 114
+        },
+        {
+          "caller": "rowContent",
+          "callee": "formatPayloadContent",
+          "lineNumber": 116
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "useThoughtStream",
+          "lineNumber": 139
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "useRef",
+          "lineNumber": 140
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "useMemo",
+          "lineNumber": 142
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "useLayoutEffect",
+          "lineNumber": 150
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "events.map",
+          "lineNumber": 193
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "eventKind",
+          "lineNumber": 194
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "rowKey",
+          "lineNumber": 196
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "labelClass",
+          "lineNumber": 198
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "formatTimestamp",
+          "lineNumber": 200
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "rowContent",
+          "lineNumber": 203
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "String",
+          "lineNumber": 212
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "Object.entries(streamEndPayload.event_count as Record<string, unknown>).map",
+          "lineNumber": 216
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "Object.entries",
+          "lineNumber": 216
+        },
+        {
+          "caller": "ThoughtStreamPanel",
+          "callee": "String",
+          "lineNumber": 218
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 7,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/webhook-settings.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 505,
+      "nonEmptyLines": 479,
+      "functions": [
+        {
+          "name": "truncateUrl",
+          "startLine": 35,
+          "endLine": 38,
+          "params": [
+            "url",
+            "max"
+          ]
+        },
+        {
+          "name": "apiError",
+          "startLine": 40,
+          "endLine": 47,
+          "params": [
+            "err",
+            "fallback"
+          ]
+        },
+        {
+          "name": "WebhookSettings",
+          "startLine": 49,
+          "endLine": 505,
+          "params": [
+            "{ projectId }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "WebhookSettings",
+          "line": 49,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "truncateUrl",
+          "callee": "url.slice",
+          "lineNumber": 37
+        },
+        {
+          "caller": "apiError",
+          "callee": "isAxiosError",
+          "lineNumber": 41
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useAuth",
+          "lineNumber": 50
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 52
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 53
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 54
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 55
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 57
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 58
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 59
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 60
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 61
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 62
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 63
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 64
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 66
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 67
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 68
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 69
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useState",
+          "lineNumber": 70
+        },
+        {
+          "caller": "applyGithubConfig",
+          "callee": "setGithubConfig",
+          "lineNumber": 73
+        },
+        {
+          "caller": "applyGithubConfig",
+          "callee": "setRepoName",
+          "lineNumber": 75
+        },
+        {
+          "caller": "applyGithubConfig",
+          "callee": "setBaseBranch",
+          "lineNumber": 76
+        },
+        {
+          "caller": "applyGithubConfig",
+          "callee": "setPatSaved",
+          "lineNumber": 77
+        },
+        {
+          "caller": "applyGithubConfig",
+          "callee": "setRepoName",
+          "lineNumber": 79
+        },
+        {
+          "caller": "applyGithubConfig",
+          "callee": "setBaseBranch",
+          "lineNumber": 80
+        },
+        {
+          "caller": "applyGithubConfig",
+          "callee": "setPatSaved",
+          "lineNumber": 81
+        },
+        {
+          "caller": "applyGithubConfig",
+          "callee": "setPat",
+          "lineNumber": 83
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useCallback",
+          "lineNumber": 86
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setLoading",
+          "lineNumber": 87
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "Promise.all",
+          "lineNumber": 89
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "listWebhooks",
+          "lineNumber": 90
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "getGitHubConfig",
+          "lineNumber": 91
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "getMembers",
+          "lineNumber": 92
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setWebhooks",
+          "lineNumber": 94
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "applyGithubConfig",
+          "lineNumber": 95
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "members.find",
+          "lineNumber": 96
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setCanManageWebhooks",
+          "lineNumber": 97
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setCanManageGithub",
+          "lineNumber": 98
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setWebhooks",
+          "lineNumber": 100
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "applyGithubConfig",
+          "lineNumber": 101
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setCanManageWebhooks",
+          "lineNumber": 102
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setCanManageGithub",
+          "lineNumber": 103
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "showErrorToast",
+          "lineNumber": 104
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "apiError",
+          "lineNumber": 104
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setLoading",
+          "lineNumber": 106
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useEffect",
+          "lineNumber": 110
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "load",
+          "lineNumber": 111
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "useEffect",
+          "lineNumber": 114
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setNewUrl",
+          "lineNumber": 115
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setNewSecret",
+          "lineNumber": 116
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setNewEvents",
+          "lineNumber": 117
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setUrlError",
+          "lineNumber": 118
+        },
+        {
+          "caller": "toggleNewEvent",
+          "callee": "setNewEvents",
+          "lineNumber": 122
+        },
+        {
+          "caller": "toggleNewEvent",
+          "callee": "prev.includes",
+          "lineNumber": 123
+        },
+        {
+          "caller": "toggleNewEvent",
+          "callee": "prev.filter",
+          "lineNumber": 124
+        },
+        {
+          "caller": "validateWebhookUrl",
+          "callee": "url.trim",
+          "lineNumber": 129
+        },
+        {
+          "caller": "validateWebhookUrl",
+          "callee": "trimmed.startsWith",
+          "lineNumber": 130
+        },
+        {
+          "caller": "validateWebhookUrl",
+          "callee": "setUrlError",
+          "lineNumber": 131
+        },
+        {
+          "caller": "validateWebhookUrl",
+          "callee": "setUrlError",
+          "lineNumber": 134
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "newUrl.trim",
+          "lineNumber": 139
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "validateWebhookUrl",
+          "lineNumber": 140
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "showErrorToast",
+          "lineNumber": 144
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "setSavingWebhook",
+          "lineNumber": 147
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "createWebhook",
+          "lineNumber": 149
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "newSecret.trim",
+          "lineNumber": 152
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "showSuccessToast",
+          "lineNumber": 154
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "setNewUrl",
+          "lineNumber": 155
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "setNewSecret",
+          "lineNumber": 156
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "setNewEvents",
+          "lineNumber": 157
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "load",
+          "lineNumber": 158
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "showErrorToast",
+          "lineNumber": 160
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "apiError",
+          "lineNumber": 160
+        },
+        {
+          "caller": "handleCreateWebhook",
+          "callee": "setSavingWebhook",
+          "lineNumber": 162
+        },
+        {
+          "caller": "handleToggleEnabled",
+          "callee": "setBusyWebhookId",
+          "lineNumber": 167
+        },
+        {
+          "caller": "handleToggleEnabled",
+          "callee": "patchWebhook",
+          "lineNumber": 169
+        },
+        {
+          "caller": "handleToggleEnabled",
+          "callee": "setWebhooks",
+          "lineNumber": 170
+        },
+        {
+          "caller": "handleToggleEnabled",
+          "callee": "prev.map",
+          "lineNumber": 171
+        },
+        {
+          "caller": "handleToggleEnabled",
+          "callee": "showErrorToast",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handleToggleEnabled",
+          "callee": "apiError",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handleToggleEnabled",
+          "callee": "setBusyWebhookId",
+          "lineNumber": 176
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "window.confirm",
+          "lineNumber": 181
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setBusyWebhookId",
+          "lineNumber": 182
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "deleteWebhook",
+          "lineNumber": 184
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "showSuccessToast",
+          "lineNumber": 185
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "load",
+          "lineNumber": 186
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "showErrorToast",
+          "lineNumber": 188
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "apiError",
+          "lineNumber": 188
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setBusyWebhookId",
+          "lineNumber": 190
+        },
+        {
+          "caller": "handleToggleDeliveries",
+          "callee": "setExpandedDeliveryId",
+          "lineNumber": 196
+        },
+        {
+          "caller": "handleToggleDeliveries",
+          "callee": "setExpandedDeliveryId",
+          "lineNumber": 199
+        },
+        {
+          "caller": "handleToggleDeliveries",
+          "callee": "getWebhookDeliveries",
+          "lineNumber": 201
+        },
+        {
+          "caller": "handleToggleDeliveries",
+          "callee": "setDeliveriesMap",
+          "lineNumber": 202
+        },
+        {
+          "caller": "handleToggleDeliveries",
+          "callee": "setDeliveriesMap",
+          "lineNumber": 204
+        },
+        {
+          "caller": "handleTest",
+          "callee": "showErrorToast",
+          "lineNumber": 210
+        },
+        {
+          "caller": "handleTest",
+          "callee": "setBusyWebhookId",
+          "lineNumber": 213
+        },
+        {
+          "caller": "handleTest",
+          "callee": "testWebhook",
+          "lineNumber": 215
+        },
+        {
+          "caller": "handleTest",
+          "callee": "showSuccessToast",
+          "lineNumber": 217
+        },
+        {
+          "caller": "handleTest",
+          "callee": "result.response_body.slice",
+          "lineNumber": 223
+        },
+        {
+          "caller": "handleTest",
+          "callee": "showErrorToast",
+          "lineNumber": 225
+        },
+        {
+          "caller": "handleTest",
+          "callee": "showErrorToast",
+          "lineNumber": 228
+        },
+        {
+          "caller": "handleTest",
+          "callee": "apiError",
+          "lineNumber": 228
+        },
+        {
+          "caller": "handleTest",
+          "callee": "setBusyWebhookId",
+          "lineNumber": 230
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "repoName.trim",
+          "lineNumber": 235
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "repo.includes",
+          "lineNumber": 236
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "showErrorToast",
+          "lineNumber": 237
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "pat.trim",
+          "lineNumber": 240
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "showErrorToast",
+          "lineNumber": 241
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "pat.trim",
+          "lineNumber": 244
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "showErrorToast",
+          "lineNumber": 245
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "setSavingGithub",
+          "lineNumber": 248
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "upsertGitHubConfig",
+          "lineNumber": 250
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "pat.trim",
+          "lineNumber": 252
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "baseBranch.trim",
+          "lineNumber": 253
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "applyGithubConfig",
+          "lineNumber": 255
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "showSuccessToast",
+          "lineNumber": 256
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "showErrorToast",
+          "lineNumber": 258
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "apiError",
+          "lineNumber": 258
+        },
+        {
+          "caller": "handleSaveGithub",
+          "callee": "setSavingGithub",
+          "lineNumber": 260
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "webhooks.map",
+          "lineNumber": 283
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "truncateUrl",
+          "lineNumber": 287
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "webhook.events.map",
+          "lineNumber": 290
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "handleToggleEnabled",
+          "lineNumber": 302
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "handleTest",
+          "lineNumber": 312
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "handleToggleDeliveries",
+          "lineNumber": 319
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "handleDelete",
+          "lineNumber": 328
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "deliveriesMap[webhook.id].map",
+          "lineNumber": 352
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "relativeTime",
+          "lineNumber": 374
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setNewUrl",
+          "lineNumber": 402
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setUrlError",
+          "lineNumber": 403
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "newUrl.trim",
+          "lineNumber": 406
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "validateWebhookUrl",
+          "lineNumber": 406
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "WEBHOOK_EVENTS.map",
+          "lineNumber": 415
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "newEvents.includes",
+          "lineNumber": 419
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "toggleNewEvent",
+          "lineNumber": 421
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setNewSecret",
+          "lineNumber": 431
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "handleCreateWebhook",
+          "lineNumber": 439
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setRepoName",
+          "lineNumber": 467
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setBaseBranch",
+          "lineNumber": 474
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "setPat",
+          "lineNumber": 485
+        },
+        {
+          "caller": "WebhookSettings",
+          "callee": "handleSaveGithub",
+          "lineNumber": 494
+        }
+      ],
+      "metrics": {
+        "importCount": 10,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/organisms/wip-warning.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 179,
+      "nonEmptyLines": 167,
+      "functions": [
+        {
+          "name": "IconAlertOctagon",
+          "startLine": 17,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "IconClose",
+          "startLine": 36,
+          "endLine": 51,
+          "params": []
+        },
+        {
+          "name": "IconArrowRight",
+          "startLine": 53,
+          "endLine": 68,
+          "params": []
+        },
+        {
+          "name": "WIPWarning",
+          "startLine": 74,
+          "endLine": 179,
+          "params": [
+            "{\r\n  open,\r\n  variant = 'toast',\r\n  title = DEFAULT_TITLE,\r\n  message,\r\n  currentTaskTitle,\r\n  autoCloseMs,\r\n  onDismiss,\r\n  onGoToCurrentTask,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "WIPWarning",
+          "line": 74,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "WIPWarning",
+          "callee": "useEffect",
+          "lineNumber": 87
+        },
+        {
+          "caller": "WIPWarning",
+          "callee": "window.setTimeout",
+          "lineNumber": 90
+        },
+        {
+          "caller": "WIPWarning",
+          "callee": "window.clearTimeout",
+          "lineNumber": 91
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/providers.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "Providers",
+          "startLine": 6,
+          "endLine": 21,
+          "params": [
+            "{ children }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Providers",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Providers",
+          "callee": "useState",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/src/components/ui/button.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 58,
+      "nonEmptyLines": 54,
+      "functions": [
+        {
+          "name": "Button",
+          "startLine": 43,
+          "endLine": 56,
+          "params": [
+            "{\r\n  className,\r\n  variant = \"default\",\r\n  size = \"default\",\r\n  ...props\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Button",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "buttonVariants",
+          "line": 58,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Button",
+          "callee": "cn",
+          "lineNumber": 52
+        },
+        {
+          "caller": "Button",
+          "callee": "buttonVariants",
+          "lineNumber": 52
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

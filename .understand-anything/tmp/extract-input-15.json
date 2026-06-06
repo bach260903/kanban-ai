@@ -1,0 +1,88 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "docs/api.md",
+                           "language":  "markdown",
+                           "sizeLines":  1054,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "docs/erd-phase1.md",
+                           "language":  "markdown",
+                           "sizeLines":  107,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "docs/phase1-full-test.md",
+                           "language":  "markdown",
+                           "sizeLines":  159,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "docs/phase1-technology-decisions.md",
+                           "language":  "markdown",
+                           "sizeLines":  160,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "docs/phase2-agent-architecture.md",
+                           "language":  "markdown",
+                           "sizeLines":  187,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "docs/phase2-api-contract.md",
+                           "language":  "markdown",
+                           "sizeLines":  193,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "docs/phase2-database-design.md",
+                           "language":  "markdown",
+                           "sizeLines":  218,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "docs/phase2-evaluation-framework.md",
+                           "language":  "markdown",
+                           "sizeLines":  181,
+                           "fileCategory":  "docs"
+                       },
+                       {
+                           "path":  "docs/phase2-full-test.md",
+                           "language":  "markdown",
+                           "sizeLines":  128,
+                           "fileCategory":  "docs"
+                       }
+                   ],
+    "batchImportData":  {
+                            "docs/api.md":  [
+
+                                            ],
+                            "docs/erd-phase1.md":  [
+
+                                                   ],
+                            "docs/phase1-full-test.md":  [
+
+                                                         ],
+                            "docs/phase1-technology-decisions.md":  [
+
+                                                                    ],
+                            "docs/phase2-agent-architecture.md":  [
+
+                                                                  ],
+                            "docs/phase2-api-contract.md":  [
+
+                                                            ],
+                            "docs/phase2-database-design.md":  [
+
+                                                               ],
+                            "docs/phase2-evaluation-framework.md":  [
+
+                                                                    ],
+                            "docs/phase2-full-test.md":  [
+
+                                                         ]
+                        }
+}

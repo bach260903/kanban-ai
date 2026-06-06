@@ -1,0 +1,75 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "evaluation/agent_frameworks/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 42,
+      "nonEmptyLines": 31,
+      "sections": [
+        {
+          "heading": "Benchmark Multi-Agent Frameworks (Giai đoạn 1.1)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Lỗi thường gặp: Python 3.14 + `pip install -r requirements.txt` (bản cũ)",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Cài đặt chuẩn (LangGraph + AutoGen, mọi Python gần đây)",
+          "level": 3,
+          "line": 15
+        },
+        {
+          "heading": "CrewAI riêng (bắt buộc Python ≤ 3.13)",
+          "level": 3,
+          "line": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "evaluation/agent_frameworks/requirements-autogen.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 3,
+      "nonEmptyLines": 3,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/requirements-crewai.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/requirements-langgraph.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 4,
+      "nonEmptyLines": 4,
+      "metrics": {}
+    },
+    {
+      "path": "evaluation/agent_frameworks/requirements.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 6,
+      "nonEmptyLines": 5,
+      "metrics": {}
+    }
+  ]
+}

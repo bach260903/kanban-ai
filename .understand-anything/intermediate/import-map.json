@@ -1,0 +1,2011 @@
+{
+  "scriptCompleted": true,
+  "stats": {
+    "filesScanned": 675,
+    "filesWithImports": 278,
+    "totalEdges": 1048
+  },
+  "importMap": {
+    ".claude/projects/d--D---n-KLTN_2/memory/feedback_language.md": [],
+    ".claude/projects/d--D---n-KLTN_2/memory/MEMORY.md": [],
+    ".claude/settings.local.json": [],
+    ".claude/skills/speckit-analyze/SKILL.md": [],
+    ".claude/skills/speckit-approve-spec/SKILL.md": [],
+    ".claude/skills/speckit-checklist/SKILL.md": [],
+    ".claude/skills/speckit-clarify/SKILL.md": [],
+    ".claude/skills/speckit-constitution/SKILL.md": [],
+    ".claude/skills/speckit-git-commit/SKILL.md": [],
+    ".claude/skills/speckit-git-feature/SKILL.md": [],
+    ".claude/skills/speckit-git-initialize/SKILL.md": [],
+    ".claude/skills/speckit-git-remote/SKILL.md": [],
+    ".claude/skills/speckit-git-validate/SKILL.md": [],
+    ".claude/skills/speckit-implement/SKILL.md": [],
+    ".claude/skills/speckit-plan/SKILL.md": [],
+    ".claude/skills/speckit-specify/SKILL.md": [],
+    ".claude/skills/speckit-tasks/SKILL.md": [],
+    ".claude/skills/speckit-taskstoissues/SKILL.md": [],
+    ".cursor/rules/specify-rules.mdc": [],
+    ".cursor/skills/speckit-analyze/SKILL.md": [],
+    ".cursor/skills/speckit-approve-spec/SKILL.md": [],
+    ".cursor/skills/speckit-checklist/SKILL.md": [],
+    ".cursor/skills/speckit-clarify/SKILL.md": [],
+    ".cursor/skills/speckit-constitution/SKILL.md": [],
+    ".cursor/skills/speckit-implement/SKILL.md": [],
+    ".cursor/skills/speckit-plan/SKILL.md": [],
+    ".cursor/skills/speckit-specify/SKILL.md": [],
+    ".cursor/skills/speckit-tasks/SKILL.md": [],
+    ".cursor/skills/speckit-taskstoissues/SKILL.md": [],
+    ".cursor/skills/ui-ux-pro-max/data/charts.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/colors.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/icons.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/landing.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/products.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/react-performance.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/astro.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/flutter.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/nextjs.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/react-native.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/react.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/shadcn.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/svelte.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/swiftui.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/stacks/vue.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/styles.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/typography.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/ui-reasoning.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/ux-guidelines.csv": [],
+    ".cursor/skills/ui-ux-pro-max/data/web-interface.csv": [],
+    ".cursor/skills/ui-ux-pro-max/scripts/core.py": [],
+    ".cursor/skills/ui-ux-pro-max/scripts/design_system.py": [
+      ".cursor/skills/ui-ux-pro-max/scripts/core.py"
+    ],
+    ".cursor/skills/ui-ux-pro-max/scripts/search.py": [
+      ".cursor/skills/ui-ux-pro-max/scripts/core.py",
+      ".cursor/skills/ui-ux-pro-max/scripts/design_system.py"
+    ],
+    ".cursor/skills/ui-ux-pro-max/SKILL.md": [],
+    ".env.example": [],
+    ".python-version": [],
+    ".specify/extensions.yml": [],
+    ".specify/extensions/.registry": [],
+    ".specify/extensions/git/commands/speckit.git.commit.md": [],
+    ".specify/extensions/git/commands/speckit.git.feature.md": [],
+    ".specify/extensions/git/commands/speckit.git.initialize.md": [],
+    ".specify/extensions/git/commands/speckit.git.remote.md": [],
+    ".specify/extensions/git/commands/speckit.git.validate.md": [],
+    ".specify/extensions/git/config-template.yml": [],
+    ".specify/extensions/git/extension.yml": [],
+    ".specify/extensions/git/git-config.yml": [],
+    ".specify/extensions/git/README.md": [],
+    ".specify/extensions/git/scripts/bash/auto-commit.sh": [],
+    ".specify/extensions/git/scripts/bash/create-new-feature.sh": [],
+    ".specify/extensions/git/scripts/bash/git-common.sh": [],
+    ".specify/extensions/git/scripts/bash/initialize-repo.sh": [],
+    ".specify/extensions/git/scripts/powershell/auto-commit.ps1": [],
+    ".specify/extensions/git/scripts/powershell/create-new-feature.ps1": [],
+    ".specify/extensions/git/scripts/powershell/git-common.ps1": [],
+    ".specify/extensions/git/scripts/powershell/initialize-repo.ps1": [],
+    ".specify/feature.json": [],
+    ".specify/init-options.json": [],
+    ".specify/integration.json": [],
+    ".specify/integrations/claude.manifest.json": [],
+    ".specify/integrations/cursor-agent.manifest.json": [],
+    ".specify/integrations/speckit.manifest.json": [],
+    ".specify/memory/constitution.md": [],
+    ".specify/PO-WORKFLOW.md": [],
+    ".specify/scripts/powershell/check-prerequisites.ps1": [],
+    ".specify/scripts/powershell/common.ps1": [],
+    ".specify/scripts/powershell/create-new-feature.ps1": [],
+    ".specify/scripts/powershell/setup-plan.ps1": [],
+    ".specify/scripts/powershell/setup-tasks.ps1": [],
+    ".specify/templates/checklist-template.md": [],
+    ".specify/templates/constitution-template.md": [],
+    ".specify/templates/plan-template.md": [],
+    ".specify/templates/spec-template.md": [],
+    ".specify/templates/tasks-template.md": [],
+    ".specify/workflows/speckit/workflow.yml": [],
+    ".specify/workflows/workflow-registry.json": [],
+    ".understand-anything/.understandignore": [],
+    "agents/README.md": [],
+    "agents/requirements.txt": [],
+    "agents/src/__init__.py": [],
+    "agents/src/agents/__init__.py": [
+      "agents/src/agents/roles.py"
+    ],
+    "agents/src/agents/assigner.py": [],
+    "agents/src/agents/executor.py": [],
+    "agents/src/agents/monitor.py": [],
+    "agents/src/agents/orchestrator.py": [],
+    "agents/src/agents/planner.py": [],
+    "agents/src/agents/reporter.py": [],
+    "agents/src/agents/roles.py": [],
+    "agents/src/graph_smoke.py": [
+      "agents/src/graph.py",
+      "agents/src/tools/__init__.py"
+    ],
+    "agents/src/graph.py": [
+      "agents/src/agents/roles.py",
+      "agents/src/state.py"
+    ],
+    "agents/src/state.py": [],
+    "agents/src/tools/__init__.py": [
+      "agents/src/tools/registry.py"
+    ],
+    "agents/src/tools/registry.py": [],
+    "audit/report.html": [],
+    "audit/report.json": [],
+    "audit/workspace-report.html": [],
+    "audit/workspace-report.json": [],
+    "backend/.dockerignore": [],
+    "backend/.env.example": [],
+    "backend/alembic.ini": [],
+    "backend/alembic/env.py": [],
+    "backend/alembic/script.py.mako": [],
+    "backend/alembic/versions/001_initial_schema.py": [],
+    "backend/alembic/versions/002_phase2_schema.py": [],
+    "backend/alembic/versions/003_add_users.py": [],
+    "backend/alembic/versions/004_add_coding_backend.py": [],
+    "backend/alembic/versions/004_auto_dispatch.py": [],
+    "backend/alembic/versions/005_platform_expansion.py": [],
+    "backend/alembic/versions/006_wip_per_developer_index.py": [],
+    "backend/alembic/versions/007_auth_oauth_fields.py": [],
+    "backend/alembic/versions/008_merge_wip_oauth_heads.py": [],
+    "backend/alembic/versions/009_drop_project_name_unique.py": [],
+    "backend/alembic/versions/010_add_member_status.py": [],
+    "backend/alembic/versions/011_webhook_response_body.py": [],
+    "backend/alembic/versions/012_pipeline_cicd.py": [],
+    "backend/alembic/versions/013_deployment_phase2.py": [],
+    "backend/alembic/versions/014fb7e4d101_merge_migration_heads.py": [],
+    "backend/alembic/versions/015_failure_analysis.py": [],
+    "backend/alembic/versions/016_devops_monitoring.py": [],
+    "backend/app/__init__.py": [],
+    "backend/app/adapters/__init__.py": [],
+    "backend/app/adapters/base.py": [],
+    "backend/app/adapters/railway_adapter.py": [
+      "backend/app/adapters/base.py"
+    ],
+    "backend/app/adapters/vercel_adapter.py": [
+      "backend/app/adapters/base.py"
+    ],
+    "backend/app/agent/context_builder.py": [
+      "backend/app/config.py",
+      "backend/app/exceptions.py",
+      "backend/app/models/agent_pause_state.py",
+      "backend/app/models/project.py",
+      "backend/app/models/task.py",
+      "backend/app/services/codebase_mapper.py",
+      "backend/app/services/project_service.py",
+      "backend/app/tools/token_optimizer.py"
+    ],
+    "backend/app/agent/graph.py": [],
+    "backend/app/agent/nodes/cli_coder_node.py": [
+      "backend/app/agent/context_builder.py",
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/exceptions.py",
+      "backend/app/git/git_service.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/audit_log.py",
+      "backend/app/models/diff.py",
+      "backend/app/models/project.py",
+      "backend/app/models/stream_event.py",
+      "backend/app/models/task.py",
+      "backend/app/services/audit_service.py",
+      "backend/app/services/task_service.py",
+      "backend/app/websocket/event_publisher.py"
+    ],
+    "backend/app/agent/nodes/coder_node.py": [
+      "backend/app/agent/context_builder.py",
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/exceptions.py",
+      "backend/app/git/git_service.py",
+      "backend/app/llm/factory.py",
+      "backend/app/llm/invoke_helpers.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/audit_log.py",
+      "backend/app/models/diff.py",
+      "backend/app/models/project.py",
+      "backend/app/models/stream_event.py",
+      "backend/app/models/task.py",
+      "backend/app/services/audit_service.py",
+      "backend/app/services/pause_service.py",
+      "backend/app/services/task_service.py",
+      "backend/app/websocket/event_publisher.py"
+    ],
+    "backend/app/agent/nodes/devops_node.py": [],
+    "backend/app/agent/nodes/failure_analyst_node.py": [],
+    "backend/app/agent/nodes/plan_node.py": [
+      "backend/app/agent/context_builder.py",
+      "backend/app/config.py",
+      "backend/app/exceptions.py",
+      "backend/app/llm/factory.py",
+      "backend/app/llm/invoke_helpers.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/audit_log.py",
+      "backend/app/models/document.py",
+      "backend/app/models/stream_event.py",
+      "backend/app/services/audit_service.py",
+      "backend/app/services/document_service.py",
+      "backend/app/websocket/event_publisher.py"
+    ],
+    "backend/app/agent/nodes/reviewer_node.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/llm/factory.py",
+      "backend/app/models/diff.py",
+      "backend/app/models/review_report.py",
+      "backend/app/models/stream_event.py",
+      "backend/app/models/task.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/audit_service.py",
+      "backend/app/services/reviewer_service.py",
+      "backend/app/websocket/event_publisher.py"
+    ],
+    "backend/app/agent/nodes/spec_node.py": [
+      "backend/app/agent/context_builder.py",
+      "backend/app/config.py",
+      "backend/app/llm/factory.py",
+      "backend/app/llm/invoke_helpers.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/stream_event.py",
+      "backend/app/websocket/event_publisher.py"
+    ],
+    "backend/app/agent/nodes/task_breakdown_node.py": [
+      "backend/app/config.py",
+      "backend/app/llm/factory.py",
+      "backend/app/llm/invoke_helpers.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/document.py",
+      "backend/app/services/document_service.py",
+      "backend/app/services/task_service.py"
+    ],
+    "backend/app/agent/state.py": [],
+    "backend/app/api/__init__.py": [],
+    "backend/app/api/v1/__init__.py": [],
+    "backend/app/api/v1/agent_runs.py": [
+      "backend/app/database.py",
+      "backend/app/exceptions.py",
+      "backend/app/middleware/auth.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/schemas/agent_run.py"
+    ],
+    "backend/app/api/v1/analytics.py": [
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/user.py",
+      "backend/app/schemas/analytics.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/analytics_service.py"
+    ],
+    "backend/app/api/v1/audit_logs.py": [
+      "backend/app/database.py",
+      "backend/app/middleware/auth.py",
+      "backend/app/schemas/audit.py",
+      "backend/app/services/audit_service.py",
+      "backend/app/services/project_service.py"
+    ],
+    "backend/app/api/v1/backends.py": [
+      "backend/app/config.py",
+      "backend/app/middleware/auth.py"
+    ],
+    "backend/app/api/v1/branches.py": [
+      "backend/app/database.py",
+      "backend/app/exceptions.py",
+      "backend/app/middleware/auth.py",
+      "backend/app/models/task_branch.py",
+      "backend/app/schemas/inline_comment.py",
+      "backend/app/schemas/task_branch.py",
+      "backend/app/services/inline_comment_service.py",
+      "backend/app/services/task_service.py"
+    ],
+    "backend/app/api/v1/codebase.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/exceptions.py",
+      "backend/app/middleware/auth.py",
+      "backend/app/models/codebase_map.py",
+      "backend/app/services/codebase_mapper.py",
+      "backend/app/services/project_service.py"
+    ],
+    "backend/app/api/v1/dependencies.py": [
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/models/project_member.py",
+      "backend/app/schemas/dependency.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/dependency_service.py",
+      "backend/app/services/project_service.py"
+    ],
+    "backend/app/api/v1/dev_auth.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/models/user.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/auth_service.py"
+    ],
+    "backend/app/api/v1/devops.py": [
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/models/deployment_config.py",
+      "backend/app/models/deployment_health_check.py",
+      "backend/app/models/deployment_incident.py",
+      "backend/app/models/deployment.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/rollback_event.py",
+      "backend/app/models/user.py",
+      "backend/app/schemas/devops.py"
+    ],
+    "backend/app/api/v1/discord_bot.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/llm/factory.py",
+      "backend/app/models/document.py",
+      "backend/app/models/github_config.py",
+      "backend/app/models/project.py",
+      "backend/app/models/task.py"
+    ],
+    "backend/app/api/v1/documents.py": [
+      "backend/app/database.py",
+      "backend/app/exceptions.py",
+      "backend/app/middleware/auth.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/audit_log.py",
+      "backend/app/models/document.py",
+      "backend/app/schemas/document.py",
+      "backend/app/services/audit_service.py",
+      "backend/app/services/document_service.py",
+      "backend/app/services/intent_service.py",
+      "backend/app/services/plan_generation_runner.py",
+      "backend/app/services/project_service.py",
+      "backend/app/services/spec_generation_runner.py",
+      "backend/app/services/task_breakdown_runner.py"
+    ],
+    "backend/app/api/v1/github.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/exceptions.py",
+      "backend/app/models/github_config.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/user.py",
+      "backend/app/schemas/github.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/github_service.py"
+    ],
+    "backend/app/api/v1/members.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/models/invitation.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/user.py",
+      "backend/app/schemas/member.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/notification_service.py"
+    ],
+    "backend/app/api/v1/memory.py": [
+      "backend/app/database.py",
+      "backend/app/middleware/auth.py",
+      "backend/app/schemas/memory.py",
+      "backend/app/services/memory_service.py",
+      "backend/app/services/project_service.py"
+    ],
+    "backend/app/api/v1/notifications.py": [
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/models/notification.py",
+      "backend/app/models/task.py",
+      "backend/app/models/user.py",
+      "backend/app/schemas/notification.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/notification_service.py"
+    ],
+    "backend/app/api/v1/pause.py": [
+      "backend/app/database.py",
+      "backend/app/middleware/auth.py",
+      "backend/app/models/agent_pause_state.py",
+      "backend/app/models/audit_log.py",
+      "backend/app/schemas/pause.py",
+      "backend/app/services/audit_service.py",
+      "backend/app/services/pause_service.py",
+      "backend/app/services/project_service.py",
+      "backend/app/services/task_service.py"
+    ],
+    "backend/app/api/v1/pipelines.py": [
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/models/deployment.py",
+      "backend/app/models/pipeline_run.py",
+      "backend/app/models/pipeline_step.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/step_failure_analysis.py",
+      "backend/app/pipeline/__init__.py",
+      "backend/app/pipeline/event_bus.py",
+      "backend/app/pipeline/pipeline_service.py",
+      "backend/app/schemas/pipeline.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/deployment_service.py",
+      "backend/app/services/failure_analysis_service.py"
+    ],
+    "backend/app/api/v1/projects.py": [
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/project.py",
+      "backend/app/models/user.py",
+      "backend/app/schemas/intent.py",
+      "backend/app/schemas/project.py",
+      "backend/app/services/intent_service.py",
+      "backend/app/services/project_service.py"
+    ],
+    "backend/app/api/v1/review.py": [
+      "backend/app/database.py",
+      "backend/app/middleware/auth.py",
+      "backend/app/models/review_report.py",
+      "backend/app/schemas/review.py"
+    ],
+    "backend/app/api/v1/tasks.py": [
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/exceptions.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/audit_log.py",
+      "backend/app/models/feedback.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/task.py",
+      "backend/app/schemas/task.py",
+      "backend/app/services/audit_service.py",
+      "backend/app/services/diff_service.py",
+      "backend/app/services/inline_comment_service.py",
+      "backend/app/services/kanban_service.py",
+      "backend/app/services/project_service.py",
+      "backend/app/services/task_service.py"
+    ],
+    "backend/app/api/v1/templates.py": [
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/models/user.py",
+      "backend/app/schemas/template.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/project_service.py",
+      "backend/app/services/template_service.py"
+    ],
+    "backend/app/api/v1/webhooks.py": [
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/exceptions.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/user.py",
+      "backend/app/models/webhook.py",
+      "backend/app/schemas/webhook.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/webhook_service.py"
+    ],
+    "backend/app/config.py": [],
+    "backend/app/database.py": [
+      "backend/app/config.py",
+      "backend/app/models.py",
+      "backend/app/models/base.py",
+      "backend/app/models/task_dependency_hooks.py"
+    ],
+    "backend/app/dependencies.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/user.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/auth_service.py"
+    ],
+    "backend/app/deps.py": [
+      "backend/app/dependencies.py"
+    ],
+    "backend/app/exceptions.py": [],
+    "backend/app/git/__init__.py": [
+      "backend/app/git/git_service.py"
+    ],
+    "backend/app/git/branch_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/git/__init__.py",
+      "backend/app/models/task_branch.py",
+      "backend/app/models/task.py"
+    ],
+    "backend/app/git/git_service.py": [],
+    "backend/app/llm.py": [
+      "backend/app/config.py"
+    ],
+    "backend/app/llm/__init__.py": [
+      "backend/app/llm/factory.py",
+      "backend/app/llm/invoke_helpers.py"
+    ],
+    "backend/app/llm/factory.py": [
+      "backend/app/config.py"
+    ],
+    "backend/app/llm/invoke_helpers.py": [
+      "backend/app/config.py"
+    ],
+    "backend/app/main.py": [
+      "backend/app/api/v1/agent_runs.py",
+      "backend/app/api/v1/analytics.py",
+      "backend/app/api/v1/audit_logs.py",
+      "backend/app/api/v1/backends.py",
+      "backend/app/api/v1/branches.py",
+      "backend/app/api/v1/codebase.py",
+      "backend/app/api/v1/dependencies.py",
+      "backend/app/api/v1/dev_auth.py",
+      "backend/app/api/v1/devops.py",
+      "backend/app/api/v1/discord_bot.py",
+      "backend/app/api/v1/documents.py",
+      "backend/app/api/v1/github.py",
+      "backend/app/api/v1/members.py",
+      "backend/app/api/v1/memory.py",
+      "backend/app/api/v1/notifications.py",
+      "backend/app/api/v1/pause.py",
+      "backend/app/api/v1/pipelines.py",
+      "backend/app/api/v1/projects.py",
+      "backend/app/api/v1/review.py",
+      "backend/app/api/v1/tasks.py",
+      "backend/app/api/v1/templates.py",
+      "backend/app/api/v1/webhooks.py",
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/middleware/error_handlers.py",
+      "backend/app/routers/auth.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/webhook_service.py",
+      "backend/app/websocket/__init__.py",
+      "backend/app/websocket/ws_handler.py"
+    ],
+    "backend/app/middleware/__init__.py": [],
+    "backend/app/middleware/auth.py": [
+      "backend/app/config.py"
+    ],
+    "backend/app/middleware/error_handlers.py": [
+      "backend/app/exceptions.py"
+    ],
+    "backend/app/models.py": [
+      "backend/app/database.py"
+    ],
+    "backend/app/models/__init__.py": [
+      "backend/app/models/agent_pause_state.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/audit_log.py",
+      "backend/app/models/base.py",
+      "backend/app/models/codebase_map.py",
+      "backend/app/models/deployment_config.py",
+      "backend/app/models/deployment.py",
+      "backend/app/models/diff.py",
+      "backend/app/models/document.py",
+      "backend/app/models/feedback.py",
+      "backend/app/models/github_config.py",
+      "backend/app/models/inline_comment.py",
+      "backend/app/models/intent.py",
+      "backend/app/models/invitation.py",
+      "backend/app/models/memory_entry.py",
+      "backend/app/models/notification.py",
+      "backend/app/models/pipeline_run.py",
+      "backend/app/models/pipeline_step.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/project.py",
+      "backend/app/models/review_report.py",
+      "backend/app/models/stream_event.py",
+      "backend/app/models/task_branch.py",
+      "backend/app/models/task_dependency.py",
+      "backend/app/models/task_template.py",
+      "backend/app/models/task.py",
+      "backend/app/models/user.py",
+      "backend/app/models/webhook.py"
+    ],
+    "backend/app/models/agent_pause_state.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/agent_run.py": [
+      "backend/app/models/base.py",
+      "backend/app/models/project.py"
+    ],
+    "backend/app/models/audit_log.py": [
+      "backend/app/models/base.py",
+      "backend/app/models/project.py"
+    ],
+    "backend/app/models/base.py": [],
+    "backend/app/models/codebase_map.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/deployment_config.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/deployment_health_check.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/deployment_incident.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/deployment.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/diff.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/document.py": [
+      "backend/app/models/base.py",
+      "backend/app/models/project.py"
+    ],
+    "backend/app/models/feedback.py": [
+      "backend/app/models/base.py",
+      "backend/app/models/project.py"
+    ],
+    "backend/app/models/github_config.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/inline_comment.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/intent.py": [
+      "backend/app/models/base.py",
+      "backend/app/models/project.py"
+    ],
+    "backend/app/models/invitation.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/memory_entry.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/notification.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/pipeline_run.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/pipeline_step.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/project_member.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/project.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/review_report.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/rollback_event.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/step_failure_analysis.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/stream_event.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/task_branch.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/task_dependency_hooks.py": [
+      "backend/app/models/task_dependency.py",
+      "backend/app/models/task.py"
+    ],
+    "backend/app/models/task_dependency.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/task_template.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/models/task.py": [
+      "backend/app/models/base.py",
+      "backend/app/models/project.py",
+      "backend/app/models/task_dependency.py"
+    ],
+    "backend/app/models/user.py": [
+      "backend/app/models/base.py",
+      "backend/app/models/github_config.py",
+      "backend/app/models/invitation.py",
+      "backend/app/models/notification.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/task_template.py",
+      "backend/app/models/webhook.py"
+    ],
+    "backend/app/models/webhook.py": [
+      "backend/app/models/base.py"
+    ],
+    "backend/app/pipeline/__init__.py": [],
+    "backend/app/pipeline/event_bus.py": [],
+    "backend/app/pipeline/executor.py": [
+      "backend/app/database.py",
+      "backend/app/models/deployment.py",
+      "backend/app/models/pipeline_run.py",
+      "backend/app/models/pipeline_step.py",
+      "backend/app/pipeline/__init__.py",
+      "backend/app/pipeline/event_bus.py",
+      "backend/app/pipeline/step_runner.py"
+    ],
+    "backend/app/pipeline/pipeline_service.py": [
+      "backend/app/config.py",
+      "backend/app/exceptions.py",
+      "backend/app/models/deployment.py",
+      "backend/app/models/pipeline_run.py",
+      "backend/app/models/pipeline_step.py",
+      "backend/app/pipeline/executor.py"
+    ],
+    "backend/app/pipeline/step_runner.py": [],
+    "backend/app/routers/__init__.py": [],
+    "backend/app/routers/activity.py": [
+      "backend/app/database.py",
+      "backend/app/deps.py",
+      "backend/app/models.py",
+      "backend/app/schemas.py"
+    ],
+    "backend/app/routers/agent.py": [
+      "backend/app/database.py",
+      "backend/app/deps.py",
+      "backend/app/models.py",
+      "backend/app/schemas.py",
+      "backend/app/services/agent_runner.py"
+    ],
+    "backend/app/routers/auth.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/dependencies.py",
+      "backend/app/models/user.py",
+      "backend/app/schemas/auth.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/auth_service.py",
+      "backend/app/services/email_service.py"
+    ],
+    "backend/app/routers/boards.py": [
+      "backend/app/database.py",
+      "backend/app/deps.py",
+      "backend/app/models.py",
+      "backend/app/schemas.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/vectorstore.py"
+    ],
+    "backend/app/routers/comments.py": [
+      "backend/app/database.py",
+      "backend/app/deps.py",
+      "backend/app/models.py",
+      "backend/app/schemas.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/vectorstore.py"
+    ],
+    "backend/app/routers/skills.py": [
+      "backend/app/database.py",
+      "backend/app/deps.py",
+      "backend/app/models.py",
+      "backend/app/schemas.py"
+    ],
+    "backend/app/routers/users.py": [
+      "backend/app/database.py",
+      "backend/app/deps.py",
+      "backend/app/models.py",
+      "backend/app/schemas.py"
+    ],
+    "backend/app/routers/ws.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/models.py",
+      "backend/app/services/ws_manager.py"
+    ],
+    "backend/app/schemas.py": [],
+    "backend/app/schemas/__init__.py": [
+      "backend/app/schemas/agent_run.py",
+      "backend/app/schemas/auth.py",
+      "backend/app/schemas/document.py",
+      "backend/app/schemas/project.py",
+      "backend/app/schemas/review.py",
+      "backend/app/schemas/task.py"
+    ],
+    "backend/app/schemas/agent_run.py": [
+      "backend/app/models/agent_run.py"
+    ],
+    "backend/app/schemas/analytics.py": [],
+    "backend/app/schemas/audit.py": [
+      "backend/app/models/audit_log.py"
+    ],
+    "backend/app/schemas/auth.py": [],
+    "backend/app/schemas/dependency.py": [],
+    "backend/app/schemas/devops.py": [],
+    "backend/app/schemas/document.py": [
+      "backend/app/models/document.py"
+    ],
+    "backend/app/schemas/github.py": [],
+    "backend/app/schemas/inline_comment.py": [],
+    "backend/app/schemas/intent.py": [],
+    "backend/app/schemas/member.py": [
+      "backend/app/models/project_member.py"
+    ],
+    "backend/app/schemas/memory.py": [],
+    "backend/app/schemas/notification.py": [
+      "backend/app/models/notification.py"
+    ],
+    "backend/app/schemas/pause.py": [],
+    "backend/app/schemas/pipeline.py": [],
+    "backend/app/schemas/project.py": [
+      "backend/app/models/project.py"
+    ],
+    "backend/app/schemas/review_insight.py": [
+      "backend/app/models/agent_run.py"
+    ],
+    "backend/app/schemas/review.py": [
+      "backend/app/models/review_report.py"
+    ],
+    "backend/app/schemas/task_branch.py": [
+      "backend/app/models/task_branch.py"
+    ],
+    "backend/app/schemas/task.py": [
+      "backend/app/models/diff.py",
+      "backend/app/models/task.py",
+      "backend/app/schemas/inline_comment.py"
+    ],
+    "backend/app/schemas/template.py": [],
+    "backend/app/schemas/webhook.py": [],
+    "backend/app/security.py": [
+      "backend/app/config.py"
+    ],
+    "backend/app/services/__init__.py": [
+      "backend/app/services/audit_service.py",
+      "backend/app/services/project_service.py",
+      "backend/app/services/task_service.py"
+    ],
+    "backend/app/services/agent_runner.py": [
+      "agents/src/agents/assigner.py",
+      "agents/src/agents/executor.py",
+      "agents/src/agents/monitor.py",
+      "agents/src/agents/orchestrator.py",
+      "agents/src/agents/planner.py",
+      "agents/src/agents/reporter.py",
+      "backend/app/config.py",
+      "backend/app/models.py",
+      "backend/app/services/llm.py",
+      "backend/app/services/tool_handlers.py",
+      "backend/app/services/ws_manager.py"
+    ],
+    "backend/app/services/alert_service.py": [],
+    "backend/app/services/analytics_service.py": [
+      "backend/app/models/agent_run.py",
+      "backend/app/models/audit_log.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/project.py",
+      "backend/app/models/review_report.py",
+      "backend/app/models/task.py",
+      "backend/app/models/user.py"
+    ],
+    "backend/app/services/audit_service.py": [
+      "backend/app/models/audit_log.py",
+      "backend/app/models/task.py"
+    ],
+    "backend/app/services/auth_service.py": [
+      "backend/app/config.py",
+      "backend/app/models/user.py"
+    ],
+    "backend/app/services/codebase_mapper.py": [
+      "backend/app/models/codebase_map.py"
+    ],
+    "backend/app/services/dependency_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/task_dependency.py",
+      "backend/app/models/task.py",
+      "backend/app/services/task_service.py"
+    ],
+    "backend/app/services/deployment_service.py": [
+      "backend/app/config.py",
+      "backend/app/models/deployment_config.py",
+      "backend/app/models/deployment.py"
+    ],
+    "backend/app/services/diff_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/diff.py",
+      "backend/app/services/task_service.py"
+    ],
+    "backend/app/services/document_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/document.py",
+      "backend/app/models/feedback.py",
+      "backend/app/models/project.py"
+    ],
+    "backend/app/services/email_service.py": [
+      "backend/app/config.py"
+    ],
+    "backend/app/services/failure_analysis_service.py": [
+      "backend/app/models/pipeline_step.py",
+      "backend/app/models/step_failure_analysis.py"
+    ],
+    "backend/app/services/github_service.py": [
+      "backend/app/config.py"
+    ],
+    "backend/app/services/inline_comment_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/inline_comment.py",
+      "backend/app/schemas/inline_comment.py",
+      "backend/app/services/diff_service.py",
+      "backend/app/services/task_service.py"
+    ],
+    "backend/app/services/intent_service.py": [
+      "backend/app/models/intent.py"
+    ],
+    "backend/app/services/kanban_service.py": [
+      "backend/app/agent/graph.py",
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/exceptions.py",
+      "backend/app/git/branch_service.py",
+      "backend/app/git/git_service.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/github_config.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/project.py",
+      "backend/app/models/task_branch.py",
+      "backend/app/models/task.py",
+      "backend/app/models/user.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/dependency_service.py",
+      "backend/app/services/diff_service.py",
+      "backend/app/services/github_service.py",
+      "backend/app/services/memory_service.py",
+      "backend/app/services/notification_service.py",
+      "backend/app/services/task_service.py",
+      "backend/app/services/webhook_service.py"
+    ],
+    "backend/app/services/llm.py": [
+      "backend/app/config.py"
+    ],
+    "backend/app/services/memory_service.py": [
+      "backend/app/config.py",
+      "backend/app/exceptions.py",
+      "backend/app/llm/factory.py",
+      "backend/app/llm/invoke_helpers.py",
+      "backend/app/models/diff.py",
+      "backend/app/models/memory_entry.py"
+    ],
+    "backend/app/services/notification_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/notification.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/task.py"
+    ],
+    "backend/app/services/observability_service.py": [
+      "backend/app/database.py",
+      "backend/app/models/deployment_config.py",
+      "backend/app/models/deployment_health_check.py",
+      "backend/app/models/deployment_incident.py",
+      "backend/app/models/deployment.py"
+    ],
+    "backend/app/services/pause_service.py": [
+      "backend/app/models/agent_pause_state.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/websocket/event_publisher.py"
+    ],
+    "backend/app/services/plan_generation_runner.py": [
+      "backend/app/database.py",
+      "backend/app/models/agent_run.py"
+    ],
+    "backend/app/services/project_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/project.py",
+      "backend/app/schemas/project.py"
+    ],
+    "backend/app/services/review_insight_service.py": [
+      "backend/app/models/agent_run.py",
+      "backend/app/schemas/review_insight.py"
+    ],
+    "backend/app/services/review_orchestration_service.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/stream_event.py",
+      "backend/app/models/task.py",
+      "backend/app/services/diff_service.py",
+      "backend/app/services/kanban_service.py",
+      "backend/app/services/task_service.py",
+      "backend/app/websocket/event_publisher.py"
+    ],
+    "backend/app/services/review_runner.py": [
+      "backend/app/database.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/services/review_orchestration_service.py"
+    ],
+    "backend/app/services/reviewer_service.py": [
+      "backend/app/llm/invoke_helpers.py"
+    ],
+    "backend/app/services/rollback_service.py": [
+      "backend/app/models/deployment_config.py",
+      "backend/app/models/deployment_incident.py",
+      "backend/app/models/deployment.py",
+      "backend/app/models/rollback_event.py",
+      "backend/app/services/deployment_service.py"
+    ],
+    "backend/app/services/spec_generation_runner.py": [
+      "backend/app/database.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/audit_log.py",
+      "backend/app/models/document.py",
+      "backend/app/services/audit_service.py"
+    ],
+    "backend/app/services/task_breakdown_runner.py": [
+      "backend/app/database.py",
+      "backend/app/models/agent_run.py"
+    ],
+    "backend/app/services/task_dispatch_service.py": [
+      "backend/app/database.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/task.py",
+      "backend/app/services/kanban_service.py",
+      "backend/app/services/project_service.py",
+      "backend/app/services/task_service.py"
+    ],
+    "backend/app/services/task_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/task.py"
+    ],
+    "backend/app/services/template_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/project_member.py",
+      "backend/app/models/task_template.py",
+      "backend/app/schemas/template.py"
+    ],
+    "backend/app/services/tool_handlers.py": [
+      "backend/app/models.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/vectorstore.py"
+    ],
+    "backend/app/services/vectorstore.py": [
+      "backend/app/config.py"
+    ],
+    "backend/app/services/webhook_service.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/exceptions.py",
+      "backend/app/models/webhook.py"
+    ],
+    "backend/app/services/ws_manager.py": [],
+    "backend/app/tools/file_tools.py": [
+      "backend/app/config.py",
+      "backend/app/exceptions.py",
+      "backend/app/tools/token_optimizer.py"
+    ],
+    "backend/app/tools/sandbox_tools.py": [
+      "backend/app/tools/file_tools.py",
+      "backend/app/tools/token_optimizer.py"
+    ],
+    "backend/app/tools/token_optimizer.py": [],
+    "backend/app/websocket/__init__.py": [
+      "backend/app/websocket/event_consumer.py",
+      "backend/app/websocket/event_publisher.py",
+      "backend/app/websocket/ws_handler.py"
+    ],
+    "backend/app/websocket/event_consumer.py": [
+      "backend/app/websocket/event_publisher.py"
+    ],
+    "backend/app/websocket/event_publisher.py": [
+      "backend/app/config.py",
+      "backend/app/exceptions.py",
+      "backend/app/models/stream_event.py",
+      "backend/app/models/task.py"
+    ],
+    "backend/app/websocket/ws_handler.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/models/agent_run.py",
+      "backend/app/models/stream_event.py",
+      "backend/app/models/task.py",
+      "backend/app/services/pause_service.py",
+      "backend/app/websocket/event_consumer.py"
+    ],
+    "backend/Dockerfile": [],
+    "backend/pyproject.toml": [],
+    "backend/pytest.ini": [],
+    "backend/README.md": [],
+    "backend/requirements-dev.txt": [],
+    "backend/requirements.txt": [],
+    "backend/run-dev.ps1": [],
+    "backend/tests/__init__.py": [],
+    "backend/tests/conftest.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/main.py"
+    ],
+    "backend/tests/integration/helpers.py": [
+      "backend/app/database.py"
+    ],
+    "backend/tests/integration/test_analytics_api.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/tests/integration/helpers.py"
+    ],
+    "backend/tests/integration/test_backend_switch.py": [],
+    "backend/tests/integration/test_create_task_api.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/tests/integration/helpers.py"
+    ],
+    "backend/tests/integration/test_dependencies_api.py": [
+      "backend/tests/integration/helpers.py"
+    ],
+    "backend/tests/integration/test_documents_api.py": [
+      "backend/tests/integration/helpers.py"
+    ],
+    "backend/tests/integration/test_github_api.py": [
+      "backend/app/services/__init__.py",
+      "backend/app/services/github_service.py",
+      "backend/tests/integration/helpers.py"
+    ],
+    "backend/tests/integration/test_notifications_api.py": [
+      "backend/app/config.py",
+      "backend/app/database.py"
+    ],
+    "backend/tests/integration/test_projects_api.py": [
+      "backend/tests/integration/helpers.py"
+    ],
+    "backend/tests/integration/test_smoke_platform_flow.py": [
+      "backend/app/database.py"
+    ],
+    "backend/tests/integration/test_tasks_api.py": [
+      "backend/tests/integration/helpers.py"
+    ],
+    "backend/tests/integration/test_tc10_memory_five_done_cycles.py": [
+      "backend/app/database.py",
+      "backend/app/models/diff.py",
+      "backend/app/models/memory_entry.py",
+      "backend/app/models/project.py",
+      "backend/app/models/task.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/memory_service.py"
+    ],
+    "backend/tests/integration/test_templates_api.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/tests/integration/helpers.py"
+    ],
+    "backend/tests/integration/test_webhooks_api.py": [
+      "backend/tests/integration/helpers.py"
+    ],
+    "backend/tests/integration/test_ws_pause_tc09.py": [
+      "backend/app/config.py",
+      "backend/app/database.py",
+      "backend/app/main.py",
+      "backend/app/services/pause_service.py"
+    ],
+    "backend/tests/test_placeholder.py": [],
+    "backend/tests/unit/test_analytics_service.py": [
+      "backend/app/models/agent_run.py",
+      "backend/app/schemas/analytics.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/analytics_service.py"
+    ],
+    "backend/tests/unit/test_backend_routing.py": [
+      "backend/app/agent/graph.py",
+      "backend/app/agent/state.py"
+    ],
+    "backend/tests/unit/test_branch_service.py": [
+      "backend/app/git/branch_service.py"
+    ],
+    "backend/tests/unit/test_branch_squash_tc12.py": [
+      "backend/app/git/branch_service.py"
+    ],
+    "backend/tests/unit/test_cli_coder_node.py": [],
+    "backend/tests/unit/test_codebase_mapper.py": [
+      "backend/app/services/codebase_mapper.py"
+    ],
+    "backend/tests/unit/test_dependency_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/task.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/dependency_service.py"
+    ],
+    "backend/tests/unit/test_github_service.py": [
+      "backend/app/models/github_config.py",
+      "backend/app/models/task.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/github_service.py"
+    ],
+    "backend/tests/unit/test_inline_comment_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/diff.py",
+      "backend/app/models/task.py",
+      "backend/app/schemas/inline_comment.py",
+      "backend/app/services/inline_comment_service.py"
+    ],
+    "backend/tests/unit/test_kanban_integrations.py": [
+      "backend/app/models/task.py",
+      "backend/app/services/kanban_service.py"
+    ],
+    "backend/tests/unit/test_kanban_transitions.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/task.py",
+      "backend/app/services/kanban_service.py"
+    ],
+    "backend/tests/unit/test_main_routers.py": [
+      "backend/app/main.py"
+    ],
+    "backend/tests/unit/test_notification_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/notification.py",
+      "backend/app/models/task.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/notification_service.py"
+    ],
+    "backend/tests/unit/test_task_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/diff.py",
+      "backend/app/models/task.py",
+      "backend/app/services/diff_service.py",
+      "backend/app/services/kanban_service.py",
+      "backend/app/services/task_service.py"
+    ],
+    "backend/tests/unit/test_token_optimizer.py": [
+      "backend/app/tools/token_optimizer.py"
+    ],
+    "backend/tests/unit/test_tree_sitter_grammars.py": [],
+    "backend/tests/unit/test_webhook_service.py": [
+      "backend/app/exceptions.py",
+      "backend/app/models/webhook.py",
+      "backend/app/services/__init__.py",
+      "backend/app/services/webhook_service.py"
+    ],
+    "backend/uvicorn.err": [],
+    "CLAUDE.md": [],
+    "design-system/neo-kanban/MASTER.md": [],
+    "design-system/neo-kanban/pages/kanban-board.md": [],
+    "design/neo-kanban.pen": [],
+    "docker-compose.yml": [],
+    "docs/.gitkeep": [],
+    "docs/api.md": [],
+    "docs/erd-phase1.md": [],
+    "docs/phase1-full-test.md": [],
+    "docs/phase1-technology-decisions.md": [],
+    "docs/phase2-agent-architecture.md": [],
+    "docs/phase2-api-contract.md": [],
+    "docs/phase2-database-design.md": [],
+    "docs/phase2-evaluation-framework.md": [],
+    "docs/phase2-full-test.md": [],
+    "evaluation/agent_frameworks/.venv-crewai/pyvenv.cfg": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/activate": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/activate.bat": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/Activate.ps1": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/chroma.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/crewai.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/deactivate.bat": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/distro.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/dotenv.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/dumppdf.py": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/f2py.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/hf.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/httpx.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/huggingface-cli.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/instructor.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/jsondiff": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonpatch": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonpointer": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/jsonschema.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/litellm-proxy.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/litellm.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/markdown-it.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/mcp.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/normalizer.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/numpy-config.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/onnxruntime_test.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/openai.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pdf2txt.py": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pdfplumber.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pip.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pip3.12.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pip3.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pybase64.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pygmentize.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pyjson5.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pypdfium2.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pyproject-build.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/python.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pythonw.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_postinstall.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_postinstall.py": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_testall.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/pywin32_testall.py": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/tiny-agents.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/tqdm.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/typer.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/uv.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/uvicorn.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/uvw.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/uvx.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/watchfiles.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/websockets.exe": [],
+    "evaluation/agent_frameworks/.venv-crewai/Scripts/wsdump.exe": [],
+    "evaluation/agent_frameworks/demo_autogen.py": [
+      "evaluation/load_repo_env.py"
+    ],
+    "evaluation/agent_frameworks/demo_crewai.py": [
+      "evaluation/load_repo_env.py"
+    ],
+    "evaluation/agent_frameworks/demo_langgraph.py": [
+      "evaluation/load_repo_env.py"
+    ],
+    "evaluation/agent_frameworks/README.md": [],
+    "evaluation/agent_frameworks/requirements-autogen.txt": [],
+    "evaluation/agent_frameworks/requirements-crewai.txt": [],
+    "evaluation/agent_frameworks/requirements-langgraph.txt": [],
+    "evaluation/agent_frameworks/requirements.txt": [],
+    "evaluation/datasets/_fixtures/seed.json": [],
+    "evaluation/datasets/planner/_README.md": [],
+    "evaluation/datasets/planner/001.json": [],
+    "evaluation/datasets/planner/002.json": [],
+    "evaluation/datasets/planner/003.json": [],
+    "evaluation/judge/rubric_assigner.md": [],
+    "evaluation/judge/rubric_executor.md": [],
+    "evaluation/judge/rubric_monitor.md": [],
+    "evaluation/judge/rubric_planner.md": [],
+    "evaluation/judge/rubric_reporter.md": [],
+    "evaluation/load_repo_env.py": [],
+    "evaluation/README.md": [],
+    "evaluation/requirements.txt": [],
+    "evaluation/scripts/aggregate_eval.py": [],
+    "evaluation/scripts/llm_latency_smoke.py": [
+      "evaluation/load_repo_env.py"
+    ],
+    "evaluation/scripts/run_eval.py": [
+      "evaluation/load_repo_env.py"
+    ],
+    "evaluation/scripts/seed_fixtures.py": [],
+    "evaluation/scripts/verify_groq.py": [
+      "evaluation/load_repo_env.py"
+    ],
+    "extract_pdf.py": [],
+    "frontend/_archive/app/(app)/boards/[id]/page.tsx": [],
+    "frontend/_archive/app/(app)/boards/page.tsx": [],
+    "frontend/_archive/app/(app)/layout.tsx": [],
+    "frontend/_archive/app/(app)/profile/page.tsx": [],
+    "frontend/_archive/app/globals.css": [],
+    "frontend/_archive/app/layout.tsx": [
+      "frontend/_archive/app/globals.css"
+    ],
+    "frontend/_archive/app/login/page.tsx": [],
+    "frontend/_archive/app/page.tsx": [],
+    "frontend/_archive/app/register/page.tsx": [],
+    "frontend/.env.example": [],
+    "frontend/.prettierignore": [],
+    "frontend/components.json": [],
+    "frontend/eslint.config.js": [],
+    "frontend/index.html": [],
+    "frontend/next.config.mjs": [],
+    "frontend/package.json": [],
+    "frontend/postcss.config.mjs": [],
+    "frontend/public/robots.txt": [],
+    "frontend/README.md": [],
+    "frontend/src/App.css": [],
+    "frontend/src/App.tsx": [
+      "frontend/src/App.css",
+      "frontend/src/components/molecules/auth-guard.tsx",
+      "frontend/src/contexts/auth-context.tsx",
+      "frontend/src/pages/accept-invite.tsx",
+      "frontend/src/pages/analytics.tsx",
+      "frontend/src/pages/auth-callback.tsx",
+      "frontend/src/pages/constitution-editor.tsx",
+      "frontend/src/pages/dashboard.tsx",
+      "frontend/src/pages/deployments/deployment-detail.tsx",
+      "frontend/src/pages/deployments/deployment-history.tsx",
+      "frontend/src/pages/dev-auth.tsx",
+      "frontend/src/pages/devops/health-dashboard.tsx",
+      "frontend/src/pages/login.tsx",
+      "frontend/src/pages/pipelines/pipeline-list.tsx",
+      "frontend/src/pages/pipelines/pipeline-run.tsx",
+      "frontend/src/pages/project-list.tsx",
+      "frontend/src/pages/project-settings.tsx",
+      "frontend/src/pages/project-workspace.tsx",
+      "frontend/src/pages/register.tsx",
+      "frontend/src/pages/reset-password.tsx"
+    ],
+    "frontend/src/components/ai/agent-trace.tsx": [],
+    "frontend/src/components/ai/breakdown-modal.tsx": [],
+    "frontend/src/components/ai/chat-panel.tsx": [
+      "frontend/src/components/ai/agent-trace.tsx"
+    ],
+    "frontend/src/components/ai/monitor-banner.tsx": [],
+    "frontend/src/components/ai/report-modal.tsx": [],
+    "frontend/src/components/ai/suggest-assignee.tsx": [],
+    "frontend/src/components/atoms/avatar.tsx": [],
+    "frontend/src/components/atoms/backend-badge.tsx": [
+      "frontend/src/components/atoms/badge.module.css",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/atoms/badge.module.css": [],
+    "frontend/src/components/atoms/badge.tsx": [
+      "frontend/src/components/atoms/badge.module.css",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/atoms/button.module.css": [],
+    "frontend/src/components/atoms/button.tsx": [
+      "frontend/src/components/atoms/button.module.css"
+    ],
+    "frontend/src/components/atoms/notification-badge.module.css": [],
+    "frontend/src/components/atoms/notification-badge.tsx": [
+      "frontend/src/components/atoms/notification-badge.module.css"
+    ],
+    "frontend/src/components/atoms/role-badge.tsx": [
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/atoms/score-gauge.tsx": [],
+    "frontend/src/components/atoms/spinner.module.css": [],
+    "frontend/src/components/atoms/spinner.tsx": [
+      "frontend/src/components/atoms/spinner.module.css"
+    ],
+    "frontend/src/components/atoms/text-input.module.css": [],
+    "frontend/src/components/atoms/text-input.tsx": [
+      "frontend/src/components/atoms/text-input.module.css"
+    ],
+    "frontend/src/components/molecules/assign-member.tsx": [
+      "frontend/src/components/atoms/avatar.tsx",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/molecules/auth-guard.module.css": [],
+    "frontend/src/components/molecules/auth-guard.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/molecules/auth-guard.module.css",
+      "frontend/src/components/organisms/app-shell.tsx",
+      "frontend/src/contexts/auth-context.tsx"
+    ],
+    "frontend/src/components/molecules/backend-selector.tsx": [
+      "frontend/src/services/project-api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/molecules/confirm-dialog.module.css": [],
+    "frontend/src/components/molecules/confirm-dialog.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/molecules/confirm-dialog.module.css"
+    ],
+    "frontend/src/components/molecules/create-task-modal.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/molecules/template-selector.tsx",
+      "frontend/src/components/organisms/new-project-modal.module.css",
+      "frontend/src/services/task-api.ts"
+    ],
+    "frontend/src/components/molecules/dependency-badge.tsx": [],
+    "frontend/src/components/molecules/diff-viewer.module.css": [],
+    "frontend/src/components/molecules/diff-viewer.tsx": [
+      "frontend/src/components/molecules/diff-viewer.module.css"
+    ],
+    "frontend/src/components/molecules/document-editor.tsx": [],
+    "frontend/src/components/molecules/empty-state.module.css": [],
+    "frontend/src/components/molecules/empty-state.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/molecules/empty-state.module.css"
+    ],
+    "frontend/src/components/molecules/forgot-password-modal.module.css": [],
+    "frontend/src/components/molecules/forgot-password-modal.tsx": [
+      "frontend/src/components/molecules/forgot-password-modal.module.css",
+      "frontend/src/services/auth-api.ts"
+    ],
+    "frontend/src/components/molecules/inline-comment-overlay.css": [],
+    "frontend/src/components/molecules/inline-comment-overlay.tsx": [
+      "frontend/src/components/molecules/inline-comment-overlay.css",
+      "frontend/src/services/task-api.ts"
+    ],
+    "frontend/src/components/molecules/notification-bell.module.css": [],
+    "frontend/src/components/molecules/notification-bell.tsx": [
+      "frontend/src/components/molecules/notification-bell.module.css",
+      "frontend/src/services/notification-api.ts",
+      "frontend/src/utils/relative-time.ts"
+    ],
+    "frontend/src/components/molecules/notification-panel.module.css": [],
+    "frontend/src/components/molecules/notification-panel.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/molecules/notification-panel.module.css",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/services/notification-api.ts"
+    ],
+    "frontend/src/components/molecules/pause-resume-controls.module.css": [],
+    "frontend/src/components/molecules/pause-resume-controls.tsx": [
+      "frontend/src/components/molecules/pause-resume-controls.module.css"
+    ],
+    "frontend/src/components/molecules/save-as-template-modal.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/organisms/new-project-modal.module.css",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/services/template-api.ts"
+    ],
+    "frontend/src/components/molecules/task-card.module.css": [],
+    "frontend/src/components/molecules/task-card.tsx": [
+      "frontend/src/components/atoms/avatar.tsx",
+      "frontend/src/components/atoms/badge.tsx",
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/molecules/assign-member.tsx",
+      "frontend/src/components/molecules/dependency-badge.tsx",
+      "frontend/src/components/molecules/task-card.module.css",
+      "frontend/src/services/task-api.ts",
+      "frontend/src/store/task-store.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/molecules/template-selector.tsx": [
+      "frontend/src/services/template-api.ts"
+    ],
+    "frontend/src/components/molecules/terms-modal.module.css": [],
+    "frontend/src/components/molecules/terms-modal.tsx": [
+      "frontend/src/components/molecules/terms-modal.module.css"
+    ],
+    "frontend/src/components/organisms/ai-review-panel.tsx": [
+      "frontend/src/components/atoms/score-gauge.tsx",
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/services/review-api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/organisms/app-shell.module.css": [],
+    "frontend/src/components/organisms/app-shell.tsx": [
+      "frontend/src/components/atoms/avatar.tsx",
+      "frontend/src/components/molecules/notification-bell.tsx",
+      "frontend/src/components/organisms/app-shell.module.css",
+      "frontend/src/contexts/auth-context.tsx"
+    ],
+    "frontend/src/components/organisms/constitution-panel.module.css": [],
+    "frontend/src/components/organisms/constitution-panel.tsx": [
+      "frontend/src/components/molecules/document-editor.tsx",
+      "frontend/src/components/organisms/constitution-panel.module.css",
+      "frontend/src/services/project-api.ts"
+    ],
+    "frontend/src/components/organisms/dependency-graph.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/services/dependency-api.ts"
+    ],
+    "frontend/src/components/organisms/deployment-settings.module.css": [],
+    "frontend/src/components/organisms/deployment-settings.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/organisms/deployment-settings.module.css",
+      "frontend/src/services/deployment-api.ts",
+      "frontend/src/services/devops-api.ts"
+    ],
+    "frontend/src/components/organisms/document-panel.module.css": [],
+    "frontend/src/components/organisms/document-panel.tsx": [
+      "frontend/src/components/atoms/badge.tsx",
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/molecules/confirm-dialog.tsx",
+      "frontend/src/components/molecules/document-editor.tsx",
+      "frontend/src/components/organisms/document-panel.module.css",
+      "frontend/src/hooks/use-document.ts",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/services/document-api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/organisms/failure-analysis-panel.module.css": [],
+    "frontend/src/components/organisms/failure-analysis-panel.tsx": [
+      "frontend/src/components/organisms/failure-analysis-panel.module.css",
+      "frontend/src/services/pipeline-api.ts"
+    ],
+    "frontend/src/components/organisms/kanban-board.module.css": [],
+    "frontend/src/components/organisms/kanban-board.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/molecules/create-task-modal.tsx",
+      "frontend/src/components/molecules/save-as-template-modal.tsx",
+      "frontend/src/components/organisms/kanban-column.tsx",
+      "frontend/src/components/organisms/task-card.tsx",
+      "frontend/src/components/organisms/wip-warning.tsx",
+      "frontend/src/contexts/auth-context.tsx",
+      "frontend/src/hooks/use-kanban.ts",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/services/dependency-api.ts",
+      "frontend/src/services/member-api.ts",
+      "frontend/src/services/task-api.ts",
+      "frontend/src/store/task-store.ts",
+      "frontend/src/types/index.ts",
+      "frontend/src/utils/dependency-map.ts",
+      "frontend/src/utils/wip-limit.ts"
+    ],
+    "frontend/src/components/organisms/kanban-column.module.css": [],
+    "frontend/src/components/organisms/kanban-column.tsx": [
+      "frontend/src/components/organisms/task-card.tsx",
+      "frontend/src/store/task-store.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/organisms/memory-editor.module.css": [],
+    "frontend/src/components/organisms/memory-editor.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/organisms/memory-editor.module.css",
+      "frontend/src/services/memory-api.ts",
+      "frontend/src/utils/relative-time.ts"
+    ],
+    "frontend/src/components/organisms/new-project-modal.module.css": [],
+    "frontend/src/components/organisms/new-project-modal.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/organisms/new-project-modal.module.css",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/organisms/pipeline-panel.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/pages/pipelines/pipeline-list.module.css",
+      "frontend/src/services/pipeline-api.ts"
+    ],
+    "frontend/src/components/organisms/project-card-skeleton.module.css": [],
+    "frontend/src/components/organisms/project-card-skeleton.tsx": [
+      "frontend/src/components/organisms/project-card-skeleton.module.css"
+    ],
+    "frontend/src/components/organisms/project-card.module.css": [],
+    "frontend/src/components/organisms/project-card.tsx": [
+      "frontend/src/components/organisms/project-card.module.css",
+      "frontend/src/types/index.ts",
+      "frontend/src/utils/relative-time.ts"
+    ],
+    "frontend/src/components/organisms/project-header.module.css": [],
+    "frontend/src/components/organisms/project-header.tsx": [
+      "frontend/src/components/atoms/backend-badge.tsx",
+      "frontend/src/components/atoms/badge.tsx",
+      "frontend/src/components/atoms/notification-badge.tsx",
+      "frontend/src/components/molecules/confirm-dialog.tsx",
+      "frontend/src/components/molecules/notification-panel.tsx",
+      "frontend/src/components/organisms/project-header.module.css",
+      "frontend/src/contexts/auth-context.tsx",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/services/member-api.ts",
+      "frontend/src/services/notification-api.ts",
+      "frontend/src/services/project-api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/organisms/project-members.module.css": [],
+    "frontend/src/components/organisms/project-members.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/atoms/role-badge.tsx",
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/organisms/project-members.module.css",
+      "frontend/src/contexts/auth-context.tsx",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/services/member-api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/components/organisms/review-panel.module.css": [],
+    "frontend/src/components/organisms/review-panel.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/molecules/diff-viewer.tsx",
+      "frontend/src/components/molecules/inline-comment-overlay.tsx",
+      "frontend/src/components/molecules/save-as-template-modal.tsx",
+      "frontend/src/components/organisms/ai-review-panel.tsx",
+      "frontend/src/components/organisms/review-panel.module.css",
+      "frontend/src/contexts/auth-context.tsx",
+      "frontend/src/hooks/use-inline-comments.ts",
+      "frontend/src/hooks/use-thought-stream.ts",
+      "frontend/src/services/member-api.ts",
+      "frontend/src/services/review-api.ts",
+      "frontend/src/services/task-api.ts",
+      "frontend/src/services/ws-handler.ts",
+      "frontend/src/store/task-store.ts"
+    ],
+    "frontend/src/components/organisms/risk-assessment-panel.module.css": [],
+    "frontend/src/components/organisms/risk-assessment-panel.tsx": [
+      "frontend/src/components/organisms/risk-assessment-panel.module.css",
+      "frontend/src/services/devops-api.ts"
+    ],
+    "frontend/src/components/organisms/task-card.tsx": [
+      "frontend/src/components/atoms/avatar.tsx",
+      "frontend/src/components/molecules/assign-member.tsx",
+      "frontend/src/components/molecules/dependency-badge.tsx",
+      "frontend/src/store/task-store.ts",
+      "frontend/src/types/index.ts",
+      "frontend/src/utils/strip-markdown.ts"
+    ],
+    "frontend/src/components/organisms/thought-stream-panel.module.css": [],
+    "frontend/src/components/organisms/thought-stream-panel.tsx": [
+      "frontend/src/components/molecules/pause-resume-controls.tsx",
+      "frontend/src/components/organisms/thought-stream-panel.module.css",
+      "frontend/src/hooks/use-thought-stream.ts"
+    ],
+    "frontend/src/components/organisms/webhook-settings.module.css": [],
+    "frontend/src/components/organisms/webhook-settings.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/atoms/text-input.tsx",
+      "frontend/src/components/organisms/webhook-settings.module.css",
+      "frontend/src/contexts/auth-context.tsx",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/services/github-api.ts",
+      "frontend/src/services/member-api.ts",
+      "frontend/src/services/webhook-api.ts",
+      "frontend/src/utils/relative-time.ts"
+    ],
+    "frontend/src/components/organisms/wip-warning.tsx": [],
+    "frontend/src/components/providers.tsx": [],
+    "frontend/src/components/ui/button.tsx": [],
+    "frontend/src/components/ui/primitives.tsx": [],
+    "frontend/src/contexts/auth-context.tsx": [
+      "frontend/src/services/api.ts",
+      "frontend/src/services/auth-api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/hooks/use-document.ts": [
+      "frontend/src/services/document-api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/hooks/use-inline-comments.ts": [
+      "frontend/src/services/task-api.ts"
+    ],
+    "frontend/src/hooks/use-kanban.ts": [
+      "frontend/src/lib/toast.ts",
+      "frontend/src/services/document-api.ts",
+      "frontend/src/services/task-api.ts",
+      "frontend/src/store/task-store.ts",
+      "frontend/src/types/index.ts",
+      "frontend/src/utils/wip-limit.ts"
+    ],
+    "frontend/src/hooks/use-thought-stream.ts": [
+      "frontend/src/services/websocket-client.ts"
+    ],
+    "frontend/src/index.css": [],
+    "frontend/src/lib/toast.ts": [],
+    "frontend/src/main.tsx": [
+      "frontend/src/App.tsx",
+      "frontend/src/index.css"
+    ],
+    "frontend/src/pages/accept-invite.module.css": [],
+    "frontend/src/pages/accept-invite.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/pages/accept-invite.module.css",
+      "frontend/src/services/member-api.ts"
+    ],
+    "frontend/src/pages/analytics.module.css": [],
+    "frontend/src/pages/analytics.tsx": [
+      "frontend/src/components/atoms/avatar.tsx",
+      "frontend/src/pages/analytics.module.css",
+      "frontend/src/services/analytics-api.ts"
+    ],
+    "frontend/src/pages/auth-callback.module.css": [],
+    "frontend/src/pages/auth-callback.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/pages/auth-callback.module.css",
+      "frontend/src/services/api.ts",
+      "frontend/src/services/auth-api.ts"
+    ],
+    "frontend/src/pages/constitution-editor.module.css": [],
+    "frontend/src/pages/constitution-editor.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/molecules/document-editor.tsx",
+      "frontend/src/pages/constitution-editor.module.css",
+      "frontend/src/pages/page-shell.module.css",
+      "frontend/src/services/project-api.ts",
+      "frontend/src/store/project-store.ts",
+      "frontend/src/utils/relative-time.ts"
+    ],
+    "frontend/src/pages/dashboard.module.css": [],
+    "frontend/src/pages/dashboard.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/pages/dashboard.module.css",
+      "frontend/src/services/analytics-api.ts"
+    ],
+    "frontend/src/pages/deployments/deployment-detail.module.css": [],
+    "frontend/src/pages/deployments/deployment-detail.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/pages/deployments/deployment-detail.module.css",
+      "frontend/src/services/pipeline-api.ts"
+    ],
+    "frontend/src/pages/deployments/deployment-history.module.css": [],
+    "frontend/src/pages/deployments/deployment-history.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/pages/deployments/deployment-history.module.css",
+      "frontend/src/services/pipeline-api.ts"
+    ],
+    "frontend/src/pages/dev-auth.module.css": [],
+    "frontend/src/pages/dev-auth.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/pages/dev-auth.module.css",
+      "frontend/src/services/api.ts",
+      "frontend/src/services/auth-api.ts"
+    ],
+    "frontend/src/pages/devops/health-dashboard.module.css": [],
+    "frontend/src/pages/devops/health-dashboard.tsx": [
+      "frontend/src/pages/devops/health-dashboard.module.css",
+      "frontend/src/services/devops-api.ts"
+    ],
+    "frontend/src/pages/login.module.css": [],
+    "frontend/src/pages/login.tsx": [
+      "frontend/src/components/molecules/forgot-password-modal.tsx",
+      "frontend/src/contexts/auth-context.tsx",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/pages/login.module.css",
+      "frontend/src/services/api.ts",
+      "frontend/src/utils/auth-redirect.ts"
+    ],
+    "frontend/src/pages/page-shell.module.css": [],
+    "frontend/src/pages/pipelines/pipeline-list.module.css": [],
+    "frontend/src/pages/pipelines/pipeline-list.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/pages/pipelines/pipeline-list.module.css",
+      "frontend/src/services/pipeline-api.ts"
+    ],
+    "frontend/src/pages/pipelines/pipeline-run.module.css": [],
+    "frontend/src/pages/pipelines/pipeline-run.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/organisms/failure-analysis-panel.tsx",
+      "frontend/src/pages/pipelines/pipeline-run.module.css",
+      "frontend/src/services/pipeline-api.ts"
+    ],
+    "frontend/src/pages/project-list.module.css": [],
+    "frontend/src/pages/project-list.tsx": [
+      "frontend/src/components/atoms/button.tsx",
+      "frontend/src/components/molecules/empty-state.tsx",
+      "frontend/src/components/organisms/new-project-modal.tsx",
+      "frontend/src/components/organisms/project-card-skeleton.tsx",
+      "frontend/src/components/organisms/project-card.tsx",
+      "frontend/src/pages/project-list.module.css",
+      "frontend/src/services/project-api.ts",
+      "frontend/src/store/project-store.ts"
+    ],
+    "frontend/src/pages/project-settings.module.css": [],
+    "frontend/src/pages/project-settings.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/organisms/deployment-settings.tsx",
+      "frontend/src/components/organisms/project-members.tsx",
+      "frontend/src/components/organisms/webhook-settings.tsx",
+      "frontend/src/pages/page-shell.module.css",
+      "frontend/src/pages/project-settings.module.css",
+      "frontend/src/services/project-api.ts"
+    ],
+    "frontend/src/pages/project-workspace.module.css": [],
+    "frontend/src/pages/project-workspace.tsx": [
+      "frontend/src/components/atoms/spinner.tsx",
+      "frontend/src/components/organisms/dependency-graph.tsx",
+      "frontend/src/components/organisms/document-panel.tsx",
+      "frontend/src/components/organisms/kanban-board.tsx",
+      "frontend/src/components/organisms/memory-editor.tsx",
+      "frontend/src/components/organisms/pipeline-panel.tsx",
+      "frontend/src/components/organisms/project-header.tsx",
+      "frontend/src/components/organisms/review-panel.tsx",
+      "frontend/src/components/organisms/thought-stream-panel.tsx",
+      "frontend/src/hooks/use-inline-comments.ts",
+      "frontend/src/lib/toast.ts",
+      "frontend/src/pages/project-workspace.module.css",
+      "frontend/src/services/audit-api.ts",
+      "frontend/src/services/document-api.ts",
+      "frontend/src/services/project-api.ts",
+      "frontend/src/services/task-api.ts",
+      "frontend/src/store/project-store.ts",
+      "frontend/src/store/task-store.ts",
+      "frontend/src/types/index.ts",
+      "frontend/src/utils/relative-time.ts"
+    ],
+    "frontend/src/pages/register-otp.module.css": [],
+    "frontend/src/pages/register.tsx": [
+      "frontend/src/components/molecules/forgot-password-modal.tsx",
+      "frontend/src/components/molecules/terms-modal.tsx",
+      "frontend/src/contexts/auth-context.tsx",
+      "frontend/src/pages/login.module.css",
+      "frontend/src/pages/register-otp.module.css",
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/pages/reset-password.tsx": [
+      "frontend/src/pages/login.module.css",
+      "frontend/src/services/auth-api.ts"
+    ],
+    "frontend/src/services/analytics-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/api-client.ts": [
+      "frontend/src/lib/toast.ts",
+      "frontend/src/services/api.ts",
+      "frontend/src/utils/auth-redirect.ts"
+    ],
+    "frontend/src/services/api.ts": [
+      "frontend/src/utils/auth-redirect.ts"
+    ],
+    "frontend/src/services/audit-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/auth-api.ts": [
+      "frontend/src/services/api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/services/dependency-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/deployment-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/devops-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/document-api.ts": [
+      "frontend/src/services/api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/services/github-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/member-api.ts": [
+      "frontend/src/services/api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/services/memory-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/notification-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/pipeline-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/project-api.ts": [
+      "frontend/src/services/api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/services/review-api.ts": [
+      "frontend/src/services/api-client.ts",
+      "frontend/src/services/api.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/services/task-api.ts": [
+      "frontend/src/services/api.ts",
+      "frontend/src/store/task-store.ts",
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/services/template-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/webhook-api.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/websocket-client.ts": [
+      "frontend/src/services/api.ts"
+    ],
+    "frontend/src/services/ws-handler.ts": [
+      "frontend/src/services/review-api.ts"
+    ],
+    "frontend/src/store/project-store.ts": [
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/store/task-store.ts": [
+      "frontend/src/types/index.ts"
+    ],
+    "frontend/src/styles/tokens.css": [],
+    "frontend/src/types/index.ts": [],
+    "frontend/src/utils/auth-redirect.ts": [],
+    "frontend/src/utils/dependency-map.ts": [
+      "frontend/src/services/dependency-api.ts"
+    ],
+    "frontend/src/utils/relative-time.ts": [],
+    "frontend/src/utils/strip-markdown.ts": [],
+    "frontend/src/utils/wip-limit.ts": [
+      "frontend/src/store/task-store.ts"
+    ],
+    "frontend/src/vite-env.d.ts": [],
+    "frontend/tailwind.config.ts": [],
+    "frontend/tsconfig.app.json": [],
+    "frontend/tsconfig.json": [],
+    "frontend/tsconfig.node.json": [],
+    "frontend/vite.config.ts": [],
+    "package.json": [],
+    "pdf_content.txt": [],
+    "pdf_extract.txt": [],
+    "README.md": [],
+    "specs/001-neo-kanban/checklists/pre-implementation.md": [],
+    "specs/001-neo-kanban/checklists/requirements.md": [],
+    "specs/001-neo-kanban/contracts/rest-api.md": [],
+    "specs/001-neo-kanban/contracts/websocket-protocol.md": [],
+    "specs/001-neo-kanban/data-model.md": [],
+    "specs/001-neo-kanban/plan.md": [],
+    "specs/001-neo-kanban/research.md": [],
+    "specs/001-neo-kanban/spec.md": [],
+    "specs/001-neo-kanban/tasks.md": [],
+    "specs/001-neo-kanban/ui-spec.md": [],
+    "specs/001-neo-kanban/validation/tc-08-stream-latency.md": [],
+    "specs/001-neo-kanban/validation/tc-10-memory-done.md": [],
+    "specs/001-neo-kanban/validation/tc-11-codebase-map-500-files.md": [],
+    "specs/001-neo-kanban/validation/tc-12-tc-13-git-squash-inline-comments.md": [],
+    "specs/002-ai-cli-integration/contracts/rest-api.md": [],
+    "specs/002-ai-cli-integration/data-model.md": [],
+    "specs/002-ai-cli-integration/plan.md": [],
+    "specs/002-ai-cli-integration/research.md": [],
+    "specs/002-ai-cli-integration/spec.md": [],
+    "specs/002-ai-cli-integration/tasks.md": [],
+    "specs/003-multi-agent-team-platform/checklists/requirements.md": [],
+    "specs/003-multi-agent-team-platform/contracts/rest-api.md": [],
+    "specs/003-multi-agent-team-platform/data-model.md": [],
+    "specs/003-multi-agent-team-platform/plan.md": [],
+    "specs/003-multi-agent-team-platform/research.md": [],
+    "specs/003-multi-agent-team-platform/spec.md": [],
+    "specs/003-multi-agent-team-platform/tasks.md": []
+  }
+}

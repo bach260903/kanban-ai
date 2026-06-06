@@ -1,0 +1,151 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".specify/extensions/git/scripts/bash/auto-commit.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 140,
+      "nonEmptyLines": 119,
+      "functions": [
+        {
+          "name": "_find_project_root",
+          "startLine": 19,
+          "endLine": 29,
+          "params": []
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": ".specify/extensions/git/scripts/bash/create-new-feature.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 453,
+      "nonEmptyLines": 409,
+      "functions": [
+        {
+          "name": "get_highest_from_specs",
+          "startLine": 105,
+          "endLine": 125,
+          "params": []
+        },
+        {
+          "name": "get_highest_from_branches",
+          "startLine": 128,
+          "endLine": 130,
+          "params": []
+        },
+        {
+          "name": "_extract_highest_number",
+          "startLine": 133,
+          "endLine": 146,
+          "params": []
+        },
+        {
+          "name": "get_highest_from_remote_refs",
+          "startLine": 149,
+          "endLine": 161,
+          "params": []
+        },
+        {
+          "name": "check_existing_branches",
+          "startLine": 164,
+          "endLine": 187,
+          "params": []
+        },
+        {
+          "name": "clean_branch_name",
+          "startLine": 190,
+          "endLine": 193,
+          "params": []
+        },
+        {
+          "name": "_find_project_root",
+          "startLine": 206,
+          "endLine": 216,
+          "params": []
+        },
+        {
+          "name": "generate_branch_name",
+          "startLine": 267,
+          "endLine": 303,
+          "params": []
+        },
+        {
+          "name": "_byte_length",
+          "startLine": 360,
+          "endLine": 360,
+          "params": []
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    },
+    {
+      "path": ".specify/extensions/git/scripts/bash/git-common.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 54,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "has_git",
+          "startLine": 7,
+          "endLine": 12,
+          "params": []
+        },
+        {
+          "name": "spec_kit_effective_branch_name",
+          "startLine": 16,
+          "endLine": 23,
+          "params": []
+        },
+        {
+          "name": "check_feature_branch",
+          "startLine": 28,
+          "endLine": 54,
+          "params": []
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": ".specify/extensions/git/scripts/bash/initialize-repo.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 54,
+      "nonEmptyLines": 45,
+      "functions": [
+        {
+          "name": "_find_project_root",
+          "startLine": 12,
+          "endLine": 22,
+          "params": []
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

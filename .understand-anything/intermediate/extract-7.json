@@ -1,0 +1,232 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".specify/extensions/git/commands/speckit.git.commit.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 80,
+      "nonEmptyLines": 54,
+      "sections": [
+        {
+          "heading": "Auto-Commit Changes",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "Behavior",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Commit messages (Conventional Commits)",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Execution",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Configuration",
+          "level": 2,
+          "line": 61
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 76
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": ".specify/extensions/git/commands/speckit.git.feature.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 67,
+      "nonEmptyLines": 46,
+      "sections": [
+        {
+          "heading": "Create Feature Branch",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "User Input",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Environment Variable Override",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 2,
+          "line": 24
+        },
+        {
+          "heading": "Branch Numbering Mode",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Execution",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Output",
+          "level": 2,
+          "line": 63
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": ".specify/extensions/git/commands/speckit.git.initialize.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 49,
+      "nonEmptyLines": 35,
+      "sections": [
+        {
+          "heading": "Initialize Git Repository",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "Execution",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Customization",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Output",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 40
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": ".specify/extensions/git/commands/speckit.git.remote.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 45,
+      "nonEmptyLines": 31,
+      "sections": [
+        {
+          "heading": "Detect Git Remote URL",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Execution",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Output",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": ".specify/extensions/git/commands/speckit.git.validate.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 49,
+      "nonEmptyLines": 35,
+      "sections": [
+        {
+          "heading": "Validate Feature Branch",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "Prerequisites",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Validation Rules",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Execution",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "Graceful Degradation",
+          "level": 2,
+          "line": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    }
+  ]
+}

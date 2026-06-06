@@ -60,8 +60,6 @@ export type TaskStatus =
   | 'in_progress'
   | 'review'
   | 'done'
-  | 'rejected'
-  | 'conflict'
 
 export interface Task {
   id: UUID

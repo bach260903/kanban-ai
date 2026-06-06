@@ -1,0 +1,106 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/charts.csv",
+                           "language":  "csv",
+                           "sizeLines":  26,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/colors.csv",
+                           "language":  "csv",
+                           "sizeLines":  97,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/icons.csv",
+                           "language":  "csv",
+                           "sizeLines":  101,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/landing.csv",
+                           "language":  "csv",
+                           "sizeLines":  31,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/products.csv",
+                           "language":  "csv",
+                           "sizeLines":  96,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/react-performance.csv",
+                           "language":  "csv",
+                           "sizeLines":  45,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/styles.csv",
+                           "language":  "csv",
+                           "sizeLines":  68,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/typography.csv",
+                           "language":  "csv",
+                           "sizeLines":  57,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/ui-reasoning.csv",
+                           "language":  "csv",
+                           "sizeLines":  101,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/ux-guidelines.csv",
+                           "language":  "csv",
+                           "sizeLines":  99,
+                           "fileCategory":  "data"
+                       },
+                       {
+                           "path":  ".cursor/skills/ui-ux-pro-max/data/web-interface.csv",
+                           "language":  "csv",
+                           "sizeLines":  31,
+                           "fileCategory":  "data"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".cursor/skills/ui-ux-pro-max/data/charts.csv":  [
+
+                                                                             ],
+                            ".cursor/skills/ui-ux-pro-max/data/colors.csv":  [
+
+                                                                             ],
+                            ".cursor/skills/ui-ux-pro-max/data/icons.csv":  [
+
+                                                                            ],
+                            ".cursor/skills/ui-ux-pro-max/data/landing.csv":  [
+
+                                                                              ],
+                            ".cursor/skills/ui-ux-pro-max/data/products.csv":  [
+
+                                                                               ],
+                            ".cursor/skills/ui-ux-pro-max/data/react-performance.csv":  [
+
+                                                                                        ],
+                            ".cursor/skills/ui-ux-pro-max/data/styles.csv":  [
+
+                                                                             ],
+                            ".cursor/skills/ui-ux-pro-max/data/typography.csv":  [
+
+                                                                                 ],
+                            ".cursor/skills/ui-ux-pro-max/data/ui-reasoning.csv":  [
+
+                                                                                   ],
+                            ".cursor/skills/ui-ux-pro-max/data/ux-guidelines.csv":  [
+
+                                                                                    ],
+                            ".cursor/skills/ui-ux-pro-max/data/web-interface.csv":  [
+
+                                                                                    ]
+                        }
+}

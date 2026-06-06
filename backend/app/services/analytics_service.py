@@ -25,8 +25,6 @@ _TASK_STATUSES = (
     TaskStatus.IN_PROGRESS,
     TaskStatus.REVIEW,
     TaskStatus.DONE,
-    TaskStatus.REJECTED,
-    TaskStatus.CONFLICT,
 )
 
 
@@ -269,7 +267,7 @@ async def get_ai_project_review(session: AsyncSession, project_id: UUID) -> dict
 
 Dữ liệu dự án hiện tại:
 - Tổng tasks: {total}
-- Todo: {counts.get('todo', 0)} | Đang làm: {counts.get('in_progress', 0)} | Review: {counts.get('review', 0)} | Done: {counts.get('done', 0)} | Rejected: {counts.get('rejected', 0)}
+- Todo: {counts.get('todo', 0)} | Đang làm: {counts.get('in_progress', 0)} | Review: {counts.get('review', 0)} | Done: {counts.get('done', 0)}
 
 Tasks đang AI thực hiện ({len(in_progress_tasks)}):
 {_task_list(in_progress_tasks)}

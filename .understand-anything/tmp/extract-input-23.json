@@ -1,0 +1,160 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "frontend/src/components/organisms/app-shell.module.css",
+                           "language":  "css",
+                           "sizeLines":  198,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/constitution-panel.module.css",
+                           "language":  "css",
+                           "sizeLines":  82,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/deployment-settings.module.css",
+                           "language":  "css",
+                           "sizeLines":  357,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/document-panel.module.css",
+                           "language":  "css",
+                           "sizeLines":  167,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/failure-analysis-panel.module.css",
+                           "language":  "css",
+                           "sizeLines":  330,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/kanban-board.module.css",
+                           "language":  "css",
+                           "sizeLines":  24,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/kanban-column.module.css",
+                           "language":  "css",
+                           "sizeLines":  117,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/memory-editor.module.css",
+                           "language":  "css",
+                           "sizeLines":  195,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/new-project-modal.module.css",
+                           "language":  "css",
+                           "sizeLines":  218,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/project-card-skeleton.module.css",
+                           "language":  "css",
+                           "sizeLines":  76,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/project-card.module.css",
+                           "language":  "css",
+                           "sizeLines":  174,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/project-header.module.css",
+                           "language":  "css",
+                           "sizeLines":  297,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/project-members.module.css",
+                           "language":  "css",
+                           "sizeLines":  211,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/review-panel.module.css",
+                           "language":  "css",
+                           "sizeLines":  187,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/risk-assessment-panel.module.css",
+                           "language":  "css",
+                           "sizeLines":  181,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/thought-stream-panel.module.css",
+                           "language":  "css",
+                           "sizeLines":  206,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/webhook-settings.module.css",
+                           "language":  "css",
+                           "sizeLines":  287,
+                           "fileCategory":  "markup"
+                       }
+                   ],
+    "batchImportData":  {
+                            "frontend/src/components/organisms/app-shell.module.css":  [
+
+                                                                                       ],
+                            "frontend/src/components/organisms/constitution-panel.module.css":  [
+
+                                                                                                ],
+                            "frontend/src/components/organisms/deployment-settings.module.css":  [
+
+                                                                                                 ],
+                            "frontend/src/components/organisms/document-panel.module.css":  [
+
+                                                                                            ],
+                            "frontend/src/components/organisms/failure-analysis-panel.module.css":  [
+
+                                                                                                    ],
+                            "frontend/src/components/organisms/kanban-board.module.css":  [
+
+                                                                                          ],
+                            "frontend/src/components/organisms/kanban-column.module.css":  [
+
+                                                                                           ],
+                            "frontend/src/components/organisms/memory-editor.module.css":  [
+
+                                                                                           ],
+                            "frontend/src/components/organisms/new-project-modal.module.css":  [
+
+                                                                                               ],
+                            "frontend/src/components/organisms/project-card-skeleton.module.css":  [
+
+                                                                                                   ],
+                            "frontend/src/components/organisms/project-card.module.css":  [
+
+                                                                                          ],
+                            "frontend/src/components/organisms/project-header.module.css":  [
+
+                                                                                            ],
+                            "frontend/src/components/organisms/project-members.module.css":  [
+
+                                                                                             ],
+                            "frontend/src/components/organisms/review-panel.module.css":  [
+
+                                                                                          ],
+                            "frontend/src/components/organisms/risk-assessment-panel.module.css":  [
+
+                                                                                                   ],
+                            "frontend/src/components/organisms/thought-stream-panel.module.css":  [
+
+                                                                                                  ],
+                            "frontend/src/components/organisms/webhook-settings.module.css":  [
+
+                                                                                              ]
+                        }
+}

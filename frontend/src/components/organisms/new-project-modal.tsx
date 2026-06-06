@@ -8,19 +8,22 @@ import {
   useState,
 } from 'react'
 
-import type { CodingBackend, PrimaryLanguage } from '../../types'
+import type { PrimaryLanguage } from '../../types'
 import { Button } from '../atoms/button'
-import { BackendSelector } from '../molecules/backend-selector'
 
 import styles from './new-project-modal.module.css'
 
-const LANGUAGES: PrimaryLanguage[] = ['typescript', 'python', 'javascript']
+const LANGUAGES: { value: PrimaryLanguage; label: string }[] = [
+  { value: 'typescript', label: 'TypeScript' },
+  { value: 'javascript', label: 'JavaScript' },
+  { value: 'python',     label: 'Python' },
+]
 
 export type NewProjectFormValues = {
   name: string
   description: string
   language: PrimaryLanguage
-  backend: CodingBackend
+  backend: 'groq'
 }
 
 export type NewProjectModalProps = {
@@ -40,7 +43,6 @@ export function NewProjectModal({ open, onClose, onSubmit }: NewProjectModalProp
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [language, setLanguage] = useState<PrimaryLanguage>('typescript')
-  const [backend, setBackend] = useState<CodingBackend>('groq')
   const [error, setError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
 
@@ -50,7 +52,6 @@ export function NewProjectModal({ open, onClose, onSubmit }: NewProjectModalProp
     setName('')
     setDescription('')
     setLanguage('typescript')
-    setBackend('groq')
     setError(null)
     setSubmitting(false)
     const id = window.setTimeout(() => nameInputRef.current?.focus(), 30)
@@ -108,7 +109,7 @@ export function NewProjectModal({ open, onClose, onSubmit }: NewProjectModalProp
         name: trimmed,
         description: description.trim(),
         language,
-        backend,
+        backend: 'groq',
       })
     } catch (err) {
       setSubmitting(false)
@@ -193,47 +194,28 @@ export function NewProjectModal({ open, onClose, onSubmit }: NewProjectModalProp
               />
             </div>
 
-            <div className={styles.formGrid}>
-              <div className={styles.field}>
-                <label htmlFor="project-language" className={styles.label}>
-                  Language
-                  <span className={styles.required} aria-hidden="true">
-                    *
-                  </span>
-                </label>
-                <select
-                  id="project-language"
-                  name="language"
-                  className={styles.select}
-                  value={language}
-                  onChange={(ev) => setLanguage(ev.target.value as PrimaryLanguage)}
-                  disabled={submitting}
-                  required
-                >
-                  {LANGUAGES.map((lang) => (
-                    <option key={lang} value={lang}>
-                      {lang}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className={styles.field}>
-                <label htmlFor="project-backend" className={styles.label}>
-                  AI Backend
-                  <span className={styles.required} aria-hidden="true">
-                    *
-                  </span>
-                </label>
-                <BackendSelector
-                  id="project-backend"
-                  name="backend"
-                  className={styles.select}
-                  value={backend}
-                  onChange={setBackend}
-                  disabled={submitting}
-                />
-              </div>
+            <div className={styles.field}>
+              <label htmlFor="project-language" className={styles.label}>
+                Language
+                <span className={styles.required} aria-hidden="true">
+                  *
+                </span>
+              </label>
+              <select
+                id="project-language"
+                name="language"
+                className={styles.select}
+                value={language}
+                onChange={(ev) => setLanguage(ev.target.value as PrimaryLanguage)}
+                disabled={submitting}
+                required
+              >
+                {LANGUAGES.map((lang) => (
+                  <option key={lang.value} value={lang.value}>
+                    {lang.label}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 

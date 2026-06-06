@@ -1,0 +1,367 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".env.example",
+      "language": "config",
+      "fileCategory": "config",
+      "totalLines": 52,
+      "nonEmptyLines": 41,
+      "definitions": [
+        {
+          "name": "POSTGRES_PUBLISH_PORT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 5,
+          "endLine": 5
+        },
+        {
+          "name": "REDIS_PUBLISH_PORT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 6,
+          "endLine": 6
+        },
+        {
+          "name": "BACKEND_PUBLISH_PORT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 7,
+          "endLine": 7
+        },
+        {
+          "name": "POSTGRES_USER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 10,
+          "endLine": 10
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 11,
+          "endLine": 11
+        },
+        {
+          "name": "POSTGRES_DB",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 12,
+          "endLine": 12
+        },
+        {
+          "name": "DATABASE_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 15,
+          "endLine": 15
+        },
+        {
+          "name": "REDIS_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 16,
+          "endLine": 16
+        },
+        {
+          "name": "JWT_SECRET",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 19,
+          "endLine": 19
+        },
+        {
+          "name": "CODER_LLM_PROVIDER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 22,
+          "endLine": 22
+        },
+        {
+          "name": "ARCHITECT_LLM_PROVIDER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 23,
+          "endLine": 23
+        },
+        {
+          "name": "REVIEW_LLM_PROVIDER",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 24,
+          "endLine": 24
+        },
+        {
+          "name": "GROQ_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 27,
+          "endLine": 27
+        },
+        {
+          "name": "GROQ_MODEL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 28,
+          "endLine": 28
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 37,
+          "endLine": 37
+        },
+        {
+          "name": "OPENAI_MODEL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 38,
+          "endLine": 38
+        },
+        {
+          "name": "OPENAI_BASE_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 39,
+          "endLine": 39
+        },
+        {
+          "name": "GOOGLE_AI_API_KEY",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 40,
+          "endLine": 40
+        },
+        {
+          "name": "GEMINI_MODEL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 41,
+          "endLine": 41
+        },
+        {
+          "name": "GEMINI_CLI_PATH",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 42,
+          "endLine": 42
+        },
+        {
+          "name": "CLAUDE_CODE_PATH",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 43,
+          "endLine": 43
+        },
+        {
+          "name": "SANDBOX_ROOT",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 46,
+          "endLine": 46
+        },
+        {
+          "name": "DEV_AUTH_ENABLED",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 49,
+          "endLine": 49
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 23
+      }
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 212,
+      "nonEmptyLines": 160,
+      "sections": [
+        {
+          "heading": "Kanban AI",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Stack",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Yêu cầu",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Cài đặt",
+          "level": 2,
+          "line": 24
+        },
+        {
+          "heading": "1. Clone và tạo file môi trường",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "2. Khởi động backend bằng Docker (khuyến nghị)",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "3. Chạy Frontend",
+          "level": 3,
+          "line": 84
+        },
+        {
+          "heading": "Tài liệu API",
+          "level": 2,
+          "line": 113
+        },
+        {
+          "heading": "Chạy backend ngoài Docker (tùy chọn — chỉ dev API nhẹ)",
+          "level": 2,
+          "line": 125
+        },
+        {
+          "heading": "Cấu trúc thư mục",
+          "level": 2,
+          "line": 145
+        },
+        {
+          "heading": "Biến môi trường quan trọng",
+          "level": 2,
+          "line": 172
+        },
+        {
+          "heading": "Chạy test",
+          "level": 2,
+          "line": 192
+        },
+        {
+          "heading": "Lưu ý",
+          "level": 2,
+          "line": 208
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "docker-compose.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 54,
+      "nonEmptyLines": 51,
+      "sections": [
+        {
+          "heading": "services",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "volumes",
+          "level": 1,
+          "line": 53
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 16,
+      "nonEmptyLines": 16,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "workspaces",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "engines",
+          "level": 1,
+          "line": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "pdf_content.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 2363,
+      "nonEmptyLines": 2363,
+      "metrics": {}
+    },
+    {
+      "path": "pdf_extract.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 14,
+      "nonEmptyLines": 13,
+      "metrics": {}
+    }
+  ]
+}

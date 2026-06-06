@@ -217,6 +217,29 @@ async def _run_with_session(state: StateDict) -> StateDict:  # noqa: PLR0912, PL
                 report.status = ReviewStatus.COMPLETE
                 report.completed_at = datetime.now(timezone.utc)
 
+                # If LLM returned no comments but tests failed, synthesise one
+                # so the user sees WHY the score is low instead of a blank panel.
+                if not ai_comments and test_fail > 0:
+                    ai_comments = [{
+                        "file_path": "test output",
+                        "line_number": None,
+                        "content": (
+                            f"{test_fail} test(s) failed, {test_pass} passed. "
+                            + (report.test_error or "Check the test output for details.")
+                        )[:2000],
+                        "severity": "error",
+                    }]
+                elif not ai_comments and suggestion == ReviewSuggestion.NEEDS_CHANGES:
+                    ai_comments = [{
+                        "file_path": "review",
+                        "line_number": None,
+                        "content": (
+                            "AI reviewer flagged issues but could not generate specific comments. "
+                            "Please inspect the diff manually before approving."
+                        ),
+                        "severity": "warning",
+                    }]
+
                 # ------------------------------------------------------------------
                 # T029: Persist ReviewComment rows — AI comments
                 # ------------------------------------------------------------------

@@ -1,0 +1,43 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".specify/extensions/git/scripts/powershell/auto-commit.ps1",
+                           "language":  "powershell",
+                           "sizeLines":  169,
+                           "fileCategory":  "script"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/scripts/powershell/create-new-feature.ps1",
+                           "language":  "powershell",
+                           "sizeLines":  403,
+                           "fileCategory":  "script"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/scripts/powershell/git-common.ps1",
+                           "language":  "powershell",
+                           "sizeLines":  51,
+                           "fileCategory":  "script"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/scripts/powershell/initialize-repo.ps1",
+                           "language":  "powershell",
+                           "sizeLines":  69,
+                           "fileCategory":  "script"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".specify/extensions/git/scripts/powershell/auto-commit.ps1":  [
+
+                                                                                           ],
+                            ".specify/extensions/git/scripts/powershell/create-new-feature.ps1":  [
+
+                                                                                                  ],
+                            ".specify/extensions/git/scripts/powershell/git-common.ps1":  [
+
+                                                                                          ],
+                            ".specify/extensions/git/scripts/powershell/initialize-repo.ps1":  [
+
+                                                                                               ]
+                        }
+}

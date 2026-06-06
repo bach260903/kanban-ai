@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "frontend/src/components/molecules/terms-modal.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  161,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/ai-review-panel.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  226,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/app-shell.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  78,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/constitution-panel.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  104,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/dependency-graph.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  474,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/deployment-settings.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  483,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/document-panel.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  559,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/failure-analysis-panel.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  287,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/kanban-board.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  431,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/kanban-column.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  328,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/memory-editor.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  304,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/new-project-modal.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  239,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/pipeline-panel.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  154,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/project-card-skeleton.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  25,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/project-card.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  85,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/project-header.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  386,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/project-members.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  347,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/review-panel.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  417,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/risk-assessment-panel.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  77,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/task-card.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  454,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/thought-stream-panel.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  228,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/webhook-settings.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  505,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/organisms/wip-warning.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  179,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/providers.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  21,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "frontend/src/components/ui/button.tsx",
+                           "language":  "typescript",
+                           "sizeLines":  58,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "frontend/src/components/molecules/terms-modal.tsx":  [
+
+                                                                                  ],
+                            "frontend/src/components/organisms/ai-review-panel.tsx":  [
+
+                                                                                      ],
+                            "frontend/src/components/organisms/app-shell.tsx":  [
+
+                                                                                ],
+                            "frontend/src/components/organisms/constitution-panel.tsx":  [
+
+                                                                                         ],
+                            "frontend/src/components/organisms/dependency-graph.tsx":  [
+
+                                                                                       ],
+                            "frontend/src/components/organisms/deployment-settings.tsx":  [
+
+                                                                                          ],
+                            "frontend/src/components/organisms/document-panel.tsx":  [
+
+                                                                                     ],
+                            "frontend/src/components/organisms/failure-analysis-panel.tsx":  [
+
+                                                                                             ],
+                            "frontend/src/components/organisms/kanban-board.tsx":  [
+
+                                                                                   ],
+                            "frontend/src/components/organisms/kanban-column.tsx":  [
+
+                                                                                    ],
+                            "frontend/src/components/organisms/memory-editor.tsx":  [
+
+                                                                                    ],
+                            "frontend/src/components/organisms/new-project-modal.tsx":  [
+
+                                                                                        ],
+                            "frontend/src/components/organisms/pipeline-panel.tsx":  [
+
+                                                                                     ],
+                            "frontend/src/components/organisms/project-card-skeleton.tsx":  [
+
+                                                                                            ],
+                            "frontend/src/components/organisms/project-card.tsx":  [
+
+                                                                                   ],
+                            "frontend/src/components/organisms/project-header.tsx":  [
+
+                                                                                     ],
+                            "frontend/src/components/organisms/project-members.tsx":  [
+
+                                                                                      ],
+                            "frontend/src/components/organisms/review-panel.tsx":  [
+
+                                                                                   ],
+                            "frontend/src/components/organisms/risk-assessment-panel.tsx":  [
+
+                                                                                            ],
+                            "frontend/src/components/organisms/task-card.tsx":  [
+
+                                                                                ],
+                            "frontend/src/components/organisms/thought-stream-panel.tsx":  [
+
+                                                                                           ],
+                            "frontend/src/components/organisms/webhook-settings.tsx":  [
+
+                                                                                       ],
+                            "frontend/src/components/organisms/wip-warning.tsx":  [
+
+                                                                                  ],
+                            "frontend/src/components/providers.tsx":  [
+
+                                                                      ],
+                            "frontend/src/components/ui/button.tsx":  [
+
+                                                                      ]
+                        }
+}

@@ -1,0 +1,43 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  ".specify/extensions/git/scripts/bash/auto-commit.sh",
+                           "language":  "shell",
+                           "sizeLines":  140,
+                           "fileCategory":  "script"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/scripts/bash/create-new-feature.sh",
+                           "language":  "shell",
+                           "sizeLines":  453,
+                           "fileCategory":  "script"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/scripts/bash/git-common.sh",
+                           "language":  "shell",
+                           "sizeLines":  54,
+                           "fileCategory":  "script"
+                       },
+                       {
+                           "path":  ".specify/extensions/git/scripts/bash/initialize-repo.sh",
+                           "language":  "shell",
+                           "sizeLines":  54,
+                           "fileCategory":  "script"
+                       }
+                   ],
+    "batchImportData":  {
+                            ".specify/extensions/git/scripts/bash/auto-commit.sh":  [
+
+                                                                                    ],
+                            ".specify/extensions/git/scripts/bash/create-new-feature.sh":  [
+
+                                                                                           ],
+                            ".specify/extensions/git/scripts/bash/git-common.sh":  [
+
+                                                                                   ],
+                            ".specify/extensions/git/scripts/bash/initialize-repo.sh":  [
+
+                                                                                        ]
+                        }
+}

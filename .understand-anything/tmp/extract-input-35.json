@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "backend/app/models/pipeline_run.py",
+                           "language":  "python",
+                           "sizeLines":  88,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/pipeline_step.py",
+                           "language":  "python",
+                           "sizeLines":  78,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/project_member.py",
+                           "language":  "python",
+                           "sizeLines":  83,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/project.py",
+                           "language":  "python",
+                           "sizeLines":  138,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/review_report.py",
+                           "language":  "python",
+                           "sizeLines":  147,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/rollback_event.py",
+                           "language":  "python",
+                           "sizeLines":  76,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/step_failure_analysis.py",
+                           "language":  "python",
+                           "sizeLines":  96,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/stream_event.py",
+                           "language":  "python",
+                           "sizeLines":  61,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/task_branch.py",
+                           "language":  "python",
+                           "sizeLines":  55,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/task_dependency_hooks.py",
+                           "language":  "python",
+                           "sizeLines":  50,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/task_dependency.py",
+                           "language":  "python",
+                           "sizeLines":  55,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/task_template.py",
+                           "language":  "python",
+                           "sizeLines":  83,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/task.py",
+                           "language":  "python",
+                           "sizeLines":  127,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/user.py",
+                           "language":  "python",
+                           "sizeLines":  76,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/models/webhook.py",
+                           "language":  "python",
+                           "sizeLines":  140,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/pipeline/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  1,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/pipeline/event_bus.py",
+                           "language":  "python",
+                           "sizeLines":  79,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/pipeline/executor.py",
+                           "language":  "python",
+                           "sizeLines":  614,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/pipeline/pipeline_service.py",
+                           "language":  "python",
+                           "sizeLines":  171,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/pipeline/step_runner.py",
+                           "language":  "python",
+                           "sizeLines":  553,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/routers/__init__.py",
+                           "language":  "python",
+                           "sizeLines":  1,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/routers/activity.py",
+                           "language":  "python",
+                           "sizeLines":  38,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/routers/agent.py",
+                           "language":  "python",
+                           "sizeLines":  233,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/routers/auth.py",
+                           "language":  "python",
+                           "sizeLines":  375,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/app/routers/boards.py",
+                           "language":  "python",
+                           "sizeLines":  595,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "backend/app/models/pipeline_run.py":  [
+
+                                                                   ],
+                            "backend/app/models/pipeline_step.py":  [
+
+                                                                    ],
+                            "backend/app/models/project_member.py":  [
+
+                                                                     ],
+                            "backend/app/models/project.py":  [
+
+                                                              ],
+                            "backend/app/models/review_report.py":  [
+
+                                                                    ],
+                            "backend/app/models/rollback_event.py":  [
+
+                                                                     ],
+                            "backend/app/models/step_failure_analysis.py":  [
+
+                                                                            ],
+                            "backend/app/models/stream_event.py":  [
+
+                                                                   ],
+                            "backend/app/models/task_branch.py":  [
+
+                                                                  ],
+                            "backend/app/models/task_dependency_hooks.py":  [
+
+                                                                            ],
+                            "backend/app/models/task_dependency.py":  [
+
+                                                                      ],
+                            "backend/app/models/task_template.py":  [
+
+                                                                    ],
+                            "backend/app/models/task.py":  [
+
+                                                           ],
+                            "backend/app/models/user.py":  [
+
+                                                           ],
+                            "backend/app/models/webhook.py":  [
+
+                                                              ],
+                            "backend/app/pipeline/__init__.py":  [
+
+                                                                 ],
+                            "backend/app/pipeline/event_bus.py":  [
+
+                                                                  ],
+                            "backend/app/pipeline/executor.py":  [
+
+                                                                 ],
+                            "backend/app/pipeline/pipeline_service.py":  [
+
+                                                                         ],
+                            "backend/app/pipeline/step_runner.py":  [
+
+                                                                    ],
+                            "backend/app/routers/__init__.py":  [
+
+                                                                ],
+                            "backend/app/routers/activity.py":  [
+
+                                                                ],
+                            "backend/app/routers/agent.py":  [
+
+                                                             ],
+                            "backend/app/routers/auth.py":  [
+
+                                                            ],
+                            "backend/app/routers/boards.py":  [
+
+                                                              ]
+                        }
+}

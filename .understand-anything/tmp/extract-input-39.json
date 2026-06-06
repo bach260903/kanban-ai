@@ -1,0 +1,232 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "backend/tests/conftest.py",
+                           "language":  "python",
+                           "sizeLines":  119,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/helpers.py",
+                           "language":  "python",
+                           "sizeLines":  70,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_analytics_api.py",
+                           "language":  "python",
+                           "sizeLines":  244,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_backend_switch.py",
+                           "language":  "python",
+                           "sizeLines":  112,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_create_task_api.py",
+                           "language":  "python",
+                           "sizeLines":  88,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_dependencies_api.py",
+                           "language":  "python",
+                           "sizeLines":  130,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_documents_api.py",
+                           "language":  "python",
+                           "sizeLines":  66,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_github_api.py",
+                           "language":  "python",
+                           "sizeLines":  121,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_notifications_api.py",
+                           "language":  "python",
+                           "sizeLines":  193,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_projects_api.py",
+                           "language":  "python",
+                           "sizeLines":  95,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_smoke_platform_flow.py",
+                           "language":  "python",
+                           "sizeLines":  259,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_tasks_api.py",
+                           "language":  "python",
+                           "sizeLines":  36,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_tc10_memory_five_done_cycles.py",
+                           "language":  "python",
+                           "sizeLines":  148,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_templates_api.py",
+                           "language":  "python",
+                           "sizeLines":  286,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_webhooks_api.py",
+                           "language":  "python",
+                           "sizeLines":  132,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/integration/test_ws_pause_tc09.py",
+                           "language":  "python",
+                           "sizeLines":  109,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/test_placeholder.py",
+                           "language":  "python",
+                           "sizeLines":  4,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_analytics_service.py",
+                           "language":  "python",
+                           "sizeLines":  205,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_backend_routing.py",
+                           "language":  "python",
+                           "sizeLines":  37,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_branch_service.py",
+                           "language":  "python",
+                           "sizeLines":  12,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_branch_squash_tc12.py",
+                           "language":  "python",
+                           "sizeLines":  38,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_cli_coder_node.py",
+                           "language":  "python",
+                           "sizeLines":  213,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_codebase_mapper.py",
+                           "language":  "python",
+                           "sizeLines":  87,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_dependency_service.py",
+                           "language":  "python",
+                           "sizeLines":  190,
+                           "fileCategory":  "code"
+                       },
+                       {
+                           "path":  "backend/tests/unit/test_github_service.py",
+                           "language":  "python",
+                           "sizeLines":  111,
+                           "fileCategory":  "code"
+                       }
+                   ],
+    "batchImportData":  {
+                            "backend/tests/conftest.py":  [
+
+                                                          ],
+                            "backend/tests/integration/helpers.py":  [
+
+                                                                     ],
+                            "backend/tests/integration/test_analytics_api.py":  [
+
+                                                                                ],
+                            "backend/tests/integration/test_backend_switch.py":  [
+
+                                                                                 ],
+                            "backend/tests/integration/test_create_task_api.py":  [
+
+                                                                                  ],
+                            "backend/tests/integration/test_dependencies_api.py":  [
+
+                                                                                   ],
+                            "backend/tests/integration/test_documents_api.py":  [
+
+                                                                                ],
+                            "backend/tests/integration/test_github_api.py":  [
+
+                                                                             ],
+                            "backend/tests/integration/test_notifications_api.py":  [
+
+                                                                                    ],
+                            "backend/tests/integration/test_projects_api.py":  [
+
+                                                                               ],
+                            "backend/tests/integration/test_smoke_platform_flow.py":  [
+
+                                                                                      ],
+                            "backend/tests/integration/test_tasks_api.py":  [
+
+                                                                            ],
+                            "backend/tests/integration/test_tc10_memory_five_done_cycles.py":  [
+
+                                                                                               ],
+                            "backend/tests/integration/test_templates_api.py":  [
+
+                                                                                ],
+                            "backend/tests/integration/test_webhooks_api.py":  [
+
+                                                                               ],
+                            "backend/tests/integration/test_ws_pause_tc09.py":  [
+
+                                                                                ],
+                            "backend/tests/test_placeholder.py":  [
+
+                                                                  ],
+                            "backend/tests/unit/test_analytics_service.py":  [
+
+                                                                             ],
+                            "backend/tests/unit/test_backend_routing.py":  [
+
+                                                                           ],
+                            "backend/tests/unit/test_branch_service.py":  [
+
+                                                                          ],
+                            "backend/tests/unit/test_branch_squash_tc12.py":  [
+
+                                                                              ],
+                            "backend/tests/unit/test_cli_coder_node.py":  [
+
+                                                                          ],
+                            "backend/tests/unit/test_codebase_mapper.py":  [
+
+                                                                           ],
+                            "backend/tests/unit/test_dependency_service.py":  [
+
+                                                                              ],
+                            "backend/tests/unit/test_github_service.py":  [
+
+                                                                          ]
+                        }
+}

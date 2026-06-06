@@ -20,8 +20,6 @@ const STATUSES: TaskStatus[] = [
   'in_progress',
   'review',
   'done',
-  'rejected',
-  'conflict',
 ]
 
 export function emptyTaskColumns(): TaskColumns {

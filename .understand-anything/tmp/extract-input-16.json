@@ -1,0 +1,34 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/Activate.ps1",
+                           "language":  "powershell",
+                           "sizeLines":  247,
+                           "fileCategory":  "script"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/activate.bat",
+                           "language":  "batch",
+                           "sizeLines":  34,
+                           "fileCategory":  "script"
+                       },
+                       {
+                           "path":  "evaluation/agent_frameworks/.venv-crewai/Scripts/deactivate.bat",
+                           "language":  "batch",
+                           "sizeLines":  22,
+                           "fileCategory":  "script"
+                       }
+                   ],
+    "batchImportData":  {
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/Activate.ps1":  [
+
+                                                                                              ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/activate.bat":  [
+
+                                                                                              ],
+                            "evaluation/agent_frameworks/.venv-crewai/Scripts/deactivate.bat":  [
+
+                                                                                                ]
+                        }
+}

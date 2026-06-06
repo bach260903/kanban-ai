@@ -1,0 +1,6361 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "backend/tests/conftest.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 119,
+      "nonEmptyLines": 102,
+      "functions": [
+        {
+          "name": "_merge_dotenv",
+          "startLine": 24,
+          "endLine": 35,
+          "params": []
+        },
+        {
+          "name": "async_db_session",
+          "startLine": 49,
+          "endLine": 60,
+          "params": []
+        },
+        {
+          "name": "test_client",
+          "startLine": 64,
+          "endLine": 69,
+          "params": []
+        },
+        {
+          "name": "auth_headers",
+          "startLine": 73,
+          "endLine": 102,
+          "params": []
+        },
+        {
+          "name": "sample_project",
+          "startLine": 106,
+          "endLine": 119,
+          "params": [
+            "async_db_session"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_merge_dotenv",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "async_db_session",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "test_client",
+          "line": 63,
+          "isDefault": false
+        },
+        {
+          "name": "auth_headers",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "sample_project",
+          "line": 105,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_merge_dotenv",
+          "callee": "env_path.is_file",
+          "lineNumber": 26
+        },
+        {
+          "caller": "_merge_dotenv",
+          "callee": "env_path.read_text(encoding=\"utf-8\").splitlines",
+          "lineNumber": 28
+        },
+        {
+          "caller": "_merge_dotenv",
+          "callee": "env_path.read_text",
+          "lineNumber": 28
+        },
+        {
+          "caller": "_merge_dotenv",
+          "callee": "raw.strip",
+          "lineNumber": 29
+        },
+        {
+          "caller": "_merge_dotenv",
+          "callee": "line.startswith",
+          "lineNumber": 30
+        },
+        {
+          "caller": "_merge_dotenv",
+          "callee": "line.split",
+          "lineNumber": 32
+        },
+        {
+          "caller": "_merge_dotenv",
+          "callee": "k.strip",
+          "lineNumber": 33
+        },
+        {
+          "caller": "_merge_dotenv",
+          "callee": "v.strip().strip('\"').strip",
+          "lineNumber": 33
+        },
+        {
+          "caller": "_merge_dotenv",
+          "callee": "v.strip().strip",
+          "lineNumber": 33
+        },
+        {
+          "caller": "_merge_dotenv",
+          "callee": "v.strip",
+          "lineNumber": 33
+        },
+        {
+          "caller": "async_db_session",
+          "callee": "engine.connect",
+          "lineNumber": 51
+        },
+        {
+          "caller": "async_db_session",
+          "callee": "conn.begin",
+          "lineNumber": 52
+        },
+        {
+          "caller": "async_db_session",
+          "callee": "AsyncSession",
+          "lineNumber": 53
+        },
+        {
+          "caller": "async_db_session",
+          "callee": "session.close",
+          "lineNumber": 57
+        },
+        {
+          "caller": "async_db_session",
+          "callee": "trans.rollback",
+          "lineNumber": 58
+        },
+        {
+          "caller": "async_db_session",
+          "callee": "engine.dispose",
+          "lineNumber": 60
+        },
+        {
+          "caller": "test_client",
+          "callee": "ASGITransport",
+          "lineNumber": 66
+        },
+        {
+          "caller": "test_client",
+          "callee": "AsyncClient",
+          "lineNumber": 67
+        },
+        {
+          "caller": "test_client",
+          "callee": "engine.dispose",
+          "lineNumber": 69
+        },
+        {
+          "caller": "auth_headers",
+          "callee": "uuid.uuid4",
+          "lineNumber": 75
+        },
+        {
+          "caller": "auth_headers",
+          "callee": "engine.begin",
+          "lineNumber": 76
+        },
+        {
+          "caller": "auth_headers",
+          "callee": "conn.execute",
+          "lineNumber": 77
+        },
+        {
+          "caller": "auth_headers",
+          "callee": "text",
+          "lineNumber": 78
+        },
+        {
+          "caller": "auth_headers",
+          "callee": "res.scalar_one",
+          "lineNumber": 94
+        },
+        {
+          "caller": "auth_headers",
+          "callee": "datetime.now",
+          "lineNumber": 95
+        },
+        {
+          "caller": "auth_headers",
+          "callee": "jwt.encode",
+          "lineNumber": 96
+        },
+        {
+          "caller": "auth_headers",
+          "callee": "str",
+          "lineNumber": 97
+        },
+        {
+          "caller": "auth_headers",
+          "callee": "timedelta",
+          "lineNumber": 97
+        },
+        {
+          "caller": "auth_headers",
+          "callee": "engine.dispose",
+          "lineNumber": 102
+        },
+        {
+          "caller": "sample_project",
+          "callee": "async_db_session.execute",
+          "lineNumber": 108
+        },
+        {
+          "caller": "sample_project",
+          "callee": "text",
+          "lineNumber": 109
+        },
+        {
+          "caller": "sample_project",
+          "callee": "res.one",
+          "lineNumber": 117
+        },
+        {
+          "caller": "sample_project",
+          "callee": "async_db_session.flush",
+          "lineNumber": 118
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/helpers.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 70,
+      "nonEmptyLines": 60,
+      "functions": [
+        {
+          "name": "create_project",
+          "startLine": 15,
+          "endLine": 29,
+          "params": [
+            "client",
+            "headers",
+            "name"
+          ]
+        },
+        {
+          "name": "insert_spec_document",
+          "startLine": 32,
+          "endLine": 48,
+          "params": [
+            "project_id",
+            "status"
+          ]
+        },
+        {
+          "name": "insert_tasks",
+          "startLine": 51,
+          "endLine": 70,
+          "params": [
+            "project_id",
+            "rows"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "create_project",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "insert_spec_document",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "insert_tasks",
+          "line": 51,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "create_project",
+          "callee": "uuid.uuid4",
+          "lineNumber": 22
+        },
+        {
+          "caller": "create_project",
+          "callee": "client.post",
+          "lineNumber": 23
+        },
+        {
+          "caller": "create_project",
+          "callee": "UUID",
+          "lineNumber": 29
+        },
+        {
+          "caller": "create_project",
+          "callee": "r.json",
+          "lineNumber": 29
+        },
+        {
+          "caller": "insert_spec_document",
+          "callee": "engine.begin",
+          "lineNumber": 37
+        },
+        {
+          "caller": "insert_spec_document",
+          "callee": "conn.execute",
+          "lineNumber": 38
+        },
+        {
+          "caller": "insert_spec_document",
+          "callee": "text",
+          "lineNumber": 39
+        },
+        {
+          "caller": "insert_spec_document",
+          "callee": "res.scalar_one",
+          "lineNumber": 48
+        },
+        {
+          "caller": "insert_tasks",
+          "callee": "engine.begin",
+          "lineNumber": 57
+        },
+        {
+          "caller": "insert_tasks",
+          "callee": "conn.execute",
+          "lineNumber": 59
+        },
+        {
+          "caller": "insert_tasks",
+          "callee": "text",
+          "lineNumber": 60
+        },
+        {
+          "caller": "insert_tasks",
+          "callee": "ids.append",
+          "lineNumber": 69
+        },
+        {
+          "caller": "insert_tasks",
+          "callee": "res.scalar_one",
+          "lineNumber": 69
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_analytics_api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 244,
+      "nonEmptyLines": 215,
+      "functions": [
+        {
+          "name": "_viewer_headers_for_project",
+          "startLine": 19,
+          "endLine": 55,
+          "params": [
+            "project_id"
+          ]
+        },
+        {
+          "name": "_developer_headers_for_project",
+          "startLine": 58,
+          "endLine": 94,
+          "params": [
+            "project_id"
+          ]
+        },
+        {
+          "name": "test_get_dashboard_requires_auth",
+          "startLine": 98,
+          "endLine": 100,
+          "params": [
+            "test_client"
+          ]
+        },
+        {
+          "name": "test_get_dashboard_excludes_archived_projects",
+          "startLine": 104,
+          "endLine": 122,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_get_project_analytics_custom_range_inverted",
+          "startLine": 126,
+          "endLine": 139,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_developer_cannot_access_project_analytics",
+          "startLine": 143,
+          "endLine": 154,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_get_dashboard_returns_member_projects",
+          "startLine": 158,
+          "endLine": 179,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_get_project_analytics_range_7d",
+          "startLine": 183,
+          "endLine": 198,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_get_project_analytics_custom_range",
+          "startLine": 202,
+          "endLine": 215,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_get_project_analytics_invalid_range",
+          "startLine": 219,
+          "endLine": 229,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_viewer_cannot_access_project_analytics",
+          "startLine": 233,
+          "endLine": 244,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_viewer_headers_for_project",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "_developer_headers_for_project",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_dashboard_requires_auth",
+          "line": 97,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_dashboard_excludes_archived_projects",
+          "line": 103,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_project_analytics_custom_range_inverted",
+          "line": 125,
+          "isDefault": false
+        },
+        {
+          "name": "test_developer_cannot_access_project_analytics",
+          "line": 142,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_dashboard_returns_member_projects",
+          "line": 157,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_project_analytics_range_7d",
+          "line": 182,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_project_analytics_custom_range",
+          "line": 201,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_project_analytics_invalid_range",
+          "line": 218,
+          "isDefault": false
+        },
+        {
+          "name": "test_viewer_cannot_access_project_analytics",
+          "line": 232,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "uuid.uuid4",
+          "lineNumber": 20
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "engine.begin",
+          "lineNumber": 21
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "conn.execute",
+          "lineNumber": 22
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "text",
+          "lineNumber": 23
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "res.scalar_one",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "conn.execute",
+          "lineNumber": 38
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "text",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "jwt.encode",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "str",
+          "lineNumber": 49
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "datetime.now",
+          "lineNumber": 50
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "timedelta",
+          "lineNumber": 50
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "uuid.uuid4",
+          "lineNumber": 59
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "engine.begin",
+          "lineNumber": 60
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "conn.execute",
+          "lineNumber": 61
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "text",
+          "lineNumber": 62
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "res.scalar_one",
+          "lineNumber": 76
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "conn.execute",
+          "lineNumber": 77
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "text",
+          "lineNumber": 78
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "jwt.encode",
+          "lineNumber": 86
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "str",
+          "lineNumber": 88
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "datetime.now",
+          "lineNumber": 89
+        },
+        {
+          "caller": "_developer_headers_for_project",
+          "callee": "timedelta",
+          "lineNumber": 89
+        },
+        {
+          "caller": "test_get_dashboard_requires_auth",
+          "callee": "test_client.get",
+          "lineNumber": 99
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "create_project",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "uuid.uuid4",
+          "lineNumber": 111
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "test_client.get",
+          "lineNumber": 113
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "any",
+          "lineNumber": 115
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "str",
+          "lineNumber": 115
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "r.json",
+          "lineNumber": 115
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "test_client.delete",
+          "lineNumber": 117
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "test_client.get",
+          "lineNumber": 120
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "any",
+          "lineNumber": 122
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "str",
+          "lineNumber": 122
+        },
+        {
+          "caller": "test_get_dashboard_excludes_archived_projects",
+          "callee": "r.json",
+          "lineNumber": 122
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range_inverted",
+          "callee": "create_project",
+          "lineNumber": 130
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range_inverted",
+          "callee": "datetime.now(timezone.utc).isoformat",
+          "lineNumber": 131
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range_inverted",
+          "callee": "datetime.now",
+          "lineNumber": 131
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range_inverted",
+          "callee": "(datetime.now(timezone.utc) - timedelta(days=7)).isoformat",
+          "lineNumber": 132
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range_inverted",
+          "callee": "datetime.now",
+          "lineNumber": 132
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range_inverted",
+          "callee": "timedelta",
+          "lineNumber": 132
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range_inverted",
+          "callee": "test_client.get",
+          "lineNumber": 133
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range_inverted",
+          "callee": "r.json",
+          "lineNumber": 139
+        },
+        {
+          "caller": "test_developer_cannot_access_project_analytics",
+          "callee": "create_project",
+          "lineNumber": 147
+        },
+        {
+          "caller": "test_developer_cannot_access_project_analytics",
+          "callee": "_developer_headers_for_project",
+          "lineNumber": 148
+        },
+        {
+          "caller": "test_developer_cannot_access_project_analytics",
+          "callee": "test_client.get",
+          "lineNumber": 149
+        },
+        {
+          "caller": "test_get_dashboard_returns_member_projects",
+          "callee": "create_project",
+          "lineNumber": 162
+        },
+        {
+          "caller": "test_get_dashboard_returns_member_projects",
+          "callee": "uuid.uuid4",
+          "lineNumber": 165
+        },
+        {
+          "caller": "test_get_dashboard_returns_member_projects",
+          "callee": "insert_tasks",
+          "lineNumber": 167
+        },
+        {
+          "caller": "test_get_dashboard_returns_member_projects",
+          "callee": "test_client.get",
+          "lineNumber": 169
+        },
+        {
+          "caller": "test_get_dashboard_returns_member_projects",
+          "callee": "r.json",
+          "lineNumber": 171
+        },
+        {
+          "caller": "test_get_dashboard_returns_member_projects",
+          "callee": "next",
+          "lineNumber": 173
+        },
+        {
+          "caller": "test_get_dashboard_returns_member_projects",
+          "callee": "str",
+          "lineNumber": 173
+        },
+        {
+          "caller": "test_get_dashboard_returns_member_projects",
+          "callee": "match[\"name\"].startswith",
+          "lineNumber": 175
+        },
+        {
+          "caller": "test_get_dashboard_returns_member_projects",
+          "callee": "match.get",
+          "lineNumber": 176
+        },
+        {
+          "caller": "test_get_project_analytics_range_7d",
+          "callee": "create_project",
+          "lineNumber": 187
+        },
+        {
+          "caller": "test_get_project_analytics_range_7d",
+          "callee": "test_client.get",
+          "lineNumber": 188
+        },
+        {
+          "caller": "test_get_project_analytics_range_7d",
+          "callee": "r.json",
+          "lineNumber": 194
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range",
+          "callee": "create_project",
+          "lineNumber": 206
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range",
+          "callee": "(datetime.now(timezone.utc) - timedelta(days=14)).isoformat",
+          "lineNumber": 207
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range",
+          "callee": "datetime.now",
+          "lineNumber": 207
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range",
+          "callee": "timedelta",
+          "lineNumber": 207
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range",
+          "callee": "datetime.now(timezone.utc).isoformat",
+          "lineNumber": 208
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range",
+          "callee": "datetime.now",
+          "lineNumber": 208
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range",
+          "callee": "test_client.get",
+          "lineNumber": 209
+        },
+        {
+          "caller": "test_get_project_analytics_custom_range",
+          "callee": "r.json",
+          "lineNumber": 215
+        },
+        {
+          "caller": "test_get_project_analytics_invalid_range",
+          "callee": "create_project",
+          "lineNumber": 223
+        },
+        {
+          "caller": "test_get_project_analytics_invalid_range",
+          "callee": "test_client.get",
+          "lineNumber": 224
+        },
+        {
+          "caller": "test_viewer_cannot_access_project_analytics",
+          "callee": "create_project",
+          "lineNumber": 237
+        },
+        {
+          "caller": "test_viewer_cannot_access_project_analytics",
+          "callee": "_viewer_headers_for_project",
+          "lineNumber": 238
+        },
+        {
+          "caller": "test_viewer_cannot_access_project_analytics",
+          "callee": "test_client.get",
+          "lineNumber": 239
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 11,
+        "functionCount": 11,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_backend_switch.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 112,
+      "nonEmptyLines": 94,
+      "functions": [
+        {
+          "name": "test_create_project_with_default_backend",
+          "startLine": 12,
+          "endLine": 24,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_create_project_with_explicit_backend",
+          "startLine": 28,
+          "endLine": 39,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_update_project_backend",
+          "startLine": 43,
+          "endLine": 64,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_backend_change_does_not_affect_tasks",
+          "startLine": 68,
+          "endLine": 98,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_backends_available_endpoint",
+          "startLine": 102,
+          "endLine": 112,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_create_project_with_default_backend",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "test_create_project_with_explicit_backend",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "test_update_project_backend",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "test_backend_change_does_not_affect_tasks",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "test_backends_available_endpoint",
+          "line": 101,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_create_project_with_default_backend",
+          "callee": "uuid.uuid4",
+          "lineNumber": 16
+        },
+        {
+          "caller": "test_create_project_with_default_backend",
+          "callee": "test_client.post",
+          "lineNumber": 17
+        },
+        {
+          "caller": "test_create_project_with_default_backend",
+          "callee": "r.json",
+          "lineNumber": 23
+        },
+        {
+          "caller": "test_create_project_with_explicit_backend",
+          "callee": "uuid.uuid4",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_create_project_with_explicit_backend",
+          "callee": "test_client.post",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_create_project_with_explicit_backend",
+          "callee": "r.json",
+          "lineNumber": 39
+        },
+        {
+          "caller": "test_update_project_backend",
+          "callee": "uuid.uuid4",
+          "lineNumber": 47
+        },
+        {
+          "caller": "test_update_project_backend",
+          "callee": "test_client.post",
+          "lineNumber": 48
+        },
+        {
+          "caller": "test_update_project_backend",
+          "callee": "r.json",
+          "lineNumber": 53
+        },
+        {
+          "caller": "test_update_project_backend",
+          "callee": "test_client.put",
+          "lineNumber": 55
+        },
+        {
+          "caller": "test_update_project_backend",
+          "callee": "r.json",
+          "lineNumber": 61
+        },
+        {
+          "caller": "test_update_project_backend",
+          "callee": "test_client.get",
+          "lineNumber": 63
+        },
+        {
+          "caller": "test_update_project_backend",
+          "callee": "r.json",
+          "lineNumber": 64
+        },
+        {
+          "caller": "test_backend_change_does_not_affect_tasks",
+          "callee": "uuid.uuid4",
+          "lineNumber": 72
+        },
+        {
+          "caller": "test_backend_change_does_not_affect_tasks",
+          "callee": "test_client.post",
+          "lineNumber": 73
+        },
+        {
+          "caller": "test_backend_change_does_not_affect_tasks",
+          "callee": "r.json",
+          "lineNumber": 78
+        },
+        {
+          "caller": "test_backend_change_does_not_affect_tasks",
+          "callee": "test_client.post",
+          "lineNumber": 80
+        },
+        {
+          "caller": "test_backend_change_does_not_affect_tasks",
+          "callee": "r.json",
+          "lineNumber": 86
+        },
+        {
+          "caller": "test_backend_change_does_not_affect_tasks",
+          "callee": "test_client.put",
+          "lineNumber": 89
+        },
+        {
+          "caller": "test_backend_change_does_not_affect_tasks",
+          "callee": "test_client.get",
+          "lineNumber": 96
+        },
+        {
+          "caller": "test_backend_change_does_not_affect_tasks",
+          "callee": "r.json",
+          "lineNumber": 98
+        },
+        {
+          "caller": "test_backends_available_endpoint",
+          "callee": "test_client.get",
+          "lineNumber": 106
+        },
+        {
+          "caller": "test_backends_available_endpoint",
+          "callee": "r.json",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_backends_available_endpoint",
+          "callee": "set",
+          "lineNumber": 111
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_create_task_api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 77,
+      "functions": [
+        {
+          "name": "_viewer_headers_for_project",
+          "startLine": 18,
+          "endLine": 51,
+          "params": [
+            "project_id"
+          ]
+        },
+        {
+          "name": "test_create_task_in_todo_column",
+          "startLine": 55,
+          "endLine": 73,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_viewer_cannot_create_task",
+          "startLine": 77,
+          "endLine": 88,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_viewer_headers_for_project",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "test_create_task_in_todo_column",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "test_viewer_cannot_create_task",
+          "line": 76,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "uuid.uuid4",
+          "lineNumber": 19
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "engine.begin",
+          "lineNumber": 20
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "conn.execute",
+          "lineNumber": 21
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "text",
+          "lineNumber": 22
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "res.scalar_one",
+          "lineNumber": 36
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "conn.execute",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "text",
+          "lineNumber": 38
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "jwt.encode",
+          "lineNumber": 46
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "str",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "datetime.now",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "timedelta",
+          "lineNumber": 47
+        },
+        {
+          "caller": "test_create_task_in_todo_column",
+          "callee": "create_project",
+          "lineNumber": 59
+        },
+        {
+          "caller": "test_create_task_in_todo_column",
+          "callee": "test_client.post",
+          "lineNumber": 60
+        },
+        {
+          "caller": "test_create_task_in_todo_column",
+          "callee": "r.json",
+          "lineNumber": 66
+        },
+        {
+          "caller": "test_create_task_in_todo_column",
+          "callee": "test_client.get",
+          "lineNumber": 70
+        },
+        {
+          "caller": "test_create_task_in_todo_column",
+          "callee": "r_list.json",
+          "lineNumber": 72
+        },
+        {
+          "caller": "test_viewer_cannot_create_task",
+          "callee": "create_project",
+          "lineNumber": 81
+        },
+        {
+          "caller": "test_viewer_cannot_create_task",
+          "callee": "_viewer_headers_for_project",
+          "lineNumber": 82
+        },
+        {
+          "caller": "test_viewer_cannot_create_task",
+          "callee": "test_client.post",
+          "lineNumber": 83
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_dependencies_api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 130,
+      "nonEmptyLines": 105,
+      "functions": [
+        {
+          "name": "test_add_dependency_blocks_move_and_sets_flag",
+          "startLine": 14,
+          "endLine": 41,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_circular_dependency_returns_409",
+          "startLine": 45,
+          "endLine": 65,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_duplicate_dependency_returns_200",
+          "startLine": 69,
+          "endLine": 89,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_done_prerequisite_unlocks_dependent_on_get_tasks",
+          "startLine": 93,
+          "endLine": 109,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_dependency_graph_lists_edges",
+          "startLine": 113,
+          "endLine": 130,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_add_dependency_blocks_move_and_sets_flag",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "test_circular_dependency_returns_409",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "test_duplicate_dependency_returns_200",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "test_done_prerequisite_unlocks_dependent_on_get_tasks",
+          "line": 92,
+          "isDefault": false
+        },
+        {
+          "name": "test_dependency_graph_lists_edges",
+          "line": 112,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "create_project",
+          "lineNumber": 18
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "insert_tasks",
+          "lineNumber": 19
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "test_client.post",
+          "lineNumber": 21
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "str",
+          "lineNumber": 24
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "test_client.get",
+          "lineNumber": 28
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "r_tasks.json",
+          "lineNumber": 30
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "next",
+          "lineNumber": 31
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "str",
+          "lineNumber": 31
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "patch",
+          "lineNumber": 34
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "test_client.post",
+          "lineNumber": 35
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "r_move.json()[\"detail\"].lower",
+          "lineNumber": 41
+        },
+        {
+          "caller": "test_add_dependency_blocks_move_and_sets_flag",
+          "callee": "r_move.json",
+          "lineNumber": 41
+        },
+        {
+          "caller": "test_circular_dependency_returns_409",
+          "callee": "create_project",
+          "lineNumber": 49
+        },
+        {
+          "caller": "test_circular_dependency_returns_409",
+          "callee": "insert_tasks",
+          "lineNumber": 50
+        },
+        {
+          "caller": "test_circular_dependency_returns_409",
+          "callee": "test_client.post",
+          "lineNumber": 52
+        },
+        {
+          "caller": "test_circular_dependency_returns_409",
+          "callee": "str",
+          "lineNumber": 55
+        },
+        {
+          "caller": "test_circular_dependency_returns_409",
+          "callee": "test_client.post",
+          "lineNumber": 59
+        },
+        {
+          "caller": "test_circular_dependency_returns_409",
+          "callee": "str",
+          "lineNumber": 62
+        },
+        {
+          "caller": "test_circular_dependency_returns_409",
+          "callee": "r2.json()[\"detail\"].lower",
+          "lineNumber": 65
+        },
+        {
+          "caller": "test_circular_dependency_returns_409",
+          "callee": "r2.json",
+          "lineNumber": 65
+        },
+        {
+          "caller": "test_duplicate_dependency_returns_200",
+          "callee": "create_project",
+          "lineNumber": 73
+        },
+        {
+          "caller": "test_duplicate_dependency_returns_200",
+          "callee": "insert_tasks",
+          "lineNumber": 74
+        },
+        {
+          "caller": "test_duplicate_dependency_returns_200",
+          "callee": "str",
+          "lineNumber": 76
+        },
+        {
+          "caller": "test_duplicate_dependency_returns_200",
+          "callee": "test_client.post",
+          "lineNumber": 77
+        },
+        {
+          "caller": "test_duplicate_dependency_returns_200",
+          "callee": "test_client.post",
+          "lineNumber": 84
+        },
+        {
+          "caller": "test_done_prerequisite_unlocks_dependent_on_get_tasks",
+          "callee": "create_project",
+          "lineNumber": 97
+        },
+        {
+          "caller": "test_done_prerequisite_unlocks_dependent_on_get_tasks",
+          "callee": "insert_tasks",
+          "lineNumber": 98
+        },
+        {
+          "caller": "test_done_prerequisite_unlocks_dependent_on_get_tasks",
+          "callee": "test_client.post",
+          "lineNumber": 100
+        },
+        {
+          "caller": "test_done_prerequisite_unlocks_dependent_on_get_tasks",
+          "callee": "str",
+          "lineNumber": 103
+        },
+        {
+          "caller": "test_done_prerequisite_unlocks_dependent_on_get_tasks",
+          "callee": "test_client.get",
+          "lineNumber": 107
+        },
+        {
+          "caller": "test_done_prerequisite_unlocks_dependent_on_get_tasks",
+          "callee": "next",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_done_prerequisite_unlocks_dependent_on_get_tasks",
+          "callee": "r_tasks.json",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_done_prerequisite_unlocks_dependent_on_get_tasks",
+          "callee": "str",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_dependency_graph_lists_edges",
+          "callee": "create_project",
+          "lineNumber": 117
+        },
+        {
+          "caller": "test_dependency_graph_lists_edges",
+          "callee": "insert_tasks",
+          "lineNumber": 118
+        },
+        {
+          "caller": "test_dependency_graph_lists_edges",
+          "callee": "test_client.post",
+          "lineNumber": 120
+        },
+        {
+          "caller": "test_dependency_graph_lists_edges",
+          "callee": "str",
+          "lineNumber": 123
+        },
+        {
+          "caller": "test_dependency_graph_lists_edges",
+          "callee": "test_client.get",
+          "lineNumber": 126
+        },
+        {
+          "caller": "test_dependency_graph_lists_edges",
+          "callee": "r.json",
+          "lineNumber": 128
+        },
+        {
+          "caller": "test_dependency_graph_lists_edges",
+          "callee": "len",
+          "lineNumber": 129
+        },
+        {
+          "caller": "test_dependency_graph_lists_edges",
+          "callee": "any",
+          "lineNumber": 130
+        },
+        {
+          "caller": "test_dependency_graph_lists_edges",
+          "callee": "str",
+          "lineNumber": 130
+        },
+        {
+          "caller": "test_dependency_graph_lists_edges",
+          "callee": "str",
+          "lineNumber": 130
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_documents_api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 54,
+      "functions": [
+        {
+          "name": "test_generate_plan_blocked_without_spec",
+          "startLine": 14,
+          "endLine": 21,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_generate_plan_blocked_when_spec_not_approved",
+          "startLine": 25,
+          "endLine": 33,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_generate_plan_accepted_when_spec_approved",
+          "startLine": 37,
+          "endLine": 47,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_approve_spec_auto_starts_plan_generation",
+          "startLine": 51,
+          "endLine": 66,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_generate_plan_blocked_without_spec",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "test_generate_plan_blocked_when_spec_not_approved",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "test_generate_plan_accepted_when_spec_approved",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "test_approve_spec_auto_starts_plan_generation",
+          "line": 50,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_generate_plan_blocked_without_spec",
+          "callee": "create_project",
+          "lineNumber": 18
+        },
+        {
+          "caller": "test_generate_plan_blocked_without_spec",
+          "callee": "test_client.post",
+          "lineNumber": 19
+        },
+        {
+          "caller": "test_generate_plan_blocked_without_spec",
+          "callee": "r.json",
+          "lineNumber": 21
+        },
+        {
+          "caller": "test_generate_plan_blocked_when_spec_not_approved",
+          "callee": "create_project",
+          "lineNumber": 29
+        },
+        {
+          "caller": "test_generate_plan_blocked_when_spec_not_approved",
+          "callee": "insert_spec_document",
+          "lineNumber": 30
+        },
+        {
+          "caller": "test_generate_plan_blocked_when_spec_not_approved",
+          "callee": "test_client.post",
+          "lineNumber": 31
+        },
+        {
+          "caller": "test_generate_plan_blocked_when_spec_not_approved",
+          "callee": "r.json()[\"detail\"].lower",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_generate_plan_blocked_when_spec_not_approved",
+          "callee": "r.json",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_generate_plan_accepted_when_spec_approved",
+          "callee": "create_project",
+          "lineNumber": 41
+        },
+        {
+          "caller": "test_generate_plan_accepted_when_spec_approved",
+          "callee": "insert_spec_document",
+          "lineNumber": 42
+        },
+        {
+          "caller": "test_generate_plan_accepted_when_spec_approved",
+          "callee": "patch",
+          "lineNumber": 43
+        },
+        {
+          "caller": "test_generate_plan_accepted_when_spec_approved",
+          "callee": "test_client.post",
+          "lineNumber": 44
+        },
+        {
+          "caller": "test_generate_plan_accepted_when_spec_approved",
+          "callee": "r.json",
+          "lineNumber": 46
+        },
+        {
+          "caller": "test_approve_spec_auto_starts_plan_generation",
+          "callee": "create_project",
+          "lineNumber": 55
+        },
+        {
+          "caller": "test_approve_spec_auto_starts_plan_generation",
+          "callee": "insert_spec_document",
+          "lineNumber": 56
+        },
+        {
+          "caller": "test_approve_spec_auto_starts_plan_generation",
+          "callee": "patch",
+          "lineNumber": 57
+        },
+        {
+          "caller": "test_approve_spec_auto_starts_plan_generation",
+          "callee": "test_client.post",
+          "lineNumber": 58
+        },
+        {
+          "caller": "test_approve_spec_auto_starts_plan_generation",
+          "callee": "r.json",
+          "lineNumber": 63
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_github_api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 121,
+      "nonEmptyLines": 102,
+      "functions": [
+        {
+          "name": "test_github_config_get_and_upsert",
+          "startLine": 16,
+          "endLine": 78,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_github_encrypt_roundtrip_via_api",
+          "startLine": 82,
+          "endLine": 114,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_github_requires_auth",
+          "startLine": 118,
+          "endLine": 121,
+          "params": [
+            "test_client"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_github_config_get_and_upsert",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "test_github_encrypt_roundtrip_via_api",
+          "line": 81,
+          "isDefault": false
+        },
+        {
+          "name": "test_github_requires_auth",
+          "line": 117,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "create_project",
+          "lineNumber": 20
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "test_client.get",
+          "lineNumber": 22
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "patch",
+          "lineNumber": 25
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "AsyncMock",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "test_client.put",
+          "lineNumber": 29
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "patch",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "AsyncMock",
+          "lineNumber": 42
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "test_client.put",
+          "lineNumber": 44
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "r.json",
+          "lineNumber": 54
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "test_client.get",
+          "lineNumber": 60
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "r.json",
+          "lineNumber": 62
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "patch",
+          "lineNumber": 64
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "AsyncMock",
+          "lineNumber": 66
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "test_client.put",
+          "lineNumber": 68
+        },
+        {
+          "caller": "test_github_config_get_and_upsert",
+          "callee": "r.json",
+          "lineNumber": 78
+        },
+        {
+          "caller": "test_github_encrypt_roundtrip_via_api",
+          "callee": "create_project",
+          "lineNumber": 86
+        },
+        {
+          "caller": "test_github_encrypt_roundtrip_via_api",
+          "callee": "patch",
+          "lineNumber": 89
+        },
+        {
+          "caller": "test_github_encrypt_roundtrip_via_api",
+          "callee": "AsyncMock",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_github_encrypt_roundtrip_via_api",
+          "callee": "test_client.put",
+          "lineNumber": 93
+        },
+        {
+          "caller": "test_github_encrypt_roundtrip_via_api",
+          "callee": "engine.begin",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_github_encrypt_roundtrip_via_api",
+          "callee": "conn.execute",
+          "lineNumber": 109
+        },
+        {
+          "caller": "test_github_encrypt_roundtrip_via_api",
+          "callee": "text",
+          "lineNumber": 110
+        },
+        {
+          "caller": "test_github_encrypt_roundtrip_via_api",
+          "callee": "res.scalar_one",
+          "lineNumber": 113
+        },
+        {
+          "caller": "test_github_encrypt_roundtrip_via_api",
+          "callee": "github_service.decrypt_pat",
+          "lineNumber": 114
+        },
+        {
+          "caller": "test_github_requires_auth",
+          "callee": "UUID",
+          "lineNumber": 119
+        },
+        {
+          "caller": "test_github_requires_auth",
+          "callee": "test_client.get",
+          "lineNumber": 120
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_notifications_api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 193,
+      "nonEmptyLines": 168,
+      "functions": [
+        {
+          "name": "_other_user_headers",
+          "startLine": 18,
+          "endLine": 43,
+          "params": []
+        },
+        {
+          "name": "_insert_notification",
+          "startLine": 46,
+          "endLine": 58,
+          "params": [
+            "user_id",
+            "content",
+            "is_read"
+          ]
+        },
+        {
+          "name": "test_list_notifications_requires_auth",
+          "startLine": 62,
+          "endLine": 64,
+          "params": [
+            "test_client"
+          ]
+        },
+        {
+          "name": "test_list_mark_and_read_all_notifications",
+          "startLine": 68,
+          "endLine": 138,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_list_notifications_includes_project_id_for_task_refs",
+          "startLine": 142,
+          "endLine": 193,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_other_user_headers",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "_insert_notification",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "test_list_notifications_requires_auth",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "test_list_mark_and_read_all_notifications",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "test_list_notifications_includes_project_id_for_task_refs",
+          "line": 141,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_other_user_headers",
+          "callee": "uuid.uuid4",
+          "lineNumber": 19
+        },
+        {
+          "caller": "_other_user_headers",
+          "callee": "engine.begin",
+          "lineNumber": 20
+        },
+        {
+          "caller": "_other_user_headers",
+          "callee": "conn.execute",
+          "lineNumber": 21
+        },
+        {
+          "caller": "_other_user_headers",
+          "callee": "text",
+          "lineNumber": 22
+        },
+        {
+          "caller": "_other_user_headers",
+          "callee": "jwt.encode",
+          "lineNumber": 35
+        },
+        {
+          "caller": "_other_user_headers",
+          "callee": "str",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_other_user_headers",
+          "callee": "datetime.now",
+          "lineNumber": 38
+        },
+        {
+          "caller": "_other_user_headers",
+          "callee": "timedelta",
+          "lineNumber": 38
+        },
+        {
+          "caller": "_insert_notification",
+          "callee": "engine.begin",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_insert_notification",
+          "callee": "conn.execute",
+          "lineNumber": 48
+        },
+        {
+          "caller": "_insert_notification",
+          "callee": "text",
+          "lineNumber": 49
+        },
+        {
+          "caller": "_insert_notification",
+          "callee": "res.scalar_one",
+          "lineNumber": 58
+        },
+        {
+          "caller": "test_list_notifications_requires_auth",
+          "callee": "test_client.get",
+          "lineNumber": 63
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "auth_headers[\"Authorization\"].split",
+          "lineNumber": 72
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "jwt.decode",
+          "lineNumber": 73
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "UUID",
+          "lineNumber": 78
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "test_client.get",
+          "lineNumber": 80
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "r.json",
+          "lineNumber": 82
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "uuid.uuid4",
+          "lineNumber": 84
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "uuid.uuid4",
+          "lineNumber": 85
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "_insert_notification",
+          "lineNumber": 86
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "_insert_notification",
+          "lineNumber": 87
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "test_client.get",
+          "lineNumber": 89
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "r.json",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "any",
+          "lineNumber": 93
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "test_client.get",
+          "lineNumber": 95
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "all",
+          "lineNumber": 101
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "r.json",
+          "lineNumber": 101
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "test_client.patch",
+          "lineNumber": 103
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "r.json",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "_other_user_headers",
+          "lineNumber": 110
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "test_client.patch",
+          "lineNumber": 111
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "uuid.uuid4",
+          "lineNumber": 117
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "_insert_notification",
+          "lineNumber": 118
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "test_client.get",
+          "lineNumber": 119
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "r.json",
+          "lineNumber": 125
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "test_client.post",
+          "lineNumber": 128
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "r.json",
+          "lineNumber": 130
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "test_client.get",
+          "lineNumber": 132
+        },
+        {
+          "caller": "test_list_mark_and_read_all_notifications",
+          "callee": "r.json",
+          "lineNumber": 138
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "auth_headers[\"Authorization\"].split",
+          "lineNumber": 146
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "jwt.decode",
+          "lineNumber": 147
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "UUID",
+          "lineNumber": 152
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "engine.begin",
+          "lineNumber": 154
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "conn.execute",
+          "lineNumber": 155
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "text",
+          "lineNumber": 156
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "project_res.scalar_one",
+          "lineNumber": 164
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "conn.execute",
+          "lineNumber": 165
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "text",
+          "lineNumber": 166
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "task_res.scalar_one",
+          "lineNumber": 175
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "conn.execute",
+          "lineNumber": 176
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "text",
+          "lineNumber": 177
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "test_client.get",
+          "lineNumber": 186
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "next",
+          "lineNumber": 188
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "r.json",
+          "lineNumber": 189
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "item.get",
+          "lineNumber": 189
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "str",
+          "lineNumber": 189
+        },
+        {
+          "caller": "test_list_notifications_includes_project_id_for_task_refs",
+          "callee": "str",
+          "lineNumber": 193
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_projects_api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 95,
+      "nonEmptyLines": 76,
+      "functions": [
+        {
+          "name": "test_projects_crud_and_duplicate_name",
+          "startLine": 14,
+          "endLine": 89,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_projects_require_auth",
+          "startLine": 93,
+          "endLine": 95,
+          "params": [
+            "test_client"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_projects_crud_and_duplicate_name",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "test_projects_require_auth",
+          "line": 92,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "uuid.uuid4",
+          "lineNumber": 18
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.post",
+          "lineNumber": 21
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "r.json",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.get",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "r.json",
+          "lineNumber": 34
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.get",
+          "lineNumber": 37
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "r.json",
+          "lineNumber": 39
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.post",
+          "lineNumber": 41
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "r.json",
+          "lineNumber": 47
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.post",
+          "lineNumber": 49
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "r.json()[\"detail\"].lower",
+          "lineNumber": 55
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "r.json",
+          "lineNumber": 55
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.put",
+          "lineNumber": 57
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.put",
+          "lineNumber": 64
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "r.json",
+          "lineNumber": 70
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.delete",
+          "lineNumber": 72
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.get",
+          "lineNumber": 75
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "r.json",
+          "lineNumber": 77
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.post",
+          "lineNumber": 79
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "r.json",
+          "lineNumber": 85
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "r.json",
+          "lineNumber": 86
+        },
+        {
+          "caller": "test_projects_crud_and_duplicate_name",
+          "callee": "test_client.delete",
+          "lineNumber": 89
+        },
+        {
+          "caller": "test_projects_require_auth",
+          "callee": "test_client.get",
+          "lineNumber": 94
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_smoke_platform_flow.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 259,
+      "nonEmptyLines": 219,
+      "functions": [
+        {
+          "name": "_unique_email",
+          "startLine": 19,
+          "endLine": 20,
+          "params": [
+            "prefix"
+          ]
+        },
+        {
+          "name": "_bearer",
+          "startLine": 23,
+          "endLine": 24,
+          "params": [
+            "token"
+          ]
+        },
+        {
+          "name": "_register",
+          "startLine": 27,
+          "endLine": 41,
+          "params": [
+            "client",
+            "email",
+            "display_name"
+          ]
+        },
+        {
+          "name": "_insert_pending_diff",
+          "startLine": 44,
+          "endLine": 62,
+          "params": [
+            "task_id"
+          ]
+        },
+        {
+          "name": "_insert_review_report",
+          "startLine": 65,
+          "endLine": 77,
+          "params": [
+            "task_id"
+          ]
+        },
+        {
+          "name": "_invite_token",
+          "startLine": 80,
+          "endLine": 83,
+          "params": [
+            "invite_url"
+          ]
+        },
+        {
+          "name": "test_smoke_platform_flow",
+          "startLine": 87,
+          "endLine": 259,
+          "params": [
+            "test_client"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_unique_email",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "_bearer",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "_register",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "_insert_pending_diff",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "_insert_review_report",
+          "line": 65,
+          "isDefault": false
+        },
+        {
+          "name": "_invite_token",
+          "line": 80,
+          "isDefault": false
+        },
+        {
+          "name": "test_smoke_platform_flow",
+          "line": 86,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_unique_email",
+          "callee": "uuid.uuid4",
+          "lineNumber": 20
+        },
+        {
+          "caller": "_register",
+          "callee": "client.post",
+          "lineNumber": 33
+        },
+        {
+          "caller": "_register",
+          "callee": "r.json",
+          "lineNumber": 38
+        },
+        {
+          "caller": "_register",
+          "callee": "body.get",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_register",
+          "callee": "body.get(\"user\", {}).get",
+          "lineNumber": 40
+        },
+        {
+          "caller": "_register",
+          "callee": "body.get",
+          "lineNumber": 40
+        },
+        {
+          "caller": "_insert_pending_diff",
+          "callee": "engine.begin",
+          "lineNumber": 45
+        },
+        {
+          "caller": "_insert_pending_diff",
+          "callee": "conn.execute",
+          "lineNumber": 46
+        },
+        {
+          "caller": "_insert_pending_diff",
+          "callee": "text",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_insert_pending_diff",
+          "callee": "res.scalar_one",
+          "lineNumber": 62
+        },
+        {
+          "caller": "_insert_review_report",
+          "callee": "engine.begin",
+          "lineNumber": 66
+        },
+        {
+          "caller": "_insert_review_report",
+          "callee": "conn.execute",
+          "lineNumber": 67
+        },
+        {
+          "caller": "_insert_review_report",
+          "callee": "text",
+          "lineNumber": 68
+        },
+        {
+          "caller": "_insert_review_report",
+          "callee": "res.scalar_one",
+          "lineNumber": 77
+        },
+        {
+          "caller": "_invite_token",
+          "callee": "re.search",
+          "lineNumber": 81
+        },
+        {
+          "caller": "_invite_token",
+          "callee": "match.group",
+          "lineNumber": 83
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_unique_email",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_register",
+          "lineNumber": 92
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_bearer",
+          "lineNumber": 97
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.post",
+          "lineNumber": 99
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json().get",
+          "lineNumber": 104
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 104
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.get",
+          "lineNumber": 106
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "uuid.uuid4",
+          "lineNumber": 113
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.post",
+          "lineNumber": 114
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 120
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.get",
+          "lineNumber": 122
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 124
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_unique_email",
+          "lineNumber": 128
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_register",
+          "lineNumber": 129
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_bearer",
+          "lineNumber": 134
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.post",
+          "lineNumber": 135
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "uuid.uuid4",
+          "lineNumber": 137
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 141
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.get",
+          "lineNumber": 143
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 144
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.post",
+          "lineNumber": 147
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 153
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_invite_token",
+          "lineNumber": 156
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_unique_email",
+          "lineNumber": 158
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_register",
+          "lineNumber": 159
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_bearer",
+          "lineNumber": 164
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.post",
+          "lineNumber": 166
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 171
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.get",
+          "lineNumber": 175
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 177
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "len",
+          "lineNumber": 180
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.post",
+          "lineNumber": 183
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 189
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.get",
+          "lineNumber": 191
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 193
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "any",
+          "lineNumber": 195
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "patch",
+          "lineNumber": 197
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "patch",
+          "lineNumber": 197
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.post",
+          "lineNumber": 200
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 206
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.post",
+          "lineNumber": 208
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 214
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_insert_review_report",
+          "lineNumber": 216
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "UUID",
+          "lineNumber": 216
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "_insert_pending_diff",
+          "lineNumber": 217
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "UUID",
+          "lineNumber": 217
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.get",
+          "lineNumber": 219
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 221
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.post",
+          "lineNumber": 225
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 230
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.get",
+          "lineNumber": 233
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 235
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "isinstance",
+          "lineNumber": 238
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.get",
+          "lineNumber": 241
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 243
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "next",
+          "lineNumber": 245
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "test_client.get",
+          "lineNumber": 250
+        },
+        {
+          "caller": "test_smoke_platform_flow",
+          "callee": "r.json",
+          "lineNumber": 256
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 7,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_tasks_api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 28,
+      "functions": [
+        {
+          "name": "test_wip_limit_second_move_to_in_progress_conflict",
+          "startLine": 14,
+          "endLine": 36,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_wip_limit_second_move_to_in_progress_conflict",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_wip_limit_second_move_to_in_progress_conflict",
+          "callee": "create_project",
+          "lineNumber": 18
+        },
+        {
+          "caller": "test_wip_limit_second_move_to_in_progress_conflict",
+          "callee": "insert_tasks",
+          "lineNumber": 19
+        },
+        {
+          "caller": "test_wip_limit_second_move_to_in_progress_conflict",
+          "callee": "patch",
+          "lineNumber": 21
+        },
+        {
+          "caller": "test_wip_limit_second_move_to_in_progress_conflict",
+          "callee": "test_client.post",
+          "lineNumber": 22
+        },
+        {
+          "caller": "test_wip_limit_second_move_to_in_progress_conflict",
+          "callee": "r1.json",
+          "lineNumber": 28
+        },
+        {
+          "caller": "test_wip_limit_second_move_to_in_progress_conflict",
+          "callee": "test_client.post",
+          "lineNumber": 30
+        },
+        {
+          "caller": "test_wip_limit_second_move_to_in_progress_conflict",
+          "callee": "r2.json",
+          "lineNumber": 36
+        },
+        {
+          "caller": "test_wip_limit_second_move_to_in_progress_conflict",
+          "callee": "r2.json()[\"detail\"].lower",
+          "lineNumber": 36
+        },
+        {
+          "caller": "test_wip_limit_second_move_to_in_progress_conflict",
+          "callee": "r2.json",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_tc10_memory_five_done_cycles.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 148,
+      "nonEmptyLines": 124,
+      "functions": [
+        {
+          "name": "_cleanup_project",
+          "startLine": 28,
+          "endLine": 31,
+          "params": [
+            "project_id"
+          ]
+        },
+        {
+          "name": "tc10_project_id",
+          "startLine": 35,
+          "endLine": 109,
+          "params": [
+            "monkeypatch",
+            "tmp_path"
+          ]
+        },
+        {
+          "name": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "startLine": 113,
+          "endLine": 148,
+          "params": [
+            "tc10_project_id",
+            "tmp_path"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_cleanup_project",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "tc10_project_id",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "line": 112,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_cleanup_project",
+          "callee": "async_session_maker",
+          "lineNumber": 29
+        },
+        {
+          "caller": "_cleanup_project",
+          "callee": "session.execute",
+          "lineNumber": 30
+        },
+        {
+          "caller": "_cleanup_project",
+          "callee": "delete(Project).where",
+          "lineNumber": 30
+        },
+        {
+          "caller": "_cleanup_project",
+          "callee": "delete",
+          "lineNumber": 30
+        },
+        {
+          "caller": "_cleanup_project",
+          "callee": "session.commit",
+          "lineNumber": 31
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "engine.connect",
+          "lineNumber": 38
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "conn.execute",
+          "lineNumber": 39
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "text",
+          "lineNumber": 39
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "str(exc).lower",
+          "lineNumber": 41
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "str",
+          "lineNumber": 41
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "str",
+          "lineNumber": 42
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "pytest.skip",
+          "lineNumber": 43
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "monkeypatch.setattr",
+          "lineNumber": 46
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "str",
+          "lineNumber": 46
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "monkeypatch.setattr",
+          "lineNumber": 54
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "uuid.uuid4",
+          "lineNumber": 56
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "async_session_maker",
+          "lineNumber": 59
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "Project",
+          "lineNumber": 60
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "session.add",
+          "lineNumber": 67
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "session.flush",
+          "lineNumber": 68
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "range",
+          "lineNumber": 72
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "Task",
+          "lineNumber": 73
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "session.add",
+          "lineNumber": 80
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "task_rows.append",
+          "lineNumber": 81
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "session.flush",
+          "lineNumber": 82
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "enumerate",
+          "lineNumber": 84
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "session.add",
+          "lineNumber": 85
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "Diff",
+          "lineNumber": 86
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "session.flush",
+          "lineNumber": 96
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "(await session.execute(select(Diff).where(Diff.task_id == t.id))).scalar_one",
+          "lineNumber": 99
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "session.execute",
+          "lineNumber": 99
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "select(Diff).where",
+          "lineNumber": 99
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "select",
+          "lineNumber": 99
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "MemoryService.create_entry",
+          "lineNumber": 100
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "MemoryService.export_memory_file",
+          "lineNumber": 102
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "session.commit",
+          "lineNumber": 103
+        },
+        {
+          "caller": "tc10_project_id",
+          "callee": "_cleanup_project",
+          "lineNumber": 109
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "async_session_maker",
+          "lineNumber": 116
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "session.scalar",
+          "lineNumber": 117
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "select(func.count()).select_from(MemoryEntry).where",
+          "lineNumber": 118
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "select(func.count()).select_from",
+          "lineNumber": 118
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "select",
+          "lineNumber": 118
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "func.count",
+          "lineNumber": 118
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "int",
+          "lineNumber": 120
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "(\r\n            await session.execute(\r\n                select(MemoryEntry)\r\n                .where(MemoryEntry.project_id == project_id)\r\n                .order_by(MemoryEntry.entry_timestamp.asc())\r\n            )\r\n        ).scalars().all",
+          "lineNumber": 122
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "(\r\n            await session.execute(\r\n                select(MemoryEntry)\r\n                .where(MemoryEntry.project_id == project_id)\r\n                .order_by(MemoryEntry.entry_timestamp.asc())\r\n            )\r\n        ).scalars",
+          "lineNumber": 122
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "session.execute",
+          "lineNumber": 123
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "select(MemoryEntry)\r\n                .where(MemoryEntry.project_id == project_id)\r\n                .order_by",
+          "lineNumber": 124
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "select(MemoryEntry)\r\n                .where",
+          "lineNumber": 124
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "select",
+          "lineNumber": 124
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "MemoryEntry.entry_timestamp.asc",
+          "lineNumber": 126
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "len",
+          "lineNumber": 129
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "(row.summary or \"\").strip",
+          "lineNumber": 133
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "(row.lessons_learned or \"\").strip",
+          "lineNumber": 134
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "isinstance",
+          "lineNumber": 135
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "len",
+          "lineNumber": 136
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "all",
+          "lineNumber": 137
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "isinstance",
+          "lineNumber": 137
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "p.strip",
+          "lineNumber": 137
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "str",
+          "lineNumber": 139
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "md_path.is_file",
+          "lineNumber": 140
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "md_path.read_text",
+          "lineNumber": 141
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "re.findall",
+          "lineNumber": 142
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "len",
+          "lineNumber": 143
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "body.count",
+          "lineNumber": 144
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "body.count",
+          "lineNumber": 145
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "body.count",
+          "lineNumber": 146
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "body.count",
+          "lineNumber": 147
+        },
+        {
+          "caller": "test_tc10_five_memory_entries_all_fields_and_memory_md",
+          "callee": "body.count",
+          "lineNumber": 148
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_templates_api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 286,
+      "nonEmptyLines": 252,
+      "functions": [
+        {
+          "name": "_viewer_headers_for_project",
+          "startLine": 19,
+          "endLine": 55,
+          "params": [
+            "project_id"
+          ]
+        },
+        {
+          "name": "test_create_and_list_project_template",
+          "startLine": 59,
+          "endLine": 88,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_duplicate_template_name_returns_409",
+          "startLine": 92,
+          "endLine": 108,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_delete_template_by_creator",
+          "startLine": 112,
+          "endLine": 140,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_list_global_templates_without_project_id",
+          "startLine": 144,
+          "endLine": 167,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_viewer_cannot_create_project_template",
+          "startLine": 171,
+          "endLine": 189,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_duplicate_name_after_whitespace_returns_409",
+          "startLine": 193,
+          "endLine": 209,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_non_member_cannot_list_project_templates",
+          "startLine": 213,
+          "endLine": 245,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_list_combined_templates_for_project",
+          "startLine": 249,
+          "endLine": 286,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_viewer_headers_for_project",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "test_create_and_list_project_template",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "test_duplicate_template_name_returns_409",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "test_delete_template_by_creator",
+          "line": 111,
+          "isDefault": false
+        },
+        {
+          "name": "test_list_global_templates_without_project_id",
+          "line": 143,
+          "isDefault": false
+        },
+        {
+          "name": "test_viewer_cannot_create_project_template",
+          "line": 170,
+          "isDefault": false
+        },
+        {
+          "name": "test_duplicate_name_after_whitespace_returns_409",
+          "line": 192,
+          "isDefault": false
+        },
+        {
+          "name": "test_non_member_cannot_list_project_templates",
+          "line": 212,
+          "isDefault": false
+        },
+        {
+          "name": "test_list_combined_templates_for_project",
+          "line": 248,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "uuid.uuid4",
+          "lineNumber": 20
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "engine.begin",
+          "lineNumber": 21
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "conn.execute",
+          "lineNumber": 22
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "text",
+          "lineNumber": 23
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "res.scalar_one",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "conn.execute",
+          "lineNumber": 38
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "text",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "jwt.encode",
+          "lineNumber": 47
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "str",
+          "lineNumber": 49
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "datetime.now",
+          "lineNumber": 50
+        },
+        {
+          "caller": "_viewer_headers_for_project",
+          "callee": "timedelta",
+          "lineNumber": 50
+        },
+        {
+          "caller": "test_create_and_list_project_template",
+          "callee": "create_project",
+          "lineNumber": 63
+        },
+        {
+          "caller": "test_create_and_list_project_template",
+          "callee": "test_client.post",
+          "lineNumber": 65
+        },
+        {
+          "caller": "test_create_and_list_project_template",
+          "callee": "str",
+          "lineNumber": 73
+        },
+        {
+          "caller": "test_create_and_list_project_template",
+          "callee": "r_create.json",
+          "lineNumber": 77
+        },
+        {
+          "caller": "test_create_and_list_project_template",
+          "callee": "str",
+          "lineNumber": 80
+        },
+        {
+          "caller": "test_create_and_list_project_template",
+          "callee": "test_client.get",
+          "lineNumber": 82
+        },
+        {
+          "caller": "test_create_and_list_project_template",
+          "callee": "r_list.json",
+          "lineNumber": 87
+        },
+        {
+          "caller": "test_duplicate_template_name_returns_409",
+          "callee": "create_project",
+          "lineNumber": 96
+        },
+        {
+          "caller": "test_duplicate_template_name_returns_409",
+          "callee": "str",
+          "lineNumber": 102
+        },
+        {
+          "caller": "test_duplicate_template_name_returns_409",
+          "callee": "test_client.post",
+          "lineNumber": 104
+        },
+        {
+          "caller": "test_duplicate_template_name_returns_409",
+          "callee": "test_client.post",
+          "lineNumber": 107
+        },
+        {
+          "caller": "test_delete_template_by_creator",
+          "callee": "create_project",
+          "lineNumber": 116
+        },
+        {
+          "caller": "test_delete_template_by_creator",
+          "callee": "test_client.post",
+          "lineNumber": 117
+        },
+        {
+          "caller": "test_delete_template_by_creator",
+          "callee": "str",
+          "lineNumber": 125
+        },
+        {
+          "caller": "test_delete_template_by_creator",
+          "callee": "r_create.json",
+          "lineNumber": 128
+        },
+        {
+          "caller": "test_delete_template_by_creator",
+          "callee": "test_client.delete",
+          "lineNumber": 130
+        },
+        {
+          "caller": "test_delete_template_by_creator",
+          "callee": "test_client.get",
+          "lineNumber": 136
+        },
+        {
+          "caller": "test_delete_template_by_creator",
+          "callee": "all",
+          "lineNumber": 140
+        },
+        {
+          "caller": "test_delete_template_by_creator",
+          "callee": "r_list.json",
+          "lineNumber": 140
+        },
+        {
+          "caller": "test_list_global_templates_without_project_id",
+          "callee": "create_project",
+          "lineNumber": 148
+        },
+        {
+          "caller": "test_list_global_templates_without_project_id",
+          "callee": "uuid.uuid4",
+          "lineNumber": 149
+        },
+        {
+          "caller": "test_list_global_templates_without_project_id",
+          "callee": "test_client.post",
+          "lineNumber": 150
+        },
+        {
+          "caller": "test_list_global_templates_without_project_id",
+          "callee": "test_client.get",
+          "lineNumber": 162
+        },
+        {
+          "caller": "test_list_global_templates_without_project_id",
+          "callee": "any",
+          "lineNumber": 167
+        },
+        {
+          "caller": "test_list_global_templates_without_project_id",
+          "callee": "r_list.json",
+          "lineNumber": 167
+        },
+        {
+          "caller": "test_viewer_cannot_create_project_template",
+          "callee": "create_project",
+          "lineNumber": 175
+        },
+        {
+          "caller": "test_viewer_cannot_create_project_template",
+          "callee": "_viewer_headers_for_project",
+          "lineNumber": 176
+        },
+        {
+          "caller": "test_viewer_cannot_create_project_template",
+          "callee": "test_client.post",
+          "lineNumber": 178
+        },
+        {
+          "caller": "test_viewer_cannot_create_project_template",
+          "callee": "str",
+          "lineNumber": 186
+        },
+        {
+          "caller": "test_duplicate_name_after_whitespace_returns_409",
+          "callee": "create_project",
+          "lineNumber": 197
+        },
+        {
+          "caller": "test_duplicate_name_after_whitespace_returns_409",
+          "callee": "str",
+          "lineNumber": 203
+        },
+        {
+          "caller": "test_duplicate_name_after_whitespace_returns_409",
+          "callee": "test_client.post",
+          "lineNumber": 205
+        },
+        {
+          "caller": "test_duplicate_name_after_whitespace_returns_409",
+          "callee": "test_client.post",
+          "lineNumber": 208
+        },
+        {
+          "caller": "test_non_member_cannot_list_project_templates",
+          "callee": "create_project",
+          "lineNumber": 217
+        },
+        {
+          "caller": "test_non_member_cannot_list_project_templates",
+          "callee": "uuid.uuid4",
+          "lineNumber": 218
+        },
+        {
+          "caller": "test_non_member_cannot_list_project_templates",
+          "callee": "engine.begin",
+          "lineNumber": 219
+        },
+        {
+          "caller": "test_non_member_cannot_list_project_templates",
+          "callee": "conn.execute",
+          "lineNumber": 220
+        },
+        {
+          "caller": "test_non_member_cannot_list_project_templates",
+          "callee": "text",
+          "lineNumber": 221
+        },
+        {
+          "caller": "test_non_member_cannot_list_project_templates",
+          "callee": "jwt.encode",
+          "lineNumber": 234
+        },
+        {
+          "caller": "test_non_member_cannot_list_project_templates",
+          "callee": "str",
+          "lineNumber": 235
+        },
+        {
+          "caller": "test_non_member_cannot_list_project_templates",
+          "callee": "datetime.now",
+          "lineNumber": 235
+        },
+        {
+          "caller": "test_non_member_cannot_list_project_templates",
+          "callee": "timedelta",
+          "lineNumber": 235
+        },
+        {
+          "caller": "test_non_member_cannot_list_project_templates",
+          "callee": "test_client.get",
+          "lineNumber": 241
+        },
+        {
+          "caller": "test_list_combined_templates_for_project",
+          "callee": "create_project",
+          "lineNumber": 253
+        },
+        {
+          "caller": "test_list_combined_templates_for_project",
+          "callee": "uuid.uuid4",
+          "lineNumber": 254
+        },
+        {
+          "caller": "test_list_combined_templates_for_project",
+          "callee": "uuid.uuid4",
+          "lineNumber": 255
+        },
+        {
+          "caller": "test_list_combined_templates_for_project",
+          "callee": "test_client.post",
+          "lineNumber": 257
+        },
+        {
+          "caller": "test_list_combined_templates_for_project",
+          "callee": "str",
+          "lineNumber": 265
+        },
+        {
+          "caller": "test_list_combined_templates_for_project",
+          "callee": "test_client.post",
+          "lineNumber": 270
+        },
+        {
+          "caller": "test_list_combined_templates_for_project",
+          "callee": "test_client.get",
+          "lineNumber": 282
+        },
+        {
+          "caller": "test_list_combined_templates_for_project",
+          "callee": "r_list.json",
+          "lineNumber": 284
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 9,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_webhooks_api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 132,
+      "nonEmptyLines": 111,
+      "functions": [
+        {
+          "name": "test_webhooks_crud_and_test",
+          "startLine": 15,
+          "endLine": 83,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_create_webhook_rejects_invalid_event",
+          "startLine": 87,
+          "endLine": 100,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_update_webhook_rejects_empty_events",
+          "startLine": 104,
+          "endLine": 125,
+          "params": [
+            "test_client",
+            "auth_headers"
+          ]
+        },
+        {
+          "name": "test_webhooks_require_auth",
+          "startLine": 129,
+          "endLine": 132,
+          "params": [
+            "test_client"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_webhooks_crud_and_test",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "test_create_webhook_rejects_invalid_event",
+          "line": 86,
+          "isDefault": false
+        },
+        {
+          "name": "test_update_webhook_rejects_empty_events",
+          "line": 103,
+          "isDefault": false
+        },
+        {
+          "name": "test_webhooks_require_auth",
+          "line": 128,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "create_project",
+          "lineNumber": 19
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "test_client.get",
+          "lineNumber": 21
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "r.json",
+          "lineNumber": 23
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "test_client.post",
+          "lineNumber": 25
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "r.json",
+          "lineNumber": 35
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "test_client.get",
+          "lineNumber": 41
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "len",
+          "lineNumber": 43
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "r.json",
+          "lineNumber": 43
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "test_client.patch",
+          "lineNumber": 45
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "r.json",
+          "lineNumber": 51
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "test_client.post",
+          "lineNumber": 53
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "r.json()[\"detail\"].lower",
+          "lineNumber": 58
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "r.json",
+          "lineNumber": 58
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "test_client.patch",
+          "lineNumber": 60
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "patch",
+          "lineNumber": 67
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "AsyncMock",
+          "lineNumber": 69
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "test_client.post",
+          "lineNumber": 71
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "r.json",
+          "lineNumber": 76
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "r.json",
+          "lineNumber": 77
+        },
+        {
+          "caller": "test_webhooks_crud_and_test",
+          "callee": "test_client.delete",
+          "lineNumber": 79
+        },
+        {
+          "caller": "test_create_webhook_rejects_invalid_event",
+          "callee": "create_project",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_create_webhook_rejects_invalid_event",
+          "callee": "test_client.post",
+          "lineNumber": 92
+        },
+        {
+          "caller": "test_update_webhook_rejects_empty_events",
+          "callee": "create_project",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_update_webhook_rejects_empty_events",
+          "callee": "test_client.post",
+          "lineNumber": 109
+        },
+        {
+          "caller": "test_update_webhook_rejects_empty_events",
+          "callee": "r.json",
+          "lineNumber": 118
+        },
+        {
+          "caller": "test_update_webhook_rejects_empty_events",
+          "callee": "test_client.patch",
+          "lineNumber": 120
+        },
+        {
+          "caller": "test_webhooks_require_auth",
+          "callee": "UUID",
+          "lineNumber": 130
+        },
+        {
+          "caller": "test_webhooks_require_auth",
+          "callee": "test_client.get",
+          "lineNumber": 131
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/integration/test_ws_pause_tc09.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 109,
+      "nonEmptyLines": 91,
+      "functions": [
+        {
+          "name": "_ws_token",
+          "startLine": 29,
+          "endLine": 37,
+          "params": []
+        },
+        {
+          "name": "_seed_in_progress_task",
+          "startLine": 40,
+          "endLine": 67,
+          "params": []
+        },
+        {
+          "name": "_delete_project",
+          "startLine": 70,
+          "endLine": 73,
+          "params": [
+            "pid"
+          ]
+        },
+        {
+          "name": "_noop_pump_redis",
+          "startLine": 76,
+          "endLine": 78,
+          "params": [
+            "_task_id",
+            "_send",
+            "_stop"
+          ]
+        },
+        {
+          "name": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "startLine": 81,
+          "endLine": 109,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "_ws_token",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "_seed_in_progress_task",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "_delete_project",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "_noop_pump_redis",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "line": 81,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_ws_token",
+          "callee": "datetime.now",
+          "lineNumber": 32
+        },
+        {
+          "caller": "_ws_token",
+          "callee": "jwt.encode",
+          "lineNumber": 33
+        },
+        {
+          "caller": "_ws_token",
+          "callee": "timedelta",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_seed_in_progress_task",
+          "callee": "uuid.uuid4",
+          "lineNumber": 41
+        },
+        {
+          "caller": "_seed_in_progress_task",
+          "callee": "engine.begin",
+          "lineNumber": 42
+        },
+        {
+          "caller": "_seed_in_progress_task",
+          "callee": "(\r\n            await conn.execute(\r\n                text(\r\n                    \"\"\"\r\n                    INSERT INTO projects (name, description, primary_language, constitution, status)\r\n                    VALUES (:name, 't113', 'python', '', 'active')\r\n                    RETURNING id\r\n                    \"\"\"\r\n                ),\r\n                {\"name\": name},\r\n            )\r\n        ).scalar_one",
+          "lineNumber": 43
+        },
+        {
+          "caller": "_seed_in_progress_task",
+          "callee": "conn.execute",
+          "lineNumber": 44
+        },
+        {
+          "caller": "_seed_in_progress_task",
+          "callee": "text",
+          "lineNumber": 45
+        },
+        {
+          "caller": "_seed_in_progress_task",
+          "callee": "(\r\n            await conn.execute(\r\n                text(\r\n                    \"\"\"\r\n                    INSERT INTO tasks (project_id, title, description, status, priority)\r\n                    VALUES (:pid, 'TC-09 pause', NULL, 'in_progress', 0)\r\n                    RETURNING id\r\n                    \"\"\"\r\n                ),\r\n                {\"pid\": pid},\r\n            )\r\n        ).scalar_one",
+          "lineNumber": 55
+        },
+        {
+          "caller": "_seed_in_progress_task",
+          "callee": "conn.execute",
+          "lineNumber": 56
+        },
+        {
+          "caller": "_seed_in_progress_task",
+          "callee": "text",
+          "lineNumber": 57
+        },
+        {
+          "caller": "_delete_project",
+          "callee": "engine.begin",
+          "lineNumber": 71
+        },
+        {
+          "caller": "_delete_project",
+          "callee": "conn.execute",
+          "lineNumber": 72
+        },
+        {
+          "caller": "_delete_project",
+          "callee": "text",
+          "lineNumber": 72
+        },
+        {
+          "caller": "_delete_project",
+          "callee": "conn.execute",
+          "lineNumber": 73
+        },
+        {
+          "caller": "_delete_project",
+          "callee": "text",
+          "lineNumber": 73
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "asyncio.run",
+          "lineNumber": 85
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "_seed_in_progress_task",
+          "lineNumber": 85
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "pytest.skip",
+          "lineNumber": 87
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "_ws_token",
+          "lineNumber": 88
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "patch.object",
+          "lineNumber": 90
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "AsyncMock",
+          "lineNumber": 90
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "patch",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "TestClient",
+          "lineNumber": 93
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "client.websocket_connect",
+          "lineNumber": 95
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "ws.receive_text",
+          "lineNumber": 96
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "json.loads",
+          "lineNumber": 97
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "connected.get",
+          "lineNumber": 98
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "ws.send_text",
+          "lineNumber": 100
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "json.dumps",
+          "lineNumber": 100
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "ws.receive_text",
+          "lineNumber": 101
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "json.loads",
+          "lineNumber": 102
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "after.get",
+          "lineNumber": 104
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "after.get(\"content\", {}).get",
+          "lineNumber": 105
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "after.get",
+          "lineNumber": 105
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "after.get(\"content\", {}).get",
+          "lineNumber": 106
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "after.get",
+          "lineNumber": 106
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "asyncio.run",
+          "lineNumber": 109
+        },
+        {
+          "caller": "test_tc09_pause_at_most_one_server_event_after_pause",
+          "callee": "_delete_project",
+          "lineNumber": 109
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/test_placeholder.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "functions": [
+        {
+          "name": "test_placeholder",
+          "startLine": 3,
+          "endLine": 4,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_placeholder",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/unit/test_analytics_service.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 205,
+      "nonEmptyLines": 181,
+      "functions": [
+        {
+          "name": "seeded_project",
+          "startLine": 19,
+          "endLine": 119,
+          "params": [
+            "async_db_session"
+          ]
+        },
+        {
+          "name": "test_get_dashboard_data_counts_and_stale",
+          "startLine": 123,
+          "endLine": 141,
+          "params": [
+            "async_db_session",
+            "seeded_project"
+          ]
+        },
+        {
+          "name": "test_get_project_analytics_aggregates_metrics",
+          "startLine": 145,
+          "endLine": 164,
+          "params": [
+            "async_db_session",
+            "seeded_project"
+          ]
+        },
+        {
+          "name": "test_get_project_analytics_member_metrics_respect_period",
+          "startLine": 168,
+          "endLine": 187,
+          "params": [
+            "async_db_session",
+            "seeded_project"
+          ]
+        },
+        {
+          "name": "test_get_dashboard_data_excludes_archived_projects",
+          "startLine": 191,
+          "endLine": 205,
+          "params": [
+            "async_db_session",
+            "seeded_project"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "seeded_project",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_dashboard_data_counts_and_stale",
+          "line": 122,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_project_analytics_aggregates_metrics",
+          "line": 144,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_project_analytics_member_metrics_respect_period",
+          "line": 167,
+          "isDefault": false
+        },
+        {
+          "name": "test_get_dashboard_data_excludes_archived_projects",
+          "line": 190,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "seeded_project",
+          "callee": "async_db_session.execute",
+          "lineNumber": 20
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "text",
+          "lineNumber": 21
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "uuid.uuid4",
+          "lineNumber": 28
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "user_res.scalar_one",
+          "lineNumber": 30
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "async_db_session.execute",
+          "lineNumber": 32
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "text",
+          "lineNumber": 33
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "project_res.scalar_one",
+          "lineNumber": 41
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "async_db_session.execute",
+          "lineNumber": 43
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "text",
+          "lineNumber": 44
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "datetime.now",
+          "lineNumber": 53
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "timedelta",
+          "lineNumber": 53
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "datetime.now",
+          "lineNumber": 54
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "async_db_session.execute",
+          "lineNumber": 61
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "text",
+          "lineNumber": 62
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "async_db_session.execute",
+          "lineNumber": 71
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "text",
+          "lineNumber": 72
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "task_res.scalar_one",
+          "lineNumber": 75
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "timedelta",
+          "lineNumber": 77
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "timedelta",
+          "lineNumber": 78
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "AgentRun",
+          "lineNumber": 79
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "async_db_session.add",
+          "lineNumber": 90
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "async_db_session.execute",
+          "lineNumber": 92
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "text",
+          "lineNumber": 93
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "async_db_session.execute",
+          "lineNumber": 108
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "text",
+          "lineNumber": 109
+        },
+        {
+          "caller": "seeded_project",
+          "callee": "async_db_session.flush",
+          "lineNumber": 118
+        },
+        {
+          "caller": "test_get_dashboard_data_counts_and_stale",
+          "callee": "analytics_service.get_dashboard_data",
+          "lineNumber": 127
+        },
+        {
+          "caller": "test_get_dashboard_data_counts_and_stale",
+          "callee": "DashboardResponse.model_validate",
+          "lineNumber": 131
+        },
+        {
+          "caller": "test_get_dashboard_data_counts_and_stale",
+          "callee": "len",
+          "lineNumber": 132
+        },
+        {
+          "caller": "test_get_project_analytics_aggregates_metrics",
+          "callee": "datetime.now",
+          "lineNumber": 149
+        },
+        {
+          "caller": "test_get_project_analytics_aggregates_metrics",
+          "callee": "analytics_service.get_project_analytics",
+          "lineNumber": 150
+        },
+        {
+          "caller": "test_get_project_analytics_aggregates_metrics",
+          "callee": "timedelta",
+          "lineNumber": 153
+        },
+        {
+          "caller": "test_get_project_analytics_aggregates_metrics",
+          "callee": "timedelta",
+          "lineNumber": 154
+        },
+        {
+          "caller": "test_get_project_analytics_aggregates_metrics",
+          "callee": "AnalyticsResponse.model_validate",
+          "lineNumber": 156
+        },
+        {
+          "caller": "test_get_project_analytics_member_metrics_respect_period",
+          "callee": "datetime.now",
+          "lineNumber": 172
+        },
+        {
+          "caller": "test_get_project_analytics_member_metrics_respect_period",
+          "callee": "analytics_service.get_project_analytics",
+          "lineNumber": 173
+        },
+        {
+          "caller": "test_get_project_analytics_member_metrics_respect_period",
+          "callee": "timedelta",
+          "lineNumber": 176
+        },
+        {
+          "caller": "test_get_project_analytics_member_metrics_respect_period",
+          "callee": "timedelta",
+          "lineNumber": 177
+        },
+        {
+          "caller": "test_get_project_analytics_member_metrics_respect_period",
+          "callee": "analytics_service.get_project_analytics",
+          "lineNumber": 181
+        },
+        {
+          "caller": "test_get_project_analytics_member_metrics_respect_period",
+          "callee": "timedelta",
+          "lineNumber": 184
+        },
+        {
+          "caller": "test_get_project_analytics_member_metrics_respect_period",
+          "callee": "timedelta",
+          "lineNumber": 185
+        },
+        {
+          "caller": "test_get_dashboard_data_excludes_archived_projects",
+          "callee": "async_db_session.execute",
+          "lineNumber": 195
+        },
+        {
+          "caller": "test_get_dashboard_data_excludes_archived_projects",
+          "callee": "text",
+          "lineNumber": 196
+        },
+        {
+          "caller": "test_get_dashboard_data_excludes_archived_projects",
+          "callee": "async_db_session.flush",
+          "lineNumber": 199
+        },
+        {
+          "caller": "test_get_dashboard_data_excludes_archived_projects",
+          "callee": "analytics_service.get_dashboard_data",
+          "lineNumber": 201
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/unit/test_backend_routing.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 24,
+      "classes": [
+        {
+          "name": "TestRouteCoder",
+          "startLine": 11,
+          "endLine": 28,
+          "methods": [
+            "test_claude_code_routes_to_cli_node",
+            "test_gemini_routes_to_cli_node",
+            "test_groq_routes_to_coder_node",
+            "test_openai_routes_to_coder_node",
+            "test_missing_backend_defaults_to_coder_node",
+            "test_unknown_backend_defaults_to_coder_node"
+          ],
+          "properties": []
+        },
+        {
+          "name": "TestAgentStateHasCodingBackend",
+          "startLine": 31,
+          "endLine": 37,
+          "methods": [
+            "test_coding_backend_key_exists_in_typeddict",
+            "test_coding_backend_type_is_str"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TestRouteCoder",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "TestAgentStateHasCodingBackend",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_claude_code_routes_to_cli_node",
+          "callee": "route_coder",
+          "lineNumber": 13
+        },
+        {
+          "caller": "test_gemini_routes_to_cli_node",
+          "callee": "route_coder",
+          "lineNumber": 16
+        },
+        {
+          "caller": "test_groq_routes_to_coder_node",
+          "callee": "route_coder",
+          "lineNumber": 19
+        },
+        {
+          "caller": "test_openai_routes_to_coder_node",
+          "callee": "route_coder",
+          "lineNumber": 22
+        },
+        {
+          "caller": "test_missing_backend_defaults_to_coder_node",
+          "callee": "route_coder",
+          "lineNumber": 25
+        },
+        {
+          "caller": "test_unknown_backend_defaults_to_coder_node",
+          "callee": "route_coder",
+          "lineNumber": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "backend/tests/unit/test_branch_service.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 7,
+      "functions": [
+        {
+          "name": "test_task_branch_slug",
+          "startLine": 10,
+          "endLine": 12,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_task_branch_slug",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_task_branch_slug",
+          "callee": "UUID",
+          "lineNumber": 11
+        },
+        {
+          "caller": "test_task_branch_slug",
+          "callee": "task_branch_slug",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/unit/test_branch_squash_tc12.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "startLine": 15,
+          "endLine": 38,
+          "params": [
+            "tmp_path"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "Repo.init",
+          "lineNumber": 16
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "repo.config_writer",
+          "lineNumber": 17
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "cw.set_value",
+          "lineNumber": 18
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "cw.set_value",
+          "lineNumber": 19
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "(tmp_path / \"README.md\").write_text",
+          "lineNumber": 21
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "repo.index.add",
+          "lineNumber": 22
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "repo.index.commit",
+          "lineNumber": 23
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "_sync_ensure_task_branch",
+          "lineNumber": 26
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "range",
+          "lineNumber": 28
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "(tmp_path / f\"feat_{i}.py\").write_text",
+          "lineNumber": 29
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "repo.index.add",
+          "lineNumber": 30
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "repo.index.commit",
+          "lineNumber": 31
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "int",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "repo.git.rev_list",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "_sync_squash_merge_to_integration",
+          "lineNumber": 35
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "int",
+          "lineNumber": 37
+        },
+        {
+          "caller": "test_tc12_squash_merge_adds_single_commit_on_main",
+          "callee": "repo.git.rev_list",
+          "lineNumber": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/unit/test_cli_coder_node.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 213,
+      "nonEmptyLines": 172,
+      "functions": [
+        {
+          "name": "_make_proc",
+          "startLine": 26,
+          "endLine": 49,
+          "params": [
+            "returncode",
+            "stdout_lines",
+            "stderr_lines"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TestCliCoderNodeTimeout",
+          "startLine": 53,
+          "endLine": 117,
+          "methods": [
+            "test_timeout_sets_rejected_and_publishes_error"
+          ],
+          "properties": []
+        },
+        {
+          "name": "TestCliCoderNodeExitCode127",
+          "startLine": 121,
+          "endLine": 163,
+          "methods": [
+            "test_exit_127_sets_cli_not_found"
+          ],
+          "properties": []
+        },
+        {
+          "name": "TestCliCoderNodeSuccess",
+          "startLine": 167,
+          "endLine": 213,
+          "methods": [
+            "test_success_saves_diff"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "_make_proc",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "TestCliCoderNodeTimeout",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "TestCliCoderNodeExitCode127",
+          "line": 120,
+          "isDefault": false
+        },
+        {
+          "name": "TestCliCoderNodeSuccess",
+          "line": 166,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_make_proc",
+          "callee": "MagicMock",
+          "lineNumber": 28
+        },
+        {
+          "caller": "_make_proc",
+          "callee": "MagicMock",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_make_proc",
+          "callee": "_stdout_aiter",
+          "lineNumber": 40
+        },
+        {
+          "caller": "_make_proc",
+          "callee": "MagicMock",
+          "lineNumber": 41
+        },
+        {
+          "caller": "_make_proc",
+          "callee": "_stderr_aiter",
+          "lineNumber": 42
+        },
+        {
+          "caller": "_make_proc",
+          "callee": "MagicMock",
+          "lineNumber": 48
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 60
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 61
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 62
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 63
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 64
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 65
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 66
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 67
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 68
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 69
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "MagicMock",
+          "lineNumber": 72
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "MagicMock",
+          "lineNumber": 74
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "uuid.uuid4",
+          "lineNumber": 74
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "AsyncMock",
+          "lineNumber": 77
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "AsyncMock",
+          "lineNumber": 78
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "AsyncMock",
+          "lineNumber": 79
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "AsyncMock",
+          "lineNumber": 80
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "MagicMock",
+          "lineNumber": 80
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "MagicMock",
+          "lineNumber": 81
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "AsyncMock",
+          "lineNumber": 82
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "AsyncMock",
+          "lineNumber": 83
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "MagicMock",
+          "lineNumber": 87
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "MagicMock",
+          "lineNumber": 88
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "iter",
+          "lineNumber": 89
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "MagicMock",
+          "lineNumber": 90
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "iter",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "MagicMock",
+          "lineNumber": 92
+        },
+        {
+          "caller": "_hanging_wait",
+          "callee": "asyncio.sleep",
+          "lineNumber": 95
+        },
+        {
+          "caller": "_fast_timeout",
+          "callee": "proc.kill",
+          "lineNumber": 104
+        },
+        {
+          "caller": "_fast_timeout",
+          "callee": "asyncio.TimeoutError",
+          "lineNumber": 105
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "patch",
+          "lineNumber": 107
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "cli_coder_node._run_with_session",
+          "lineNumber": 108
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "len",
+          "lineNumber": 114
+        },
+        {
+          "caller": "test_timeout_sets_rejected_and_publishes_error",
+          "callee": "str",
+          "lineNumber": 114
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "patch",
+          "lineNumber": 128
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "patch",
+          "lineNumber": 129
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "patch",
+          "lineNumber": 130
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "patch",
+          "lineNumber": 131
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "patch",
+          "lineNumber": 132
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "patch",
+          "lineNumber": 133
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "patch",
+          "lineNumber": 134
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "patch",
+          "lineNumber": 135
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "patch",
+          "lineNumber": 136
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "patch",
+          "lineNumber": 137
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "MagicMock",
+          "lineNumber": 139
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "MagicMock",
+          "lineNumber": 141
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "uuid.uuid4",
+          "lineNumber": 141
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "AsyncMock",
+          "lineNumber": 143
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "AsyncMock",
+          "lineNumber": 144
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "AsyncMock",
+          "lineNumber": 145
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "AsyncMock",
+          "lineNumber": 146
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "MagicMock",
+          "lineNumber": 146
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "MagicMock",
+          "lineNumber": 147
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "AsyncMock",
+          "lineNumber": 148
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "AsyncMock",
+          "lineNumber": 149
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "_make_proc",
+          "lineNumber": 152
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "cli_coder_node._run_with_session",
+          "lineNumber": 155
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "str",
+          "lineNumber": 161
+        },
+        {
+          "caller": "test_exit_127_sets_cli_not_found",
+          "callee": "len",
+          "lineNumber": 163
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "MagicMock",
+          "lineNumber": 173
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 180
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 181
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 182
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 183
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 184
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 185
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 186
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 187
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 188
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 189
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 190
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 191
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "patch",
+          "lineNumber": 192
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "MagicMock",
+          "lineNumber": 194
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "MagicMock",
+          "lineNumber": 196
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "uuid.uuid4",
+          "lineNumber": 196
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "AsyncMock",
+          "lineNumber": 198
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "AsyncMock",
+          "lineNumber": 199
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "AsyncMock",
+          "lineNumber": 200
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "AsyncMock",
+          "lineNumber": 201
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "MagicMock",
+          "lineNumber": 201
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "MagicMock",
+          "lineNumber": 202
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "AsyncMock",
+          "lineNumber": 203
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "AsyncMock",
+          "lineNumber": 204
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "_make_proc",
+          "lineNumber": 207
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "cli_coder_node._run_with_session",
+          "lineNumber": 210
+        },
+        {
+          "caller": "test_success_saves_diff",
+          "callee": "state.get",
+          "lineNumber": 212
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 1,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "backend/tests/unit/test_codebase_mapper.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 87,
+      "nonEmptyLines": 70,
+      "functions": [
+        {
+          "name": "test_build_python_map_extracts_class_function_and_method",
+          "startLine": 13,
+          "endLine": 40,
+          "params": [
+            "tmp_path"
+          ]
+        },
+        {
+          "name": "test_directory_tree_contains_scanned_file",
+          "startLine": 43,
+          "endLine": 49,
+          "params": [
+            "tmp_path"
+          ]
+        },
+        {
+          "name": "test_javascript_export_class_and_function",
+          "startLine": 52,
+          "endLine": 63,
+          "params": [
+            "tmp_path"
+          ]
+        },
+        {
+          "name": "test_tc11_500_python_files_map_within_ten_seconds",
+          "startLine": 66,
+          "endLine": 82,
+          "params": [
+            "tmp_path"
+          ]
+        },
+        {
+          "name": "test_invalid_language_raises",
+          "startLine": 85,
+          "endLine": 87,
+          "params": [
+            "tmp_path"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_build_python_map_extracts_class_function_and_method",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "test_directory_tree_contains_scanned_file",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "test_javascript_export_class_and_function",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "test_tc11_500_python_files_map_within_ten_seconds",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "test_invalid_language_raises",
+          "line": 85,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "pytest.importorskip",
+          "lineNumber": 14
+        },
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "pkg.mkdir",
+          "lineNumber": 16
+        },
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "(pkg / \"mod.py\").write_text",
+          "lineNumber": 17
+        },
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "uuid4",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "build_codebase_map_dict",
+          "lineNumber": 28
+        },
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "str",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "f0[\"path\"].endswith",
+          "lineNumber": 34
+        },
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "next",
+          "lineNumber": 38
+        },
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "any",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "ch.get",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_build_python_map_extracts_class_function_and_method",
+          "callee": "foo.get",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_directory_tree_contains_scanned_file",
+          "callee": "(tmp_path / \"a.py\").write_text",
+          "lineNumber": 44
+        },
+        {
+          "caller": "test_directory_tree_contains_scanned_file",
+          "callee": "build_codebase_map_dict",
+          "lineNumber": 45
+        },
+        {
+          "caller": "test_directory_tree_contains_scanned_file",
+          "callee": "uuid4",
+          "lineNumber": 45
+        },
+        {
+          "caller": "test_directory_tree_contains_scanned_file",
+          "callee": "tree.get",
+          "lineNumber": 48
+        },
+        {
+          "caller": "test_javascript_export_class_and_function",
+          "callee": "pytest.importorskip",
+          "lineNumber": 53
+        },
+        {
+          "caller": "test_javascript_export_class_and_function",
+          "callee": "(tmp_path / \"app.js\").write_text",
+          "lineNumber": 54
+        },
+        {
+          "caller": "test_javascript_export_class_and_function",
+          "callee": "build_codebase_map_dict",
+          "lineNumber": 58
+        },
+        {
+          "caller": "test_javascript_export_class_and_function",
+          "callee": "uuid4",
+          "lineNumber": 58
+        },
+        {
+          "caller": "test_tc11_500_python_files_map_within_ten_seconds",
+          "callee": "pytest.importorskip",
+          "lineNumber": 68
+        },
+        {
+          "caller": "test_tc11_500_python_files_map_within_ten_seconds",
+          "callee": "range",
+          "lineNumber": 71
+        },
+        {
+          "caller": "test_tc11_500_python_files_map_within_ten_seconds",
+          "callee": "(tmp_path / f\"m_{i:05d}.py\").write_text",
+          "lineNumber": 72
+        },
+        {
+          "caller": "test_tc11_500_python_files_map_within_ten_seconds",
+          "callee": "uuid4",
+          "lineNumber": 74
+        },
+        {
+          "caller": "test_tc11_500_python_files_map_within_ten_seconds",
+          "callee": "time.perf_counter",
+          "lineNumber": 75
+        },
+        {
+          "caller": "test_tc11_500_python_files_map_within_ten_seconds",
+          "callee": "build_codebase_map_dict",
+          "lineNumber": 76
+        },
+        {
+          "caller": "test_tc11_500_python_files_map_within_ten_seconds",
+          "callee": "time.perf_counter",
+          "lineNumber": 77
+        },
+        {
+          "caller": "test_tc11_500_python_files_map_within_ten_seconds",
+          "callee": "len",
+          "lineNumber": 81
+        },
+        {
+          "caller": "test_invalid_language_raises",
+          "callee": "pytest.raises",
+          "lineNumber": 86
+        },
+        {
+          "caller": "test_invalid_language_raises",
+          "callee": "build_codebase_map_dict",
+          "lineNumber": 87
+        },
+        {
+          "caller": "test_invalid_language_raises",
+          "callee": "uuid4",
+          "lineNumber": 87
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/unit/test_dependency_service.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 190,
+      "nonEmptyLines": 153,
+      "functions": [
+        {
+          "name": "_insert_task",
+          "startLine": 18,
+          "endLine": 36,
+          "params": [
+            "session",
+            "project_id",
+            "title",
+            "status"
+          ]
+        },
+        {
+          "name": "project_id",
+          "startLine": 40,
+          "endLine": 52,
+          "params": [
+            "async_db_session"
+          ]
+        },
+        {
+          "name": "test_add_dependency_blocks_until_prerequisite_done",
+          "startLine": 56,
+          "endLine": 76,
+          "params": [
+            "async_db_session",
+            "project_id"
+          ]
+        },
+        {
+          "name": "test_add_dependency_rejects_cycle",
+          "startLine": 80,
+          "endLine": 94,
+          "params": [
+            "async_db_session",
+            "project_id"
+          ]
+        },
+        {
+          "name": "test_add_dependency_on_done_prerequisite_clears_blocked_flag",
+          "startLine": 98,
+          "endLine": 112,
+          "params": [
+            "async_db_session",
+            "project_id"
+          ]
+        },
+        {
+          "name": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "startLine": 116,
+          "endLine": 134,
+          "params": [
+            "async_db_session",
+            "project_id"
+          ]
+        },
+        {
+          "name": "test_enforce_not_blocked_revalidates_stale_false_flag",
+          "startLine": 138,
+          "endLine": 151,
+          "params": [
+            "async_db_session",
+            "project_id"
+          ]
+        },
+        {
+          "name": "test_delete_prerequisite_resyncs_dependent_blocked_flag",
+          "startLine": 155,
+          "endLine": 171,
+          "params": [
+            "async_db_session",
+            "project_id"
+          ]
+        },
+        {
+          "name": "test_remove_dependency_recomputes_blocked_flag",
+          "startLine": 175,
+          "endLine": 190,
+          "params": [
+            "async_db_session",
+            "project_id"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "_insert_task",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "project_id",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "test_add_dependency_blocks_until_prerequisite_done",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "test_add_dependency_rejects_cycle",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "test_add_dependency_on_done_prerequisite_clears_blocked_flag",
+          "line": 97,
+          "isDefault": false
+        },
+        {
+          "name": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "line": 115,
+          "isDefault": false
+        },
+        {
+          "name": "test_enforce_not_blocked_revalidates_stale_false_flag",
+          "line": 137,
+          "isDefault": false
+        },
+        {
+          "name": "test_delete_prerequisite_resyncs_dependent_blocked_flag",
+          "line": 154,
+          "isDefault": false
+        },
+        {
+          "name": "test_remove_dependency_recomputes_blocked_flag",
+          "line": 174,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_insert_task",
+          "callee": "datetime.now",
+          "lineNumber": 25
+        },
+        {
+          "caller": "_insert_task",
+          "callee": "Task",
+          "lineNumber": 26
+        },
+        {
+          "caller": "_insert_task",
+          "callee": "session.add",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_insert_task",
+          "callee": "session.flush",
+          "lineNumber": 35
+        },
+        {
+          "caller": "project_id",
+          "callee": "async_db_session.execute",
+          "lineNumber": 41
+        },
+        {
+          "caller": "project_id",
+          "callee": "text",
+          "lineNumber": 42
+        },
+        {
+          "caller": "project_id",
+          "callee": "res.scalar_one",
+          "lineNumber": 50
+        },
+        {
+          "caller": "project_id",
+          "callee": "async_db_session.flush",
+          "lineNumber": 51
+        },
+        {
+          "caller": "test_add_dependency_blocks_until_prerequisite_done",
+          "callee": "_insert_task",
+          "lineNumber": 60
+        },
+        {
+          "caller": "test_add_dependency_blocks_until_prerequisite_done",
+          "callee": "_insert_task",
+          "lineNumber": 61
+        },
+        {
+          "caller": "test_add_dependency_blocks_until_prerequisite_done",
+          "callee": "dependency_service.add_dependency",
+          "lineNumber": 63
+        },
+        {
+          "caller": "test_add_dependency_blocks_until_prerequisite_done",
+          "callee": "async_db_session.refresh",
+          "lineNumber": 66
+        },
+        {
+          "caller": "test_add_dependency_blocks_until_prerequisite_done",
+          "callee": "async_db_session.flush",
+          "lineNumber": 71
+        },
+        {
+          "caller": "test_add_dependency_blocks_until_prerequisite_done",
+          "callee": "dependency_service.unlock_dependents",
+          "lineNumber": 72
+        },
+        {
+          "caller": "test_add_dependency_blocks_until_prerequisite_done",
+          "callee": "async_db_session.refresh",
+          "lineNumber": 73
+        },
+        {
+          "caller": "test_add_dependency_rejects_cycle",
+          "callee": "_insert_task",
+          "lineNumber": 84
+        },
+        {
+          "caller": "test_add_dependency_rejects_cycle",
+          "callee": "_insert_task",
+          "lineNumber": 85
+        },
+        {
+          "caller": "test_add_dependency_rejects_cycle",
+          "callee": "dependency_service.add_dependency",
+          "lineNumber": 87
+        },
+        {
+          "caller": "test_add_dependency_rejects_cycle",
+          "callee": "pytest.raises",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_add_dependency_rejects_cycle",
+          "callee": "dependency_service.add_dependency",
+          "lineNumber": 92
+        },
+        {
+          "caller": "test_add_dependency_on_done_prerequisite_clears_blocked_flag",
+          "callee": "_insert_task",
+          "lineNumber": 102
+        },
+        {
+          "caller": "test_add_dependency_on_done_prerequisite_clears_blocked_flag",
+          "callee": "_insert_task",
+          "lineNumber": 103
+        },
+        {
+          "caller": "test_add_dependency_on_done_prerequisite_clears_blocked_flag",
+          "callee": "async_db_session.flush",
+          "lineNumber": 105
+        },
+        {
+          "caller": "test_add_dependency_on_done_prerequisite_clears_blocked_flag",
+          "callee": "dependency_service.add_dependency",
+          "lineNumber": 107
+        },
+        {
+          "caller": "test_add_dependency_on_done_prerequisite_clears_blocked_flag",
+          "callee": "async_db_session.refresh",
+          "lineNumber": 110
+        },
+        {
+          "caller": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "callee": "_insert_task",
+          "lineNumber": 120
+        },
+        {
+          "caller": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "callee": "_insert_task",
+          "lineNumber": 121
+        },
+        {
+          "caller": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "callee": "_insert_task",
+          "lineNumber": 122
+        },
+        {
+          "caller": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "callee": "dependency_service.add_dependency",
+          "lineNumber": 123
+        },
+        {
+          "caller": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "callee": "dependency_service.add_dependency",
+          "lineNumber": 124
+        },
+        {
+          "caller": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "callee": "async_db_session.refresh",
+          "lineNumber": 125
+        },
+        {
+          "caller": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "callee": "async_db_session.flush",
+          "lineNumber": 129
+        },
+        {
+          "caller": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "callee": "dependency_service.unlock_dependents",
+          "lineNumber": 130
+        },
+        {
+          "caller": "test_unlock_dependents_reblocks_when_other_prerequisite_open",
+          "callee": "async_db_session.refresh",
+          "lineNumber": 131
+        },
+        {
+          "caller": "test_enforce_not_blocked_revalidates_stale_false_flag",
+          "callee": "_insert_task",
+          "lineNumber": 142
+        },
+        {
+          "caller": "test_enforce_not_blocked_revalidates_stale_false_flag",
+          "callee": "_insert_task",
+          "lineNumber": 143
+        },
+        {
+          "caller": "test_enforce_not_blocked_revalidates_stale_false_flag",
+          "callee": "dependency_service.add_dependency",
+          "lineNumber": 144
+        },
+        {
+          "caller": "test_enforce_not_blocked_revalidates_stale_false_flag",
+          "callee": "async_db_session.flush",
+          "lineNumber": 148
+        },
+        {
+          "caller": "test_enforce_not_blocked_revalidates_stale_false_flag",
+          "callee": "pytest.raises",
+          "lineNumber": 150
+        },
+        {
+          "caller": "test_enforce_not_blocked_revalidates_stale_false_flag",
+          "callee": "dependency_service.enforce_not_blocked_for_move",
+          "lineNumber": 151
+        },
+        {
+          "caller": "test_delete_prerequisite_resyncs_dependent_blocked_flag",
+          "callee": "_insert_task",
+          "lineNumber": 159
+        },
+        {
+          "caller": "test_delete_prerequisite_resyncs_dependent_blocked_flag",
+          "callee": "_insert_task",
+          "lineNumber": 160
+        },
+        {
+          "caller": "test_delete_prerequisite_resyncs_dependent_blocked_flag",
+          "callee": "dependency_service.add_dependency",
+          "lineNumber": 161
+        },
+        {
+          "caller": "test_delete_prerequisite_resyncs_dependent_blocked_flag",
+          "callee": "async_db_session.refresh",
+          "lineNumber": 164
+        },
+        {
+          "caller": "test_delete_prerequisite_resyncs_dependent_blocked_flag",
+          "callee": "async_db_session.delete",
+          "lineNumber": 167
+        },
+        {
+          "caller": "test_delete_prerequisite_resyncs_dependent_blocked_flag",
+          "callee": "async_db_session.flush",
+          "lineNumber": 168
+        },
+        {
+          "caller": "test_delete_prerequisite_resyncs_dependent_blocked_flag",
+          "callee": "async_db_session.refresh",
+          "lineNumber": 169
+        },
+        {
+          "caller": "test_remove_dependency_recomputes_blocked_flag",
+          "callee": "_insert_task",
+          "lineNumber": 179
+        },
+        {
+          "caller": "test_remove_dependency_recomputes_blocked_flag",
+          "callee": "_insert_task",
+          "lineNumber": 180
+        },
+        {
+          "caller": "test_remove_dependency_recomputes_blocked_flag",
+          "callee": "dependency_service.add_dependency",
+          "lineNumber": 182
+        },
+        {
+          "caller": "test_remove_dependency_recomputes_blocked_flag",
+          "callee": "dependency_service.remove_dependency",
+          "lineNumber": 185
+        },
+        {
+          "caller": "test_remove_dependency_recomputes_blocked_flag",
+          "callee": "async_db_session.refresh",
+          "lineNumber": 188
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 9,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "backend/tests/unit/test_github_service.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 111,
+      "nonEmptyLines": 92,
+      "functions": [
+        {
+          "name": "test_encrypt_decrypt_pat_roundtrip",
+          "startLine": 18,
+          "endLine": 22,
+          "params": []
+        },
+        {
+          "name": "test_validate_config_success",
+          "startLine": 26,
+          "endLine": 32,
+          "params": []
+        },
+        {
+          "name": "test_validate_config_failure",
+          "startLine": 36,
+          "endLine": 42,
+          "params": []
+        },
+        {
+          "name": "test_validate_config_handles_network_errors",
+          "startLine": 46,
+          "endLine": 50,
+          "params": []
+        },
+        {
+          "name": "github_task",
+          "startLine": 54,
+          "endLine": 83,
+          "params": [
+            "async_db_session"
+          ]
+        },
+        {
+          "name": "test_create_pull_request_returns_url",
+          "startLine": 87,
+          "endLine": 111,
+          "params": [
+            "github_task"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "test_encrypt_decrypt_pat_roundtrip",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "test_validate_config_success",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "test_validate_config_failure",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "test_validate_config_handles_network_errors",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "github_task",
+          "line": 53,
+          "isDefault": false
+        },
+        {
+          "name": "test_create_pull_request_returns_url",
+          "line": 86,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "test_encrypt_decrypt_pat_roundtrip",
+          "callee": "github_service.encrypt_pat",
+          "lineNumber": 20
+        },
+        {
+          "caller": "test_encrypt_decrypt_pat_roundtrip",
+          "callee": "github_service.decrypt_pat",
+          "lineNumber": 22
+        },
+        {
+          "caller": "test_validate_config_success",
+          "callee": "MagicMock",
+          "lineNumber": 27
+        },
+        {
+          "caller": "test_validate_config_success",
+          "callee": "patch",
+          "lineNumber": 28
+        },
+        {
+          "caller": "test_validate_config_success",
+          "callee": "github_service.validate_config",
+          "lineNumber": 30
+        },
+        {
+          "caller": "test_validate_config_success",
+          "callee": "github_cls.return_value.get_repo.assert_called_once_with",
+          "lineNumber": 32
+        },
+        {
+          "caller": "test_validate_config_failure",
+          "callee": "patch",
+          "lineNumber": 39
+        },
+        {
+          "caller": "test_validate_config_failure",
+          "callee": "GithubException",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_validate_config_failure",
+          "callee": "github_service.validate_config",
+          "lineNumber": 41
+        },
+        {
+          "caller": "test_validate_config_handles_network_errors",
+          "callee": "patch",
+          "lineNumber": 47
+        },
+        {
+          "caller": "test_validate_config_handles_network_errors",
+          "callee": "ConnectionError",
+          "lineNumber": 48
+        },
+        {
+          "caller": "test_validate_config_handles_network_errors",
+          "callee": "github_service.validate_config",
+          "lineNumber": 49
+        },
+        {
+          "caller": "github_task",
+          "callee": "async_db_session.execute",
+          "lineNumber": 55
+        },
+        {
+          "caller": "github_task",
+          "callee": "text",
+          "lineNumber": 56
+        },
+        {
+          "caller": "github_task",
+          "callee": "uuid.uuid4",
+          "lineNumber": 63
+        },
+        {
+          "caller": "github_task",
+          "callee": "project_res.scalar_one",
+          "lineNumber": 65
+        },
+        {
+          "caller": "github_task",
+          "callee": "GitHubConfig",
+          "lineNumber": 66
+        },
+        {
+          "caller": "github_task",
+          "callee": "github_service.encrypt_pat",
+          "lineNumber": 69
+        },
+        {
+          "caller": "github_task",
+          "callee": "Task",
+          "lineNumber": 73
+        },
+        {
+          "caller": "github_task",
+          "callee": "async_db_session.add",
+          "lineNumber": 80
+        },
+        {
+          "caller": "github_task",
+          "callee": "async_db_session.add",
+          "lineNumber": 81
+        },
+        {
+          "caller": "github_task",
+          "callee": "async_db_session.flush",
+          "lineNumber": 82
+        },
+        {
+          "caller": "test_create_pull_request_returns_url",
+          "callee": "MagicMock",
+          "lineNumber": 89
+        },
+        {
+          "caller": "test_create_pull_request_returns_url",
+          "callee": "MagicMock",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_create_pull_request_returns_url",
+          "callee": "patch",
+          "lineNumber": 95
+        },
+        {
+          "caller": "test_create_pull_request_returns_url",
+          "callee": "patch",
+          "lineNumber": 96
+        },
+        {
+          "caller": "test_create_pull_request_returns_url",
+          "callee": "github_service.create_pull_request",
+          "lineNumber": 99
+        },
+        {
+          "caller": "test_create_pull_request_returns_url",
+          "callee": "mock_repo.create_pull.assert_called_once",
+          "lineNumber": 107
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    }
+  ]
+}

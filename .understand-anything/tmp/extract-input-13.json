@@ -1,0 +1,43 @@
+{
+    "projectRoot":  "D:\\KLTN\\kanban-ai",
+    "batchFiles":  [
+                       {
+                           "path":  "audit/report.html",
+                           "language":  "html",
+                           "sizeLines":  2893,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "audit/report.json",
+                           "language":  "json",
+                           "sizeLines":  3161,
+                           "fileCategory":  "config"
+                       },
+                       {
+                           "path":  "audit/workspace-report.html",
+                           "language":  "html",
+                           "sizeLines":  2893,
+                           "fileCategory":  "markup"
+                       },
+                       {
+                           "path":  "audit/workspace-report.json",
+                           "language":  "json",
+                           "sizeLines":  5670,
+                           "fileCategory":  "config"
+                       }
+                   ],
+    "batchImportData":  {
+                            "audit/report.html":  [
+
+                                                  ],
+                            "audit/report.json":  [
+
+                                                  ],
+                            "audit/workspace-report.html":  [
+
+                                                            ],
+                            "audit/workspace-report.json":  [
+
+                                                            ]
+                        }
+}
