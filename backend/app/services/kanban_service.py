@@ -562,30 +562,31 @@ class KanbanService:
                 branch_name = branch_row.branch_name
             sandbox = _sandbox_project_root(task.project_id)
 
-            # Fire-and-forget: git commit runs in background — pipeline executor
-            # only accesses the sandbox seconds later so the commit is always done first.
+            # Fire-and-forget: commit then immediately push to GitHub while the task
+            # branch still exists locally.  The pipeline executor calls squash_and_merge
+            # shortly after and deletes the local branch, so the push MUST happen first.
             _commit_msg = f"feat: {task.title}"
             _sandbox_commit = sandbox
+            _branch_for_push = branch_name
+            _project_id_for_push = task.project_id
+            _task_id_for_push = task.id
+            _task_title_for_push = task.title
             async def _commit_bg() -> None:
                 try:
                     await asyncio.to_thread(GitService.commit_all, _sandbox_commit, _commit_msg)
                 except Exception:
                     logger.exception("Background commit_all failed (task %s)", task_id)
+                # Push to GitHub immediately after committing, before pipeline squash_and_merge
+                # deletes the local branch.
+                if _branch_for_push is not None:
+                    await _github_push_pr_bg(
+                        project_id=_project_id_for_push,
+                        task_id=_task_id_for_push,
+                        branch_name=_branch_for_push,
+                        sandbox=_sandbox_commit,
+                        task_title=_task_title_for_push,
+                    )
             asyncio.create_task(_commit_bg(), name=f"git-commit-{task_id}")
-
-            # GitHub push + PR: fire-and-forget background task (2-13s network I/O).
-            # Does not block the HTTP response; failures are logged, never surface to user.
-            if branch_name is not None:
-                asyncio.create_task(
-                    _github_push_pr_bg(
-                        project_id=task.project_id,
-                        task_id=task.id,
-                        branch_name=branch_name,
-                        sandbox=sandbox,
-                        task_title=task.title,
-                    ),
-                    name=f"github-push-{task.id}",
-                )
 
         task.status = to_status
         task.updated_at = datetime.now(timezone.utc)
@@ -606,14 +607,25 @@ class KanbanService:
             )
 
         if to_status == TaskStatus.IN_PROGRESS and from_status == TaskStatus.TODO:
-            # Fire-and-forget: git init/configure/branch are disk-heavy (300-1100 ms).
-            # The coder agent calls an LLM first (2-30 s), so sandbox is always ready
-            # before the agent touches any files.
+            # Git init runs sequentially BEFORE the coder starts to prevent a race
+            # condition on ensure_baseline_commit.  Both _git_init_bg and coder_node
+            # previously called init_repo/configure_identity/ensure_baseline_commit
+            # concurrently, causing .git/index.lock contention on fresh sandboxes
+            # (first run always failed; second run succeeded because HEAD already
+            # existed and ensure_baseline_commit returned early).  Fixing this by
+            # completing git init first, then scheduling the coder.
             _sandbox_init = _sandbox_project_root(task.project_id)
             _init_task_id = task.id
             _init_project_id = task.project_id
+            # Capture coder args at schedule time (session may close after return).
+            _project_for_init = await session.get(Project, task.project_id)
+            _backend_for_init = str(_project_for_init.coding_backend) if _project_for_init else "groq"
+            _defer = defer_coder_start
+            _po_fb = po_feedback
+            _ar_id = agent_run_id
 
-            async def _git_init_bg() -> None:
+            async def _git_init_then_coder() -> None:
+                """Init sandbox git repo, create task branch, THEN start coder."""
                 try:
                     await asyncio.to_thread(GitService.init_repo, _sandbox_init)
                     await asyncio.to_thread(GitService.configure_identity, _sandbox_init)
@@ -626,7 +638,6 @@ class KanbanService:
                         "Background git init FAILED for task_id=%s — reverting to TODO",
                         _init_task_id,
                     )
-                    # Revert the task so the user can retry
                     try:
                         async with async_session_maker() as bg_session:
                             t = await bg_session.get(Task, _init_task_id)
@@ -636,8 +647,19 @@ class KanbanService:
                                 await bg_session.commit()
                     except Exception:
                         logger.exception("Failed to revert task_id=%s after git init failure", _init_task_id)
+                    return  # Do NOT start coder if git init failed
 
-            asyncio.create_task(_git_init_bg(), name=f"git-init-{task.id}")
+                # Git init succeeded — now safe to start coder (no concurrent git ops)
+                if not _defer:
+                    _schedule_coder_agent(
+                        _init_task_id,
+                        _init_project_id,
+                        po_feedback=_po_fb,
+                        agent_run_id=_ar_id,
+                        coding_backend=_backend_for_init,
+                    )
+
+            asyncio.create_task(_git_init_then_coder(), name=f"git-init-{task.id}")
         if to_status == TaskStatus.DONE and from_status == TaskStatus.REVIEW:
             # ── Trigger CI/CD pipeline only if no passing run exists yet ──────
             # The agent's ci_gate_node already ran CI before moving to REVIEW.
@@ -707,7 +729,14 @@ class KanbanService:
                             "notify_task_unblocked failed task_id=%s",
                             unlocked_id,
                         )
-        if to_status == TaskStatus.IN_PROGRESS and not defer_coder_start:
+        # REVIEW → IN_PROGRESS (PO rejected diff): start coder immediately.
+        # The TODO → IN_PROGRESS path is handled inside _git_init_then_coder above
+        # (coder starts only AFTER git init completes to avoid race conditions).
+        if (
+            to_status == TaskStatus.IN_PROGRESS
+            and from_status == TaskStatus.REVIEW
+            and not defer_coder_start
+        ):
             project = await session.get(Project, task.project_id)
             backend = str(project.coding_backend) if project else "groq"
             _schedule_coder_agent(

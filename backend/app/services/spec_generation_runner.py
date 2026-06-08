@@ -119,12 +119,19 @@ async def _run_with_session(
     async def _noop(*_a: object, **_kw: object) -> None:
         return None
 
+    # Fetch current SPEC content so the revision prompt can show it to the LLM.
+    # Without this the model has to regenerate from scratch instead of making
+    # targeted edits — losing good sections already approved by the PO.
+    current_doc = await session.get(Document, document_id)
+    current_spec_content = (current_doc.content or "").strip() if current_doc else ""
+
     state: dict[str, Any] = {
         "session": session,
         "project_id": project_id,
         "agent_run_id": agent_run_id,
         "intent": intent_text,
         "feedback": feedback or "",
+        "current_spec_content": current_spec_content,
         "set_agent_run_status": set_agent_run_status,
         "persist_spec": persist_spec,
         "write_pending_log": write_pending_log_cb,

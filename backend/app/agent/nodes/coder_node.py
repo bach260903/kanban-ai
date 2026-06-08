@@ -127,6 +127,64 @@ _MAX_TOOL_ROUNDS = 12  # room for the write → run tests → fix → re-run sel
 _WARN_LINES = 200    # soft warning returned to agent
 _HARD_LINES = 500    # hard reject — force agent to split
 
+# Message compaction — trim old large ToolMessages to save tokens.
+# read_file results can be 10-400 KB each; by round 9 the full history
+# easily exceeds 30 k tokens. We keep the last COMPACT_KEEP_ROUNDS rounds
+# verbatim and replace older large results with a short excerpt.
+_COMPACT_START_ROUND = 3   # don't compact until we have enough history
+_COMPACT_KEEP_ROUNDS = 2   # keep last N rounds of tool results in full
+_COMPACT_THRESHOLD   = 500 # chars — only truncate messages larger than this
+_COMPACT_HEAD        = 150 # chars to keep from the start of truncated content
+
+
+def _compact_messages(messages: list[Any], current_round: int) -> list[Any]:
+    """Return a token-efficient copy of *messages* for the next LLM call.
+
+    ToolMessages from rounds older than ``_COMPACT_KEEP_ROUNDS`` that exceed
+    ``_COMPACT_THRESHOLD`` chars are replaced with a short excerpt so the
+    model still sees the call happened — it just doesn't re-read the full
+    file content that was already processed several rounds ago.
+
+    The caller must continue appending to the *original* messages list (not
+    the returned copy) so that future rounds compact from the unmodified history.
+    """
+    if current_round <= _COMPACT_START_ROUND:
+        return messages
+
+    # Find the message index where the Nth-from-last AIMessage begins.
+    ai_seen = 0
+    boundary = 0
+    for i in range(len(messages) - 1, -1, -1):
+        if isinstance(messages[i], AIMessage):
+            ai_seen += 1
+            if ai_seen >= _COMPACT_KEEP_ROUNDS:
+                boundary = i
+                break
+
+    if boundary == 0:
+        return messages
+
+    compacted: list[Any] = []
+    for i, msg in enumerate(messages):
+        if (
+            i < boundary
+            and isinstance(msg, ToolMessage)
+            and len(msg.content) > _COMPACT_THRESHOLD
+        ):
+            head = msg.content[:_COMPACT_HEAD].rstrip()
+            compacted.append(
+                ToolMessage(
+                    content=(
+                        f"{head}\n"
+                        f"…[{len(msg.content):,} chars — truncated, already processed]"
+                    ),
+                    tool_call_id=msg.tool_call_id,
+                )
+            )
+        else:
+            compacted.append(msg)
+    return compacted
+
 # Auto-generated files that are exempt from line limits
 _GENERATED_FILENAMES = frozenset({
     "package-lock.json", "yarn.lock", "pnpm-lock.yaml",
@@ -649,7 +707,12 @@ async def _run_with_session(state: StateDict) -> StateDict:
                         "reasoning": f"Coder LLM round {rounds}: invoking model to decide the next sandbox actions.",
                     },
                 )
-                ai = cast(AIMessage, await ainvoke_llm(llm, messages))
+                # Compact old tool-result messages before sending to save tokens.
+                # We pass the compacted list to the LLM but always append the
+                # response to the original *messages* so future rounds compact
+                # from the full unmodified history.
+                msgs_to_send = _compact_messages(messages, rounds)
+                ai = cast(AIMessage, await ainvoke_llm(llm, msgs_to_send))
                 await finalise_log(session, llm_log.id, AuditLogResult.SUCCESS)
             except Exception as exc:
                 await finalise_log(session, llm_log.id, AuditLogResult.FAILURE, output_refs=[str(exc)])

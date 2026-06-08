@@ -24,9 +24,10 @@ logger = logging.getLogger(__name__)
 # Kept small to limit tokens per coder call (free-tier friendly): the codebase map
 # and memory are injected into the coder's context every run, so a 120k-char map was
 # ~30k tokens per call and drained the daily quota in a few tasks.
-_MAX_MEMORY_MD_CHARS = 8_000
-_MAX_CODEBASE_MAP_JSON_CHARS = 20_000
+_MAX_MEMORY_MD_CHARS = 4_000           # ~1 k tokens  (was 8 000)
+_MAX_CODEBASE_MAP_JSON_CHARS = 10_000  # ~2.5 k tokens (was 20 000)
 _MAX_INLINE_COMMENTS_JSON_CHARS = 8_000
+_MAX_CONSTITUTION_CHARS = 2_000        # ~500 tokens — coder needs the gist, not full doc
 
 
 def _sandbox_project_dir(project_id: UUID) -> Path:
@@ -175,8 +176,11 @@ class ContextBuilder:
             "5. PROJECT CONFIG — write minimal config only:\n"
             "   - Node/TypeScript: `package.json` with only the dependencies you actually use, "
             "plus `scripts.test` and `scripts.build`. Do NOT generate `package-lock.json` by hand.\n"
-            "   - Config files: create EXACTLY ONE format per tool. Either `jest.config.js` OR "
-            "`jest.config.ts` — never both. Either `.eslintrc.json` OR `eslint.config.js` — never both.\n"
+            "   - Config files: create EXACTLY ONE format per tool — these are ALL the same tool:\n"
+            "       Jest:   jest.config.js | jest.config.ts | jest.config.cjs | jest.config.mjs | jest.config.json\n"
+            "       ESLint: .eslintrc.json | .eslintrc.js | .eslintrc.cjs | eslint.config.js | eslint.config.mjs\n"
+            "     Pick ONE and never create the others. If you already wrote jest.config.js, do NOT also\n"
+            "     write jest.config.cjs — Jest will fail with 'Multiple configurations found'.\n"
             "   - Python: correct package layout, `__init__.py` where needed.\n"
             "6. TESTS — write tests for the main behavior only: one happy path + one important "
             "edge case per function. Do NOT write exhaustive test suites with 20+ cases per "
@@ -223,7 +227,7 @@ class ContextBuilder:
         human_prompt = (
             f"Task title: {task.title}\n"
             f"Task description:\n{task.description or '(none)'}\n\n"
-            f"Project constitution (excerpt, first 8000 chars):\n{project.constitution[:8000]}"
+            f"Project constitution (excerpt):\n{project.constitution[:_MAX_CONSTITUTION_CHARS]}"
         )
         if po_feedback is not None and po_feedback.strip():
             human_prompt += (

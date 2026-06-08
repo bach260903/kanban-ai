@@ -37,6 +37,53 @@ _IGNORE_DIRS = {
 
 _KNOWN_TEST_RUNNERS = {"jest", "vitest", "mocha", "jasmine", "tap", "ava"}
 
+# Jest configuration filenames in priority order (highest priority first).
+# Jest fails with "Multiple configurations found" when more than one exists;
+# this list drives the auto-dedup that runs before every npm test invocation.
+_JEST_CONFIG_PRIORITY = [
+    "jest.config.js",
+    "jest.config.ts",
+    "jest.config.cjs",
+    "jest.config.mjs",
+    "jest.config.json",
+]
+
+
+def _dedup_jest_configs(target: Path) -> str | None:
+    """Remove duplicate Jest config files, keeping the highest-priority one.
+
+    The Coder agent sometimes creates ``jest.config.js`` and then, when a test
+    fails for an unrelated reason, also writes ``jest.config.cjs`` as a retry
+    attempt — leaving two config files that make Jest error with
+    "Multiple configurations found".
+
+    We keep the first match in ``_JEST_CONFIG_PRIORITY`` order and delete the
+    rest.  Returns a log line describing the action, or ``None`` if nothing was
+    removed (no-op for projects with a single config or no Jest at all).
+    """
+    found = [name for name in _JEST_CONFIG_PRIORITY if (target / name).exists()]
+    if len(found) <= 1:
+        return None
+
+    keep = found[0]
+    removed: list[str] = []
+    for name in found[1:]:
+        try:
+            (target / name).unlink()
+            removed.append(name)
+        except OSError as exc:
+            logger.warning("dedup_jest_configs: could not remove %s/%s: %s", target, name, exc)
+
+    if not removed:
+        return None
+    msg = (
+        f"[CI auto-fix] Removed duplicate Jest config(s): {', '.join(removed)} "
+        f"— keeping {keep}. "
+        "The Coder agent created multiple Jest config files; CI removed extras."
+    )
+    logger.info(msg)
+    return msg
+
 
 @dataclass
 class StepResult:
@@ -337,10 +384,18 @@ async def run_test(sandbox: Path) -> StepResult:
                 ai_reasoning=f"npm install failed (exit {install_rc}).",
             )
         await asyncio.to_thread(_ensure_test_runner, target)
+
+        # Remove duplicate Jest config files before running so Jest doesn't
+        # bail out with "Multiple configurations found" (a common agent artefact
+        # where the model wrote jest.config.js then jest.config.cjs as a fix).
+        dedup_note = await asyncio.to_thread(_dedup_jest_configs, target)
+
         rc, logs = await asyncio.to_thread(
             _run_cmd, ["npm", "test", "--", "--watchAll=false", "--passWithNoTests"], target
         )
         dur = int((time.monotonic() - t0) * 1000)
+        if dedup_note:
+            logs = dedup_note + "\n\n" + logs
         status = "success" if rc == 0 else "failure"
         return StepResult(
             status=status,

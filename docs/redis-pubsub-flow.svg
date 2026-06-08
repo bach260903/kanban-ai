@@ -1,0 +1,258 @@
+<svg width="960" height="575" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+<rect width="960" height="575" fill="#f1f5f9"/>
+
+<!-- Title -->
+<text x="480" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Luồng Redis Pub/Sub — Agent → Redis → WebSocket → Frontend</text>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 1: PUBLISH PATH
+════════════════════════════════════════════════════════════════════════ -->
+<rect x="8" y="34" width="944" height="258" fill="#eff6ff" rx="8" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="18" y="50" font-size="9.5" font-weight="700" fill="#1d4ed8">① PUBLISH PATH   (Agent → EventPublisher → Redis → EventConsumer → WS Handler → Frontend)</text>
+
+<!-- ── Agent Layer box ── -->
+<rect x="14" y="60" width="122" height="118" fill="#fff7ed" rx="7" stroke="#f97316" stroke-width="2"/>
+<rect x="14" y="60" width="122" height="26" fill="#fed7aa" rx="7"/><rect x="14" y="78" width="122" height="8" fill="#fed7aa"/>
+<text x="75" y="77" text-anchor="middle" font-size="10" font-weight="700" fill="#9a3412">Agent Layer</text>
+<text x="75" y="96"  text-anchor="middle" font-size="9" fill="#78350f">coder_node</text>
+<text x="75" y="110" text-anchor="middle" font-size="9" fill="#78350f">reviewer_node</text>
+<text x="75" y="124" text-anchor="middle" font-size="9" fill="#78350f">spec_node</text>
+<text x="75" y="138" text-anchor="middle" font-size="9" fill="#78350f">plan_node</text>
+<text x="75" y="170" text-anchor="middle" font-size="8" fill="#92400e" font-style="italic">gọi EventPublisher</text>
+<text x="75" y="181" text-anchor="middle" font-size="8" fill="#92400e" font-style="italic">.publish() sau mỗi bước</text>
+
+<!-- Arrow Agent → EventPublisher -->
+<line x1="136" y1="120" x2="158" y2="120" stroke="#374151" stroke-width="2" marker-end="url(#arr)"/>
+<text x="147" y="115" text-anchor="middle" font-size="7.5" fill="#374151">call</text>
+
+<!-- ── EventPublisher box ── -->
+<rect x="160" y="48" width="148" height="196" fill="#dcfce7" rx="7" stroke="#16a34a" stroke-width="2"/>
+<rect x="160" y="48" width="148" height="26" fill="#bbf7d0" rx="7"/><rect x="160" y="66" width="148" height="8" fill="#bbf7d0"/>
+<text x="234" y="65" text-anchor="middle" font-size="10" font-weight="700" fill="#14532d">EventPublisher</text>
+<text x="234" y="84"  text-anchor="middle" font-size="8.5" font-weight="600" fill="#14532d">① SELECT task FOR UPDATE</text>
+<text x="234" y="98"  text-anchor="middle" font-size="8.5" fill="#166534">(lock task row)</text>
+<text x="234" y="116" text-anchor="middle" font-size="8.5" font-weight="600" fill="#14532d">② MAX(sequence_number)+1</text>
+<text x="234" y="130" text-anchor="middle" font-size="8.5" fill="#166534">(monotonic seq per task)</text>
+<text x="234" y="148" text-anchor="middle" font-size="8.5" font-weight="600" fill="#14532d">③ INSERT stream_events</text>
+<text x="234" y="162" text-anchor="middle" font-size="8.5" fill="#166534">(persist to PostgreSQL)</text>
+<text x="234" y="180" text-anchor="middle" font-size="8.5" font-weight="600" fill="#14532d">④ PUBLISH to Redis</text>
+<text x="234" y="194" text-anchor="middle" font-size="8" fill="#166534">channel: task:{id}:events</text>
+<text x="234" y="210" text-anchor="middle" font-size="8" fill="#166534">payload: JSON event</text>
+<text x="234" y="228" text-anchor="middle" font-size="7.5" fill="#15803d" font-style="italic">r.publish(channel, msg)</text>
+
+<!-- Vertical arrow EP → PostgreSQL -->
+<line x1="234" y1="244" x2="234" y2="276" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrPurple)"/>
+<text x="247" y="264" font-size="7.5" fill="#6d28d9">persist</text>
+
+<!-- ── PostgreSQL (persistence) ── -->
+<rect x="168" y="278" width="130" height="52" fill="white" rx="6" stroke="#7c3aed" stroke-width="1.5"/>
+<rect x="168" y="278" width="130" height="20" fill="#ede9fe" rx="6"/><rect x="168" y="290" width="130" height="8" fill="#ede9fe"/>
+<text x="233" y="291" text-anchor="middle" font-size="9.5" font-weight="700" fill="#4c1d95">PostgreSQL</text>
+<text x="233" y="307" text-anchor="middle" font-size="8.5" fill="#6d28d9">stream_events table</text>
+<text x="233" y="320" text-anchor="middle" font-size="7.5" fill="#8b5cf6">id · task_id · event_type · content · seq</text>
+
+<!-- Arrow EP → Redis (horizontal) -->
+<line x1="308" y1="148" x2="344" y2="148" stroke="#374151" stroke-width="2" marker-end="url(#arr)"/>
+<text x="326" y="143" text-anchor="middle" font-size="7.5" fill="#374151">PUBLISH</text>
+
+<!-- ── Redis Channel box ── -->
+<rect x="346" y="90" width="118" height="105" fill="#fff1f2" rx="7" stroke="#ef4444" stroke-width="2"/>
+<rect x="346" y="90" width="118" height="26" fill="#fecaca" rx="7"/><rect x="346" y="108" width="118" height="8" fill="#fecaca"/>
+<text x="405" y="107" text-anchor="middle" font-size="10" font-weight="700" fill="#991b1b">Redis</text>
+<text x="405" y="127" text-anchor="middle" font-size="8.5" font-weight="600" fill="#991b1b">Channel:</text>
+<text x="405" y="141" text-anchor="middle" font-size="8" fill="#b91c1c">task:{task_id}:events</text>
+<text x="405" y="158" text-anchor="middle" font-size="8" fill="#dc2626">Pub/Sub message bus</text>
+<text x="405" y="174" text-anchor="middle" font-size="7.5" fill="#ef4444" font-style="italic">aioredis PUBLISH/SUBSCRIBE</text>
+
+<!-- Arrow Redis → EventConsumer -->
+<line x1="464" y1="148" x2="488" y2="148" stroke="#374151" stroke-width="2" marker-end="url(#arr)"/>
+<text x="476" y="143" text-anchor="middle" font-size="7" fill="#374151">yield msg</text>
+
+<!-- ── EventConsumer box ── -->
+<rect x="490" y="90" width="128" height="105" fill="#f0fdfa" rx="7" stroke="#0d9488" stroke-width="2"/>
+<rect x="490" y="90" width="128" height="26" fill="#ccfbf1" rx="7"/><rect x="490" y="108" width="128" height="8" fill="#ccfbf1"/>
+<text x="554" y="107" text-anchor="middle" font-size="10" font-weight="700" fill="#134e4a">EventConsumer</text>
+<text x="554" y="127" text-anchor="middle" font-size="8.5" fill="#0f766e">pubsub.subscribe(channel)</text>
+<text x="554" y="141" text-anchor="middle" font-size="8.5" fill="#0f766e">async for raw in</text>
+<text x="554" y="155" text-anchor="middle" font-size="8.5" fill="#0f766e">  pubsub.listen()</text>
+<text x="554" y="170" text-anchor="middle" font-size="8" fill="#0d9488" font-style="italic">json.loads(data)</text>
+<text x="554" y="183" text-anchor="middle" font-size="8" fill="#0d9488" font-style="italic">yield parsed dict</text>
+
+<!-- Arrow EC → WS Handler -->
+<line x1="618" y1="148" x2="644" y2="148" stroke="#374151" stroke-width="2" marker-end="url(#arr)"/>
+<text x="631" y="143" text-anchor="middle" font-size="7" fill="#374151">relay</text>
+
+<!-- ── WS Handler box ── -->
+<rect x="646" y="48" width="148" height="196" fill="#eff6ff" rx="7" stroke="#3b82f6" stroke-width="2"/>
+<rect x="646" y="48" width="148" height="26" fill="#bfdbfe" rx="7"/><rect x="646" y="66" width="148" height="8" fill="#bfdbfe"/>
+<text x="720" y="65" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">WS Handler</text>
+<text x="720" y="85"  text-anchor="middle" font-size="8.5" font-weight="600" fill="#1d4ed8">_pump_redis() task</text>
+<text x="720" y="99"  text-anchor="middle" font-size="8" fill="#3b82f6">relay Redis → send_text()</text>
+<text x="720" y="117" text-anchor="middle" font-size="8.5" font-weight="600" fill="#1d4ed8">poll_stream_end() task</text>
+<text x="720" y="131" text-anchor="middle" font-size="8" fill="#3b82f6">every 1.5s check task status</text>
+<text x="720" y="145" text-anchor="middle" font-size="8" fill="#3b82f6">→ send STREAM_END</text>
+<text x="720" y="163" text-anchor="middle" font-size="8.5" font-weight="600" fill="#1d4ed8">On connect: send</text>
+<text x="720" y="177" text-anchor="middle" font-size="8" fill="#3b82f6">CONNECTED{task_id,</text>
+<text x="720" y="191" text-anchor="middle" font-size="8" fill="#3b82f6">agent_run_id, latest_seq}</text>
+<text x="720" y="228" text-anchor="middle" font-size="7.5" fill="#2563eb" font-style="italic">send_lock: asyncio.Lock()</text>
+
+<!-- Arrow WS Handler → Frontend -->
+<line x1="794" y1="148" x2="820" y2="148" stroke="#374151" stroke-width="2" marker-end="url(#arr)"/>
+<text x="807" y="143" text-anchor="middle" font-size="7" fill="#374151">send_text()</text>
+
+<!-- ── Frontend box ── -->
+<rect x="822" y="90" width="126" height="105" fill="#faf5ff" rx="7" stroke="#8b5cf6" stroke-width="2"/>
+<rect x="822" y="90" width="126" height="26" fill="#ede9fe" rx="7"/><rect x="822" y="108" width="126" height="8" fill="#ede9fe"/>
+<text x="885" y="107" text-anchor="middle" font-size="10" font-weight="700" fill="#4c1d95">Frontend</text>
+<text x="885" y="127" text-anchor="middle" font-size="8.5" fill="#7c3aed">React AI Chat Panel</text>
+<text x="885" y="141" text-anchor="middle" font-size="8.5" fill="#7c3aed">Agent Trace Viewer</text>
+<text x="885" y="158" text-anchor="middle" font-size="8" fill="#6d28d9">WebSocket Client</text>
+<text x="885" y="174" text-anchor="middle" font-size="7.5" fill="#7c3aed" font-style="italic">onmessage(event)</text>
+<text x="885" y="188" text-anchor="middle" font-size="7.5" fill="#7c3aed" font-style="italic">→ render trace item</text>
+
+<!-- Event type legend strip inside section 1 -->
+<rect x="346" y="208" width="458" height="80" fill="white" rx="5" stroke="#e2e8f0" stroke-width="1"/>
+<text x="356" y="222" font-size="9" font-weight="700" fill="#334155">Event types (event_type field):</text>
+<rect x="356" y="228" width="56" height="14" fill="#fef3c7" rx="3" stroke="#f59e0b" stroke-width="1"/>
+<text x="384" y="239" text-anchor="middle" font-size="8" fill="#78350f">THOUGHT</text>
+<rect x="418" y="228" width="56" height="14" fill="#dbeafe" rx="3" stroke="#3b82f6" stroke-width="1"/>
+<text x="446" y="239" text-anchor="middle" font-size="8" fill="#1e40af">TOOL_CALL</text>
+<rect x="480" y="228" width="62" height="14" fill="#dcfce7" rx="3" stroke="#16a34a" stroke-width="1"/>
+<text x="511" y="239" text-anchor="middle" font-size="8" fill="#14532d">TOOL_RESULT</text>
+<rect x="548" y="228" width="46" height="14" fill="#fff7ed" rx="3" stroke="#f97316" stroke-width="1"/>
+<text x="571" y="239" text-anchor="middle" font-size="8" fill="#9a3412">ACTION</text>
+<rect x="600" y="228" width="38" height="14" fill="#fee2e2" rx="3" stroke="#ef4444" stroke-width="1"/>
+<text x="619" y="239" text-anchor="middle" font-size="8" fill="#991b1b">ERROR</text>
+<rect x="644" y="228" width="74" height="14" fill="#f3e8ff" rx="3" stroke="#a855f7" stroke-width="1"/>
+<text x="681" y="239" text-anchor="middle" font-size="8" fill="#581c87">STATUS_CHANGE</text>
+<rect x="724" y="228" width="72" height="14" fill="#f0fdf4" rx="3" stroke="#22c55e" stroke-width="1"/>
+<text x="760" y="239" text-anchor="middle" font-size="8" fill="#14532d">STREAM_END</text>
+<text x="356" y="263" font-size="8" fill="#475569">JSON payload: </text>
+<text x="419" y="263" font-size="7.5" fill="#64748b">{ id, task_id, agent_run_id, event_type, content, sequence_number, timestamp }</text>
+<text x="356" y="278" font-size="8" fill="#475569">Channel pattern: </text>
+<text x="432" y="278" font-size="8" font-weight="600" fill="#dc2626">task:{task_id}:events</text>
+<text x="546" y="278" font-size="7.5" fill="#64748b">  (one channel per task, per agent run)</text>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 2: CATCH-UP PATH
+════════════════════════════════════════════════════════════════════════ -->
+<rect x="8" y="342" width="944" height="96" fill="#f0fdf4" rx="8" stroke="#bbf7d0" stroke-width="1.5"/>
+<text x="18" y="357" font-size="9.5" font-weight="700" fill="#15803d">② CATCH-UP PATH   (Frontend → WS Handler → PostgreSQL → replay to client)</text>
+
+<!-- Frontend sends CATCH_UP -->
+<rect x="18" y="364" width="128" height="66" fill="white" rx="5" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="82" y="379" text-anchor="middle" font-size="9" font-weight="600" fill="#4c1d95">Frontend</text>
+<text x="82" y="393" text-anchor="middle" font-size="8.5" fill="#6d28d9">sends WS message:</text>
+<text x="82" y="407" text-anchor="middle" font-size="8" fill="#7c3aed">{ type: "CATCH_UP",</text>
+<text x="82" y="420" text-anchor="middle" font-size="8" fill="#7c3aed">  last_sequence: N }</text>
+
+<line x1="146" y1="397" x2="175" y2="397" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- WS Handler CATCH_UP handling -->
+<rect x="177" y="364" width="165" height="66" fill="white" rx="5" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="259" y="379" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">WS Handler</text>
+<text x="259" y="393" text-anchor="middle" font-size="8.5" fill="#3b82f6">_replay_catch_up()</text>
+<text x="259" y="407" text-anchor="middle" font-size="8" fill="#60a5fa">SELECT * FROM stream_events</text>
+<text x="259" y="420" text-anchor="middle" font-size="8" fill="#60a5fa">WHERE seq &gt; last_sequence</text>
+
+<line x1="342" y1="397" x2="371" y2="397" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="357" y="392" text-anchor="middle" font-size="7" fill="#374151">query</text>
+
+<!-- PostgreSQL -->
+<rect x="373" y="364" width="120" height="66" fill="white" rx="5" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="433" y="379" text-anchor="middle" font-size="9" font-weight="600" fill="#4c1d95">PostgreSQL</text>
+<text x="433" y="395" text-anchor="middle" font-size="8.5" fill="#6d28d9">stream_events</text>
+<text x="433" y="409" text-anchor="middle" font-size="8" fill="#8b5cf6">ORDER BY sequence_number</text>
+<text x="433" y="422" text-anchor="middle" font-size="8" fill="#8b5cf6">ASC (missed events)</text>
+
+<line x1="493" y1="397" x2="522" y2="397" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="508" y="392" text-anchor="middle" font-size="7" fill="#374151">rows</text>
+
+<!-- Replay label -->
+<rect x="524" y="364" width="155" height="66" fill="white" rx="5" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="601" y="379" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">WS Handler replay</text>
+<text x="601" y="393" text-anchor="middle" font-size="8.5" fill="#3b82f6">for row in missed_events:</text>
+<text x="601" y="407" text-anchor="middle" font-size="8" fill="#60a5fa">  await send_text(</text>
+<text x="601" y="420" text-anchor="middle" font-size="8" fill="#60a5fa">    json.dumps(row))</text>
+
+<line x1="679" y1="397" x2="708" y2="397" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="694" y="392" text-anchor="middle" font-size="7" fill="#374151">replay</text>
+
+<!-- Frontend receive -->
+<rect x="710" y="364" width="128" height="66" fill="white" rx="5" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="774" y="379" text-anchor="middle" font-size="9" font-weight="600" fill="#4c1d95">Frontend</text>
+<text x="774" y="393" text-anchor="middle" font-size="8.5" fill="#7c3aed">nhận lại các event</text>
+<text x="774" y="407" text-anchor="middle" font-size="8" fill="#6d28d9">bị bỏ lỡ (reconnect</text>
+<text x="774" y="420" text-anchor="middle" font-size="8" fill="#6d28d9">hoặc late join)</text>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SECTION 3: CONTROL PATH (PAUSE / RESUME)
+════════════════════════════════════════════════════════════════════════ -->
+<rect x="8" y="447" width="944" height="94" fill="#fff7ed" rx="8" stroke="#fed7aa" stroke-width="1.5"/>
+<text x="18" y="462" font-size="9.5" font-weight="700" fill="#c2410c">③ CONTROL PATH   (Frontend → PAUSE / RESUME → PauseService → Redis SET flag → Agent checks)</text>
+
+<!-- Frontend PAUSE/RESUME -->
+<rect x="18" y="470" width="128" height="64" fill="white" rx="5" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="82" y="485" text-anchor="middle" font-size="9" font-weight="600" fill="#4c1d95">Frontend</text>
+<text x="82" y="499" text-anchor="middle" font-size="8" fill="#7c3aed">{ type: "PAUSE" }</text>
+<text x="82" y="513" text-anchor="middle" font-size="8" fill="#7c3aed">{ type: "RESUME",</text>
+<text x="82" y="526" text-anchor="middle" font-size="8" fill="#7c3aed">  steering_instructions }</text>
+
+<line x1="146" y1="502" x2="175" y2="502" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- WS Handler -->
+<rect x="177" y="470" width="148" height="64" fill="white" rx="5" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="251" y="485" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">WS Handler</text>
+<text x="251" y="499" text-anchor="middle" font-size="8.5" fill="#3b82f6">mtype == "PAUSE"</text>
+<text x="251" y="513" text-anchor="middle" font-size="8" fill="#60a5fa">PauseService.pause()</text>
+<text x="251" y="526" text-anchor="middle" font-size="8" fill="#60a5fa">PauseService.resume()</text>
+
+<line x1="325" y1="502" x2="354" y2="502" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- PauseService -->
+<rect x="356" y="470" width="128" height="64" fill="white" rx="5" stroke="#0d9488" stroke-width="1.5"/>
+<text x="420" y="485" text-anchor="middle" font-size="9" font-weight="600" fill="#134e4a">PauseService</text>
+<text x="420" y="499" text-anchor="middle" font-size="8.5" fill="#0f766e">pause_service.py</text>
+<text x="420" y="513" text-anchor="middle" font-size="8" fill="#0d9488">Redis SET / DEL</text>
+<text x="420" y="526" text-anchor="middle" font-size="8" fill="#0d9488">flag: task:{id}:paused</text>
+
+<line x1="484" y1="502" x2="513" y2="502" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- Redis flag -->
+<rect x="515" y="470" width="115" height="64" fill="white" rx="5" stroke="#ef4444" stroke-width="1.5"/>
+<text x="572" y="485" text-anchor="middle" font-size="9" font-weight="600" fill="#991b1b">Redis</text>
+<text x="572" y="499" text-anchor="middle" font-size="8.5" fill="#dc2626">SET/DEL key:</text>
+<text x="572" y="513" text-anchor="middle" font-size="8" fill="#ef4444">task:{task_id}:paused</text>
+<text x="572" y="526" text-anchor="middle" font-size="8" fill="#ef4444">(flag per task)</text>
+
+<line x1="630" y1="502" x2="659" y2="502" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- Agent polling pause flag -->
+<rect x="661" y="470" width="178" height="64" fill="white" rx="5" stroke="#f97316" stroke-width="1.5"/>
+<text x="750" y="485" text-anchor="middle" font-size="9" font-weight="600" fill="#9a3412">Agent (coder_node)</text>
+<text x="750" y="499" text-anchor="middle" font-size="8.5" fill="#c2410c">_pause_checkpoint() mỗi bước</text>
+<text x="750" y="513" text-anchor="middle" font-size="8" fill="#ea580c">PauseService.is_paused(task_id)</text>
+<text x="750" y="526" text-anchor="middle" font-size="8" fill="#ea580c">→ raise PauseSignal() nếu set</text>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     LEGEND
+════════════════════════════════════════════════════════════════════════ -->
+<rect x="850" y="470" width="102" height="64" fill="white" rx="5" stroke="#e2e8f0" stroke-width="1"/>
+<text x="901" y="484" text-anchor="middle" font-size="8.5" font-weight="700" fill="#334155">Legend</text>
+<line x1="858" y1="494" x2="885" y2="494" stroke="#374151" stroke-width="2" marker-end="url(#arr)"/>
+<text x="895" y="497" font-size="8" fill="#334155">publish</text>
+<line x1="858" y1="508" x2="885" y2="508" stroke="#6d28d9" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrPurple)"/>
+<text x="895" y="511" font-size="8" fill="#334155">persist</text>
+<line x1="858" y1="522" x2="885" y2="522" stroke="#374151" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="895" y="525" font-size="8" fill="#334155">control</text>
+
+<!-- Arrow markers -->
+<defs>
+  <marker id="arr" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+    <polygon points="0 0,8 3.5,0 7" fill="#374151"/>
+  </marker>
+  <marker id="arrPurple" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+    <polygon points="0 0,8 3.5,0 7" fill="#6d28d9"/>
+  </marker>
+</defs>
+</svg>

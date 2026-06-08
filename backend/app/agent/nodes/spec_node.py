@@ -124,11 +124,28 @@ async def _generate_spec(state: StateDict) -> StateDict:
     if intent:
         human_parts.append(f"Intent:\n{intent}")
     if feedback:
+        current_spec = str(state.get("current_spec_content", "")).strip()
         human_parts.append(
-            "The PO requested a revision of the current SPEC. Regenerate the full SPEC markdown, "
-            "addressing the feedback while keeping coherent structure and headings."
+            "## Revision task\n"
+            "The PO has reviewed the current SPEC and requested changes.\n"
+            "Your job is to **revise** the existing SPEC — not regenerate it from scratch.\n"
+            "Keep every section that is still valid and correct.\n"
+            "Only change the parts that the feedback explicitly targets."
         )
-        human_parts.append(f"Revision feedback:\n{feedback}")
+        if current_spec:
+            # Cap at 40 000 chars (~10k tokens) to stay within context limits
+            capped = current_spec[:40_000]
+            if len(current_spec) > 40_000:
+                capped += "\n…(SPEC truncated for context length)"
+            human_parts.append(
+                f"## Current SPEC (revise this — do NOT discard working sections)\n\n"
+                f"```markdown\n{capped}\n```"
+            )
+        else:
+            human_parts.append(
+                "*(No existing SPEC content found — generate a fresh SPEC based on the intent.)*"
+            )
+        human_parts.append(f"## PO revision feedback\n{feedback}")
     human_content = "\n\n".join(human_parts)
 
     await _publish_spec_status(

@@ -1,0 +1,215 @@
+<svg width="960" height="820" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Background -->
+  <rect width="960" height="820" fill="#f1f5f9" rx="0"/>
+
+  <!-- ═══════════════════════════════════════ TITLE ═══════════════════════════════════════ -->
+  <text x="480" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Kiến trúc Tổng thể Hệ thống Neo-Kanban AI</text>
+  <text x="480" y="54" text-anchor="middle" font-size="12" fill="#475569">4 lớp: Frontend · Backend · Agent Layer · Database</text>
+
+  <!-- ═══════════════════════════════════ LAYER 1: FRONTEND ═══════════════════════════════ -->
+  <rect x="16" y="64" width="928" height="136" fill="#dbeafe" rx="10" stroke="#93c5fd" stroke-width="1.5"/>
+  <!-- Label bar (blue) -->
+  <rect x="16" y="64" width="80" height="136" fill="#2563eb" rx="10"/>
+  <rect x="72"  y="64" width="24" height="136" fill="#2563eb"/>
+  <text x="56" y="162" text-anchor="middle" font-size="11" font-weight="700" fill="white" transform="rotate(-90,56,133)">FRONTEND</text>
+
+  <!-- Subtitle -->
+  <text x="520" y="82" text-anchor="middle" font-size="10.5" fill="#1d4ed8">React 18 · TypeScript 5.6 · Vite · Tailwind CSS · TanStack Query</text>
+
+  <!-- 4 component boxes -->
+  <!-- Kanban Board -->
+  <rect x="106" y="90" width="193" height="96" fill="white" rx="8" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="202" y="115" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">Kanban Board</text>
+  <text x="202" y="132" text-anchor="middle" font-size="10" fill="#3b82f6">Drag &amp; Drop · Columns</text>
+  <text x="202" y="149" text-anchor="middle" font-size="10" fill="#3b82f6">WIP Visualization</text>
+  <text x="202" y="166" text-anchor="middle" font-size="10" fill="#3b82f6">Task Detail Modal</text>
+
+  <!-- AI Chat Panel -->
+  <rect x="315" y="90" width="193" height="96" fill="white" rx="8" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="411" y="115" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">AI Chat Panel</text>
+  <text x="411" y="132" text-anchor="middle" font-size="10" fill="#3b82f6">Agent Trace Viewer</text>
+  <text x="411" y="149" text-anchor="middle" font-size="10" fill="#3b82f6">Streaming Output</text>
+  <text x="411" y="166" text-anchor="middle" font-size="10" fill="#3b82f6">Backend Selector UI</text>
+
+  <!-- Auth UI -->
+  <rect x="524" y="90" width="193" height="96" fill="white" rx="8" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="620" y="115" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">Auth &amp; Project UI</text>
+  <text x="620" y="132" text-anchor="middle" font-size="10" fill="#3b82f6">Login / Register</text>
+  <text x="620" y="149" text-anchor="middle" font-size="10" fill="#3b82f6">Project Dashboard</text>
+  <text x="620" y="166" text-anchor="middle" font-size="10" fill="#3b82f6">Member Management</text>
+
+  <!-- WebSocket + REST Client -->
+  <rect x="733" y="90" width="199" height="96" fill="white" rx="8" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="832" y="115" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">Network Layer</text>
+  <text x="832" y="132" text-anchor="middle" font-size="10" fill="#3b82f6">Axios REST Client</text>
+  <text x="832" y="149" text-anchor="middle" font-size="10" fill="#3b82f6">WebSocket Client</text>
+  <text x="832" y="166" text-anchor="middle" font-size="10" fill="#3b82f6">JWT Token Handler</text>
+
+  <!-- ══ Arrows F→B ══ -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <line x1="248" y1="200" x2="248" y2="218" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <line x1="460" y1="200" x2="460" y2="218" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <line x1="670" y1="200" x2="670" y2="218" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <line x1="832" y1="200" x2="832" y2="218" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <text x="480" y="214" text-anchor="middle" font-size="9" fill="#94a3b8">HTTP / WebSocket</text>
+
+  <!-- ═══════════════════════════════════ LAYER 2: BACKEND ════════════════════════════════ -->
+  <rect x="16" y="222" width="928" height="170" fill="#dcfce7" rx="10" stroke="#86efac" stroke-width="1.5"/>
+  <!-- Label bar (green) -->
+  <rect x="16" y="222" width="80" height="170" fill="#16a34a" rx="10"/>
+  <rect x="72"  y="222" width="24" height="170" fill="#16a34a"/>
+  <text x="56" y="316" text-anchor="middle" font-size="11" font-weight="700" fill="white" transform="rotate(-90,56,307)">BACKEND</text>
+
+  <text x="520" y="240" text-anchor="middle" font-size="10.5" fill="#15803d">Python 3.11 · FastAPI · Uvicorn · SQLAlchemy 2.0 · Alembic · Pydantic v2</text>
+
+  <!-- Row 1: 4 boxes -->
+  <!-- REST API -->
+  <rect x="106" y="248" width="195" height="60" fill="white" rx="7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="203" y="271" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14532d">REST API  /api/v1</text>
+  <text x="203" y="288" text-anchor="middle" font-size="10" fill="#16a34a">Projects · Tasks · Users</text>
+  <text x="203" y="303" text-anchor="middle" font-size="10" fill="#16a34a">Boards · Columns · Auth</text>
+
+  <!-- WebSocket Server -->
+  <rect x="313" y="248" width="195" height="60" fill="white" rx="7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="410" y="271" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14532d">WebSocket Server</text>
+  <text x="410" y="288" text-anchor="middle" font-size="10" fill="#16a34a">/ws/agent/{board_id}</text>
+  <text x="410" y="303" text-anchor="middle" font-size="10" fill="#16a34a">Stream Events · Trace Push</text>
+
+  <!-- Auth Service -->
+  <rect x="520" y="248" width="195" height="60" fill="white" rx="7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="617" y="271" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14532d">Auth Service</text>
+  <text x="617" y="288" text-anchor="middle" font-size="10" fill="#16a34a">JWT · bcrypt · RBAC</text>
+  <text x="617" y="303" text-anchor="middle" font-size="10" fill="#16a34a">Owner / Member roles</text>
+
+  <!-- Kanban Service -->
+  <rect x="727" y="248" width="205" height="60" fill="white" rx="7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="829" y="271" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14532d">Kanban Service</text>
+  <text x="829" y="288" text-anchor="middle" font-size="10" fill="#16a34a">WIP Enforcement</text>
+  <text x="829" y="303" text-anchor="middle" font-size="10" fill="#16a34a">Task Flow · One-way</text>
+
+  <!-- Row 2: Agent Dispatcher + Audit -->
+  <rect x="106" y="322" width="400" height="56" fill="white" rx="7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="306" y="346" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14532d">Agent Dispatcher</text>
+  <text x="306" y="363" text-anchor="middle" font-size="10" fill="#16a34a">Coding Backend Selector · Sandbox Isolation · LangGraph Runner</text>
+
+  <rect x="518" y="322" width="414" height="56" fill="white" rx="7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="725" y="346" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14532d">Audit &amp; Logging Service</text>
+  <text x="725" y="363" text-anchor="middle" font-size="10" fill="#16a34a">audit_service · stream_events · Activity Log · Pending Log</text>
+
+  <!-- ══ Arrows B→A ══ -->
+  <line x1="248" y1="392" x2="248" y2="413" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <line x1="504" y1="392" x2="504" y2="413" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <line x1="720" y1="392" x2="720" y2="413" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <text x="480" y="409" text-anchor="middle" font-size="9" fill="#94a3b8">LangGraph invoke / astream_events</text>
+
+  <!-- ═══════════════════════════════════ LAYER 3: AGENT LAYER ══════════════════════════════ -->
+  <rect x="16" y="417" width="928" height="228" fill="#fff7ed" rx="10" stroke="#fdba74" stroke-width="1.5"/>
+  <!-- Label bar (orange) -->
+  <rect x="16" y="417" width="80" height="228" fill="#ea580c" rx="10"/>
+  <rect x="72"  y="417" width="24" height="228" fill="#ea580c"/>
+  <text x="56" y="535" text-anchor="middle" font-size="11" font-weight="700" fill="white" transform="rotate(-90,56,531)">AGENT LAYER</text>
+
+  <text x="520" y="434" text-anchor="middle" font-size="10.5" fill="#c2410c">LangGraph · LangChain · Groq API</text>
+
+  <!-- Orchestrator -->
+  <rect x="280" y="442" width="400" height="48" fill="white" rx="8" stroke="#fb923c" stroke-width="2"/>
+  <text x="480" y="463" text-anchor="middle" font-size="12.5" font-weight="700" fill="#9a3412">Orchestrator  (Supervisor)</text>
+  <text x="480" y="480" text-anchor="middle" font-size="10" fill="#ea580c">Intent Router: plan · assign · monitor · report · execute · end   |   MAX_ITERS=6</text>
+
+  <!-- 5 Worker boxes + Tools Registry -->
+  <!-- Planner -->
+  <rect x="106" y="502" width="140" height="56" fill="white" rx="7" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="176" y="523" text-anchor="middle" font-size="11" font-weight="600" fill="#7c2d12">Planner</text>
+  <text x="176" y="539" text-anchor="middle" font-size="9.5" fill="#f97316">Task Decomposition</text>
+  <text x="176" y="553" text-anchor="middle" font-size="9.5" fill="#f97316">Est. Hours · Skills</text>
+
+  <!-- Assigner -->
+  <rect x="258" y="502" width="140" height="56" fill="white" rx="7" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="328" y="523" text-anchor="middle" font-size="11" font-weight="600" fill="#7c2d12">Assigner</text>
+  <text x="328" y="539" text-anchor="middle" font-size="9.5" fill="#f97316">Skill Match Score</text>
+  <text x="328" y="553" text-anchor="middle" font-size="9.5" fill="#f97316">Workload Balance</text>
+
+  <!-- Monitor -->
+  <rect x="410" y="502" width="140" height="56" fill="white" rx="7" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="480" y="523" text-anchor="middle" font-size="11" font-weight="600" fill="#7c2d12">Monitor</text>
+  <text x="480" y="539" text-anchor="middle" font-size="9.5" fill="#f97316">WIP Alerts</text>
+  <text x="480" y="553" text-anchor="middle" font-size="9.5" fill="#f97316">Overdue Detection</text>
+
+  <!-- Reporter -->
+  <rect x="562" y="502" width="140" height="56" fill="white" rx="7" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="632" y="523" text-anchor="middle" font-size="11" font-weight="600" fill="#7c2d12">Reporter</text>
+  <text x="632" y="539" text-anchor="middle" font-size="9.5" fill="#f97316">Daily / Weekly</text>
+  <text x="632" y="553" text-anchor="middle" font-size="9.5" fill="#f97316">Per-user Summary</text>
+
+  <!-- Executor -->
+  <rect x="714" y="502" width="140" height="56" fill="white" rx="7" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="784" y="523" text-anchor="middle" font-size="11" font-weight="600" fill="#7c2d12">Executor</text>
+  <text x="784" y="539" text-anchor="middle" font-size="9.5" fill="#f97316">NL → CRUD Actions</text>
+  <text x="784" y="553" text-anchor="middle" font-size="9.5" fill="#f97316">Mutating Tools</text>
+
+  <!-- Coder row: Groq | Claude Code | Gemini | OpenAI -->
+  <rect x="280" y="570" width="400" height="56" fill="#fef3c7" rx="7" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="480" y="591" text-anchor="middle" font-size="12" font-weight="600" fill="#78350f">Groq + LangGraph</text>
+  <text x="480" y="608" text-anchor="middle" font-size="10" fill="#d97706">ReAct Loop · Tool Calling · coder_node</text>
+  <text x="480" y="622" text-anchor="middle" font-size="9" fill="#b45309">MAX_TOOL_ROUNDS = 12 · read_file · write_file · run_terminal</text>
+
+  <!-- Tools Registry (right column, spans workers + coders) - REMOVED, instead show Tools pill -->
+  <!-- Tools pill below coders row -->
+  <rect x="106" y="636" width="708" height="0" fill="none"/>
+  <!-- Small tools tag line -->
+  <rect x="106" y="634" width="708" height="0" fill="none"/>
+
+  <!-- ══ Arrows A→DB ══ -->
+  <line x1="248" y1="645" x2="200" y2="663" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <line x1="480" y1="645" x2="480" y2="663" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <line x1="730" y1="645" x2="780" y2="663" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <text x="480" y="659" text-anchor="middle" font-size="9" fill="#94a3b8">SQLAlchemy async · aioredis · ChromaDB client</text>
+
+  <!-- ═══════════════════════════════════ LAYER 4: DATABASE ════════════════════════════════ -->
+  <rect x="16" y="667" width="928" height="135" fill="#f5f3ff" rx="10" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- Label bar (purple) -->
+  <rect x="16" y="667" width="80" height="135" fill="#7c3aed" rx="10"/>
+  <rect x="72"  y="667" width="24" height="135" fill="#7c3aed"/>
+  <text x="56" y="735" text-anchor="middle" font-size="11" font-weight="700" fill="white" transform="rotate(-90,56,735)">DATABASE</text>
+
+  <text x="520" y="685" text-anchor="middle" font-size="10.5" fill="#6d28d9">Persistent Storage · Caching · Vector Search · Checkpointing</text>
+
+  <!-- PostgreSQL -->
+  <rect x="106" y="693" width="270" height="95" fill="white" rx="8" stroke="#c4b5fd" stroke-width="1.5"/>
+  <text x="241" y="717" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">PostgreSQL 16</text>
+  <text x="241" y="735" text-anchor="middle" font-size="10" fill="#7c3aed">users · boards · columns · tasks</text>
+  <text x="241" y="751" text-anchor="middle" font-size="10" fill="#7c3aed">agent_runs · audit_log · skills</text>
+  <text x="241" y="767" text-anchor="middle" font-size="10" fill="#7c3aed">diffs · stream_events · comments</text>
+  <text x="241" y="781" text-anchor="middle" font-size="9" fill="#a78bfa">+ pgvector extension</text>
+
+  <!-- Redis -->
+  <rect x="392" y="693" width="270" height="95" fill="white" rx="8" stroke="#c4b5fd" stroke-width="1.5"/>
+  <text x="527" y="717" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">Redis 7</text>
+  <text x="527" y="735" text-anchor="middle" font-size="10" fill="#7c3aed">Session Cache · Rate Limiting</text>
+  <text x="527" y="751" text-anchor="middle" font-size="10" fill="#7c3aed">LangGraph MemorySaver</text>
+  <text x="527" y="767" text-anchor="middle" font-size="10" fill="#7c3aed">Short-term Memory Checkpoints</text>
+  <text x="527" y="781" text-anchor="middle" font-size="9" fill="#a78bfa">thread_id = (user_id, board_id)</text>
+
+  <!-- ChromaDB -->
+  <rect x="678" y="693" width="266" height="95" fill="white" rx="8" stroke="#c4b5fd" stroke-width="1.5"/>
+  <text x="811" y="717" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">ChromaDB</text>
+  <text x="811" y="735" text-anchor="middle" font-size="10" fill="#7c3aed">task_chunks · comment_chunks</text>
+  <text x="811" y="751" text-anchor="middle" font-size="10" fill="#7c3aed">decision_notes · Embeddings</text>
+  <text x="811" y="767" text-anchor="middle" font-size="10" fill="#7c3aed">search_similar_tasks (vector)</text>
+  <text x="811" y="781" text-anchor="middle" font-size="9" fill="#a78bfa">Long-term Semantic Memory</text>
+
+  <!-- ════════════════════════ Legend ════════════════════════ -->
+  <rect x="16" y="808" width="928" height="0" fill="none"/>
+
+  <!-- Orchestrator arrows down to workers (decorative lines) -->
+  <line x1="480" y1="490" x2="176" y2="502" stroke="#fbbf24" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="480" y1="490" x2="328" y2="502" stroke="#fbbf24" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="480" y1="490" x2="480" y2="502" stroke="#fbbf24" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="480" y1="490" x2="632" y2="502" stroke="#fbbf24" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="480" y1="490" x2="784" y2="502" stroke="#fbbf24" stroke-width="1" stroke-dasharray="3,3"/>
+
+</svg>

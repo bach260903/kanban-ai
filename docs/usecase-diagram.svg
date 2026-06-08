@@ -1,0 +1,258 @@
+<svg width="980" height="720" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="980" height="720" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="490" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Biểu đồ Use Case — Neo-Kanban AI</text>
+
+  <!-- Markers -->
+  <defs>
+    <marker id="arrowInc" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0,9 3.5,0 7" fill="#6366f1"/>
+    </marker>
+    <marker id="arrowAssoc" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- ═══════════════════════════════ SYSTEM BOUNDARY ═══════════════════════════════ -->
+  <rect x="118" y="45" width="738" height="638" fill="white" rx="10" stroke="#334155" stroke-width="2"/>
+  <text x="487" y="42" text-anchor="middle" font-size="11" font-weight="700" fill="#334155" dy="-3">«system»  Neo-Kanban AI</text>
+
+  <!-- ═══ EPIC 1 — Xác thực ═══ -->
+  <rect x="124" y="52" width="726" height="72" fill="#f1f5f9" rx="6" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="134" y="67" font-size="9.5" font-weight="700" fill="#64748b">Epic 1 · Xác thực</text>
+
+  <!-- UC1 Đăng ký -->
+  <ellipse cx="305" cy="90" rx="88" ry="20" fill="white" stroke="#475569" stroke-width="1.5"/>
+  <text x="305" y="94" text-anchor="middle" font-size="10.5" fill="#1e293b">Đăng ký tài khoản</text>
+
+  <!-- UC2 Đăng nhập -->
+  <ellipse cx="570" cy="90" rx="80" ry="20" fill="white" stroke="#475569" stroke-width="1.5"/>
+  <text x="570" y="94" text-anchor="middle" font-size="10.5" fill="#1e293b">Đăng nhập hệ thống</text>
+
+  <!-- ═══ EPIC 2 — Quản lý Dự án ═══ -->
+  <rect x="124" y="130" width="726" height="96" fill="#eff6ff" rx="6" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="134" y="145" font-size="9.5" font-weight="700" fill="#1d4ed8">Epic 2 · Quản lý Dự án</text>
+
+  <!-- UC3 Tạo dự án -->
+  <ellipse cx="250" cy="180" rx="80" ry="20" fill="white" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="250" y="184" text-anchor="middle" font-size="10.5" fill="#1e40af">Tạo dự án mới</text>
+
+  <!-- UC4 Xem dự án -->
+  <ellipse cx="490" cy="180" rx="90" ry="20" fill="white" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="490" y="184" text-anchor="middle" font-size="10.5" fill="#1e40af">Xem danh sách dự án</text>
+
+  <!-- UC5 Constitution -->
+  <ellipse cx="730" cy="180" rx="90" ry="20" fill="white" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="730" y="184" text-anchor="middle" font-size="10.5" fill="#1e40af">Khai báo Constitution</text>
+
+  <!-- ═══ EPIC 3 — Sinh & Duyệt Tài liệu ═══ -->
+  <rect x="124" y="232" width="726" height="205" fill="#fff7ed" rx="6" stroke="#fed7aa" stroke-width="1"/>
+  <text x="134" y="248" font-size="9.5" font-weight="700" fill="#c2410c">Epic 3 · Sinh &amp; Duyệt Tài liệu (HIL checkpoints)</text>
+
+  <!-- Row 1 — SPEC -->
+  <!-- UC6 Nhập Intent -->
+  <ellipse cx="225" cy="288" rx="76" ry="20" fill="white" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="225" y="292" text-anchor="middle" font-size="10.5" fill="#7c2d12">Nhập Intent</text>
+
+  <!-- UC7 Sinh SPEC.md -->
+  <ellipse cx="490" cy="288" rx="82" ry="20" fill="#fef3c7" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="490" y="284" text-anchor="middle" font-size="10.5" font-weight="600" fill="#78350f">Sinh SPEC.md</text>
+  <text x="490" y="298" text-anchor="middle" font-size="8.5" fill="#b45309">(Architect Agent)</text>
+
+  <!-- UC8 Duyệt SPEC.md -->
+  <ellipse cx="733" cy="288" rx="80" ry="20" fill="white" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="733" y="292" text-anchor="middle" font-size="10.5" fill="#7c2d12">Duyệt SPEC.md</text>
+
+  <!-- Row 2 — PLAN -->
+  <!-- UC9 Sinh PLAN.md -->
+  <ellipse cx="490" cy="362" rx="82" ry="20" fill="#fef3c7" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="490" y="358" text-anchor="middle" font-size="10.5" font-weight="600" fill="#78350f">Sinh PLAN.md</text>
+  <text x="490" y="372" text-anchor="middle" font-size="8.5" fill="#b45309">(Architect Agent)</text>
+
+  <!-- UC10 Duyệt PLAN.md -->
+  <ellipse cx="733" cy="362" rx="80" ry="20" fill="white" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="733" y="366" text-anchor="middle" font-size="10.5" fill="#7c2d12">Duyệt PLAN.md</text>
+
+  <!-- UC11 Phân rã Task -->
+  <ellipse cx="360" cy="417" rx="90" ry="20" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="360" y="413" text-anchor="middle" font-size="10.5" font-weight="600" fill="#78350f">Phân rã Task (task_breakdown)</text>
+  <text x="360" y="426" text-anchor="middle" font-size="8.5" fill="#b45309">(Architect Agent)</text>
+
+  <!-- ═══ EPIC 4 — Kanban & Coding ═══ -->
+  <rect x="124" y="443" width="726" height="232" fill="#f0fdf4" rx="6" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="134" y="459" font-size="9.5" font-weight="700" fill="#15803d">Epic 4 · Kanban &amp; Coding Agent</text>
+
+  <!-- Row 1 — Trigger coding -->
+  <!-- UC12 Kéo Task → In Progress -->
+  <ellipse cx="252" cy="498" rx="96" ry="20" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="252" y="494" text-anchor="middle" font-size="10" fill="#14532d">Kéo Task → In Progress</text>
+  <text x="252" y="508" text-anchor="middle" font-size="8.5" fill="#16a34a">(kích hoạt Coder Agent)</text>
+
+  <!-- UC13 Implement Task -->
+  <ellipse cx="528" cy="498" rx="90" ry="20" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="528" y="494" text-anchor="middle" font-size="10.5" font-weight="600" fill="#14532d">Implement Task</text>
+  <text x="528" y="508" text-anchor="middle" font-size="8.5" fill="#16a34a">(Coder Agent · ReAct)</text>
+
+  <!-- UC14 Xem Streaming -->
+  <ellipse cx="752" cy="498" rx="84" ry="20" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="752" y="502" text-anchor="middle" font-size="10.5" fill="#14532d">Xem Real-time Output</text>
+
+  <!-- Row 2 — Review -->
+  <!-- UC15 Sinh Code Diff -->
+  <ellipse cx="390" cy="573" rx="88" ry="20" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="390" y="569" text-anchor="middle" font-size="10.5" font-weight="600" fill="#14532d">Sinh Code Diff</text>
+  <text x="390" y="583" text-anchor="middle" font-size="8.5" fill="#16a34a">(Coder Agent · git diff)</text>
+
+  <!-- UC16 Review Code -->
+  <ellipse cx="628" cy="573" rx="88" ry="20" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="628" y="569" text-anchor="middle" font-size="10.5" font-weight="600" fill="#14532d">Review Code</text>
+  <text x="628" y="583" text-anchor="middle" font-size="8.5" fill="#16a34a">(Reviewer Agent)</text>
+
+  <!-- UC17 Xem Diff Viewer -->
+  <ellipse cx="240" cy="573" rx="82" ry="20" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="240" y="577" text-anchor="middle" font-size="10.5" fill="#14532d">Xem Code Diff Viewer</text>
+
+  <!-- Row 3 — HIL -->
+  <!-- UC18 Approve Code -->
+  <ellipse cx="300" cy="650" rx="80" ry="20" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="300" y="654" text-anchor="middle" font-size="10.5" fill="#14532d">Approve Code</text>
+
+  <!-- UC19 Reject + Feedback -->
+  <ellipse cx="528" cy="650" rx="95" ry="20" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="528" y="654" text-anchor="middle" font-size="10.5" fill="#991b1b">Reject + Feedback</text>
+
+  <!-- UC20 Xem Audit Log -->
+  <ellipse cx="742" cy="650" rx="80" ry="20" fill="white" stroke="#475569" stroke-width="1.5"/>
+  <text x="742" y="654" text-anchor="middle" font-size="10.5" fill="#334155">Xem Audit Log</text>
+
+  <!-- ═══════════════════════════════ ACTOR: PROJECT OWNER ═══════════════════════════════ -->
+  <!-- Head -->
+  <circle cx="50" cy="270" r="15" fill="white" stroke="#1e293b" stroke-width="2"/>
+  <!-- Body -->
+  <line x1="50" y1="285" x2="50" y2="330" stroke="#1e293b" stroke-width="2"/>
+  <!-- Arms -->
+  <line x1="22" y1="308" x2="78" y2="308" stroke="#1e293b" stroke-width="2"/>
+  <!-- Legs -->
+  <line x1="50" y1="330" x2="22" y2="365" stroke="#1e293b" stroke-width="2"/>
+  <line x1="50" y1="330" x2="78" y2="365" stroke="#1e293b" stroke-width="2"/>
+  <!-- Label -->
+  <text x="50" y="385" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1e293b">Project Owner</text>
+  <text x="50" y="398" text-anchor="middle" font-size="10" fill="#475569">(PO)</text>
+
+  <!-- ═══════════════════════════════ ACTOR: AGENTS ═══════════════════════════════ -->
+
+  <!-- Architect Agent -->
+  <rect x="858" y="258" width="106" height="46" fill="#fef3c7" rx="6" stroke="#d97706" stroke-width="1.5"/>
+  <text x="911" y="274" text-anchor="middle" font-size="9.5" font-weight="700" fill="#78350f">«actor»</text>
+  <text x="911" y="289" text-anchor="middle" font-size="10" font-weight="700" fill="#78350f">Architect Agent</text>
+  <text x="911" y="300" text-anchor="middle" font-size="8.5" fill="#92400e">LangGraph / Groq</text>
+
+  <!-- Coder Agent -->
+  <rect x="858" y="478" width="106" height="46" fill="#dcfce7" rx="6" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="911" y="494" text-anchor="middle" font-size="9.5" font-weight="700" fill="#14532d">«actor»</text>
+  <text x="911" y="509" text-anchor="middle" font-size="10" font-weight="700" fill="#14532d">Coder Agent</text>
+  <text x="911" y="520" text-anchor="middle" font-size="8.5" fill="#166534">ReAct · Groq</text>
+
+  <!-- Reviewer Agent -->
+  <rect x="858" y="553" width="106" height="46" fill="#dbeafe" rx="6" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="911" y="569" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1e40af">«actor»</text>
+  <text x="911" y="584" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">Reviewer Agent</text>
+  <text x="911" y="595" text-anchor="middle" font-size="8.5" fill="#1d4ed8">LLM Review</text>
+
+  <!-- ═══════════════════════════════ PO ASSOCIATIONS ═══════════════════════════════ -->
+  <!-- UC1 -->
+  <line x1="65" y1="278" x2="217" y2="90" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC2 -->
+  <line x1="65" y1="282" x2="490" y2="90" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC3 -->
+  <line x1="65" y1="295" x2="170" y2="180" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC4 -->
+  <line x1="65" y1="300" x2="400" y2="180" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC5 -->
+  <line x1="65" y1="305" x2="640" y2="180" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC6 Nhập Intent -->
+  <line x1="65" y1="315" x2="149" y2="288" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC8 Duyệt SPEC -->
+  <line x1="65" y1="320" x2="653" y2="288" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC10 Duyệt PLAN -->
+  <line x1="65" y1="325" x2="653" y2="362" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC12 Kéo Task -->
+  <line x1="65" y1="335" x2="156" y2="498" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC14 Xem Streaming -->
+  <line x1="65" y1="340" x2="668" y2="498" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC17 Xem Diff -->
+  <line x1="65" y1="345" x2="158" y2="573" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC18 Approve -->
+  <line x1="65" y1="352" x2="220" y2="650" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC19 Reject -->
+  <line x1="65" y1="356" x2="433" y2="650" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+  <!-- UC20 Audit -->
+  <line x1="65" y1="360" x2="662" y2="650" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrowAssoc)"/>
+
+  <!-- ═══════════════════════════════ AGENT ASSOCIATIONS ═══════════════════════════════ -->
+  <!-- Architect → UC7 Sinh SPEC -->
+  <line x1="858" y1="275" x2="572" y2="288" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrowAssoc)"/>
+  <!-- Architect → UC9 Sinh PLAN -->
+  <line x1="858" y1="290" x2="572" y2="362" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrowAssoc)"/>
+  <!-- Architect → UC11 Phân rã Task -->
+  <line x1="858" y1="300" x2="450" y2="417" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrowAssoc)"/>
+  <!-- Coder → UC13 Implement -->
+  <line x1="858" y1="495" x2="618" y2="498" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrowAssoc)"/>
+  <!-- Coder → UC15 Sinh Diff -->
+  <line x1="858" y1="505" x2="478" y2="573" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrowAssoc)"/>
+  <!-- Reviewer → UC16 Review -->
+  <line x1="858" y1="568" x2="716" y2="573" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrowAssoc)"/>
+
+  <!-- ═══════════════════════════════ INCLUDE / TRIGGER ARROWS ═══════════════════════════════ -->
+  <!-- UC6 Nhập Intent →«trigger»→ UC7 Sinh SPEC -->
+  <line x1="301" y1="288" x2="408" y2="288" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowInc)"/>
+  <text x="355" y="283" text-anchor="middle" font-size="8" fill="#6366f1">«include»</text>
+
+  <!-- UC8 Duyệt SPEC approve →«trigger»→ UC9 Sinh PLAN -->
+  <line x1="733" y1="308" x2="570" y2="342" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowInc)"/>
+  <text x="670" y="322" text-anchor="middle" font-size="8" fill="#6366f1">«include»</text>
+
+  <!-- UC10 Duyệt PLAN approve →«trigger»→ UC11 Phân rã Task -->
+  <line x1="680" y1="378" x2="448" y2="408" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowInc)"/>
+  <text x="585" y="390" text-anchor="middle" font-size="8" fill="#6366f1">«include»</text>
+
+  <!-- UC12 Kéo Task →«include»→ UC13 Implement -->
+  <line x1="348" y1="498" x2="438" y2="498" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowInc)"/>
+  <text x="393" y="493" text-anchor="middle" font-size="8" fill="#6366f1">«include»</text>
+
+  <!-- UC13 Implement →«include»→ UC15 Sinh Diff -->
+  <line x1="490" y1="518" x2="430" y2="553" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowInc)"/>
+  <text x="480" y="538" text-anchor="middle" font-size="8" fill="#6366f1">«include»</text>
+
+  <!-- UC15 Sinh Diff →«include»→ UC16 Review -->
+  <line x1="478" y1="573" x2="540" y2="573" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowInc)"/>
+  <text x="509" y="568" text-anchor="middle" font-size="8" fill="#6366f1">«include»</text>
+
+  <!-- UC16 Review →«include»→ UC17 Xem Diff -->
+  <line x1="540" y1="562" x2="318" y2="560" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowInc)"/>
+  <text x="435" y="555" text-anchor="middle" font-size="8" fill="#6366f1">«include»</text>
+
+  <!-- UC17 Xem Diff → UC18/UC19 (extend) -->
+  <line x1="265" y1="593" x2="295" y2="630" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowInc)"/>
+  <line x1="265" y1="593" x2="450" y2="633" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowInc)"/>
+  <text x="245" y="615" font-size="8" fill="#6366f1">«extend»</text>
+
+  <!-- ═══════════════════════════════ LEGEND ═══════════════════════════════ -->
+  <rect x="118" y="690" width="738" height="24" fill="#f1f5f9" rx="5"/>
+
+  <ellipse cx="140" cy="702" rx="14" ry="7" fill="white" stroke="#475569" stroke-width="1.2"/>
+  <text x="160" y="706" font-size="9.5" fill="#334155">Use case</text>
+
+  <line x1="225" y1="702" x2="250" y2="702" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="256" y="706" font-size="9.5" fill="#334155">Kết hợp (actor–use case)</text>
+
+  <line x1="395" y1="702" x2="420" y2="702" stroke="#6366f1" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrowInc)"/>
+  <text x="427" y="706" font-size="9.5" fill="#334155">«include» / «extend»</text>
+
+  <rect x="565" y="697" width="34" height="11" fill="#fef3c7" stroke="#d97706" stroke-width="1" rx="2"/>
+  <text x="605" y="706" font-size="9.5" fill="#334155">Architect Agent</text>
+
+  <rect x="680" y="697" width="34" height="11" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="2"/>
+  <text x="720" y="706" font-size="9.5" fill="#334155">Coder / Reviewer</text>
+</svg>

@@ -1,0 +1,306 @@
+==============================================================
+  KỊCH BẢN KIỂM THỬ THỦ CÔNG — NEO-KANBAN AI
+  Chạy từ đầu đến cuối theo thứ tự
+==============================================================
+
+
+--------------------------------------------------------------
+BƯỚC 1: ĐĂNG KÝ TÀI KHOẢN
+--------------------------------------------------------------
+
+Mở http://localhost:5173/register
+
+Điền vào form:
+  Email        : testuser@example.com
+  Password     : Test1234!
+  Display name : Nguyen Van A
+
+Nhấn Register
+
+Kiểm tra console backend (terminal chạy uvicorn):
+  Tìm dòng "DEV MODE — Email OTP" → ghi lại mã 6 chữ số
+  Ví dụ: 382719
+
+Nhập mã OTP vào ô xác minh → nhấn Verify
+
+PASS nếu:  Chuyển sang trang /projects, thấy tên "Nguyen Van A"
+FAIL nếu:  Lỗi, hoặc không nhận được OTP trong console
+
+--------------------------------------------------------------
+BƯỚC 2: ĐĂNG NHẬP LẠI (kiểm tra login hoạt động)
+--------------------------------------------------------------
+
+Nhấn Logout (góc trên phải)
+Mở http://localhost:5173/login
+
+Điền:
+  Email    : testuser@example.com
+  Password : Test1234!
+
+Nhấn Login
+
+PASS nếu:  Vào /projects, thấy "Nguyen Van A"
+FAIL nếu:  Báo sai thông tin
+
+Thử login sai mật khẩu:
+  Password : Saigui123
+
+PASS nếu:  Hiện thông báo lỗi, không vào được
+FAIL nếu:  Đăng nhập thành công (lỗ hổng bảo mật)
+
+--------------------------------------------------------------
+BƯỚC 3: ĐĂNG NHẬP GITHUB (nếu đã cấu hình)
+--------------------------------------------------------------
+
+Logout → vào /login
+Nhấn nút "Continue with GitHub"
+
+PASS nếu:  Redirect sang github.com/login/oauth/authorize
+           → Sau khi cấp quyền → về /projects với avatar GitHub
+FAIL nếu:  Lỗi 503 "GitHub OAuth is not configured"
+           (Nếu chưa cấu hình GITHUB_OAUTH_CLIENT_ID thì bỏ qua bước này)
+
+--------------------------------------------------------------
+BƯỚC 4: TẠO DỰ ÁN
+--------------------------------------------------------------
+
+Đang ở trang /projects, nhấn "New Project"
+
+Điền:
+  Project Name : Todo App
+  Description  : Ứng dụng quản lý công việc đơn giản
+  Language     : Python
+  AI Backend   : Groq (default)
+
+Nhấn Create Project
+
+PASS nếu:  Vào workspace, thấy tab Documents / Kanban / Memory / Audit Log / Constitution
+FAIL nếu:  Lỗi hoặc không tạo được
+
+--------------------------------------------------------------
+BƯỚC 5: KHAI BÁO CONSTITUTION
+--------------------------------------------------------------
+
+Click tab "Constitution"
+
+Xoá nội dung cũ, nhập:
+
+  ## Quy tắc kỹ thuật
+  - Mỗi file tối đa 200 dòng
+  - Viết test cho mọi function chính
+  - Không dùng thư viện ngoài danh sách đã có
+
+Nhấn Save
+
+PASS nếu:  Hiện thông báo lưu thành công, nội dung vẫn còn khi F5
+FAIL nếu:  Mất nội dung hoặc lỗi
+
+--------------------------------------------------------------
+BƯỚC 6: NHẬP INTENT VÀ SINH SPEC.md
+--------------------------------------------------------------
+
+Click tab "Documents"
+
+Trong ô SPEC, nhập vào ô Intent:
+
+  Xây dựng ứng dụng Todo đơn giản bằng Python và FastAPI.
+  Cho phép tạo, xem, cập nhật, xoá task.
+  Mỗi task có tiêu đề, mô tả, trạng thái (todo/done).
+  Có API REST và file test pytest.
+
+Nhấn "Generate SPEC"
+
+Chờ 20-60 giây
+
+PASS nếu:  SPEC.md hiện ra với badge "Draft"
+           Nội dung có các phần:
+             # Overview
+             ## Goals
+             ## Functional Requirements
+             ## Acceptance Criteria
+FAIL nếu:  Timeout, lỗi API key, hoặc SPEC trống
+
+--------------------------------------------------------------
+BƯỚC 7: DUYỆT SPEC.md
+--------------------------------------------------------------
+
+Đọc lướt SPEC.md đã sinh
+
+Nhấn "Approve"
+
+PASS nếu:  Badge chuyển sang "Approved" (màu xanh lá)
+           PLAN.md bắt đầu sinh tự động (badge "Generating...")
+FAIL nếu:  Lỗi, hoặc badge không thay đổi
+
+--------------------------------------------------------------
+BƯỚC 8: THỬ YÊU CẦU SỬA SPEC (revision)
+--------------------------------------------------------------
+
+[Tạo project khác để test] hoặc reset SPEC bằng cách tạo project mới:
+  Project Name : Todo App v2
+  (lặp lại bước 6 để có SPEC Draft)
+
+Tại SPEC.md đang ở Draft, điền vào ô "Request revision":
+
+  Bổ sung thêm yêu cầu: API cần có xác thực JWT.
+  Mỗi user chỉ thấy task của mình.
+
+Nhấn "Submit revision"
+
+Chờ 20-60 giây
+
+PASS nếu:  SPEC.md sinh lại, giữ nguyên phần Overview/Goals cũ
+           Có thêm yêu cầu về JWT và user isolation
+           Badge vẫn "Draft" chờ duyệt lại
+FAIL nếu:  SPEC bị xoá trắng hoặc không thay đổi
+
+--------------------------------------------------------------
+BƯỚC 9: DUYỆT PLAN.md
+--------------------------------------------------------------
+
+Quay lại project "Todo App" (bước 4)
+
+Chờ PLAN.md xuất hiện (sau khi SPEC Approved ở bước 7)
+
+Đọc PLAN, nhấn "Approve"
+
+PASS nếu:  Tasks tự động xuất hiện ở tab Kanban, cột TODO
+           Ví dụ task: "Thiết lập project FastAPI", "Tạo model Task"...
+FAIL nếu:  Không có task nào, hoặc lỗi
+
+--------------------------------------------------------------
+BƯỚC 10: CHẠY CODER AGENT
+--------------------------------------------------------------
+
+Vào tab Kanban
+Thấy các task trong cột TODO
+
+Kéo task đầu tiên (ví dụ "Thiết lập project FastAPI") sang cột IN PROGRESS
+(hoặc click nút Start trên card)
+
+Quan sát panel bên phải (Thought Stream):
+  - Thấy: "Coder LLM round 1: invoking model..."
+  - Thấy: TOOL_CALL → write_file: main.py
+  - Thấy: TOOL_CALL → run_terminal: python -m pytest -q
+  - Thấy: TOOL_RESULT: kết quả test
+
+Chờ Agent chạy xong (5-10 phút tùy task)
+
+PASS nếu:  Task tự chuyển sang cột REVIEW
+           Panel hiển thị "STATUS_CHANGE: CODING → REVIEWING"
+FAIL nếu:  Task về lại TODO với thông báo lỗi
+
+--------------------------------------------------------------
+BƯỚC 11: KIỂM TRA WIP LIMIT
+--------------------------------------------------------------
+
+Khi task đang ở IN PROGRESS (chờ Agent chạy)
+
+Kéo thêm task thứ 2 vào IN PROGRESS
+
+PASS nếu:  Hiện cảnh báo "WIP limit: chỉ được 1 task In Progress"
+           Task 2 bật trở lại TODO
+FAIL nếu:  2 task cùng ở IN PROGRESS được
+
+--------------------------------------------------------------
+BƯỚC 12: DUYỆT CODE (APPROVE)
+--------------------------------------------------------------
+
+Khi có task ở REVIEW
+
+Click vào task → xem Diff Viewer:
+  - Dòng thêm màu xanh lá
+  - Dòng xoá màu đỏ
+  - AI Reviewer comment bên dưới (score, nhận xét)
+
+Nhấn "Approve"
+
+PASS nếu:  Task chuyển sang DONE
+FAIL nếu:  Lỗi hoặc task không chuyển
+
+--------------------------------------------------------------
+BƯỚC 13: TỪ CHỐI CODE VÀ YÊU CẦU SỬA
+--------------------------------------------------------------
+
+Với task khác ở REVIEW
+
+Trong ô feedback nhập:
+
+  Hàm get_task thiếu kiểm tra task không tồn tại,
+  cần trả về 404 thay vì để crash.
+
+Nhấn "Reject"
+
+PASS nếu:  Task về IN PROGRESS
+           Agent chạy lại, stream hiển thị "PO review feedback: ..."
+           Sau khi xong → REVIEW với code đã sửa
+FAIL nếu:  Task không chuyển, hoặc Agent không nhận được feedback
+
+--------------------------------------------------------------
+BƯỚC 14: PIPELINE CI/CD
+--------------------------------------------------------------
+
+Sau khi 1 task sang DONE
+
+Mở tab Pipelines (hoặc tìm link "View Pipeline" trên task DONE)
+
+PASS nếu:  Có pipeline run mới: test ✓ | lint ✓ | build ✓
+FAIL nếu:  Không có pipeline, hoặc test fail
+
+Nếu pipeline fail:
+  Click vào run → xem log từng bước
+  Xem mục "AI Failure Analysis" → thấy root cause
+  Nhấn "Chạy lại"
+  PASS nếu: Trang load spinner (không màn hình đen), run mới bắt đầu
+  FAIL nếu: Màn hình trắng/đen sau khi nhấn Chạy lại
+
+--------------------------------------------------------------
+BƯỚC 15: AUDIT LOG
+--------------------------------------------------------------
+
+Mở tab "Audit Log"
+
+PASS nếu:  Thấy lịch sử:
+             coder_llm → success (các round LLM)
+             coder_write_file → success
+             coder_run_terminal → success
+             spec_node → success
+FAIL nếu:  Trang trống hoặc lỗi
+
+--------------------------------------------------------------
+BƯỚC 16: MEMORY
+--------------------------------------------------------------
+
+Sau khi có ít nhất 1 task DONE
+
+Mở tab "Memory"
+
+PASS nếu:  Có nội dung mô tả bài học từ task đã xong
+           Ví dụ: "Added FastAPI project structure with main.py..."
+FAIL nếu:  Trống
+
+--------------------------------------------------------------
+KẾT QUẢ
+--------------------------------------------------------------
+
+  Bước 1  Đăng ký OTP          PASS [ ]  FAIL [ ]
+  Bước 2  Đăng nhập            PASS [ ]  FAIL [ ]
+  Bước 3  GitHub OAuth         PASS [ ]  FAIL [ ]  SKIP [ ]
+  Bước 4  Tạo project          PASS [ ]  FAIL [ ]
+  Bước 5  Constitution         PASS [ ]  FAIL [ ]
+  Bước 6  Sinh SPEC            PASS [ ]  FAIL [ ]
+  Bước 7  Approve SPEC         PASS [ ]  FAIL [ ]
+  Bước 8  Revision SPEC        PASS [ ]  FAIL [ ]
+  Bước 9  Approve PLAN         PASS [ ]  FAIL [ ]
+  Bước 10 Coder Agent          PASS [ ]  FAIL [ ]
+  Bước 11 WIP limit            PASS [ ]  FAIL [ ]
+  Bước 12 Approve code         PASS [ ]  FAIL [ ]
+  Bước 13 Reject + feedback    PASS [ ]  FAIL [ ]
+  Bước 14 Pipeline + Re-run    PASS [ ]  FAIL [ ]
+  Bước 15 Audit log            PASS [ ]  FAIL [ ]
+  Bước 16 Memory               PASS [ ]  FAIL [ ]
+
+  Lỗi gặp phải:
+  ___________________________________________________________
+  ___________________________________________________________
+  ___________________________________________________________

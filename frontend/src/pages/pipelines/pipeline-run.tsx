@@ -383,8 +383,16 @@ export default function PipelineRunPage() {
     [setStepAnalysis],
   )
 
-  // Initial load
+  // Load (or reload) the run whenever runId changes.
+  // Reset all local state first so navigating to a new run (e.g. after
+  // "Chạy lại") never shows stale content or the old run's dark log panels.
   useEffect(() => {
+    setRun(null)
+    setError(null)
+    setLoading(true)
+    setPreviewUrl(null)
+    setAnalysisStates({})
+
     let cancelled = false
     void (async () => {
       try {
@@ -401,9 +409,16 @@ export default function PipelineRunPage() {
     }
   }, [runId])
 
-  // Subscribe to SSE once run is loaded
+  // Subscribe to SSE once the run is loaded and is still active.
+  // Guard on run.id (not run.status alone) so that navigating to a fresh
+  // re-run — which briefly keeps the old run in state — does NOT skip the
+  // subscription because the old run had status 'failure'.
   useEffect(() => {
     if (!run) return
+    // Only subscribe for the run that matches the current URL param.
+    // If the state still holds the previous run (while the new fetch is in
+    // flight after a re-run navigate), skip until the state is updated.
+    if (run.id !== runId) return
     if (run.status === 'success' || run.status === 'failure' || run.status === 'cancelled') return
 
     cleanupRef.current = subscribePipelineRun(runId, handleEvent)
@@ -430,7 +445,17 @@ export default function PipelineRunPage() {
     )
   }
 
-  if (!run) return null
+  // run is null only during the brief window between resetting state and the
+  // fetch completing. Show the same spinner instead of an empty screen.
+  if (!run) {
+    return (
+      <div className={styles.page}>
+        <div className={styles.loading}>
+          <Spinner /> Loading pipeline run…
+        </div>
+      </div>
+    )
+  }
 
   const durationMs =
     run.started_at && run.completed_at

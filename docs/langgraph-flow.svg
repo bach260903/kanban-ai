@@ -1,0 +1,180 @@
+<svg width="900" height="600" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="900" height="600" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="450" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Đồ thị LangGraph — Nodes &amp; Conditional Edges</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="aBlue"   markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#3b82f6"/></marker>
+    <marker id="aOrange" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#ea580c"/></marker>
+    <marker id="aGreen"  markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#16a34a"/></marker>
+    <marker id="aRed"    markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#dc2626"/></marker>
+    <marker id="aGray"   markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#94a3b8"/></marker>
+  </defs>
+
+  <!-- ──── Divider ──── -->
+  <line x1="448" y1="44" x2="448" y2="562" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="210" y="48" text-anchor="middle" font-size="10.5" font-weight="600" fill="#64748b">Architect Graph (Spec / Plan)</text>
+  <text x="675" y="48" text-anchor="middle" font-size="10.5" font-weight="600" fill="#64748b">Coder Graph (Task → IN_PROGRESS)</text>
+
+  <!-- ═══════════════════════════════════════════════
+       LEFT COLUMN — ARCHITECT FLOW  (cx ≈ 210)
+  ════════════════════════════════════════════════════ -->
+
+  <!-- START -->
+  <circle cx="210" cy="78" r="21" fill="#1e293b"/>
+  <text x="210" y="83" text-anchor="middle" font-size="10" font-weight="700" fill="white">START</text>
+
+  <!-- START → spec -->
+  <line x1="210" y1="99" x2="210" y2="122" stroke="#3b82f6" stroke-width="2" marker-end="url(#aBlue)"/>
+
+  <!-- spec node -->
+  <rect x="130" y="122" width="160" height="48" fill="#dbeafe" rx="8" stroke="#3b82f6" stroke-width="2"/>
+  <text x="210" y="143" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">spec</text>
+  <text x="210" y="160" text-anchor="middle" font-size="9.5" fill="#3b82f6">Spec Node (Architect Agent)</text>
+
+  <!-- spec → diamond_spec -->
+  <line x1="210" y1="170" x2="210" y2="200" stroke="#3b82f6" stroke-width="2" marker-end="url(#aBlue)"/>
+
+  <!-- Diamond: route_after_spec  (cx=210, cy=220) -->
+  <polygon points="210,200 255,222 210,244 165,222" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="210" y="226" text-anchor="middle" font-size="8.5" font-weight="600" fill="#92400e">_route_after_spec</text>
+
+  <!-- diamond_spec → plan (down, "plan") -->
+  <line x1="210" y1="244" x2="210" y2="272" stroke="#3b82f6" stroke-width="2" marker-end="url(#aBlue)"/>
+  <text x="224" y="263" font-size="9" fill="#16a34a">"plan"</text>
+
+  <!-- Self-loop: diamond_spec → spec ("spec" / feedback) -->
+  <path d="M165,222 Q90,222 90,146 Q90,122 130,122" fill="none" stroke="#f97316" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#aOrange)"/>
+  <text x="65" y="178" font-size="8.5" fill="#ea580c" text-anchor="middle">"spec"</text>
+  <text x="65" y="190" font-size="8.5" fill="#ea580c" text-anchor="middle">(feedback)</text>
+
+  <!-- diamond_spec → END (error, right) -->
+  <line x1="255" y1="222" x2="390" y2="222" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aGray)"/>
+  <text x="322" y="215" text-anchor="middle" font-size="8.5" fill="#94a3b8">error</text>
+  <circle cx="400" cy="222" r="8" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <circle cx="400" cy="222" r="4" fill="#94a3b8"/>
+
+  <!-- plan node -->
+  <rect x="130" y="272" width="160" height="48" fill="#dbeafe" rx="8" stroke="#3b82f6" stroke-width="2"/>
+  <text x="210" y="293" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">plan</text>
+  <text x="210" y="310" text-anchor="middle" font-size="9.5" fill="#3b82f6">Plan Node (Architect Agent)</text>
+
+  <!-- plan → diamond_plan -->
+  <line x1="210" y1="320" x2="210" y2="350" stroke="#3b82f6" stroke-width="2" marker-end="url(#aBlue)"/>
+
+  <!-- Diamond: route_after_plan  (cx=210, cy=370) -->
+  <polygon points="210,350 255,372 210,394 165,372" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="210" y="376" text-anchor="middle" font-size="8.5" font-weight="600" fill="#92400e">_route_after_plan</text>
+
+  <!-- diamond_plan → task_breakdown (down, "task_breakdown") -->
+  <line x1="210" y1="394" x2="210" y2="422" stroke="#3b82f6" stroke-width="2" marker-end="url(#aBlue)"/>
+  <text x="253" y="412" font-size="8.5" fill="#16a34a">run_breakdown</text>
+
+  <!-- diamond_plan → END (else, right) -->
+  <line x1="255" y1="372" x2="390" y2="372" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aGray)"/>
+  <text x="322" y="365" text-anchor="middle" font-size="8.5" fill="#94a3b8">else (HIL)</text>
+  <circle cx="400" cy="372" r="8" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <circle cx="400" cy="372" r="4" fill="#94a3b8"/>
+
+  <!-- task_breakdown node -->
+  <rect x="120" y="422" width="180" height="48" fill="#ccfbf1" rx="8" stroke="#0d9488" stroke-width="2"/>
+  <text x="210" y="443" text-anchor="middle" font-size="12" font-weight="700" fill="#134e4a">task_breakdown</text>
+  <text x="210" y="460" text-anchor="middle" font-size="9.5" fill="#0d9488">Subtask Generation Node</text>
+
+  <!-- task_breakdown → END -->
+  <line x1="210" y1="470" x2="210" y2="508" stroke="#3b82f6" stroke-width="2" marker-end="url(#aBlue)"/>
+
+  <!-- END (arch) — double circle -->
+  <circle cx="210" cy="528" r="20" fill="#1e293b"/>
+  <circle cx="210" cy="528" r="14" fill="#f8fafc"/>
+  <circle cx="210" cy="528" r="8"  fill="#1e293b"/>
+  <text x="210" y="556" text-anchor="middle" font-size="9.5" fill="#64748b">END</text>
+
+  <!-- ═══════════════════════════════════════════════
+       RIGHT COLUMN — CODER FLOW  (cx ≈ 675)
+  ════════════════════════════════════════════════════ -->
+
+  <!-- KanbanService (dashed, external trigger) -->
+  <rect x="565" y="56" width="220" height="38" fill="#f1f5f9" rx="6" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="675" y="72" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">KanbanService</text>
+  <text x="675" y="86" text-anchor="middle" font-size="8.5" fill="#64748b">task → IN_PROGRESS trigger</text>
+
+  <!-- KanbanService → route_coder -->
+  <line x1="675" y1="94" x2="675" y2="116" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aGray)"/>
+
+  <!-- Diamond: route_coder  (cx=675, cy=136) -->
+  <polygon points="675,116 722,138 675,160 628,138" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="675" y="142" text-anchor="middle" font-size="8.5" font-weight="600" fill="#92400e">route_coder</text>
+
+  <!-- route_coder → coder_node (active, left branch) -->
+  <line x1="640" y1="155" x2="590" y2="198" stroke="#ea580c" stroke-width="2" marker-end="url(#aOrange)"/>
+  <text x="594" y="183" font-size="8.5" fill="#ea580c" text-anchor="end">groq</text>
+
+  <!-- route_coder → cli_coder_node (inactive, right branch, dashed) -->
+  <line x1="710" y1="155" x2="782" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aGray)"/>
+  <text x="766" y="183" font-size="8.5" fill="#94a3b8">claude/gemini</text>
+
+  <!-- coder_node (active) -->
+  <rect x="478" y="198" width="188" height="48" fill="#fff7ed" rx="8" stroke="#ea580c" stroke-width="2"/>
+  <text x="572" y="219" text-anchor="middle" font-size="12" font-weight="700" fill="#9a3412">coder_node</text>
+  <text x="572" y="236" text-anchor="middle" font-size="9.5" fill="#ea580c">Groq ReAct · MAX_ROUNDS=12</text>
+
+  <!-- cli_coder_node (inactive / greyed) -->
+  <rect x="690" y="198" width="188" height="48" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="784" y="219" text-anchor="middle" font-size="11.5" font-weight="600" fill="#94a3b8">cli_coder_node</text>
+  <text x="784" y="236" text-anchor="middle" font-size="9" fill="#cbd5e1">CLI subprocess (không dùng)</text>
+
+  <!-- coder_node → reviewer_node -->
+  <line x1="572" y1="246" x2="640" y2="292" stroke="#ea580c" stroke-width="2" marker-end="url(#aOrange)"/>
+
+  <!-- cli_coder_node → reviewer_node (dashed) -->
+  <line x1="784" y1="246" x2="726" y2="292" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#aGray)"/>
+
+  <!-- reviewer_node -->
+  <rect x="578" y="292" width="192" height="48" fill="#dcfce7" rx="8" stroke="#16a34a" stroke-width="2"/>
+  <text x="674" y="313" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">reviewer_node</text>
+  <text x="674" y="330" text-anchor="middle" font-size="9.5" fill="#16a34a">AI Code Review + ReviewReport</text>
+
+  <!-- reviewer_node → interrupt_node -->
+  <line x1="674" y1="340" x2="674" y2="372" stroke="#16a34a" stroke-width="2" marker-end="url(#aGreen)"/>
+
+  <!-- interrupt_node (HIL) -->
+  <rect x="564" y="372" width="220" height="48" fill="#fee2e2" rx="8" stroke="#dc2626" stroke-width="2"/>
+  <text x="674" y="393" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b">interrupt_node</text>
+  <text x="674" y="410" text-anchor="middle" font-size="9.5" fill="#dc2626">HIL — suspend until PO approves</text>
+
+  <!-- interrupt_node → END -->
+  <line x1="674" y1="420" x2="674" y2="508" stroke="#dc2626" stroke-width="2" marker-end="url(#aRed)"/>
+
+  <!-- END (coder) -->
+  <circle cx="674" cy="528" r="20" fill="#1e293b"/>
+  <circle cx="674" cy="528" r="14" fill="#f8fafc"/>
+  <circle cx="674" cy="528" r="8"  fill="#1e293b"/>
+  <text x="674" y="556" text-anchor="middle" font-size="9.5" fill="#64748b">END</text>
+
+  <!-- ──── Legend ──── -->
+  <rect x="16" y="568" width="868" height="24" fill="#f1f5f9" rx="5"/>
+
+  <rect x="26"  y="575" width="11" height="11" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" rx="2"/>
+  <text x="43"  y="584" font-size="9.5" fill="#334155">Architect Node</text>
+
+  <rect x="148" y="575" width="11" height="11" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5" rx="2"/>
+  <text x="165" y="584" font-size="9.5" fill="#334155">Coder Node</text>
+
+  <rect x="252" y="575" width="11" height="11" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5" rx="2"/>
+  <text x="269" y="584" font-size="9.5" fill="#334155">Task Breakdown</text>
+
+  <rect x="374" y="575" width="11" height="11" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5" rx="2"/>
+  <text x="391" y="584" font-size="9.5" fill="#334155">Reviewer Node</text>
+
+  <rect x="484" y="575" width="11" height="11" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" rx="2"/>
+  <text x="501" y="584" font-size="9.5" fill="#334155">HIL Interrupt</text>
+
+  <polygon points="592,582 608,576 608,588" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+  <text x="614" y="584" font-size="9.5" fill="#334155">Conditional Edge</text>
+
+  <line x1="726" y1="581" x2="748" y2="581" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="754" y="584" font-size="9.5" fill="#94a3b8">Không sử dụng</text>
+</svg>
